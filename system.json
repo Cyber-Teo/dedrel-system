@@ -1,0 +1,55 @@
+{
+  "id": "dedrel",
+  "title": "Dedrel TTRPG System",
+  "description": "Dedrel TTRPG system implementation for Foundry VTT v14.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Teo",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "dedrel.mjs"
+  ],
+  "styles": [
+    "css/dedrel.css"
+  ],
+  "languages": [
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json",
+      "flags": {}
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "primaryTokenAttribute": "resources.hp",
+  "documentTypes": {
+    "Actor": {
+      "character": {}
+    },
+    "Item": {
+      "currency": {},
+      "loot": {},
+      "trade_good": {},
+      "mutilation": {},
+      "countryoforigin": {},
+      "mutation": {},
+      "talent": {},
+      "maneuver": {},
+      "weapon": {},
+      "armor": {},
+      "magic_item": {}
+    }
+  }
+}

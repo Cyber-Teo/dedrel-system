@@ -1,0 +1,74 @@
+{
+  "DEDREL": {
+    "SystemName": "Dedrel System",
+    "Actor": {
+      "TypeCharacter": "Character"
+    },
+    "Item": {
+      "TypeCurrency": "Currency",
+      "TypeLoot": "Loot",
+      "TypeTradeGood": "Trade Good",
+      "TypeMutilation": "Mutilation",
+      "TYPES.Item.countryoforigin": "Country of Origin",
+      "TYPES.Item.mutation": "Mutation",
+      "TYPES.Item.talent": "Talent",
+      "TYPES.Item.maneuver": "Maneuver",
+      "TYPES.Item.weapon": "Weapon",
+      "TYPES.Item.armor": "Armor",
+      "TYPES.Item.magic_item": "Magic Item"
+    },
+    "ItemFields": {
+      "Prerequisite": "Prerequisites",
+      "APCost": "AP Cost",
+      "Uses": "Uses",
+      "TargetType": "Target Type",
+      "FormulaAttack": "Attack Formula",
+      "FormulaDamage": "Damage Formula",
+      "Source": "Source",
+      "ActionType": "Action Type"
+    },
+    "Attributes": {
+      "int": "Intuition",
+      "dex": "Dexterity",
+      "log": "Logic",
+      "rea": "Reaction",
+      "str": "Strength",
+      "will": "Willpower",
+      "con": "Constitution",
+      "luck": "Luck",
+      "cha": "Charisma"
+    },
+    "Skills": {
+      "crossbows": "Crossbows",
+      "artillery": "Artillery",
+      "unarmed_combat": "Unarmed Combat",
+      "polearms": "Polearms",
+      "bludgeoning_weapons": "Bludgeoning Weapons",
+      "bladed_weapons": "Bladed Weapons",
+      "bows": "Bows",
+      "magic_attacks": "Magic Attacks",
+      "throwing": "Throwing",
+      "armor_wearing": "Armor Wearing",
+      "firearms": "Firearms",
+      "exotic_weapons": "Exotic Weapons",
+      "lore": "Lore",
+      "lore_erudite": "Lore (Erudite)",
+      "sign_interpretation": "Sign Interpretation",
+      "investigation": "Investigation",
+      "cultural_awareness": "Cultural Awareness",
+      "logic_and_reasoning": "Logic and Reasoning",
+      "alchemy": "Alchemy",
+      "athletics": "Athletics",
+      "survival": "Survival",
+      "engineering": "Engineering",
+      "healing": "Healing",
+      "crafting": "Crafting",
+      "stealth": "Stealth",
+      "performance": "Performance",
+      "intimidation": "Intimidation",
+      "deception": "Deception",
+      "insight": "Insight",
+      "persuasion": "Persuasion"
+    }
+  }
+}

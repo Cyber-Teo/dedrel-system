@@ -1,0 +1,628 @@
+/* Basic styles for the Dedrel system */
+.system-dedrel {
+  --color-border: #444;
+  --color-bg: #1a1c23;
+  --color-panel: #252830;
+  --color-primary: #6c757d;
+  --color-text: #e0e0e0;
+  --color-text-dark: #b0b0b0;
+  --color-hp: #2d8a59;
+  --color-ap-univ: #3b5998;
+  --color-ap-maneuver: #b58900;
+  --color-ap-magic: #6f42c1;
+}
+
+.dedrel.sheet.actor .window-content {
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0;
+  overflow: hidden;
+}
+
+.dedrel.sheet.actor form,
+.dedrel.sheet.item form,
+form.dedrel.sheet.actor,
+form.dedrel.sheet.item {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.dedrel.sheet .sheet-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+}
+
+/* Header */
+.dedrel .sheet-header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background: var(--color-panel);
+  border-bottom: 2px solid var(--color-border);
+  gap: 15px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dedrel .profile-img {
+  flex: 0 0 120px;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+}
+
+.dedrel .header-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dedrel .name-wrapper {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dedrel .dedrel-charname {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dedrel .dedrel-charname input {
+  font-size: 24px;
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--color-border);
+  color: #fff;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+/* Stats Row */
+.dedrel .header-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.dedrel .stat-block {
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.3);
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  gap: 10px;
+  min-width: 0;
+}
+
+.dedrel .stat-block label {
+  font-weight: bold;
+  color: var(--color-text-dark);
+  white-space: normal;
+}
+
+.dedrel .stat-block input {
+  width: 50px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #fff;
+}
+
+.dedrel .stat-inputs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dedrel .max-val {
+  font-weight: bold;
+  color: var(--color-text);
+  width: 30px;
+  text-align: center;
+}
+
+.dedrel .hp-block {
+  border-left: 4px solid var(--color-hp);
+}
+
+/* AP Bars */
+.dedrel .ap-bars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.dedrel .ap-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  gap: 5px;
+  min-width: 0;
+}
+
+.dedrel .ap-bar input {
+  width: 40px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #fff;
+}
+
+.dedrel .ap-bar label {
+  font-size: 12px;
+  color: var(--color-text-dark);
+  margin-left: auto;
+}
+
+.dedrel .ap-bar.universal { border-left: 4px solid var(--color-ap-univ); }
+.dedrel .ap-bar.maneuver { border-left: 4px solid var(--color-ap-maneuver); }
+.dedrel .ap-bar.magic { border-left: 4px solid var(--color-ap-magic); }
+
+/* Tabs */
+.dedrel .sheet-tabs {
+  flex: 0 0 30px;
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dedrel .sheet-tabs .item {
+  line-height: 30px;
+  padding: 0 20px;
+  font-weight: bold;
+  color: var(--color-text-dark);
+}
+
+.dedrel .sheet-tabs .item.active {
+  color: #fff;
+  border-bottom: 2px solid var(--color-hp);
+  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+/* Body */
+.dedrel .sheet-body {
+  position: relative;
+  flex: 1;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.dedrel .tab {
+  display: none;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  overflow: hidden;
+}
+
+.dedrel .tab.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.dedrel .tab-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
+}
+
+.dedrel .main-top {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+  overflow: visible;
+}
+
+.dedrel .main-bottom {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+  overflow: visible;
+}
+
+.dedrel .main-divider {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  margin: 10px 0;
+  flex: 0 0 1px;
+}
+
+/* Biography */
+.dedrel .biography-box {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  flex: 1;
+  display: flex;
+}
+
+.dedrel .biography-box textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  resize: none;
+  font-family: inherit;
+}
+
+.dedrel .biography-box textarea:focus {
+  outline: none;
+}
+
+/* Skills */
+.dedrel .skills-list {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.dedrel .skills-scrollarea {
+  flex: 1;
+  overflow: visible;
+}
+
+.dedrel .skills-header {
+  display: flex;
+  font-weight: bold;
+  color: var(--color-text-dark);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.dedrel .skill-name-header { flex: 2; }
+.dedrel .skill-spec-header { flex: 2; text-align: center; }
+.dedrel .skill-rank-header { flex: 0 0 50px; text-align: center; }
+
+.dedrel .skill-item {
+  display: flex;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.dedrel .skill-item:last-child { border-bottom: none; }
+
+.dedrel .skill-name {
+  flex: 2;
+  cursor: pointer;
+  transition: text-shadow 0.2s;
+}
+
+.dedrel .skill-name:hover {
+  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+  color: #fff;
+}
+
+.dedrel .skill-spec {
+  flex: 2;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--color-border);
+  color: #fff;
+  padding: 2px 5px;
+  height: 24px;
+}
+
+.dedrel .skill-rank {
+  flex: 0 0 50px;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--color-border);
+  color: #fff;
+  height: 24px;
+}
+
+/* Attributes Grid */
+.dedrel .attributes-grid {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dedrel .attributes-header {
+  display: flex;
+  font-weight: bold;
+  color: var(--color-text-dark);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.dedrel .attributes-header span {
+  flex: 1;
+  text-align: center;
+}
+.dedrel .attributes-header span:first-child { text-align: left; flex: 2; }
+
+.dedrel .attribute-block {
+  display: flex;
+  align-items: center;
+}
+
+.dedrel .attribute-block .attr-name {
+  flex: 2;
+  font-weight: bold;
+}
+
+.dedrel .attribute-block input {
+  flex: 1;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--color-border);
+  color: #fff;
+  height: 26px;
+  margin: 0 2px;
+}
+
+.dedrel .attribute-block .attr-save {
+  flex: 1;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+  height: 26px;
+  line-height: 24px;
+  margin: 0 2px;
+  display: inline-block;
+}
+
+.dedrel .speed-block {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.dedrel .speed-block .derived-val {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Defenses */
+.dedrel .defenses-box {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 0 0 150px;
+}
+
+.dedrel .defense-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.3);
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  flex: 1;
+}
+
+.dedrel .defense-item label {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-weight: bold;
+}
+
+.dedrel .defense-item .derived-val {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Quick Slots */
+.dedrel .quick-slots {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  flex: 1;
+  overflow: visible;
+}
+
+.dedrel .slot-header {
+  font-size: 14px;
+  border-bottom: 1px solid var(--color-border);
+  margin: 10px 0 5px 0;
+  padding-bottom: 3px;
+  color: var(--color-text-dark);
+}
+
+.dedrel .quick-slots h3:first-child {
+  margin-top: 0;
+}
+
+.dedrel .empty-slot {
+  border: 1px dashed var(--color-primary);
+  color: var(--color-text-dark);
+  text-align: center;
+  padding: 15px;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* Scrollbars */
+.dedrel ::-webkit-scrollbar {
+  width: 6px;
+}
+.dedrel ::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+.dedrel ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+
+/* --- Item Sheet --- */
+.dedrel.sheet.item .item-header {
+  flex: 0 0 80px;
+}
+.dedrel.sheet.item .profile-img {
+  flex: 0 0 80px;
+  height: 80px;
+}
+.dedrel.sheet.item .item-type-badge {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.dedrel.sheet.item .form-fields-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+.dedrel.sheet.item .form-group {
+  display: flex;
+  align-items: center;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.dedrel.sheet.item .form-group label {
+  flex: 1;
+  font-weight: bold;
+  color: var(--color-text-dark);
+}
+.dedrel.sheet.item .form-group input {
+  flex: 2;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+}
+.dedrel.sheet.item .editor-container {
+  height: 100%;
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* --- Item Lists --- */
+.dedrel .item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+.dedrel .item-list-header {
+  font-weight: bold;
+  background: var(--color-border);
+  padding: 5px;
+  border-radius: 3px;
+}
+.dedrel .item-row {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 5px;
+  border-radius: 4px;
+  align-items: center;
+  transition: background 0.2s;
+}
+.dedrel .item-row:hover {
+  background: rgba(0,0,0,0.6);
+  border-color: rgba(255,255,255,0.3);
+}
+.dedrel .item-image {
+  flex: 0 0 24px;
+  margin-right: 10px;
+}
+.dedrel .item-image img {
+  border: none;
+  border-radius: 2px;
+}
+.dedrel .item-name {
+  flex: 1;
+}
+.dedrel .item-name h4 {
+  margin: 0;
+  color: var(--color-text-light);
+  font-size: 14px;
+}
+.dedrel .item-ap-cost {
+  flex: 0 0 50px;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+}
+.dedrel .item-controls {
+  flex: 0 0 60px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.dedrel .item-control {
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.dedrel .item-control:hover {
+  color: var(--color-primary);
+}

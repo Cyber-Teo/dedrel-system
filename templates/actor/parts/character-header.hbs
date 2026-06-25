@@ -1,0 +1,55 @@
+<header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    <div class="header-details">
+        <div class="name-wrapper">
+            <h1 class="dedrel-charname">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Имя персонажа" />
+            </h1>
+        </div>
+
+        <div class="header-stats">
+            <div class="stat-block hp-block">
+                <label>HP</label>
+                <div class="stat-inputs">
+                    <input type="text" name="system.resources.hp.value" value="{{system.resources.hp.value}}"
+                        data-dtype="Number" />
+                    <span class="separator">/</span>
+                    <span class="max-val" title="Максимум">{{system.resources.hp.max}}</span>
+                </div>
+            </div>
+            <div class="stat-block temp-hp-block">
+                <label>Temp HP</label>
+                <input type="text" name="system.resources.hp.temp" value="{{system.resources.hp.temp}}"
+                    data-dtype="Number" />
+            </div>
+            <div class="stat-block exp-block">
+                <label>EXP (Free / Total)</label>
+                <input type="text" name="system.details.xp" value="{{system.details.xp}}" data-dtype="Number" />
+            </div>
+        </div>
+
+        <div class="ap-bars">
+            <div class="ap-bar universal">
+                <input type="text" name="system.resources.ap_universal.value"
+                    value="{{system.resources.ap_universal.value}}" data-dtype="Number" />
+                <span class="separator">/</span>
+                <span class="max-val">{{system.resources.ap_universal.max}}</span>
+                <label>Universal AP</label>
+            </div>
+            <div class="ap-bar maneuver">
+                <input type="text" name="system.resources.ap_maneuver.value"
+                    value="{{system.resources.ap_maneuver.value}}" data-dtype="Number" />
+                <span class="separator">/</span>
+                <span class="max-val">{{system.resources.ap_maneuver.max}}</span>
+                <label>Maneuver AP</label>
+            </div>
+            <div class="ap-bar magic">
+                <input type="text" name="system.resources.ap_magic.value"
+                    value="{{system.resources.ap_magic.value}}" data-dtype="Number" />
+                <span class="separator">/</span>
+                <span class="max-val">{{system.resources.ap_magic.max}}</span>
+                <label>Magic AP</label>
+            </div>
+        </div>
+    </div>
+</header>

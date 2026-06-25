@@ -1,0 +1,166 @@
+export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
+  static defineSchema() {
+    const fields = foundry.data.fields;
+    
+    // Helper to generate attribute schema
+    const attributeField = () => new fields.SchemaField({
+      rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 })
+    });
+
+    // Helper to generate skill schema
+    const skillField = () => new fields.SchemaField({
+      rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+      specialization: new fields.StringField({ required: false, initial: "" })
+    });
+
+    return {
+      attributes: new fields.SchemaField({
+        int: attributeField(),
+        dex: attributeField(),
+        log: attributeField(),
+        rea: attributeField(),
+        str: attributeField(),
+        will: attributeField(),
+        con: attributeField(),
+        luck: attributeField(),
+        cha: attributeField()
+      }),
+      
+      skills: new fields.SchemaField({
+        // Combat
+        crossbows: skillField(),
+        artillery: skillField(),
+        unarmed_combat: skillField(),
+        polearms: skillField(),
+        bludgeoning_weapons: skillField(),
+        bladed_weapons: skillField(),
+        bows: skillField(),
+        magic_attacks: skillField(),
+        throwing: skillField(),
+        armor_wearing: skillField(),
+        firearms: skillField(),
+        exotic_weapons: skillField(),
+        // Intellectual
+        lore: skillField(),
+        lore_erudite: skillField(),
+        sign_interpretation: skillField(),
+        investigation: skillField(),
+        cultural_awareness: skillField(),
+        logic_and_reasoning: skillField(),
+        // Practical
+        alchemy: skillField(),
+        athletics: skillField(),
+        survival: skillField(),
+        engineering: skillField(),
+        healing: skillField(),
+        crafting: skillField(),
+        stealth: skillField(),
+        // Social
+        performance: skillField(),
+        intimidation: skillField(),
+        deception: skillField(),
+        insight: skillField(),
+        persuasion: skillField()
+      }),
+
+      resources: new fields.SchemaField({
+        hp: new fields.SchemaField({
+          value: new fields.NumberField({ required: true, integer: true, initial: 10, min: 0 }),
+          temp: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+          max: new fields.NumberField({ required: false, integer: true, initial: 10 }) // Derived
+        }),
+        wounds: new fields.SchemaField({
+          level: new fields.NumberField({ required: false, integer: true, initial: 1 }), // Derived
+          penalty: new fields.NumberField({ required: false, integer: true, initial: 0 }) // Derived
+        }),
+        ap_universal: new fields.SchemaField({
+          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        }),
+        ap_maneuver: new fields.SchemaField({
+          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        }),
+        ap_magic: new fields.SchemaField({
+          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        }),
+        luck_points: new fields.SchemaField({
+          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        })
+      }),
+
+      defenses: new fields.SchemaField({
+        block: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+        dodge: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+        mdef: new fields.NumberField({ required: false, integer: true, initial: 0 }) // Derived
+      }),
+
+      initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+      movement: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+      
+      details: new fields.SchemaField({
+        xp: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+        level: new fields.NumberField({ required: true, integer: true, initial: 1 }),
+        biography: new fields.HTMLField({ required: false, blank: true, initial: "" })
+      })
+    };
+  }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const attrs = this.attributes;
+    const res = this.resources;
+    const def = this.defenses;
+
+    // HP Max
+    res.hp.max = Math.ceil((attrs.con.rank + attrs.will.rank / 2) * 10);
+
+    // Wounds
+    const hpPercent = (res.hp.value / res.hp.max) * 100;
+    if (hpPercent > 75) {
+      res.wounds.level = 1;
+      res.wounds.penalty = 0;
+    } else if (hpPercent > 50) {
+      res.wounds.level = 2;
+      res.wounds.penalty = -1;
+    } else if (hpPercent > 25) {
+      res.wounds.level = 3;
+      res.wounds.penalty = -3;
+    } else {
+      res.wounds.level = 4;
+      res.wounds.penalty = -5;
+    }
+
+    // Luck Points Max
+    res.luck_points.max = attrs.luck.rank;
+
+    // AP Universal
+    const maxConWill = Math.max(attrs.con.rank, attrs.will.rank);
+    const minConWill = Math.min(attrs.con.rank, attrs.will.rank);
+    const baseUniv = maxConWill > 1 ? 1 : 0;
+    res.ap_universal.max = baseUniv + Math.ceil((maxConWill + minConWill / 2) / 2);
+
+    // AP Maneuver
+    const maxManeuver = Math.max(attrs.str.rank, attrs.dex.rank, attrs.rea.rank);
+    const baseManeuver = maxManeuver > 1 ? 1 : 0;
+    res.ap_maneuver.max = baseManeuver + Math.ceil(maxManeuver / 2);
+
+    // AP Magic
+    const maxMagic = Math.max(attrs.log.rank, attrs.int.rank);
+    const baseMagic = maxMagic > 1 ? 1 : 0;
+    res.ap_magic.max = baseMagic + Math.ceil(maxMagic / 2);
+
+    // Defenses
+    def.block = Math.floor(attrs.str.rank + attrs.rea.rank / 2) + 8;
+    def.dodge = Math.floor(attrs.dex.rank + attrs.rea.rank / 2) + 8;
+    def.mdef = Math.floor(Math.max(attrs.int.rank, attrs.log.rank) + attrs.will.rank / 2) + 8;
+
+    // Initiative
+    this.initiative = Math.max(attrs.int.rank, attrs.rea.rank);
+
+    // Movement
+    this.movement = Math.floor(2 + attrs.dex.rank);
+  }
+}

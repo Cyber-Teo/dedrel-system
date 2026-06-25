@@ -1,0 +1,74 @@
+{
+  "DEDREL": {
+    "SystemName": "Система Dedrel",
+    "Actor": {
+      "TypeCharacter": "Персонаж"
+    },
+    "Item": {
+      "TypeCurrency": "Валюта",
+      "TypeLoot": "Добыча",
+      "TypeTradeGood": "Торговый товар",
+      "TypeMutilation": "Увечье",
+      "TYPES.Item.countryoforigin": "Происхождение",
+      "TYPES.Item.mutation": "Мутация",
+      "TYPES.Item.talent": "Талант",
+      "TYPES.Item.maneuver": "Манёвр",
+      "TYPES.Item.weapon": "Оружие",
+      "TYPES.Item.armor": "Броня",
+      "TYPES.Item.magic_item": "Магический предмет"
+    },
+    "ItemFields": {
+      "Prerequisite": "Требования",
+      "APCost": "Стоимость (AP)",
+      "Uses": "Использования",
+      "TargetType": "Тип цели",
+      "FormulaAttack": "Формула атаки",
+      "FormulaDamage": "Формула урона",
+      "Source": "Источник",
+      "ActionType": "Тип действия"
+    },
+    "Attributes": {
+      "int": "Интуиция",
+      "dex": "Ловкость",
+      "log": "Логика",
+      "rea": "Реакция",
+      "str": "Сила",
+      "will": "Сила воли",
+      "con": "Телосложение",
+      "luck": "Удача",
+      "cha": "Харизма"
+    },
+    "Skills": {
+      "crossbows": "Арбалеты",
+      "artillery": "Артиллерия",
+      "unarmed_combat": "Бой голыми руками",
+      "polearms": "Древковое оружие",
+      "bludgeoning_weapons": "Дробящее оружие",
+      "bladed_weapons": "Лезвийное оружие",
+      "bows": "Луки",
+      "magic_attacks": "Магические атаки",
+      "throwing": "Метание",
+      "armor_wearing": "Ношение доспехов",
+      "firearms": "Огнестрельное оружие",
+      "exotic_weapons": "Экзотическое оружие",
+      "lore": "Знание",
+      "lore_erudite": "Знания Эрудит",
+      "sign_interpretation": "Интерпретация знаков",
+      "investigation": "Исследование",
+      "cultural_awareness": "Культурная Осведомленность",
+      "logic_and_reasoning": "Логика и рассуждение",
+      "alchemy": "Алхимия",
+      "athletics": "Атлетизм",
+      "survival": "Выживание",
+      "engineering": "Инженерное дело",
+      "healing": "Лечение",
+      "crafting": "Ремесло",
+      "stealth": "Скрытность",
+      "performance": "Выступление",
+      "intimidation": "Запугивание",
+      "deception": "Обман",
+      "insight": "Проницательность",
+      "persuasion": "Убеждение"
+    }
+  }
+}

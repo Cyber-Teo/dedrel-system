@@ -1,0 +1,63 @@
+<div class="sheet-content">
+    <header class="sheet-header item-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        <div class="header-details">
+            <div class="name-wrapper">
+                <h1 class="dedrel-charname"><input name="name" type="text" value="{{item.name}}" placeholder="Название"/></h1>
+            </div>
+            <div class="item-subtitle">
+                <span class="item-type-badge">{{item.type}}</span>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        {{#each tabs as |tab|}}
+        <a class="{{tab.cssClass}}" data-action="changeTab" data-group="primary" data-tab="{{tab.id}}">{{tab.label}}</a>
+        {{/each}}
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Details Tab --}}
+        <div class="tab details {{tabs.details.cssClass}}" data-group="primary" data-tab="details">
+            <div class="form-fields-grid">
+            {{#if (eq item.type "maneuver")}}
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.APCost"}}</label>
+                    <input type="text" name="system.ap_cost" value="{{system.ap_cost}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
+                    <input type="text" name="system.formula_attack" value="{{system.formula_attack}}"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.FormulaDamage"}}</label>
+                    <input type="text" name="system.formula_damage" value="{{system.formula_damage}}"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.Prerequisite"}}</label>
+                    <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
+                </div>
+            {{/if}}
+
+            {{#if (or (eq item.type "mutation") (eq item.type "talent"))}}
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.Prerequisite"}}</label>
+                    <input type="text" name="system.prerequisite" value="{{system.prerequisite}}"/>
+                </div>
+            {{/if}}
+            </div>
+        </div>
+
+        {{!-- Description Tab --}}
+        <div class="tab description {{tabs.description.cssClass}}" data-group="primary" data-tab="description">
+            <div class="editor-container">
+                {{editor enrichedDescription target="system.description" button=true editable=editable}}
+            </div>
+        </div>
+
+    </section>
+</div>

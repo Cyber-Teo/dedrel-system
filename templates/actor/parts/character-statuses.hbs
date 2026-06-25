@@ -1,0 +1,31 @@
+<div class="tab statuses {{tabs.statuses.cssClass}}" data-group="primary" data-tab="statuses">
+    <h2 class="tab-title">Увечья (Mutilations)</h2>
+    <div class="item-list">
+        {{#each mutilations as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name">
+                <h4>{{item.name}}</h4>
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
+                <a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">Активные эффекты</h2>
+    <div class="item-list">
+        {{#each activeEffects as |effect id|}}
+        <div class="item-row flexrow effect-row" data-effect-id="{{effect.id}}">
+            <div class="item-image"><img src="{{effect.icon}}" title="{{effect.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name">
+                <h4>{{effect.name}}</h4>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

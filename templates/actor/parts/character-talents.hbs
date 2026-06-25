@@ -1,0 +1,18 @@
+<div class="tab talents {{tabs.talents.cssClass}}" data-group="primary" data-tab="talents">
+    <h2 class="tab-title">Таланты</h2>
+    <div class="item-list">
+        {{#each talents as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name">
+                <h4>{{item.name}}</h4>
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
+                <a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
