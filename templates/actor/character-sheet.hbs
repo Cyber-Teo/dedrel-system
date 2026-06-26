@@ -2,18 +2,17 @@
     {{!-- Tabs Navigation --}}
     {{> "systems/dedrel/templates/actor/parts/character-navigation.hbs"}}
 
-    {{!-- Header --}}
-    {{> "systems/dedrel/templates/actor/parts/character-header.hbs"}}
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-        {{> "systems/dedrel/templates/actor/parts/character-main.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-inventory.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-maneuvers.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-spells.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-mutations.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-talents.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-statuses.hbs"}}
-        {{> "systems/dedrel/templates/actor/parts/character-experience.hbs"}}
-    </section>
+    <div class="scrollable-wrapper">
+        {{!-- Sheet Body --}}
+        <section class="sheet-body">
+            {{> "systems/dedrel/templates/actor/parts/character-main.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-inventory.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-maneuvers.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-spells.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-mutations.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-talents.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-statuses.hbs"}}
+            {{> "systems/dedrel/templates/actor/parts/character-experience.hbs"}}
+        </section>
+    </div>
 </div>

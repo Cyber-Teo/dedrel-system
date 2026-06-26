@@ -29,7 +29,8 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-mutations.hbs",
     "systems/dedrel/templates/actor/parts/character-talents.hbs",
     "systems/dedrel/templates/actor/parts/character-statuses.hbs",
-    "systems/dedrel/templates/actor/parts/character-experience.hbs"
+    "systems/dedrel/templates/actor/parts/character-experience.hbs",
+    "systems/dedrel/templates/apps/roll-dialog.hbs"
   ]);
 
   // Register sheets

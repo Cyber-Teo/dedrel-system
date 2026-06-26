@@ -57,6 +57,31 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.system = itemData.system;
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
+    
+    if (itemData.type === "weapon") {
+      context.weaponTypes = {
+        "bladed": "Лезвийное",
+        "polearm": "Древковое",
+        "blunt": "Дробящее",
+        "ranged": "Стрелковое"
+      };
+      context.damageTypes = {
+        "slashing": "Режущий",
+        "bludgeoning": "Дробящий",
+        "piercing": "Колющий"
+      };
+      context.reqAttributes = {
+        "none": "Нет",
+        "str": "Сила",
+        "dex": "Ловкость",
+        "con": "Телосложение",
+        "int": "Интеллект",
+        "wis": "Мудрость",
+        "cha": "Харизма"
+      };
+      context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
+      context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
+    }
 
     console.log("Dedrel | DedrelItemSheet context prepared successfully:", context);
     return context;

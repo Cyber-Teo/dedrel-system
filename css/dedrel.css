@@ -29,6 +29,7 @@ form.dedrel.sheet.item {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .dedrel.sheet .sheet-content {
@@ -43,7 +44,7 @@ form.dedrel.sheet.item {
 .dedrel .sheet-header {
   flex: 0 0 auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
   background: var(--color-panel);
   border-bottom: 2px solid var(--color-border);
@@ -53,16 +54,40 @@ form.dedrel.sheet.item {
   box-sizing: border-box;
 }
 
+.dedrel .header-top {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+}
+
+.dedrel .header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 0 200px;
+  align-items: stretch;
+}
+
+.dedrel .header-left .profile-img {
+  align-self: center;
+}
+
+.dedrel .header-left .stat-block {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
 .dedrel .profile-img {
-  flex: 0 0 120px;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border: 2px solid var(--color-border);
   border-radius: 5px;
 }
 
-.dedrel .header-details {
+.dedrel .header-right {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -71,10 +96,32 @@ form.dedrel.sheet.item {
   max-width: 100%;
 }
 
+.dedrel .header-row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.dedrel .header-row .name-wrapper {
+  flex: 3;
+}
+
+.dedrel .header-row .exp-block {
+  flex: 1;
+}
+
+.dedrel .header-row.hp-row .stat-block {
+  flex: 1;
+}
+
 .dedrel .name-wrapper {
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .dedrel .dedrel-charname {
@@ -82,20 +129,23 @@ form.dedrel.sheet.item {
   padding: 0;
   border: none;
   width: 100%;
+  height: 100%;
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .dedrel .dedrel-charname input {
   font-size: 24px;
   font-weight: bold;
-  height: 40px;
+  height: 100%;
   width: 100%;
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--color-border);
   color: #fff;
   padding: 0 10px;
@@ -104,17 +154,14 @@ form.dedrel.sheet.item {
 
 /* Stats Row */
 .dedrel .header-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 15px;
-  align-items: center;
-  width: 100%;
+  display: none;
+  /* No longer used, handled by header-row now */
 }
 
 .dedrel .stat-block {
   display: flex;
   align-items: center;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 5px 10px;
   border-radius: 4px;
   border: 1px solid var(--color-border);
@@ -166,7 +213,7 @@ form.dedrel.sheet.item {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 5px;
   border-radius: 4px;
   border: 1px solid var(--color-border);
@@ -189,9 +236,17 @@ form.dedrel.sheet.item {
   margin-left: auto;
 }
 
-.dedrel .ap-bar.universal { border-left: 4px solid var(--color-ap-univ); }
-.dedrel .ap-bar.maneuver { border-left: 4px solid var(--color-ap-maneuver); }
-.dedrel .ap-bar.magic { border-left: 4px solid var(--color-ap-magic); }
+.dedrel .ap-bar.universal {
+  border-left: 4px solid var(--color-ap-univ);
+}
+
+.dedrel .ap-bar.maneuver {
+  border-left: 4px solid var(--color-ap-maneuver);
+}
+
+.dedrel .ap-bar.magic {
+  border-left: 4px solid var(--color-ap-magic);
+}
 
 /* Tabs */
 .dedrel .sheet-tabs {
@@ -200,40 +255,46 @@ form.dedrel.sheet.item {
   border-bottom: 1px solid var(--color-border);
 }
 
-.dedrel .sheet-tabs .item {
+.dedrel .sheet-tabs a {
   line-height: 30px;
   padding: 0 20px;
   font-weight: bold;
   color: var(--color-text-dark);
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
 }
 
-.dedrel .sheet-tabs .item.active {
+.dedrel .sheet-tabs a.active {
   color: #fff;
-  border-bottom: 2px solid var(--color-hp);
-  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+  border-bottom: 2px solid #ff3333;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 /* Body */
-.dedrel .sheet-body {
-  position: relative;
+.dedrel .scrollable-wrapper {
   flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dedrel .sheet-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
   padding: 10px;
-  overflow: hidden;
 }
 
 .dedrel .tab {
   display: none;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  overflow: hidden;
+  flex: 1 0 auto;
+  flex-direction: column;
 }
 
 .dedrel .tab.active {
   display: flex;
-  flex-direction: column;
 }
 
 .dedrel .tab-content {
@@ -241,9 +302,7 @@ form.dedrel.sheet.item {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 5px;
+  overflow: visible;
 }
 
 .dedrel .main-top {
@@ -276,6 +335,7 @@ form.dedrel.sheet.item {
   padding: 10px;
   flex: 1;
   display: flex;
+  min-height: 80px;
 }
 
 .dedrel .biography-box textarea {
@@ -318,18 +378,30 @@ form.dedrel.sheet.item {
   align-items: center;
 }
 
-.dedrel .skill-name-header { flex: 2; }
-.dedrel .skill-spec-header { flex: 2; text-align: center; }
-.dedrel .skill-rank-header { flex: 0 0 50px; text-align: center; }
+.dedrel .skill-name-header {
+  flex: 2;
+}
+
+.dedrel .skill-spec-header {
+  flex: 2;
+  text-align: center;
+}
+
+.dedrel .skill-rank-header {
+  flex: 0 0 50px;
+  text-align: center;
+}
 
 .dedrel .skill-item {
   display: flex;
   align-items: center;
   padding: 3px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.dedrel .skill-item:last-child { border-bottom: none; }
+.dedrel .skill-item:last-child {
+  border-bottom: none;
+}
 
 .dedrel .skill-name {
   flex: 2;
@@ -338,13 +410,13 @@ form.dedrel.sheet.item {
 }
 
 .dedrel .skill-name:hover {
-  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
   color: #fff;
 }
 
 .dedrel .skill-spec {
   flex: 2;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--color-border);
   color: #fff;
   padding: 2px 5px;
@@ -354,7 +426,7 @@ form.dedrel.sheet.item {
 .dedrel .skill-rank {
   flex: 0 0 50px;
   text-align: center;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--color-border);
   color: #fff;
   height: 24px;
@@ -366,9 +438,9 @@ form.dedrel.sheet.item {
   border: 1px solid var(--color-border);
   border-radius: 5px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 15px;
 }
 
 .dedrel .attributes-header {
@@ -377,14 +449,18 @@ form.dedrel.sheet.item {
   color: var(--color-text-dark);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 .dedrel .attributes-header span {
   flex: 1;
   text-align: center;
 }
-.dedrel .attributes-header span:first-child { text-align: left; flex: 2; }
+
+.dedrel .attributes-header span:first-child {
+  text-align: left;
+  flex: 2;
+}
 
 .dedrel .attribute-block {
   display: flex;
@@ -399,7 +475,7 @@ form.dedrel.sheet.item {
 .dedrel .attribute-block input {
   flex: 1;
   text-align: center;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--color-border);
   color: #fff;
   height: 26px;
@@ -409,7 +485,7 @@ form.dedrel.sheet.item {
 .dedrel .attribute-block .attr-save {
   flex: 1;
   text-align: center;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--color-border);
   color: var(--color-text-dark);
   height: 26px;
@@ -440,9 +516,9 @@ form.dedrel.sheet.item {
   padding: 10px;
   gap: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  flex: 0 0 150px;
 }
 
 .dedrel .defense-item {
@@ -450,7 +526,7 @@ form.dedrel.sheet.item {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   padding: 5px 15px;
   border-radius: 4px;
   border: 1px solid var(--color-border);
@@ -505,22 +581,58 @@ form.dedrel.sheet.item {
 .dedrel ::-webkit-scrollbar {
   width: 6px;
 }
+
 .dedrel ::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
+
 .dedrel ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
 }
 
 /* --- Item Sheet --- */
 .dedrel.sheet.item .item-header {
-  flex: 0 0 80px;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto;
 }
+
+.dedrel.sheet.item .sheet-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
 .dedrel.sheet.item .profile-img {
   flex: 0 0 80px;
+  width: 80px;
   height: 80px;
 }
+
+.dedrel.sheet.item .properties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.dedrel.sheet.item .properties-grid .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.dedrel.sheet.item .properties-grid .checkbox input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
 .dedrel.sheet.item .item-type-badge {
   background: var(--color-primary);
   color: #fff;
@@ -529,12 +641,14 @@ form.dedrel.sheet.item {
   font-size: 12px;
   text-transform: uppercase;
 }
+
 .dedrel.sheet.item .form-fields-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   padding: 10px;
 }
+
 .dedrel.sheet.item .form-group {
   display: flex;
   align-items: center;
@@ -543,19 +657,29 @@ form.dedrel.sheet.item {
   border-radius: 5px;
   padding: 5px 10px;
 }
+
+.dedrel.sheet.item .form-group.stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .dedrel.sheet.item .form-group label {
   flex: 1;
   font-weight: bold;
   color: var(--color-text-dark);
 }
-.dedrel.sheet.item .form-group input {
+
+.dedrel.sheet.item .form-group input[type="text"],
+.dedrel.sheet.item .form-group input[type="number"],
+.dedrel.sheet.item .form-group select {
   flex: 2;
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
   padding: 5px;
   border-radius: 3px;
 }
+
 .dedrel.sheet.item .editor-container {
   height: 100%;
   background: var(--color-panel);
@@ -572,57 +696,119 @@ form.dedrel.sheet.item {
   gap: 5px;
   margin-top: 10px;
 }
+
 .dedrel .item-list-header {
   font-weight: bold;
   background: var(--color-border);
   padding: 5px;
   border-radius: 3px;
 }
+
 .dedrel .item-row {
-  background: rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 5px;
   border-radius: 4px;
   align-items: center;
   transition: background 0.2s;
 }
+
 .dedrel .item-row:hover {
-  background: rgba(0,0,0,0.6);
-  border-color: rgba(255,255,255,0.3);
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
 }
+
 .dedrel .item-image {
   flex: 0 0 24px;
   margin-right: 10px;
 }
+
 .dedrel .item-image img {
   border: none;
   border-radius: 2px;
 }
+
 .dedrel .item-name {
   flex: 1;
 }
+
 .dedrel .item-name h4 {
   margin: 0;
   color: var(--color-text-light);
   font-size: 14px;
 }
+
 .dedrel .item-ap-cost {
   flex: 0 0 50px;
   text-align: center;
   font-weight: bold;
   color: #fff;
 }
+
 .dedrel .item-controls {
   flex: 0 0 60px;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
+
 .dedrel .item-control {
   cursor: pointer;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   transition: color 0.2s;
 }
+
 .dedrel .item-control:hover {
   color: var(--color-primary);
 }
+
+/* Dice Rolling & Dialogs */
+.dedrel .rollable {
+  cursor: pointer;
+  color: var(--color-text-light);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.dedrel .rollable:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 5px var(--color-primary);
+}
+
+.dedrel-roll-dialog .form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dedrel-roll-dialog .form-group label {
+  flex: 2;
+  font-weight: bold;
+}
+
+.dedrel-roll-dialog .form-group .form-fields {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dedrel-roll-dialog input[type="number"] {
+  width: 60px;
+  text-align: center;
+}
+
+.dedrel-roll-dialog .talents-info {
+  margin-top: 10px;
+  background: rgba(0,0,0,0.1);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--color-border);
+}
+
+.dedrel-roll-dialog .talents-info h4 {
+  margin: 0 0 5px 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+}
+

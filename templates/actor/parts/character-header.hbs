@@ -1,13 +1,7 @@
 <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-    <div class="header-details">
-        <div class="name-wrapper">
-            <h1 class="dedrel-charname">
-                <input name="name" type="text" value="{{actor.name}}" placeholder="Имя персонажа" />
-            </h1>
-        </div>
-
-        <div class="header-stats">
+    <div class="header-top flexrow">
+        <div class="header-left">
+            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
             <div class="stat-block hp-block">
                 <label>HP</label>
                 <div class="stat-inputs">
@@ -22,34 +16,103 @@
                 <input type="text" name="system.resources.hp.temp" value="{{system.resources.hp.temp}}"
                     data-dtype="Number" />
             </div>
-            <div class="stat-block exp-block">
-                <label>EXP (Free / Total)</label>
-                <input type="text" name="system.details.xp" value="{{system.details.xp}}" data-dtype="Number" />
-            </div>
         </div>
+        
+        <div class="header-right">
+            <!-- Row 1: Имя и Опыт -->
+            <div class="header-row top-row">
+                <div class="name-wrapper">
+                    <h1 class="dedrel-charname">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="Имя персонажа" />
+                    </h1>
+                </div>
+                <div class="stat-block exp-block">
+                    <label>EXP (Free / Total)</label>
+                    <input type="text" name="system.details.xp" value="{{system.details.xp}}" data-dtype="Number" />
+                </div>
+            </div>
 
-        <div class="ap-bars">
-            <div class="ap-bar universal">
-                <input type="text" name="system.resources.ap_universal.value"
-                    value="{{system.resources.ap_universal.value}}" data-dtype="Number" />
-                <span class="separator">/</span>
-                <span class="max-val">{{system.resources.ap_universal.max}}</span>
-                <label>Universal AP</label>
+            <!-- Row 2: Action Points -->
+            <div class="ap-bars">
+                <div class="ap-bar universal">
+                    <input type="text" name="system.resources.ap_universal.value"
+                        value="{{system.resources.ap_universal.value}}" data-dtype="Number" />
+                    <span class="separator">/</span>
+                    <span class="max-val">{{system.resources.ap_universal.max}}</span>
+                    <label>Universal AP</label>
+                </div>
+                <div class="ap-bar maneuver">
+                    <input type="text" name="system.resources.ap_maneuver.value"
+                        value="{{system.resources.ap_maneuver.value}}" data-dtype="Number" />
+                    <span class="separator">/</span>
+                    <span class="max-val">{{system.resources.ap_maneuver.max}}</span>
+                    <label>Maneuver AP</label>
+                </div>
+                <div class="ap-bar magic">
+                    <input type="text" name="system.resources.ap_magic.value"
+                        value="{{system.resources.ap_magic.value}}" data-dtype="Number" />
+                    <span class="separator">/</span>
+                    <span class="max-val">{{system.resources.ap_magic.max}}</span>
+                    <label>Magic AP</label>
+                </div>
             </div>
-            <div class="ap-bar maneuver">
-                <input type="text" name="system.resources.ap_maneuver.value"
-                    value="{{system.resources.ap_maneuver.value}}" data-dtype="Number" />
-                <span class="separator">/</span>
-                <span class="max-val">{{system.resources.ap_maneuver.max}}</span>
-                <label>Maneuver AP</label>
+
+            <!-- Row 3: Блок атрибутов -->
+            <div class="attributes-grid">
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                {{#each system.attributes as |attr key|}}
+                <div class="attribute-block">
+                    <a class="attr-name rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-label="{{localize (concat "DEDREL.Attributes." key)}}">{{localize (concat "DEDREL.Attributes." key)}}</a>
+                    <input type="text" name="system.attributes.{{key}}.rank" value="{{attr.rank}}"
+                        data-dtype="Number" title="Rank" />
+                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-is-save="true" data-label="Спасбросок: {{localize (concat "DEDREL.Attributes." key)}}" title="Сделать спасбросок">{{attr.rank}}</a>
+                </div>
+                {{/each}}
             </div>
-            <div class="ap-bar magic">
-                <input type="text" name="system.resources.ap_magic.value"
-                    value="{{system.resources.ap_magic.value}}" data-dtype="Number" />
-                <span class="separator">/</span>
-                <span class="max-val">{{system.resources.ap_magic.max}}</span>
-                <label>Magic AP</label>
+
+            <!-- Row 4: Защиты и Скорость -->
+            <div class="defenses-box">
+                <div class="defense-item">
+                    <label>BLOCK</label>
+                    <span class="derived-val">{{system.defenses.block}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>DODGE</label>
+                    <span class="derived-val">{{system.defenses.dodge}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>MDEF</label>
+                    <span class="derived-val">{{system.defenses.mdef}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>INIT</label>
+                    <span class="derived-val">{{system.initiative}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>SPEED</label>
+                    <span class="derived-val">{{system.movement}}</span>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Biography block now full width -->
+    <div class="biography-box">
+        <textarea name="system.details.biography"
+            placeholder="Языки, происхождение и т.д.">{{system.details.biography}}</textarea>
     </div>
 </header>

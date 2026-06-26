@@ -1,3 +1,7 @@
+import { ItemDataModels } from "../data/items/index.js";
+import { ActorDataModels } from "../data/actors/index.mjs";
+import { showRollDialog } from "../dice/roll.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
@@ -23,7 +27,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       delete: DedrelCharacterSheet.#onDeleteItem,
       "toggle-favorite": DedrelCharacterSheet.#onToggleFavorite,
       create: DedrelCharacterSheet.#onCreateItem,
-      changeTab: DedrelCharacterSheet.#onChangeTab
+      changeTab: DedrelCharacterSheet.#onChangeTab,
+      rollCheck: DedrelCharacterSheet.#onRollCheck
     }
   };
 
@@ -189,5 +194,19 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const tab = target.dataset.tab;
     const group = target.dataset.group || "primary";
     this.changeTab(tab, group, { event });
+  }
+
+  static async #onRollCheck(event, target) {
+    const actor = this.document;
+    const label = target.dataset.label;
+    const rank = parseInt(target.dataset.rank) || 0;
+    const isSave = target.dataset.isSave === "true";
+    
+    await showRollDialog({
+      actor: actor,
+      title: label,
+      baseRank: rank,
+      isSave: isSave
+    });
   }
 }

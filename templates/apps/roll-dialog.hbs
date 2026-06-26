@@ -1,0 +1,37 @@
+<form class="dedrel-roll-dialog">
+    {{#unless isSave}}
+    <div class="form-group">
+        <label>Специализация (+2)</label>
+        <div class="form-fields">
+            <input type="checkbox" name="specialization" />
+        </div>
+    </div>
+    {{/unless}}
+    
+    <div class="form-group">
+        <label>Ситуационный бонус</label>
+        <div class="form-fields">
+            <input type="number" name="bonus" value="0" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Ситуационный штраф</label>
+        <div class="form-fields">
+            <input type="number" name="penalty" value="0" />
+        </div>
+    </div>
+
+    <hr>
+    
+    <div class="talents-info">
+        <h4>Применимые таланты</h4>
+        <div class="placeholder">
+            {{#if talentsInfo}}
+                {{{talentsInfo}}}
+            {{else}}
+                <span style="color: #666; font-style: italic;">(Здесь будут отображаться подсказки от талантов)</span>
+            {{/if}}
+        </div>
+    </div>
+</form>

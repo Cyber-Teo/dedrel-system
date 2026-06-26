@@ -49,7 +49,69 @@
                     <input type="text" name="system.prerequisite" value="{{system.prerequisite}}"/>
                 </div>
             {{/if}}
+
+            {{#if (eq item.type "weapon")}}
+                <div class="form-group">
+                    <label>Тип оружия</label>
+                    <select name="system.weapon_type">
+                        {{selectOptions weaponTypes selected=system.weapon_type}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Тип урона</label>
+                    <select name="system.damage_type">
+                        {{selectOptions damageTypes selected=system.damage_type}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Урон</label>
+                    <input type="text" name="system.damage_formula" value="{{system.damage_formula}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Зона контроля</label>
+                    <select name="system.control_zone" data-dtype="Number">
+                        {{selectOptions zeroToThree selected=system.control_zone}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Бронебойность</label>
+                    <select name="system.armor_piercing" data-dtype="Number">
+                        {{selectOptions zeroToThree selected=system.armor_piercing}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Дальность</label>
+                    <input type="text" name="system.range" value="{{system.range}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Требование к атрибуту</label>
+                    <select name="system.req_attribute">
+                        {{selectOptions reqAttributes selected=system.req_attribute}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Требование к рангу</label>
+                    <select name="system.req_atr_rank" data-dtype="Number">
+                        {{selectOptions zeroToSix selected=system.req_atr_rank}}
+                    </select>
+                </div>
+            {{/if}}
+            </div> <!-- CLOSE form-fields-grid -->
+
+            {{#if (eq item.type "weapon")}}
+            <div class="form-group stacked">
+                <label>Свойства</label>
+                <div class="properties-grid">
+                    <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> Вспомогательное</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> Быстрое</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> Медленное</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> Двуручное</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> Метательное</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> Магическое</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> Перезарядка</label>
+                </div>
             </div>
+            {{/if}}
         </div>
 
         {{!-- Description Tab --}}

@@ -1,53 +1,8 @@
 <div class="tab main {{tabs.main.cssClass}}" data-group="primary" data-tab="main">
     <div class="tab-content">
-        <div class="main-top">
-            <div class="biography-box">
-                <textarea name="system.details.biography"
-                    placeholder="Языки, происхождение и т.д.">{{system.details.biography}}</textarea>
-            </div>
+        {{!-- Header --}}
+        {{> "systems/dedrel/templates/actor/parts/character-header.hbs"}}
 
-            <div class="attributes-grid">
-                <div class="attributes-header">
-                    <span>ATTR</span>
-                    <span>RANK</span>
-                    <span>SAVE</span>
-                </div>
-                {{#each system.attributes as |attr key|}}
-                <div class="attribute-block">
-                    <span class="attr-name">{{localize (concat "DEDREL.Attributes." key)}}</span>
-                    <input type="text" name="system.attributes.{{key}}.rank" value="{{attr.rank}}"
-                        data-dtype="Number" title="Rank" />
-                    <span class="attr-save" title="Save Base (Readonly)">{{attr.rank}}</span>
-                </div>
-                {{/each}}
-                <div class="attribute-block speed-block">
-                    <span class="attr-name">SPEED</span>
-                    <span class="derived-val">{{system.movement}}</span>
-                    <span></span>
-                </div>
-            </div>
-
-            <div class="defenses-box">
-                <div class="defense-item">
-                    <label>BLOCK</label>
-                    <span class="derived-val">{{system.defenses.block}}</span>
-                </div>
-                <div class="defense-item">
-                    <label>DODGE</label>
-                    <span class="derived-val">{{system.defenses.dodge}}</span>
-                </div>
-                <div class="defense-item">
-                    <label>MDEF</label>
-                    <span class="derived-val">{{system.defenses.mdef}}</span>
-                </div>
-                <div class="defense-item">
-                    <label>INIT</label>
-                    <span class="derived-val">{{system.initiative}}</span>
-                </div>
-            </div>
-        </div>
-
-        <hr class="main-divider">
 
         <div class="main-bottom">
             <div class="skills-list">
@@ -59,8 +14,7 @@
                 <div class="skills-scrollarea">
                     {{#each system.skills as |skill key|}}
                     <div class="skill-item" data-skill-id="{{key}}">
-                        <span class="skill-name rollable" data-roll-type="skill">{{localize (concat
-                            "DEDREL.Skills." key)}}</span>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." key)}}">{{localize (concat "DEDREL.Skills." key)}}</a>
                         <input type="text" class="skill-spec" name="system.skills.{{key}}.specialization"
                             value="{{skill.specialization}}" />
                         <input type="text" class="skill-rank" name="system.skills.{{key}}.rank"
