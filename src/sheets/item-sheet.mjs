@@ -19,7 +19,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       closeOnSubmit: false
     },
     actions: {
-      changeTab: DedrelItemSheet.#onChangeTab
+      changeTab: DedrelItemSheet.#onChangeTab,
+      editImage: DedrelItemSheet.#onEditImage
     }
   };
 
@@ -28,6 +29,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       template: "systems/dedrel/templates/item/item-sheet.hbs"
     }
   };
+
+  get title() {
+    return this.document.name;
+  }
 
   static TABS = {
     primary: {
@@ -59,42 +64,36 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.editable = this.isEditable;
     
     if (itemData.type === "weapon") {
-      context.weaponTypes = {
-        "melee": "Ближний бой (Melee)",
-        "ranged": "Дальний бой (Ranged)",
-        "shield": "Щит (Shield)",
-        "bladed": "Лезвийное (Legacy)",
-        "polearm": "Древковое (Legacy)",
-        "blunt": "Дробящее (Legacy)"
+      context.weaponSkills = {
+        "unarmed_combat": "Безоружный бой",
+        "pole_weapons": "Древковое оружие",
+        "blunt_weapons": "Дробящее оружие",
+        "artillery": "Артиллерия",
+        "firearms": "Огнестрельное оружие",
+        "throwing": "Метательное оружие",
+        "exotic_weapons": "Экзотическое оружие",
+        "magical_attacks": "Магические атаки",
+        "bows": "Луки",
+        "bladed_weapons": "Лезвийное оружие"
       };
       context.damageTypes = {
         "slashing": "Режущий",
         "bludgeoning": "Дробящий",
         "piercing": "Колющий"
       };
-      context.reqAttributes = {
-        "none": "Нет",
-        "str": "Сила",
-        "dex": "Ловкость",
-        "con": "Телосложение",
-        "int": "Интеллект",
-        "wis": "Мудрость",
-        "cha": "Харизма"
-      };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
     }
     
-    if (["talent", "mutation", "maneuver"].includes(itemData.type)) {
+    if (["talent", "mutation", "maneuver", "weapon"].includes(itemData.type)) {
       context.bloodlines = {
-        "": "—",
         "Human": "Human",
         "Demon": "Demon",
         "Elf": "Elf",
         "Fay": "Fay",
         "Dragon": "Dragon"
       };
-      
+
       context.joinedPrereqAttributes = (itemData.system.prerequisites_attributes || []).join(", ");
       context.joinedPrereqSkills = (itemData.system.prerequisites_skills || []).join(", ");
       context.joinedPrereqTalents = (itemData.system.prerequisites_talents || []).join(", ");
@@ -131,6 +130,9 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "free": "Свободное",
         "chain": "Цепное"
       };
+      context.joinedActionType = (itemData.system.action_type || [])[0];
+      context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join(", ");
+      
       context.targetTypes = {
         "self": "На себя",
         "creature": "Существо",
@@ -144,8 +146,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "cone": "Конус",
         "line": "Линия"
       };
-      context.joinedActionType = (itemData.system.action_type || [])[0];
-      context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join(", ");
     }
 
     console.log("Dedrel | DedrelItemSheet context prepared successfully:", context);
@@ -170,7 +170,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   _prepareSubmitData(event, form, formData) {
     const data = super._prepareSubmitData(event, form, formData);
     
-    if (["talent", "mutation", "maneuver"].includes(this.document.type)) {
+    if (["talent", "mutation", "maneuver", "weapon"].includes(this.document.type)) {
       const arrayFields = [
         "system.prerequisites_attributes",
         "system.prerequisites_skills",
@@ -195,5 +195,21 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     const tab = target.dataset.tab;
     const group = target.dataset.group || "primary";
     this.changeTab(tab, group, { event });
+  }
+
+  static async #onEditImage(event, target) {
+    const attr = target.dataset.edit || "img";
+    const current = foundry.utils.getProperty(this.document, attr);
+    const fp = new FilePicker({
+      type: "image",
+      current: current,
+      callback: path => {
+        target.src = path;
+        this.document.update({ [attr]: path });
+      },
+      top: this.position.top + 40,
+      left: this.position.left + 10
+    });
+    return fp.browse();
   }
 }

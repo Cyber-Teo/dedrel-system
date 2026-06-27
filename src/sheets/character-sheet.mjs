@@ -29,7 +29,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       create: DedrelCharacterSheet.#onCreateItem,
       changeTab: DedrelCharacterSheet.#onChangeTab,
       rollCheck: DedrelCharacterSheet.#onRollCheck,
-      useItem: DedrelCharacterSheet.#onUseItem
+      useItem: DedrelCharacterSheet.#onUseItem,
+      editImage: DedrelCharacterSheet.#onEditImage
     }
   };
 
@@ -38,6 +39,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       template: "systems/dedrel/templates/actor/character-sheet.hbs"
     }
   };
+
+  get title() {
+    return this.document.name;
+  }
 
   static TABS = {
     primary: {
@@ -49,6 +54,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         { id: "mutations", label: "Мутации" },
         { id: "talents", label: "Таланты" },
         { id: "statuses", label: "Статусы" },
+        { id: "biography", label: "Биография" },
         { id: "experience", label: "Опыт" }
       ],
       initial: "main",
@@ -223,5 +229,21 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     } else if (item) {
       ui.notifications.warn("Этот предмет нельзя использовать.");
     }
+  }
+
+  static async #onEditImage(event, target) {
+    const attr = target.dataset.edit || "img";
+    const current = foundry.utils.getProperty(this.document, attr);
+    const fp = new FilePicker({
+      type: "image",
+      current: current,
+      callback: path => {
+        target.src = path;
+        this.document.update({ [attr]: path });
+      },
+      top: this.position.top + 40,
+      left: this.position.left + 10
+    });
+    return fp.browse();
   }
 }

@@ -23,9 +23,9 @@ export default class DedrelItem extends Item {
           const wType = i.system.weapon_type; // "melee", "ranged", "shield"
           
           let match = false;
-          if (wType === "melee" && reqType.melee) match = true;
-          if (wType === "ranged" && reqType.ranged) match = true;
-          if (wType === "shield" && reqType.shield) match = true;
+          if (wType.melee && reqType.melee) match = true;
+          if (wType.ranged && reqType.ranged) match = true;
+          if (wType.shield && reqType.shield) match = true;
           
           const hasReq = reqType.melee || reqType.ranged || reqType.shield;
           if (hasReq && !match) return false;

@@ -6,15 +6,11 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       description: new fields.HTMLField({ label: "Description" }),
       
       // Basic Stats
-      weapon_type: new fields.StringField({ 
-        initial: "melee", 
-        choices: {
-          "melee": "Ближний бой (Melee)",
-          "ranged": "Дальний бой (Ranged)",
-          "shield": "Щит (Shield)",
-          "magic": "Магическое (Magic)"
-        },
-        label: "Тип оружия" 
+      weapon_type: new fields.SchemaField({
+        melee: new fields.BooleanField({ label: "Ближний бой (Melee)" }),
+        ranged: new fields.BooleanField({ label: "Дальний бой (Ranged)" }),
+        shield: new fields.BooleanField({ label: "Щит (Shield)" }),
+        magic: new fields.BooleanField({ label: "Магическое (Magic)" })
       }),
       damage_type: new fields.SchemaField({
         piercing: new fields.BooleanField({ label: "Колющий" }),
@@ -25,20 +21,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       damage_formula: new fields.StringField({ initial: "", label: "Урон" }),
       range: new fields.StringField({ initial: "", label: "Дальность" }),
       
-      req_attribute: new fields.StringField({ 
-        initial: "none", 
-        choices: {
-          "none": "Нет",
-          "str": "Сила",
-          "dex": "Ловкость",
-          "con": "Телосложение",
-          "int": "Интеллект",
-          "wis": "Мудрость",
-          "cha": "Харизма"
-        },
-        label: "Требуемый атрибут" 
-      }),
-      req_atr_rank: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 6, label: "Требование к рангу" }),
+      prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [], label: "Требования к атрибутам" }),
+      prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [], label: "Требования к навыкам" }),
       
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3, label: "Зона контроля" }),
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3, label: "Бронебойность" }),

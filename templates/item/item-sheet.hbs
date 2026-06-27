@@ -1,9 +1,14 @@
 <div class="sheet-content">
     <header class="sheet-header item-header">
-        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-        <div class="header-details">
-            <div class="name-wrapper">
-                <h1 class="dedrel-charname"><input name="name" type="text" value="{{item.name}}" placeholder="Название"/></h1>
+        <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" style="cursor: pointer;"/>
+        <div class="header-details" style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+            <div class="name-wrapper" style="display: flex; flex-direction: row; gap: 10px; align-items: center; width: 100%;">
+                <h1 class="dedrel-charname" style="flex: 1; margin: 0; min-height: 40px;"><input name="name" type="text" value="{{item.name}}" placeholder="Название"/></h1>
+                {{#if (eq item.type "weapon")}}
+                <label class="checkbox" style="display: flex; align-items: center; gap: 5px; font-weight: bold; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 4px; border: 1px solid var(--color-border); color: #fff; cursor: pointer; flex: 0 0 auto; height: 38px; box-sizing: border-box;">
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}} style="margin: 0; width: 16px; height: 16px;"/> Экипировано
+                </label>
+                {{/if}}
             </div>
             <div class="item-subtitle">
                 <span class="item-type-badge">{{item.type}}</span>
@@ -285,11 +290,14 @@
             {{/if}}
 
             {{#if (eq item.type "weapon")}}
-                <div class="form-group">
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
                     <label>Тип оружия</label>
-                    <select name="system.weapon_type">
-                        {{selectOptions weaponTypes selected=system.weapon_type}}
-                    </select>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.melee" {{checked system.weapon_type.melee}}/> Ближний бой (Melee)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.ranged" {{checked system.weapon_type.ranged}}/> Дальний бой (Ranged)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.shield" {{checked system.weapon_type.shield}}/> Щит (Shield)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> Магическое (Magic)</label>
+                    </div>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
                     <label>Тип урона</label>
@@ -301,7 +309,10 @@
                 </div>
                 <div class="form-group">
                     <label>Навык оружия</label>
-                    <input type="text" name="system.skill" value="{{system.skill}}" placeholder="bladed_weapons"/>
+                    <select name="system.skill">
+                        <option value="">Нет навыка</option>
+                        {{selectOptions weaponSkills selected=system.skill}}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Урон</label>
@@ -324,16 +335,12 @@
                     <input type="text" name="system.range" value="{{system.range}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Требование к атрибуту</label>
-                    <select name="system.req_attribute">
-                        {{selectOptions reqAttributes selected=system.req_attribute}}
-                    </select>
+                    <label>Требования (атрибуты)</label>
+                    <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="str 2, con 1"/>
                 </div>
                 <div class="form-group">
-                    <label>Требование к рангу</label>
-                    <select name="system.req_atr_rank" data-dtype="Number">
-                        {{selectOptions zeroToSix selected=system.req_atr_rank}}
-                    </select>
+                    <label>Требования (навыки)</label>
+                    <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2"/>
                 </div>
             {{/if}}
             </div> <!-- CLOSE form-fields-grid -->
@@ -342,7 +349,6 @@
             <div class="form-group stacked">
                 <label>Свойства</label>
                 <div class="properties-grid">
-                    <label class="checkbox" style="font-weight: bold; color: var(--color-text-hyperlink);"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> Экипировано</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> Вспомогательное</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> Быстрое</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> Медленное</label>

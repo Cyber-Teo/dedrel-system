@@ -29,7 +29,6 @@ form.dedrel.sheet.item {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 }
 
 .dedrel.sheet .sheet-content {
@@ -199,6 +198,36 @@ form.dedrel.sheet.item {
 
 .dedrel .hp-block {
   border-left: 4px solid var(--color-hp);
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dedrel .wounds-track {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.dedrel .wound-box {
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #888;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.dedrel .wound-box.active {
+  background: #ff3333;
+  border-color: #ff0000;
+  color: #fff;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
 /* AP Bars */
@@ -250,14 +279,18 @@ form.dedrel.sheet.item {
 
 /* Tabs */
 .dedrel .sheet-tabs {
-  flex: 0 0 30px;
+  flex: 0 0 auto;
   background: var(--color-panel);
   border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .dedrel .sheet-tabs a {
   line-height: 30px;
-  padding: 0 20px;
+  padding: 0 5px;
+  flex: 1;
+  text-align: center;
   font-weight: bold;
   color: var(--color-text-dark);
   cursor: pointer;

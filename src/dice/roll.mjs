@@ -37,16 +37,26 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
 }
 
 async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty }) {
+  const woundPenalty = Math.abs(actor.system.resources.wounds?.penalty || 0);
+
   // Specialization adds +2
   const specBonus = isSpecialized ? 2 : 0;
-  const totalMod = specBonus + bonus - penalty;
+  const totalMod = specBonus + bonus - penalty - woundPenalty;
   
   // Create base roll. 
   // xo10 means explode once on a 10.
   let rollFormula = `1d10xo10 + ${baseRank}`;
-  if (totalMod !== 0) {
-    rollFormula += totalMod > 0 ? ` + ${totalMod}` : ` - ${Math.abs(totalMod)}`;
-  }
+  if (specBonus) rollFormula += ` + ${specBonus}`;
+  if (bonus) rollFormula += ` + ${bonus}`;
+  if (penalty) rollFormula += ` - ${penalty}`;
+  if (woundPenalty) rollFormula += ` - ${woundPenalty}`;
+
+  let formulaDisplay = `1d10xo10`;
+  if (baseRank) formulaDisplay += ` + ${baseRank} (ранг)`;
+  if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
+  if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
+  if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
+  if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
 
   let roll = new Roll(rollFormula);
   await roll.evaluate();
@@ -81,12 +91,6 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
 
   // We could use native ChatMessage creation, but intercept the flavor
   let flavor = `<b>${title}</b>`;
-  if (isSpecialized) flavor += ` (Специализация)`;
-  if (bonus) flavor += ` | Бонус: +${bonus}`;
-  if (penalty) flavor += ` | Штраф: -${penalty}`;
-
-  // If we want total control we create our own message, 
-  // but Roll#toMessage handles dice tooltips nicely.
   
   // First we get the native HTML
   const rollHtml = await roll.getTooltip();
@@ -95,7 +99,7 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
   let messageContent = `
     <div class="dice-roll">
       <div class="dice-result">
-        <div class="dice-formula">${roll.formula}</div>
+        <div class="dice-formula" style="font-size: 12px; line-height: 1.2; padding: 5px; text-align: left;">${formulaDisplay}</div>
         ${rollHtml}
         <h4 class="dice-total ${isCritFumble ? 'critical-fumble' : ''}">${isCritFumble ? 'ПРОВАЛ' : roll.total}</h4>
         ${customChatAddon}

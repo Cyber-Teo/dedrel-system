@@ -1,14 +1,29 @@
 <header class="sheet-header">
     <div class="header-top flexrow">
         <div class="header-left">
-            <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
             <div class="stat-block hp-block">
-                <label>HP</label>
-                <div class="stat-inputs">
-                    <input type="text" name="system.resources.hp.value" value="{{system.resources.hp.value}}"
-                        data-dtype="Number" />
-                    <span class="separator">/</span>
-                    <span class="max-val" title="Максимум">{{system.resources.hp.max}}</span>
+                <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+                    <label>HP</label>
+                    <div class="stat-inputs">
+                        <input type="text" name="system.resources.hp.value" value="{{system.resources.hp.value}}"
+                            data-dtype="Number" />
+                        <span class="separator">/</span>
+                        <span class="max-val" title="Максимум">{{system.resources.hp.max}}</span>
+                    </div>
+                </div>
+                <div class="wounds-track" title="Степени ранения (Штраф к броскам)">
+                    <div class="wound-box {{#if (and (eq system.resources.wounds.level 1) (lt system.resources.hp.value system.resources.hp.max))}}active{{/if}}">
+                        <span>—</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 2)}}active{{/if}}">
+                        <span>-1</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 3)}}active{{/if}}">
+                        <span>-3</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 4)}}active{{/if}}">
+                        <span>-5</span>
+                    </div>
                 </div>
             </div>
             <div class="stat-block temp-hp-block">
@@ -108,11 +123,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Biography block now full width -->
-    <div class="biography-box">
-        <textarea name="system.details.biography"
-            placeholder="Языки, происхождение и т.д.">{{system.details.biography}}</textarea>
     </div>
 </header>
