@@ -26,8 +26,77 @@
             <div class="form-fields-grid">
             {{#if (eq item.type "maneuver")}}
                 <div class="form-group">
+                    <label>Источник</label>
+                    <select name="system.source">
+                        {{selectOptions maneuverSources selected=system.source}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Тип действия</label>
+                    <select name="system.action_type">
+                        {{selectOptions actionTypes selected=joinedActionType}}
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>{{localize "DEDREL.ItemFields.APCost"}}</label>
                     <input type="text" name="system.ap_cost" value="{{system.ap_cost}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.is_variable_cost" {{checked system.is_variable_cost}}/> Переменная стоимость
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Макс. AP (если перем.)</label>
+                    <input type="text" name="system.variable_cost_max" value="{{system.variable_cost_max}}" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Использования</h3>
+                </div>
+                <div class="form-group">
+                    <label>Текущие</label>
+                    <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Максимум</label>
+                    <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Восстановление</label>
+                    <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Цель и Область</h3>
+                </div>
+                <div class="form-group">
+                    <label>Тип цели</label>
+                    <select name="system.target_type">
+                        {{selectOptions targetTypes selected=system.target_type}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Кол-во целей</label>
+                    <input type="text" name="system.target_value" value="{{system.target_value}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Дальность (м)</label>
+                    <input type="text" name="system.target_range" value="{{system.target_range}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Форма области</label>
+                    <select name="system.template_shape">
+                        {{selectOptions templateShapes selected=system.template_shape}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Размер области (м)</label>
+                    <input type="text" name="system.template_size" value="{{system.template_size}}" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Формулы и Спасброски</h3>
                 </div>
                 <div class="form-group">
                     <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
@@ -38,15 +107,180 @@
                     <input type="text" name="system.formula_damage" value="{{system.formula_damage}}"/>
                 </div>
                 <div class="form-group">
-                    <label>{{localize "DEDREL.ItemFields.Prerequisite"}}</label>
+                    <label>Доп. формула</label>
+                    <input type="text" name="system.formula_custom" value="{{system.formula_custom}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Атрибут спасброска</label>
+                    <input type="text" name="system.save_attribute" value="{{system.save_attribute}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Сложность (DC)</label>
+                    <input type="text" name="system.save_dc_formula" value="{{system.save_dc_formula}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Запрет защиты</label>
+                    <input type="text" name="system.forbidden_defense" value="{{system.forbidden_defense}}"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Цепные триггеры</h3>
+                </div>
+                <div class="form-group">
+                    <label>Текст триггера</label>
+                    <input type="text" name="system.chain_trigger_text" value="{{system.chain_trigger_text}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Цепные манёвры</label>
+                    <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1, maneuver2"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Требования к оружию</h3>
+                </div>
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
+                    <label>Тип оружия</label>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.melee" {{checked system.req_weapon_type.melee}}/> Ближний бой (Melee)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.ranged" {{checked system.req_weapon_type.ranged}}/> Дальний бой (Ranged)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.shield" {{checked system.req_weapon_type.shield}}/> Щит (Shield)</label>
+                    </div>
+                </div>
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
+                    <label>Тип урона</label>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.piercing" {{checked system.req_weapon_damage_type.piercing}}/> Колющий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.bludgeoning" {{checked system.req_weapon_damage_type.bludgeoning}}/> Дробящий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.slashing" {{checked system.req_weapon_damage_type.slashing}}/> Режущий</label>
+                    </div>
+                </div>
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
+                    <label>Свойства оружия</label>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_auxiliary" {{checked system.req_weapon_property.is_auxiliary}}/> Вспомогательное</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_fast" {{checked system.req_weapon_property.is_fast}}/> Быстрое</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_slow" {{checked system.req_weapon_property.is_slow}}/> Медленное</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_twohanded" {{checked system.req_weapon_property.is_twohanded}}/> Двуручное</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_thrown" {{checked system.req_weapon_property.is_thrown}}/> Метательное</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_enchanted" {{checked system.req_weapon_property.is_enchanted}}/> Магическое</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_reloading" {{checked system.req_weapon_property.is_reloading}}/> Перезарядка</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Навык оружия</label>
+                    <input type="text" name="system.req_weapon_skill_group" value="{{system.req_weapon_skill_group}}"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Пререквизиты персонажа</h3>
+                </div>
+                <div class="form-group">
+                    <label>Текст требований</label>
                     <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Атрибуты (ключ ранг)</label>
+                    <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
+                </div>
+                <div class="form-group">
+                    <label>Навыки (ключ ранг)</label>
+                    <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
+                </div>
+                <div class="form-group">
+                    <label>Таланты</label>
+                    <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
+                </div>
+                <div class="form-group">
+                    <label>Мутации</label>
+                    <input type="text" name="system.prerequisites_mutations" value="{{joinedPrereqMutations}}" placeholder="mutation1"/>
+                </div>
+                <div class="form-group">
+                    <label>Линия крови</label>
+                    <select name="system.prerequisites_bloodlines">
+                        {{selectOptions bloodlines selected=joinedPrereqBloodlines}}
+                    </select>
                 </div>
             {{/if}}
 
-            {{#if (or (eq item.type "mutation") (eq item.type "talent"))}}
+            {{#if (or (eq item.type "talent") (eq item.type "mutation"))}}
                 <div class="form-group">
-                    <label>{{localize "DEDREL.ItemFields.Prerequisite"}}</label>
-                    <input type="text" name="system.prerequisite" value="{{system.prerequisite}}"/>
+                    <label>{{localize "DEDREL.ItemFields.Subtype"}}</label>
+                    <select name="system.subtype">
+                        {{selectOptions talentSubtypes selected=system.subtype}}
+                    </select>
+                </div>
+                {{#if (eq item.type "mutation")}}
+                <div class="form-group">
+                    <label>Тип мутации</label>
+                    <select name="system.mutation_type">
+                        {{selectOptions mutationTypes selected=system.mutation_type}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="system.starting" {{checked system.starting}}/> Стартовая
+                    </label>
+                </div>
+                {{/if}}
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.XPCost"}}</label>
+                    <input type="text" name="system.xp_cost" value="{{system.xp_cost}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Текущие использования</label>
+                    <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.UsesMax"}}</label>
+                    <input type="text" name="system.uses_max" value="{{system.uses_max}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "DEDREL.ItemFields.UsesPer"}}</label>
+                    <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Пререквизиты</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label>Текст требований</label>
+                    <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Атрибуты (ключ ранг)</label>
+                    <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
+                </div>
+                <div class="form-group">
+                    <label>Навыки (ключ ранг)</label>
+                    <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
+                </div>
+                <div class="form-group">
+                    <label>Таланты</label>
+                    <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
+                </div>
+                <div class="form-group">
+                    <label>Мутации</label>
+                    <input type="text" name="system.prerequisites_mutations" value="{{joinedPrereqMutations}}" placeholder="mutation1"/>
+                </div>
+                <div class="form-group">
+                    <label>Линия крови</label>
+                    <select name="system.prerequisites_bloodlines">
+                        {{selectOptions bloodlines selected=joinedPrereqBloodlines}}
+                    </select>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Добавляет:</h3>
+                </div>
+
+                <div class="form-group">
+                    <label>Манёвры</label>
+                    <input type="text" name="system.adds_maneuvers" value="{{joinedAddsManeuvers}}" placeholder="maneuver1, maneuver2"/>
+                </div>
+                <div class="form-group">
+                    <label>Макрос при добавлении</label>
+                    <input type="text" name="system.on_add_macro" value="{{system.on_add_macro}}"/>
                 </div>
             {{/if}}
 
@@ -57,11 +291,17 @@
                         {{selectOptions weaponTypes selected=system.weapon_type}}
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
                     <label>Тип урона</label>
-                    <select name="system.damage_type">
-                        {{selectOptions damageTypes selected=system.damage_type}}
-                    </select>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> Колющий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> Дробящий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.slashing" {{checked system.damage_type.slashing}}/> Режущий</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Навык оружия</label>
+                    <input type="text" name="system.skill" value="{{system.skill}}" placeholder="bladed_weapons"/>
                 </div>
                 <div class="form-group">
                     <label>Урон</label>
@@ -102,6 +342,7 @@
             <div class="form-group stacked">
                 <label>Свойства</label>
                 <div class="properties-grid">
+                    <label class="checkbox" style="font-weight: bold; color: var(--color-text-hyperlink);"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> Экипировано</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> Вспомогательное</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> Быстрое</label>
                     <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> Медленное</label>

@@ -4,7 +4,26 @@ export default class MutationDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
-      prerequisite: new fields.StringField({ required: true, blank: true, label: "Prerequisites" })
+      
+      mutation_type: new fields.StringField({ initial: "useful", label: "Mutation Type" }),
+      starting: new fields.BooleanField({ initial: false, label: "Starting" }),
+      
+      subtype: new fields.StringField({ initial: "passive", label: "Subtype" }),
+      xp_cost: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "XP Cost" }),
+      
+      prerequisites_text: new fields.StringField({ initial: "", label: "Prerequisites Text" }),
+      prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_talents: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_mutations: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_bloodlines: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      
+      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Current Uses" }),
+      uses_max: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Max Uses" }),
+      uses_per: new fields.StringField({ initial: "", label: "Uses Per" }),
+      
+      adds_maneuvers: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      on_add_macro: new fields.StringField({ initial: "", label: "On Add Macro" })
     };
   }
 }

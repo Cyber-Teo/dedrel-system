@@ -3,9 +3,9 @@
     <div class="item-list">
         {{#each mutations as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
-            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" data-action="useItem" style="cursor: pointer;" />
             </div>
-            <div class="item-name">
+            <div class="item-name" data-action="useItem" style="cursor: pointer;">
                 <h4>{{item.name}}</h4>
             </div>
             <div class="item-controls">

@@ -7,24 +7,21 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       
       // Basic Stats
       weapon_type: new fields.StringField({ 
-        initial: "bladed", 
+        initial: "melee", 
         choices: {
-          "bladed": "Лезвийное",
-          "polearm": "Древковое",
-          "blunt": "Дробящее",
-          "ranged": "Стрелковое"
+          "melee": "Ближний бой (Melee)",
+          "ranged": "Дальний бой (Ranged)",
+          "shield": "Щит (Shield)",
+          "magic": "Магическое (Magic)"
         },
         label: "Тип оружия" 
       }),
-      damage_type: new fields.StringField({
-        initial: "slashing",
-        choices: {
-          "slashing": "Режущий",
-          "bludgeoning": "Дробящий",
-          "piercing": "Колющий"
-        },
-        label: "Тип урона"
+      damage_type: new fields.SchemaField({
+        piercing: new fields.BooleanField({ label: "Колющий" }),
+        bludgeoning: new fields.BooleanField({ label: "Дробящий" }),
+        slashing: new fields.BooleanField({ label: "Режущий" })
       }),
+      skill: new fields.StringField({ initial: "", label: "Навык оружия" }),
       damage_formula: new fields.StringField({ initial: "", label: "Урон" }),
       range: new fields.StringField({ initial: "", label: "Дальность" }),
       

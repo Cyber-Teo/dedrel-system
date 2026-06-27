@@ -17,10 +17,26 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       uses_max: new fields.StringField({ required: true, blank: true, initial: "0" }),
       uses_per: new fields.StringField({ required: true, blank: true }),
       
-      req_weapon_type: new fields.StringField({ required: true, blank: true, initial: "any" }),
-      req_weapon_damage_type: new fields.StringField({ required: true, blank: true, initial: "any" }),
+      req_weapon_type: new fields.SchemaField({
+        melee: new fields.BooleanField(),
+        ranged: new fields.BooleanField(),
+        shield: new fields.BooleanField()
+      }),
+      req_weapon_damage_type: new fields.SchemaField({
+        piercing: new fields.BooleanField(),
+        bludgeoning: new fields.BooleanField(),
+        slashing: new fields.BooleanField()
+      }),
       req_weapon_skill_group: new fields.StringField({ required: true, blank: true, initial: "any" }),
-      req_weapon_property: new fields.StringField({ required: true, blank: true }),
+      req_weapon_property: new fields.SchemaField({
+        is_auxiliary: new fields.BooleanField(),
+        is_fast: new fields.BooleanField(),
+        is_slow: new fields.BooleanField(),
+        is_twohanded: new fields.BooleanField(),
+        is_thrown: new fields.BooleanField(),
+        is_enchanted: new fields.BooleanField(),
+        is_reloading: new fields.BooleanField()
+      }),
       
       prerequisites_text: new fields.StringField({ required: true, blank: true }),
       prerequisites_attributes: new fields.ArrayField(new fields.StringField()),
@@ -30,7 +46,7 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       prerequisites_bloodlines: new fields.ArrayField(new fields.StringField()),
       
       target_type: new fields.StringField({ required: true, blank: true, initial: "creature" }),
-      target_range: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+      target_range: new fields.StringField({ required: true, blank: true, initial: "" }),
       target_value: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       template_shape: new fields.StringField({ required: true, blank: true }),
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),

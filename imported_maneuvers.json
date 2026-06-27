@@ -1,0 +1,256 @@
+[
+  {
+    "name": "Удар",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака дробящим оружием ближнего боя\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": [
+        "action",
+        "chain"
+      ],
+      "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
+      "chain_trigger_maneuvers": [
+        "maneuver_riposte",
+        "maneuver_attack_of_opportunity",
+        "maneuver_rage"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": true,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Дробящее оружие ближнего боя",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "7f50c32b7ad2498e"
+  },
+  {
+    "name": "Взмах",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака режущим оружием ближнего боя\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": [
+        "action",
+        "chain"
+      ],
+      "chain_trigger_text": "атака по возможности, ответный удар",
+      "chain_trigger_maneuvers": [
+        "maneuver_riposte",
+        "maneuver_attack_of_opportunity",
+        "maneuver_rage"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": true
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Режущее оружие ближнего боя",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "37732a7615fa4bab"
+  },
+  {
+    "name": "Метнуть",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМетнуть метательное оружие\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": [
+        "action",
+        "chain"
+      ],
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Метательное оружие",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "ee0fed97edac43ff"
+  },
+  {
+    "name": "Выпад",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака колющим оружием ближнего боя,\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": [
+        "action",
+        "chain"
+      ],
+      "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
+      "chain_trigger_maneuvers": [
+        "maneuver_riposte",
+        "maneuver_attack_of_opportunity",
+        "maneuver_rage"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Колющее оружие ближнего боя",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "55fc7f73917e4ba6"
+  }
+]

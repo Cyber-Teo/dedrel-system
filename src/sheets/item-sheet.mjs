@@ -60,10 +60,12 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     
     if (itemData.type === "weapon") {
       context.weaponTypes = {
-        "bladed": "Лезвийное",
-        "polearm": "Древковое",
-        "blunt": "Дробящее",
-        "ranged": "Стрелковое"
+        "melee": "Ближний бой (Melee)",
+        "ranged": "Дальний бой (Ranged)",
+        "shield": "Щит (Shield)",
+        "bladed": "Лезвийное (Legacy)",
+        "polearm": "Древковое (Legacy)",
+        "blunt": "Дробящее (Legacy)"
       };
       context.damageTypes = {
         "slashing": "Режущий",
@@ -81,6 +83,69 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
+    }
+    
+    if (["talent", "mutation", "maneuver"].includes(itemData.type)) {
+      context.bloodlines = {
+        "": "—",
+        "Human": "Human",
+        "Demon": "Demon",
+        "Elf": "Elf",
+        "Fay": "Fay",
+        "Dragon": "Dragon"
+      };
+      
+      context.joinedPrereqAttributes = (itemData.system.prerequisites_attributes || []).join(", ");
+      context.joinedPrereqSkills = (itemData.system.prerequisites_skills || []).join(", ");
+      context.joinedPrereqTalents = (itemData.system.prerequisites_talents || []).join(", ");
+      context.joinedPrereqMutations = (itemData.system.prerequisites_mutations || []).join(", ");
+      context.joinedPrereqBloodlines = (itemData.system.prerequisites_bloodlines || []).join(", ");
+      context.joinedAddsManeuvers = (itemData.system.adds_maneuvers || []).join(", ");
+    }
+    
+    if (itemData.type === "talent" || itemData.type === "mutation") {
+      context.talentSubtypes = {
+        "passive": "Пассивный",
+        "narrative": "Нарративный",
+        "active": "Активный"
+      };
+      
+      if (itemData.type === "mutation") {
+        context.mutationTypes = {
+          "useful": "Полезная",
+          "neutral": "Нейтральная",
+          "harmful": "Вредная"
+        };
+      }
+    }
+    
+    if (itemData.type === "maneuver") {
+      context.maneuverSources = {
+        "basic": "Базовый",
+        "talent": "Талант",
+        "mutation": "Мутация"
+      };
+      context.actionTypes = {
+        "action": "Действие",
+        "reaction": "Реакция",
+        "free": "Свободное",
+        "chain": "Цепное"
+      };
+      context.targetTypes = {
+        "self": "На себя",
+        "creature": "Существо",
+        "point": "Точка",
+        "area": "Область"
+      };
+      context.templateShapes = {
+        "": "Нет",
+        "square": "Квадрат",
+        "circle": "Круг",
+        "cone": "Конус",
+        "line": "Линия"
+      };
+      context.joinedActionType = (itemData.system.action_type || [])[0];
+      context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join(", ");
     }
 
     console.log("Dedrel | DedrelItemSheet context prepared successfully:", context);
@@ -100,6 +165,30 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   _onClickAction(event, target) {
     console.log("Dedrel | _onClickAction called for Item. event:", event, "target:", target, "action:", target.dataset.action);
     return super._onClickAction(event, target);
+  }
+
+  _prepareSubmitData(event, form, formData) {
+    const data = super._prepareSubmitData(event, form, formData);
+    
+    if (["talent", "mutation", "maneuver"].includes(this.document.type)) {
+      const arrayFields = [
+        "system.prerequisites_attributes",
+        "system.prerequisites_skills",
+        "system.prerequisites_talents",
+        "system.prerequisites_mutations",
+        "system.prerequisites_bloodlines",
+        "system.adds_maneuvers",
+        "system.action_type",
+        "system.chain_trigger_maneuvers"
+      ];
+      for (const field of arrayFields) {
+        if (typeof data[field] === "string") {
+          data[field] = data[field].split(",").map(s => s.trim()).filter(s => s.length > 0);
+        }
+      }
+    }
+    
+    return data;
   }
 
   static #onChangeTab(event, target) {

@@ -28,7 +28,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       "toggle-favorite": DedrelCharacterSheet.#onToggleFavorite,
       create: DedrelCharacterSheet.#onCreateItem,
       changeTab: DedrelCharacterSheet.#onChangeTab,
-      rollCheck: DedrelCharacterSheet.#onRollCheck
+      rollCheck: DedrelCharacterSheet.#onRollCheck,
+      useItem: DedrelCharacterSheet.#onUseItem
     }
   };
 
@@ -94,7 +95,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       else if (i.type === 'mutilation') mutilations.push(i);
       else if (i.type === 'weapon') {
         weapons.push(i);
-        if (isFav || i.system.equipped) equippedWeapons.push(i);
+        if (i.system.equipped) equippedWeapons.push(i);
       }
       else if (i.type === 'armor') armors.push(i);
       else if (i.type === 'magic_item') {
@@ -176,8 +177,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const itemId = target.closest(".item-row").dataset.itemId;
     const item = this.document.items.get(itemId);
     if (item) {
-      const isFav = item.getFlag("dedrel", "isFavorite");
-      await item.setFlag("dedrel", "isFavorite", !isFav);
+      if (item.type === "weapon" || item.type === "armor") {
+        await item.update({"system.equipped": !item.system.equipped});
+      } else {
+        const isFav = item.getFlag("dedrel", "isFavorite");
+        await item.setFlag("dedrel", "isFavorite", !isFav);
+      }
     }
   }
 
@@ -208,5 +213,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       baseRank: rank,
       isSave: isSave
     });
+  }
+
+  static async #onUseItem(event, target) {
+    const itemId = target.closest(".item-row").dataset.itemId;
+    const item = this.document.items.get(itemId);
+    if (item && typeof item.use === "function") {
+      await item.use();
+    } else if (item) {
+      ui.notifications.warn("Этот предмет нельзя использовать.");
+    }
   }
 }
