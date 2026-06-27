@@ -15,7 +15,7 @@ export default class TalentDataModel extends foundry.abstract.TypeDataModel {
       prerequisites_bloodlines: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       
       uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Current Uses" }),
-      uses_max: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Max Uses" }),
+      uses_max: new fields.StringField({ initial: "", label: "Max Uses" }),
       uses_per: new fields.StringField({ initial: "", label: "Uses Per" }),
       
       adds_maneuvers: new fields.ArrayField(new fields.StringField(), { initial: [] }),

@@ -92,8 +92,7 @@
                 {{#each system.attributes as |attr key|}}
                 <div class="attribute-block">
                     <a class="attr-name rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-label="{{localize (concat "DEDREL.Attributes." key)}}">{{localize (concat "DEDREL.Attributes." key)}}</a>
-                    <input type="text" name="system.attributes.{{key}}.rank" value="{{attr.rank}}"
-                        data-dtype="Number" title="Rank" />
+                    <span class="attribute-rank-display" title="Rank">{{attr.rank}}</span>
                     <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-is-save="true" data-label="Спасбросок: {{localize (concat "DEDREL.Attributes." key)}}" title="Сделать спасбросок">{{attr.rank}}</a>
                 </div>
                 {{/each}}

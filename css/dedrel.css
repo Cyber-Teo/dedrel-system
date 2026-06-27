@@ -456,13 +456,16 @@ form.dedrel.sheet.item {
   height: 24px;
 }
 
-.dedrel .skill-rank {
+.dedrel .skill-rank, .dedrel .skill-rank-display {
   flex: 0 0 50px;
   text-align: center;
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--color-border);
   color: #fff;
   height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Attributes Grid */
@@ -505,7 +508,7 @@ form.dedrel.sheet.item {
   font-weight: bold;
 }
 
-.dedrel .attribute-block input {
+.dedrel .attribute-block input, .dedrel .attribute-block .attribute-rank-display {
   flex: 1;
   text-align: center;
   background: rgba(0, 0, 0, 0.3);
@@ -513,6 +516,9 @@ form.dedrel.sheet.item {
   color: #fff;
   height: 26px;
   margin: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dedrel .attribute-block .attr-save {
@@ -795,7 +801,93 @@ form.dedrel.sheet.item {
   color: var(--color-primary);
 }
 
-/* Dice Rolling & Dialogs */
+/* --- Experience Tab --- */
+.dedrel .experience-header {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.dedrel .xp-pool {
+  font-size: 16px;
+  color: var(--color-text-dark);
+}
+
+.dedrel .xp-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-right: 10px;
+}
+
+.dedrel .xp-total {
+  font-size: 14px;
+  color: #888;
+}
+
+.dedrel .experience-section {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.dedrel .experience-section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+  color: var(--color-text-light);
+}
+
+.dedrel .creation-mode-btn {
+  background: rgba(100, 100, 100, 0.2);
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  color: #fff;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dedrel .creation-mode-btn:hover {
+  background: rgba(100, 100, 100, 0.6);
+}
+
+.dedrel .upgrade-btn {
+  background: rgba(45, 138, 89, 0.2);
+  border: 1px solid rgba(45, 138, 89, 0.5);
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 12px;
+}
+
+.dedrel .upgrade-btn:hover:not(:disabled) {
+  background: rgba(45, 138, 89, 0.6);
+}
+
+.dedrel .upgrade-btn:disabled,
+.dedrel .upgrade-btn.disabled {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #666;
+  cursor: not-allowed;
+}
+
+.dedrel .max-rank {
+  color: #ff3333;
+  font-weight: bold;
+  font-size: 12px;
+}
+
 .dedrel .rollable {
   cursor: pointer;
   color: var(--color-text-light);
@@ -845,3 +937,131 @@ form.dedrel.sheet.item {
   padding-bottom: 5px;
 }
 
+/* Creation Tab Styles */
+.dedrel .creation-header {
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.dedrel .lock-toggle {
+  font-size: 24px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.dedrel .lock-toggle:hover {
+  color: #ff3333;
+}
+
+.dedrel .creation-locked-message {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  color: var(--color-text-dark);
+  font-style: italic;
+}
+
+.dedrel .creation-section {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.dedrel .creation-section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+  color: var(--color-text-light);
+}
+
+.dedrel .creation-section .hint {
+  font-size: 12px;
+  color: var(--color-text-dark);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.dedrel .grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.dedrel .bloodline-item,
+.dedrel .attribute-item,
+.dedrel .skill-item-create {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dedrel .bloodline-controls,
+.dedrel .attribute-controls,
+.dedrel .skill-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dedrel .control-btn {
+  cursor: pointer;
+  color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dedrel .control-btn:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.dedrel .bloodline-value,
+.dedrel .attribute-value,
+.dedrel .skill-value {
+  font-weight: bold;
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.dedrel .mutations-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dedrel .mutations-col:first-child {
+  padding-right: 15px;
+  border-right: 1px dashed var(--color-border);
+}
+
+.dedrel .mutations-col:last-child {
+  padding-left: 15px;
+}
+
+.dedrel .drop-zone {
+  flex: 1;
+  min-height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed var(--color-border);
+  border-radius: 5px;
+  padding: 5px;
+}

@@ -1,4 +1,13 @@
+/**
+ * Модель данных (Data Model) для главного героя (персонажа) в системе Dedrel.
+ * Определяет структуру всех базовых параметров (Атрибуты, Навыки, Ресурсы)
+ * и содержит логику для расчета производных (Derived) характеристик.
+ */
 export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
+  /**
+   * Определяет схему данных (Data Schema) для сущности "character".
+   * Возвращает объект с полями, которые будут сохранены в базе данных Foundry.
+   */
   static defineSchema() {
     const fields = foundry.data.fields;
     
@@ -14,6 +23,13 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     });
 
     return {
+      bloodlines: new fields.SchemaField({
+        human: attributeField(),
+        demon: attributeField(),
+        dragon: attributeField(),
+        fay: attributeField(),
+        elf: attributeField()
+      }),
       attributes: new fields.SchemaField({
         int: attributeField(),
         dex: attributeField(),
@@ -106,6 +122,12 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     };
   }
 
+  /**
+   * Метод жизненного цикла DataModel (Foundry VTT).
+   * Вызывается каждый раз при инициализации документа (при загрузке или обновлении данных).
+   * Здесь мы рассчитываем все вторичные (производные) характеристики,
+   * такие как Максимум ХП, Блок, Уворот, Инициатива, исходя из базовых атрибутов.
+   */
   prepareDerivedData() {
     super.prepareDerivedData();
     const attrs = this.attributes;

@@ -17,8 +17,7 @@
                         <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." key)}}">{{localize (concat "DEDREL.Skills." key)}}</a>
                         <input type="text" class="skill-spec" name="system.skills.{{key}}.specialization"
                             value="{{skill.specialization}}" />
-                        <input type="text" class="skill-rank" name="system.skills.{{key}}.rank"
-                            value="{{skill.rank}}" data-dtype="Number" />
+                        <span class="skill-rank-display">{{skill.rank}}</span>
                     </div>
                     {{/each}}
                 </div>

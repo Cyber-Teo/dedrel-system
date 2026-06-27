@@ -42,6 +42,13 @@
       "luck": "Удача",
       "cha": "Харизма"
     },
+    "Bloodline": {
+      "human": "Человек",
+      "demon": "Демон",
+      "dragon": "Дракон",
+      "fay": "Фей",
+      "elf": "Эльф"
+    },
     "Skills": {
       "crossbows": "Арбалеты",
       "artillery": "Артиллерия",

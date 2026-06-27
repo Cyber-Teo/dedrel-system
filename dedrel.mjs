@@ -1,3 +1,8 @@
+/**
+ * Основной файл инициализации игровой системы Dedrel для Foundry VTT.
+ * Загружается при старте системы, регистрирует модели данных (Data Models),
+ * шаблоны (Templates) и логику работы с документами (Sheets).
+ */
 import { ItemDataModels } from "./src/data/items/index.js";
 import { ActorDataModels } from "./src/data/actors/index.mjs";
 import DedrelCharacterSheet from "./src/sheets/character-sheet.mjs";
@@ -5,23 +10,27 @@ import { DedrelItemSheet } from "./src/sheets/item-sheet.mjs";
 import DedrelItem from "./src/documents/item.mjs";
 import { showRollDialog } from "./src/dice/roll.mjs";
 
+/**
+ * Хук "init" вызывается Foundry один раз при загрузке.
+ * Используется для конфигурации ядра системы до того, как загружен мир.
+ */
 Hooks.once("init", function() {
   console.log("Dedrel | Initializing Dedrel System");
 
-  // Register Custom Item Data Models
+  // Регистрация кастомного класса предмета и моделей данных для предметов (Item)
   CONFIG.Item.documentClass = DedrelItem;
   CONFIG.Item.dataModels = {
     ...CONFIG.Item.dataModels,
     ...ItemDataModels
   };
 
-  // Register Custom Actor Data Models
+  // Регистрация моделей данных для актёров (Actor)
   CONFIG.Actor.dataModels = {
     ...CONFIG.Actor.dataModels,
     ...ActorDataModels
   };
 
-  // Preload Handlebars Templates (partials)
+  // Предзагрузка частичных шаблонов Handlebars, чтобы их можно было переиспользовать через {{> "путь"}}
   foundry.applications.handlebars.loadTemplates([
     "systems/dedrel/templates/actor/parts/character-header.hbs",
     "systems/dedrel/templates/actor/parts/character-navigation.hbs",
@@ -34,10 +43,11 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-statuses.hbs",
     "systems/dedrel/templates/actor/parts/character-biography.hbs",
     "systems/dedrel/templates/actor/parts/character-experience.hbs",
+    "systems/dedrel/templates/actor/parts/character-creation.hbs",
     "systems/dedrel/templates/apps/roll-dialog.hbs"
   ]);
 
-  // Register sheets
+  // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "Лист персонажа Dedrel" });
 
@@ -52,7 +62,10 @@ Hooks.once("init", function() {
   console.log("Dedrel | Actor Data Models Registered:", Object.keys(ActorDataModels));
 });
 
-// Set Default Icons for Items
+/**
+ * Хук "preCreateItem" вызывается перед созданием нового предмета в базе данных.
+ * Мы используем его для назначения красивых иконок по умолчанию, вместо стандартного рюкзака.
+ */
 Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (item.img === "icons/svg/item-bag.svg") {
     const defaultIcons = {
@@ -65,7 +78,8 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
       mutilation: "systems/dedrel/assets/icons/mutilation.svg",
       weapon: "systems/dedrel/assets/icons/weapon.svg",
       armor: "systems/dedrel/assets/icons/armor.svg",
-      magic_item: "systems/dedrel/assets/icons/magic_item.svg"
+      magic_item: "systems/dedrel/assets/icons/magic_item.svg",
+      exp: "icons/magic/light/orb-lightbulb-gray.webp"
     };
     if (defaultIcons[item.type]) {
       item.updateSource({ img: defaultIcons[item.type] });
@@ -73,7 +87,10 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
   }
 });
 
-// Chat Actions
+/**
+ * Хук "renderChatMessageHTML" вызывается при рендеринге сообщения в чат.
+ * Обрабатывает клики по интерактивным кнопкам в чате (например, бросок урона или атаки).
+ */
 Hooks.on("renderChatMessageHTML", (message, html, data) => {
   html.addEventListener("click", async (event) => {
     const button = event.target.closest(".dedrel-chat-action");
@@ -92,9 +109,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     
     const weapon = weaponId ? actor.items.get(weaponId) : null;
     
+    // Бросок атаки
     if (action === "rollAttack") {
       let baseRank = 0;
       let title = `Атака: ${item.name}`;
+      
+      // Если атака связана с оружием, ищем ранг соответствующего оружейного навыка
       if (weapon && weapon.system.skill) {
         title += ` (${weapon.name})`;
         const skillKey = weapon.system.skill;
@@ -111,10 +131,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       });
     }
     
+    // Бросок урона
     if (action === "rollDamage") {
       let formula = item.system.formula_damage;
       let damageType = "";
       
+      // Определяем тип урона из требований манёвра
       if (item.type === "maneuver" && item.system.req_weapon_damage_type) {
         const reqDmg = item.system.req_weapon_damage_type;
         if (reqDmg.piercing) damageType = "Колющий";
@@ -122,6 +144,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         else if (reqDmg.slashing) damageType = "Режущий";
       }
       
+      // Если у манёвра нет своей формулы, берем формулу и тип урона от оружия
       if (!formula && weapon) {
         formula = weapon.system.damage_formula;
         if (!damageType) {
@@ -137,6 +160,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let roll = new Roll(formula);
       await roll.evaluate();
       
+      // Формируем HTML для отображения результатов броска кубиков в чате
       let chatContent = `
         <div class="dice-roll">
           <div class="dice-result">

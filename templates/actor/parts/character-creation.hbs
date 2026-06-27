@@ -1,0 +1,107 @@
+<div class="tab creation {{tabs.creation.cssClass}}" data-group="primary" data-tab="creation">
+    <div class="tab-content">
+        <div class="creation-header flexrow">
+            <h2>Блок создания персонажа</h2>
+            <div class="lock-toggle rollable" data-action="toggleCreationLock" title="{{#if actor.flags.dedrel.creationLocked}}Разблокировать редактирование{{else}}Заблокировать (Случайные изменения отключены){{/if}}">
+                <i class="fas {{#if actor.flags.dedrel.creationLocked}}fa-lock{{else}}fa-lock-open{{/if}}"></i>
+            </div>
+        </div>
+
+        {{#if actor.flags.dedrel.creationLocked}}
+        <div class="creation-locked-message">
+            <p>Параметры создания заблокированы. Для редактирования стартовых значений нажмите на замочек.</p>
+        </div>
+        {{else}}
+        
+        <div class="creation-section">
+            <h3>Линии Крови (Распределено: {{creationData.bloodlinesUsed}} / 10)</h3>
+            <div class="bloodlines-grid grid-3col">
+                {{#each system.bloodlines as |bloodline key|}}
+                <div class="bloodline-item">
+                    <span class="bloodline-name">{{localize (concat "DEDREL.Bloodline." key)}}</span>
+                    <div class="bloodline-controls">
+                        <a class="control-btn" data-action="decreaseBloodline" data-key="{{key}}"><i class="fas fa-minus"></i></a>
+                        <span class="bloodline-value">{{bloodline.rank}}</span>
+                        <a class="control-btn" data-action="increaseBloodline" data-key="{{key}}"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="creation-section flexrow">
+            <div class="mutations-col">
+                <h3>Полезные мутации (Очки: {{creationData.mutationsUsed}} / {{creationData.mutationsMax}})</h3>
+                <p class="hint">Перетащите сюда полезные мутации из компендиума.</p>
+                <div class="item-list drop-zone" data-drop-type="mutation-useful">
+                    {{#each creationData.startingUsefulMutations as |item|}}
+                    <div class="item-row flexrow" data-item-id="{{item.id}}">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                        <div class="item-name"><h4>{{item.name}} ({{item.system.xp_cost}} Очков)</h4></div>
+                        <div class="item-controls">
+                            <a class="item-control item-delete" data-action="deleteItem"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            
+            <div class="mutations-col">
+                <h3>Вредные мутации (Выбрано: {{creationData.harmfulMutationsCount}} / 2)</h3>
+                <p class="hint">Перетащите сюда вредные мутации. Каждая даёт +1 очко для полезных.</p>
+                <div class="item-list drop-zone" data-drop-type="mutation-harmful">
+                    {{#each creationData.startingHarmfulMutations as |item|}}
+                    <div class="item-row flexrow" data-item-id="{{item.id}}">
+                        <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
+                        <div class="item-name"><h4>{{item.name}}</h4></div>
+                        <div class="item-controls">
+                            <a class="item-control item-delete" data-action="deleteItem"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="creation-section">
+            <h3>Атрибуты (Распределено: {{creationData.attributesUsed}} / 10)</h3>
+            <p class="hint">Максимальное стартовое значение: 4</p>
+            <div class="attributes-grid grid-3col">
+                {{#each system.attributes as |attr key|}}
+                <div class="attribute-item">
+                    <span class="attribute-name">{{localize (concat "DEDREL.Attributes." key)}}</span>
+                    <div class="attribute-controls">
+                        <a class="control-btn" data-action="decreaseAttribute" data-key="{{key}}"><i class="fas fa-minus"></i></a>
+                        <span class="attribute-value">{{attr.rank}}</span>
+                        <a class="control-btn" data-action="increaseAttribute" data-key="{{key}}"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <div class="creation-section">
+            <h3>Страна происхождения</h3>
+            <input type="text" name="flags.dedrel.homeland" value="{{actor.flags.dedrel.homeland}}" placeholder="Введите страну..." />
+        </div>
+
+        <div class="creation-section">
+            <h3>Умения (Распределено: {{creationData.skillsUsed}} / 15)</h3>
+            <p class="hint">Максимальный стартовый ранг: 3</p>
+            <div class="skills-grid grid-3col">
+                {{#each system.skills as |skill key|}}
+                <div class="skill-item-create">
+                    <span class="skill-name">{{localize (concat "DEDREL.Skills." key)}}</span>
+                    <div class="skill-controls">
+                        <a class="control-btn" data-action="decreaseSkill" data-key="{{key}}"><i class="fas fa-minus"></i></a>
+                        <span class="skill-value">{{skill.rank}}</span>
+                        <a class="control-btn" data-action="increaseSkill" data-key="{{key}}"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        
+        {{/if}}
+    </div>
+</div>

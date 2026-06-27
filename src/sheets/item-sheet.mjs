@@ -1,6 +1,10 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
-
+/**
+ * Основной класс Листа Предмета для системы Dedrel.
+ * Наследуется от нового Foundry V2 Application Framework (ItemSheetV2).
+ * Обрабатывает логику отображения и сохранения данных предмета.
+ */
 export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   
   static DEFAULT_OPTIONS = {
@@ -45,13 +49,16 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       contentSelector: ".sheet-body"
     }
   };
-
+  /**
+   * Подготовка данных для передачи в Handlebars шаблоны.
+   * Формирует списки выбора (select) и подготавливает массивы в строки для инпутов.
+   */
   async _prepareContext(options) {
     console.log("Dedrel | DedrelItemSheet _prepareContext start for item:", this.document.name, this.document.id);
     const context = await super._prepareContext(options);
     const itemData = this.document;
     
-    // Enrich HTML description using namespaced TextEditor
+    // Обогащаем HTML описание, чтобы работали секретные блоки и броски кубиков в тексте
     context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(itemData.system.description || "", {
       async: true,
       secrets: this.document.isOwner,
@@ -167,6 +174,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     return super._onClickAction(event, target);
   }
 
+  /**
+   * Обработчик перед сохранением формы.
+   * Конвертирует строковые значения с запятыми (введённые пользователем) обратно в массивы для DataModel.
+   */
   _prepareSubmitData(event, form, formData) {
     const data = super._prepareSubmitData(event, form, formData);
     

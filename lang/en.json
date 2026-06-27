@@ -42,6 +42,13 @@
       "luck": "Luck",
       "cha": "Charisma"
     },
+    "Bloodline": {
+      "human": "Human",
+      "demon": "Demon",
+      "dragon": "Dragon",
+      "fay": "Fay",
+      "elf": "Elf"
+    },
     "Skills": {
       "crossbows": "Crossbows",
       "artillery": "Artillery",

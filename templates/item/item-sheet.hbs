@@ -201,9 +201,7 @@
                 </div>
                 <div class="form-group">
                     <label>Линия крови</label>
-                    <select name="system.prerequisites_bloodlines">
-                        {{selectOptions bloodlines selected=joinedPrereqBloodlines}}
-                    </select>
+                    <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
                 </div>
             {{/if}}
 
@@ -270,9 +268,7 @@
                 </div>
                 <div class="form-group">
                     <label>Линия крови</label>
-                    <select name="system.prerequisites_bloodlines">
-                        {{selectOptions bloodlines selected=joinedPrereqBloodlines}}
-                    </select>
+                    <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">

@@ -9,6 +9,7 @@ import ManeuverData from './maneuver.mjs';
 import WeaponData from './weapon.mjs';
 import ArmorData from './armor.mjs';
 import MagicItemData from './magic_item.mjs';
+import ExpData from './exp.mjs';
 
 export const ItemDataModels = {
   currency: CurrencyData,
@@ -21,5 +22,6 @@ export const ItemDataModels = {
   maneuver: ManeuverData,
   weapon: WeaponData,
   armor: ArmorData,
-  magic_item: MagicItemData
+  magic_item: MagicItemData,
+  exp: ExpData
 };
