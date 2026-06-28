@@ -36,6 +36,18 @@ Hooks.once("init", function() {
     ...ActorDataModels
   };
 
+  const DR_KEY_LABELS = {
+    "piercing": "DEDREL.ItemSheet.Piercing",
+    "bludgeoning": "DEDREL.ItemSheet.Bludgeoning",
+    "slashing": "DEDREL.ItemSheet.Slashing",
+    "heat": "DEDREL.ItemSheet.Fire",
+    "cold": "DEDREL.ItemSheet.Cold",
+    "necrotic": "DEDREL.ItemSheet.Necrotic",
+    "radiant": "DEDREL.ItemSheet.Radiant",
+    "electric": "DEDREL.ItemSheet.Lightning",
+    "sonic": "DEDREL.ItemSheet.Thunder"
+  };
+
   // Предзагрузка частичных шаблонов Handlebars, чтобы их можно было переиспользовать через {{> "путь"}}
   foundry.applications.handlebars.loadTemplates([
     "systems/dedrel/templates/actor/parts/character-header.hbs",
@@ -55,13 +67,13 @@ Hooks.once("init", function() {
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
-  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "Лист персонажа Dedrel" });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "DEDREL.Sheets.CharacterSheet" });
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
     types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp"],
     makeDefault: true,
-    label: "Лист предмета Dedrel"
+    label: "DEDREL.Sheets.ItemSheet"
   });
 
   console.log("Dedrel | Item Data Models Registered:", Object.keys(ItemDataModels));
@@ -74,10 +86,10 @@ Hooks.once("init", function() {
       let actor;
       if (speaker.token) actor = game.actors.tokens[speaker.token];
       if (!actor) actor = game.actors.get(speaker.actor);
-      if (!actor) return ui.notifications.warn("Пожалуйста, выделите токен, чтобы использовать макрос.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTokenForMacro"));
       
       const item = actor.items.find(i => i.name === itemName);
-      if (!item) return ui.notifications.warn(`У выделенного персонажа нет предмета "${itemName}"`);
+      if (!item) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ItemNotFoundOnActor", {itemName: itemName}));
 
       if (item.use) item.use();
     },
@@ -87,7 +99,7 @@ Hooks.once("init", function() {
       let actor;
       if (speaker.token) actor = game.actors.tokens[speaker.token];
       if (!actor) actor = game.actors.get(speaker.actor);
-      if (!actor) return ui.notifications.warn("Пожалуйста, выделите токен.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectToken"));
 
       const skillData = actor.system.skills[skillKey];
       if (!skillData) return;
@@ -96,7 +108,7 @@ Hooks.once("init", function() {
       
       await showRollDialog({
         actor: actor,
-        title: `Проверка: ${skillName}`,
+        title: game.i18n.format("DEDREL.Notifications.SkillCheck", {name: skillName}),
         baseRank: skillData.rank,
         isSave: false
       });
@@ -144,14 +156,14 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     const weaponId = button.dataset.weaponId;
     
     const actor = ChatMessage.getSpeakerActor(message.speaker);
-    if (!actor) return ui.notifications.warn("Персонаж не найден.");
+    if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ActorNotFound"));
     
     const item = itemId ? actor.items.get(itemId) : null;
     const weapon = weaponId ? actor.items.get(weaponId) : null;
     
     // Бросок атаки
     if (action === "rollAttack") {
-      if (!item) return ui.notifications.warn("Предмет не найден.");
+      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       let baseRank = 0;
       let title = game.i18n.format("DEDREL.Chat.AttackCardTitle", {name: item.name});
       
@@ -174,47 +186,49 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     
     // Бросок урона
     if (action === "rollDamage") {
-      if (!item) return ui.notifications.warn("Предмет не найден.");
+      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       let formula = item.system.formula_damage;
-      let damageType = "";
+      let drKey = "";
       
       // Определяем тип урона из требований манёвра
       if (item.type === "maneuver" && item.system.req_weapon_damage_type) {
         const reqDmg = item.system.req_weapon_damage_type;
-        if (reqDmg.piercing) damageType = "Колющий";
-        else if (reqDmg.bludgeoning) damageType = "Дробящий";
-        else if (reqDmg.slashing) damageType = "Режущий";
+        if (reqDmg.piercing) drKey = "piercing";
+        else if (reqDmg.bludgeoning) drKey = "bludgeoning";
+        else if (reqDmg.slashing) drKey = "slashing";
       }
       
       // Если у манёвра нет своей формулы, берем формулу и тип урона от оружия
       if (!formula && weapon) {
         formula = weapon.system.damage_formula;
-        if (!damageType) {
+        if (!drKey) {
            const wDmg = weapon.system.damage_type;
-           if (wDmg.piercing) damageType = "Колющий";
-           else if (wDmg.bludgeoning) damageType = "Дробящий";
-           else if (wDmg.slashing) damageType = "Режущий";
+           if (wDmg.piercing) drKey = "piercing";
+           else if (wDmg.bludgeoning) drKey = "bludgeoning";
+           else if (wDmg.slashing) drKey = "slashing";
         }
       }
       
-      if (!formula) return ui.notifications.warn("Формула урона не задана.");
+      if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
       
       let roll = new Roll(formula);
       await roll.evaluate();
       
       const apLevel = weapon?.system?.properties?.armor_piercing_value || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
       
+      let damageTypeLabel = drKey ? game.i18n.localize(DR_KEY_LABELS[drKey]) : "";
+      
       // Формируем HTML для отображения результатов броска кубиков в чате
       let chatContent = `
         <div class="dice-roll">
           <div class="dice-result">
-            <div class="dice-formula">${roll.formula} ${damageType ? `[${damageType}]` : ''}</div>
+            <div class="dice-formula">${roll.formula} ${damageTypeLabel ? `[${damageTypeLabel}]` : ''}</div>
             ${await roll.getTooltip()}
             <h4 class="dice-total">${roll.total}</h4>
           </div>
         </div>
         <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
-           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${damageType}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${drKey}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
         </div>
       `;
       
@@ -231,16 +245,16 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     if (action === "applyItemEffects") {
       const speaker = message.speaker;
       const actor = game.actors.get(speaker.actor);
-      if (!actor) return ui.notifications.warn("Не удалось найти персонажа, использовавшего предмет.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ActorNotFoundForEffect"));
       
       const item = actor.items.get(itemId);
-      if (!item) return ui.notifications.warn("Не удалось найти предмет.");
+      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
 
       let targets = canvas.tokens.controlled;
       if (targets.length === 0) targets = Array.from(game.user.targets);
       
       if (targets.length === 0) {
-        return ui.notifications.warn("Выберите токены для наложения эффекта (выделите себя или возьмите цель в таргет).");
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
       }
 
       const effectsToApply = item.effects.filter(e => !e.transfer).map(e => {
@@ -249,42 +263,31 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         return effData;
       });
 
-      if (effectsToApply.length === 0) return ui.notifications.info("На предмете нет временных эффектов для наложения.");
+      if (effectsToApply.length === 0) return ui.notifications.info(game.i18n.localize("DEDREL.Notifications.NoEffectsOnItem"));
 
       for (let token of targets) {
         const targetActor = token.actor;
         if (!targetActor) continue;
         await targetActor.createEmbeddedDocuments("ActiveEffect", effectsToApply);
       }
-      ui.notifications.info(`Эффекты применены к ${targets.length} токенам.`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.EffectsApplied", {count: targets.length}));
     }
 
     // Применение урона
     if (action === "applyDamage") {
       const damage = parseInt(button.dataset.damage) || 0;
-      const type = button.dataset.type || "";
+      const drKey = button.dataset.type || "";
       const apLevel = parseInt(button.dataset.ap) || 0;
 
       // Сначала берем выделенные токены (controlled), если их нет - берем таргеты (targets)
       let targets = canvas.tokens.controlled;
       if (targets.length === 0) targets = Array.from(game.user.targets);
       
-      if (targets.length === 0) return ui.notifications.warn("Нет выделенных токенов для получения урона.");
+      if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTargetForDamage"));
 
       for (let token of targets) {
         const targetActor = token.actor;
         if (!targetActor) continue;
-
-        let drKey = "";
-        if (type === "Колющий") drKey = "piercing";
-        else if (type === "Дробящий") drKey = "bludgeoning";
-        else if (type === "Режущий") drKey = "slashing";
-        else if (type === "Огонь" || type === "Огненный") drKey = "heat";
-        else if (type === "Холод") drKey = "cold";
-        else if (type === "Некротический") drKey = "necrotic";
-        else if (type === "Светлый") drKey = "radiant";
-        else if (type === "Электрический") drKey = "electric";
-        else if (type === "Звуковой") drKey = "sonic";
         
         let targetDr = 0;
         if (drKey && targetActor.system.dr && targetActor.system.dr[drKey] !== undefined) {
@@ -323,14 +326,17 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         await targetActor.update(updates);
         
         // totalAppliedDamage - это суммарный урон, который прошел после брони
-        let totalAppliedDamage = finalDamage + tempHpDamage; 
+        const totalAppliedDamage = finalDamage + tempHpDamage;
         
-        let chatMsg = `<b>${targetActor.name}</b> получает ${totalAppliedDamage} ${type ? `[${type}] ` : ''}урона.`;
+        let damageTypeStr = drKey ? `[${game.i18n.localize(DR_KEY_LABELS[drKey])}] ` : "";
+        let chatMsg = game.i18n.format("DEDREL.Chat.DamageTaken", {name: targetActor.name, damage: totalAppliedDamage, type: damageTypeStr});
+
         if (tempHpDamage > 0) {
-          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">(Из них по временным хитам: ${tempHpDamage})</span>`;
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageTakenTemp", {tempDamage: tempHpDamage})}</span>`;
         }
+
         if (targetDr > 0) {
-          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">(Заблокировано броней: ${targetDr} DR)</span>`;
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: targetDr})}</span>`;
         }
         
         ChatMessage.create({

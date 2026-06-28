@@ -19,7 +19,7 @@
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         {{#each tabs as |tab|}}
-        <a class="{{tab.cssClass}}" data-action="changeTab" data-group="primary" data-tab="{{tab.id}}">{{tab.label}}</a>
+        <a class="{{tab.cssClass}}" data-action="changeTab" data-group="primary" data-tab="{{tab.id}}">{{localize tab.label}}</a>
         {{/each}}
     </nav>
 
@@ -140,7 +140,7 @@
                     <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
                 </div>
                 <div class="form-group">
-                    <label>Макрос при использовании</label>
+                    <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
                     <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
 
@@ -148,35 +148,35 @@
                     <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.WeaponRequirements"}}</h3>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Тип оружия</label>
+                    <label>{{localize "DEDREL.ItemSheet.WeaponType"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.melee" {{checked system.req_weapon_type.melee}}/> Ближний бой (Melee)</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.ranged" {{checked system.req_weapon_type.ranged}}/> Дальний бой (Ranged)</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.shield" {{checked system.req_weapon_type.shield}}/> Щит (Shield)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.melee" {{checked system.req_weapon_type.melee}}/> {{localize "DEDREL.ItemSheet.Melee"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.ranged" {{checked system.req_weapon_type.ranged}}/> {{localize "DEDREL.ItemSheet.Ranged"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.shield" {{checked system.req_weapon_type.shield}}/> {{localize "DEDREL.ItemSheet.Shield"}}</label>
                     </div>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Тип урона</label>
+                    <label>{{localize "DEDREL.ItemSheet.DamageType"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.piercing" {{checked system.req_weapon_damage_type.piercing}}/> Колющий</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.bludgeoning" {{checked system.req_weapon_damage_type.bludgeoning}}/> Дробящий</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.slashing" {{checked system.req_weapon_damage_type.slashing}}/> Режущий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.piercing" {{checked system.req_weapon_damage_type.piercing}}/> {{localize "DEDREL.ItemSheet.Piercing"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.bludgeoning" {{checked system.req_weapon_damage_type.bludgeoning}}/> {{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_damage_type.slashing" {{checked system.req_weapon_damage_type.slashing}}/> {{localize "DEDREL.ItemSheet.Slashing"}}</label>
                     </div>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
                     <label>{{localize "DEDREL.ItemSheet.WeaponProperties"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_auxiliary" {{checked system.req_weapon_property.is_auxiliary}}/> Вспомогательное</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_fast" {{checked system.req_weapon_property.is_fast}}/> Быстрое</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_slow" {{checked system.req_weapon_property.is_slow}}/> Медленное</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_twohanded" {{checked system.req_weapon_property.is_twohanded}}/> Двуручное</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_thrown" {{checked system.req_weapon_property.is_thrown}}/> Метательное</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_enchanted" {{checked system.req_weapon_property.is_enchanted}}/> Магическое</label>
-                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_reloading" {{checked system.req_weapon_property.is_reloading}}/> Перезарядка</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_auxiliary" {{checked system.req_weapon_property.is_auxiliary}}/> {{localize "DEDREL.ItemSheet.IsAuxiliary"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_fast" {{checked system.req_weapon_property.is_fast}}/> {{localize "DEDREL.ItemSheet.IsFast"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_slow" {{checked system.req_weapon_property.is_slow}}/> {{localize "DEDREL.ItemSheet.IsSlow"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_twohanded" {{checked system.req_weapon_property.is_twohanded}}/> {{localize "DEDREL.ItemSheet.IsTwohanded"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_thrown" {{checked system.req_weapon_property.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_enchanted" {{checked system.req_weapon_property.is_enchanted}}/> {{localize "DEDREL.ItemSheet.IsEnchanted"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_reloading" {{checked system.req_weapon_property.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Навык оружия</label>
+                    <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
                     <input type="text" name="system.req_weapon_skill_group" value="{{system.req_weapon_skill_group}}"/>
                 </div>
 
@@ -184,27 +184,27 @@
                     <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.CharacterPrerequisites"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Текст требований</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqText"}}</label>
                     <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Атрибуты (ключ ранг)</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqAttributes"}}</label>
                     <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
                 </div>
                 <div class="form-group">
-                    <label>Навыки (ключ ранг)</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqSkills"}}</label>
                     <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
                 </div>
                 <div class="form-group">
-                    <label>Таланты</label>
+                    <label>{{localize "DEDREL.ItemSheet.Talents"}}</label>
                     <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
                 </div>
                 <div class="form-group">
-                    <label>Мутации</label>
+                    <label>{{localize "DEDREL.ItemSheet.Mutations"}}</label>
                     <input type="text" name="system.prerequisites_mutations" value="{{joinedPrereqMutations}}" placeholder="mutation1"/>
                 </div>
                 <div class="form-group">
-                    <label>Линия крови</label>
+                    <label>{{localize "DEDREL.ItemSheet.Bloodline"}}</label>
                     <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
                 </div>
             {{/if}}
@@ -246,7 +246,7 @@
                     <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Макрос при использовании</label>
+                    <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
                     <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
 
@@ -255,27 +255,27 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Текст требований</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqText"}}</label>
                     <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Атрибуты (ключ ранг)</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqAttributes"}}</label>
                     <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
                 </div>
                 <div class="form-group">
-                    <label>Навыки (ключ ранг)</label>
+                    <label>{{localize "DEDREL.ItemSheet.ReqSkills"}}</label>
                     <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
                 </div>
                 <div class="form-group">
-                    <label>Таланты</label>
+                    <label>{{localize "DEDREL.ItemSheet.Talents"}}</label>
                     <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
                 </div>
                 <div class="form-group">
-                    <label>Мутации</label>
+                    <label>{{localize "DEDREL.ItemSheet.Mutations"}}</label>
                     <input type="text" name="system.prerequisites_mutations" value="{{joinedPrereqMutations}}" placeholder="mutation1"/>
                 </div>
                 <div class="form-group">
-                    <label>Линия крови</label>
+                    <label>{{localize "DEDREL.ItemSheet.Bloodline"}}</label>
                     <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
                 </div>
 
@@ -316,39 +316,39 @@
                     <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.DamageResistance"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Рубящий</label>
+                    <label>{{localize "DEDREL.ItemSheet.Slashing"}}</label>
                     <input type="text" name="system.dr.slashing" value="{{system.dr.slashing}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Колющий</label>
+                    <label>{{localize "DEDREL.ItemSheet.Piercing"}}</label>
                     <input type="text" name="system.dr.piercing" value="{{system.dr.piercing}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Дробящий</label>
+                    <label>{{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
                     <input type="text" name="system.dr.bludgeoning" value="{{system.dr.bludgeoning}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Огонь</label>
+                    <label>{{localize "DEDREL.ItemSheet.Fire"}}</label>
                     <input type="text" name="system.dr.heat" value="{{system.dr.heat}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Холод</label>
+                    <label>{{localize "DEDREL.ItemSheet.Cold"}}</label>
                     <input type="text" name="system.dr.cold" value="{{system.dr.cold}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Некротический</label>
+                    <label>{{localize "DEDREL.ItemSheet.Necrotic"}}</label>
                     <input type="text" name="system.dr.necrotic" value="{{system.dr.necrotic}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Светлый</label>
+                    <label>{{localize "DEDREL.ItemSheet.Radiant"}}</label>
                     <input type="text" name="system.dr.radiant" value="{{system.dr.radiant}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Электрический</label>
+                    <label>{{localize "DEDREL.ItemSheet.Lightning"}}</label>
                     <input type="text" name="system.dr.electric" value="{{system.dr.electric}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Звуковой</label>
+                    <label>{{localize "DEDREL.ItemSheet.Thunder"}}</label>
                     <input type="text" name="system.dr.sonic" value="{{system.dr.sonic}}" data-dtype="Number"/>
                 </div>
 
@@ -356,38 +356,38 @@
                     <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Modifiers"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Уклонение</label>
+                    <label>{{localize "DEDREL.ItemSheet.Evasion"}}</label>
                     <input type="text" name="system.modifiers.dodge" value="{{system.modifiers.dodge}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Блок</label>
+                    <label>{{localize "DEDREL.ItemSheet.Block"}}</label>
                     <input type="text" name="system.modifiers.block" value="{{system.modifiers.block}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Скрытность</label>
+                    <label>{{localize "DEDREL.ItemSheet.Stealth"}}</label>
                     <input type="text" name="system.modifiers.stealth" value="{{system.modifiers.stealth}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Дальняя Атака</label>
+                    <label>{{localize "DEDREL.ItemSheet.RangedAttack"}}</label>
                     <input type="text" name="system.modifiers.ranged_attack" value="{{system.modifiers.ranged_attack}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Магическая Атака</label>
+                    <label>{{localize "DEDREL.ItemSheet.MagicAttack"}}</label>
                     <input type="text" name="system.modifiers.magic_attack" value="{{system.modifiers.magic_attack}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Штраф к скорости (Гексы)</label>
+                    <label>{{localize "DEDREL.ItemSheet.SpeedPenalty"}}</label>
                     <input type="text" name="system.modifiers.movement" value="{{system.modifiers.movement}}" data-dtype="Number"/>
                 </div>
                 
                 <div class="form-group stacked" style="grid-column: 1 / -1; margin-top: 10px;">
                     <label>{{localize "DEDREL.ItemSheet.ArmorProperties"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.properties.exclusive_slot" {{checked system.properties.exclusive_slot}}/> Эксклюзивный слот</label>
-                        <label class="checkbox"><input type="checkbox" name="system.properties.rigid" {{checked system.properties.rigid}}/> Жесткая</label>
-                        <label class="checkbox"><input type="checkbox" name="system.properties.loud" {{checked system.properties.loud}}/> Шумная</label>
-                        <label class="checkbox"><input type="checkbox" name="system.properties.encumbering" {{checked system.properties.encumbering}}/> Громоздкая</label>
-                        <label class="checkbox"><input type="checkbox" name="system.properties.weak_point_protection" {{checked system.properties.weak_point_protection}}/> Защита слабых мест</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.exclusive_slot" {{checked system.properties.exclusive_slot}}/> {{localize "DEDREL.ItemSheet.ExclusiveSlot"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.rigid" {{checked system.properties.rigid}}/> {{localize "DEDREL.ItemSheet.Rigid"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.loud" {{checked system.properties.loud}}/> {{localize "DEDREL.ItemSheet.Loud"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.encumbering" {{checked system.properties.encumbering}}/> {{localize "DEDREL.ItemSheet.Encumbering"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.weak_point_protection" {{checked system.properties.weak_point_protection}}/> {{localize "DEDREL.ItemSheet.WeakPointProtection"}}</label>
                     </div>
                 </div>
 
@@ -414,26 +414,26 @@
 
             {{#if (eq item.type "weapon")}}
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Тип оружия</label>
+                    <label>{{localize "DEDREL.ItemSheet.WeaponType"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.melee" {{checked system.weapon_type.melee}}/> Ближний бой (Melee)</label>
-                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.ranged" {{checked system.weapon_type.ranged}}/> Дальний бой (Ranged)</label>
-                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.shield" {{checked system.weapon_type.shield}}/> Щит (Shield)</label>
-                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> Магическое (Magic)</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.melee" {{checked system.weapon_type.melee}}/> {{localize "DEDREL.ItemSheet.Melee"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.ranged" {{checked system.weapon_type.ranged}}/> {{localize "DEDREL.ItemSheet.Ranged"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.shield" {{checked system.weapon_type.shield}}/> {{localize "DEDREL.ItemSheet.Shield"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> {{localize "DEDREL.ItemSheet.Magic"}}</label>
                     </div>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Тип урона</label>
+                    <label>{{localize "DEDREL.ItemSheet.DamageType"}}</label>
                     <div class="properties-grid">
-                        <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> Колющий</label>
-                        <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> Дробящий</label>
-                        <label class="checkbox"><input type="checkbox" name="system.damage_type.slashing" {{checked system.damage_type.slashing}}/> Режущий</label>
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> {{localize "DEDREL.ItemSheet.Piercing"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> {{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+                        <label class="checkbox"><input type="checkbox" name="system.damage_type.slashing" {{checked system.damage_type.slashing}}/> {{localize "DEDREL.ItemSheet.Slashing"}}</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Навык оружия</label>
+                    <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
                     <select name="system.skill">
-                        <option value="">Нет навыка</option>
+                        <option value="">{{localize "DEDREL.ItemSheet.NoSkill"}}</option>
                         {{selectOptions weaponSkills selected=system.skill}}
                     </select>
                 </div>
@@ -478,35 +478,35 @@
                     <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Восстановление</label>
+                    <label>{{localize "DEDREL.ItemFields.UsesPer"}}</label>
                     <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Макрос при использовании</label>
+                    <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
                     <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
             {{/if}}
 
             {{#if (eq item.type "exp")}}
                 <div class="form-group" style="grid-column: 1 / -1;">
-                    <label>Очки Опыта (XP)</label>
-                    <input type="text" name="system.value" value="{{system.value}}" data-dtype="Number" placeholder="Например: 10, -5"/>
+                    <label>{{localize "DEDREL.ItemSheet.ExperiencePoints"}}</label>
+                    <input type="text" name="system.value" value="{{system.value}}" data-dtype="Number" placeholder="10, -5"/>
                 </div>
-                <p class="hint" style="grid-column: 1 / -1; margin-top: 0;">Укажите положительное число для выдачи опыта, или отрицательное (например, -5) для списания штрафного опыта.</p>
+                <p class="hint" style="grid-column: 1 / -1; margin-top: 0;">{{localize "DEDREL.ItemSheet.ExperienceHint"}}</p>
             {{/if}}
             </div> <!-- CLOSE form-fields-grid -->
 
             {{#if (eq item.type "weapon")}}
             <div class="form-group stacked">
-                <label>Свойства</label>
+                <label>{{localize "DEDREL.ItemSheet.WeaponProperties"}}</label>
                 <div class="properties-grid">
-                    <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> Вспомогательное</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> Быстрое</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> Медленное</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> Двуручное</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> Метательное</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> Магическое</label>
-                    <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> Перезарядка</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> {{localize "DEDREL.ItemSheet.IsAuxiliary"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> {{localize "DEDREL.ItemSheet.IsFast"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> {{localize "DEDREL.ItemSheet.IsSlow"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> {{localize "DEDREL.ItemSheet.IsTwohanded"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> {{localize "DEDREL.ItemSheet.IsEnchanted"}}</label>
+                    <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
                 </div>
             </div>
             {{/if}}

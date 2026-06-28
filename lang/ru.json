@@ -17,6 +17,10 @@
       "TYPES.Item.armor": "Броня",
       "TYPES.Item.magic_item": "Магический предмет"
     },
+    "Sheets": {
+      "CharacterSheet": "Лист персонажа Dedrel",
+      "ItemSheet": "Лист предмета Dedrel"
+    },
     "ItemFields": {
       "Prerequisite": "Требования",
       "APCost": "Стоимость (AP)",
@@ -48,6 +52,51 @@
       "dragon": "Дракон",
       "fay": "Фей",
       "elf": "Эльф"
+    },
+    "ArmorSlots": {
+      "lower": "Нижний слой",
+      "middle": "Средний слой",
+      "upper": "Верхний слой",
+      "universal": "Универсальный"
+    },
+    "WeightClasses": {
+      "light": "Легкая",
+      "medium": "Средняя",
+      "heavy": "Тяжелая"
+    },
+    "TalentSubtypes": {
+      "passive": "Пассивный",
+      "narrative": "Нарративный",
+      "active": "Активный"
+    },
+    "MutationTypes": {
+      "useful": "Полезная",
+      "neutral": "Нейтральная",
+      "harmful": "Вредная"
+    },
+    "ManeuverSources": {
+      "basic": "Базовый",
+      "talent": "Талант",
+      "mutation": "Мутация"
+    },
+    "ActionTypes": {
+      "action": "Действие",
+      "reaction": "Реакция",
+      "free": "Свободное",
+      "chain": "Цепное"
+    },
+    "TargetTypes": {
+      "self": "На себя",
+      "creature": "Существо",
+      "point": "Точка",
+      "area": "Область"
+    },
+    "TemplateShapes": {
+      "none": "Нет",
+      "square": "Квадрат",
+      "circle": "Круг",
+      "cone": "Конус",
+      "line": "Линия"
     },
     "Skills": {
       "crossbows": "Арбалеты",
@@ -93,6 +142,17 @@
       "UnlockItems": "Разблокировать удаление предметов"
     },
     "ItemSheet": {
+      "Tabs": {
+        "Details": "Детали",
+        "Description": "Описание",
+        "Effects": "Эффекты"
+      },
+      "ItemType": "Тип предмета",
+      "Equipped": "Экипировано",
+      "Damage": "Урон",
+      "ControlZone": "Зона Контроля",
+      "ArmorPiercing": "Бронебойность (AP)",
+      "Range": "Дальность (м)",
       "Source": "Источник",
       "ActionType": "Тип действия",
       "VariableCost": "Переменная стоимость",
@@ -126,6 +186,27 @@
       "Piercing": "Колющий",
       "Bludgeoning": "Дробящий",
       "Slashing": "Режущий",
+      "Fire": "Огонь",
+      "Cold": "Холод",
+      "Necrotic": "Некротический",
+      "Radiant": "Светлый",
+      "Lightning": "Электрический",
+      "Thunder": "Звуковой",
+      "Astral": "Астральный",
+      "Psychic": "Ментальный",
+      "Evasion": "Уклонение",
+      "Block": "Блок",
+      "Stealth": "Скрытность",
+      "RangedAttack": "Дальняя Атака",
+      "MagicAttack": "Магическая Атака",
+      "SpeedPenalty": "Штраф к скорости (Гексы)",
+      "ExclusiveSlot": "Эксклюзивный слот",
+      "Rigid": "Жесткая",
+      "Loud": "Шумная",
+      "Encumbering": "Громоздкая",
+      "WeakPointProtection": "Защита слабых мест",
+      "Visored": "С забралом",
+      "Restricting": "Ограничивающая обзор",
       "WeaponProperties": "Свойства оружия",
       "IsAuxiliary": "Вспомогательное",
       "IsFast": "Быстрое",
@@ -135,6 +216,9 @@
       "IsEnchanted": "Магическое",
       "IsReloading": "Перезарядка",
       "WeaponSkill": "Навык оружия",
+      "NoSkill": "Нет навыка",
+      "ExperiencePoints": "Очки Опыта (XP)",
+      "ExperienceHint": "Укажите положительное число для выдачи опыта, или отрицательное (например, -5) для списания штрафного опыта.",
       "CharacterPrerequisites": "Пререквизиты персонажа",
       "RequirementsText": "Текст требований",
       "AttributesKeyRank": "Атрибуты (ключ ранг)",
@@ -167,10 +251,17 @@
       "Attack": "Атака",
       "Damage": "Урон",
       "ApplyEffects": "Применить Эффекты",
-      "ApplyDamage": "Применить урон",
+      "ApplyDamage": "Применить Урон",
       "Use": "Использовать",
       "Roll": "Бросок",
       "Cancel": "Отмена",
+      "AttackCardTitle": "Атака: {name}",
+      "AttackCardFlavor": "Использует {name}",
+      "DamageCardFlavor": "Урон: {name}",
+      "DamageTaken": "<b>{name}</b> получает {damage} {type} урона.",
+      "DamageTakenTemp": "(Из них по временным хитам: {tempDamage})",
+      "DamageBlocked": "(Заблокировано броней: {dr} DR)",
+      "UseItem": "Использование: {name}",
       "SpendAP": "Использовать <b>{name}</b> за <strong>{cost} ОД</strong>?",
       "NotEnoughAPDialog": "Недостаточно ОД! У вас {current}, требуется {cost}.",
       "SpendCharge": "Потратить 1 заряд? (Осталось: <b>{value}/{max}</b>)",
@@ -178,8 +269,6 @@
       "Weapon": "Оружие: ",
       "NoEquippedWeapon": "Нет подходящего экипированного оружия.",
       "Confirm": "Подтвердить",
-      "AttackCardTitle": "Атака: {name}",
-      "DamageCardFlavor": "<b>Урон: {name}</b>",
       "SpendLuckTitle": "Трата Очка Удачи",
       "SpendLuckContent": "<p>Вы можете перебросить любой 1 кубик (свой или противника).<br><b>Вы обязаны использовать новый результат.</b></p><p>Потратить 1 очко удачи?</p>",
       "LuckChatTitle": "Очко Удачи!",
@@ -335,6 +424,18 @@
       "NotEnoughXPOrMaxRank": "Недостаточно опыта или достигнут максимальный ранг.",
       "SkillUpgraded": "Улучшен навык {key} до ранга {nextRank} за {cost} XP.",
       "NotEnoughXPForSkill": "Недостаточно очков опыта для улучшения навыка.",
+      "SelectTokenForMacro": "Пожалуйста, выделите токен, чтобы использовать макрос.",
+      "ItemNotFoundOnActor": "У выделенного персонажа нет предмета '{itemName}'.",
+      "SelectToken": "Пожалуйста, выделите токен.",
+      "SkillCheck": "Проверка: {name}",
+      "ActorNotFound": "Персонаж не найден.",
+      "ItemNotFound": "Предмет не найден.",
+      "NoDamageFormula": "Формула урона не задана.",
+      "ActorNotFoundForEffect": "Не удалось найти персонажа, использовавшего предмет.",
+      "SelectTargetForEffect": "Выберите токены для наложения эффекта (выделите себя или возьмите цель в таргет).",
+      "NoEffectsOnItem": "На предмете нет временных эффектов для наложения.",
+      "EffectsApplied": "Эффекты применены к {count} токенам.",
+      "NoTargetForDamage": "Нет выделенных токенов для получения урона.",
       "CannotDeleteItemEffect": "Невозможно удалить эффект, принадлежащий предмету. Измените предмет.",
       "XPGained": "Получено опыта: {value}",
       "CharacterCreationLocked": "Создание персонажа заблокировано!",

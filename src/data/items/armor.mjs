@@ -40,17 +40,17 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       }),
 
       // Заряды и макросы (добавлено для поддержки магических свойств, особенностей и эффектов)
-      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Текущие заряды" }),
-      uses_max: new fields.StringField({ initial: "", label: "Максимум зарядов" }),
-      uses_per: new fields.StringField({ initial: "", label: "Восстановление зарядов" }),
-      on_use_macro: new fields.StringField({ initial: "", label: "Макрос при использовании" }),
+      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
+      uses_max: new fields.StringField({ initial: "" }),
+      uses_per: new fields.StringField({ initial: "" }),
+      on_use_macro: new fields.StringField({ initial: "" }),
 
       prerequisites_text: new fields.StringField({ initial: "" }),
-      prerequisites_attributes: new fields.ArrayField(new fields.StringField()),
-      prerequisites_skills: new fields.ArrayField(new fields.StringField()),
-      prerequisites_talents: new fields.ArrayField(new fields.StringField()),
-      prerequisites_mutations: new fields.ArrayField(new fields.StringField()),
-      prerequisites_bloodlines: new fields.ArrayField(new fields.StringField()),
+      prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_talents: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_mutations: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_bloodlines: new fields.ArrayField(new fields.StringField(), { initial: [] }),
 
       equipped: new fields.BooleanField({ initial: false })
     };

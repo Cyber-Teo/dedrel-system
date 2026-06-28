@@ -44,9 +44,9 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   static TABS = {
     primary: {
       tabs: [
-        { id: "details", label: "Детали" },
-        { id: "description", label: "Описание" },
-        { id: "effects", label: "Эффекты" }
+        { id: "details", label: "DEDREL.ItemSheet.Tabs.Details" },
+        { id: "description", label: "DEDREL.ItemSheet.Tabs.Description" },
+        { id: "effects", label: "DEDREL.ItemSheet.Tabs.Effects" }
       ],
       initial: "description",
       navSelector: ".tabs[data-group='primary']",
@@ -76,21 +76,21 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     
     if (itemData.type === "weapon") {
       context.weaponSkills = {
-        "unarmed_combat": "Безоружный бой",
-        "pole_weapons": "Древковое оружие",
-        "blunt_weapons": "Дробящее оружие",
-        "artillery": "Артиллерия",
-        "firearms": "Огнестрельное оружие",
-        "throwing": "Метательное оружие",
-        "exotic_weapons": "Экзотическое оружие",
-        "magical_attacks": "Магические атаки",
-        "bows": "Луки",
-        "bladed_weapons": "Лезвийное оружие"
+        "unarmed_combat": game.i18n.localize("DEDREL.Skills.unarmed_combat"),
+        "pole_weapons": game.i18n.localize("DEDREL.Skills.pole_weapons"),
+        "blunt_weapons": game.i18n.localize("DEDREL.Skills.blunt_weapons"),
+        "artillery": game.i18n.localize("DEDREL.Skills.artillery"),
+        "firearms": game.i18n.localize("DEDREL.Skills.firearms"),
+        "throwing": game.i18n.localize("DEDREL.Skills.throwing"),
+        "exotic_weapons": game.i18n.localize("DEDREL.Skills.exotic_weapons"),
+        "magical_attacks": game.i18n.localize("DEDREL.Skills.magical_attacks"),
+        "bows": game.i18n.localize("DEDREL.Skills.bows"),
+        "bladed_weapons": game.i18n.localize("DEDREL.Skills.bladed_weapons")
       };
       context.damageTypes = {
-        "slashing": "Режущий",
-        "bludgeoning": "Дробящий",
-        "piercing": "Колющий"
+        "slashing": game.i18n.localize("DEDREL.ItemSheet.Slashing"),
+        "bludgeoning": game.i18n.localize("DEDREL.ItemSheet.Bludgeoning"),
+        "piercing": game.i18n.localize("DEDREL.ItemSheet.Piercing")
       };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
@@ -98,25 +98,25 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     
     if (itemData.type === "armor") {
       context.armorSlots = {
-        "lower": "Нижний слой",
-        "middle": "Средний слой",
-        "upper": "Верхний слой",
-        "universal": "Универсальный"
+        "lower": game.i18n.localize("DEDREL.ArmorSlots.lower"),
+        "middle": game.i18n.localize("DEDREL.ArmorSlots.middle"),
+        "upper": game.i18n.localize("DEDREL.ArmorSlots.upper"),
+        "universal": game.i18n.localize("DEDREL.ArmorSlots.universal")
       };
       context.weightClasses = {
-        "light": "Легкая",
-        "medium": "Средняя",
-        "heavy": "Тяжелая"
+        "light": game.i18n.localize("DEDREL.WeightClasses.light"),
+        "medium": game.i18n.localize("DEDREL.WeightClasses.medium"),
+        "heavy": game.i18n.localize("DEDREL.WeightClasses.heavy")
       };
     }
     
     if (["talent", "mutation", "maneuver", "weapon"].includes(itemData.type)) {
       context.bloodlines = {
-        "Human": "Human",
-        "Demon": "Demon",
-        "Elf": "Elf",
-        "Fay": "Fay",
-        "Dragon": "Dragon"
+        "Human": game.i18n.localize("DEDREL.Bloodline.human"),
+        "Demon": game.i18n.localize("DEDREL.Bloodline.demon"),
+        "Elf": game.i18n.localize("DEDREL.Bloodline.elf"),
+        "Fay": game.i18n.localize("DEDREL.Bloodline.fay"),
+        "Dragon": game.i18n.localize("DEDREL.Bloodline.dragon")
       };
 
       context.joinedPrereqAttributes = (itemData.system.prerequisites_attributes || []).join("; ");
@@ -129,47 +129,47 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     
     if (itemData.type === "talent" || itemData.type === "mutation") {
       context.talentSubtypes = {
-        "passive": "Пассивный",
-        "narrative": "Нарративный",
-        "active": "Активный"
+        "passive": game.i18n.localize("DEDREL.TalentSubtypes.passive"),
+        "narrative": game.i18n.localize("DEDREL.TalentSubtypes.narrative"),
+        "active": game.i18n.localize("DEDREL.TalentSubtypes.active")
       };
       
       if (itemData.type === "mutation") {
         context.mutationTypes = {
-          "useful": "Полезная",
-          "neutral": "Нейтральная",
-          "harmful": "Вредная"
+          "useful": game.i18n.localize("DEDREL.MutationTypes.useful"),
+          "neutral": game.i18n.localize("DEDREL.MutationTypes.neutral"),
+          "harmful": game.i18n.localize("DEDREL.MutationTypes.harmful")
         };
       }
     }
     
     if (itemData.type === "maneuver") {
       context.maneuverSources = {
-        "basic": "Базовый",
-        "talent": "Талант",
-        "mutation": "Мутация"
+        "basic": game.i18n.localize("DEDREL.ManeuverSources.basic"),
+        "talent": game.i18n.localize("DEDREL.ManeuverSources.talent"),
+        "mutation": game.i18n.localize("DEDREL.ManeuverSources.mutation")
       };
       context.actionTypes = {
-        "action": "Действие",
-        "reaction": "Реакция",
-        "free": "Свободное",
-        "chain": "Цепное"
+        "action": game.i18n.localize("DEDREL.ActionTypes.action"),
+        "reaction": game.i18n.localize("DEDREL.ActionTypes.reaction"),
+        "free": game.i18n.localize("DEDREL.ActionTypes.free"),
+        "chain": game.i18n.localize("DEDREL.ActionTypes.chain")
       };
       context.joinedActionType = (itemData.system.action_type || [])[0];
       context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join("; ");
       
       context.targetTypes = {
-        "self": "На себя",
-        "creature": "Существо",
-        "point": "Точка",
-        "area": "Область"
+        "self": game.i18n.localize("DEDREL.TargetTypes.self"),
+        "creature": game.i18n.localize("DEDREL.TargetTypes.creature"),
+        "point": game.i18n.localize("DEDREL.TargetTypes.point"),
+        "area": game.i18n.localize("DEDREL.TargetTypes.area")
       };
       context.templateShapes = {
-        "": "Нет",
-        "square": "Квадрат",
-        "circle": "Круг",
-        "cone": "Конус",
-        "line": "Линия"
+        "": game.i18n.localize("DEDREL.TemplateShapes.none"),
+        "square": game.i18n.localize("DEDREL.TemplateShapes.square"),
+        "circle": game.i18n.localize("DEDREL.TemplateShapes.circle"),
+        "cone": game.i18n.localize("DEDREL.TemplateShapes.cone"),
+        "line": game.i18n.localize("DEDREL.TemplateShapes.line")
       };
     }
 

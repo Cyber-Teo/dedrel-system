@@ -7,19 +7,19 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       
       // Basic Stats
       weapon_type: new fields.SchemaField({
-        melee: new fields.BooleanField({ label: "Ближний бой (Melee)" }),
-        ranged: new fields.BooleanField({ label: "Дальний бой (Ranged)" }),
-        shield: new fields.BooleanField({ label: "Щит (Shield)" }),
-        magic: new fields.BooleanField({ label: "Магическое (Magic)" })
+        melee: new fields.BooleanField(),
+        ranged: new fields.BooleanField(),
+        shield: new fields.BooleanField(),
+        magic: new fields.BooleanField()
       }),
       damage_type: new fields.SchemaField({
-        piercing: new fields.BooleanField({ label: "Колющий" }),
-        bludgeoning: new fields.BooleanField({ label: "Дробящий" }),
-        slashing: new fields.BooleanField({ label: "Режущий" })
+        piercing: new fields.BooleanField(),
+        bludgeoning: new fields.BooleanField(),
+        slashing: new fields.BooleanField()
       }),
-      skill: new fields.StringField({ initial: "", label: "Навык оружия" }),
-      damage_formula: new fields.StringField({ initial: "", label: "Урон" }),
-      range: new fields.StringField({ initial: "", label: "Дальность" }),
+      skill: new fields.StringField({ initial: "" }),
+      damage_formula: new fields.StringField({ initial: "" }),
+      range: new fields.StringField({ initial: "" }),
 
       properties: new fields.SchemaField({
         natural: new fields.BooleanField({ initial: false }),
@@ -36,27 +36,27 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         can_be_dropped: new fields.BooleanField({ initial: false })
       }),
       // Заряды и макросы (добавлено для поддержки магических свойств, особенностей и эффектов)
-      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Текущие заряды" }),
-      uses_max: new fields.StringField({ initial: "", label: "Максимум зарядов" }),
-      uses_per: new fields.StringField({ initial: "", label: "Восстановление зарядов" }),
-      on_use_macro: new fields.StringField({ initial: "", label: "Макрос при использовании" }),
+      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
+      uses_max: new fields.StringField({ initial: "" }),
+      uses_per: new fields.StringField({ initial: "" }),
+      on_use_macro: new fields.StringField({ initial: "" }),
       
-      prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [], label: "Требования к атрибутам" }),
-      prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [], label: "Требования к навыкам" }),
+      prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       
-      control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3, label: "Зона контроля" }),
-      armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3, label: "Бронебойность" }),
+      control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
+      armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
       
       // Properties
-      is_auxiliary: new fields.BooleanField({ initial: false, label: "Вспомогательное" }),
-      is_fast: new fields.BooleanField({ initial: false, label: "Быстрое" }),
-      is_slow: new fields.BooleanField({ initial: false, label: "Медленное" }),
-      is_twohanded: new fields.BooleanField({ initial: false, label: "Двуручное" }),
-      is_thrown: new fields.BooleanField({ initial: false, label: "Метательное" }),
-      is_enchanted: new fields.BooleanField({ initial: false, label: "Магическое" }),
-      is_reloading: new fields.BooleanField({ initial: false, label: "Перезарядка" }),
+      is_auxiliary: new fields.BooleanField({ initial: false }),
+      is_fast: new fields.BooleanField({ initial: false }),
+      is_slow: new fields.BooleanField({ initial: false }),
+      is_twohanded: new fields.BooleanField({ initial: false }),
+      is_thrown: new fields.BooleanField({ initial: false }),
+      is_enchanted: new fields.BooleanField({ initial: false }),
+      is_reloading: new fields.BooleanField({ initial: false }),
       
-      equipped: new fields.BooleanField({ initial: false, label: "Экипировано" })
+      equipped: new fields.BooleanField({ initial: false })
     };
   }
 }

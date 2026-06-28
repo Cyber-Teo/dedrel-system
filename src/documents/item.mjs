@@ -197,7 +197,7 @@ export default class DedrelItem extends Item {
     content += `</div>`;
 
     await DialogV2.wait({
-      window: { title: `Использование: ${this.name}` },
+      window: { title: game.i18n.format("DEDREL.Chat.UseItem", {name: this.name}) },
       content: content,
       buttons: [
         {
