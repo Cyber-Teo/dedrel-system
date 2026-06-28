@@ -10,6 +10,7 @@ import { DedrelItemSheet } from "./src/sheets/item-sheet.mjs";
 import DedrelItem from "./src/documents/item.mjs";
 import { showRollDialog } from "./src/dice/roll.mjs";
 import { registerSystemSettings } from "./src/settings.mjs";
+import ActiveEffectsHUD from "./src/apps/active-effects-hud.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -75,7 +76,8 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-talent.hbs",
     "systems/dedrel/templates/item/parts/details-armor.hbs",
     "systems/dedrel/templates/item/parts/details-weapon.hbs",
-    "systems/dedrel/templates/item/parts/details-exp.hbs"
+    "systems/dedrel/templates/item/parts/details-exp.hbs",
+    "systems/dedrel/templates/item/parts/details-condition.hbs"
   ]);
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
@@ -84,7 +86,7 @@ Hooks.once("init", function() {
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
-    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp"],
+    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp", "condition"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
   });
@@ -446,4 +448,50 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
       }
     }
   }
+});
+
+Hooks.once("ready", async () => {
+  console.log("Dedrel | System Ready. Initializing Conditions...");
+  const pack = game.packs.get("dedrel.conditions");
+  if (pack) {
+    const conditions = await pack.getDocuments();
+    const statusEffects = [];
+    
+    for (const item of conditions) {
+      if (item.type !== "condition") continue;
+      
+      let durationData = {};
+      if (item.system.duration.units === "rounds") durationData.rounds = item.system.duration.value;
+      else if (item.system.duration.units === "turns") durationData.turns = item.system.duration.value;
+      else if (item.system.duration.units === "seconds") durationData.seconds = item.system.duration.value;
+      // Note: minutes/hours/days can be converted to seconds if needed, but for combat rounds/turns are main.
+      
+      const effectData = {
+        id: item.id,
+        name: item.name,
+        img: item.img,
+        description: item.system.description,
+        duration: durationData,
+        flags: {
+          dedrel: {
+            condition: true,
+            is_technical: item.system.is_technical,
+            category: item.system.category
+          }
+        },
+        changes: item.effects.map(e => e.toObject())
+      };
+      statusEffects.push(effectData);
+    }
+    
+    if (statusEffects.length > 0) {
+      CONFIG.statusEffects = statusEffects;
+      console.log(`Dedrel | Loaded ${statusEffects.length} conditions into CONFIG.statusEffects.`);
+    }
+  }
+
+  // Инициализация HUD активных эффектов
+  game.dedrel.effectsHUD = new ActiveEffectsHUD();
+  game.dedrel.effectsHUD.activateHooks();
+  game.dedrel.effectsHUD.render(true);
 });

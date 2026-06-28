@@ -401,6 +401,8 @@
       "ExclusiveArmorEquipped": "Exclusive armor equipped: {name}. Other slots cleared.",
       "CannotEquipExclusive": "Cannot equip this armor: an exclusive slot armor is already equipped.",
       "ItemCannotBeUsed": "This item cannot be used.",
+      "DeleteEffectTitle": "Remove Effect",
+      "DeleteEffectConfirm": "Are you sure you want to remove the effect '{name}' from {actor}?",
       "NoLuckPoints": "You have no luck points!",
       "LuckPointsRestored": "Luck points restored.",
       "GMRestoreTimeOnly": "Only GM can advance time. Charges and AP restored locally.",
@@ -469,6 +471,37 @@
       "OverCapSkillWarning": "Error: Skill rank cannot exceed 3 during character creation (even with mutations). Please lower the base value.",
       "Homeland": "Homeland",
       "HomelandPlaceholder": "Enter homeland..."
+    },
+    "Condition": {
+      "Category": "Category",
+      "IsTechnical": "Technical (Hidden)?",
+      "Stackable": "Stackable?",
+      "MaxStacks": "Max Stacks",
+      "DurationLabel": "Duration",
+      "DurationUnits": "Time Units",
+      "DurationValue": "Duration Value",
+      "ExpiryEvents": "Expiry Events (e.g. turnEnd)",
+      "Removal": "Removal / Text",
+      "ApplicationText": "Application Text",
+      "RemovalText": "Removal Text",
+      "RemovableBySkill": "Removable By Skill Check?",
+      "SkillToRemove": "Skill Key for Removal",
+      "RemoveDC": "Removal DC"
+    },
+    "ConditionCategories": {
+      "negative": "Negative (Debuff)",
+      "neutral": "Neutral",
+      "positive": "Positive (Buff)",
+      "technical": "Technical (Marker)"
+    },
+    "DurationUnits": {
+      "rounds": "Rounds",
+      "turns": "Turns",
+      "seconds": "Seconds",
+      "minutes": "Minutes",
+      "hours": "Hours",
+      "days": "Days",
+      "permanent": "Permanent"
     },
     "Settings": {
       "Language": {

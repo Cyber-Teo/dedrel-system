@@ -411,6 +411,8 @@
       "RoundAPRestored": "Очки Действия всех участников боя восстановлены (Начало нового раунда).",
       "CannotEquipExclusive": "Нельзя надеть эту броню: уже надета броня с эксклюзивным слотом.",
       "ItemCannotBeUsed": "Этот предмет нельзя использовать.",
+      "DeleteEffectTitle": "Снятие эффекта",
+      "DeleteEffectConfirm": "Вы уверены, что хотите снять эффект '{name}' с персонажа {actor}?",
       "NoLuckPoints": "У вас нет очков удачи!",
       "LuckPointsRestored": "Очки удачи восстановлены.",
       "GMRestoreTimeOnly": "Время может проматывать только GM. Заряды и ОД восстановлены локально.",
@@ -479,6 +481,37 @@
       "OverCapSkillWarning": "Ошибка: Значение навыка не может превышать 3 при создании персонажа (даже с учетом мутаций). Пожалуйста, снизьте базовое значение.",
       "Homeland": "Страна происхождения",
       "HomelandPlaceholder": "Введите страну..."
+    },
+    "Condition": {
+      "Category": "Категория",
+      "IsTechnical": "Техническое (Скрытое)?",
+      "Stackable": "Суммируется (Стакается)?",
+      "MaxStacks": "Макс. Стаков",
+      "DurationLabel": "Длительность",
+      "DurationUnits": "Единицы Времени",
+      "DurationValue": "Значение Длительности",
+      "ExpiryEvents": "События Снятия (напр. turnEnd)",
+      "Removal": "Условия Снятия / Текст",
+      "ApplicationText": "Текст при Наложении",
+      "RemovalText": "Текст при Снятии",
+      "RemovableBySkill": "Снимается Проверкой Навыка?",
+      "SkillToRemove": "Ключ Навыка для Снятия",
+      "RemoveDC": "Сложность (DC) Снятия"
+    },
+    "ConditionCategories": {
+      "negative": "Негативное (Дебафф)",
+      "neutral": "Нейтральное",
+      "positive": "Положительное (Бафф)",
+      "technical": "Техническое (Маркер)"
+    },
+    "DurationUnits": {
+      "rounds": "Раундов",
+      "turns": "Ходов",
+      "seconds": "Секунд",
+      "minutes": "Минут",
+      "hours": "Часов",
+      "days": "Дней",
+      "permanent": "Постоянно"
     },
     "Settings": {
       "Language": {

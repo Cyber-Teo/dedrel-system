@@ -10,6 +10,7 @@ import WeaponData from './weapon.mjs';
 import ArmorData from './armor.mjs';
 import MagicItemData from './magic_item.mjs';
 import ExpData from './exp.mjs';
+import ConditionDataModel from './condition.mjs';
 
 export const ItemDataModels = {
   currency: CurrencyData,
@@ -23,5 +24,6 @@ export const ItemDataModels = {
   weapon: WeaponData,
   armor: ArmorData,
   magic_item: MagicItemData,
-  exp: ExpData
+  exp: ExpData,
+  condition: ConditionDataModel
 };

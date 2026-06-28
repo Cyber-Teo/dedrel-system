@@ -1,0 +1,177 @@
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
+export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(ApplicationV2) {
+  static DEFAULT_OPTIONS = {
+    id: "dedrel-active-effects-hud",
+    classes: ["dedrel", "effects-hud"],
+    tag: "div",
+    window: {
+      frame: false
+    },
+    position: {
+      width: "auto",
+      height: "auto"
+    },
+    actions: {
+      removeEffect: ActiveEffectsHUD.#onRemoveEffect
+    }
+  };
+
+  static PARTS = {
+    main: {
+      template: "systems/dedrel/templates/apps/active-effects-hud.hbs"
+    }
+  };
+
+  constructor(options) {
+    super(options);
+    this._actor = null;
+    this._hooks = [];
+  }
+
+  get actor() {
+    return this._actor;
+  }
+
+  set actor(actor) {
+    this._actor = actor;
+    if (this.rendered) {
+      this.render();
+    }
+  }
+
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+
+    // Согласно архитектуре V14, сайдбар всегда свернут по умолчанию.
+    // Официальный источник истины — геттер ui.sidebar.expanded
+    let isCollapsed = true;
+    if (ui.sidebar && ui.sidebar.expanded !== undefined) {
+      isCollapsed = !ui.sidebar.expanded;
+    }
+    context.isCollapsed = isCollapsed;
+
+    context.effects = [];
+    
+    if (this._actor) {
+      const effectsCollection = this._actor.appliedEffects || this._actor.effects;
+      context.effects = effectsCollection.filter(e => {
+        // Show effects that are not disabled and either have a status ID, are a condition, or have an icon/img
+        const isCondition = e.flags?.dedrel?.condition === true;
+        const hasStatus = e.statuses?.size > 0;
+        return !e.disabled && (isCondition || hasStatus || e.isTemporary);
+      }).map(e => {
+        let tooltip = `<strong>${e.name}</strong>`;
+        
+        // Foundry предоставляет готовый e.duration.label, который показывает *оставшееся* время на текущем языке.
+        if (e.duration && e.duration.label) {
+          tooltip += `<br><em><i class="fas fa-clock"></i> ${e.duration.label}</em>`;
+        }
+
+        if (e.description) {
+          tooltip += `<hr>${e.description}`;
+        }
+
+        return {
+          id: e.id,
+          name: e.name,
+          img: e.img || e.icon || "icons/svg/aura.svg",
+          description: e.description || "",
+          tooltip: tooltip,
+          isTechnical: e.flags?.dedrel?.is_technical || false
+        };
+      }).filter(e => !e.isTechnical);
+    }
+    
+    return context;
+  }
+
+  static async #onRemoveEffect(event, target) {
+    event.preventDefault();
+    if (event.type !== "contextmenu") return; // Ensure it's a right-click if we bind to contextmenu, or we can just bind to click in the template. Wait, actions in V2 trigger on click by default. We can use right-click action if we map it, but standard actions are click. 
+    // Actually, V2 actions trigger on 'click'. If we want right-click, we can either use data-action and accept left click, or we add event listener in _onRender.
+    
+    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    if (!effectId) return;
+    
+    if (!this.actor) return;
+    const effect = this.actor.effects.get(effectId);
+    if (effect) {
+      await effect.delete();
+    }
+  }
+
+  // In V2, actions are triggered by click. If we want right-click (contextmenu) to delete:
+  _onRender(context, options) {
+    super._onRender(context, options);
+    
+    // Ensure it's in the body
+    if (this.element.parentElement !== document.body) {
+      document.body.appendChild(this.element);
+    }
+
+    // Add right-click listener for removal
+    const effectElements = this.element.querySelectorAll(".effect-icon");
+    for (const el of effectElements) {
+      el.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        const effectId = el.dataset.effectId;
+        if (this.actor && effectId) {
+          const effect = this.actor.effects.get(effectId);
+          if (effect) {
+            const confirmed = await foundry.applications.api.DialogV2.confirm({
+              window: { title: game.i18n.localize("DEDREL.Notifications.DeleteEffectTitle") },
+              content: `<p>${game.i18n.format("DEDREL.Notifications.DeleteEffectConfirm", { name: effect.name, actor: this.actor.name })}</p>`,
+              modal: true
+            });
+            if (confirmed) {
+              await effect.delete();
+            }
+          }
+        }
+      });
+    }
+  }
+
+  activateHooks() {
+    this._hooks.push(
+      Hooks.on("controlToken", this._onControlToken.bind(this)),
+      Hooks.on("createActiveEffect", this._onEffectChange.bind(this)),
+      Hooks.on("updateActiveEffect", this._onEffectChange.bind(this)),
+      Hooks.on("deleteActiveEffect", this._onEffectChange.bind(this)),
+      Hooks.on("updateToken", this._onEffectChange.bind(this)),
+      Hooks.on("collapseSidebar", this._onCollapseSidebar.bind(this)),
+      Hooks.on("canvasReady", this._onCanvasReady.bind(this))
+    );
+  }
+
+  _onCollapseSidebar(sidebar, collapsed) {
+    const list = this.element?.querySelector(".active-effects-list");
+    if (list) {
+      list.classList.toggle("sidebar-collapsed", collapsed);
+    }
+  }
+
+  _onControlToken(token, controlled) {
+    // Use setTimeout to let canvas.tokens.controlled update properly
+    setTimeout(() => {
+      const controlledTokens = canvas.tokens.controlled;
+      if (controlledTokens.length > 0) {
+        this.actor = controlledTokens[0].actor;
+      } else {
+        this.actor = game.user.character || null;
+      }
+    }, 10);
+  }
+
+  _onCanvasReady() {
+    this._onControlToken();
+  }
+
+  _onEffectChange(effect, ...args) {
+    if (!this.actor) return;
+    if (effect.parent === this.actor) {
+      this.render();
+    }
+  }
+}

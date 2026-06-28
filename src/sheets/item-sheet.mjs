@@ -172,6 +172,25 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "line": game.i18n.localize("DEDREL.TemplateShapes.line")
       };
     }
+    
+    if (itemData.type === "condition") {
+      context.conditionCategories = {
+        "negative": game.i18n.localize("DEDREL.ConditionCategories.negative"),
+        "neutral": game.i18n.localize("DEDREL.ConditionCategories.neutral"),
+        "positive": game.i18n.localize("DEDREL.ConditionCategories.positive"),
+        "technical": game.i18n.localize("DEDREL.ConditionCategories.technical")
+      };
+      context.durationUnits = {
+        "rounds": game.i18n.localize("DEDREL.DurationUnits.rounds"),
+        "turns": game.i18n.localize("DEDREL.DurationUnits.turns"),
+        "seconds": game.i18n.localize("DEDREL.DurationUnits.seconds"),
+        "minutes": game.i18n.localize("DEDREL.DurationUnits.minutes"),
+        "hours": game.i18n.localize("DEDREL.DurationUnits.hours"),
+        "days": game.i18n.localize("DEDREL.DurationUnits.days"),
+        "permanent": game.i18n.localize("DEDREL.DurationUnits.permanent")
+      };
+      context.joinedExpiryEvents = (itemData.system.expiry_events || []).join("; ");
+    }
 
     console.log("Dedrel | DedrelItemSheet context prepared successfully:", context);
     return context;
@@ -218,6 +237,16 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         if (typeof val === "string") {
           data[field] = val.split(";").map(s => s.trim()).filter(s => s.length > 0);
         }
+      }
+    }
+    
+    if (this.document.type === "condition") {
+      let events = data["system.expiry_events"];
+      if (Array.isArray(events) && events.length === 1 && typeof events[0] === "string") {
+        events = events[0];
+      }
+      if (typeof events === "string") {
+        data["system.expiry_events"] = events.split(";").map(s => s.trim()).filter(s => s.length > 0);
       }
     }
     

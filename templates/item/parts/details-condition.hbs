@@ -1,0 +1,99 @@
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.Category"}}</label>
+  <div class="form-fields">
+    <select name="system.category">
+      {{selectOptions conditionCategories selected=system.category}}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.IsTechnical"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="system.is_technical" {{checked system.is_technical}}>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.Stackable"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="system.stackable" {{checked system.stackable}}>
+  </div>
+</div>
+
+{{#if system.stackable}}
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.MaxStacks"}}</label>
+  <div class="form-fields">
+    <input type="number" name="system.max_stacks" value="{{system.max_stacks}}" min="1" step="1">
+  </div>
+</div>
+{{/if}}
+
+<div class="form-header">
+  <h3 class="form-header">{{localize "DEDREL.Condition.DurationLabel"}}</h3>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.DurationUnits"}}</label>
+  <div class="form-fields">
+    <select name="system.duration.units">
+      {{selectOptions durationUnits selected=system.duration.units}}
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.DurationValue"}}</label>
+  <div class="form-fields">
+    <input type="number" name="system.duration.value" value="{{system.duration.value}}" min="0" step="1">
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.ExpiryEvents"}}</label>
+  <div class="form-fields">
+    <input type="text" name="system.expiry_events" value="{{joinedExpiryEvents}}" placeholder="turnEnd; turnStart">
+  </div>
+</div>
+
+<div class="form-header">
+  <h3 class="form-header">{{localize "DEDREL.Condition.Removal"}}</h3>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.ApplicationText"}}</label>
+  <div class="form-fields">
+    <input type="text" name="system.application_text" value="{{system.application_text}}">
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.RemovalText"}}</label>
+  <div class="form-fields">
+    <input type="text" name="system.removal_text" value="{{system.removal_text}}">
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.RemovableBySkill"}}</label>
+  <div class="form-fields">
+    <input type="checkbox" name="system.is_removable_by_skill" {{checked system.is_removable_by_skill}}>
+  </div>
+</div>
+
+{{#if system.is_removable_by_skill}}
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.SkillToRemove"}}</label>
+  <div class="form-fields">
+    <input type="text" name="system.skill_to_remove" value="{{system.skill_to_remove}}" placeholder="healing">
+  </div>
+</div>
+
+<div class="form-group">
+  <label>{{localize "DEDREL.Condition.RemoveDC"}}</label>
+  <div class="form-fields">
+    <input type="number" name="system.remove_dc" value="{{system.remove_dc}}" min="0" step="1">
+  </div>
+</div>
+{{/if}}

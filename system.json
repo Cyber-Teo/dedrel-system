@@ -19,6 +19,22 @@
   "styles": [
     "css/dedrel.css"
   ],
+  "packs": [
+    {
+      "name": "mutations",
+      "label": "Mutations",
+      "path": "packs/mutations.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "conditions",
+      "label": "Conditions",
+      "path": "packs/conditions.db",
+      "type": "Item",
+      "system": "dedrel"
+    }
+  ],
   "languages": [
     {
       "lang": "ru",
@@ -50,7 +66,8 @@
       "weapon": {},
       "armor": {},
       "magic_item": {},
-      "exp": {}
+      "exp": {},
+      "condition": {}
     }
   }
 }
