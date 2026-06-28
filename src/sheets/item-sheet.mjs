@@ -101,12 +101,12 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "Dragon": "Dragon"
       };
 
-      context.joinedPrereqAttributes = (itemData.system.prerequisites_attributes || []).join(", ");
-      context.joinedPrereqSkills = (itemData.system.prerequisites_skills || []).join(", ");
-      context.joinedPrereqTalents = (itemData.system.prerequisites_talents || []).join(", ");
-      context.joinedPrereqMutations = (itemData.system.prerequisites_mutations || []).join(", ");
-      context.joinedPrereqBloodlines = (itemData.system.prerequisites_bloodlines || []).join(", ");
-      context.joinedAddsManeuvers = (itemData.system.adds_maneuvers || []).join(", ");
+      context.joinedPrereqAttributes = (itemData.system.prerequisites_attributes || []).join("; ");
+      context.joinedPrereqSkills = (itemData.system.prerequisites_skills || []).join("; ");
+      context.joinedPrereqTalents = (itemData.system.prerequisites_talents || []).join("; ");
+      context.joinedPrereqMutations = (itemData.system.prerequisites_mutations || []).join("; ");
+      context.joinedPrereqBloodlines = (itemData.system.prerequisites_bloodlines || []).join("; ");
+      context.joinedAddsManeuvers = (itemData.system.adds_maneuvers || []).join("; ");
     }
     
     if (itemData.type === "talent" || itemData.type === "mutation") {
@@ -138,7 +138,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "chain": "Цепное"
       };
       context.joinedActionType = (itemData.system.action_type || [])[0];
-      context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join(", ");
+      context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join("; ");
       
       context.targetTypes = {
         "self": "На себя",
@@ -194,7 +194,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       ];
       for (const field of arrayFields) {
         if (typeof data[field] === "string") {
-          data[field] = data[field].split(",").map(s => s.trim()).filter(s => s.length > 0);
+          data[field] = data[field].split(";").map(s => s.trim()).filter(s => s.length > 0);
         }
       }
     }

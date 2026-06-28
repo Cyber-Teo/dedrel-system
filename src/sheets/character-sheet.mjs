@@ -260,6 +260,19 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return context;
   }
 
+  async _preRender(context, options) {
+    await super._preRender(context, options);
+    this._savedScrollTop = this.element?.querySelector(".scrollable-wrapper")?.scrollTop || 0;
+  }
+
+  _onRender(context, options) {
+    super._onRender(context, options);
+    const wrapper = this.element.querySelector(".scrollable-wrapper");
+    if (wrapper) {
+      wrapper.scrollTop = this._savedScrollTop;
+    }
+  }
+
   changeTab(tab, group, options={}) {
     console.log("Dedrel | changeTab called for Actor. tab:", tab, "group:", group, "options:", options);
     return super.changeTab(tab, group, options);
@@ -524,7 +537,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
    * (например, стартовые мутации при создании персонажа).
    */
   async _onDrop(event) {
-    const data = foundry.applications.api.DragDrop.getDragData(event);
+    const data = TextEditor.getDragEventData(event);
     if (data.type !== "Item") return super._onDrop(event);
 
     const item = await Item.implementation.fromDropData(data);

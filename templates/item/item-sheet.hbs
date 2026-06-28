@@ -137,7 +137,7 @@
                 </div>
                 <div class="form-group">
                     <label>Цепные манёвры</label>
-                    <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1, maneuver2"/>
+                    <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
@@ -277,7 +277,7 @@
 
                 <div class="form-group">
                     <label>Манёвры</label>
-                    <input type="text" name="system.adds_maneuvers" value="{{joinedAddsManeuvers}}" placeholder="maneuver1, maneuver2"/>
+                    <input type="text" name="system.adds_maneuvers" value="{{joinedAddsManeuvers}}" placeholder="maneuver1; maneuver2"/>
                 </div>
                 <div class="form-group">
                     <label>Макрос при добавлении</label>
@@ -332,12 +332,20 @@
                 </div>
                 <div class="form-group">
                     <label>Требования (атрибуты)</label>
-                    <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="str 2, con 1"/>
+                    <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="str 2; con 1"/>
                 </div>
                 <div class="form-group">
                     <label>Требования (навыки)</label>
                     <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2"/>
                 </div>
+            {{/if}}
+
+            {{#if (eq item.type "exp")}}
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Очки Опыта (XP)</label>
+                    <input type="text" name="system.value" value="{{system.value}}" data-dtype="Number" placeholder="Например: 10, -5"/>
+                </div>
+                <p class="hint" style="grid-column: 1 / -1; margin-top: 0;">Укажите положительное число для выдачи опыта, или отрицательное (например, -5) для списания штрафного опыта.</p>
             {{/if}}
             </div> <!-- CLOSE form-fields-grid -->
 
