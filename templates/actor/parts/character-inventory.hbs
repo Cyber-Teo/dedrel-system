@@ -7,6 +7,9 @@
             </div>
             <div class="item-name rollable" data-action="useItem">
                 <h4>{{item.name}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
             </div>
             <div class="item-controls">
                 <a class="item-control" data-action="toggle-favorite" title="Экипировать"><i
@@ -26,6 +29,9 @@
             </div>
             <div class="item-name rollable" data-action="useItem">
                 <h4>{{item.name}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
             </div>
             <div class="item-controls">
                 <a class="item-control" data-action="toggle-favorite" title="Экипировать"><i
@@ -45,6 +51,9 @@
             </div>
             <div class="item-name rollable" data-action="useItem">
                 <h4>{{item.name}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
             </div>
             <div class="item-controls">
                 <a class="item-control" data-action="toggle-favorite" title="В избранное"><i
@@ -71,6 +80,9 @@
             </div>
             <div class="item-name rollable" data-action="useItem">
                 <h4>{{item.name}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
             </div>
             <div class="item-controls">
                 <a class="item-control" data-action="toggle-favorite" title="В избранное"><i

@@ -69,6 +69,13 @@ export default class DedrelItem extends Item {
     }
   }
 
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const usesMaxStr = this.system.uses_max || "0";
+    const usesMax = parseInt(usesMaxStr, 10) || 0;
+    this.system.has_charges = usesMax > 0;
+  }
+
   /**
    * Метод активации/использования предмета (вызывается при клике по предмету или броске).
    * Проверяет необходимые ресурсы (Очки Действия), выбирает подходящее оружие и отправляет результат в чат.

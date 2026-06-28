@@ -36,6 +36,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       rollCheck: DedrelCharacterSheet.#onRollCheck,
       useItem: DedrelCharacterSheet.#onUseItem,
       editImage: DedrelCharacterSheet.#onEditImage,
+      toggleSkillFavorite: DedrelCharacterSheet.#onToggleSkillFavorite,
       shortRest: DedrelCharacterSheet.#onShortRest,
       longRest: DedrelCharacterSheet.#onLongRest,
       toggleItemsLock: DedrelCharacterSheet.#onToggleItemsLock,
@@ -51,7 +52,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       upgradeSkill: DedrelCharacterSheet.#onUpgradeSkill,
       toggleEffect: DedrelCharacterSheet.#onToggleEffect,
       editEffect: DedrelCharacterSheet.#onEditEffect,
-      deleteEffect: DedrelCharacterSheet.#onDeleteEffect
+      deleteEffect: DedrelCharacterSheet.#onDeleteEffect,
+      spendLuck: DedrelCharacterSheet.#onSpendLuck,
+      resetLuck: DedrelCharacterSheet.#onResetLuck
     }
   };
 
@@ -254,6 +257,34 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    // Skill Groups and Favorites
+    const skillCategories = {
+      combat: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"],
+      intellectual: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"],
+      practical: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism"],
+      social: ["persuasion", "insight", "deception", "intimidation", "performance"]
+    };
+
+    const skillGroups = { combat: [], intellectual: [], practical: [], social: [] };
+    const favoriteSkillsData = [];
+    const favSkillsFlag = this.document.getFlag("dedrel", "favoriteSkills") || [];
+
+    if (actorData.system.skills) {
+      for (const [key, skillData] of Object.entries(actorData.system.skills)) {
+        let category = "combat";
+        if (skillCategories.intellectual.includes(key)) category = "intellectual";
+        else if (skillCategories.practical.includes(key)) category = "practical";
+        else if (skillCategories.social.includes(key)) category = "social";
+
+        const skillObj = { key: key, ...skillData, isFavorite: favSkillsFlag.includes(key) };
+        skillGroups[category].push(skillObj);
+        
+        if (skillObj.isFavorite) {
+          favoriteSkillsData.push(skillObj);
+        }
+      }
+    }
+
     // Check for attributes over cap during creation
     let hasOverCapAttributes = false;
     if (actorData.flags?.dedrel?.showCreation) {
@@ -311,6 +342,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       enrichedBiography,
       creationData,
       xpData,
+      skillGroups,
+      favoriteSkillsData,
       tabs: this._prepareTabs("primary"),
       editable: this.isEditable
     });
@@ -328,6 +361,36 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const wrapper = this.element.querySelector(".scrollable-wrapper");
     if (wrapper) {
       wrapper.scrollTop = this._savedScrollTop;
+    }
+
+    const dragTargets = this.element.querySelectorAll(".item-row, .skill-item");
+    for (let el of dragTargets) {
+      el.setAttribute("draggable", "true");
+      el.addEventListener("dragstart", this.#onDragStart.bind(this));
+    }
+  }
+
+  #onDragStart(event) {
+    const el = event.currentTarget;
+    let dragData = null;
+
+    if (el.classList.contains("item-row")) {
+      const itemId = el.dataset.itemId;
+      if (itemId) {
+        const item = this.document.items.get(itemId);
+        if (item) {
+          dragData = { type: "Item", uuid: item.uuid };
+        }
+      }
+    } else if (el.classList.contains("skill-item")) {
+      const skillId = el.dataset.skillId;
+      if (skillId) {
+        dragData = { type: "Skill", actorId: this.document.id, skillId: skillId };
+      }
+    }
+
+    if (dragData) {
+      event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
     }
   }
 
@@ -376,6 +439,22 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         await item.setFlag("dedrel", "isFavorite", !isFav);
       }
     }
+  }
+
+  static async #onToggleSkillFavorite(event, target) {
+    event.preventDefault();
+    const skillItem = target.closest(".skill-item");
+    if (!skillItem) return;
+    const skillId = skillItem.dataset.skillId;
+    if (!skillId) return;
+
+    let favSkills = this.document.getFlag("dedrel", "favoriteSkills") || [];
+    if (favSkills.includes(skillId)) {
+      favSkills = favSkills.filter(s => s !== skillId);
+    } else {
+      favSkills = [...favSkills, skillId];
+    }
+    await this.document.setFlag("dedrel", "favoriteSkills", favSkills);
   }
 
   static async #onCreateItem(event, target) {
@@ -456,6 +535,39 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (!confirm) return;
     await DedrelCharacterSheet.performRest(this.document, "long");
   }
+
+  static async #onSpendLuck(event, target) {
+    const actor = this.document;
+    const currentLuck = actor.system.resources.luck_points.value;
+    
+    if (currentLuck <= 0) {
+      return ui.notifications.warn("У вас нет очков удачи!");
+    }
+
+    const confirm = await Dialog.confirm({
+      title: "Трата Очка Удачи",
+      content: "<p>Вы можете перебросить любой 1 кубик (свой или противника).<br><b>Вы обязаны использовать новый результат.</b></p><p>Потратить 1 очко удачи?</p>",
+      yes: () => true,
+      no: () => false,
+      defaultYes: true
+    });
+
+    if (confirm) {
+      await actor.update({ "system.resources.luck_points.value": currentLuck - 1 });
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: actor }),
+        content: `<div class="dedrel-item-chat"><h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;"><i class="fas fa-clover" style="color: green;"></i> Очко Удачи!</h3><p><b>${actor.name}</b> тратит Очко Удачи.</p><p><i>Переброс 1 кубика (свой или противника), используется новый результат.</i></p></div>`
+      });
+    }
+  }
+
+  static async #onResetLuck(event, target) {
+    const actor = this.document;
+    const maxLuck = actor.system.resources.luck_points.max;
+    await actor.update({ "system.resources.luck_points.value": maxLuck });
+    ui.notifications.info("Очки удачи восстановлены.");
+  }
+
 
   static async performRest(actor, restType) {
     if (game.user.isGM) {

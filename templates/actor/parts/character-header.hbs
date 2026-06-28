@@ -1,6 +1,17 @@
 <header class="sheet-header">
     <div class="header-top flexrow">
         <div class="header-left">
+            <div class="stat-block luck-block" style="margin-bottom: 10px;">
+                <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+                    <label class="rollable" data-action="spendLuck" style="cursor: pointer; color: var(--color-text-light-highlight);" title="Потратить очко удачи"><i class="fas fa-clover"></i> Удача</label>
+                    <div class="stat-inputs">
+                        <input type="text" name="system.resources.luck_points.value" value="{{system.resources.luck_points.value}}" data-dtype="Number" />
+                        <span class="separator">/</span>
+                        <span class="max-val" title="Максимум">{{system.resources.luck_points.max}}</span>
+                        <a data-action="resetLuck" title="Сбросить удачу" style="margin-left: 5px; cursor: pointer;"><i class="fas fa-sync"></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="stat-block hp-block">
                 <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
                     <label>HP</label>

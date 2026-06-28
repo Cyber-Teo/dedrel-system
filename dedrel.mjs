@@ -17,6 +17,12 @@ import { showRollDialog } from "./src/dice/roll.mjs";
 Hooks.once("init", function() {
   console.log("Dedrel | Initializing Dedrel System");
 
+  // Инициатива (стандартный расчет Foundry для системы)
+  CONFIG.Combat.initiative = {
+    formula: "@initiative + 1d10",
+    decimals: 2
+  };
+
   // Регистрация кастомного класса предмета и моделей данных для предметов (Item)
   CONFIG.Item.documentClass = DedrelItem;
   CONFIG.Item.dataModels = {
@@ -60,6 +66,42 @@ Hooks.once("init", function() {
 
   console.log("Dedrel | Item Data Models Registered:", Object.keys(ItemDataModels));
   console.log("Dedrel | Actor Data Models Registered:", Object.keys(ActorDataModels));
+
+  // Экспортируем глобальные методы для макросов
+  game.dedrel = {
+    rollItemMacro: async (itemName) => {
+      const speaker = ChatMessage.getSpeaker();
+      let actor;
+      if (speaker.token) actor = game.actors.tokens[speaker.token];
+      if (!actor) actor = game.actors.get(speaker.actor);
+      if (!actor) return ui.notifications.warn("Пожалуйста, выделите токен, чтобы использовать макрос.");
+      
+      const item = actor.items.find(i => i.name === itemName);
+      if (!item) return ui.notifications.warn(`У выделенного персонажа нет предмета "${itemName}"`);
+
+      if (item.use) item.use();
+    },
+    
+    rollSkillMacro: async (skillKey) => {
+      const speaker = ChatMessage.getSpeaker();
+      let actor;
+      if (speaker.token) actor = game.actors.tokens[speaker.token];
+      if (!actor) actor = game.actors.get(speaker.actor);
+      if (!actor) return ui.notifications.warn("Пожалуйста, выделите токен.");
+
+      const skillData = actor.system.skills[skillKey];
+      if (!skillData) return;
+
+      const skillName = game.i18n.localize(`DEDREL.Skills.${skillKey}`);
+      
+      await showRollDialog({
+        actor: actor,
+        title: `Проверка: ${skillName}`,
+        baseRank: skillData.rank,
+        isSave: false
+      });
+    }
+  };
 });
 
 /**
@@ -101,7 +143,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     const itemId = button.dataset.itemId;
     const weaponId = button.dataset.weaponId;
     
-    const actor = message.speaker.actor ? game.actors.get(message.speaker.actor) : null;
+    const actor = ChatMessage.getSpeakerActor(message.speaker);
     if (!actor) return ui.notifications.warn("Персонаж не найден.");
     
     const item = actor.items.get(itemId);
@@ -181,3 +223,50 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     }
   });
 });
+
+/**
+ * Хук "hotbarDrop" перехватывает перетаскивание предметов и навыков на панель макросов.
+ */
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+  if (data.type === "Item") {
+    createItemMacro(data, slot);
+    return false;
+  }
+  if (data.type === "Skill") {
+    createSkillMacro(data, slot);
+    return false;
+  }
+});
+
+async function createItemMacro(data, slot) {
+  const item = await Item.implementation.fromDropData(data);
+  if (!item) return;
+  const command = `game.dedrel.rollItemMacro("${item.name}");`;
+  let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
+  if (!macro) {
+    macro = await Macro.create({
+      name: item.name,
+      type: "script",
+      img: item.img,
+      command: command,
+      flags: { "dedrel.itemMacro": true }
+    });
+  }
+  game.user.assignHotbarMacro(macro, slot);
+}
+
+async function createSkillMacro(data, slot) {
+  const skillName = game.i18n.localize(`DEDREL.Skills.${data.skillId}`);
+  const command = `game.dedrel.rollSkillMacro("${data.skillId}");`;
+  let macro = game.macros.find(m => (m.name === skillName) && (m.command === command));
+  if (!macro) {
+    macro = await Macro.create({
+      name: skillName,
+      type: "script",
+      img: "icons/svg/d20.svg",
+      command: command,
+      flags: { "dedrel.skillMacro": true }
+    });
+  }
+  game.user.assignHotbarMacro(macro, slot);
+}

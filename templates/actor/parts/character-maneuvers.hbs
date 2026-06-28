@@ -15,6 +15,9 @@
             </div>
             <div class="item-name" data-action="useItem" style="cursor: pointer;">
                 <h4>{{item.name}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
             </div>
             <div class="item-ap-cost">{{item.system.ap_cost}}</div>
             <div class="item-controls">
