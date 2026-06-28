@@ -1,0 +1,87 @@
+<div class="form-fields-grid">
+    <div class="form-group stacked" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.WeaponType"}}</label>
+        <div class="properties-grid">
+            <label class="checkbox"><input type="checkbox" name="system.weapon_type.melee" {{checked system.weapon_type.melee}}/> {{localize "DEDREL.ItemSheet.Melee"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.weapon_type.ranged" {{checked system.weapon_type.ranged}}/> {{localize "DEDREL.ItemSheet.Ranged"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.weapon_type.shield" {{checked system.weapon_type.shield}}/> {{localize "DEDREL.ItemSheet.Shield"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> {{localize "DEDREL.ItemSheet.Magic"}}</label>
+        </div>
+    </div>
+    <div class="form-group stacked" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.DamageType"}}</label>
+        <div class="properties-grid">
+            <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> {{localize "DEDREL.ItemSheet.Piercing"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> {{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.damage_type.slashing" {{checked system.damage_type.slashing}}/> {{localize "DEDREL.ItemSheet.Slashing"}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
+        <select name="system.skill">
+            <option value="">{{localize "DEDREL.ItemSheet.NoSkill"}}</option>
+            {{selectOptions weaponSkills selected=system.skill}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Damage"}}</label>
+        <input type="text" name="system.damage_formula" value="{{system.damage_formula}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ControlZone"}}</label>
+        <select name="system.control_zone" data-dtype="Number">
+            {{selectOptions zeroToThree selected=system.control_zone}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ArmorPiercing"}}</label>
+        <select name="system.armor_piercing" data-dtype="Number">
+            {{selectOptions zeroToThree selected=system.armor_piercing}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Range"}}</label>
+        <input type="text" name="system.range" value="{{system.range}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.AttributesKeyRank"}}</label>
+        <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="str 2; con 1"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.SkillsKeyRank"}}</label>
+        <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.Uses"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
+        <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
+        <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.UsesPer"}}</label>
+        <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
+        <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
+    </div>
+</div> <!-- CLOSE form-fields-grid inside details-weapon -->
+
+<div class="form-group stacked">
+    <label>{{localize "DEDREL.ItemSheet.WeaponProperties"}}</label>
+    <div class="properties-grid">
+        <label class="checkbox"><input type="checkbox" name="system.is_auxiliary" {{checked system.is_auxiliary}}/> {{localize "DEDREL.ItemSheet.IsAuxiliary"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_fast" {{checked system.is_fast}}/> {{localize "DEDREL.ItemSheet.IsFast"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> {{localize "DEDREL.ItemSheet.IsSlow"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> {{localize "DEDREL.ItemSheet.IsTwohanded"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> {{localize "DEDREL.ItemSheet.IsEnchanted"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import DedrelCharacterSheet from "./src/sheets/character-sheet.mjs";
 import { DedrelItemSheet } from "./src/sheets/item-sheet.mjs";
 import DedrelItem from "./src/documents/item.mjs";
 import { showRollDialog } from "./src/dice/roll.mjs";
+import { registerSystemSettings } from "./src/settings.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -16,6 +17,9 @@ import { showRollDialog } from "./src/dice/roll.mjs";
  */
 Hooks.once("init", function() {
   console.log("Dedrel | Initializing Dedrel System");
+
+  // Регистрация настроек системы
+  registerSystemSettings();
 
   // Инициатива (стандартный расчет Foundry для системы)
   CONFIG.Combat.initiative = {
@@ -62,7 +66,16 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-biography.hbs",
     "systems/dedrel/templates/actor/parts/character-experience.hbs",
     "systems/dedrel/templates/actor/parts/character-creation.hbs",
-    "systems/dedrel/templates/apps/roll-dialog.hbs"
+    "systems/dedrel/templates/apps/roll-dialog.hbs",
+    "systems/dedrel/templates/item/parts/item-header.hbs",
+    "systems/dedrel/templates/item/parts/item-navigation.hbs",
+    "systems/dedrel/templates/item/parts/item-description.hbs",
+    "systems/dedrel/templates/item/parts/item-effects.hbs",
+    "systems/dedrel/templates/item/parts/details-maneuver.hbs",
+    "systems/dedrel/templates/item/parts/details-talent.hbs",
+    "systems/dedrel/templates/item/parts/details-armor.hbs",
+    "systems/dedrel/templates/item/parts/details-weapon.hbs",
+    "systems/dedrel/templates/item/parts/details-exp.hbs"
   ]);
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
@@ -89,9 +102,13 @@ Hooks.once("init", function() {
       if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTokenForMacro"));
       
       const item = actor.items.find(i => i.name === itemName);
-      if (!item) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ItemNotFoundOnActor", {itemName: itemName}));
-
-      if (item.use) item.use();
+      if (!item) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ItemNotFoundMacro", {name: itemName}));
+      
+      if (item.type === "maneuver" || item.type === "spell") {
+        if (typeof item.use === "function") return item.use();
+      } else {
+        return item.sheet.render(true);
+      }
     },
     
     rollSkillMacro: async (skillKey) => {
@@ -394,3 +411,39 @@ async function createSkillMacro(data, slot) {
   }
   game.user.assignHotbarMacro(macro, slot);
 }
+
+Hooks.on("updateCombat", async (combat, changed, options, userId) => {
+  if (!game.user.isGM) return;
+
+  if (changed.round !== undefined && combat.round > 0) {
+    if (options.direction === 1 || options.direction === undefined) {
+      let updatedAny = false;
+      for (const combatant of combat.combatants) {
+        const actor = combatant.actor;
+        if (!actor || actor.type !== "character") continue;
+        const res = actor.system.resources;
+        if (!res) continue;
+        
+        const updateData = {};
+        if (res.ap_universal && res.ap_universal.value !== res.ap_universal.max) {
+          updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
+        }
+        if (res.ap_magic && res.ap_magic.value !== res.ap_magic.max) {
+          updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
+        }
+        if (res.ap_maneuver && res.ap_maneuver.value !== res.ap_maneuver.max) {
+          updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
+        }
+        
+        if (Object.keys(updateData).length > 0) {
+          await actor.update(updateData);
+          updatedAny = true;
+        }
+      }
+
+      if (updatedAny) {
+        ui.notifications.info(game.i18n.localize("DEDREL.Notifications.RoundAPRestored"));
+      }
+    }
+  }
+});

@@ -172,18 +172,18 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       startingHarmfulMutations: []
     };
 
-    if (actorData.system.bloodlines) {
-      for (const [k, v] of Object.entries(actorData.system.bloodlines)) {
+    if (this.document._source.system.bloodlines) {
+      for (const [k, v] of Object.entries(this.document._source.system.bloodlines)) {
         creationData.bloodlinesUsed += (v.rank - 1);
       }
     }
     
-    for (const [k, v] of Object.entries(actorData.system.attributes)) {
+    for (const [k, v] of Object.entries(this.document._source.system.attributes)) {
       creationData.attributesUsed += (v.rank - 1);
     }
     
-    if (actorData.system.skills) {
-      for (const [k, v] of Object.entries(actorData.system.skills)) {
+    if (this.document._source.system.skills) {
+      for (const [k, v] of Object.entries(this.document._source.system.skills)) {
         creationData.skillsUsed += v.rank;
       }
     }
@@ -300,6 +300,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     // Check for attributes over cap during creation
     let hasOverCapAttributes = false;
+    let hasOverCapSkills = false;
     if (actorData.flags?.dedrel?.showCreation) {
       for (const [key, attr] of Object.entries(actorData.system.attributes)) {
         if (attr.rank > 4) {
@@ -309,8 +310,17 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
           attr.isOverCap = false;
         }
       }
+      for (const [key, skill] of Object.entries(actorData.system.skills)) {
+        if (skill.rank > 3) {
+          skill.isOverCap = true;
+          hasOverCapSkills = true;
+        } else {
+          skill.isOverCap = false;
+        }
+      }
     }
     creationData.hasOverCapAttributes = hasOverCapAttributes;
+    creationData.hasOverCapSkills = hasOverCapSkills;
 
     const permanentEffects = [];
     const temporaryEffects = [];

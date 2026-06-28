@@ -93,13 +93,18 @@
         <div class="creation-section">
             <h3>{{localize "DEDREL.UI.Skills"}} ({{localize "DEDREL.Creation.Distributed" used=creationData.skillsUsed max=15}})</h3>
             <p class="hint">{{localize "DEDREL.Creation.MaxStartingValue" max=3}}</p>
+            {{#if creationData.hasOverCapSkills}}
+            <p class="warning" style="color: red; font-weight: bold; margin-top: 0; margin-bottom: 10px;">
+                <i class="fas fa-exclamation-triangle"></i> {{localize "DEDREL.Creation.OverCapSkillWarning"}}
+            </p>
+            {{/if}}
             <div class="skills-grid grid-3col">
                 {{#each system.skills as |skill key|}}
                 <div class="skill-item-create">
                     <span class="skill-name">{{localize (concat "DEDREL.Skills." key)}}</span>
                     <div class="skill-controls">
                         <a class="control-btn" data-action="decreaseSkill" data-key="{{key}}"><i class="fas fa-minus"></i></a>
-                        <span class="skill-value">{{skill.rank}}</span>
+                        <span class="skill-value {{#if skill.isOverCap}}over-cap{{/if}}" {{#if skill.isOverCap}}style="color: red; font-weight: bold;"{{/if}}>{{skill.rank}}</span>
                         <a class="control-btn" data-action="increaseSkill" data-key="{{key}}"><i class="fas fa-plus"></i></a>
                     </div>
                 </div>

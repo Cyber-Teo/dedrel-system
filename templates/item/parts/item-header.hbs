@@ -1,0 +1,16 @@
+<header class="sheet-header item-header">
+    <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" style="cursor: pointer;"/>
+    <div class="header-details" style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+        <div class="name-wrapper" style="display: flex; flex-direction: row; gap: 10px; align-items: center; width: 100%;">
+            <h1 class="dedrel-charname" style="flex: 1; margin: 0; min-height: 40px;"><input name="name" type="text" value="{{item.name}}" placeholder="{{localize "DEDREL.UI.Name"}}"/></h1>
+            {{#if (eq item.type "weapon")}}
+            <label class="checkbox" style="display: flex; align-items: center; gap: 5px; font-weight: bold; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 4px; border: 1px solid var(--color-border); color: #fff; cursor: pointer; flex: 0 0 auto; height: 38px; box-sizing: border-box;">
+                <input type="checkbox" name="system.equipped" {{checked system.equipped}} style="margin: 0; width: 16px; height: 16px;"/> {{localize "DEDREL.ItemSheet.Equipped"}}
+            </label>
+            {{/if}}
+        </div>
+        <div class="item-subtitle">
+            <span class="item-type-badge">{{item.type}}</span>
+        </div>
+    </div>
+</header>

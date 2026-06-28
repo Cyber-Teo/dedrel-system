@@ -1,0 +1,118 @@
+<div class="form-fields-grid">
+    <div class="form-group stacked" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.BasicParameters"}}</label>
+        <div class="properties-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">{{localize "DEDREL.ItemSheet.Slot"}}</label>
+                <select name="system.slot" style="width: 100%;">
+                    {{selectOptions armorSlots selected=system.slot}}
+                </select>
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">{{localize "DEDREL.ItemSheet.WeightClass"}}</label>
+                <select name="system.weight_class" style="width: 100%;">
+                    {{selectOptions weightClasses selected=system.weight_class}}
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.DamageResistance"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Slashing"}}</label>
+        <input type="text" name="system.dr.slashing" value="{{system.dr.slashing}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Piercing"}}</label>
+        <input type="text" name="system.dr.piercing" value="{{system.dr.piercing}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+        <input type="text" name="system.dr.bludgeoning" value="{{system.dr.bludgeoning}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Fire"}}</label>
+        <input type="text" name="system.dr.heat" value="{{system.dr.heat}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Cold"}}</label>
+        <input type="text" name="system.dr.cold" value="{{system.dr.cold}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Necrotic"}}</label>
+        <input type="text" name="system.dr.necrotic" value="{{system.dr.necrotic}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Radiant"}}</label>
+        <input type="text" name="system.dr.radiant" value="{{system.dr.radiant}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Lightning"}}</label>
+        <input type="text" name="system.dr.electric" value="{{system.dr.electric}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Thunder"}}</label>
+        <input type="text" name="system.dr.sonic" value="{{system.dr.sonic}}" data-dtype="Number"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.Modifiers"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Evasion"}}</label>
+        <input type="text" name="system.modifiers.dodge" value="{{system.modifiers.dodge}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Block"}}</label>
+        <input type="text" name="system.modifiers.block" value="{{system.modifiers.block}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Stealth"}}</label>
+        <input type="text" name="system.modifiers.stealth" value="{{system.modifiers.stealth}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.RangedAttack"}}</label>
+        <input type="text" name="system.modifiers.ranged_attack" value="{{system.modifiers.ranged_attack}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.MagicAttack"}}</label>
+        <input type="text" name="system.modifiers.magic_attack" value="{{system.modifiers.magic_attack}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.SpeedPenalty"}}</label>
+        <input type="text" name="system.modifiers.movement" value="{{system.modifiers.movement}}" data-dtype="Number"/>
+    </div>
+    
+    <div class="form-group stacked" style="grid-column: 1 / -1; margin-top: 10px;">
+        <label>{{localize "DEDREL.ItemSheet.ArmorProperties"}}</label>
+        <div class="properties-grid">
+            <label class="checkbox"><input type="checkbox" name="system.properties.exclusive_slot" {{checked system.properties.exclusive_slot}}/> {{localize "DEDREL.ItemSheet.ExclusiveSlot"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.properties.rigid" {{checked system.properties.rigid}}/> {{localize "DEDREL.ItemSheet.Rigid"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.properties.loud" {{checked system.properties.loud}}/> {{localize "DEDREL.ItemSheet.Loud"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.properties.encumbering" {{checked system.properties.encumbering}}/> {{localize "DEDREL.ItemSheet.Encumbering"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.properties.weak_point_protection" {{checked system.properties.weak_point_protection}}/> {{localize "DEDREL.ItemSheet.WeakPointProtection"}}</label>
+        </div>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.Uses"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
+        <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
+        <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Recovery"}}</label>
+        <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
+        <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
+    </div>
+</div>

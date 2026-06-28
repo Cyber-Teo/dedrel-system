@@ -691,10 +691,7 @@ form.dedrel.sheet.item {
 .dedrel.sheet.item .form-group {
   display: flex;
   align-items: center;
-  background: var(--color-panel);
-  border: 1px solid var(--color-border);
-  border-radius: 5px;
-  padding: 5px 10px;
+  margin-bottom: 0px;
 }
 
 .dedrel.sheet.item .form-group.stacked {
@@ -706,6 +703,8 @@ form.dedrel.sheet.item {
   flex: 1;
   font-weight: bold;
   color: var(--color-text-dark);
+  font-size: 13px;
+  margin-right: 5px;
 }
 
 .dedrel.sheet.item .form-group input[type="text"],
@@ -726,6 +725,16 @@ form.dedrel.sheet.item {
   border-radius: 5px;
   padding: 10px;
   overflow-y: auto;
+}
+
+.dedrel.sheet.item .section-header {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--color-border);
+  margin: 15px 0 5px 0;
+  padding-bottom: 3px;
+  color: var(--color-text-dark);
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* --- Item Lists --- */
