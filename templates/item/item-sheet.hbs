@@ -139,6 +139,10 @@
                     <label>Цепные манёвры</label>
                     <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
                 </div>
+                <div class="form-group">
+                    <label>Макрос при использовании</label>
+                    <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
+                </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
                     <h3 style="margin: 0; padding-bottom: 5px;">Требования к оружию</h3>
@@ -235,11 +239,15 @@
                 </div>
                 <div class="form-group">
                     <label>{{localize "DEDREL.ItemFields.UsesMax"}}</label>
-                    <input type="text" name="system.uses_max" value="{{system.uses_max}}" data-dtype="Number"/>
+                    <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
                 </div>
                 <div class="form-group">
                     <label>{{localize "DEDREL.ItemFields.UsesPer"}}</label>
                     <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Макрос при использовании</label>
+                    <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
@@ -282,6 +290,125 @@
                 <div class="form-group">
                     <label>Макрос при добавлении</label>
                     <input type="text" name="system.on_add_macro" value="{{system.on_add_macro}}"/>
+                </div>
+            {{/if}}
+
+            {{#if (eq item.type "armor")}}
+                <div class="form-group stacked" style="grid-column: 1 / -1;">
+                    <label>Основные параметры</label>
+                    <div class="properties-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">Слот</label>
+                            <select name="system.slot" style="width: 100%;">
+                                {{selectOptions armorSlots selected=system.slot}}
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">Класс веса</label>
+                            <select name="system.weight_class" style="width: 100%;">
+                                {{selectOptions weightClasses selected=system.weight_class}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Сопротивление урону (DR)</h3>
+                </div>
+                <div class="form-group">
+                    <label>Рубящий</label>
+                    <input type="text" name="system.dr.slashing" value="{{system.dr.slashing}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Колющий</label>
+                    <input type="text" name="system.dr.piercing" value="{{system.dr.piercing}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Дробящий</label>
+                    <input type="text" name="system.dr.bludgeoning" value="{{system.dr.bludgeoning}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Огонь</label>
+                    <input type="text" name="system.dr.heat" value="{{system.dr.heat}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Холод</label>
+                    <input type="text" name="system.dr.cold" value="{{system.dr.cold}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Некротический</label>
+                    <input type="text" name="system.dr.necrotic" value="{{system.dr.necrotic}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Светлый</label>
+                    <input type="text" name="system.dr.radiant" value="{{system.dr.radiant}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Электрический</label>
+                    <input type="text" name="system.dr.electric" value="{{system.dr.electric}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Звуковой</label>
+                    <input type="text" name="system.dr.sonic" value="{{system.dr.sonic}}" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Модификаторы</h3>
+                </div>
+                <div class="form-group">
+                    <label>Уклонение</label>
+                    <input type="text" name="system.modifiers.dodge" value="{{system.modifiers.dodge}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Блок</label>
+                    <input type="text" name="system.modifiers.block" value="{{system.modifiers.block}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Скрытность</label>
+                    <input type="text" name="system.modifiers.stealth" value="{{system.modifiers.stealth}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Дальняя Атака</label>
+                    <input type="text" name="system.modifiers.ranged_attack" value="{{system.modifiers.ranged_attack}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Магическая Атака</label>
+                    <input type="text" name="system.modifiers.magic_attack" value="{{system.modifiers.magic_attack}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Штраф к скорости (Гексы)</label>
+                    <input type="text" name="system.modifiers.movement" value="{{system.modifiers.movement}}" data-dtype="Number"/>
+                </div>
+                
+                <div class="form-group stacked" style="grid-column: 1 / -1; margin-top: 10px;">
+                    <label>Свойства Брони</label>
+                    <div class="properties-grid">
+                        <label class="checkbox"><input type="checkbox" name="system.properties.exclusive_slot" {{checked system.properties.exclusive_slot}}/> Эксклюзивный слот</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.rigid" {{checked system.properties.rigid}}/> Жесткая</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.loud" {{checked system.properties.loud}}/> Шумная</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.encumbering" {{checked system.properties.encumbering}}/> Громоздкая</label>
+                        <label class="checkbox"><input type="checkbox" name="system.properties.weak_point_protection" {{checked system.properties.weak_point_protection}}/> Защита слабых мест</label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Использования и Эффекты</h3>
+                </div>
+                <div class="form-group">
+                    <label>Текущие использования</label>
+                    <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Максимум</label>
+                    <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Восстановление</label>
+                    <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Макрос при использовании</label>
+                    <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
             {{/if}}
 
@@ -337,6 +464,26 @@
                 <div class="form-group">
                     <label>Требования (навыки)</label>
                     <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2"/>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
+                    <h3 style="margin: 0; padding-bottom: 5px;">Использования и Эффекты</h3>
+                </div>
+                <div class="form-group">
+                    <label>Текущие использования</label>
+                    <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>Максимум</label>
+                    <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Восстановление</label>
+                    <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+                </div>
+                <div class="form-group">
+                    <label>Макрос при использовании</label>
+                    <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
             {{/if}}
 

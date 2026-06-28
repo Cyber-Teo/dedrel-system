@@ -111,6 +111,18 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         mdef: new fields.NumberField({ required: false, integer: true, initial: 0 }) // Derived
       }),
 
+      equipment_slots: new fields.SchemaField({
+        main_hand: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "weapon" }) }),
+        off_hand: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "shield" }) }),
+        tail: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "" }) }),
+        armor_upper: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
+        armor_middle: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
+        armor_lower: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
+        magic_item_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
+        magic_item_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
+        ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) })
+      }),
+
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
       movement: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
       
@@ -182,5 +194,53 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
     // Movement
     this.movement = Math.floor(2 + attrs.dex.rank);
+
+    // DR and Armor calculation
+    this.dr = { slashing: 0, piercing: 0, bludgeoning: 0, heat: 0, cold: 0, necrotic: 0, radiant: 0, electric: 0, sonic: 0 };
+    
+    if (this.parent && this.parent.items) {
+      const equippedArmors = [];
+      const slots = this.equipment_slots;
+      for (const slotKey of ['armor_upper', 'armor_middle', 'armor_lower']) {
+        if (slots[slotKey] && slots[slotKey].item_id) {
+          const item = this.parent.items.get(slots[slotKey].item_id);
+          if (item && item.type === "armor") equippedArmors.push(item);
+        }
+      }
+
+      let maxArmorWeight = 0; // 0 = light or none, 1 = medium, 2 = heavy
+
+      for (const armor of equippedArmors) {
+        for (const [key, value] of Object.entries(armor.system.dr || {})) {
+          if (this.dr[key] !== undefined) {
+            this.dr[key] += (value || 0);
+          }
+        }
+        if (armor.system.modifiers) {
+          def.dodge += (armor.system.modifiers.dodge || 0);
+          def.block += (armor.system.modifiers.block || 0);
+          this.movement += (armor.system.modifiers.movement || 0);
+        }
+        
+        const weightClass = armor.system.weight_class;
+        if (weightClass === "heavy") maxArmorWeight = Math.max(maxArmorWeight, 2);
+        else if (weightClass === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
+      }
+
+      // Штрафы от навыка ношения доспехов
+      const armorUseRank = this.skills?.combat?.armor_use?.rank || 0;
+      let hasArmorPenalty = false;
+      
+      // Тяжелая броня требует ранг 4+
+      if (maxArmorWeight === 2 && armorUseRank < 4) hasArmorPenalty = true;
+      // Средняя броня требует ранг 2+
+      if (maxArmorWeight === 1 && armorUseRank < 2) hasArmorPenalty = true;
+
+      this.armor_penalty = hasArmorPenalty;
+      if (hasArmorPenalty) {
+        this.initiative -= 2;
+        this.movement -= 2;
+      }
+    }
   }
 }

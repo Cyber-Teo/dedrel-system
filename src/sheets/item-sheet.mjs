@@ -96,6 +96,20 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
     }
     
+    if (itemData.type === "armor") {
+      context.armorSlots = {
+        "lower": "Нижний слой",
+        "middle": "Средний слой",
+        "upper": "Верхний слой",
+        "universal": "Универсальный"
+      };
+      context.weightClasses = {
+        "light": "Легкая",
+        "medium": "Средняя",
+        "heavy": "Тяжелая"
+      };
+    }
+    
     if (["talent", "mutation", "maneuver", "weapon"].includes(itemData.type)) {
       context.bloodlines = {
         "Human": "Human",

@@ -146,13 +146,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     const actor = ChatMessage.getSpeakerActor(message.speaker);
     if (!actor) return ui.notifications.warn("Персонаж не найден.");
     
-    const item = actor.items.get(itemId);
-    if (!item) return ui.notifications.warn("Предмет не найден.");
-    
+    const item = itemId ? actor.items.get(itemId) : null;
     const weapon = weaponId ? actor.items.get(weaponId) : null;
     
     // Бросок атаки
     if (action === "rollAttack") {
+      if (!item) return ui.notifications.warn("Предмет не найден.");
       let baseRank = 0;
       let title = `Атака: ${item.name}`;
       
@@ -175,6 +174,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     
     // Бросок урона
     if (action === "rollDamage") {
+      if (!item) return ui.notifications.warn("Предмет не найден.");
       let formula = item.system.formula_damage;
       let damageType = "";
       
@@ -202,6 +202,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let roll = new Roll(formula);
       await roll.evaluate();
       
+      const apLevel = weapon?.system?.properties?.armor_piercing_value || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
+      
       // Формируем HTML для отображения результатов броска кубиков в чате
       let chatContent = `
         <div class="dice-roll">
@@ -210,6 +212,9 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
             ${await roll.getTooltip()}
             <h4 class="dice-total">${roll.total}</h4>
           </div>
+        </div>
+        <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${damageType}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> Применить урон</button>
         </div>
       `;
       
@@ -220,6 +225,119 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         content: chatContent,
         rolls: [roll]
       });
+    }
+
+    // Применение эффектов предмета
+    if (action === "applyItemEffects") {
+      const speaker = message.speaker;
+      const actor = game.actors.get(speaker.actor);
+      if (!actor) return ui.notifications.warn("Не удалось найти персонажа, использовавшего предмет.");
+      
+      const item = actor.items.get(itemId);
+      if (!item) return ui.notifications.warn("Не удалось найти предмет.");
+
+      let targets = canvas.tokens.controlled;
+      if (targets.length === 0) targets = Array.from(game.user.targets);
+      
+      if (targets.length === 0) {
+        return ui.notifications.warn("Выберите токены для наложения эффекта (выделите себя или возьмите цель в таргет).");
+      }
+
+      const effectsToApply = item.effects.filter(e => !e.transfer).map(e => {
+        let effData = e.toObject();
+        effData.origin = item.uuid;
+        return effData;
+      });
+
+      if (effectsToApply.length === 0) return ui.notifications.info("На предмете нет временных эффектов для наложения.");
+
+      for (let token of targets) {
+        const targetActor = token.actor;
+        if (!targetActor) continue;
+        await targetActor.createEmbeddedDocuments("ActiveEffect", effectsToApply);
+      }
+      ui.notifications.info(`Эффекты применены к ${targets.length} токенам.`);
+    }
+
+    // Применение урона
+    if (action === "applyDamage") {
+      const damage = parseInt(button.dataset.damage) || 0;
+      const type = button.dataset.type || "";
+      const apLevel = parseInt(button.dataset.ap) || 0;
+
+      // Сначала берем выделенные токены (controlled), если их нет - берем таргеты (targets)
+      let targets = canvas.tokens.controlled;
+      if (targets.length === 0) targets = Array.from(game.user.targets);
+      
+      if (targets.length === 0) return ui.notifications.warn("Нет выделенных токенов для получения урона.");
+
+      for (let token of targets) {
+        const targetActor = token.actor;
+        if (!targetActor) continue;
+
+        let drKey = "";
+        if (type === "Колющий") drKey = "piercing";
+        else if (type === "Дробящий") drKey = "bludgeoning";
+        else if (type === "Режущий") drKey = "slashing";
+        else if (type === "Огонь" || type === "Огненный") drKey = "heat";
+        else if (type === "Холод") drKey = "cold";
+        else if (type === "Некротический") drKey = "necrotic";
+        else if (type === "Светлый") drKey = "radiant";
+        else if (type === "Электрический") drKey = "electric";
+        else if (type === "Звуковой") drKey = "sonic";
+        
+        let targetDr = 0;
+        if (drKey && targetActor.system.dr && targetActor.system.dr[drKey] !== undefined) {
+          targetDr = targetActor.system.dr[drKey];
+        }
+
+        // Применяем бронебойность
+        if (apLevel > 0 && targetDr > 0) {
+          const ignorePercent = apLevel * 10;
+          targetDr = targetDr - (targetDr * ignorePercent / 100);
+        }
+        
+        targetDr = Math.floor(targetDr);
+        if (targetDr < 0) targetDr = 0;
+
+        let finalDamage = damage - targetDr;
+        if (finalDamage < 0) finalDamage = 0;
+
+        const currentHp = targetActor.system.resources.hp.value;
+        let tempHp = targetActor.system.resources.hp.temp || 0;
+        let tempHpDamage = 0;
+        
+        if (tempHp > 0) {
+          tempHpDamage = Math.min(tempHp, finalDamage);
+          tempHp -= tempHpDamage;
+          finalDamage -= tempHpDamage;
+        }
+
+        const newHp = Math.max(0, currentHp - finalDamage);
+
+        const updates = { "system.resources.hp.value": newHp };
+        if (tempHpDamage > 0) {
+          updates["system.resources.hp.temp"] = tempHp;
+        }
+
+        await targetActor.update(updates);
+        
+        // totalAppliedDamage - это суммарный урон, который прошел после брони
+        let totalAppliedDamage = finalDamage + tempHpDamage; 
+        
+        let chatMsg = `<b>${targetActor.name}</b> получает ${totalAppliedDamage} ${type ? `[${type}] ` : ''}урона.`;
+        if (tempHpDamage > 0) {
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">(Из них по временным хитам: ${tempHpDamage})</span>`;
+        }
+        if (targetDr > 0) {
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">(Заблокировано броней: ${targetDr} DR)</span>`;
+        }
+        
+        ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: actor }),
+          content: `<div class="dedrel-item-chat"><p>${chatMsg}</p></div>`
+        });
+      }
     }
   });
 });

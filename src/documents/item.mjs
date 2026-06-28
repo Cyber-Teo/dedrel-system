@@ -84,7 +84,7 @@ export default class DedrelItem extends Item {
     const actor = this.actor;
     if (!actor) return ui.notifications.warn("Предмет не принадлежит персонажу.");
 
-    if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon"].includes(this.type)) {
+    if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good"].includes(this.type)) {
       return this.postToChat();
     }
 
@@ -245,6 +245,16 @@ export default class DedrelItem extends Item {
               selectedWeaponId = weaponSelect ? weaponSelect.value : null;
             }
             
+            // Вызов макроса если есть
+            if (this.system.on_use_macro) {
+              const macro = game.macros.find(m => m.name === this.system.on_use_macro);
+              if (macro) {
+                macro.execute({ actor: actor, item: this });
+              } else {
+                ui.notifications.warn(`Макрос с именем "${this.system.on_use_macro}" не найден.`);
+              }
+            }
+
             await this.postToChat(selectedWeaponId);
           }
         },
@@ -278,10 +288,19 @@ export default class DedrelItem extends Item {
 
     let buttons = "";
     if (showCombatButtons) {
-      buttons = `
+      buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
           <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> Атака</button>
           <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> Урон</button>
+        </div>
+      `;
+    }
+
+    const hasTransferableEffects = this.effects.some(e => !e.transfer);
+    if (hasTransferableEffects) {
+      buttons += `
+        <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
+          <button class="dedrel-chat-action" data-action="applyItemEffects" data-item-id="${this.id}"><i class="fa-solid fa-magic"></i> Применить Эффекты</button>
         </div>
       `;
     }

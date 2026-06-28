@@ -56,8 +56,10 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       formula_custom: new fields.StringField({ required: true, blank: true }),
       
       save_attribute: new fields.StringField({ required: true, blank: true }),
-      save_dc_formula: new fields.StringField({ required: true, blank: true }),
-      forbidden_defense: new fields.StringField({ required: true, blank: true })
+      save_dc_formula: new fields.StringField({ initial: "", label: "Save DC Formula" }),
+      forbidden_defense: new fields.StringField({ initial: "", label: "Forbidden Defense" }),
+      
+      on_use_macro: new fields.StringField({ initial: "", label: "On Use Macro" })
     };
   }
 }

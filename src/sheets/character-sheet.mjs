@@ -54,7 +54,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       editEffect: DedrelCharacterSheet.#onEditEffect,
       deleteEffect: DedrelCharacterSheet.#onDeleteEffect,
       spendLuck: DedrelCharacterSheet.#onSpendLuck,
-      resetLuck: DedrelCharacterSheet.#onResetLuck
+      resetLuck: DedrelCharacterSheet.#onResetLuck,
+      equipArmor: DedrelCharacterSheet.#onEquipArmor,
+      unequipArmor: DedrelCharacterSheet.#onUnequipArmor
     }
   };
 
@@ -144,6 +146,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         if (isFav) quickSlots.push(i);
       }
     }
+
+    const equipment_slots = {
+      armor_upper: actorData.system.equipment_slots?.armor_upper?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_upper.item_id) : null,
+      armor_middle: actorData.system.equipment_slots?.armor_middle?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_middle.item_id) : null,
+      armor_lower: actorData.system.equipment_slots?.armor_lower?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_lower.item_id) : null,
+    };
 
     // Enrich HTML for biography using namespaced TextEditor
     const enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(actorData.system.details?.biography || "", {
@@ -344,6 +352,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       xpData,
       skillGroups,
       favoriteSkillsData,
+      equipment_slots,
       tabs: this._prepareTabs("primary"),
       editable: this.isEditable
     });
@@ -432,12 +441,76 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const itemId = target.closest(".item-row").dataset.itemId;
     const item = this.document.items.get(itemId);
     if (item) {
-      if (item.type === "weapon" || item.type === "armor") {
+      if (item.type === "weapon") {
         await item.update({"system.equipped": !item.system.equipped});
+      } else if (item.type === "armor") {
+        // Старая логика экипировки заменена на слоты (убрана отсюда)
+        ui.notifications.warn("Для брони используйте кнопки 'Надеть' (слоты).");
       } else {
         const isFav = item.getFlag("dedrel", "isFavorite");
         await item.setFlag("dedrel", "isFavorite", !isFav);
       }
+    }
+  }
+
+  static async #onEquipArmor(event, target) {
+    const itemId = target.closest(".item-row").dataset.itemId;
+    const item = this.document.items.get(itemId);
+    if (!item || item.type !== "armor") return;
+
+    const slotOptions = {
+      "lower": ["armor_lower"],
+      "middle": ["armor_middle"],
+      "upper": ["armor_upper"],
+      "universal": ["armor_lower", "armor_middle"]
+    };
+
+    const allowedSlots = slotOptions[item.system.slot];
+    if (!allowedSlots) return ui.notifications.warn("Неизвестный слот брони.");
+
+    const equipment_slots = this.document.system.equipment_slots;
+    
+    // Если это эксклюзивная броня, нужно снять всё остальное
+    const isExclusive = item.system.properties?.exclusive_slot;
+    const updates = {};
+    
+    // Пытаемся найти первый свободный слот
+    let targetSlot = allowedSlots.find(s => !equipment_slots[s]?.item_id);
+    if (!targetSlot) targetSlot = allowedSlots[0]; // Если всё занято, заменяем первый доступный
+
+    if (isExclusive) {
+      updates["system.equipment_slots.armor_upper.item_id"] = "";
+      updates["system.equipment_slots.armor_middle.item_id"] = "";
+      updates["system.equipment_slots.armor_lower.item_id"] = "";
+      updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
+      ui.notifications.info(`Надета эксклюзивная броня: ${item.name}. Остальные слоты очищены.`);
+    } else {
+      // Проверяем, нет ли уже надетой эксклюзивной брони
+      let hasExclusive = false;
+      for (const s of ['armor_upper', 'armor_middle', 'armor_lower']) {
+        const currentId = equipment_slots[s]?.item_id;
+        if (currentId) {
+           const currentArmor = this.document.items.get(currentId);
+           if (currentArmor && currentArmor.system.properties?.exclusive_slot) {
+             hasExclusive = true;
+           }
+        }
+      }
+      
+      if (hasExclusive) {
+        return ui.notifications.warn("Нельзя надеть эту броню: уже надета броня с эксклюзивным слотом.");
+      }
+      
+      updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
+    }
+
+    await this.document.update(updates);
+  }
+
+  static async #onUnequipArmor(event, target) {
+    const slot = target.dataset.slot; // e.g. "armor_upper"
+    if (slot) {
+      await this.document.update({ [`system.equipment_slots.${slot}.item_id`]: "" });
     }
   }
 

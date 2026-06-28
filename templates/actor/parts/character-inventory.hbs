@@ -21,7 +21,43 @@
         {{/each}}
     </div>
 
-    <h2 class="tab-title">Броня</h2>
+    <h2 class="tab-title">Слоты Брони</h2>
+    {{#if system.armor_penalty}}
+    <div class="armor-penalty-warning" style="background: rgba(255, 0, 0, 0.1); border: 1px solid var(--color-text-dark-primary); color: #b72a2a; padding: 5px; margin-bottom: 10px; border-radius: 4px; text-align: center;">
+        <i class="fas fa-exclamation-triangle"></i> Недостаточный ранг навыка 'Ношение доспехов'! Штраф: -2 к Инициативе, -2 к Скорости.
+    </div>
+    {{/if}}
+    <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Верхний слой</h4>
+            {{#if equipment_slots.armor_upper}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_upper.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_upper" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            {{/if}}
+        </div>
+        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Средний слой</h4>
+            {{#if equipment_slots.armor_middle}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_middle.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_middle" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            {{/if}}
+        </div>
+        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Нижний слой</h4>
+            {{#if equipment_slots.armor_lower}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_lower.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_lower" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            {{/if}}
+        </div>
+    </div>
+
+    <h2 class="tab-title">Броня (Инвентарь)</h2>
     <div class="item-list">
         {{#each armors as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -34,8 +70,7 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="toggle-favorite" title="Экипировать"><i
-                        class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-star"></i></a>
+                <a class="item-control" data-action="equipArmor" title="Надеть"><i class="fas fa-tshirt"></i></a>
                 <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
                 {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
