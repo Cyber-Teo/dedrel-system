@@ -276,8 +276,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Манёвры</label>
-                    <input type="text" name="system.adds_maneuvers" value="{{joinedAddsManeuvers}}" placeholder="maneuver1; maneuver2"/>
+                    <label>Добавляет предметы (через ;)</label>
+                    <input type="text" name="system.adds_items" value="{{joinedAddsItems}}" placeholder="maneuver1; talent1"/>
                 </div>
                 <div class="form-group">
                     <label>Макрос при добавлении</label>
@@ -369,6 +369,28 @@
         <div class="tab description {{tabs.description.cssClass}}" data-group="primary" data-tab="description">
             <div class="editor-container">
                 {{editor enrichedDescription target="system.description" button=true editable=editable}}
+            </div>
+        </div>
+
+        {{!-- Effects Tab --}}
+        <div class="tab effects {{tabs.effects.cssClass}}" data-group="primary" data-tab="effects">
+            <div class="effects-header flexrow">
+                <h3 style="flex: 1;">Активные Эффекты</h3>
+                <a class="effect-control" data-action="addEffect" title="Добавить Эффект" style="flex: 0 0 auto; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 4px;"><i class="fas fa-plus"></i> Добавить</a>
+            </div>
+            <div class="effects-list">
+                {{#each item.effects as |effect|}}
+                <div class="effect-item flexrow" data-effect-id="{{effect.id}}" style="padding: 5px; border-bottom: 1px solid var(--color-border-dark); align-items: center;">
+                    <img src="{{effect.img}}" width="24" height="24" style="margin-right: 10px; border: none;"/>
+                    <h4 style="flex: 1; margin: 0;">{{effect.name}}</h4>
+                    <div class="effect-controls">
+                        <a class="effect-control" data-action="editEffect" title="Редактировать"><i class="fas fa-edit"></i></a>
+                        <a class="effect-control" data-action="deleteEffect" title="Удалить"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+                {{else}}
+                <p class="hint">У этого предмета нет встроенных эффектов.</p>
+                {{/each}}
             </div>
         </div>
 

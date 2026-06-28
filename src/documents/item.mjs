@@ -7,165 +7,278 @@ const { DialogV2 } = foundry.applications.api;
  */
 export default class DedrelItem extends Item {
   
+  async _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    
+    if (userId !== game.user.id) return;
+    if (!this.isEmbedded || !(this.parent instanceof Actor)) return;
+
+    const addsItems = this.system.adds_items;
+    if (!addsItems || !addsItems.length) return;
+
+    const itemsToAdd = [];
+    let itemNamesToFind = [];
+    for (const item of addsItems) {
+      if (item.includes(";")) {
+        itemNamesToFind.push(...item.split(";").map(s => s.trim()).filter(s => s.length > 0));
+      } else {
+        if (item.trim().length > 0) itemNamesToFind.push(item.trim());
+      }
+    }
+    
+    if (itemNamesToFind.length === 0) return;
+    
+    for (const pack of game.packs) {
+      if (pack.documentName !== "Item") continue;
+      
+      const index = await pack.getIndex();
+      for (let i = itemNamesToFind.length - 1; i >= 0; i--) {
+        const itemName = itemNamesToFind[i];
+        const entry = index.find(idx => idx.name === itemName);
+        if (entry) {
+          const itemDoc = await pack.getDocument(entry._id);
+          const itemData = itemDoc.toObject();
+          foundry.utils.setProperty(itemData, "flags.dedrel.parentItemId", this.id);
+          itemsToAdd.push(itemData);
+          itemNamesToFind.splice(i, 1);
+        }
+      }
+      if (itemNamesToFind.length === 0) break;
+    }
+    
+    if (itemNamesToFind.length > 0) {
+      ui.notifications.warn(`Не удалось найти следующие предметы для добавления: ${itemNamesToFind.join(", ")}`);
+    }
+    
+    if (itemsToAdd.length > 0) {
+      await this.parent.createEmbeddedDocuments("Item", itemsToAdd);
+      ui.notifications.info(`Добавлены связанные предметы: ${itemsToAdd.map(i => i.name).join(", ")}`);
+    }
+  }
+
+  async _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    
+    if (userId !== game.user.id) return;
+    if (!this.isEmbedded || !(this.parent instanceof Actor)) return;
+    
+    const childItems = this.parent.items.filter(i => i.getFlag("dedrel", "parentItemId") === this.id);
+    if (childItems.length > 0) {
+      await this.parent.deleteEmbeddedDocuments("Item", childItems.map(i => i.id));
+      ui.notifications.info(`Удалены зависимые предметы: ${childItems.map(i => i.name).join(", ")}`);
+    }
+  }
+
   /**
    * Метод активации/использования предмета (вызывается при клике по предмету или броске).
    * Проверяет необходимые ресурсы (Очки Действия), выбирает подходящее оружие и отправляет результат в чат.
    */
   async use() {
-    // Если предмет не является активной способностью, просто выводим его описание в чат
-    if (!["maneuver", "talent", "mutation"].includes(this.type)) {
+    const actor = this.actor;
+    if (!actor) return ui.notifications.warn("Предмет не принадлежит персонажу.");
+
+    if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon"].includes(this.type)) {
       return this.postToChat();
     }
 
     const apCost = this.system.ap_cost || 0;
-    const actor = this.actor;
-    if (!actor) return ui.notifications.warn("Предмет не принадлежит персонажу.");
+    
+    // Проверка зарядов
+    const usesMaxStr = this.system.uses_max || "0";
+    const usesMax = parseInt(usesMaxStr, 10) || 0;
+    const usesValue = this.system.uses_value || 0;
+    const hasCharges = usesMax > 0;
 
-    // Ищем подходящее оружие, которое можно использовать вместе с этим предметом
+    // Проверка на потребность в оружии
+    let requiresWeapon = false;
     let validWeapons = [];
-    if (this.type === "maneuver") {
-      validWeapons = actor.items.filter(i => {
-        if (i.type !== "weapon" || !i.system.equipped) return false;
-        
-        // Проверка по типу оружия (Melee, Ranged, Shield)
-        const reqType = this.system.req_weapon_type;
-        if (reqType) {
-          const wType = i.system.weapon_type; // "melee", "ranged", "shield"
+    
+    if (this.type === "maneuver" || this.type === "spell") {
+      const wType = this.system.req_weapon_type || {};
+      const wDmg = this.system.req_weapon_damage_type || {};
+      if (wType.melee || wType.ranged || wType.shield || wType.magic ||
+          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing) {
+        requiresWeapon = true;
+      }
+      
+      const wProp = this.system.req_weapon_property || {};
+      if (wProp.is_auxiliary || wProp.is_fast || wProp.is_slow || 
+          wProp.is_twohanded || wProp.is_thrown || wProp.is_enchanted || wProp.is_reloading) {
+        requiresWeapon = true;
+      }
+      
+      if (requiresWeapon) {
+        validWeapons = actor.items.filter(i => {
+          if (i.type !== "weapon" || !i.system.equipped) return false;
           
-          let match = false;
-          if (wType.melee && reqType.melee) match = true;
-          if (wType.ranged && reqType.ranged) match = true;
-          if (wType.shield && reqType.shield) match = true;
+          const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
+          if (hasReqType) {
+            const wt = i.system.weapon_type || {};
+            let matchType = (wt.melee && wType.melee) || (wt.ranged && wType.ranged) || 
+                            (wt.shield && wType.shield) || (wt.magic && wType.magic);
+            if (!matchType) return false;
+          }
           
-          const hasReq = reqType.melee || reqType.ranged || reqType.shield;
-          if (hasReq && !match) return false;
-        }
-
-        // Проверка по типу наносимого урона (Piercing, Bludgeoning, Slashing)
-        const reqDmg = this.system.req_weapon_damage_type;
-        if (reqDmg) {
-          const wDmg = i.system.damage_type;
-          let match = true;
-          if (reqDmg.piercing && !wDmg.piercing) match = false;
-          if (reqDmg.bludgeoning && !wDmg.bludgeoning) match = false;
-          if (reqDmg.slashing && !wDmg.slashing) match = false;
-          
-          const hasReq = reqDmg.piercing || reqDmg.bludgeoning || reqDmg.slashing;
-          if (hasReq && !match) return false;
-        }
-
-        return true;
-      });
-    } else {
-      // Для талантов и мутаций просто берём любое экипированное оружие, на случай если оно усиливает атаку
-      validWeapons = actor.items.filter(i => i.type === "weapon" && i.system.equipped);
+          const hasReqDmg = wDmg.piercing || wDmg.bludgeoning || wDmg.slashing;
+          if (hasReqDmg) {
+            const wd = i.system.damage_type || {};
+            let matchDmg = (wd.piercing && wDmg.piercing) || (wd.bludgeoning && wDmg.bludgeoning) || 
+                           (wd.slashing && wDmg.slashing);
+            if (!matchDmg) return false;
+          }
+          return true;
+        });
+      }
     }
 
-    // Расчет доступных Очков Действия (ОД)
-    let apUniversal = actor.system.resources?.ap_universal?.value || 0;
+    // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
+    const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
+    if (apCost === 0 && !hasCharges && !requiresWeapon && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good")) {
+      return this.sheet.render(true);
+    }
+    
+    if (apCost === 0 && !hasCharges && !requiresWeapon) {
+      return this.sheet.render(true);
+    }
+
+    // Подготовка диалогового окна
+    let content = `<div style="margin-bottom: 15px;">`;
+    
+    let currentAp = 0;
     let apSpecific = 0;
     let specificApKey = "";
-
-    // В зависимости от типа действия определяем, какие специфичные ОД можно использовать
-    if (this.type === "maneuver") {
-      apSpecific = actor.system.resources?.ap_maneuver?.value || 0;
-      specificApKey = "system.resources.ap_maneuver.value";
-    } else if (this.type === "spell" || this.type === "magic_item") {
-      apSpecific = actor.system.resources?.ap_magic?.value || 0;
-      specificApKey = "system.resources.ap_magic.value";
-    }
-
-    let currentAp = apUniversal + apSpecific;
-    let warningHtml = apCost > currentAp ? `<p style="color: red; font-weight: bold;">Недостаточно ОД! У вас ${currentAp}, требуется ${apCost}.</p>` : "";
-    let weaponSelectHtml = "";
     
-    // Формируем HTML для выбора оружия, если есть подходящие варианты
-    if (validWeapons.length > 0) {
-      weaponSelectHtml = `
-        <div class="form-group" style="margin-top: 10px;">
-          <label style="font-weight: bold;">Оружие: </label>
-          <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
-            ${validWeapons.map(w => `<option value="${w.id}">${w.name}</option>`).join("")}
-          </select>
-        </div>
-      `;
-    } else if (this.type === "maneuver") {
-      weaponSelectHtml = `<p style="color: orange; font-style: italic;">Нет подходящего экипированного оружия.</p>`;
+    if (apCost > 0) {
+      let apUniversal = actor.system.resources?.ap_universal?.value || 0;
+      if (this.type === "maneuver") {
+        apSpecific = actor.system.resources?.ap_maneuver?.value || 0;
+        specificApKey = "system.resources.ap_maneuver.value";
+      } else if (this.type === "spell" || this.type === "magic_item") {
+        apSpecific = actor.system.resources?.ap_magic?.value || 0;
+        specificApKey = "system.resources.ap_magic.value";
+      }
+      currentAp = apUniversal + apSpecific;
+      
+      content += `<p>Использовать <b>${this.name}</b> за <strong>${apCost} ОД</strong>?</p>`;
+      if (apCost > currentAp) {
+        content += `<p style="color: red; font-weight: bold;">Недостаточно ОД! У вас ${currentAp}, требуется ${apCost}.</p>`;
+      }
     }
 
-    let content = `
-      <div style="margin-bottom: 15px;">
-        <p>Использовать <b>${this.name}</b> за <strong>${apCost} ОД</strong>?</p>
-        ${warningHtml}
-        ${weaponSelectHtml}
-      </div>
-    `;
+    if (hasCharges) {
+      content += `<p>Потратить 1 заряд? (Осталось: <b>${usesValue}/${usesMax}</b>)</p>`;
+      if (usesValue <= 0) {
+        content += `<p style="color: red; font-weight: bold;">Заряды исчерпаны!</p>`;
+      }
+    }
 
-    // Показываем диалог подтверждения, если есть стоимость в ОД или нужно выбрать оружие
-    if (apCost > 0 || validWeapons.length > 0) {
-      await DialogV2.wait({
-        window: { title: `Использование: ${this.name}` },
-        content: content,
-        buttons: [
-          {
-            action: "confirm",
-            icon: "fa-solid fa-check",
-            label: "Подтвердить",
-            callback: async (event, button, dialog) => {
-              const weaponSelect = dialog.element.querySelector("#use-weapon-select");
-              const selectedWeaponId = weaponSelect ? weaponSelect.value : null;
+    if (requiresWeapon) {
+      if (validWeapons.length > 0) {
+        content += `
+          <div class="form-group" style="margin-top: 10px;">
+            <label style="font-weight: bold;">Оружие: </label>
+            <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
+              ${validWeapons.map(w => `<option value="${w.id}">${w.name}</option>`).join("")}
+            </select>
+          </div>
+        `;
+      } else {
+        content += `<p style="color: orange; font-style: italic;">Нет подходящего экипированного оружия.</p>`;
+      }
+    }
+
+    content += `</div>`;
+
+    await DialogV2.wait({
+      window: { title: `Использование: ${this.name}` },
+      content: content,
+      buttons: [
+        {
+          action: "confirm",
+          icon: "fa-solid fa-check",
+          label: "Подтвердить",
+          callback: async (event, button, dialog) => {
+            if (apCost > 0 && apCost > currentAp) {
+              ui.notifications.warn("Недостаточно Очков Действия!");
+              return;
+            }
+            if (hasCharges && usesValue <= 0) {
+              ui.notifications.warn("Недостаточно зарядов!");
+              return;
+            }
+
+            // Списание ОД
+            if (apCost > 0) {
+              let apUniversal = actor.system.resources?.ap_universal?.value || 0;
+              let costLeft = apCost;
+              let updates = {};
               
-              // Логика списания ОД (сначала тратятся специфичные, затем универсальные)
-              if (apCost > 0) {
-                let costLeft = apCost;
-                let updates = {};
-                
-                if (specificApKey) {
-                  let specificSpend = Math.min(apSpecific, costLeft);
-                  updates[specificApKey] = apSpecific - specificSpend;
-                  costLeft -= specificSpend;
-                }
-                
-                if (costLeft > 0) {
-                  let uniSpend = Math.min(apUniversal, costLeft);
-                  updates["system.resources.ap_universal.value"] = apUniversal - uniSpend;
-                }
-                
-                await actor.update(updates);
+              if (specificApKey) {
+                let specificSpend = Math.min(apSpecific, costLeft);
+                updates[specificApKey] = apSpecific - specificSpend;
+                costLeft -= specificSpend;
               }
               
-              await this.postToChat(selectedWeaponId);
+              if (costLeft > 0) {
+                let uniSpend = Math.min(apUniversal, costLeft);
+                updates["system.resources.ap_universal.value"] = apUniversal - uniSpend;
+              }
+              
+              await actor.update(updates);
             }
-          },
-          {
-            action: "cancel",
-            icon: "fa-solid fa-times",
-            label: "Отмена"
+            
+            // Списание Зарядов
+            if (hasCharges) {
+              await this.update({ "system.uses_value": usesValue - 1 });
+            }
+
+            let selectedWeaponId = null;
+            if (requiresWeapon) {
+              const weaponSelect = dialog.element.querySelector("#use-weapon-select");
+              selectedWeaponId = weaponSelect ? weaponSelect.value : null;
+            }
+            
+            await this.postToChat(selectedWeaponId);
           }
-        ]
-      });
-    } else {
-      // Если предмет бесплатный и не требует оружия, просто выводим в чат
-      await this.postToChat(null);
-    }
+        },
+        {
+          action: "cancel",
+          icon: "fa-solid fa-times",
+          label: "Отмена"
+        }
+      ]
+    });
   }
 
   /**
-   * Отправляет карточку предмета в чат с прикрепленными кнопками бросков (Атака/Урон).
+   * Отправляет карточку предмета в чат. Боевые кнопки (Атака/Урон) добавляются только боевым предметам.
    * @param {string|null} weaponId - ID выбранного оружия (если есть)
    */
   async postToChat(weaponId = null) {
     let weaponAttr = weaponId ? `data-weapon-id="${weaponId}"` : "";
     
-    // Формируем кнопки взаимодействия для чата
-    let buttons = `
-      <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
-        <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> Атака</button>
-        <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> Урон</button>
-      </div>
-    `;
+    let showCombatButtons = false;
+    if (this.type === "maneuver" || this.type === "spell") {
+       const wType = this.system.req_weapon_type || {};
+       const wDmg = this.system.req_weapon_damage_type || {};
+       const reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
+                          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing);
+       
+       if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute) {
+         showCombatButtons = true;
+       }
+    }
 
-    // Формируем контент карточки
+    let buttons = "";
+    if (showCombatButtons) {
+      buttons = `
+        <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
+          <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> Атака</button>
+          <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> Урон</button>
+        </div>
+      `;
+    }
+
     let content = `
       <div class="dedrel-item-chat">
         <h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;">${this.name}</h3>
@@ -174,7 +287,6 @@ export default class DedrelItem extends Item {
       </div>
     `;
 
-    // Создаем сообщение в чате от имени текущего игрока/токена
     await ChatMessage.create({
       user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),

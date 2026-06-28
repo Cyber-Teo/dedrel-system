@@ -31,6 +31,12 @@
                 <input type="text" name="system.resources.hp.temp" value="{{system.resources.hp.temp}}"
                     data-dtype="Number" />
             </div>
+
+            <!-- Rest Buttons -->
+            <div class="rest-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                <button type="button" class="rest-btn" data-action="shortRest" title="Короткий отдых (1 час)" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-campground"></i> Короткий отдых</button>
+                <button type="button" class="rest-btn" data-action="longRest" title="Длинный отдых (8 часов)" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-bed"></i> Длинный отдых</button>
+            </div>
         </div>
         
         <div class="header-right">
@@ -72,7 +78,7 @@
                 </div>
             </div>
 
-            <!-- Row 3: Блок атрибутов -->
+            <!-- Row 4: Блок атрибутов -->
             <div class="attributes-grid">
                 <div class="attributes-header">
                     <span>ATTR</span>

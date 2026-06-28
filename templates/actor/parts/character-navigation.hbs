@@ -1,5 +1,11 @@
-<nav class="sheet-tabs tabs" data-group="primary">
+<nav class="sheet-tabs tabs" data-group="primary" style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center;">
     {{#each tabs as |tab|}}
     <a class="{{tab.cssClass}}" data-action="changeTab" data-group="primary" data-tab="{{tab.id}}">{{tab.label}}</a>
     {{/each}}
+    
+    <div class="items-lock-btn" style="margin-left: auto; padding-right: 15px;">
+        <a data-action="toggleItemsLock" style="cursor: pointer;" title="{{#if itemsLocked}}Разблокировать удаление предметов{{else}}Заблокировать удаление предметов{{/if}}">
+            <i class="fas {{#if itemsLocked}}fa-lock{{else}}fa-lock-open{{/if}}" style="color: {{#if itemsLocked}}var(--color-text-light-highlight){{else}}var(--color-text-dark-primary){{/if}}"></i>
+        </a>
+    </div>
 </nav>

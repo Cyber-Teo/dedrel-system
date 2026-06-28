@@ -20,6 +20,16 @@
 
         <div class="experience-section">
             <h3>Улучшение Атрибутов</h3>
+            {{#if xpData.activeDiscounts.length}}
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">
+                <strong>Активные скидки Линий Крови:</strong> 
+                {{#each xpData.activeDiscounts}}
+                {{localize (concat "DEDREL.Attributes." this.attrKey)}} (-{{this.discount}} XP){{#unless @last}}, {{/unless}}
+                {{/each}}
+            </p>
+            {{else}}
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">У вас пока нет Линий крови 3+ ранга для получения скидок.</p>
+            {{/if}}
             <div class="attributes-grid grid-3col">
                 {{#each system.attributes as |attr key|}}
                 {{#with (lookup ../xpData.attributes key) as |xpInfo|}}
@@ -41,6 +51,7 @@
 
         <div class="experience-section">
             <h3>Улучшение Навыков</h3>
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;"><strong>Стоимость:</strong> Новый ранг * 2 XP</p>
             <div class="skills-grid grid-3col">
                 {{#each system.skills as |skill key|}}
                 {{#with (lookup ../xpData.skills key) as |xpInfo|}}

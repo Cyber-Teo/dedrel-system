@@ -39,7 +39,7 @@
                         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
                         <div class="item-name"><h4>{{item.name}} ({{item.system.xp_cost}} Очков)</h4></div>
                         <div class="item-controls">
-                            <a class="item-control item-delete" data-action="delete"><i class="fas fa-trash"></i></a>
+                            {{#unless @root.itemsLocked}}<a class="item-control item-delete" data-action="delete"><i class="fas fa-trash"></i></a>{{/unless}}
                         </div>
                     </div>
                     {{/each}}
@@ -55,7 +55,7 @@
                         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
                         <div class="item-name"><h4>{{item.name}}</h4></div>
                         <div class="item-controls">
-                            <a class="item-control item-delete" data-action="delete"><i class="fas fa-trash"></i></a>
+                            {{#unless @root.itemsLocked}}<a class="item-control item-delete" data-action="delete"><i class="fas fa-trash"></i></a>{{/unless}}
                         </div>
                     </div>
                     {{/each}}
@@ -66,13 +66,18 @@
         <div class="creation-section">
             <h3>Атрибуты (Распределено: {{creationData.attributesUsed}} / 10)</h3>
             <p class="hint">Максимальное стартовое значение: 4</p>
+            {{#if creationData.hasOverCapAttributes}}
+            <p class="warning" style="color: red; font-weight: bold; margin-top: 0; margin-bottom: 10px;">
+                <i class="fas fa-exclamation-triangle"></i> Ошибка: Значение атрибута не может превышать 4 при создании персонажа (даже с учетом мутаций). Пожалуйста, снизьте базовое значение.
+            </p>
+            {{/if}}
             <div class="attributes-grid grid-3col">
                 {{#each system.attributes as |attr key|}}
                 <div class="attribute-item">
                     <span class="attribute-name">{{localize (concat "DEDREL.Attributes." key)}}</span>
                     <div class="attribute-controls">
                         <a class="control-btn" data-action="decreaseAttribute" data-key="{{key}}"><i class="fas fa-minus"></i></a>
-                        <span class="attribute-value">{{attr.rank}}</span>
+                        <span class="attribute-value {{#if attr.isOverCap}}over-cap{{/if}}" {{#if attr.isOverCap}}style="color: red; font-weight: bold;"{{/if}}>{{attr.rank}}</span>
                         <a class="control-btn" data-action="increaseAttribute" data-key="{{key}}"><i class="fas fa-plus"></i></a>
                     </div>
                 </div>

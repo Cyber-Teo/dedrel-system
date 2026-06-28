@@ -21,7 +21,7 @@
                 <a class="item-control" data-action="toggle-favorite" title="В избранное"><i
                         class="{{#if item.flags.dedrel.isFavorite}}fas{{else}}far{{/if}} fa-star"></i></a>
                 <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                <a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}

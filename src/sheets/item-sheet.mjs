@@ -24,7 +24,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     },
     actions: {
       changeTab: DedrelItemSheet.#onChangeTab,
-      editImage: DedrelItemSheet.#onEditImage
+      editImage: DedrelItemSheet.#onEditImage,
+      addEffect: DedrelItemSheet.#onAddEffect,
+      editEffect: DedrelItemSheet.#onEditEffect,
+      deleteEffect: DedrelItemSheet.#onDeleteEffect
     }
   };
 
@@ -42,7 +45,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     primary: {
       tabs: [
         { id: "details", label: "Детали" },
-        { id: "description", label: "Описание" }
+        { id: "description", label: "Описание" },
+        { id: "effects", label: "Эффекты" }
       ],
       initial: "description",
       navSelector: ".tabs[data-group='primary']",
@@ -106,7 +110,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.joinedPrereqTalents = (itemData.system.prerequisites_talents || []).join("; ");
       context.joinedPrereqMutations = (itemData.system.prerequisites_mutations || []).join("; ");
       context.joinedPrereqBloodlines = (itemData.system.prerequisites_bloodlines || []).join("; ");
-      context.joinedAddsManeuvers = (itemData.system.adds_maneuvers || []).join("; ");
+      context.joinedAddsItems = (itemData.system.adds_items || []).join("; ");
     }
     
     if (itemData.type === "talent" || itemData.type === "mutation") {
@@ -188,13 +192,17 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "system.prerequisites_talents",
         "system.prerequisites_mutations",
         "system.prerequisites_bloodlines",
-        "system.adds_maneuvers",
+        "system.adds_items",
         "system.action_type",
         "system.chain_trigger_maneuvers"
       ];
       for (const field of arrayFields) {
-        if (typeof data[field] === "string") {
-          data[field] = data[field].split(";").map(s => s.trim()).filter(s => s.length > 0);
+        let val = data[field];
+        if (Array.isArray(val) && val.length === 1 && typeof val[0] === "string") {
+          val = val[0];
+        }
+        if (typeof val === "string") {
+          data[field] = val.split(";").map(s => s.trim()).filter(s => s.length > 0);
         }
       }
     }
@@ -222,5 +230,25 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       left: this.position.left + 10
     });
     return fp.browse();
+  }
+
+  static async #onAddEffect(event, target) {
+    return ActiveEffect.implementation.create({
+      name: "Новый Эффект",
+      icon: "icons/svg/aura.svg",
+      origin: this.document.uuid
+    }, { parent: this.document });
+  }
+
+  static async #onEditEffect(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (effect) return effect.sheet.render(true);
+  }
+
+  static async #onDeleteEffect(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (effect) return effect.delete();
   }
 }

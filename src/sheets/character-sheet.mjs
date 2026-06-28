@@ -36,6 +36,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       rollCheck: DedrelCharacterSheet.#onRollCheck,
       useItem: DedrelCharacterSheet.#onUseItem,
       editImage: DedrelCharacterSheet.#onEditImage,
+      shortRest: DedrelCharacterSheet.#onShortRest,
+      longRest: DedrelCharacterSheet.#onLongRest,
+      toggleItemsLock: DedrelCharacterSheet.#onToggleItemsLock,
       toggleCreationLock: DedrelCharacterSheet.#onToggleCreationLock,
       toggleCreationView: DedrelCharacterSheet.#onToggleCreationView,
       increaseBloodline: DedrelCharacterSheet.#onIncreaseBloodline,
@@ -45,7 +48,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       increaseSkill: DedrelCharacterSheet.#onIncreaseSkill,
       decreaseSkill: DedrelCharacterSheet.#onDecreaseSkill,
       upgradeAttribute: DedrelCharacterSheet.#onUpgradeAttribute,
-      upgradeSkill: DedrelCharacterSheet.#onUpgradeSkill
+      upgradeSkill: DedrelCharacterSheet.#onUpgradeSkill,
+      toggleEffect: DedrelCharacterSheet.#onToggleEffect,
+      editEffect: DedrelCharacterSheet.#onEditEffect,
+      deleteEffect: DedrelCharacterSheet.#onDeleteEffect
     }
   };
 
@@ -85,6 +91,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const actorData = this.document;
+    
+    // Блокировка удаления предметов
+    context.itemsLocked = this.document.getFlag("dedrel", "itemsLocked") ?? true;
     
     // Categorize Items
     const maneuvers = [];
@@ -185,12 +194,23 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     // Calculate Upgrade Costs
     const xpData = {
       attributes: {},
-      skills: {}
+      skills: {},
+      activeDiscounts: []
     };
     const xpCostsList = [2, 4, 8, 16, 32];
     const bloodlineAttrMap = {
       human: "will", demon: "rea", dragon: "log", fay: "luck", elf: "dex"
     };
+
+    if (actorData.system.bloodlines) {
+      for (const [blKey, attrKey] of Object.entries(bloodlineAttrMap)) {
+        const rank = actorData.system.bloodlines[blKey]?.rank || 1;
+        if (rank >= 3) {
+          const discount = rank >= 5 ? 4 : 2;
+          xpData.activeDiscounts.push({ attrKey, discount });
+        }
+      }
+    }
 
     const getDiscount = (attrKey) => {
       let discount = 0;
@@ -234,6 +254,43 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    // Check for attributes over cap during creation
+    let hasOverCapAttributes = false;
+    if (actorData.flags?.dedrel?.showCreation) {
+      for (const [key, attr] of Object.entries(actorData.system.attributes)) {
+        if (attr.rank > 4) {
+          attr.isOverCap = true;
+          hasOverCapAttributes = true;
+        } else {
+          attr.isOverCap = false;
+        }
+      }
+    }
+    creationData.hasOverCapAttributes = hasOverCapAttributes;
+
+    const permanentEffects = [];
+    const temporaryEffects = [];
+    
+    for (const e of actorData.effects) {
+      const effect = e.toObject(false);
+      effect.id = e.id;
+      effect.parent = e.parent;
+      effect.displayIcon = (effect.img && effect.img !== "icons/svg/aura.svg") ? effect.img : (effect.parent?.img || "icons/svg/aura.svg");
+      temporaryEffects.push(effect);
+    }
+    
+    for (const item of actorData.items) {
+      if (item.effects && item.effects.size > 0) {
+        for (const e of item.effects) {
+          const effect = e.toObject(false);
+          effect.id = e.id;
+          effect.parent = e.parent;
+          effect.displayIcon = (effect.img && effect.img !== "icons/svg/aura.svg") ? effect.img : (effect.parent?.img || "icons/svg/aura.svg");
+          permanentEffects.push(effect);
+        }
+      }
+    }
+
     Object.assign(context, {
       actor: actorData,
       system: actorData.system,
@@ -249,7 +306,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       favoriteManeuversSpells,
       quickSlots,
       equippedWeapons,
-      activeEffects: Array.from(actorData.effects),
+      permanentEffects,
+      temporaryEffects,
       enrichedBiography,
       creationData,
       xpData,
@@ -375,10 +433,85 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return fp.browse();
   }
 
+  static async #onShortRest(event, target) {
+    const confirm = await Dialog.confirm({
+      title: "Короткий Отдых",
+      content: "<p>Вы уверены, что хотите совершить короткий отдых (1 час)? Это восстановит ОД и способности на короткий отдых.</p>",
+      yes: () => true,
+      no: () => false,
+      defaultYes: true
+    });
+    if (!confirm) return;
+    await DedrelCharacterSheet.performRest(this.document, "short");
+  }
+
+  static async #onLongRest(event, target) {
+    const confirm = await Dialog.confirm({
+      title: "Длинный Отдых",
+      content: "<p>Вы уверены, что хотите совершить длинный отдых (8 часов)? Это восстановит ОД и все способности на день/короткий/длинный отдых.</p>",
+      yes: () => true,
+      no: () => false,
+      defaultYes: true
+    });
+    if (!confirm) return;
+    await DedrelCharacterSheet.performRest(this.document, "long");
+  }
+
+  static async performRest(actor, restType) {
+    if (game.user.isGM) {
+      const timeAdvance = restType === "long" ? 28800 : 3600;
+      await game.time.advance(timeAdvance);
+    } else {
+      ui.notifications.info("Время может проматывать только GM. Заряды и ОД восстановлены локально.");
+    }
+    
+    const updateData = {};
+    const res = actor.system.resources;
+    if (res.ap_universal) updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
+    if (res.ap_magic) updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
+    if (res.ap_maneuver) updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
+    
+    await actor.update(updateData);
+    
+    const itemUpdates = [];
+    for (const item of actor.items) {
+      if (!item.system.uses_max || !item.system.uses_per) continue;
+      
+      let shouldRestore = false;
+      if (restType === "short" && item.system.uses_per === "short_rest") shouldRestore = true;
+      if (restType === "long" && ["short_rest", "long_rest", "day"].includes(item.system.uses_per)) shouldRestore = true;
+      
+      if (shouldRestore) {
+        let maxVal = 0;
+        if (!isNaN(item.system.uses_max)) {
+           maxVal = parseInt(item.system.uses_max);
+        } else {
+           try {
+             const r = new Roll(item.system.uses_max, actor.getRollData());
+             maxVal = r.evaluate({async: false}).total;
+           } catch(e) {
+             console.error("Dedrel | Error parsing uses_max", e);
+           }
+        }
+        itemUpdates.push({ _id: item.id, "system.uses_value": maxVal });
+      }
+    }
+    
+    if (itemUpdates.length > 0) {
+      await actor.updateEmbeddedDocuments("Item", itemUpdates);
+    }
+    
+    ui.notifications.info(`${actor.name} совершил ${restType === "long" ? "длинный" : "короткий"} отдых.`);
+  }
+
   static async #onToggleCreationLock(event, target) {
-    const isLocked = this.document.getFlag("dedrel", "creationLocked") ?? true;
     const currentlyLocked = !!this.document.getFlag("dedrel", "creationLocked");
     await this.document.setFlag("dedrel", "creationLocked", !currentlyLocked);
+  }
+
+  static async #onToggleItemsLock(event, target) {
+    const currentlyLocked = this.document.getFlag("dedrel", "itemsLocked") ?? true;
+    await this.document.setFlag("dedrel", "itemsLocked", !currentlyLocked);
   }
 
   static async #onToggleCreationView(event, target) {
@@ -389,10 +522,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onIncreaseBloodline(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.bloodlines[key].rank;
+    const current = this.document._source.system.bloodlines[key].rank;
     if (current < 6) { // check total?
       let total = 0;
-      for (const [k, v] of Object.entries(this.document.system.bloodlines)) total += (v.rank - 1);
+      for (const [k, v] of Object.entries(this.document._source.system.bloodlines)) total += (v.rank - 1);
       if (total < 10) {
         await this.document.update({ [`system.bloodlines.${key}.rank`]: current + 1 });
       } else {
@@ -404,7 +537,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onDecreaseBloodline(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.bloodlines[key].rank;
+    const current = this.document._source.system.bloodlines[key].rank;
     if (current > 1) {
       await this.document.update({ [`system.bloodlines.${key}.rank`]: current - 1 });
     }
@@ -413,10 +546,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onIncreaseAttribute(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.attributes[key].rank;
+    const current = this.document._source.system.attributes[key].rank;
     if (current < 4) { // Max starting rank
       let total = 0;
-      for (const [k, v] of Object.entries(this.document.system.attributes)) total += (v.rank - 1);
+      for (const [k, v] of Object.entries(this.document._source.system.attributes)) total += (v.rank - 1);
       if (total < 10) {
         await this.document.update({ [`system.attributes.${key}.rank`]: current + 1 });
       } else {
@@ -430,7 +563,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onDecreaseAttribute(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.attributes[key].rank;
+    const current = this.document._source.system.attributes[key].rank;
     if (current > 1) {
       await this.document.update({ [`system.attributes.${key}.rank`]: current - 1 });
     }
@@ -439,10 +572,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onIncreaseSkill(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.skills[key].rank;
+    const current = this.document._source.system.skills[key].rank;
     if (current < 3) { // Max starting rank
       let total = 0;
-      for (const [k, v] of Object.entries(this.document.system.skills)) total += v.rank;
+      for (const [k, v] of Object.entries(this.document._source.system.skills)) total += v.rank;
       if (total < 15) {
         await this.document.update({ [`system.skills.${key}.rank`]: current + 1 });
       } else {
@@ -456,7 +589,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onDecreaseSkill(event, target) {
     if (this.document.getFlag("dedrel", "creationLocked")) return;
     const key = target.dataset.key;
-    const current = this.document.system.skills[key].rank;
+    const current = this.document._source.system.skills[key].rank;
     if (current > 0) {
       await this.document.update({ [`system.skills.${key}.rank`]: current - 1 });
     }
@@ -481,18 +614,64 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
   static async #onUpgradeSkill(event, target) {
     const key = target.dataset.key;
-    const cost = parseInt(target.dataset.cost);
+    const current = this.document.system.skills[key].rank;
+    const nextRank = current + 1;
+    const cost = nextRank * 2;
     const currentXp = this.document.system.details.xp || 0;
-    const currentRank = this.document.system.skills[key].rank;
 
     if (currentXp >= cost) {
       await this.document.update({
-        [`system.skills.${key}.rank`]: currentRank + 1,
+        [`system.skills.${key}.rank`]: nextRank,
         "system.details.xp": currentXp - cost
       });
-      ui.notifications.info(`Навык повышен за ${cost} XP.`);
+      ui.notifications.info(`Улучшен навык ${key} до ранга ${nextRank} за ${cost} XP.`);
     } else {
-      ui.notifications.warn("Недостаточно опыта.");
+      ui.notifications.warn("Недостаточно очков опыта для улучшения навыка.");
+    }
+  }
+
+  static async #onToggleEffect(event, target) {
+    const effectId = target.closest(".effect-row").dataset.effectId;
+    const parentId = target.closest(".effect-row").dataset.parentId;
+    let effect;
+    if (parentId && this.document.items.has(parentId)) {
+      effect = this.document.items.get(parentId).effects.get(effectId);
+    } else {
+      effect = this.document.effects.get(effectId);
+    }
+    if (effect) {
+      return effect.update({ disabled: !effect.disabled });
+    }
+  }
+
+  static async #onEditEffect(event, target) {
+    const effectId = target.closest(".effect-row").dataset.effectId;
+    const parentId = target.closest(".effect-row").dataset.parentId;
+    let effect;
+    if (parentId && this.document.items.has(parentId)) {
+      effect = this.document.items.get(parentId).effects.get(effectId);
+    } else {
+      effect = this.document.effects.get(effectId);
+    }
+    if (effect) {
+      return effect.sheet.render(true);
+    }
+  }
+
+  static async #onDeleteEffect(event, target) {
+    const effectId = target.closest(".effect-row").dataset.effectId;
+    const parentId = target.closest(".effect-row").dataset.parentId;
+    let effect;
+    if (parentId && this.document.items.has(parentId)) {
+      effect = this.document.items.get(parentId).effects.get(effectId);
+    } else {
+      effect = this.document.effects.get(effectId);
+    }
+    
+    if (effect && effect.parent.documentName === "Actor") {
+      return effect.delete();
+    } else if (effect) {
+      ui.notifications.warn("Невозможно удалить эффект, принадлежащий предмету. Измените предмет.");
     }
   }
 
@@ -537,7 +716,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
    * (например, стартовые мутации при создании персонажа).
    */
   async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch(err) {
+      return super._onDrop(event);
+    }
     if (data.type !== "Item") return super._onDrop(event);
 
     const item = await Item.implementation.fromDropData(data);
