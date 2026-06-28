@@ -153,7 +153,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     if (action === "rollAttack") {
       if (!item) return ui.notifications.warn("Предмет не найден.");
       let baseRank = 0;
-      let title = `Атака: ${item.name}`;
+      let title = game.i18n.format("DEDREL.Chat.AttackCardTitle", {name: item.name});
       
       // Если атака связана с оружием, ищем ранг соответствующего оружейного навыка
       if (weapon && weapon.system.skill) {
@@ -214,14 +214,14 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           </div>
         </div>
         <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
-           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${damageType}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> Применить урон</button>
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${damageType}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
         </div>
       `;
       
       await ChatMessage.create({
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        flavor: `<b>Урон: ${item.name}</b>`,
+        flavor: game.i18n.format("DEDREL.Chat.DamageCardFlavor", {name: item.name}),
         content: chatContent,
         rolls: [roll]
       });

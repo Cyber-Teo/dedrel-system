@@ -1,16 +1,16 @@
 <div class="tab experience {{tabs.experience.cssClass}}" data-group="primary" data-tab="experience">
     <div class="tab-content">
         <div class="experience-header flexrow">
-            <h2>Распределение опыта</h2>
+            <h2>{{localize "DEDREL.ActorSheet.ExperienceDistribution"}}</h2>
             <div class="xp-pool">
-                <span>Текущий Опыт: </span>
+                <span>{{localize "DEDREL.ActorSheet.CurrentExperience"}}</span>
                 <span class="xp-value">{{system.details.xp}}</span>
-                <span class="xp-total">(Всего получено: {{actor.flags.dedrel.total_xp}})</span>
+                <span class="xp-total">{{localize "DEDREL.ActorSheet.TotalGained" total=actor.flags.dedrel.total_xp}}</span>
             </div>
         </div>
         <div class="experience-actions flexrow" style="margin-bottom: 10px;">
             <a class="creation-mode-btn" data-action="toggleCreationView">
-                <i class="fas fa-edit"></i> {{#if actor.flags.dedrel.showCreation}}Скрыть блок создания{{else}}Режим создания персонажа{{/if}}
+                <i class="fas fa-edit"></i> {{#if actor.flags.dedrel.showCreation}}{{localize "DEDREL.ActorSheet.HideCreationView"}}{{else}}{{localize "DEDREL.ActorSheet.ToggleCreationView"}}{{/if}}
             </a>
         </div>
 
@@ -19,16 +19,16 @@
         {{else}}
 
         <div class="experience-section">
-            <h3>Улучшение Атрибутов</h3>
+            <h3>{{localize "DEDREL.ActorSheet.AttributeUpgrade"}}</h3>
             {{#if xpData.activeDiscounts.length}}
             <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">
-                <strong>Активные скидки Линий Крови:</strong> 
+                <strong>{{localize "DEDREL.ActorSheet.ActiveDiscounts"}}</strong> 
                 {{#each xpData.activeDiscounts}}
                 {{localize (concat "DEDREL.Attributes." this.attrKey)}} (-{{this.discount}} XP){{#unless @last}}, {{/unless}}
                 {{/each}}
             </p>
             {{else}}
-            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">У вас пока нет Линий крови 3+ ранга для получения скидок.</p>
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">{{localize "DEDREL.ActorSheet.NoDiscounts"}}</p>
             {{/if}}
             <div class="attributes-grid grid-3col">
                 {{#each system.attributes as |attr key|}}
@@ -41,7 +41,7 @@
                         <i class="fas fa-arrow-up"></i> {{xpInfo.cost}} XP
                     </a>
                     {{else}}
-                    <span class="max-rank">МАКС</span>
+                    <span class="max-rank">{{localize "DEDREL.ActorSheet.MAX"}}</span>
                     {{/if}}
                 </div>
                 {{/with}}
@@ -50,17 +50,24 @@
         </div>
 
         <div class="experience-section">
-            <h3>Улучшение Навыков</h3>
-            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;"><strong>Стоимость:</strong> Новый ранг * 2 XP</p>
+            <h3>{{localize "DEDREL.ActorSheet.SkillUpgrade"}}</h3>
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;"><strong>{{localize "DEDREL.ActorSheet.CostHint"}}</strong></p>
             <div class="skills-grid grid-3col">
                 {{#each system.skills as |skill key|}}
                 {{#with (lookup ../xpData.skills key) as |xpInfo|}}
-                <div class="skill-item-create">
-                    <span class="skill-name">{{localize (concat "DEDREL.Skills." key)}}</span>
-                    <span class="skill-value">{{skill.rank}}</span>
-                    <a class="upgrade-btn {{#unless xpInfo.canUpgrade}}disabled{{/unless}}" data-action="upgradeSkill" data-key="{{key}}" data-cost="{{xpInfo.cost}}" {{#unless xpInfo.canUpgrade}}disabled{{/unless}}>
-                        <i class="fas fa-arrow-up"></i> {{xpInfo.cost}} XP
-                    </a>
+                <div class="skill-item-create" style="flex-direction: column; align-items: stretch;">
+                    <div class="flexrow" style="align-items: center; justify-content: space-between;">
+                        <span class="skill-name">{{localize (concat "DEDREL.Skills." key)}}</span>
+                        <span class="skill-value" style="margin-right: 10px;">{{skill.rank}}</span>
+                        <a class="upgrade-btn {{#unless xpInfo.canUpgrade}}disabled{{/unless}}" data-action="upgradeSkill" data-key="{{key}}" data-cost="{{xpInfo.cost}}" {{#unless xpInfo.canUpgrade}}disabled{{/unless}}>
+                            <i class="fas fa-arrow-up"></i> {{xpInfo.cost}} XP
+                        </a>
+                    </div>
+                    {{#if xpInfo.needsSpecialization}}
+                    <div class="skill-specialization" style="margin-top: 5px;">
+                        <input type="text" name="system.skills.{{key}}.specialization" value="{{skill.specialization}}" placeholder="{{localize "DEDREL.ActorSheet.SpecifySpecialization"}}" style="width: 100%; height: 24px; font-size: 0.9em;" {{#if @root.itemsLocked}}disabled{{/if}} />
+                    </div>
+                    {{/if}}
                 </div>
                 {{/with}}
                 {{/each}}
@@ -68,8 +75,8 @@
         </div>
 
         <div class="experience-section">
-            <h3>Покупка Талантов и Мутаций</h3>
-            <p class="hint">Для покупки таланта или мутации, просто перетащите нужный предмет из компендиума в лист персонажа. Опыт спишется автоматически, если его достаточно.</p>
+            <h3>{{localize "DEDREL.ActorSheet.BuyTalentsMutations"}}</h3>
+            <p class="hint">{{localize "DEDREL.ActorSheet.DragHint"}}</p>
         </div>
         
         {{/if}}

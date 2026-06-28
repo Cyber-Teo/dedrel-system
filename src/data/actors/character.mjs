@@ -227,17 +227,23 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         else if (weightClass === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
       }
 
-      // Штрафы от навыка ношения доспехов
-      const armorUseRank = this.skills?.combat?.armor_use?.rank || 0;
+      // ==========================================
+      // Расчет штрафов от навыка ношения доспехов
+      // ==========================================
+      // Навыки хранятся единым плоским списком (flat schema), поэтому обращаемся напрямую.
+      const armorUseRank = this.skills?.armor_use?.rank || 0;
       let hasArmorPenalty = false;
       
-      // Тяжелая броня требует ранг 4+
+      // Тяжелая броня требует 4+ ранг навыка "Ношение доспехов"
       if (maxArmorWeight === 2 && armorUseRank < 4) hasArmorPenalty = true;
-      // Средняя броня требует ранг 2+
+      // Средняя броня требует 2+ ранг навыка "Ношение доспехов"
       if (maxArmorWeight === 1 && armorUseRank < 2) hasArmorPenalty = true;
 
       this.armor_penalty = hasArmorPenalty;
       if (hasArmorPenalty) {
+        // Применяем механический штраф за недостаточный навык:
+        // -2 к Инициативе, -2 к Скорости. 
+        // Этот штраф также отображается в инвентаре для удобства игрока.
         this.initiative -= 2;
         this.movement -= 2;
       }

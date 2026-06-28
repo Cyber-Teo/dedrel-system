@@ -3,10 +3,10 @@
         <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" style="cursor: pointer;"/>
         <div class="header-details" style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
             <div class="name-wrapper" style="display: flex; flex-direction: row; gap: 10px; align-items: center; width: 100%;">
-                <h1 class="dedrel-charname" style="flex: 1; margin: 0; min-height: 40px;"><input name="name" type="text" value="{{item.name}}" placeholder="Название"/></h1>
+                <h1 class="dedrel-charname" style="flex: 1; margin: 0; min-height: 40px;"><input name="name" type="text" value="{{item.name}}" placeholder="{{localize "DEDREL.UI.Name"}}"/></h1>
                 {{#if (eq item.type "weapon")}}
                 <label class="checkbox" style="display: flex; align-items: center; gap: 5px; font-weight: bold; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 4px; border: 1px solid var(--color-border); color: #fff; cursor: pointer; flex: 0 0 auto; height: 38px; box-sizing: border-box;">
-                    <input type="checkbox" name="system.equipped" {{checked system.equipped}} style="margin: 0; width: 16px; height: 16px;"/> Экипировано
+                    <input type="checkbox" name="system.equipped" {{checked system.equipped}} style="margin: 0; width: 16px; height: 16px;"/> {{localize "DEDREL.ItemSheet.Equipped"}}
                 </label>
                 {{/if}}
             </div>
@@ -31,13 +31,13 @@
             <div class="form-fields-grid">
             {{#if (eq item.type "maneuver")}}
                 <div class="form-group">
-                    <label>Источник</label>
+                    <label>{{localize "DEDREL.ItemSheet.Source"}}</label>
                     <select name="system.source">
                         {{selectOptions maneuverSources selected=system.source}}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Тип действия</label>
+                    <label>{{localize "DEDREL.ItemSheet.ActionType"}}</label>
                     <select name="system.action_type">
                         {{selectOptions actionTypes selected=joinedActionType}}
                     </select>
@@ -48,60 +48,60 @@
                 </div>
                 <div class="form-group">
                     <label class="checkbox">
-                        <input type="checkbox" name="system.is_variable_cost" {{checked system.is_variable_cost}}/> Переменная стоимость
+                        <input type="checkbox" name="system.is_variable_cost" {{checked system.is_variable_cost}}/> {{localize "DEDREL.ItemSheet.VariableCost"}}
                     </label>
                 </div>
                 <div class="form-group">
-                    <label>Макс. AP (если перем.)</label>
+                    <label>{{localize "DEDREL.ItemSheet.MaxAPVariable"}}</label>
                     <input type="text" name="system.variable_cost_max" value="{{system.variable_cost_max}}" data-dtype="Number"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Использования</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Uses"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Текущие</label>
+                    <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
                     <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Максимум</label>
+                    <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
                     <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Восстановление</label>
+                    <label>{{localize "DEDREL.ItemSheet.Recovery"}}</label>
                     <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Цель и Область</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.TargetAndArea"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Тип цели</label>
+                    <label>{{localize "DEDREL.ItemSheet.TargetType"}}</label>
                     <select name="system.target_type">
                         {{selectOptions targetTypes selected=system.target_type}}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Кол-во целей</label>
+                    <label>{{localize "DEDREL.ItemSheet.NumTargets"}}</label>
                     <input type="text" name="system.target_value" value="{{system.target_value}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Дальность (м)</label>
+                    <label>{{localize "DEDREL.ItemSheet.RangeM"}}</label>
                     <input type="text" name="system.target_range" value="{{system.target_range}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Форма области</label>
+                    <label>{{localize "DEDREL.ItemSheet.AreaShape"}}</label>
                     <select name="system.template_shape">
                         {{selectOptions templateShapes selected=system.template_shape}}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Размер области (м)</label>
+                    <label>{{localize "DEDREL.ItemSheet.AreaSizeM"}}</label>
                     <input type="text" name="system.template_size" value="{{system.template_size}}" data-dtype="Number"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Формулы и Спасброски</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.FormulasAndSaves"}}</h3>
                 </div>
                 <div class="form-group">
                     <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
@@ -112,31 +112,31 @@
                     <input type="text" name="system.formula_damage" value="{{system.formula_damage}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Доп. формула</label>
+                    <label>{{localize "DEDREL.ItemSheet.FormulaCustom"}}</label>
                     <input type="text" name="system.formula_custom" value="{{system.formula_custom}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Атрибут спасброска</label>
+                    <label>{{localize "DEDREL.ItemSheet.SaveAttribute"}}</label>
                     <input type="text" name="system.save_attribute" value="{{system.save_attribute}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Сложность (DC)</label>
+                    <label>{{localize "DEDREL.ItemSheet.SaveDC"}}</label>
                     <input type="text" name="system.save_dc_formula" value="{{system.save_dc_formula}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Запрет защиты</label>
+                    <label>{{localize "DEDREL.ItemSheet.ForbiddenDefense"}}</label>
                     <input type="text" name="system.forbidden_defense" value="{{system.forbidden_defense}}"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Цепные триггеры</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.ChainTriggers"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Текст триггера</label>
+                    <label>{{localize "DEDREL.ItemSheet.TriggerText"}}</label>
                     <input type="text" name="system.chain_trigger_text" value="{{system.chain_trigger_text}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Цепные манёвры</label>
+                    <label>{{localize "DEDREL.ItemSheet.ChainManeuvers"}}</label>
                     <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
                 </div>
                 <div class="form-group">
@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Требования к оружию</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.WeaponRequirements"}}</h3>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
                     <label>Тип оружия</label>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Свойства оружия</label>
+                    <label>{{localize "DEDREL.ItemSheet.WeaponProperties"}}</label>
                     <div class="properties-grid">
                         <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_auxiliary" {{checked system.req_weapon_property.is_auxiliary}}/> Вспомогательное</label>
                         <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_fast" {{checked system.req_weapon_property.is_fast}}/> Быстрое</label>
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Пререквизиты персонажа</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.CharacterPrerequisites"}}</h3>
                 </div>
                 <div class="form-group">
                     <label>Текст требований</label>
@@ -218,14 +218,14 @@
                 </div>
                 {{#if (eq item.type "mutation")}}
                 <div class="form-group">
-                    <label>Тип мутации</label>
+                    <label>{{localize "DEDREL.ItemSheet.MutationType"}}</label>
                     <select name="system.mutation_type">
                         {{selectOptions mutationTypes selected=system.mutation_type}}
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="checkbox">
-                        <input type="checkbox" name="system.starting" {{checked system.starting}}/> Стартовая
+                        <input type="checkbox" name="system.starting" {{checked system.starting}}/> {{localize "DEDREL.ItemSheet.IsStarting"}}
                     </label>
                 </div>
                 {{/if}}
@@ -234,7 +234,7 @@
                     <input type="text" name="system.xp_cost" value="{{system.xp_cost}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Текущие использования</label>
+                    <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
                     <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
@@ -251,7 +251,7 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Пререквизиты</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Prerequisites"}}</h3>
                 </div>
                 
                 <div class="form-group">
@@ -280,31 +280,31 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Добавляет:</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.AddsItems"}}</h3>
                 </div>
 
                 <div class="form-group">
-                    <label>Добавляет предметы (через ;)</label>
+                    <label>{{localize "DEDREL.ItemSheet.AddsItems"}}</label>
                     <input type="text" name="system.adds_items" value="{{joinedAddsItems}}" placeholder="maneuver1; talent1"/>
                 </div>
                 <div class="form-group">
-                    <label>Макрос при добавлении</label>
+                    <label>{{localize "DEDREL.ItemSheet.OnAddMacro"}}</label>
                     <input type="text" name="system.on_add_macro" value="{{system.on_add_macro}}"/>
                 </div>
             {{/if}}
 
             {{#if (eq item.type "armor")}}
                 <div class="form-group stacked" style="grid-column: 1 / -1;">
-                    <label>Основные параметры</label>
+                    <label>{{localize "DEDREL.ItemSheet.BasicParameters"}}</label>
                     <div class="properties-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                         <div>
-                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">Слот</label>
+                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">{{localize "DEDREL.ItemSheet.Slot"}}</label>
                             <select name="system.slot" style="width: 100%;">
                                 {{selectOptions armorSlots selected=system.slot}}
                             </select>
                         </div>
                         <div>
-                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">Класс веса</label>
+                            <label style="display: block; font-size: 0.8em; color: var(--color-text-dark-secondary);">{{localize "DEDREL.ItemSheet.WeightClass"}}</label>
                             <select name="system.weight_class" style="width: 100%;">
                                 {{selectOptions weightClasses selected=system.weight_class}}
                             </select>
@@ -313,7 +313,7 @@
                 </div>
                 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Сопротивление урону (DR)</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.DamageResistance"}}</h3>
                 </div>
                 <div class="form-group">
                     <label>Рубящий</label>
@@ -353,7 +353,7 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Модификаторы</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Modifiers"}}</h3>
                 </div>
                 <div class="form-group">
                     <label>Уклонение</label>
@@ -381,7 +381,7 @@
                 </div>
                 
                 <div class="form-group stacked" style="grid-column: 1 / -1; margin-top: 10px;">
-                    <label>Свойства Брони</label>
+                    <label>{{localize "DEDREL.ItemSheet.ArmorProperties"}}</label>
                     <div class="properties-grid">
                         <label class="checkbox"><input type="checkbox" name="system.properties.exclusive_slot" {{checked system.properties.exclusive_slot}}/> Эксклюзивный слот</label>
                         <label class="checkbox"><input type="checkbox" name="system.properties.rigid" {{checked system.properties.rigid}}/> Жесткая</label>
@@ -392,22 +392,22 @@
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Использования и Эффекты</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Uses"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Текущие использования</label>
+                    <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
                     <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Максимум</label>
+                    <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
                     <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Восстановление</label>
+                    <label>{{localize "DEDREL.ItemSheet.Recovery"}}</label>
                     <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Макрос при использовании</label>
+                    <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
                     <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
                 </div>
             {{/if}}
@@ -438,43 +438,43 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Урон</label>
+                    <label>{{localize "DEDREL.ItemSheet.Damage"}}</label>
                     <input type="text" name="system.damage_formula" value="{{system.damage_formula}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Зона контроля</label>
+                    <label>{{localize "DEDREL.ItemSheet.ControlZone"}}</label>
                     <select name="system.control_zone" data-dtype="Number">
                         {{selectOptions zeroToThree selected=system.control_zone}}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Бронебойность</label>
+                    <label>{{localize "DEDREL.ItemSheet.ArmorPiercing"}}</label>
                     <select name="system.armor_piercing" data-dtype="Number">
                         {{selectOptions zeroToThree selected=system.armor_piercing}}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Дальность</label>
+                    <label>{{localize "DEDREL.ItemSheet.Range"}}</label>
                     <input type="text" name="system.range" value="{{system.range}}"/>
                 </div>
                 <div class="form-group">
-                    <label>Требования (атрибуты)</label>
+                    <label>{{localize "DEDREL.ItemSheet.AttributesKeyRank"}}</label>
                     <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="str 2; con 1"/>
                 </div>
                 <div class="form-group">
-                    <label>Требования (навыки)</label>
+                    <label>{{localize "DEDREL.ItemSheet.SkillsKeyRank"}}</label>
                     <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2"/>
                 </div>
 
                 <div class="form-group" style="grid-column: 1 / -1; margin-top: 10px; border-bottom: 1px solid var(--color-border-dark);">
-                    <h3 style="margin: 0; padding-bottom: 5px;">Использования и Эффекты</h3>
+                    <h3 style="margin: 0; padding-bottom: 5px;">{{localize "DEDREL.ItemSheet.Uses"}}</h3>
                 </div>
                 <div class="form-group">
-                    <label>Текущие использования</label>
+                    <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
                     <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
                 </div>
                 <div class="form-group">
-                    <label>Максимум</label>
+                    <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
                     <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
                 </div>
                 <div class="form-group">
@@ -522,8 +522,8 @@
         {{!-- Effects Tab --}}
         <div class="tab effects {{tabs.effects.cssClass}}" data-group="primary" data-tab="effects">
             <div class="effects-header flexrow">
-                <h3 style="flex: 1;">Активные Эффекты</h3>
-                <a class="effect-control" data-action="addEffect" title="Добавить Эффект" style="flex: 0 0 auto; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 4px;"><i class="fas fa-plus"></i> Добавить</a>
+                <h3 style="flex: 1;">{{localize "DEDREL.ItemSheet.Effects"}}</h3>
+                <a class="effect-control" data-action="addEffect" title="{{localize "DEDREL.ItemSheet.AddEffect"}}" style="flex: 0 0 auto; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 4px;"><i class="fas fa-plus"></i> {{localize "DEDREL.ItemSheet.AddEffect"}}</a>
             </div>
             <div class="effects-list">
                 {{#each item.effects as |effect|}}
@@ -536,7 +536,7 @@
                     </div>
                 </div>
                 {{else}}
-                <p class="hint">У этого предмета нет встроенных эффектов.</p>
+                <p class="hint">{{localize "DEDREL.ItemSheet.NoEffects"}}</p>
                 {{/each}}
             </div>
         </div>

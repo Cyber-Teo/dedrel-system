@@ -39,10 +39,11 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
         weak_point_protection: new fields.BooleanField({ initial: false })
       }),
 
-      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
-      uses_max: new fields.StringField({ initial: "" }),
-      uses_per: new fields.StringField({ initial: "" }),
-      on_use_macro: new fields.StringField({ initial: "" }),
+      // Заряды и макросы (добавлено для поддержки магических свойств, особенностей и эффектов)
+      uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Текущие заряды" }),
+      uses_max: new fields.StringField({ initial: "", label: "Максимум зарядов" }),
+      uses_per: new fields.StringField({ initial: "", label: "Восстановление зарядов" }),
+      on_use_macro: new fields.StringField({ initial: "", label: "Макрос при использовании" }),
 
       prerequisites_text: new fields.StringField({ initial: "" }),
       prerequisites_attributes: new fields.ArrayField(new fields.StringField()),

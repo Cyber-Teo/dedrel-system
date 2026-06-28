@@ -11,13 +11,13 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   const { DialogV2 } = foundry.applications.api;
 
   await DialogV2.wait({
-    window: { title: `Бросок: ${title}` },
+    window: { title: `${game.i18n.localize("DEDREL.Chat.Roll")}: ${title}` },
     content: content,
     buttons: [
       {
         action: "roll",
         icon: "fa-solid fa-dice",
-        label: "Бросок",
+        label: game.i18n.localize("DEDREL.Chat.Roll"),
         callback: async (event, button, dialog) => {
           const html = $(dialog.element);
           const isSpecialized = isSave ? false : html.find('[name="specialization"]').is(":checked");
@@ -30,7 +30,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
       {
         action: "cancel",
         icon: "fa-solid fa-times",
-        label: "Отмена"
+        label: game.i18n.localize("DEDREL.Chat.Cancel")
       }
     ]
   });
@@ -79,12 +79,12 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
 
       if (fumbleResult === 1) {
         isCritFumble = true;
-        customChatAddon = `<div class="dedrel-fumble" style="color: red; font-weight: bold; margin-top: 5px;">КРИТИЧЕСКИЙ ПРОВАЛ! (Подтверждающий бросок: 1)</div>`;
+        customChatAddon = `<div class="dedrel-fumble" style="color: red; font-weight: bold; margin-top: 5px;">${game.i18n.localize("DEDREL.Dice.CriticalFumble")}</div>`;
       } else {
         // If not a 1 on reroll, result treats the first die as +1 (total)
         // Since the first die was a 1, its value is already 1 in the roll total.
         // We just add a note that a fumble was averted.
-        customChatAddon = `<div class="dedrel-fumble-averted" style="color: black; font-style: italic; margin-top: 5px;">Провал предотвращён. (Подтверждающий бросок: ${fumbleResult})</div>`;
+        customChatAddon = `<div class="dedrel-fumble-averted" style="color: black; font-style: italic; margin-top: 5px;">${game.i18n.format("DEDREL.Dice.FumbleAverted", {fumbleResult: fumbleResult})}</div>`;
       }
     }
   }

@@ -47,12 +47,12 @@ export default class DedrelItem extends Item {
     }
     
     if (itemNamesToFind.length > 0) {
-      ui.notifications.warn(`Не удалось найти следующие предметы для добавления: ${itemNamesToFind.join(", ")}`);
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ItemsNotFound", {names: itemNamesToFind.join(", ")}));
     }
     
     if (itemsToAdd.length > 0) {
       await this.parent.createEmbeddedDocuments("Item", itemsToAdd);
-      ui.notifications.info(`Добавлены связанные предметы: ${itemsToAdd.map(i => i.name).join(", ")}`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.LinkedItemsAdded", {names: itemsToAdd.map(i => i.name).join(", ")}));
     }
   }
 
@@ -65,7 +65,7 @@ export default class DedrelItem extends Item {
     const childItems = this.parent.items.filter(i => i.getFlag("dedrel", "parentItemId") === this.id);
     if (childItems.length > 0) {
       await this.parent.deleteEmbeddedDocuments("Item", childItems.map(i => i.id));
-      ui.notifications.info(`Удалены зависимые предметы: ${childItems.map(i => i.name).join(", ")}`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.DependentItemsRemoved", {names: childItems.map(i => i.name).join(", ")}));
     }
   }
 
@@ -82,7 +82,7 @@ export default class DedrelItem extends Item {
    */
   async use() {
     const actor = this.actor;
-    if (!actor) return ui.notifications.warn("Предмет не принадлежит персонажу.");
+    if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotOwned"));
 
     if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good"].includes(this.type)) {
       return this.postToChat();
@@ -166,16 +166,16 @@ export default class DedrelItem extends Item {
       }
       currentAp = apUniversal + apSpecific;
       
-      content += `<p>Использовать <b>${this.name}</b> за <strong>${apCost} ОД</strong>?</p>`;
+      content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: this.name, cost: apCost})}</p>`;
       if (apCost > currentAp) {
-        content += `<p style="color: red; font-weight: bold;">Недостаточно ОД! У вас ${currentAp}, требуется ${apCost}.</p>`;
+        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: currentAp, cost: apCost})}</p>`;
       }
     }
 
     if (hasCharges) {
-      content += `<p>Потратить 1 заряд? (Осталось: <b>${usesValue}/${usesMax}</b>)</p>`;
+      content += `<p>${game.i18n.format("DEDREL.Chat.SpendCharge", {value: usesValue, max: usesMax})}</p>`;
       if (usesValue <= 0) {
-        content += `<p style="color: red; font-weight: bold;">Заряды исчерпаны!</p>`;
+        content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Chat.OutOfCharges")}</p>`;
       }
     }
 
@@ -183,14 +183,14 @@ export default class DedrelItem extends Item {
       if (validWeapons.length > 0) {
         content += `
           <div class="form-group" style="margin-top: 10px;">
-            <label style="font-weight: bold;">Оружие: </label>
+            <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.Weapon")}</label>
             <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
               ${validWeapons.map(w => `<option value="${w.id}">${w.name}</option>`).join("")}
             </select>
           </div>
         `;
       } else {
-        content += `<p style="color: orange; font-style: italic;">Нет подходящего экипированного оружия.</p>`;
+        content += `<p style="color: orange; font-style: italic;">${game.i18n.localize("DEDREL.Chat.NoEquippedWeapon")}</p>`;
       }
     }
 
@@ -203,14 +203,14 @@ export default class DedrelItem extends Item {
         {
           action: "confirm",
           icon: "fa-solid fa-check",
-          label: "Подтвердить",
+          label: game.i18n.localize("DEDREL.Chat.Confirm"),
           callback: async (event, button, dialog) => {
             if (apCost > 0 && apCost > currentAp) {
-              ui.notifications.warn("Недостаточно Очков Действия!");
+              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
               return;
             }
             if (hasCharges && usesValue <= 0) {
-              ui.notifications.warn("Недостаточно зарядов!");
+              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughUses"));
               return;
             }
 
@@ -251,7 +251,7 @@ export default class DedrelItem extends Item {
               if (macro) {
                 macro.execute({ actor: actor, item: this });
               } else {
-                ui.notifications.warn(`Макрос с именем "${this.system.on_use_macro}" не найден.`);
+                ui.notifications.warn(game.i18n.format("DEDREL.Notifications.MacroNotFound", {name: this.system.on_use_macro}));
               }
             }
 
@@ -261,7 +261,7 @@ export default class DedrelItem extends Item {
         {
           action: "cancel",
           icon: "fa-solid fa-times",
-          label: "Отмена"
+          label: game.i18n.localize("DEDREL.Chat.Cancel")
         }
       ]
     });
@@ -290,17 +290,20 @@ export default class DedrelItem extends Item {
     if (showCombatButtons) {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
-          <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> Атака</button>
-          <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> Урон</button>
+          <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>
+          <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>
         </div>
       `;
     }
 
+    // Если у предмета есть эффекты, которые НЕ переносятся автоматически (transfer: false),
+    // значит это бафы/дебафы, которые нужно накладывать вручную (например, яд, заклинание).
+    // Генерируем кнопку для наложения этих эффектов на выделенные токены.
     const hasTransferableEffects = this.effects.some(e => !e.transfer);
     if (hasTransferableEffects) {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
-          <button class="dedrel-chat-action" data-action="applyItemEffects" data-item-id="${this.id}"><i class="fa-solid fa-magic"></i> Применить Эффекты</button>
+          <button class="dedrel-chat-action" data-action="applyItemEffects" data-item-id="${this.id}"><i class="fa-solid fa-magic"></i> ${game.i18n.localize("DEDREL.Chat.ApplyEffects")}</button>
         </div>
       `;
     }

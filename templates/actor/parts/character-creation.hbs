@@ -1,20 +1,20 @@
 <div class="creation-wrapper">
     <div class="creation-content">
         <div class="creation-header flexrow">
-            <h2>Блок создания персонажа</h2>
-            <div class="lock-toggle rollable" data-action="toggleCreationLock" title="{{#if actor.flags.dedrel.creationLocked}}Разблокировать редактирование{{else}}Заблокировать (Случайные изменения отключены){{/if}}">
+            <h2>{{localize "DEDREL.Creation.Title"}}</h2>
+            <div class="lock-toggle rollable" data-action="toggleCreationLock" title="{{#if actor.flags.dedrel.creationLocked}}{{localize "DEDREL.Creation.UnlockTitle"}}{{else}}{{localize "DEDREL.Creation.LockTitle"}}{{/if}}">
                 <i class="fas {{#if actor.flags.dedrel.creationLocked}}fa-lock{{else}}fa-lock-open{{/if}}"></i>
             </div>
         </div>
 
         {{#if actor.flags.dedrel.creationLocked}}
         <div class="creation-locked-message">
-            <p>Параметры создания заблокированы. Для редактирования стартовых значений нажмите на замочек.</p>
+            <p>{{localize "DEDREL.Creation.LockedMessage"}}</p>
         </div>
         {{else}}
         
         <div class="creation-section">
-            <h3>Линии Крови (Распределено: {{creationData.bloodlinesUsed}} / 10)</h3>
+            <h3>{{localize "DEDREL.Creation.Bloodlines"}} ({{localize "DEDREL.Creation.Distributed" used=creationData.bloodlinesUsed max=10}})</h3>
             <div class="bloodlines-grid grid-3col">
                 {{#each system.bloodlines as |bloodline key|}}
                 <div class="bloodline-item">
@@ -31,13 +31,13 @@
 
         <div class="creation-section flexrow">
             <div class="mutations-col">
-                <h3>Полезные мутации (Очки: {{creationData.mutationsUsed}} / {{creationData.mutationsMax}})</h3>
-                <p class="hint">Перетащите сюда полезные мутации из компендиума.</p>
+                <h3>{{localize "DEDREL.Creation.UsefulMutations"}} ({{localize "DEDREL.Creation.Points" used=creationData.mutationsUsed max=creationData.mutationsMax}})</h3>
+                <p class="hint">{{localize "DEDREL.Creation.DragUsefulHint"}}</p>
                 <div class="item-list drop-zone" data-drop-type="mutation-useful">
                     {{#each creationData.startingUsefulMutations as |item|}}
                     <div class="item-row flexrow" data-item-id="{{item.id}}">
                         <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
-                        <div class="item-name"><h4>{{item.name}} ({{item.system.xp_cost}} Очков)</h4></div>
+                        <div class="item-name"><h4>{{item.name}} ({{localize "DEDREL.Creation.CostPoints" cost=item.system.xp_cost}})</h4></div>
                         <div class="item-controls">
                             {{#unless @root.itemsLocked}}<a class="item-control item-delete" data-action="delete"><i class="fas fa-trash"></i></a>{{/unless}}
                         </div>
@@ -47,8 +47,8 @@
             </div>
             
             <div class="mutations-col">
-                <h3>Вредные мутации (Выбрано: {{creationData.harmfulMutationsCount}} / 2)</h3>
-                <p class="hint">Перетащите сюда вредные мутации. Каждая даёт +1 очко для полезных.</p>
+                <h3>{{localize "DEDREL.Creation.HarmfulMutations"}} ({{localize "DEDREL.Creation.Selected" used=creationData.harmfulMutationsCount max=2}})</h3>
+                <p class="hint">{{localize "DEDREL.Creation.DragHarmfulHint"}}</p>
                 <div class="item-list drop-zone" data-drop-type="mutation-harmful">
                     {{#each creationData.startingHarmfulMutations as |item|}}
                     <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -64,11 +64,11 @@
         </div>
 
         <div class="creation-section">
-            <h3>Атрибуты (Распределено: {{creationData.attributesUsed}} / 10)</h3>
-            <p class="hint">Максимальное стартовое значение: 4</p>
+            <h3>{{localize "DEDREL.ActorSheet.Attributes"}} ({{localize "DEDREL.Creation.Distributed" used=creationData.attributesUsed max=10}})</h3>
+            <p class="hint">{{localize "DEDREL.Creation.MaxStartingValue" max=4}}</p>
             {{#if creationData.hasOverCapAttributes}}
             <p class="warning" style="color: red; font-weight: bold; margin-top: 0; margin-bottom: 10px;">
-                <i class="fas fa-exclamation-triangle"></i> Ошибка: Значение атрибута не может превышать 4 при создании персонажа (даже с учетом мутаций). Пожалуйста, снизьте базовое значение.
+                <i class="fas fa-exclamation-triangle"></i> {{localize "DEDREL.Creation.OverCapWarning"}}
             </p>
             {{/if}}
             <div class="attributes-grid grid-3col">
@@ -86,13 +86,13 @@
         </div>
 
         <div class="creation-section">
-            <h3>Страна происхождения</h3>
-            <input type="text" name="flags.dedrel.homeland" value="{{actor.flags.dedrel.homeland}}" placeholder="Введите страну..." />
+            <h3>{{localize "DEDREL.Creation.Homeland"}}</h3>
+            <input type="text" name="flags.dedrel.homeland" value="{{actor.flags.dedrel.homeland}}" placeholder="{{localize "DEDREL.Creation.HomelandPlaceholder"}}" />
         </div>
 
         <div class="creation-section">
-            <h3>Умения (Распределено: {{creationData.skillsUsed}} / 15)</h3>
-            <p class="hint">Максимальный стартовый ранг: 3</p>
+            <h3>{{localize "DEDREL.UI.Skills"}} ({{localize "DEDREL.Creation.Distributed" used=creationData.skillsUsed max=15}})</h3>
+            <p class="hint">{{localize "DEDREL.Creation.MaxStartingValue" max=3}}</p>
             <div class="skills-grid grid-3col">
                 {{#each system.skills as |skill key|}}
                 <div class="skill-item-create">

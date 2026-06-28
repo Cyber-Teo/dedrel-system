@@ -3,12 +3,12 @@
         <div class="header-left">
             <div class="stat-block luck-block" style="margin-bottom: 10px;">
                 <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
-                    <label class="rollable" data-action="spendLuck" style="cursor: pointer; color: var(--color-text-light-highlight);" title="Потратить очко удачи"><i class="fas fa-clover"></i> Удача</label>
+                    <label class="rollable" data-action="spendLuck" style="cursor: pointer; color: var(--color-text-light-highlight);" title="{{localize "DEDREL.ActorSheet.SpendLuck"}}"><i class="fas fa-clover"></i> {{localize "DEDREL.ActorSheet.Luck"}}</label>
                     <div class="stat-inputs">
                         <input type="text" name="system.resources.luck_points.value" value="{{system.resources.luck_points.value}}" data-dtype="Number" />
                         <span class="separator">/</span>
-                        <span class="max-val" title="Максимум">{{system.resources.luck_points.max}}</span>
-                        <a data-action="resetLuck" title="Сбросить удачу" style="margin-left: 5px; cursor: pointer;"><i class="fas fa-sync"></i></a>
+                        <span class="max-val" title="{{localize "DEDREL.ActorSheet.Maximum"}}">{{system.resources.luck_points.max}}</span>
+                        <a data-action="resetLuck" title="{{localize "DEDREL.ActorSheet.ResetLuck"}}" style="margin-left: 5px; cursor: pointer;"><i class="fas fa-sync"></i></a>
                     </div>
                 </div>
             </div>
@@ -19,10 +19,10 @@
                         <input type="text" name="system.resources.hp.value" value="{{system.resources.hp.value}}"
                             data-dtype="Number" />
                         <span class="separator">/</span>
-                        <span class="max-val" title="Максимум">{{system.resources.hp.max}}</span>
+                        <span class="max-val" title="{{localize "DEDREL.ActorSheet.Maximum"}}">{{system.resources.hp.max}}</span>
                     </div>
                 </div>
-                <div class="wounds-track" title="Степени ранения (Штраф к броскам)">
+                <div class="wounds-track" title="{{localize "DEDREL.ActorSheet.WoundsTrack"}}">
                     <div class="wound-box {{#if (and (eq system.resources.wounds.level 1) (lt system.resources.hp.value system.resources.hp.max))}}active{{/if}}">
                         <span>—</span>
                     </div>
@@ -45,8 +45,8 @@
 
             <!-- Rest Buttons -->
             <div class="rest-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-                <button type="button" class="rest-btn" data-action="shortRest" title="Короткий отдых (1 час)" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-campground"></i> Короткий отдых</button>
-                <button type="button" class="rest-btn" data-action="longRest" title="Длинный отдых (8 часов)" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-bed"></i> Длинный отдых</button>
+                <button type="button" class="rest-btn" data-action="shortRest" title="{{localize "DEDREL.ActorSheet.ShortRest"}}" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-campground"></i> {{localize "DEDREL.ActorSheet.ShortRest"}}</button>
+                <button type="button" class="rest-btn" data-action="longRest" title="{{localize "DEDREL.ActorSheet.LongRest"}}" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-bed"></i> {{localize "DEDREL.ActorSheet.LongRest"}}</button>
             </div>
         </div>
         
@@ -55,7 +55,7 @@
             <div class="header-row top-row">
                 <div class="name-wrapper">
                     <h1 class="dedrel-charname">
-                        <input name="name" type="text" value="{{actor.name}}" placeholder="Имя персонажа" />
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "DEDREL.ActorSheet.CharacterName"}}" />
                     </h1>
                 </div>
                 <div class="stat-block exp-block">
@@ -71,21 +71,21 @@
                         value="{{system.resources.ap_universal.value}}" data-dtype="Number" />
                     <span class="separator">/</span>
                     <span class="max-val">{{system.resources.ap_universal.max}}</span>
-                    <label>Universal AP</label>
+                    <label>{{localize "DEDREL.ActorSheet.UniversalAP"}}</label>
                 </div>
                 <div class="ap-bar maneuver">
                     <input type="text" name="system.resources.ap_maneuver.value"
                         value="{{system.resources.ap_maneuver.value}}" data-dtype="Number" />
                     <span class="separator">/</span>
                     <span class="max-val">{{system.resources.ap_maneuver.max}}</span>
-                    <label>Maneuver AP</label>
+                    <label>{{localize "DEDREL.ActorSheet.ManeuverAP"}}</label>
                 </div>
                 <div class="ap-bar magic">
                     <input type="text" name="system.resources.ap_magic.value"
                         value="{{system.resources.ap_magic.value}}" data-dtype="Number" />
                     <span class="separator">/</span>
                     <span class="max-val">{{system.resources.ap_magic.max}}</span>
-                    <label>Magic AP</label>
+                    <label>{{localize "DEDREL.ActorSheet.MagicAP"}}</label>
                 </div>
             </div>
 
@@ -110,7 +110,7 @@
                 <div class="attribute-block">
                     <a class="attr-name rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-label="{{localize (concat "DEDREL.Attributes." key)}}">{{localize (concat "DEDREL.Attributes." key)}}</a>
                     <span class="attribute-rank-display" title="Rank">{{attr.rank}}</span>
-                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-is-save="true" data-label="Спасбросок: {{localize (concat "DEDREL.Attributes." key)}}" title="Сделать спасбросок">{{attr.rank}}</a>
+                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-is-save="true" data-label="{{localize "DEDREL.ActorSheet.SaveThrow"}}: {{localize (concat "DEDREL.Attributes." key)}}" title="{{localize "DEDREL.ActorSheet.MakeSaveThrow"}}">{{attr.rank}}</a>
                 </div>
                 {{/each}}
             </div>

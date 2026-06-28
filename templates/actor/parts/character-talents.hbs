@@ -1,5 +1,5 @@
 <div class="tab talents {{tabs.talents.cssClass}}" data-group="primary" data-tab="talents">
-    <h2 class="tab-title">Таланты</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Talents"}}</h2>
     <div class="item-list">
         {{#each talents as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -12,8 +12,8 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}

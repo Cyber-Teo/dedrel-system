@@ -73,15 +73,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static TABS = {
     primary: {
       tabs: [
-        { id: "main", label: "Основное" },
-        { id: "inventory", label: "Инвентарь" },
-        { id: "maneuvers", label: "Манёвры" },
-        { id: "spells", label: "Заклинания" },
-        { id: "mutations", label: "Мутации" },
-        { id: "talents", label: "Таланты" },
-        { id: "statuses", label: "Статусы" },
-        { id: "biography", label: "Биография" },
-        { id: "experience", label: "Опыт" }
+        { id: "main", label: "DEDREL.ActorSheet.Tabs.Main" },
+        { id: "inventory", label: "DEDREL.ActorSheet.Tabs.Inventory" },
+        { id: "maneuvers", label: "DEDREL.ActorSheet.Tabs.Maneuvers" },
+        { id: "spells", label: "DEDREL.ActorSheet.Tabs.Spells" },
+        { id: "mutations", label: "DEDREL.ActorSheet.Tabs.Mutations" },
+        { id: "talents", label: "DEDREL.ActorSheet.Tabs.Talents" },
+        { id: "statuses", label: "DEDREL.ActorSheet.Tabs.Statuses" },
+        { id: "biography", label: "DEDREL.ActorSheet.Tabs.Biography" },
+        { id: "experience", label: "DEDREL.ActorSheet.Tabs.Experience" }
       ],
       initial: "main",
       navSelector: ".tabs[data-group='primary']",
@@ -260,12 +260,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         const cost = nextRank * 2;
         xpData.skills[key] = {
            cost: cost,
-           canUpgrade: ((actorData.system.details.xp || 0) >= cost)
+           canUpgrade: ((actorData.system.details.xp || 0) >= cost),
+           needsSpecialization: skill.rank >= 3 && key !== "armor_use"
         };
       }
     }
 
-    // Skill Groups and Favorites
+    // ==========================================
+    // Группировка навыков и избранное
+    // ==========================================
+    // Навыки в DataModel хранятся плоским списком, но в UI разбиты по категориям.
     const skillCategories = {
       combat: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"],
       intellectual: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"],
@@ -279,12 +283,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     if (actorData.system.skills) {
       for (const [key, skillData] of Object.entries(actorData.system.skills)) {
+        // Определяем категорию навыка для правильного отображения в UI
         let category = "combat";
         if (skillCategories.intellectual.includes(key)) category = "intellectual";
         else if (skillCategories.practical.includes(key)) category = "practical";
         else if (skillCategories.social.includes(key)) category = "social";
 
-        const skillObj = { key: key, ...skillData, isFavorite: favSkillsFlag.includes(key) };
+        const skillObj = { key: key, ...skillData, isFavorite: favSkillsFlag.includes(key), category: category };
         skillGroups[category].push(skillObj);
         
         if (skillObj.isFavorite) {
@@ -367,6 +372,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
   _onRender(context, options) {
     super._onRender(context, options);
+    const html = this.element;
     const wrapper = this.element.querySelector(".scrollable-wrapper");
     if (wrapper) {
       wrapper.scrollTop = this._savedScrollTop;
@@ -445,7 +451,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         await item.update({"system.equipped": !item.system.equipped});
       } else if (item.type === "armor") {
         // Старая логика экипировки заменена на слоты (убрана отсюда)
-        ui.notifications.warn("Для брони используйте кнопки 'Надеть' (слоты).");
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.EquipArmorHint"));
       } else {
         const isFav = item.getFlag("dedrel", "isFavorite");
         await item.setFlag("dedrel", "isFavorite", !isFav);
@@ -466,7 +472,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     };
 
     const allowedSlots = slotOptions[item.system.slot];
-    if (!allowedSlots) return ui.notifications.warn("Неизвестный слот брони.");
+    if (!allowedSlots) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.UnknownArmorSlot"));
 
     const equipment_slots = this.document.system.equipment_slots;
     
@@ -483,7 +489,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       updates["system.equipment_slots.armor_middle.item_id"] = "";
       updates["system.equipment_slots.armor_lower.item_id"] = "";
       updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
-      ui.notifications.info(`Надета эксклюзивная броня: ${item.name}. Остальные слоты очищены.`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.ExclusiveArmorEquipped", {name: item.name}));
     } else {
       // Проверяем, нет ли уже надетой эксклюзивной брони
       let hasExclusive = false;
@@ -498,7 +504,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
       
       if (hasExclusive) {
-        return ui.notifications.warn("Нельзя надеть эту броню: уже надета броня с эксклюзивным слотом.");
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CannotEquipExclusive"));
       }
       
       updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
@@ -565,7 +571,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (item && typeof item.use === "function") {
       await item.use();
     } else if (item) {
-      ui.notifications.warn("Этот предмет нельзя использовать.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemCannotBeUsed"));
     }
   }
 
@@ -614,12 +620,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const currentLuck = actor.system.resources.luck_points.value;
     
     if (currentLuck <= 0) {
-      return ui.notifications.warn("У вас нет очков удачи!");
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoLuckPoints"));
     }
 
     const confirm = await Dialog.confirm({
-      title: "Трата Очка Удачи",
-      content: "<p>Вы можете перебросить любой 1 кубик (свой или противника).<br><b>Вы обязаны использовать новый результат.</b></p><p>Потратить 1 очко удачи?</p>",
+      title: game.i18n.localize("DEDREL.Chat.SpendLuckTitle"),
+      content: game.i18n.localize("DEDREL.Chat.SpendLuckContent"),
       yes: () => true,
       no: () => false,
       defaultYes: true
@@ -629,7 +635,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       await actor.update({ "system.resources.luck_points.value": currentLuck - 1 });
       ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        content: `<div class="dedrel-item-chat"><h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;"><i class="fas fa-clover" style="color: green;"></i> Очко Удачи!</h3><p><b>${actor.name}</b> тратит Очко Удачи.</p><p><i>Переброс 1 кубика (свой или противника), используется новый результат.</i></p></div>`
+        content: `<div class="dedrel-item-chat"><h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;"><i class="fas fa-clover" style="color: green;"></i> ${game.i18n.localize("DEDREL.Chat.LuckChatTitle")}</h3><p>${game.i18n.format("DEDREL.Chat.LuckChatFlavor", {name: actor.name})}</p><p>${game.i18n.localize("DEDREL.Chat.LuckChatDesc")}</p></div>`
       });
     }
   }
@@ -638,7 +644,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const actor = this.document;
     const maxLuck = actor.system.resources.luck_points.max;
     await actor.update({ "system.resources.luck_points.value": maxLuck });
-    ui.notifications.info("Очки удачи восстановлены.");
+    ui.notifications.info(game.i18n.localize("DEDREL.Notifications.LuckPointsRestored"));
   }
 
 
@@ -647,7 +653,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       const timeAdvance = restType === "long" ? 28800 : 3600;
       await game.time.advance(timeAdvance);
     } else {
-      ui.notifications.info("Время может проматывать только GM. Заряды и ОД восстановлены локально.");
+      ui.notifications.info(game.i18n.localize("DEDREL.Notifications.GMRestoreTimeOnly"));
     }
     
     const updateData = {};
@@ -686,7 +692,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       await actor.updateEmbeddedDocuments("Item", itemUpdates);
     }
     
-    ui.notifications.info(`${actor.name} совершил ${restType === "long" ? "длинный" : "короткий"} отдых.`);
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.RestPerformed", {name: actor.name, restType: restType === "long" ? game.i18n.localize("DEDREL.Notifications.RestLong") : game.i18n.localize("DEDREL.Notifications.RestShort")}));
   }
 
   static async #onToggleCreationLock(event, target) {
@@ -714,7 +720,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       if (total < 10) {
         await this.document.update({ [`system.bloodlines.${key}.rank`]: current + 1 });
       } else {
-        ui.notifications.warn("Достигнут лимит очков Линий Крови (10).");
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.BloodlinePointsLimit"));
       }
     }
   }
@@ -738,10 +744,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       if (total < 10) {
         await this.document.update({ [`system.attributes.${key}.rank`]: current + 1 });
       } else {
-        ui.notifications.warn("Достигнут лимит стартовых очков атрибутов (10).");
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.StartingAttributesLimit"));
       }
     } else {
-      ui.notifications.warn("Максимальное стартовое значение атрибута - 4.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.MaxStartingAttribute"));
     }
   }
 
@@ -764,10 +770,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       if (total < 15) {
         await this.document.update({ [`system.skills.${key}.rank`]: current + 1 });
       } else {
-        ui.notifications.warn("Достигнут лимит стартовых очков умений (15).");
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.StartingSkillsLimit"));
       }
     } else {
-      ui.notifications.warn("Максимальное стартовое значение навыка - 3.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.MaxStartingSkill"));
     }
   }
 
@@ -791,9 +797,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         [`system.attributes.${key}.rank`]: currentRank + 1,
         "system.details.xp": currentXp - cost
       });
-      ui.notifications.info(`Атрибут повышен за ${cost} XP.`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.AttributeUpgraded", {cost: cost}));
     } else {
-      ui.notifications.warn("Недостаточно опыта или достигнут максимальный ранг.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPOrMaxRank"));
     }
   }
 
@@ -809,9 +815,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         [`system.skills.${key}.rank`]: nextRank,
         "system.details.xp": currentXp - cost
       });
-      ui.notifications.info(`Улучшен навык ${key} до ранга ${nextRank} за ${cost} XP.`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.SkillUpgraded", {key: key, nextRank: nextRank, cost: cost}));
     } else {
-      ui.notifications.warn("Недостаточно очков опыта для улучшения навыка.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPForSkill"));
     }
   }
 
@@ -856,7 +862,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (effect && effect.parent.documentName === "Actor") {
       return effect.delete();
     } else if (effect) {
-      ui.notifications.warn("Невозможно удалить эффект, принадлежащий предмету. Измените предмет.");
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CannotDeleteItemEffect"));
     }
   }
 
@@ -879,7 +885,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       });
       await this.document.setFlag("dedrel", "total_xp", totalExp + expValue);
       
-      ui.notifications.info(`Получено опыта: ${expValue}`);
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.XPGained", {value: expValue}));
       // Do not create the item
       return [];
     }
@@ -920,7 +926,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       const targetElement = event.target.closest(".drop-zone");
       if (targetElement) {
         if (this.document.getFlag("dedrel", "creationLocked")) {
-          ui.notifications.warn("Создание персонажа заблокировано!");
+          ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CharacterCreationLocked"));
           return false;
         }
 
@@ -944,7 +950,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
            }
            const maxPoints = 3 + Math.min(harmfulCount, 2);
            if (totalUsed + (itemObj.system.xp_cost || 0) > maxPoints) {
-             ui.notifications.warn("Недостаточно очков для стартовой полезной мутации!");
+             ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughPointsForMutation"));
              return false;
            }
         } else if (dropType === "mutation-harmful") {
@@ -956,7 +962,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
              }
            }
            if (harmfulCount >= 2) {
-             ui.notifications.warn("Максимум 2 стартовые вредные мутации!");
+             ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.MaxStartingHarmfulMutations"));
              return false;
            }
         }

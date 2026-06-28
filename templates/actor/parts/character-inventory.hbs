@@ -1,5 +1,5 @@
 <div class="tab inventory {{tabs.inventory.cssClass}}" data-group="primary" data-tab="inventory">
-    <h2 class="tab-title">Оружие</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Weapons"}}</h2>
     <div class="item-list">
         {{#each weapons as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -12,52 +12,52 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="toggle-favorite" title="Экипировать"><i
+                <a class="item-control" data-action="toggle-favorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}"><i
                         class="{{#if item.system.equipped}}fas{{else}}far{{/if}} fa-star"></i></a>
-                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}
     </div>
 
-    <h2 class="tab-title">Слоты Брони</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.ArmorSlots"}}</h2>
     {{#if system.armor_penalty}}
     <div class="armor-penalty-warning" style="background: rgba(255, 0, 0, 0.1); border: 1px solid var(--color-text-dark-primary); color: #b72a2a; padding: 5px; margin-bottom: 10px; border-radius: 4px; text-align: center;">
-        <i class="fas fa-exclamation-triangle"></i> Недостаточный ранг навыка 'Ношение доспехов'! Штраф: -2 к Инициативе, -2 к Скорости.
+        <i class="fas fa-exclamation-triangle"></i> {{localize "DEDREL.ActorSheet.ArmorPenaltyWarning"}}
     </div>
     {{/if}}
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Верхний слой</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.UpperLayer"}}</h4>
             {{#if equipment_slots.armor_upper}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_upper.name}}</div>
-            <a class="item-control" data-action="unequipArmor" data-slot="armor_upper" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_upper" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Средний слой</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MiddleLayer"}}</h4>
             {{#if equipment_slots.armor_middle}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_middle.name}}</div>
-            <a class="item-control" data-action="unequipArmor" data-slot="armor_middle" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_middle" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Нижний слой</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.LowerLayer"}}</h4>
             {{#if equipment_slots.armor_lower}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_lower.name}}</div>
-            <a class="item-control" data-action="unequipArmor" data-slot="armor_lower" title="Снять"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_lower" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
     </div>
 
-    <h2 class="tab-title">Броня (Инвентарь)</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.ArmorInventory"}}</h2>
     <div class="item-list">
         {{#each armors as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -70,15 +70,15 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="equipArmor" title="Надеть"><i class="fas fa-tshirt"></i></a>
-                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
+                <a class="item-control" data-action="equipArmor" title="{{localize "DEDREL.ActorSheet.Equip"}}"><i class="fas fa-tshirt"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}
     </div>
 
-    <h2 class="tab-title">Магические предметы</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.MagicItems"}}</h2>
     <div class="item-list">
         {{#each magic_items as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
@@ -91,21 +91,21 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="toggle-favorite" title="В избранное"><i
+                <a class="item-control" data-action="toggle-favorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}"><i
                         class="{{#if item.flags.dedrel.isFavorite}}fas{{else}}far{{/if}} fa-star"></i></a>
-                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}
     </div>
 
-    <h2 class="tab-title">Прочий инвентарь</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.GeneralInventory"}}</h2>
     <div class="item-list">
         <div class="item-list-header flexrow">
-            <div class="item-name">Название</div>
+            <div class="item-name">{{localize "DEDREL.UI.Name"}}</div>
             <div class="item-controls">
-                <a class="item-control" data-action="create" data-type="loot" title="Добавить предмет"><i
+                <a class="item-control" data-action="create" data-type="loot" title="{{localize "DEDREL.ActorSheet.Add"}}"><i
                         class="fas fa-plus"></i></a>
             </div>
         </div>
@@ -120,10 +120,10 @@
                 {{/if}}
             </div>
             <div class="item-controls">
-                <a class="item-control" data-action="toggle-favorite" title="В избранное"><i
+                <a class="item-control" data-action="toggle-favorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}"><i
                         class="{{#if item.flags.dedrel.isFavorite}}fas{{else}}far{{/if}} fa-star"></i></a>
-                <a class="item-control" data-action="edit" title="Редактировать"><i class="fas fa-edit"></i></a>
-                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="Удалить"><i class="fas fa-trash"></i></a>{{/unless}}
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
         {{/each}}
