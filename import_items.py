@@ -50,6 +50,15 @@ def parse_md_file(filepath):
     # Generate Foundry Item Data matching DataModel
     item_type = frontmatter.get("type", "maneuver")
     
+    # Обрабатываем action_type как словарь булевых значений
+    raw_action_type = frontmatter.get("action_type", [])
+    action_type_obj = {
+        "action": "action" in raw_action_type,
+        "reaction": "reaction" in raw_action_type,
+        "free": "free" in raw_action_type,
+        "chain": "chain" in raw_action_type
+    }
+    
     item = {
         "name": frontmatter.get("title", "Unnamed Item"),
         "type": item_type,
@@ -57,7 +66,7 @@ def parse_md_file(filepath):
         "system": {
             "description": body,
             "source": frontmatter.get("source", "basic"),
-            "action_type": frontmatter.get("action_type", []),
+            "action_type": action_type_obj,
             "chain_trigger_text": frontmatter.get("chain_trigger_text", ""),
             "chain_trigger_maneuvers": frontmatter.get("chain_trigger_maneuvers", []),
             "ap_cost": frontmatter.get("ap_cost", 0),

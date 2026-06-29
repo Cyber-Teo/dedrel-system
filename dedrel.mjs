@@ -11,6 +11,7 @@ import DedrelItem from "./src/documents/item.mjs";
 import { showRollDialog } from "./src/dice/roll.mjs";
 import { registerSystemSettings } from "./src/settings.mjs";
 import ActiveEffectsHUD from "./src/apps/active-effects-hud.mjs";
+import ChainManeuversHUD from "./src/apps/chain-maneuvers-hud.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -23,9 +24,18 @@ Hooks.once("init", function() {
   registerSystemSettings();
 
   // Инициатива (стандартный расчет Foundry для системы)
+  let initDirection = -1;
+  try {
+    const sortSetting = game.settings.get("dedrel", "initiativeSort");
+    if (sortSetting === "ascending") initDirection = 1;
+  } catch (e) {
+    // Настройка может быть еще не готова, используем дефолт
+  }
+
   CONFIG.Combat.initiative = {
     formula: "@initiative + 1d10",
-    decimals: 2
+    decimals: 2,
+    direction: initDirection
   };
 
   // Регистрация кастомного класса предмета и моделей данных для предметов (Item)
@@ -131,7 +141,9 @@ Hooks.once("init", function() {
         baseRank: skillData.rank,
         isSave: false
       });
-    }
+    },
+    effectsHUD: new ActiveEffectsHUD(),
+    chainHUD: new ChainManeuversHUD()
   };
 });
 
@@ -416,8 +428,12 @@ async function createSkillMacro(data, slot) {
 
 Hooks.on("updateCombat", async (combat, changed, options, userId) => {
   if (!game.user.isGM) return;
+  if (!combat.started) return;
 
-  if (changed.round !== undefined && combat.round > 0) {
+  const restoreTiming = game.settings.get("dedrel", "apRestoreTiming") || "startOfTurn";
+
+  // Логика восстановления в начале раунда для ВСЕХ
+  if (restoreTiming === "startOfRound" && changed.round !== undefined && combat.round > 0) {
     if (options.direction === 1 || options.direction === undefined) {
       let updatedAny = false;
       for (const combatant of combat.combatants) {
@@ -446,6 +462,40 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
       if (updatedAny) {
         ui.notifications.info(game.i18n.localize("DEDREL.Notifications.RoundAPRestored"));
       }
+    }
+  }
+
+  // Логика восстановления в начале хода для ТЕКУЩЕГО персонажа
+  if (restoreTiming === "startOfTurn" && (changed.turn !== undefined || changed.round !== undefined)) {
+    if (options.direction === 1 || options.direction === undefined) {
+      const combatant = combat.combatant;
+      if (combatant && combatant.actor && combatant.actor.type === "character") {
+        const actor = combatant.actor;
+        const res = actor.system.resources;
+        if (res) {
+          const updateData = {};
+          if (res.ap_universal && res.ap_universal.value !== res.ap_universal.max) {
+            updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
+          }
+          if (res.ap_magic && res.ap_magic.value !== res.ap_magic.max) {
+            updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
+          }
+          if (res.ap_maneuver && res.ap_maneuver.value !== res.ap_maneuver.max) {
+            updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
+          }
+          
+          if (Object.keys(updateData).length > 0) {
+            await actor.update(updateData);
+          }
+        }
+      }
+    }
+  }
+
+  // Закрытие окна цепных манёвров при смене хода (чтобы не загромождать интерфейс)
+  if (changed.turn !== undefined || changed.round !== undefined) {
+    if (game.dedrel.chainHUD && game.dedrel.chainHUD.actor) {
+      game.dedrel.chainHUD.closeHUD();
     }
   }
 });

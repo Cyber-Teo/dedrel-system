@@ -15,6 +15,47 @@ export function registerSystemSettings() {
     requiresReload: true   // Foundry V11+ автоматически предложит перезагрузку
   });
 
+  game.settings.register("dedrel", "apRestoreTiming", {
+    name: "DEDREL.Settings.APRestoreTiming.Name",
+    hint: "DEDREL.Settings.APRestoreTiming.Hint",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      "startOfRound": "DEDREL.Settings.APRestoreTiming.StartOfRound",
+      "startOfTurn": "DEDREL.Settings.APRestoreTiming.StartOfTurn"
+    },
+    default: "startOfTurn",
+    requiresReload: false
+  });
+
+  game.settings.register("dedrel", "initiativeSort", {
+    name: "DEDREL.Settings.InitiativeSort.Name",
+    hint: "DEDREL.Settings.InitiativeSort.Hint",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      "descending": "DEDREL.Settings.InitiativeSort.Descending",
+      "ascending": "DEDREL.Settings.InitiativeSort.Ascending"
+    },
+    default: "descending",
+    requiresReload: true,
+    onChange: (value) => {
+      CONFIG.Combat.initiative.direction = value === "descending" ? -1 : 1;
+    }
+  });
+
+  game.settings.register("dedrel", "showChainsOutsideCombat", {
+    name: "DEDREL.Settings.ShowChainsOutsideCombat.Name",
+    hint: "DEDREL.Settings.ShowChainsOutsideCombat.Hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: false
+  });
+
   // В будущем сюда можно добавлять другие настройки, например:
   // - Использовать ли опциональные правила (scope: "world")
   // - Тема оформления чаршита (scope: "client")

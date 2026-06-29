@@ -155,7 +155,15 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "free": game.i18n.localize("DEDREL.ActionTypes.free"),
         "chain": game.i18n.localize("DEDREL.ActionTypes.chain")
       };
-      context.joinedActionType = (itemData.system.action_type || [])[0];
+      
+      const aType = itemData.system.action_type || {};
+      context.actionTypeChecked = {
+        action: !!aType.action,
+        reaction: !!aType.reaction,
+        free: !!aType.free,
+        chain: !!aType.chain
+      };
+
       context.joinedChainTriggers = (itemData.system.chain_trigger_maneuvers || []).join("; ");
       
       context.targetTypes = {
@@ -226,7 +234,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "system.prerequisites_mutations",
         "system.prerequisites_bloodlines",
         "system.adds_items",
-        "system.action_type",
         "system.chain_trigger_maneuvers"
       ];
       for (const field of arrayFields) {

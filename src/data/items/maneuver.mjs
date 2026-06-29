@@ -4,8 +4,14 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "", label: "System Key" }),
       source: new fields.StringField({ required: true, blank: true, initial: "basic" }),
-      action_type: new fields.ArrayField(new fields.StringField()),
+      action_type: new fields.SchemaField({
+        action: new fields.BooleanField(),
+        reaction: new fields.BooleanField(),
+        free: new fields.BooleanField(),
+        chain: new fields.BooleanField()
+      }),
       chain_trigger_text: new fields.StringField({ required: true, blank: true }),
       chain_trigger_maneuvers: new fields.ArrayField(new fields.StringField()),
       
@@ -61,5 +67,18 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       
       on_use_macro: new fields.StringField({ initial: "", label: "On Use Macro" })
     };
+  }
+
+  static migrateData(source) {
+    if (Array.isArray(source.action_type)) {
+      const arr = source.action_type;
+      source.action_type = {
+        action: arr.includes("action"),
+        reaction: arr.includes("reaction"),
+        free: arr.includes("free"),
+        chain: arr.includes("chain")
+      };
+    }
+    return super.migrateData(source);
   }
 }

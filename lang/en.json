@@ -143,8 +143,11 @@
       "UnlockItems": "Unlock Item Deletion"
     },
     "Chat": {
-      "Weapon": "Weapon: ",
-      "NoEquippedWeapon": "No suitable equipped weapon.",
+      "Weapon": "Used Weapon",
+      "NoEquippedWeapon": "No suitable equipped weapon",
+      "ChainTriggered": "Available chains after {name}",
+      "NoChainManeuvers": "No available chain maneuvers.",
+      "FreeActionReminder": "Don't forget you can perform Free actions at any time.",
       "AttackCardTitle": "Attack: {name}",
       "DamageCardFlavor": "Damage: {name}",
       "SpendLuckTitle": "Spend Luck Point",
@@ -194,6 +197,23 @@
       "Current": "Current Uses",
       "Maximum": "Maximum",
       "Recovery": "Recovery",
+      "Source": "Source",
+      "ActionType": "Action Type",
+      "VariableCost": "Variable Cost",
+      "MaxAPVariable": "Max AP (if var.)",
+      "TargetAndArea": "Target & Area",
+      "TargetType": "Target Type",
+      "NumTargets": "Num Targets",
+      "AreaShape": "Area Shape",
+      "AreaSizeM": "Area Size (m)",
+      "FormulasAndSaves": "Formulas & Saves",
+      "FormulaCustom": "Custom Formula",
+      "SaveAttribute": "Save Attribute",
+      "SaveDC": "Save DC",
+      "ForbiddenDefense": "Forbidden Defense",
+      "ChainTriggers": "Chain Triggers",
+      "TriggerText": "Trigger Text",
+      "ChainManeuvers": "Chain Maneuvers",
       "OnUseMacro": "On Use Macro",
       "WeaponRequirements": "Weapon Requirements",
       "WeaponType": "Weapon Type",
@@ -488,6 +508,30 @@
       "SkillToRemove": "Skill Key for Removal",
       "RemoveDC": "Removal DC"
     },
+    "ManeuverSources": {
+      "basic": "Basic",
+      "talent": "Talent",
+      "mutation": "Mutation"
+    },
+    "ActionTypes": {
+      "action": "Action",
+      "reaction": "Reaction",
+      "free": "Free Action",
+      "chain": "Chain"
+    },
+    "TargetTypes": {
+      "self": "Self",
+      "creature": "Creature",
+      "point": "Point",
+      "area": "Area"
+    },
+    "TemplateShapes": {
+      "none": "None",
+      "square": "Square",
+      "circle": "Circle",
+      "cone": "Cone",
+      "line": "Line"
+    },
     "ConditionCategories": {
       "negative": "Negative (Debuff)",
       "neutral": "Neutral",
@@ -505,9 +549,25 @@
     },
     "Settings": {
       "Language": {
-        "Name": "System Language Override",
-        "Hint": "Forces the system to use a specific language, regardless of the core Foundry VTT language settings.",
-        "Auto": "Auto (Core Settings)"
+        "Name": "System Language (Forced)",
+        "Hint": "Allows forcing the language for Dedrel system windows regardless of the core Foundry VTT settings.",
+        "Auto": "Automatic (Use core settings)"
+      },
+      "APRestoreTiming": {
+        "Name": "Action Points Restore Timing",
+        "Hint": "When to restore Action Points in combat: at the start of a new round or at the start of a character's turn?",
+        "StartOfRound": "Start of Round",
+        "StartOfTurn": "Start of Turn"
+      },
+      "InitiativeSort": {
+        "Name": "Initiative Sorting",
+        "Hint": "How to sort initiative in the combat tracker: descending (highest first) or ascending (lowest first)?",
+        "Descending": "Descending (Highest first)",
+        "Ascending": "Ascending (Lowest first)"
+      },
+      "ShowChainsOutsideCombat": {
+        "Name": "Chain Maneuvers Outside Combat",
+        "Hint": "Show the chain maneuvers selection popup even when combat has not started (useful for testing)."
       }
     }
   }

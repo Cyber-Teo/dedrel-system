@@ -1148,3 +1148,98 @@ form.dedrel.sheet.item {
   pointer-events: none;
   white-space: nowrap;
 }
+
+/* ==================================================
+ * Chain Maneuvers HUD
+ * ================================================== */
+.dedrel.chain-hud {
+  /* Нативная рамка V14 сама позиционирует окно, нам не нужен абсолют */
+}
+
+.chain-maneuvers-container {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-dark);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--color-text-dark-primary);
+  font-family: var(--font-primary);
+  width: 320px;
+}
+
+.chain-list {
+  padding: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chain-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chain-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 5px var(--color-shadow-highlight);
+}
+
+.chain-item.disabled {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.chain-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 8px;
+  border: 1px solid var(--color-border-dark);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.chain-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.chain-name {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.chain-cost {
+  font-size: 11px;
+  color: var(--color-text-dark-secondary);
+}
+
+.no-chains {
+  padding: 12px;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-dark-secondary);
+  margin: 0;
+}
+
+.chain-footer {
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--color-border);
+  font-size: 11px;
+  color: var(--color-text-dark-secondary);
+  text-align: center;
+}
+.chain-footer p {
+  margin: 0;
+}

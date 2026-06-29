@@ -1,0 +1,22 @@
+<div class="chain-maneuvers-container">
+  
+  {{#if chainManeuvers.length}}
+  <div class="chain-list">
+    {{#each chainManeuvers}}
+    <div class="chain-item {{#unless this.canAfford}}disabled{{/unless}}" data-action="useChainManeuver" data-item-id="{{this.id}}">
+      <img src="{{this.img}}" alt="{{this.name}}" />
+      <div class="chain-info">
+        <span class="chain-name">{{this.name}}</span>
+        <span class="chain-cost">{{this.cost}} {{localize "DEDREL.Resources.AP"}}</span>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{else}}
+  <p class="no-chains">{{localize "DEDREL.Chat.NoChainManeuvers"}}</p>
+  {{/if}}
+
+  <div class="chain-footer">
+    <p><i class="fa-solid fa-info-circle"></i> {{localize "DEDREL.Chat.FreeActionReminder"}}</p>
+  </div>
+</div>

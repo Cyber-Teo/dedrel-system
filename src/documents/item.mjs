@@ -256,6 +256,17 @@ export default class DedrelItem extends Item {
             }
 
             await this.postToChat(selectedWeaponId);
+
+            // Обработка цепных манёвров
+            if (this.type === "maneuver") {
+              const aType = this.system.action_type || {};
+              if (aType.action || aType.chain || aType.reaction) {
+                const showOutside = game.settings.get("dedrel", "showChainsOutsideCombat");
+                if (game.combat?.started || showOutside) {
+                  game.dedrel.chainHUD.showFor(actor, this);
+                }
+              }
+            }
           }
         },
         {
