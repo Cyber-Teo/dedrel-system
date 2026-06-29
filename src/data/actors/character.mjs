@@ -102,6 +102,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         luck_points: new fields.SchemaField({
           max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        }),
+        movement: new fields.SchemaField({
+          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         })
       }),
 
@@ -124,7 +128,6 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       }),
 
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
-      movement: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
       
       details: new fields.SchemaField({
         xp: new fields.NumberField({ required: true, integer: true, initial: 0 }),
@@ -193,7 +196,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     this.initiative = Math.max(attrs.int.rank, attrs.rea.rank);
 
     // Movement
-    this.movement = Math.floor(2 + attrs.dex.rank);
+    res.movement.max = Math.floor(2 + attrs.dex.rank);
 
     // DR and Armor calculation
     this.dr = { slashing: 0, piercing: 0, bludgeoning: 0, heat: 0, cold: 0, necrotic: 0, radiant: 0, electric: 0, sonic: 0 };
@@ -219,7 +222,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         if (armor.system.modifiers) {
           def.dodge += (armor.system.modifiers.dodge || 0);
           def.block += (armor.system.modifiers.block || 0);
-          this.movement += (armor.system.modifiers.movement || 0);
+          res.movement.max += (armor.system.modifiers.movement || 0);
         }
         
         const weightClass = armor.system.weight_class;
@@ -245,7 +248,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         // -2 к Инициативе, -2 к Скорости. 
         // Этот штраф также отображается в инвентаре для удобства игрока.
         this.initiative -= 2;
-        this.movement -= 2;
+        res.movement.max -= 2;
       }
     }
   }

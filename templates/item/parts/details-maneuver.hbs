@@ -75,6 +75,11 @@
         <label>{{localize "DEDREL.ItemSheet.AreaSizeM"}}</label>
         <input type="text" name="system.template_size" value="{{system.template_size}}" data-dtype="Number"/>
     </div>
+    {{#if (and system.template_shape system.template_size)}}
+    <div class="form-group">
+        <button type="button" class="dedrel-action" data-action="placeTemplate" style="width: 100%;"><i class="fa-solid fa-ruler-combined"></i> {{localize "DEDREL.Chat.PlaceTemplate"}}</button>
+    </div>
+    {{/if}}
 
     <div class="section-header">
         {{localize "DEDREL.ItemSheet.FormulasAndSaves"}}

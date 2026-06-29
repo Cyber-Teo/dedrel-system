@@ -286,10 +286,11 @@ export default class DedrelItem extends Item {
     let weaponAttr = weaponId ? `data-weapon-id="${weaponId}"` : "";
     
     let showCombatButtons = false;
+    let reqWeapon = false;
     if (this.type === "maneuver" || this.type === "spell") {
        const wType = this.system.req_weapon_type || {};
        const wDmg = this.system.req_weapon_damage_type || {};
-       const reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
+       reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
                           wDmg.piercing || wDmg.bludgeoning || wDmg.slashing);
        
        if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute) {
@@ -300,9 +301,25 @@ export default class DedrelItem extends Item {
     let buttons = "";
     if (showCombatButtons) {
       buttons += `
+        <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
+      `;
+      if (this.system.formula_attack || reqWeapon) {
+        buttons += `<button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>`;
+      }
+      if (this.system.formula_damage || reqWeapon) {
+        buttons += `<button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>`;
+      }
+      if (this.system.save_attribute) {
+        const dc = this.system.save_dc || this.system.save_dc_formula || "";
+        buttons += `<button class="dedrel-chat-action" data-action="rollSave" data-save="${this.system.save_attribute}" data-dc="${dc}"><i class="fa-solid fa-shield-halved"></i> ${game.i18n.localize("DEDREL.Chat.Save")} (${this.system.save_attribute.toUpperCase()})</button>`;
+      }
+      buttons += `</div>`;
+    }
+
+    if (this.system.template_shape && this.system.template_size) {
+      buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
-          <button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>
-          <button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>
+          <button class="dedrel-chat-action" data-action="placeTemplate" data-shape="${this.system.template_shape}" data-size="${this.system.template_size}"><i class="fa-solid fa-ruler-combined"></i> ${game.i18n.localize("DEDREL.Chat.PlaceTemplate")}</button>
         </div>
       `;
     }

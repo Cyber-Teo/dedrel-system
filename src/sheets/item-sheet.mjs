@@ -1,5 +1,6 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
+import { placeTemplatePreview } from "../canvas/template.mjs";
 /**
  * Основной класс Листа Предмета для системы Dedrel.
  * Наследуется от нового Foundry V2 Application Framework (ItemSheetV2).
@@ -27,7 +28,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       editImage: DedrelItemSheet.#onEditImage,
       addEffect: DedrelItemSheet.#onAddEffect,
       editEffect: DedrelItemSheet.#onEditEffect,
-      deleteEffect: DedrelItemSheet.#onDeleteEffect
+      deleteEffect: DedrelItemSheet.#onDeleteEffect,
+      placeTemplate: DedrelItemSheet.#onPlaceTemplate
     }
   };
 
@@ -300,5 +302,31 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
     if (effect) return effect.delete();
+  }
+
+  static async #onPlaceTemplate(event, target) {
+    let shape = this.document.system.template_shape;
+    const size = parseFloat(this.document.system.template_size) || 0;
+    
+    if (!shape || size <= 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.InvalidTemplateData"));
+    
+    if (shape === "square") shape = "rect";
+    if (shape === "line") shape = "ray";
+
+    const templateData = {
+      t: shape,
+      distance: size,
+      user: game.user.id,
+      fillColor: game.user.color
+    };
+
+    if (shape === "ray") {
+      templateData.width = canvas.scene.grid.distance;
+    } else if (shape === "rect") {
+      templateData.direction = 45;
+      templateData.distance = Math.hypot(size, size);
+    }
+
+    placeTemplatePreview(templateData);
   }
 }
