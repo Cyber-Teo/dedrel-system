@@ -56,7 +56,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       spendLuck: DedrelCharacterSheet.#onSpendLuck,
       resetLuck: DedrelCharacterSheet.#onResetLuck,
       equipArmor: DedrelCharacterSheet.#onEquipArmor,
-      unequipArmor: DedrelCharacterSheet.#onUnequipArmor
+      unequipArmor: DedrelCharacterSheet.#onUnequipArmor,
+      equipWeapon: DedrelCharacterSheet.#onEquipWeapon,
+      unequipWeapon: DedrelCharacterSheet.#onUnequipWeapon
     }
   };
 
@@ -147,10 +149,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    const hasTail = mutations.some(m => m.name.toLowerCase().includes("хвост"));
+
     const equipment_slots = {
       armor_upper: actorData.system.equipment_slots?.armor_upper?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_upper.item_id) : null,
       armor_middle: actorData.system.equipment_slots?.armor_middle?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_middle.item_id) : null,
       armor_lower: actorData.system.equipment_slots?.armor_lower?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_lower.item_id) : null,
+      main_hand: actorData.system.equipment_slots?.main_hand?.item_id ? actorData.items.get(actorData.system.equipment_slots.main_hand.item_id) : null,
+      off_hand: actorData.system.equipment_slots?.off_hand?.item_id ? actorData.items.get(actorData.system.equipment_slots.off_hand.item_id) : null,
+      tail: actorData.system.equipment_slots?.tail?.item_id ? actorData.items.get(actorData.system.equipment_slots.tail.item_id) : null,
     };
 
     // Enrich HTML for biography using namespaced TextEditor
@@ -368,6 +375,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       skillGroups,
       favoriteSkillsData,
       equipment_slots,
+      hasTail,
       tabs: this._prepareTabs("primary"),
       editable: this.isEditable
     });
@@ -458,9 +466,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const item = this.document.items.get(itemId);
     if (item) {
       if (item.type === "weapon") {
-        await item.update({"system.equipped": !item.system.equipped});
+        ui.notifications.warn("Для оружия используйте кнопки 'Надеть' (слоты).");
       } else if (item.type === "armor") {
-        // Старая логика экипировки заменена на слоты (убрана отсюда)
         ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.EquipArmorHint"));
       } else {
         const isFav = item.getFlag("dedrel", "isFavorite");
@@ -527,6 +534,68 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const slot = target.dataset.slot; // e.g. "armor_upper"
     if (slot) {
       await this.document.update({ [`system.equipment_slots.${slot}.item_id`]: "" });
+    }
+  }
+
+  static async #onEquipWeapon(event, target) {
+    const itemId = target.closest(".item-row").dataset.itemId;
+    const item = this.document.items.get(itemId);
+    if (!item || item.type !== "weapon") return;
+
+    if (item.system.equipped) {
+      return ui.notifications.warn("Это оружие уже экипировано. Сначала снимите его из слота.");
+    }
+
+    const equipment_slots = this.document.system.equipment_slots;
+    const isTwoHanded = item.system.is_twohanded;
+    const hasTail = this.document.items.some(i => i.type === "mutation" && i.name.toLowerCase().includes("хвост"));
+
+    const updates = {};
+
+    if (isTwoHanded) {
+      if (!equipment_slots.main_hand.item_id && !equipment_slots.off_hand.item_id) {
+         updates["system.equipment_slots.main_hand.item_id"] = item.id;
+         updates["system.equipment_slots.off_hand.item_id"] = item.id;
+      } else {
+         return ui.notifications.warn("Обе руки должны быть свободны для экипировки двуручного оружия.");
+      }
+    } else {
+      if (!equipment_slots.main_hand.item_id) {
+         updates["system.equipment_slots.main_hand.item_id"] = item.id;
+      } else if (!equipment_slots.off_hand.item_id) {
+         updates["system.equipment_slots.off_hand.item_id"] = item.id;
+      } else if (hasTail && !equipment_slots.tail.item_id) {
+         updates["system.equipment_slots.tail.item_id"] = item.id;
+      } else {
+         return ui.notifications.warn("Нет свободных слотов для оружия (освободите руки или хвост).");
+      }
+    }
+
+    if (Object.keys(updates).length > 0) {
+      await this.document.update(updates);
+      await item.update({"system.equipped": true});
+    }
+  }
+
+  static async #onUnequipWeapon(event, target) {
+    const slot = target.dataset.slot; 
+    const equipment_slots = this.document.system.equipment_slots;
+    const itemId = equipment_slots[slot]?.item_id;
+    if (!itemId) return;
+
+    const updates = {};
+    const item = this.document.items.get(itemId);
+    
+    if (item && item.system.is_twohanded) {
+      updates["system.equipment_slots.main_hand.item_id"] = "";
+      updates["system.equipment_slots.off_hand.item_id"] = "";
+    } else {
+      updates[`system.equipment_slots.${slot}.item_id`] = "";
+    }
+
+    await this.document.update(updates);
+    if (item) {
+      await item.update({"system.equipped": false});
     }
   }
 

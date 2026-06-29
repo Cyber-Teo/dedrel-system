@@ -96,8 +96,20 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
+      
+      context.ammoOptions = { "": "None" };
+      if (this.document.actor) {
+        this.document.actor.items.forEach(i => {
+          if (i.type === "ammunition" || i.type === "weapon") {
+            if (i.id !== this.document.id) {
+              context.ammoOptions[i.id] = `${i.name} (${i.system.quantity || 0})`;
+            }
+          }
+        });
+      }
     }
     
+    context.hasQuantity = itemData.system.quantity !== undefined;
     if (itemData.type === "armor") {
       context.armorSlots = {
         "lower": game.i18n.localize("DEDREL.ArmorSlots.lower"),

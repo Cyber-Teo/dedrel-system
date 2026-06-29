@@ -1241,5 +1241,111 @@ form.dedrel.sheet.item {
   text-align: center;
 }
 .chain-footer p {
-  margin: 0;
+  margin: 0 0 5px 0;
+}
+
+.cancel-chain-btn {
+  width: 100%;
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  color: var(--color-text-dark-primary);
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: var(--font-primary);
+}
+
+.cancel-chain-btn:hover {
+  background: rgba(255, 0, 0, 0.4);
+  border-color: rgba(255, 0, 0, 0.6);
+  color: #fff;
+}
+
+/* ==================================================
+ * AP HUD (Fallout Style)
+ * ================================================== */
+.dedrel.ap-hud {
+  pointer-events: none;
+  z-index: 50;
+  position: fixed !important;
+  bottom: 75px !important; /* Above the hotbar */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: auto !important;
+}
+
+.ap-hud-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--color-border-dark);
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  pointer-events: auto;
+}
+
+.ap-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ap-label {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 14px;
+  width: 35px;
+  text-align: right;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.ap-cubes {
+  display: flex;
+  gap: 4px;
+}
+
+.ap-cube {
+  width: 14px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.8);
+  transition: all 0.2s;
+}
+
+/* Maneuver AP (Gold) */
+.ap-row.maneuver .ap-label { color: #FFD700; }
+.ap-row.maneuver .ap-cube.active {
+  background: #FFD700;
+  border-color: #ffe666;
+  box-shadow: 0 0 8px #FFD700, inset 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* Universal AP (Moccasin) */
+.ap-row.universal .ap-label { color: #FFE4B5; }
+.ap-row.universal .ap-cube.active {
+  background: #FFE4B5;
+  border-color: #fff1d6;
+  box-shadow: 0 0 8px #FFE4B5, inset 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* Magic AP (Indigo) */
+.ap-row.magic .ap-label { color: #4B0082; }
+.ap-row.magic .ap-cube.active {
+  background: #4B0082;
+  border-color: #7a1ee6;
+  box-shadow: 0 0 8px #4B0082, inset 0 0 5px rgba(255,255,255,0.2);
+}
+
+/* Inventory Tab Headers */
+.dedrel.sheet.actor h2.tab-title {
+    font-size: 1.2em;
+    margin: 10px 0 5px 0;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--color-border-dark-highlight);
+    color: var(--color-text-dark-primary);
 }

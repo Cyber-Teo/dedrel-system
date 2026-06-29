@@ -17,7 +17,8 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
       top: 100
     },
     actions: {
-      useChainManeuver: ChainManeuversHUD.#onUseChainManeuver
+      useChainManeuver: ChainManeuversHUD.#onUseChainManeuver,
+      cancelChain: ChainManeuversHUD.#onCancelChain
     }
   };
 
@@ -103,6 +104,10 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
       // Use the maneuver. The `use` method inside Item will trigger a new HUD if it's an action/chain
       await item.use();
     }
+  }
+
+  static async #onCancelChain(event, target) {
+    this.closeHUD();
   }
 
   _onRender(context, options) {

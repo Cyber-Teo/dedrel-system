@@ -71,6 +71,22 @@
         <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
         <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
     </div>
+
+    {{#if system.weapon_type.ranged}}
+    <div class="section-header" style="grid-column: 1 / -1; margin-top: 10px;">
+        Боеприпасы (Ammunition)
+    </div>
+    <div class="form-group">
+        <label>Использует (Consume Target)</label>
+        <select name="system.consume_target">
+            {{selectOptions ammoOptions selected=system.consume_target}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Расход за атаку (Amount)</label>
+        <input type="number" name="system.consume_amount" value="{{system.consume_amount}}" data-dtype="Number"/>
+    </div>
+    {{/if}}
 </div> <!-- CLOSE form-fields-grid inside details-weapon -->
 
 <div class="form-group stacked">

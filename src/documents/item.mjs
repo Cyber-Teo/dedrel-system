@@ -138,13 +138,38 @@ export default class DedrelItem extends Item {
       }
     }
 
+    // Проверка боеприпасов и расходуемых предметов
+    let ammoItem = null;
+    let consumeAmount = this.system.consume_amount || 1;
+    let isSelfConsume = false;
+    let hasEnoughAmmo = true;
+    let consumesResources = false;
+
+    if (this.type === "weapon" && this.system.consume_target) {
+      ammoItem = actor.items.get(this.system.consume_target);
+      consumesResources = true;
+      if (ammoItem) {
+        if (ammoItem.system.quantity < consumeAmount) {
+          hasEnoughAmmo = false;
+        }
+      } else {
+        hasEnoughAmmo = false; // Привязанный предмет не найден
+      }
+    } else if (this.system.properties?.consumed_on_use || this.system.consumable || this.type === "ammunition") {
+      isSelfConsume = true;
+      consumesResources = true;
+      if ((this.system.quantity || 0) < consumeAmount) {
+        hasEnoughAmmo = false;
+      }
+    }
+
     // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
     const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
-    if (apCost === 0 && !hasCharges && !requiresWeapon && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good")) {
+    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
       return this.sheet.render(true);
     }
     
-    if (apCost === 0 && !hasCharges && !requiresWeapon) {
+    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources) {
       return this.sheet.render(true);
     }
 
@@ -176,6 +201,20 @@ export default class DedrelItem extends Item {
       content += `<p>${game.i18n.format("DEDREL.Chat.SpendCharge", {value: usesValue, max: usesMax})}</p>`;
       if (usesValue <= 0) {
         content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Chat.OutOfCharges")}</p>`;
+      }
+    }
+
+    if (ammoItem) {
+      if (!hasEnoughAmmo) {
+        content += `<p style="color: red; font-weight: bold;">Недостаточно боеприпасов: ${ammoItem.name} (${ammoItem.system.quantity}/${consumeAmount})</p>`;
+      } else {
+        content += `<p>Потратится: ${ammoItem.name} x${consumeAmount}</p>`;
+      }
+    } else if (isSelfConsume) {
+      if (!hasEnoughAmmo) {
+        content += `<p style="color: red; font-weight: bold;">Предмет закончился!</p>`;
+      } else {
+        content += `<p>Потратится: ${this.name} x${consumeAmount}</p>`;
       }
     }
 
@@ -213,6 +252,10 @@ export default class DedrelItem extends Item {
               ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughUses"));
               return;
             }
+            if (!hasEnoughAmmo) {
+              ui.notifications.warn("Недостаточно боеприпасов или предметов!");
+              return;
+            }
 
             // Списание ОД
             if (apCost > 0) {
@@ -237,6 +280,24 @@ export default class DedrelItem extends Item {
             // Списание Зарядов
             if (hasCharges) {
               await this.update({ "system.uses_value": usesValue - 1 });
+            }
+
+            // Списание предметов / боеприпасов
+            if (ammoItem) {
+              const newQty = Math.max(0, ammoItem.system.quantity - consumeAmount);
+              if (newQty <= 0) {
+                await ammoItem.delete();
+              } else {
+                await ammoItem.update({ "system.quantity": newQty });
+              }
+            } else if (isSelfConsume) {
+              const newQty = Math.max(0, (this.system.quantity || 0) - consumeAmount);
+              if (newQty <= 0) {
+                await this.delete();
+                // Если предмет удален, дальше макросы могут сбоить, но мы прерываемся после postToChat
+              } else {
+                await this.update({ "system.quantity": newQty });
+              }
             }
 
             let selectedWeaponId = null;

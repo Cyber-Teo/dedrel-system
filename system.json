@@ -67,7 +67,8 @@
       "armor": {},
       "magic_item": {},
       "exp": {},
-      "condition": {}
+      "condition": {},
+      "ammunition": {}
     }
   }
 }

@@ -12,7 +12,9 @@ import { showRollDialog } from "./src/dice/roll.mjs";
 import { registerSystemSettings } from "./src/settings.mjs";
 import ActiveEffectsHUD from "./src/apps/active-effects-hud.mjs";
 import ChainManeuversHUD from "./src/apps/chain-maneuvers-hud.mjs";
+import ActionPointsHUD from "./src/apps/ap-hud.mjs";
 import { placeTemplatePreview } from "./src/canvas/template.mjs";
+import DedrelToken from "./src/canvas/token.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -47,6 +49,12 @@ Hooks.once("init", function() {
     ...CONFIG.Item.dataModels,
     ...ItemDataModels
   };
+
+  // Кастомный класс для Токена (чтобы отрисовывать дополнительные бары)
+  CONFIG.Token.objectClass = DedrelToken;
+
+  // Регистрация Active Effects для системы
+  CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Регистрация моделей данных для актёров (Actor)
   CONFIG.Actor.dataModels = {
@@ -99,7 +107,7 @@ Hooks.once("init", function() {
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
-    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp", "condition"],
+    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
   });
@@ -607,7 +615,36 @@ Hooks.once("ready", async () => {
   game.dedrel.effectsHUD = new ActiveEffectsHUD();
   game.dedrel.effectsHUD.activateHooks();
   game.dedrel.effectsHUD.render(true);
+
+  // Инициализация AP HUD
+  game.dedrel.apHUD = new ActionPointsHUD();
+  game.dedrel.apHUD.activateHooks();
+  // Он сам вызовет render когда будет выделен токен
 });
+
+Hooks.on("deleteToken", (tokenDocument, options, userId) => {
+  // Логика удаления (если нужно)
+});
+
+/* ==================================================
+ * Хуки для Аур Токенов
+ * ================================================== */
+function refreshTokensForAuras() {
+  if (!canvas.ready) return;
+  canvas.tokens.placeables.forEach(t => t.renderFlags.set({refreshState: true}));
+}
+
+function refreshActorTokensForAuras(item) {
+  if (item.parent && item.parent.documentName === "Actor" && item.type === "weapon") {
+    item.parent.getActiveTokens().forEach(t => t.renderFlags.set({refreshState: true}));
+  }
+}
+
+Hooks.on("updateCombat", refreshTokensForAuras);
+Hooks.on("deleteCombat", refreshTokensForAuras);
+Hooks.on("createItem", refreshActorTokensForAuras);
+Hooks.on("updateItem", refreshActorTokensForAuras);
+Hooks.on("deleteItem", refreshActorTokensForAuras);
 
 Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
   if (userId !== game.user.id) return;
@@ -652,7 +689,7 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
     const currentSpeed = res.movement.value;
     
     // Если это отмена (Undo / Ctrl+Z), возвращаем скорость
-    if (options.undo) {
+    if (options.undo || options.isUndo) {
       const newSpeed = Math.min(res.movement.max, currentSpeed + Math.ceil(speedCost));
       actor.update({ "system.resources.movement.value": newSpeed });
       return;

@@ -35,6 +35,10 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         can_be_sold: new fields.BooleanField({ initial: false }),
         can_be_dropped: new fields.BooleanField({ initial: false })
       }),
+      // Потребление и количество
+      quantity: new fields.NumberField({ initial: 1, integer: true, min: 0 }),
+      consume_target: new fields.StringField({ initial: "" }), // ID предмета-боеприпаса
+      consume_amount: new fields.NumberField({ initial: 1, integer: true, min: 0 }),
       // Заряды и макросы (добавлено для поддержки магических свойств, особенностей и эффектов)
       uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       uses_max: new fields.StringField({ initial: "" }),

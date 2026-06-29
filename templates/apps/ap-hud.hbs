@@ -1,0 +1,38 @@
+{{#if visible}}
+<div class="ap-hud-container">
+  
+  {{#if maneuver.length}}
+  <div class="ap-row maneuver">
+    <div class="ap-label">MAN</div>
+    <div class="ap-cubes">
+      {{#each maneuver}}
+      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+  
+  {{#if universal.length}}
+  <div class="ap-row universal">
+    <div class="ap-label">UNI</div>
+    <div class="ap-cubes">
+      {{#each universal}}
+      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if magic.length}}
+  <div class="ap-row magic">
+    <div class="ap-label">MAG</div>
+    <div class="ap-cubes">
+      {{#each magic}}
+      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
+</div>
+{{/if}}
