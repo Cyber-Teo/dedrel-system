@@ -4,6 +4,7 @@ export default class TalentDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "", label: "System Key" }),
       subtype: new fields.StringField({ initial: "passive", label: "Subtype" }),
       xp_cost: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "XP Cost" }),
       

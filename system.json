@@ -33,6 +33,90 @@
       "path": "packs/conditions.db",
       "type": "Item",
       "system": "dedrel"
+    },
+    {
+      "name": "talents",
+      "label": "Talents",
+      "path": "packs/talents.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "maneuvers",
+      "label": "Maneuvers",
+      "path": "packs/maneuvers.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "path": "packs/weapons.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "armors",
+      "label": "Armors",
+      "path": "packs/armors.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "magic_items",
+      "label": "Magic Items",
+      "path": "packs/magic_items.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "loot",
+      "label": "Loot & Items",
+      "path": "packs/loot.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "trade_goods",
+      "label": "Trade Goods",
+      "path": "packs/trade_goods.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "currencies",
+      "label": "Currencies",
+      "path": "packs/currencies.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "mutilations",
+      "label": "Mutilations",
+      "path": "packs/mutilations.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "countriesoforigin",
+      "label": "Countries of Origin",
+      "path": "packs/countriesoforigin.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "path": "packs/spells.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "ammunition",
+      "label": "Ammunition",
+      "path": "packs/ammunition.db",
+      "type": "Item",
+      "system": "dedrel"
     }
   ],
   "languages": [

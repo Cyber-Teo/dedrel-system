@@ -4,6 +4,7 @@ export default class MutationDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "", label: "System Key" }),
       
       mutation_type: new fields.StringField({ initial: "useful", label: "Mutation Type" }),
       starting: new fields.BooleanField({ initial: false, label: "Starting" }),

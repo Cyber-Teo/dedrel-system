@@ -165,16 +165,16 @@ Hooks.once("init", function() {
 Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (item.img === "icons/svg/item-bag.svg") {
     const defaultIcons = {
-      maneuver: "systems/dedrel/assets/icons/maneuver.svg",
-      talent: "systems/dedrel/assets/icons/talent.svg",
-      mutation: "systems/dedrel/assets/icons/mutation.svg",
-      currency: "systems/dedrel/assets/icons/currency.svg",
-      loot: "systems/dedrel/assets/icons/loot.svg",
-      trade_good: "systems/dedrel/assets/icons/trade_good.svg",
-      mutilation: "systems/dedrel/assets/icons/mutilation.svg",
-      weapon: "systems/dedrel/assets/icons/weapon.svg",
-      armor: "systems/dedrel/assets/icons/armor.svg",
-      magic_item: "systems/dedrel/assets/icons/magic_item.svg",
+      maneuver: "systems/dedrel/assets/icons/items/maneuver.svg",
+      talent: "systems/dedrel/assets/icons/items/talent.svg",
+      mutation: "systems/dedrel/assets/icons/items/mutation.svg",
+      currency: "systems/dedrel/assets/icons/items/currency.svg",
+      loot: "systems/dedrel/assets/icons/items/loot.svg",
+      trade_good: "systems/dedrel/assets/icons/items/trade_good.svg",
+      mutilation: "systems/dedrel/assets/icons/items/mutilation.svg",
+      weapon: "systems/dedrel/assets/icons/items/weapon.svg",
+      armor: "systems/dedrel/assets/icons/items/armor.svg",
+      magic_item: "systems/dedrel/assets/icons/items/magic_item.svg",
       exp: "icons/magic/light/orb-lightbulb-gray.webp"
     };
     if (defaultIcons[item.type]) {

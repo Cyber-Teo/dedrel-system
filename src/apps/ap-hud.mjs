@@ -68,6 +68,14 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
       active: i < magVal
     }));
 
+    const speedMax = res.movement?.max || 0;
+    const speedVal = res.movement?.value || 0;
+    context.hasSpeed = speedMax > 0;
+    context.speedVal = speedVal;
+    context.speedMax = speedMax;
+    // Calculate percentage for visual bar fill
+    context.speedPercent = speedMax > 0 ? Math.round((speedVal / speedMax) * 100) : 0;
+
     return context;
   }
 

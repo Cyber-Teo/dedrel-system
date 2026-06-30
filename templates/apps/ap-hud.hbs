@@ -34,5 +34,16 @@
   </div>
   {{/if}}
 
+  {{#if hasSpeed}}
+  <div class="ap-row speed">
+    <div class="ap-label" style="color: #85c1e9;">SPD</div>
+    <div class="ap-bar-container" style="width: 80px; display: flex; align-items: center; padding: 2px; background: rgba(0,0,0,0.5); border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);">
+      <div class="ap-speed-bar" style="height: 16px; background: #85c1e9; width: {{speedPercent}}%; min-width: 20%; border-radius: 2px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 5px #85c1e9, inset 0 0 3px rgba(255,255,255,0.5); transition: width 0.3s ease;">
+        <span style="color: #000; font-size: 13px; font-weight: 900; line-height: 1; white-space: nowrap;">{{speedVal}} / {{speedMax}}</span>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
 </div>
 {{/if}}
