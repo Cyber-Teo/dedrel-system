@@ -3,11 +3,13 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 export default class ActionPointsHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "dedrel-ap-hud",
-    classes: ["dedrel", "ap-hud"],
+    classes: ["dedrel"],
     tag: "div",
     window: {
-      frame: false,
-      positioned: true
+      frame: true,
+      title: "Action Points",
+      positioned: true,
+      minimizable: true
     },
     position: {
       width: "auto",

@@ -1,7 +1,7 @@
 /**
  * Кастомный класс Токена для отрисовки дополнительных баров (ОД)
  */
-export default class DedrelToken extends Token {
+export default class DedrelToken extends foundry.canvas.placeables.Token {
   /** @override */
   async _draw(options) {
     await super._draw(options);

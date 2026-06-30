@@ -1076,7 +1076,7 @@ form.dedrel.sheet.item {
  * ================================================== */
 #dedrel-active-effects-hud {
   display: contents !important; /* Делает обертку полностью прозрачной для лейаута */
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 #dedrel-active-effects-hud .active-effects-list {
@@ -1141,7 +1141,7 @@ form.dedrel.sheet.item {
   padding: 1px 4px;
   border-radius: 4px;
   font-weight: bold;
-  pointer-events: none;
+  /* pointer-events: none; */
   white-space: nowrap;
 }
 
@@ -1191,7 +1191,7 @@ form.dedrel.sheet.item {
 .chain-item.disabled {
   opacity: 0.5;
   filter: grayscale(100%);
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .chain-item img {
@@ -1262,13 +1262,13 @@ form.dedrel.sheet.item {
  * AP HUD (Fallout Style)
  * ================================================== */
 .dedrel.ap-hud {
-  pointer-events: none;
+  /* pointer-events: none; */
   z-index: 50;
-  position: fixed !important;
-  bottom: 75px !important; /* Above the hotbar */
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  top: auto !important;
+  /* position: fixed !important; */
+  /* bottom: 75px !important; */ /* Above the hotbar */
+  /* left: 50% !important; */
+  /* transform: translateX(-50%) !important; */
+  /* top: auto !important; */
 }
 
 .ap-hud-container {

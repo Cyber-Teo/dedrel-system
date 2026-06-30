@@ -1,11 +1,20 @@
 export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false }) {
+  // Fetch talents and mutations that have a situational trigger
+  const situationalTalents = actor ? actor.items.filter(i => 
+    (i.type === "talent" || i.type === "mutation") && 
+    i.system.situational_trigger
+  ).map(i => ({
+    name: i.name,
+    trigger: i.system.situational_trigger,
+    bonus: i.system.situational_bonus
+  })) : [];
+
   // HTML Content for the Dialog using V14 namespace
   const content = await foundry.applications.handlebars.renderTemplate("systems/dedrel/templates/apps/roll-dialog.hbs", {
     title: title,
     baseRank: baseRank,
     isSave: isSave,
-    // Note: We can fetch talents related to this roll here in the future
-    talentsInfo: "" 
+    situationalTalents: situationalTalents 
   });
 
   const { DialogV2 } = foundry.applications.api;
@@ -21,8 +30,16 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
         callback: async (event, button, dialog) => {
           const html = dialog.element;
           const isSpecialized = isSave ? false : (html.querySelector('[name="specialization"]')?.checked ?? false);
-          const bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
+          let bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
           const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
+          
+          // Calculate situational talents bonus
+          const checkboxes = html.querySelectorAll('.situational-talent-cb');
+          checkboxes.forEach(cb => {
+            if (cb.checked) {
+              bonus += parseInt(cb.dataset.bonus) || 0;
+            }
+          });
           
           await executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty });
         }

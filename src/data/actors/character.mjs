@@ -108,6 +108,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         })
       }),
+      
+      senses: new fields.SchemaField({
+        darkvision: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
 
       defenses: new fields.SchemaField({
         block: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived

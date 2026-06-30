@@ -35,8 +35,10 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
 
   set actor(actor) {
     this._actor = actor;
-    if (this.rendered) {
-      this.render();
+    if (actor) {
+      this.render({ force: true });
+    } else if (this.rendered) {
+      this.render({ force: true }); // It will render empty
     }
   }
 

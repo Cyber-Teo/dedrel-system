@@ -14,4 +14,59 @@ export default class DedrelActor extends Actor {
       this.updateSource({ prototypeToken });
     }
   }
+
+  prepareData() {
+    super.prepareData();
+    if (this.type === "character" && this.system.senses) {
+      const darkvision = this.system.senses.darkvision || 0;
+      if (darkvision > 0) {
+        this.prototypeToken.updateSource({
+          "sight.visionMode": "darkvision",
+          "sight.range": darkvision
+        });
+      } else {
+        this.prototypeToken.updateSource({
+          "sight.visionMode": "basic",
+          "sight.range": 0
+        });
+      }
+    }
+  }
+
+  _syncVisionToTokens() {
+    if (this.type !== "character" || !this.isOwner) return;
+    
+    const protoSight = this.prototypeToken.sight;
+    const tokens = this.getActiveTokens();
+    
+    for (let t of tokens) {
+      const tSight = t.document.sight;
+      if (tSight.visionMode !== protoSight.visionMode || tSight.range !== protoSight.range) {
+        t.document.update({
+          "sight.visionMode": protoSight.visionMode,
+          "sight.range": protoSight.range
+        });
+      }
+    }
+  }
+
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (game.user.id === userId) this._syncVisionToTokens();
+  }
+
+  _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    if (game.user.id === userId) this._syncVisionToTokens();
+  }
+
+  _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+    if (game.user.id === userId) this._syncVisionToTokens();
+  }
+
+  _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+    if (game.user.id === userId) this._syncVisionToTokens();
+  }
 }

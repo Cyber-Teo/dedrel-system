@@ -12,6 +12,9 @@ export default class MutationDataModel extends foundry.abstract.TypeDataModel {
       subtype: new fields.StringField({ initial: "passive", label: "Subtype" }),
       xp_cost: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "XP Cost" }),
       
+      situational_bonus: new fields.NumberField({ initial: 0, integer: true, label: "Situational Bonus" }),
+      situational_trigger: new fields.StringField({ initial: "", label: "Situational Trigger" }),
+      
       prerequisites_text: new fields.StringField({ initial: "", label: "Prerequisites Text" }),
       prerequisites_attributes: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),

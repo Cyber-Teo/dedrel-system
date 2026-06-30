@@ -152,8 +152,13 @@ Hooks.once("init", function() {
       });
     },
     effectsHUD: new ActiveEffectsHUD(),
-    chainHUD: new ChainManeuversHUD()
+    chainHUD: new ChainManeuversHUD(),
+    apHUD: new ActionPointsHUD()
   };
+  
+  // Инициализация хуков для глобальных виджетов
+  game.dedrel.effectsHUD.activateHooks();
+  game.dedrel.apHUD.activateHooks();
 });
 
 /**
@@ -190,6 +195,30 @@ Hooks.once("ready", async function () {
   if (foundry.utils.isNewerVersion(currentVersion, lastMigration)) {
     if (game.user.isGM) {
       DedrelMigration.migrateWorld(currentVersion);
+    }
+  }
+
+  // Загружаем кастомные состояния из компендиума и заменяем стандартные statusEffects
+  const conditionsPack = game.packs.get("dedrel.conditions");
+  if (conditionsPack) {
+    const conditionItems = await conditionsPack.getDocuments();
+    if (conditionItems.length > 0) {
+      CONFIG.statusEffects = conditionItems.map(c => {
+        return {
+          id: c.name.toLowerCase().replace(/[^a-z0-9а-яё]/gi, '_'),
+          name: c.name,
+          icon: c.img,
+          img: c.img,
+          description: c.system.description || "",
+          flags: {
+            dedrel: {
+              condition: true,
+              is_technical: c.system.is_technical || false,
+              category: c.system.category || "negative"
+            }
+          }
+        };
+      });
     }
   }
 });
