@@ -206,15 +206,15 @@ export default class DedrelItem extends Item {
 
     if (ammoItem) {
       if (!hasEnoughAmmo) {
-        content += `<p style="color: red; font-weight: bold;">Недостаточно боеприпасов: ${ammoItem.name} (${ammoItem.system.quantity}/${consumeAmount})</p>`;
+        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Notifications.NotEnoughAmmo", {name: ammoItem.name, current: ammoItem.system.quantity, required: consumeAmount})}</p>`;
       } else {
-        content += `<p>Потратится: ${ammoItem.name} x${consumeAmount}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: ammoItem.name, count: consumeAmount})}</p>`;
       }
     } else if (isSelfConsume) {
       if (!hasEnoughAmmo) {
-        content += `<p style="color: red; font-weight: bold;">Предмет закончился!</p>`;
+        content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Notifications.ItemDepleted")}</p>`;
       } else {
-        content += `<p>Потратится: ${this.name} x${consumeAmount}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: this.name, count: consumeAmount})}</p>`;
       }
     }
 
@@ -253,7 +253,7 @@ export default class DedrelItem extends Item {
               return;
             }
             if (!hasEnoughAmmo) {
-              ui.notifications.warn("Недостаточно боеприпасов или предметов!");
+              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
               return;
             }
 

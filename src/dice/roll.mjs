@@ -19,10 +19,10 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
         icon: "fa-solid fa-dice",
         label: game.i18n.localize("DEDREL.Chat.Roll"),
         callback: async (event, button, dialog) => {
-          const html = $(dialog.element);
-          const isSpecialized = isSave ? false : html.find('[name="specialization"]').is(":checked");
-          const bonus = parseInt(html.find('[name="bonus"]').val()) || 0;
-          const penalty = parseInt(html.find('[name="penalty"]').val()) || 0;
+          const html = dialog.element;
+          const isSpecialized = isSave ? false : (html.querySelector('[name="specialization"]')?.checked ?? false);
+          const bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
+          const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
           
           await executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty });
         }

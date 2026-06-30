@@ -306,24 +306,20 @@ form.dedrel.sheet.item {
 
 /* Body */
 .dedrel .scrollable-wrapper {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
+  display: none;
 }
 
 .dedrel .sheet-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 auto;
-  padding: 10px;
+  display: none;
 }
 
 .dedrel .tab {
   display: none;
-  flex: 1 0 auto;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex-direction: column;
+  padding: 10px;
 }
 
 .dedrel .tab.active {

@@ -34,9 +34,11 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   };
 
   static PARTS = {
-    sheet: {
-      template: "systems/dedrel/templates/item/item-sheet.hbs"
-    }
+    header: { template: "systems/dedrel/templates/item/parts/item-header.hbs" },
+    navigation: { template: "systems/dedrel/templates/item/parts/item-navigation.hbs" },
+    details: { template: "systems/dedrel/templates/item/parts/item-details.hbs" },
+    description: { template: "systems/dedrel/templates/item/parts/item-description.hbs" },
+    effects: { template: "systems/dedrel/templates/item/parts/item-effects.hbs" }
   };
 
   get title() {
@@ -60,7 +62,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
    * Формирует списки выбора (select) и подготавливает массивы в строки для инпутов.
    */
   async _prepareContext(options) {
-    console.log("Dedrel | DedrelItemSheet _prepareContext start for item:", this.document.name, this.document.id);
     const context = await super._prepareContext(options);
     const itemData = this.document;
     
@@ -214,22 +215,32 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.joinedExpiryEvents = (itemData.system.expiry_events || []).join("; ");
     }
 
-    console.log("Dedrel | DedrelItemSheet context prepared successfully:", context);
     return context;
   }
 
+  async _preRender(context, options) {
+    await super._preRender(context, options);
+    const activeTab = this.element?.querySelector(".tab.active");
+    this._savedScrollTop = activeTab ? activeTab.scrollTop : 0;
+  }
+
+  _onRender(context, options) {
+    super._onRender(context, options);
+    const activeTab = this.element?.querySelector(".tab.active");
+    if (activeTab) {
+      activeTab.scrollTop = this._savedScrollTop;
+    }
+  }
+
   changeTab(tab, group, options={}) {
-    console.log("Dedrel | changeTab called for Item. tab:", tab, "group:", group, "options:", options);
     return super.changeTab(tab, group, options);
   }
 
   _onClickTab(event) {
-    console.log("Dedrel | _onClickTab called for Item. event:", event, "target:", event.target, "currentTarget:", event.currentTarget);
     return super._onClickTab(event);
   }
 
   _onClickAction(event, target) {
-    console.log("Dedrel | _onClickAction called for Item. event:", event, "target:", target, "action:", target.dataset.action);
     return super._onClickAction(event, target);
   }
 

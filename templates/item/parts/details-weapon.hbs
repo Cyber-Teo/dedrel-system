@@ -74,16 +74,16 @@
 
     {{#if system.weapon_type.ranged}}
     <div class="section-header" style="grid-column: 1 / -1; margin-top: 10px;">
-        Боеприпасы (Ammunition)
+        {{localize "DEDREL.ItemFields.Ammunition"}}
     </div>
     <div class="form-group">
-        <label>Использует (Consume Target)</label>
+        <label>{{localize "DEDREL.ItemFields.ConsumeTarget"}}</label>
         <select name="system.consume_target">
             {{selectOptions ammoOptions selected=system.consume_target}}
         </select>
     </div>
     <div class="form-group">
-        <label>Расход за атаку (Amount)</label>
+        <label>{{localize "DEDREL.ItemFields.ConsumeAmount"}}</label>
         <input type="number" name="system.consume_amount" value="{{system.consume_amount}}" data-dtype="Number"/>
     </div>
     {{/if}}

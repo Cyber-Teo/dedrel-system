@@ -1,4 +1,4 @@
-import { ItemDataModels } from "../data/items/index.js";
+import { ItemDataModels } from "../data/items/index.mjs";
 import { ActorDataModels } from "../data/actors/index.mjs";
 import { showRollDialog } from "../dice/roll.mjs";
 
@@ -63,9 +63,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   };
 
   static PARTS = {
-    sheet: {
-      template: "systems/dedrel/templates/actor/character-sheet.hbs"
-    }
+    navigation: { template: "systems/dedrel/templates/actor/parts/character-navigation.hbs" },
+    main: { template: "systems/dedrel/templates/actor/parts/character-main.hbs" },
+    inventory: { template: "systems/dedrel/templates/actor/parts/character-inventory.hbs" },
+    maneuvers: { template: "systems/dedrel/templates/actor/parts/character-maneuvers.hbs" },
+    spells: { template: "systems/dedrel/templates/actor/parts/character-spells.hbs" },
+    mutations: { template: "systems/dedrel/templates/actor/parts/character-mutations.hbs" },
+    talents: { template: "systems/dedrel/templates/actor/parts/character-talents.hbs" },
+    statuses: { template: "systems/dedrel/templates/actor/parts/character-statuses.hbs" },
+    biography: { template: "systems/dedrel/templates/actor/parts/character-biography.hbs" },
+    experience: { template: "systems/dedrel/templates/actor/parts/character-experience.hbs" }
   };
 
   get title() {
@@ -149,7 +156,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    const hasTail = mutations.some(m => m.name.toLowerCase().includes("хвост"));
+    const hasTail = mutations.some(m => m.system.key === "prehensile_tail");
 
     const equipment_slots = {
       armor_upper: actorData.system.equipment_slots?.armor_upper?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_upper.item_id) : null,
@@ -385,15 +392,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
   async _preRender(context, options) {
     await super._preRender(context, options);
-    this._savedScrollTop = this.element?.querySelector(".scrollable-wrapper")?.scrollTop || 0;
+    const activeTab = this.element?.querySelector(".tab.active");
+    this._savedScrollTop = activeTab ? activeTab.scrollTop : 0;
   }
 
   _onRender(context, options) {
     super._onRender(context, options);
-    const html = this.element;
-    const wrapper = this.element.querySelector(".scrollable-wrapper");
-    if (wrapper) {
-      wrapper.scrollTop = this._savedScrollTop;
+    const activeTab = this.element?.querySelector(".tab.active");
+    if (activeTab) {
+      activeTab.scrollTop = this._savedScrollTop;
     }
 
     const dragTargets = this.element.querySelectorAll(".item-row, .skill-item");
@@ -428,27 +435,21 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   changeTab(tab, group, options={}) {
-    console.log("Dedrel | changeTab called for Actor. tab:", tab, "group:", group, "options:", options);
     return super.changeTab(tab, group, options);
   }
 
   _onClickTab(event) {
-    console.log("Dedrel | _onClickTab called for Actor. event:", event, "target:", event.target, "currentTarget:", event.currentTarget);
     return super._onClickTab(event);
   }
 
   _onClickAction(event, target) {
-    console.log("Dedrel | _onClickAction called for Actor. event:", event, "target:", target, "action:", target.dataset.action);
     return super._onClickAction(event, target);
   }
 
   static async #onEditItem(event, target) {
-    console.log("Dedrel | #onEditItem action triggered. target:", target);
     const itemId = target.closest(".item-row").dataset.itemId;
     const item = this.document.items.get(itemId);
-    console.log("Dedrel | Item retrieved:", item);
     if (item) {
-      console.log("Dedrel | item.sheet instance:", item.sheet);
       item.sheet.render(true);
     } else {
       console.warn("Dedrel | No item found with ID:", itemId);
@@ -466,7 +467,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const item = this.document.items.get(itemId);
     if (item) {
       if (item.type === "weapon") {
-        ui.notifications.warn("Для оружия используйте кнопки 'Надеть' (слоты).");
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.EquipWeaponHint"));
       } else if (item.type === "armor") {
         ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.EquipArmorHint"));
       } else {
@@ -543,12 +544,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (!item || item.type !== "weapon") return;
 
     if (item.system.equipped) {
-      return ui.notifications.warn("Это оружие уже экипировано. Сначала снимите его из слота.");
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WeaponAlreadyEquipped"));
     }
 
     const equipment_slots = this.document.system.equipment_slots;
     const isTwoHanded = item.system.is_twohanded;
-    const hasTail = this.document.items.some(i => i.type === "mutation" && i.name.toLowerCase().includes("хвост"));
+    const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key === "prehensile_tail");
 
     const updates = {};
 
@@ -557,7 +558,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
          updates["system.equipment_slots.main_hand.item_id"] = item.id;
          updates["system.equipment_slots.off_hand.item_id"] = item.id;
       } else {
-         return ui.notifications.warn("Обе руки должны быть свободны для экипировки двуручного оружия.");
+         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TwoHandsRequired"));
       }
     } else {
       if (!equipment_slots.main_hand.item_id) {
@@ -567,7 +568,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       } else if (hasTail && !equipment_slots.tail.item_id) {
          updates["system.equipment_slots.tail.item_id"] = item.id;
       } else {
-         return ui.notifications.warn("Нет свободных слотов для оружия (освободите руки или хвост).");
+         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoWeaponSlots"));
       }
     }
 
@@ -671,24 +672,20 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   static async #onShortRest(event, target) {
-    const confirm = await Dialog.confirm({
-      title: "Короткий Отдых",
-      content: "<p>Вы уверены, что хотите совершить короткий отдых (1 час)? Это восстановит ОД и способности на короткий отдых.</p>",
-      yes: () => true,
-      no: () => false,
-      defaultYes: true
+    const { DialogV2 } = foundry.applications.api;
+    const confirm = await DialogV2.confirm({
+      window: { title: game.i18n.localize("DEDREL.ActorSheet.ShortRest") },
+      content: `<p>${game.i18n.localize("DEDREL.Chat.ShortRestConfirm")}</p>`
     });
     if (!confirm) return;
     await DedrelCharacterSheet.performRest(this.document, "short");
   }
 
   static async #onLongRest(event, target) {
-    const confirm = await Dialog.confirm({
-      title: "Длинный Отдых",
-      content: "<p>Вы уверены, что хотите совершить длинный отдых (8 часов)? Это восстановит ОД и все способности на день/короткий/длинный отдых.</p>",
-      yes: () => true,
-      no: () => false,
-      defaultYes: true
+    const { DialogV2 } = foundry.applications.api;
+    const confirm = await DialogV2.confirm({
+      window: { title: game.i18n.localize("DEDREL.ActorSheet.LongRest") },
+      content: `<p>${game.i18n.localize("DEDREL.Chat.LongRestConfirm")}</p>`
     });
     if (!confirm) return;
     await DedrelCharacterSheet.performRest(this.document, "long");
@@ -702,12 +699,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoLuckPoints"));
     }
 
-    const confirm = await Dialog.confirm({
-      title: game.i18n.localize("DEDREL.Chat.SpendLuckTitle"),
-      content: game.i18n.localize("DEDREL.Chat.SpendLuckContent"),
-      yes: () => true,
-      no: () => false,
-      defaultYes: true
+    const { DialogV2 } = foundry.applications.api;
+    const confirm = await DialogV2.confirm({
+      window: { title: game.i18n.localize("DEDREL.Chat.SpendLuckTitle") },
+      content: game.i18n.localize("DEDREL.Chat.SpendLuckContent")
     });
 
     if (confirm) {
@@ -758,7 +753,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         } else {
            try {
              const r = new Roll(item.system.uses_max, actor.getRollData());
-             maxVal = r.evaluate({async: false}).total;
+             await r.evaluate();
+             maxVal = r.total;
            } catch(e) {
              console.error("Dedrel | Error parsing uses_max", e);
            }

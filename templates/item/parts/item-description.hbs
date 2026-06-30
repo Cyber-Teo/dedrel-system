@@ -1,3 +1,7 @@
-<div class="editor-container">
-    {{editor enrichedDescription target="system.description" button=true editable=editable}}
+<div class="tab description {{tabs.description.cssClass}}" data-group="primary" data-tab="description">
+<div class="editor-container" style="flex: 1; min-height: 300px; display: flex; flex-direction: column;">
+    <prose-mirror name="system.description" data-document-u-u-i-d="{{item.uuid}}" value="{{system.description}}" toggled="true" collaborate="true" style="flex: 1; display: flex; flex-direction: column;">
+        {{{enrichedDescription}}}
+    </prose-mirror>
+</div>
 </div>

@@ -1,31 +1,31 @@
 <div class="tab inventory {{tabs.inventory.cssClass}}" data-group="primary" data-tab="inventory">
-    <h2 class="tab-title">Слоты оружия</h2>
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.WeaponSlots"}}</h2>
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Правая рука</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MainHand"}}</h4>
             {{#if equipment_slots.main_hand}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.main_hand.name}}</div>
-            <a class="item-control" data-action="unequipWeapon" data-slot="main_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipWeapon" data-slot="main_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
             {{/if}}
         </div>
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Левая рука</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.OffHand"}}</h4>
             {{#if equipment_slots.off_hand}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.off_hand.name}}</div>
-            <a class="item-control" data-action="unequipWeapon" data-slot="off_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipWeapon" data-slot="off_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
             {{/if}}
         </div>
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05); {{#unless hasTail}}opacity: 0.5; pointer-events: none;{{/unless}}">
-            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">Хвост {{#unless hasTail}}<i class="fas fa-lock" title="Требуется мутация"></i>{{/unless}}</h4>
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.Tail"}} {{#unless hasTail}}<i class="fas fa-lock" title="{{localize "DEDREL.ActorSheet.MutationRequired"}}"></i>{{/unless}}</h4>
             {{#if equipment_slots.tail}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.tail.name}}</div>
-            <a class="item-control" data-action="unequipWeapon" data-slot="tail" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> Снять</a>
+            <a class="item-control" data-action="unequipWeapon" data-slot="tail" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
             {{else}}
-            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">Пусто</div>
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
             {{/if}}
         </div>
     </div>

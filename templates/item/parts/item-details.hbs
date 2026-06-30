@@ -1,0 +1,23 @@
+<div class="tab details {{tabs.details.cssClass}}" data-group="primary" data-tab="details">
+    {{#if (eq item.type "maneuver")}}
+        {{> "systems/dedrel/templates/item/parts/details-maneuver.hbs"}}
+    {{else if (eq item.type "condition")}}
+        {{> "systems/dedrel/templates/item/parts/details-condition.hbs"}}
+    {{/if}}
+
+    {{#if (or (eq item.type "talent") (eq item.type "mutation"))}}
+        {{> "systems/dedrel/templates/item/parts/details-talent.hbs"}}
+    {{/if}}
+
+    {{#if (eq item.type "armor")}}
+        {{> "systems/dedrel/templates/item/parts/details-armor.hbs"}}
+    {{/if}}
+
+    {{#if (eq item.type "weapon")}}
+        {{> "systems/dedrel/templates/item/parts/details-weapon.hbs"}}
+    {{/if}}
+
+    {{#if (eq item.type "exp")}}
+        {{> "systems/dedrel/templates/item/parts/details-exp.hbs"}}
+    {{/if}}
+</div>

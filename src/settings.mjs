@@ -60,6 +60,14 @@ export function registerSystemSettings() {
   // - Использовать ли опциональные правила (scope: "world")
   // - Тема оформления чаршита (scope: "client")
   // и т.д.
+
+  game.settings.register("dedrel", "systemMigrationVersion", {
+    name: "System Migration Version",
+    scope: "world",
+    config: false,
+    type: String,
+    default: ""
+  });
 }
 
 Hooks.once("setup", async function() {

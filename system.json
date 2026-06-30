@@ -152,7 +152,8 @@
       "magic_item": {},
       "exp": {},
       "condition": {},
-      "ammunition": {}
+      "ammunition": {},
+      "spell": {}
     }
   }
 }

@@ -23,14 +23,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
 
       properties: new fields.SchemaField({
         natural: new fields.BooleanField({ initial: false }),
-        auxiliary: new fields.BooleanField({ initial: false }),
         armor_piercing: new fields.BooleanField({ initial: false }),
-        fast: new fields.BooleanField({ initial: false }),
-        slow: new fields.BooleanField({ initial: false }),
-        thrown: new fields.BooleanField({ initial: false }),
-        enchanted: new fields.BooleanField({ initial: false }),
         misfire_chance: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
-        requires_reload: new fields.BooleanField({ initial: false }),
         consumed_on_use: new fields.BooleanField({ initial: false }),
         can_be_sold: new fields.BooleanField({ initial: false }),
         can_be_dropped: new fields.BooleanField({ initial: false })
