@@ -1,4 +1,8 @@
 <div class="tab details {{tabs.details.cssClass}}" data-group="primary" data-tab="details">
+    <div class="form-group" style="padding: 10px; background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--color-border); margin-bottom: 10px;">
+        <label style="font-weight: bold; width: 100px;">{{localize "DEDREL.ItemFields.SystemKey"}}</label>
+        <input type="text" name="system.key" value="{{system.key}}" placeholder="unique_item_id" style="flex: 1;"/>
+    </div>
     {{#if (eq item.type "maneuver")}}
         {{> "systems/dedrel/templates/item/parts/details-maneuver.hbs"}}
     {{else if (eq item.type "condition")}}

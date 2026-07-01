@@ -77,7 +77,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
     
-    if (itemData.type === "weapon") {
+    if (itemData.type === "weapon" || itemData.type === "maneuver") {
       context.weaponSkills = {
         "unarmed_combat": game.i18n.localize("DEDREL.Skills.unarmed_combat"),
         "pole_weapons": game.i18n.localize("DEDREL.Skills.pole_weapons"),

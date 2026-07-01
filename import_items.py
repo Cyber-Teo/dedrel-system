@@ -59,10 +59,17 @@ def parse_md_file(filepath):
         "chain": "chain" in raw_action_type
     }
     
+    # Устанавливаем иконку на основе имени файла (если это маневр)
+    base_name = os.path.splitext(os.path.basename(filepath))[0]
+    if item_type == "maneuver":
+        img_path = f"systems/dedrel/assets/icons/maneuvers/{base_name}.svg"
+    else:
+        img_path = f"systems/dedrel/assets/icons/{item_type}.svg"
+    
     item = {
         "name": frontmatter.get("title", "Unnamed Item"),
         "type": item_type,
-        "img": f"systems/dedrel/assets/icons/{item_type}.svg",
+        "img": img_path,
         "system": {
             "description": body,
             "source": frontmatter.get("source", "basic"),

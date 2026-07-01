@@ -22,6 +22,9 @@
       "ItemSheet": "Лист предмета Dedrel"
     },
     "ItemFields": {
+      "SystemKey": "Системный ключ",
+      "SituationalBonus": "Ситуационный бонус",
+      "SituationalTrigger": "Условие бонуса",
       "Prerequisite": "Требования",
       "APCost": "Стоимость (AP)",
       "Uses": "Использования",
@@ -201,6 +204,7 @@
       "Lightning": "Электрический",
       "Thunder": "Звуковой",
       "Astral": "Астральный",
+      "Acid": "Кислота",
       "Psychic": "Ментальный",
       "Evasion": "Уклонение",
       "Block": "Блок",
@@ -325,6 +329,8 @@
       "EquipmentSlots": "Слоты Экипировки",
       "Weapons": "Оружие",
       "MagicItems": "Магические предметы",
+      "Notes": "Заметки",
+      "DamageResistance": "Сопротивление урону (DR)",
       "GeneralInventory": "Общий Инвентарь",
       "WeaponSlots": "Слоты оружия",
       "MainHand": "Правая рука",

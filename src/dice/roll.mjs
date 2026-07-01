@@ -1,13 +1,15 @@
 export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false }) {
-  // Fetch talents and mutations that have a situational trigger
   const situationalTalents = actor ? actor.items.filter(i => 
     (i.type === "talent" || i.type === "mutation") && 
-    i.system.situational_trigger
-  ).map(i => ({
-    name: i.name,
-    trigger: i.system.situational_trigger,
-    bonus: i.system.situational_bonus
-  })) : [];
+    i.system.has_situational_bonus
+  ).map(i => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = i.system.description || "";
+    return {
+      name: i.name,
+      description: tempDiv.textContent || tempDiv.innerText || ""
+    };
+  }) : [];
 
   // HTML Content for the Dialog using V14 namespace
   const content = await foundry.applications.handlebars.renderTemplate("systems/dedrel/templates/apps/roll-dialog.hbs", {
@@ -20,7 +22,10 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   const { DialogV2 } = foundry.applications.api;
 
   await DialogV2.wait({
-    window: { title: `${game.i18n.localize("DEDREL.Chat.Roll")}: ${title}` },
+    window: { 
+      title: `${game.i18n.localize("DEDREL.Chat.Roll")}: ${title}`
+    },
+    position: { width: 500 },
     content: content,
     buttons: [
       {
@@ -33,15 +38,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
           let bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
           const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
           
-          // Calculate situational talents bonus
-          const checkboxes = html.querySelectorAll('.situational-talent-cb');
-          checkboxes.forEach(cb => {
-            if (cb.checked) {
-              bonus += parseInt(cb.dataset.bonus) || 0;
-            }
-          });
-          
-          await executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty });
+          await executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty, isSave });
         }
       },
       {
@@ -53,27 +50,44 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   });
 }
 
-async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty }) {
+async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty, isSave = false }) {
   const woundPenalty = Math.abs(actor.system.resources.wounds?.penalty || 0);
 
   // Specialization adds +2
   const specBonus = isSpecialized ? 2 : 0;
-  const totalMod = specBonus + bonus - penalty - woundPenalty;
   
+  // Прицеливание (Take Aim) дает +2 к дальним выстрелам
+  let takeAimBonus = 0;
+  let isTakeAimAttack = false;
+  const takeAimTriggers = ["Выстрел из лука", "Выстрел из арбалета", "Выстрел из огнестрела"];
+  if (actor?.flags?.dedrel?.takeAimBonus && takeAimTriggers.some(t => title.includes(t))) {
+    takeAimBonus = 2;
+    isTakeAimAttack = true;
+  }
+  
+  const globalRollBonus = actor?.system?.bonuses?.global_roll || 0;
+  const globalSkillBonus = (!isSave) ? (actor?.system?.bonuses?.global_skill || 0) : 0;
+  const globalSaveBonus = (isSave) ? (actor?.system?.bonuses?.global_save || 0) : 0;
+  
+  const totalMod = specBonus + bonus + takeAimBonus - penalty - woundPenalty + globalRollBonus + globalSkillBonus + globalSaveBonus;
+  
+  // Construct parts for formula and tooltip
   // Create base roll. 
   // xo10 means explode once on a 10.
-  let rollFormula = `1d10xo10 + ${baseRank}`;
-  if (specBonus) rollFormula += ` + ${specBonus}`;
-  if (bonus) rollFormula += ` + ${bonus}`;
-  if (penalty) rollFormula += ` - ${penalty}`;
-  if (woundPenalty) rollFormula += ` - ${woundPenalty}`;
-
   let formulaDisplay = `1d10xo10`;
   if (baseRank) formulaDisplay += ` + ${baseRank} (ранг)`;
   if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
   if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
+  if (takeAimBonus) formulaDisplay += ` + ${takeAimBonus} (прицеливание)`;
   if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
   if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
+
+  let rollFormula = `1d10xo10 + ${baseRank}`;
+  if (specBonus) rollFormula += ` + ${specBonus}`;
+  if (bonus) rollFormula += ` + ${bonus}`;
+  if (takeAimBonus) rollFormula += ` + ${takeAimBonus}`;
+  if (penalty) rollFormula += ` - ${penalty}`;
+  if (woundPenalty) rollFormula += ` - ${woundPenalty}`;
 
   let roll = new Roll(rollFormula);
   await roll.evaluate();
@@ -133,4 +147,10 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
   };
 
   await ChatMessage.create(chatData);
+
+  // Если использовали прицеливание, удаляем бафф после броска
+  if (isTakeAimAttack) {
+    const effectToRemove = actor.effects.find(e => e.changes.some(c => c.key === "flags.dedrel.takeAimBonus"));
+    if (effectToRemove) await effectToRemove.delete();
+  }
 }

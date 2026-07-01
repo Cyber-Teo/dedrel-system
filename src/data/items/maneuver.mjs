@@ -57,6 +57,7 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       template_shape: new fields.StringField({ required: true, blank: true }),
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       
+      skill: new fields.StringField({ initial: "", label: "Override Skill" }),
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_custom: new fields.StringField({ required: true, blank: true }),

@@ -4,6 +4,7 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "" }),
       
       // Basic Stats
       weapon_type: new fields.SchemaField({

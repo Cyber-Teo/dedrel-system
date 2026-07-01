@@ -117,6 +117,27 @@
       "path": "packs/ammunition.db",
       "type": "Item",
       "system": "dedrel"
+    },
+    {
+      "name": "additional_conditions",
+      "label": "Additional Conditions",
+      "path": "packs/additional_conditions.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "experience",
+      "label": "Experience",
+      "path": "packs/experience.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "macro",
+      "label": "Macro",
+      "path": "packs/macro.db",
+      "type": "Macro",
+      "system": "dedrel"
     }
   ],
   "languages": [

@@ -22,6 +22,9 @@
       "ItemSheet": "Dedrel Item Sheet"
     },
     "ItemFields": {
+      "SystemKey": "System Key",
+      "SituationalBonus": "Situational Bonus",
+      "SituationalTrigger": "Situational Trigger",
       "Prerequisite": "Prerequisites",
       "APCost": "AP Cost",
       "Uses": "Uses",
@@ -242,6 +245,7 @@
       "Lightning": "Lightning",
       "Thunder": "Thunder",
       "Astral": "Astral",
+      "Acid": "Acid",
       "Psychic": "Psychic",
       "Evasion": "Evasion",
       "Block": "Block",
@@ -333,6 +337,7 @@
       "EquipmentSlots": "Equipment Slots",
       "Weapons": "Weapons",
       "MagicItems": "Magic Items",
+      "DamageResistance": "Damage Resistance (DR)",
       "GeneralInventory": "General Inventory",
       "WeaponSlots": "Weapon Slots",
       "MainHand": "Main Hand",

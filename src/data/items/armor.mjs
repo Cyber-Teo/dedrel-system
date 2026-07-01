@@ -4,6 +4,7 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "" }),
       rarity: new fields.StringField({ initial: "common", choices: ["common", "uncommon", "rare", "very rare", "legendary"] }),
       base_price: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       weight: new fields.NumberField({ initial: 0, min: 0 }),
@@ -19,7 +20,8 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
         necrotic: new fields.NumberField({ initial: 0, integer: true }),
         radiant: new fields.NumberField({ initial: 0, integer: true }),
         electric: new fields.NumberField({ initial: 0, integer: true }),
-        sonic: new fields.NumberField({ initial: 0, integer: true })
+        sonic: new fields.NumberField({ initial: 0, integer: true }),
+        acid: new fields.NumberField({ initial: 0, integer: true })
       }),
       
       modifiers: new fields.SchemaField({

@@ -7,5 +7,6 @@ export const DR_KEY_LABELS = {
   "necrotic": "DEDREL.ItemSheet.Necrotic",
   "radiant": "DEDREL.ItemSheet.Radiant",
   "electric": "DEDREL.ItemSheet.Lightning",
-  "sonic": "DEDREL.ItemSheet.Thunder"
+  "sonic": "DEDREL.ItemSheet.Thunder",
+  "acid": "DEDREL.ItemSheet.Acid"
 };

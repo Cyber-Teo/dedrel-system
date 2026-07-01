@@ -1,15 +1,207 @@
 [
   {
+    "name": "Удар абсолютной энтропии",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_absolute_entropy_strike.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nУдар чудовищной силы, что-то вроде перста смерти при попадании. Механика в разработке.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 5,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "2",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "absolute_entropy_strike"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": "block"
+    },
+    "flags": {},
+    "_id": "fd8ffd7b40bc4f75"
+  },
+  {
+    "name": "Бронебойный выстрел",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_armor_piersing_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПозволяет использовать длинные луки на полную мощность и совершать чудовищно мощные выстрелы, которые получают свойство Бронебойное\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "bows",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "armor_piersing_shot"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "670f66077cdb4ded"
+  },
+  {
+    "name": "Атака по возможности",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nЕсли зона контроля персонажа равна 1 и больше (определяется оружием и талантами) и он не находится В Клинче он может без дополнительной траты ОД провести Выпад, Взмах или Удар, если держит в руках оружие, позволяющее проводить такие манёвры по персонажу который пересекает его зону контроля. \nЕсли атака была успешной (даже если не нанесла урон), движение противника после этого прекращается, персонажи переходят в состояние В Клинче\nЕсли противник пересекает несколько клеток зоны контроля, персонаж может проводить атаки по возможности за каждую пересеченную клетку.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Зона контроля >=1, нет состояния „В Клинче“.",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "70e07876657c4c47"
+  },
+  {
     "name": "Удар",
     "type": "maneuver",
-    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bash.svg",
     "system": {
       "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака дробящим оружием ближнего боя\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
       "source": "basic",
-      "action_type": [
-        "action",
-        "chain"
-      ],
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
       "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
       "chain_trigger_maneuvers": [
         "maneuver_riposte",
@@ -61,19 +253,3410 @@
       "forbidden_defense": ""
     },
     "flags": {},
-    "_id": "7f50c32b7ad2498e"
+    "_id": "bb413f29762540ec"
+  },
+  {
+    "name": "Слепое пятно",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_blind_spot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. Активируется на 10 раундов. Пока талант активен, враги в вашей Зоне Контроля не могут использовать манёвры-реакции против вас.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 5,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "blind_spot"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "83c74b3685e842e5"
+  },
+  {
+    "name": "Блок",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_block.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж тратит от 1 до 5 ОД и получает столько же очков к Блоку до начала своего следующего хода.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": true,
+      "variable_cost_max": 5,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "606ffd2be8454bd9"
+  },
+  {
+    "name": "Язык тела",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_body_language.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. Вы выбираете одного противника. Эффект длится 10 раундов. Все атаки выбранного противника против вас совершаются только с базовым броском без бонусов от талантов, состояний или манёвров. Противник не может применять против вас манёвры требующие скрытности или внезапности. (Бене Гессерит: чтение микродвижений и предсказание удара через наблюдение за телом.)\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 4,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "body_language"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "a42fd8a795fd4b12"
+  },
+  {
+    "name": "Выстрел из лука",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bow_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВыстрел из лука\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "bows",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Лук",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "27b118ba5e11422c"
+  },
+  {
+    "name": "Драконье дыхание",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_breath_weapon.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\n3 раза в долгий отдых\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nНадо будет создать дыхание для каждого типа урона: огонь, кислота, лёд",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "dragon_breath_weapon"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "cone",
+      "template_size": 3,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "54181b35f35b4b39"
+  },
+  {
+    "name": "Эффект бабочки",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_butterfly_effect.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nЦель получает урон 1d10+LOG в начале своего следующего хода. Игрок описывает механизм («подскользнётся», «цепь зацепится»), мастер воплощает. Игрок выбирает тип урона из физически обоснованных на поле боя — мастер вправе отклонить невозможное.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "butterfly_effect"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "1d10+LOG",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "bb141b43e6234cbb"
+  },
+  {
+    "name": "Цитадель разума",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_citadel_of_reason.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКогда на вас направлено заклинание или способность с ментальным эффектом (save_attribute: will или int) — потратьте 2 ОД. Атакующий перебрасывает бросок и берёт худший результат. Если у способности нет броска атаки, а только спасбросок — вы получаете право на спасбросок даже если по условию он не предусмотрен.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "citadel_of_reason"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "c47b3b35ffe14880"
+  },
+  {
+    "name": "Закрытые глаза",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_closed_eyes.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. На 1 раунд вы полностью игнорируете состояние «Ослепление» и все штрафы от визуальных помех и невидимости. Дополнительно получаете +2 к Блоку и Уклонению на этот раунд, так как перестаёте реагировать на ложные движения.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "closed_eyes"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "98a9cc211f0f40db"
+  },
+  {
+    "name": "Копирование",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_copying.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКогда противник применяет против вас или в вашем поле зрения небазовый манёвр (source: talent), вы можете немедленно добавить его в список доступных вам манёвров до конца сцены. Требования к оружию сохраняются. Манёвры с требованием мутации (крылья, хвост и т.п.) скопировать нельзя.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nДодумать механику этого манёвра, сейчас она не доделана",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 4,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "copying"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "77a72100c8cd4b19"
+  },
+  {
+    "name": "Выстрел из арбалета",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_crossbow_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВыстрел из арбалета\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "crossbows",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Арбалет",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "33130cb3f20e4f3d"
+  },
+  {
+    "name": "Интуиция разрушителя",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_destroyers_intuition.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВешает статус. Ваша следующая атака дробящим оружием, в случае попадания, нанесёт +2 кубика урона, противник так же получит травму. Зона поражения определяется броском д100.\nРуки 1-40%\nТорс 41-70%\nНоги 71%-90%\nГолова 91-100%\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "2",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": true,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "destroyers_intuition"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "d11a333d670f4eae"
+  },
+  {
+    "name": "Разорвать дистанцию",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_disengage.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж безопасно отходит на расстояние до 2+Ловкость гексов не провоцируя Атаку по возможности и выходя из состояние В клинче.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "03376c2752a84f62"
+  },
+  {
+    "name": "Уклонение",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж получает тратит от 1 до 5 выносливости и получает столько же очков к Уклонению до начала своего следующего хода.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": true,
+      "variable_cost_max": 5,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "bed8bed536fb4550"
+  },
+  {
+    "name": "Драконий рёв",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_draconic_roar.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nОдин раз за сцену. Персонаж издаёт ужасающий драконий рёв. Все живые противники, которые его слышат (примерно 30 гексов на открытой местности, по решению мастера) должны пройти проверку Силы Воли, при провале они получают статус Ужас на 3 раундов, при успехе Дезориентацию.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "@attributes.will.rank+1 or @attributes.cha.rank+1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "dragon_breath_weapon"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "Will",
+      "save_dc_formula": "@will+12",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "2411ba56945a4f06"
+  },
+  {
+    "name": "Пустой ум",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_empty_mind.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКогда на вас направлено заклинание или способность с ментальным эффектом (save_attribute: will или int) — потратьте 2 ОД. Атакующий обязан перебросить бросок и взять худший результат. Если у способности нет броска атаки, а только спасбросок — вы получаете право на один переброс спасбросока, если провалили с персого раза.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "empty_mind"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "0895f37c604b4283"
+  },
+  {
+    "name": "Вскрыть карты",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_expose_weakness.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПроверка LOG против DC из статблока цели. При успехе — раскрывает игроку часть данных моба на выбор: HP, DR или спасброски. Вся пати видит результат.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "expose_weakness"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "1dafef87203948ac"
+  },
+  {
+    "name": "Финт",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_feint_attack.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, Быстрое оружие ближнего боя. Киньте вашу атаку в ближнем бою. Если вы попадаете по противнику, вы можете сразу провести атаку в цепи. Этот манёвр запрещает использование ответной атаки и использование блока.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nмеханика таланта не додумана",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "feint_attack"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": "block"
+    },
+    "flags": {},
+    "_id": "5f6d85ea1e424249"
+  },
+  {
+    "name": "Встрел из огнестрела",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_firearme_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВстрел из огнестрела\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "firearms",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Огнестрел",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "07bd7cbd7aa24dbb"
+  },
+  {
+    "name": "Пламенная душа",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flaming_soul.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВсе Тени, Нежить и Демоны в радиусе 5 гексов должны пройти проверку Силы Воли по Х сложности, при провале они получают статус Ужас на 3 раундов, при успехе Дезориентацию.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "@attributes.will.rank or @attributes.cha.rank+1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "elf_flaming_soul"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "circle",
+      "template_size": 5,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "Will",
+      "save_dc_formula": "@will+12",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "9178e4dc81d54d99"
+  },
+  {
+    "name": "Выстрел в полёте",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flying_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nНад персонажем должно быть минимум 2 уровня свободного вертикального пространства. Персонаж совершает резкий взлет с помощью крыльев на долю секунды поднимаясь над полем боя. Это позволяет оценить тактическую обстановку и произвести Выстрел из Лука, Выстрел из арбалета или Выстрел из огнестрела без дополнительных трат ОД поверх препятствий, после чего персонаж приземляется в тот же гекс, из которого начинал движение.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 4,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "дальнобойное оружие",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "demon_wings",
+        "dragon_wings"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "927e627341ed4861"
+  },
+  {
+    "name": "Полёт",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_fly.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж может применить в свой ход манёвр «Полёт», чтобы переместиться по воздуху на расстояние до 2 + Ловкость гексов. Для совершения данного манёвра персонажу необходим стартовый импульс, поэтому дистанция перемещения должна составлять минимум 3 гекса. Полёт позволяет персонажу перемещаться над полем боя, игнорируя штрафы за сложную местность, наземные препятствия, ловушки и магические эффекты, расположенные на поверхности земли. По завершении перемещения персонаж обязан приземлиться в целевом гексе на твердую поверхность; зависание в воздухе между ходами невозможно. Атаки по возможности по летящему персонажи возможны только если досягаемость оружия 3.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "любой манёвр",
+      "chain_trigger_maneuvers": [
+        "any"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "demon_wings",
+        "dragon_wings"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "12ccffbcd7444b90"
+  },
+  {
+    "name": "Спрятаться за щитом",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж получает тратит от 1 до 5 очков действия и получает столько же очков к Блоку до начала своего следующего хода. Помимо этого, персонаж получает Малое укрытие если это средний щит и Большое укрытие если это Ростовой щит.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": true,
+      "variable_cost_max": 5,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": true
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Экипированный щит",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "64f666677c5b4aec"
+  },
+  {
+    "name": "Гипнотический взгляд",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hypnotic_gaze.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\n3 раз за сцену. Необходимо иметь визуальный контакт с целью, цель должна обладать сознанием. Если цель проваливает спас, можно дать ей простой приказ: брось оружие, стой смирно, беги, упади. Цель не станет выполнять очевидно суицидальные приказы (кинься со скалы, зареж себя). Если цель прокидывает спас она имунна к этому манёвру на ближайшие сутки.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "@attributes.will.rank+1 or @attributes.cha.rank+1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "dragon_hypnotic_gaze"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "3",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "Will",
+      "save_dc_formula": "@will+8",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "803e83ea0cc548a8"
+  },
+  {
+    "name": "Невероятная грация",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_incredible_grace.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж получает +2 к уклонению на 10 раундов.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "elf_incredible_grace"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "784f435622dc4fa5"
+  },
+  {
+    "name": "Несокрушимый дух",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_indomitable_spirit.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\n[🔧 плейсхолдер: игнорировать список лёгких негативных состояний] пока талант активен.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "indomitable_spirit"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "75a69fc86c7e4f4a"
+  },
+  {
+    "name": "Воодушевляющее присутствие",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_inspiring_presence.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКогда союзник в пределах слышимости совершает бросок атаки или защиты — потратьте заряд, он добавляет +2 к результату. Объявляется после броска, до объявления результата.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "inspiring_presence"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "a0be1a5a579547ee"
+  },
+  {
+    "name": "Мгновенный перехват",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_instant_intercept.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, реакция. Если по вам попадает дальнобойная атака противника, вы можете использовать этот манёвр в качестве реакции и отбить летящий снаряд. Требование: снаряженное оружие ближнего боя.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "instant_intercept"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "b8d87761d6f1438d"
+  },
+  {
+    "name": "Взаимодействие",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_interact.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nБазовое взаимодействие с окружающим миром: например потушить огонь на себе или союзнике, сделать проверку умения, толкнуть речь (что-то большее чем пара слов в бою, но не поэма), достать предмет из сумки и так далее по решению мастера.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "83eb7fe160d14b9a"
+  },
+  {
+    "name": "Перехват",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_intercepting_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр. Дальнобойное оружие. Если в области досягаемости вашего персонажа противник проводит Перезарядку, Прицеливание или будут_добавлены_манёвры. Вы можете совершить манёвр Выстрел из или Бросок в качесвте реакции без траты дополнительных ОД. Если ваша атака попадёт и нанесёт урон, действие противника будет считаться сорванным, а потраченные ОД — сгоревшими.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "intercepting_shot"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "crature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "40fcc27f69e04d47"
+  },
+  {
+    "name": "Из Последних Сил",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_last_stand.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПредотвращает падение до 0 HP, восстанавливая часть здоровья.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "last_stand"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "56d2b20d711b418f"
+  },
+  {
+    "name": "Взгляд вожака",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_leaders_gaze.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПроверка WILL против WILL цели. При успехе — [🔧 плейсхолдер: лёгкий статус ошеломления] на 2 раунда (налог +1 ОД на все манёвры цели).\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "leaders_gaze"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "453ee841ca5e49ea"
+  },
+  {
+    "name": "Живой осадный механизм",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_living_siege_engine.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nТы можешь поднимать и швырять огромные, тяжелые объекты с силой катапульты.\nТы можешь поднять и швырнуть большой объект (валун, колонну) на расстояние до (Ранг Силы * 5) гексов. При попадании в цель или в точку на земле, объект наносит большой урон по области (например, радиус 1-2 гекса).\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nпереформулировать/перегенирить этот манёвр",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "2",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "living_siege_engine"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "fa348250c457419d"
+  },
+  {
+    "name": "Стрельба в движении.",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_mobile_marksman.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр в цепи после движения, можно применить любой Выстрел не тратя дополнительных ОД.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nследующий выстрел стоит 0 ОД",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "maneuver_move",
+      "chain_trigger_maneuvers": [
+        "maneuver_move"
+      ],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "mobile_marksman"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "6ad4b6a1f0c94187"
+  },
+  {
+    "name": "Передвижение",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_move.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж может применить в свой ход манёвр Передвижение чтобы переместиться до 2+ловкость гексов.\nВы не можете разделить движение другими манёврами, но можете совершить этот манёвр сразу после другого манёвра.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "любой манёвр",
+      "chain_trigger_maneuvers": [
+        "any"
+      ],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "a746f09e470c4905"
+  },
+  {
+    "name": "Дозор",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_overwatch.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр. Свободное действие. Вы можете выбрать один из доступных вам манёвров и задать тригер: когда маг начнёт колдовать, когда стражник попадёт в зону видимости (итд). Вы должны сразу потратить од на целевой маёнвр, он автоматически сработает когда будут выполнены условия. Если манёвр сделает для цели невозможным выполнение действия, ОД которые она потратила не возвращаются.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "overwatch"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "d5ab7f887dad46ad"
+  },
+  {
+    "name": "Проникающий удар",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_penetrating_strike.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВы используете две конечности и свой вес чтобы нанести сильный колющий удар противнику. +2 урона.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "penetrating_strike"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "weapon +2",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "5c3bbf691a154661"
+  },
+  {
+    "name": "Фантомный шаг",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_phantom_tread.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, следующее передвижение не провоцирует атак по возможности. НЕ в цепи.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "phantom_tread"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "21c49d3dd8184f97"
+  },
+  {
+    "name": "Удар с замахом",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_power_bash.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВы делаете сильный замах, чтобы нанести больший урон противнику. +2 урона\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": true,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "power_bash"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "weapon +2",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "7a94559df4bf446f"
+  },
+  {
+    "name": "Карающий промах",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_punishing_miss.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКак ответная атака, но можно активировать после промаха противника.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "punishing_miss"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "crature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "e5915bf530474955"
+  },
+  {
+    "name": "Ярость",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_rage.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж впадает в состояние ярости на 10 раундов. В этом состоянии он игнорирует штрафы к броскам за ранения.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "demon_rage"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "a69395519b6140de"
+  },
+  {
+    "name": "Сплочение",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_rally.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. Все союзники в пределах слышимости снимают [🔧 плейсхолдер: лёгкие негативные состояния] и получают +1 к броскам до конца раунда.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "rally"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "circle",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "7c4922f333034137"
+  },
+  {
+    "name": "Ответный выстрел",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_ranged_riposte.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nКак riposte но в дальнем бою.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "ranged_riposte"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "crature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "f400a4455be3481d"
+  },
+  {
+    "name": "Быстрый выстрел из лука",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_rapid_bow_shot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nСтоит на 1 выносливость меньше. Вы тренировали свои руки достаточно чтобы без особого труда растягивать даже самые тяжелые луки.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "bows",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Лук",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "rapid_bow_shot"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "5644f4a359dd42ee"
+  },
+  {
+    "name": "Регенрация",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_regeneration.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВосполнить 10% хитов\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "demon_regeneration"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "94ba5f05f4fa47a1"
+  },
+  {
+    "name": "Перезарядка",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reload.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nЕсли оружие обладает перезарядкой, этот манёвр позволяет его перезарядить.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Встрел из огнестрела, Выстрел из арбалета.",
+      "chain_trigger_maneuvers": [
+        "maneuver_firearme_shot",
+        "maneuver_crossbow_shot"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Огнестрел",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "af02e78f66e8404c"
+  },
+  {
+    "name": "Резервная вынослиовсть",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reserve_stamina.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nДает возможность мгновенно восстановить часть универсальных Очков Действия.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "reserve_stamina"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "78fd6aa6624148ad"
+  },
+  {
+    "name": "Переписать момент",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_rewrite_moment.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nРеакция. Когда вы получаете урон — вы можете активировать этот талант. Атака противника полностью отменяется со всеми последствиями (урон, состояния, эффекты). Потраченные противником ОД не возвращаются.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 5,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "rewrite_moment"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "892fc208ce01479f"
+  },
+  {
+    "name": "Ответная атака",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nЕсли по персонажу была проведена успешная атака ближнего боя (не важно, нанесла ли она урон), используя этот манёвр, он может сразу без дополнительной траты ОД провести Выпад, Взмах или Удар.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "оружие ближнего боя",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "81d50ce6d1f64e42"
+  },
+  {
+    "name": "Удар щитом",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_shield_bash.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nНеобходимо держать в руке щит. Вы можете провести атаку ближнего боя используя ранг вашей силы в качестве бонуса к броску. Эта атака не наносит урон, но в случае попадания, противник будет вынужден отступить на STR гексов по направлению от вас.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": true
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "shield_bash"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "3edd9d2019a64951"
+  },
+  {
+    "name": "Королевская воля",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_sovereign_will.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВсе враги в радиусе 2+WILL гексов проходят проверку WILL против вашего WILL+12. Провал — [🔧 плейсхолдер: Ужас]. Успех — [🔧 плейсхолдер: лёгкий статус].\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nподумать над введением сущности \"аура\"",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "sovereign_will"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "circle",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "will",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "04ee9210f031478f"
+  },
+  {
+    "name": "Стальной барьер",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_steel_barrier.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВы раскручиваете свой меч, создавая вокруг себя зону отчуждения 1 гекс, до начала своего следующего хода. Первый противник вошедший в вашу зону получает от вас автоматическое попадание (урон откидывается, но не модифицируется другими талантами), это не считается атакующим манёвром (для возможностей избежать атаки). После этого манёвр прекращается. Активация другого манёвра прекращает стальной барьер.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "bladed",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "двуручный меч",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "steel_barrier"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "2",
+      "target_value": 1,
+      "template_shape": "cirle",
+      "template_size": 2,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "b7c93898a393454e"
+  },
+  {
+    "name": "Стальная инерция",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_steel_momentum.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nЕсли в конце прошлого хода вы начали Стальной барьер и он не сработал до начала нового хода, то в начале хода вы можете применить Стальную Инерцию: подвигайтесь до двух гексов и проведите атаку, в случае успеха добавьте 1 кубик урона вашего оружия.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "bladed",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "статус стальной барьер",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "steel_momentum"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "weapon +1 dice",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "ed03519e5e7f4b4b"
+  },
+  {
+    "name": "Суперпозиция",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_superposition.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр. Вы выставляете до 4 копий вашего персонажа на поле боя в пределах видимости. У каждой копии 1 хит, после получения урона она исчезает. После того как противник совершает атаку по одному из ваших токенов вы выбираете: он атакует копию или настоящего персонажа. В свой ход вы так же решаете какой из токенов — ваш персонаж. Вы можете совершать манёвры реакции копиями с налогом +1 ОД.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 5,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "superposition"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "20e8364182ab4af8"
   },
   {
     "name": "Взмах",
     "type": "maneuver",
-    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing.svg",
     "system": {
       "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака режущим оружием ближнего боя\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
       "source": "basic",
-      "action_type": [
-        "action",
-        "chain"
-      ],
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
       "chain_trigger_text": "атака по возможности, ответный удар",
       "chain_trigger_maneuvers": [
         "maneuver_riposte",
@@ -125,24 +3708,90 @@
       "forbidden_defense": ""
     },
     "flags": {},
-    "_id": "37732a7615fa4bab"
+    "_id": "d20b26b40ba144c2"
   },
   {
-    "name": "Метнуть",
+    "name": "Взмах на ходу",
     "type": "maneuver",
-    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing_on_a_move.svg",
     "system": {
-      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМетнуть метательное оружие\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
-      "source": "basic",
-      "action_type": [
-        "action",
-        "chain"
-      ],
-      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр в цепи после движения, режущее. +2 урона.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "maneuver_move",
       "chain_trigger_maneuvers": [
-        "maneuver_take_ranged_aim"
+        "maneuver_move"
       ],
-      "ap_cost": 2,
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "swing_on_a_move"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "da1c022e132e425b"
+  },
+  {
+    "name": "Тактический разбор",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_tactical_breakdown.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. Выберите одного противника. Все союзники в пределах слышимости получают против этой цели до конца сцены: +2 к урону и право перебросить один кубик урона (новый результат обязателен).\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
       "is_variable_cost": false,
       "variable_cost_max": 0,
       "uses_value": 0,
@@ -168,14 +3817,16 @@
         "is_enchanted": false,
         "is_reloading": false
       },
-      "prerequisites_text": "Метательное оружие",
+      "prerequisites_text": "",
       "prerequisites_attributes": [],
       "prerequisites_skills": [],
-      "prerequisites_talents": [],
+      "prerequisites_talents": [
+        "tactical_breakdown"
+      ],
       "prerequisites_mutations": [],
       "prerequisites_bloodlines": [],
       "target_type": "creature",
-      "target_range": "weapon",
+      "target_range": "",
       "target_value": 1,
       "template_shape": "",
       "template_size": 0,
@@ -187,19 +3838,211 @@
       "forbidden_defense": ""
     },
     "flags": {},
-    "_id": "ee0fed97edac43ff"
+    "_id": "7017d99ede3245e5"
+  },
+  {
+    "name": "Прицеливание дальнобойным оружием",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_take_ranged_aim.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж получает +2 к следующему боску атаки Выстрел из огнестрела/лука/арбалета.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": true,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "дальнобойное оружие",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "fe27d5f58116420c"
+  },
+  {
+    "name": "Провокация",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_taunt.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПроверка CHA vs WILL цели. При провале штраф -3 на атаки против других целей.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 1,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "taunt"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "4d861c65254f4767"
+  },
+  {
+    "name": "Сквозь боль",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_through_the_pain.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nСвободное действие. Игнорируете штраф текущего уровня ранения до конца раунда.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "through_the_pain"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "000eb9f615294956"
   },
   {
     "name": "Выпад",
     "type": "maneuver",
-    "img": "systems/dedrel/assets/icons/maneuver.svg",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_thrust.svg",
     "system": {
       "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nАтака колющим оружием ближнего боя,\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
       "source": "basic",
-      "action_type": [
-        "action",
-        "chain"
-      ],
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
       "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
       "chain_trigger_maneuvers": [
         "maneuver_riposte",
@@ -251,6 +4094,649 @@
       "forbidden_defense": ""
     },
     "flags": {},
-    "_id": "55fc7f73917e4ba6"
+    "_id": "f1f6065b65e145b6"
+  },
+  {
+    "name": "Метнуть",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_trow.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМетнуть метательное оружие\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "basic",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "Прицеливание дальнобойным оружием",
+      "chain_trigger_maneuvers": [
+        "maneuver_take_ranged_aim"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "Метательное оружие",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "79b5c4047dde4941"
+  },
+  {
+    "name": "Несокрушимость",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_unbreakable.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nпозволяет вешать на себя статус предотращающий получение урона 1 раз в долгий отдых.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "unbreakable"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "671f17beb14a465a"
+  },
+  {
+    "name": "Невероятный метаболизм",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_uncanny_metabolism.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, свободное действие. Вы получаете скидку -1 на все манёвры на ближайшие три раунда (но не меньше 1).\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nскидка на все манёвры 1",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "uncanny_metabolism"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "f7b7a04128174589"
+  },
+  {
+    "name": "Давящее присутствие",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_unnerving_presence.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПроверка CHA vs WILL цели. При успехе — [🔧 плейсхолдер: лёгкий дебаф] на 2 раунда. Нарративно: не страх, а ощущение что противник заведомо проиграл.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "unnerving_presence"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "82386e94793c4646"
+  },
+  {
+    "name": "Векторное скольжение",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_vector_glide.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, в цепи. позволяет персонажу бегать по вертикальным поверхностям и воде. Если персонаж закончит движение на верекальной порверхности/воде то упадет.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": true
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [
+        "any"
+      ],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "vector_glide"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "7e36654d705f495d"
+  },
+  {
+    "name": "Вольт",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_volt_step.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nМанёвр, реакция. После броска атаки противника в ближнем бою, потратьте до 5 ОД и прибавьте столько же к Уклонению до конца этого раунда.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": true,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 0,
+      "is_variable_cost": true,
+      "variable_cost_max": 5,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "volt_step"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "self",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "eaa83ac377d24761"
+  },
+  {
+    "name": "Слабое место",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_weak_spot.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПеред атакой вы объявляете что «читаете» противника. При попадании атака полностью игнорирует DR брони цели.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии\nКажется слишком имбово, подумать над формулироваками",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "3",
+      "uses_per": "short_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "weak_spot"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "47810a338d874f00"
+  },
+  {
+    "name": "Аура защиты",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_will_aura.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nВсе союзники в радиусе 2+WILL гексов получают +2 к спасброскам против ментальных эффектов и состояний.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 3,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "will_aura"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "area",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "circle",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "a55d146c21324cb0"
+  },
+  {
+    "name": "Крылья: Пикирующая атака",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_wings_dive_strike.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nПерсонаж взлетает и обрушивается на противника. Цель должна находится минимум в 3 гексах от персонажа. Персонаж совершает атаку своим оружием ближнего боя с бонусом +2 к атаке и +2 к урону.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "mutation",
+      "action_type": {
+        "action": true,
+        "reaction": false,
+        "free": false,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 2,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "",
+      "uses_per": "",
+      "req_weapon_type": {
+        "melee": true,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "оружие ближнего боя",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [],
+      "prerequisites_mutations": [
+        "demon_wings",
+        "dragon_wings"
+      ],
+      "prerequisites_bloodlines": [],
+      "target_type": "creature",
+      "target_range": "@dex+1+weapon",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "9da3c9ed2b3a4414"
+  },
+  {
+    "name": "Мир на моей стороне",
+    "type": "maneuver",
+    "img": "systems/dedrel/assets/icons/maneuvers/maneuver_world_favors_me.svg",
+    "system": {
+      "description": "> [!summary] Краткое описание\n> Суть манёвра в одном предложении. Для быстрого понимания.\n\n### Механика\nСвободное действие. До конца раунда окружающие предметы и среда действуют в вашу пользу: механизм заклинивает, верёвка рвётся, камень укатывается. Мастер воплощает эффект исходя из контекста. Нельзя нанести урон или состояния напрямую — только изменить обстановку.\n\n### Визуальное описание (Flaf)\n\n\n### Комментарии",
+      "source": "talent",
+      "action_type": {
+        "action": false,
+        "reaction": false,
+        "free": true,
+        "chain": false
+      },
+      "chain_trigger_text": "",
+      "chain_trigger_maneuvers": [],
+      "ap_cost": 5,
+      "is_variable_cost": false,
+      "variable_cost_max": 0,
+      "uses_value": 0,
+      "uses_max": "1",
+      "uses_per": "long_rest",
+      "req_weapon_type": {
+        "melee": false,
+        "ranged": false,
+        "shield": false
+      },
+      "req_weapon_damage_type": {
+        "piercing": false,
+        "bludgeoning": false,
+        "slashing": false
+      },
+      "req_weapon_skill_group": "",
+      "req_weapon_property": {
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_enchanted": false,
+        "is_reloading": false
+      },
+      "prerequisites_text": "",
+      "prerequisites_attributes": [],
+      "prerequisites_skills": [],
+      "prerequisites_talents": [
+        "world_favors_me"
+      ],
+      "prerequisites_mutations": [],
+      "prerequisites_bloodlines": [],
+      "target_type": "",
+      "target_range": "",
+      "target_value": 1,
+      "template_shape": "",
+      "template_size": 0,
+      "formula_attack": "",
+      "formula_damage": "",
+      "formula_custom": "",
+      "save_attribute": "",
+      "save_dc_formula": "",
+      "forbidden_defense": ""
+    },
+    "flags": {},
+    "_id": "9c1f99a762ad49d1"
   }
 ]

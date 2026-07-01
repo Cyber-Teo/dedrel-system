@@ -31,10 +31,10 @@ export default class DedrelItem extends Item {
     for (const pack of game.packs) {
       if (pack.documentName !== "Item") continue;
       
-      const index = await pack.getIndex();
+      const index = await pack.getIndex({ fields: ["system.key"] });
       for (let i = itemNamesToFind.length - 1; i >= 0; i--) {
         const itemName = itemNamesToFind[i];
-        const entry = index.find(idx => idx.name === itemName);
+        const entry = index.find(idx => idx.system?.key === itemName || idx.name === itemName);
         if (entry) {
           const itemDoc = await pack.getDocument(entry._id);
           const itemData = itemDoc.toObject();
@@ -88,7 +88,16 @@ export default class DedrelItem extends Item {
       return this.postToChat();
     }
 
-    const apCost = this.system.ap_cost || 0;
+    let apCost = this.system.ap_cost || 0;
+    
+    // Поддержка бесплатных манёвров (например Рипост делает Взмах, Удар или Выпад бесплатными)
+    let isFreeRiposte = false;
+    if (this.type === "maneuver" && apCost > 0) {
+      if (actor.flags?.dedrel?.freeAttackRiposte && ["Взмах", "Удар", "Выпад"].includes(this.name)) {
+        apCost = 0;
+        isFreeRiposte = true;
+      }
+    }
     
     // Проверка зарядов
     const usesMaxStr = this.system.uses_max || "0";
@@ -180,7 +189,11 @@ export default class DedrelItem extends Item {
     let apSpecific = 0;
     let specificApKey = "";
     
-    if (apCost > 0) {
+    let isVariable = this.system.is_variable_cost;
+    let minAp = apCost;
+    let maxAp = this.system.variable_cost_max || 99;
+
+    if (apCost > 0 || isVariable) {
       let apUniversal = actor.system.resources?.ap_universal?.value || 0;
       if (this.type === "maneuver") {
         apSpecific = actor.system.resources?.ap_maneuver?.value || 0;
@@ -191,9 +204,20 @@ export default class DedrelItem extends Item {
       }
       currentAp = apUniversal + apSpecific;
       
-      content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: this.name, cost: apCost})}</p>`;
-      if (apCost > currentAp) {
-        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: currentAp, cost: apCost})}</p>`;
+      if (isVariable) {
+        maxAp = Math.min(maxAp, currentAp);
+        content += `
+          <div class="form-group" style="margin-top: 10px;">
+            <label style="font-weight: bold;">Трата ОД (от ${minAp} до ${this.system.variable_cost_max || 'макс.'}):</label>
+            <input type="number" id="use-ap-cost" value="${minAp}" min="${minAp}" max="${maxAp}" style="width: 100%; padding: 4px;">
+          </div>
+        `;
+        content += `<p style="color: gray; font-size: 12px;">Доступно ОД: ${currentAp}</p>`;
+      } else {
+        content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: this.name, cost: apCost})}</p>`;
+        if (apCost > currentAp) {
+          content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: currentAp, cost: apCost})}</p>`;
+        }
       }
     }
 
@@ -244,7 +268,13 @@ export default class DedrelItem extends Item {
           icon: "fa-solid fa-check",
           label: game.i18n.localize("DEDREL.Chat.Confirm"),
           callback: async (event, button, dialog) => {
-            if (apCost > 0 && apCost > currentAp) {
+            let finalApCost = apCost;
+            if (isVariable) {
+              const inputEl = dialog.element.querySelector("#use-ap-cost");
+              if (inputEl) finalApCost = parseInt(inputEl.value) || minAp;
+            }
+
+            if (finalApCost > 0 && finalApCost > currentAp) {
               ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
               return;
             }
@@ -258,9 +288,9 @@ export default class DedrelItem extends Item {
             }
 
             // Списание ОД
-            if (apCost > 0) {
+            if (finalApCost > 0) {
               let apUniversal = actor.system.resources?.ap_universal?.value || 0;
-              let costLeft = apCost;
+              let costLeft = finalApCost;
               let updates = {};
               
               if (specificApKey) {
@@ -275,6 +305,12 @@ export default class DedrelItem extends Item {
               }
               
               await actor.update(updates);
+            }
+            
+            // Если была использована бесплатная атака от рипоста, удаляем бафф
+            if (isFreeRiposte) {
+              const effectToRemove = actor.effects.find(e => e.changes.some(c => c.key === "flags.dedrel.freeAttackRiposte"));
+              if (effectToRemove) await effectToRemove.delete();
             }
             
             // Списание Зарядов
@@ -308,9 +344,26 @@ export default class DedrelItem extends Item {
             
             // Вызов макроса если есть
             if (this.system.on_use_macro) {
-              const macro = game.macros.find(m => m.name === this.system.on_use_macro);
+              let macro = game.macros.find(m => m.name === this.system.on_use_macro);
+              if (!macro) {
+                if (this.system.on_use_macro.startsWith("Compendium.") || this.system.on_use_macro.startsWith("Macro.")) {
+                  macro = await fromUuid(this.system.on_use_macro);
+                } else {
+                  for (let pack of game.packs.values()) {
+                    if (pack.documentName === "Macro") {
+                      const index = await pack.getIndex();
+                      const entry = index.find(e => e.name === this.system.on_use_macro);
+                      if (entry) {
+                        macro = await pack.getDocument(entry._id);
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
+              
               if (macro) {
-                macro.execute({ actor: actor, item: this });
+                macro.execute({ actor: actor, item: this, spentAp: finalApCost });
               } else {
                 ui.notifications.warn(game.i18n.format("DEDREL.Notifications.MacroNotFound", {name: this.system.on_use_macro}));
               }
@@ -354,7 +407,7 @@ export default class DedrelItem extends Item {
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
                           wDmg.piercing || wDmg.bludgeoning || wDmg.slashing);
        
-       if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute) {
+       if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
          showCombatButtons = true;
        }
     }
@@ -364,7 +417,7 @@ export default class DedrelItem extends Item {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
       `;
-      if (this.system.formula_attack || reqWeapon) {
+      if (this.system.formula_attack || reqWeapon || this.system.skill) {
         buttons += `<button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>`;
       }
       if (this.system.formula_damage || reqWeapon) {

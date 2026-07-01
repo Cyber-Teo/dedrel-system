@@ -10,7 +10,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
    */
   static defineSchema() {
     const fields = foundry.data.fields;
-    
+
     // Helper to generate attribute schema
     const attributeField = () => new fields.SchemaField({
       rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 })
@@ -41,7 +41,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         luck: attributeField(),
         cha: attributeField()
       }),
-      
+
       skills: new fields.SchemaField({
         // Combat
         crossbows: skillField(),
@@ -79,9 +79,9 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
       resources: new fields.SchemaField({
         hp: new fields.SchemaField({
-          value: new fields.NumberField({ required: true, integer: true, initial: 10, min: 0 }),
-          temp: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-          max: new fields.NumberField({ required: false, integer: true, initial: 10 }) // Derived
+          value: new fields.NumberField({ required: true, initial: 10, min: 0 }),
+          temp: new fields.NumberField({ required: true, initial: 0, min: 0 }),
+          max: new fields.NumberField({ required: false, initial: 10 }) // Derived
         }),
         wounds: new fields.SchemaField({
           level: new fields.NumberField({ required: false, integer: true, initial: 1 }), // Derived
@@ -108,7 +108,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         })
       }),
-      
+
       senses: new fields.SchemaField({
         darkvision: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
@@ -117,6 +117,19 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         block: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
         dodge: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
         mdef: new fields.NumberField({ required: false, integer: true, initial: 0 }) // Derived
+      }),
+
+      dr: new fields.SchemaField({
+        slashing: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        piercing: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        bludgeoning: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        heat: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        cold: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        necrotic: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        radiant: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        electric: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        sonic: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+        acid: new fields.NumberField({ required: false, integer: true, initial: 0 })
       }),
 
       equipment_slots: new fields.SchemaField({
@@ -131,8 +144,14 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) })
       }),
 
+      bonuses: new fields.SchemaField({
+        global_roll: new fields.NumberField({ initial: 0, integer: true }),
+        global_skill: new fields.NumberField({ initial: 0, integer: true }),
+        global_save: new fields.NumberField({ initial: 0, integer: true })
+      }),
+
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
-      
+
       details: new fields.SchemaField({
         xp: new fields.NumberField({ required: true, integer: true, initial: 0 }),
         level: new fields.NumberField({ required: true, integer: true, initial: 1 }),
@@ -154,7 +173,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     const def = this.defenses;
 
     // HP Max
-    res.hp.max = Math.ceil((attrs.con.rank + attrs.will.rank / 2) * 10);
+    res.hp.max += Math.ceil((attrs.con.rank + attrs.will.rank / 2) * 10);
 
     // Wounds
     const hpPercent = (res.hp.value / res.hp.max) * 100;
@@ -173,38 +192,39 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     }
 
     // Luck Points Max
-    res.luck_points.max = attrs.luck.rank;
+    res.luck_points.max += attrs.luck.rank;
 
     // AP Universal
     const maxConWill = Math.max(attrs.con.rank, attrs.will.rank);
     const minConWill = Math.min(attrs.con.rank, attrs.will.rank);
     const baseUniv = maxConWill > 1 ? 1 : 0;
-    res.ap_universal.max = baseUniv + Math.ceil((maxConWill + minConWill / 2) / 2);
+    res.ap_universal.max += baseUniv + Math.ceil((maxConWill + minConWill / 2) / 2);
 
     // AP Maneuver
     const maxManeuver = Math.max(attrs.str.rank, attrs.dex.rank, attrs.rea.rank);
     const baseManeuver = maxManeuver > 1 ? 1 : 0;
-    res.ap_maneuver.max = baseManeuver + Math.ceil(maxManeuver / 2);
+    res.ap_maneuver.max += baseManeuver + Math.ceil(maxManeuver / 2);
 
     // AP Magic
     const maxMagic = Math.max(attrs.log.rank, attrs.int.rank);
     const baseMagic = maxMagic > 1 ? 1 : 0;
-    res.ap_magic.max = baseMagic + Math.ceil(maxMagic / 2);
+    res.ap_magic.max += baseMagic + Math.ceil(maxMagic / 2);
 
     // Defenses
-    def.block = Math.floor(attrs.str.rank + attrs.rea.rank / 2) + 8;
-    def.dodge = Math.floor(attrs.dex.rank + attrs.rea.rank / 2) + 8;
-    def.mdef = Math.floor(Math.max(attrs.int.rank, attrs.log.rank) + attrs.will.rank / 2) + 8;
+    def.block += Math.floor(attrs.str.rank + attrs.rea.rank / 2) + 8;
+    def.dodge += Math.floor(attrs.dex.rank + attrs.rea.rank / 2) + 8;
+    def.mdef += Math.floor(Math.max(attrs.int.rank, attrs.log.rank) + attrs.will.rank / 2) + 8;
 
     // Initiative
-    this.initiative = Math.max(attrs.int.rank, attrs.rea.rank);
+    this.initiative += Math.max(attrs.int.rank, attrs.rea.rank);
 
     // Movement
-    res.movement.max = Math.floor(2 + attrs.dex.rank);
+    res.movement.max += Math.floor(2 + attrs.dex.rank);
 
     // DR and Armor calculation
-    this.dr = { slashing: 0, piercing: 0, bludgeoning: 0, heat: 0, cold: 0, necrotic: 0, radiant: 0, electric: 0, sonic: 0 };
-    
+    // this.dr is now part of the schema, so Active Effects can modify it.
+    // We just need to add armor DR to it.
+
     if (this.parent && this.parent.items) {
       const equippedArmors = [];
       const slots = this.equipment_slots;
@@ -228,7 +248,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           def.block += (armor.system.modifiers.block || 0);
           res.movement.max += (armor.system.modifiers.movement || 0);
         }
-        
+
         const weightClass = armor.system.weight_class;
         if (weightClass === "heavy") maxArmorWeight = Math.max(maxArmorWeight, 2);
         else if (weightClass === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
@@ -240,7 +260,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       // Навыки хранятся единым плоским списком (flat schema), поэтому обращаемся напрямую.
       const armorUseRank = this.skills?.armor_use?.rank || 0;
       let hasArmorPenalty = false;
-      
+
       // Тяжелая броня требует 4+ ранг навыка "Ношение доспехов"
       if (maxArmorWeight === 2 && armorUseRank < 4) hasArmorPenalty = true;
       // Средняя броня требует 2+ ранг навыка "Ношение доспехов"

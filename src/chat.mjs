@@ -28,13 +28,18 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let baseRank = 0;
       let title = game.i18n.format("DEDREL.Chat.AttackCardTitle", {name: item.name});
       
-      // Если атака связана с оружием, ищем ранг соответствующего оружейного навыка
-      if (weapon && weapon.system.skill) {
+      // Определяем навык: сначала ищем у самого манёвра/предмета, если нет - у оружия
+      let skillKey = item.system.skill;
+      if (!skillKey && weapon && weapon.system.skill) {
+        skillKey = weapon.system.skill;
+      }
+      
+      if (weapon) {
         title += ` (${weapon.name})`;
-        const skillKey = weapon.system.skill;
-        if (actor.system.skills && actor.system.skills[skillKey]) {
-          baseRank = actor.system.skills[skillKey].rank || 0;
-        }
+      }
+
+      if (skillKey && actor.system.skills && actor.system.skills[skillKey]) {
+        baseRank = actor.system.skills[skillKey].rank || 0;
       }
       
       await showRollDialog({
@@ -72,7 +77,37 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
       
-      let roll = new Roll(formula);
+      // Попробуем извлечь тип урона прямо из формулы, если он указан в скобках, например 1d6[acid] или 1d6[кислота]
+      const match = formula.match(/\[(.*?)\]/);
+      if (match) {
+          const flavorText = match[1].toLowerCase().trim();
+          if (!drKey) {
+              if (DR_KEY_LABELS[flavorText]) {
+                  drKey = flavorText;
+              } else {
+                  for (const [k, labelKey] of Object.entries(DR_KEY_LABELS)) {
+                      if (game.i18n.localize(labelKey).toLowerCase() === flavorText) {
+                          drKey = k;
+                          break;
+                      }
+                  }
+              }
+          }
+          // Удаляем квадратные скобки из формулы, чтобы избежать ошибок синтаксиса Roll
+          formula = formula.replace(/\[.*?\]/g, '').trim();
+      }
+      
+      let roll = new Roll(formula, actor.getRollData());
+      
+      // Возвращаем flavor обратно в кубики для поддержки Dice So Nice
+      if (drKey) {
+          for (let term of roll.terms) {
+              if (term.faces !== undefined) {
+                  term.options.flavor = drKey;
+              }
+          }
+      }
+      
       await roll.evaluate();
       
       const apLevel = weapon?.system?.properties?.armor_piercing_value || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
@@ -150,22 +185,31 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         const targetActor = token.actor;
         if (!targetActor) continue;
         
-        let targetDr = 0;
+        let drUnits = 0;
         if (drKey && targetActor.system.dr && targetActor.system.dr[drKey] !== undefined) {
-          targetDr = targetActor.system.dr[drKey];
+          drUnits = targetActor.system.dr[drKey];
         }
 
-        // Применяем бронебойность
-        if (apLevel > 0 && targetDr > 0) {
-          const ignorePercent = apLevel * 10;
-          targetDr = targetDr - (targetDr * ignorePercent / 100);
-        }
+        let drPercent = drUnits * 10;
+        let apPercent = apLevel * 10;
         
-        targetDr = Math.floor(targetDr);
-        if (targetDr < 0) targetDr = 0;
+        // Применяем бронебойность (плоское вычитание процентов)
+        if (drPercent > 0) {
+          drPercent -= apPercent;
+          if (drPercent < 0) drPercent = 0;
+        }
 
-        let finalDamage = damage - targetDr;
+        // Защита не может превышать 100%
+        if (drPercent > 100) drPercent = 100;
+
+        let finalDamage = damage * (1 - drPercent / 100);
         if (finalDamage < 0) finalDamage = 0;
+        
+        // Небольшое округление, чтобы избежать длинных дробей
+        finalDamage = Math.round(finalDamage * 10) / 10;
+        
+        let blockedDamage = damage - finalDamage;
+        blockedDamage = Math.round(blockedDamage * 10) / 10;
 
         const currentHp = targetActor.system.resources.hp.value;
         let tempHp = targetActor.system.resources.hp.temp || 0;
@@ -196,8 +240,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageTakenTemp", {tempDamage: tempHpDamage})}</span>`;
         }
 
-        if (targetDr > 0) {
-          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: targetDr})}</span>`;
+        if (blockedDamage > 0) {
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: blockedDamage})}</span>`;
         }
         
         ChatMessage.create({

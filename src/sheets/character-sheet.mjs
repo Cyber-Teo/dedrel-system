@@ -156,7 +156,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    const hasTail = mutations.some(m => m.system.key === "prehensile_tail");
+    const hasTail = mutations.some(m => m.system.key && m.system.key.includes("tail"));
 
     const equipment_slots = {
       armor_upper: actorData.system.equipment_slots?.armor_upper?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_upper.item_id) : null,
@@ -549,7 +549,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     const equipment_slots = this.document.system.equipment_slots;
     const isTwoHanded = item.system.is_twohanded;
-    const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key === "prehensile_tail");
+    const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
 
     const updates = {};
 

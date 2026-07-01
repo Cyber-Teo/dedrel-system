@@ -1,9 +1,5 @@
 <div class="form-fields-grid">
     <div class="form-group">
-        <label>System Key</label>
-        <input type="text" name="system.key" value="{{system.key}}" placeholder="{{localize "DEDREL.ItemFields.KeyPlaceholder"}}"/>
-    </div>
-    <div class="form-group">
         <label>{{localize "DEDREL.ItemFields.Subtype"}}</label>
         <select name="system.subtype">
             {{selectOptions talentSubtypes selected=system.subtype}}
@@ -26,6 +22,15 @@
         <label>{{localize "DEDREL.ItemFields.XPCost"}}</label>
         <input type="text" name="system.xp_cost" value="{{system.xp_cost}}" data-dtype="Number"/>
     </div>
+    
+    <div class="section-header" style="grid-column: 1 / -1;">
+        {{localize "DEDREL.ItemFields.SituationalBonus"}}
+    </div>
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="system.has_situational_bonus" {{checked system.has_situational_bonus}}/> {{localize "DEDREL.ItemFields.SituationalBonus"}}
+        </label>
+    </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
         <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
@@ -43,44 +48,46 @@
         <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
     </div>
 
-    <div class="section-header">
+    <div class="section-header" style="grid-column: 1 / -1;">
         {{localize "DEDREL.ItemSheet.Prerequisites"}}
     </div>
     
-    <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.ReqText"}}</label>
-        <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
-    </div>
-    <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.ReqAttributes"}}</label>
-        <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
-    </div>
-    <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.ReqSkills"}}</label>
-        <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
-    </div>
-    <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.Talents"}}</label>
-        <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
-    </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.Mutations"}}</label>
         <input type="text" name="system.prerequisites_mutations" value="{{joinedPrereqMutations}}" placeholder="mutation1"/>
     </div>
-    <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.Bloodline"}}</label>
-        <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.Talents"}}</label>
+        <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1, talent2"/>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.ReqText"}}</label>
+        <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
+    </div>
+    <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.ReqAttributes"}}</label>
+            <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
+        </div>
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.ReqSkills"}}</label>
+            <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="atletism 2, knowledge 3"/>
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+            <label>{{localize "DEDREL.ItemSheet.Bloodline"}}</label>
+            <input type="text" name="system.prerequisites_bloodlines" value="{{joinedPrereqBloodlines}}" placeholder="Demon, 2"/>
+        </div>
     </div>
 
-    <div class="section-header">
+    <div class="section-header" style="grid-column: 1 / -1;">
         {{localize "DEDREL.ItemSheet.AddsItems"}}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.AddsItems"}}</label>
         <input type="text" name="system.adds_items" value="{{joinedAddsItems}}" placeholder="maneuver1; talent1"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.OnAddMacro"}}</label>
         <input type="text" name="system.on_add_macro" value="{{system.on_add_macro}}"/>
     </div>
