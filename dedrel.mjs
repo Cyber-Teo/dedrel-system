@@ -186,6 +186,41 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
   }
 });
 
+/**
+ * Хуки "preCreateActiveEffect" и "preUpdateActiveEffect"
+ * Автоматически добавляют phase: "apply" ко всем изменениям системных переменных (system.),
+ * так как интерфейс Foundry V14 не всегда позволяет задать фазу вручную, а без нее TypeDataModel игнорирует эффекты.
+ */
+Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
+  if (!effect._source.changes) return;
+  
+  let changed = false;
+  const newChanges = effect._source.changes.map(c => {
+    if (c.key && c.key.startsWith("system.") && !c.phase) {
+      changed = true;
+      return { ...c, phase: "apply" };
+    }
+    return c;
+  });
+  
+  if (changed) {
+    effect.updateSource({ changes: newChanges });
+  }
+});
+
+Hooks.on("preUpdateActiveEffect", (effect, changes, options, userId) => {
+  if (!changes.changes) return;
+  
+  const newChanges = changes.changes.map(c => {
+    if (c.key && c.key.startsWith("system.") && !c.phase) {
+      return { ...c, phase: "apply" };
+    }
+    return c;
+  });
+  
+  changes.changes = newChanges;
+});
+
 
 
 Hooks.once("ready", async function () {

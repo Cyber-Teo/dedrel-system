@@ -1,3 +1,5 @@
+import { DedrelItemSheet } from "../sheets/item-sheet.mjs";
+import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -90,14 +92,25 @@ export default class DedrelItem extends Item {
 
     let apCost = this.system.ap_cost || 0;
     
-    // Поддержка бесплатных манёвров (например Рипост делает Взмах, Удар или Выпад бесплатными)
-    let isFreeRiposte = false;
-    if (this.type === "maneuver" && apCost > 0) {
-      if (actor.flags?.dedrel?.freeAttackRiposte && ["Взмах", "Удар", "Выпад"].includes(this.name)) {
-        apCost = 0;
-        isFreeRiposte = true;
+    // Поддержка скидок ОД от системных ключей
+    const bonuses = DedrelBonuses.extractNextActionBonuses(actor, this);
+    let consumedApKeys = [];
+    
+    if (this.type === "maneuver" || this.type === "spell") {
+      // ВАЖНО: блок НЕ обёрнут в if (apCost > 0), потому что apSet может быть применён
+      // к манёвру даже если тот изначально бесплатный (хотя это редкий случай).
+      // Главное — apDiscount не уводит стоимость ниже 0.
+      if (bonuses.apDiscount > 0 && apCost > 0) {
+        apCost = Math.max(0, apCost - bonuses.apDiscount);
+        consumedApKeys.push("system.bonuses.next_ap_discount");
+      }
+      if (bonuses.apSet !== null) {
+        // apSet применяется всегда при совпадении фильтра (даже если apCost уже 0)
+        apCost = bonuses.apSet;
+        consumedApKeys.push("system.bonuses.next_ap_set");
       }
     }
+    
     
     // Проверка зарядов
     const usesMaxStr = this.system.uses_max || "0";
@@ -123,9 +136,16 @@ export default class DedrelItem extends Item {
         requiresWeapon = true;
       }
       
+      const reqSkill = this.system.req_weapon_skill_group || "";
+      if (reqSkill && reqSkill !== "any") {
+        requiresWeapon = true;
+      }
+      
       if (requiresWeapon) {
         validWeapons = actor.items.filter(i => {
           if (i.type !== "weapon" || !i.system.equipped) return false;
+          
+          if (reqSkill && reqSkill !== "any" && i.system.skill !== reqSkill) return false;
           
           const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
           if (hasReqType) {
@@ -177,8 +197,11 @@ export default class DedrelItem extends Item {
     if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
       return this.sheet.render(true);
     }
-    
-    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources) {
+
+    // ВАЖНО: если бонус сделал манёвр бесплатным (consumedApKeys.length > 0), НЕ делаем early-return.
+    // Нужно продолжить поток, чтобы: 1) сжечь бафф, 2) отправить карточку в чат.
+    const hadBonusApplied = consumedApKeys.length > 0;
+    if (apCost === 0 && !hadBonusApplied && !hasCharges && !requiresWeapon && !consumesResources) {
       return this.sheet.render(true);
     }
 
@@ -307,11 +330,11 @@ export default class DedrelItem extends Item {
               await actor.update(updates);
             }
             
-            // Если была использована бесплатная атака от рипоста, удаляем бафф
-            if (isFreeRiposte) {
-              const effectToRemove = actor.effects.find(e => e.changes.some(c => c.key === "flags.dedrel.freeAttackRiposte"));
-              if (effectToRemove) await effectToRemove.delete();
+            // Удаляем баффы стоимости ОД
+            if (consumedApKeys.length > 0) {
+              await DedrelBonuses.consumeNextActionBonuses(actor, consumedApKeys);
             }
+            
             
             // Списание Зарядов
             if (hasCharges) {
@@ -404,11 +427,15 @@ export default class DedrelItem extends Item {
     if (this.type === "maneuver" || this.type === "spell") {
        const wType = this.system.req_weapon_type || {};
        const wDmg = this.system.req_weapon_damage_type || {};
+       const reqSkill = this.system.req_weapon_skill_group || "";
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
-                          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing);
+                          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing || reqSkill !== "");
        
        if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
          showCombatButtons = true;
+       }
+       if (this.system.hide_combat_buttons) {
+         showCombatButtons = false;
        }
     }
 

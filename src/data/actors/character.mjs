@@ -3,6 +3,8 @@
  * Определяет структуру всех базовых параметров (Атрибуты, Навыки, Ресурсы)
  * и содержит логику для расчета производных (Derived) характеристик.
  */
+import { getBonusesSchema } from "./bonuses-schema.mjs";
+
 export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   /**
    * Определяет схему данных (Data Schema) для сущности "character".
@@ -144,11 +146,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) })
       }),
 
-      bonuses: new fields.SchemaField({
-        global_roll: new fields.NumberField({ initial: 0, integer: true }),
-        global_skill: new fields.NumberField({ initial: 0, integer: true }),
-        global_save: new fields.NumberField({ initial: 0, integer: true })
-      }),
+      bonuses: getBonusesSchema(),
 
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
 

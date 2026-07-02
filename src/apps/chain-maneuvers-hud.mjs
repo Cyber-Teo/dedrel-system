@@ -71,7 +71,10 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
         if (!actionType.chain) return false;
 
         // Must match triggers
-        const triggers = i.system.chain_trigger_maneuvers || [];
+        let triggers = i.system.chain_trigger_maneuvers || [];
+        if (triggers.length === 1 && typeof triggers[0] === "string" && triggers[0].includes(";")) {
+          triggers = triggers[0].split(";").map(s => s.trim());
+        }
         const isAny = triggers.includes("any") || triggers.includes("Any");
         const isMatch = triggers.includes(usedKey) || triggers.includes(this._usedManeuver.name);
 

@@ -67,6 +67,7 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       save_dc_formula: new fields.StringField({ initial: "", label: "Save DC Formula" }),
       forbidden_defense: new fields.StringField({ initial: "", label: "Forbidden Defense" }),
       
+      hide_combat_buttons: new fields.BooleanField({ initial: false, label: "Hide Combat Buttons" }),
       on_use_macro: new fields.StringField({ initial: "", label: "On Use Macro" })
     };
   }

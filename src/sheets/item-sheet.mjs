@@ -294,7 +294,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   static async #onEditImage(event, target) {
     const attr = target.dataset.edit || "img";
     const current = foundry.utils.getProperty(this.document, attr);
-    const fp = new FilePicker({
+    const fp = new foundry.applications.apps.FilePicker.implementation({
       type: "image",
       current: current,
       callback: path => {

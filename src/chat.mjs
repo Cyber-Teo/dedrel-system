@@ -1,6 +1,7 @@
 import { showRollDialog } from "./dice/roll.mjs";
 import { placeTemplatePreview } from "./canvas/template.mjs";
 import { DR_KEY_LABELS } from "./constants.mjs";
+import { DedrelBonuses } from "./utils/dedrel-bonuses.mjs";
 
 /**
  * Хук "renderChatMessageHTML" вызывается при рендеринге сообщения в чат.
@@ -46,6 +47,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         actor: actor,
         title: title,
         baseRank: baseRank,
+        itemId: item?.id,
         isSave: false
       });
     }
@@ -76,6 +78,16 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
       
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
+      
+      const bonuses = DedrelBonuses.extractNextActionBonuses(actor, item);
+      if (bonuses.damage !== 0) {
+        formula += ` + ${bonuses.damage}`;
+        const damageKeys = ["system.bonuses.next_damage", "system.bonuses.next_melee_damage", "system.bonuses.next_ranged_damage"];
+        const consumedKeys = bonuses.usedKeys.filter(k => damageKeys.includes(k));
+        if (consumedKeys.length > 0) {
+          await DedrelBonuses.consumeNextActionBonuses(actor, consumedKeys);
+        }
+      }
       
       // Попробуем извлечь тип урона прямо из формулы, если он указан в скобках, например 1d6[acid] или 1d6[кислота]
       const match = formula.match(/\[(.*?)\]/);

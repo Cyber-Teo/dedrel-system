@@ -1,3 +1,5 @@
+import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
+
 export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false }) {
   const situationalTalents = actor ? actor.items.filter(i => 
     (i.type === "talent" || i.type === "mutation") && 
@@ -38,7 +40,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
           let bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
           const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
           
-          await executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty, isSave });
+          await executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave });
         }
       },
       {
@@ -50,13 +52,13 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   });
 }
 
-async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penalty, isSave = false }) {
+async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave = false }) {
   const woundPenalty = Math.abs(actor.system.resources.wounds?.penalty || 0);
 
   // Specialization adds +2
   const specBonus = isSpecialized ? 2 : 0;
   
-  // Прицеливание (Take Aim) дает +2 к дальним выстрелам
+  // Прицеливание (Take Aim) дает +2 к дальним выстрелам - обратная совместимость
   let takeAimBonus = 0;
   let isTakeAimAttack = false;
   const takeAimTriggers = ["Выстрел из лука", "Выстрел из арбалета", "Выстрел из огнестрела"];
@@ -65,11 +67,26 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
     isTakeAimAttack = true;
   }
   
+  // Системные бонусы к атаке
+  let systemAttackBonus = 0;
+  let consumedAttackKeys = [];
+  if (actor && itemId) {
+    const item = actor.items.get(itemId);
+    if (item) {
+      const bonuses = DedrelBonuses.extractNextActionBonuses(actor, item);
+      if (bonuses.attack !== 0) {
+        systemAttackBonus = bonuses.attack;
+        const attackKeys = ["system.bonuses.next_attack", "system.bonuses.next_melee_attack", "system.bonuses.next_ranged_attack"];
+        consumedAttackKeys = bonuses.usedKeys.filter(k => attackKeys.includes(k));
+      }
+    }
+  }
+  
   const globalRollBonus = actor?.system?.bonuses?.global_roll || 0;
   const globalSkillBonus = (!isSave) ? (actor?.system?.bonuses?.global_skill || 0) : 0;
   const globalSaveBonus = (isSave) ? (actor?.system?.bonuses?.global_save || 0) : 0;
   
-  const totalMod = specBonus + bonus + takeAimBonus - penalty - woundPenalty + globalRollBonus + globalSkillBonus + globalSaveBonus;
+  const totalMod = specBonus + bonus + takeAimBonus + systemAttackBonus - penalty - woundPenalty + globalRollBonus + globalSkillBonus + globalSaveBonus;
   
   // Construct parts for formula and tooltip
   // Create base roll. 
@@ -79,6 +96,7 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
   if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
   if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
   if (takeAimBonus) formulaDisplay += ` + ${takeAimBonus} (прицеливание)`;
+  if (systemAttackBonus) formulaDisplay += ` + ${systemAttackBonus} (бафф)`;
   if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
   if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
 
@@ -86,6 +104,7 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
   if (specBonus) rollFormula += ` + ${specBonus}`;
   if (bonus) rollFormula += ` + ${bonus}`;
   if (takeAimBonus) rollFormula += ` + ${takeAimBonus}`;
+  if (systemAttackBonus) rollFormula += ` + ${systemAttackBonus}`;
   if (penalty) rollFormula += ` - ${penalty}`;
   if (woundPenalty) rollFormula += ` - ${woundPenalty}`;
 
@@ -152,5 +171,10 @@ async function executeRoll({ actor, title, baseRank, isSpecialized, bonus, penal
   if (isTakeAimAttack) {
     const effectToRemove = actor.effects.find(e => e.changes.some(c => c.key === "flags.dedrel.takeAimBonus"));
     if (effectToRemove) await effectToRemove.delete();
+  }
+  
+  // Удаляем использованные системные бонусы к атаке
+  if (consumedAttackKeys.length > 0) {
+    await DedrelBonuses.consumeNextActionBonuses(actor, consumedAttackKeys);
   }
 }

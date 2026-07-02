@@ -5,6 +5,11 @@
             {{selectOptions maneuverSources selected=system.source}}
         </select>
     </div>
+    <div class="form-group">
+        <label class="checkbox" title="Hide Attack and Damage buttons in chat for utility maneuvers">
+            <input type="checkbox" name="system.hide_combat_buttons" {{checked system.hide_combat_buttons}}/> Hide Combat Buttons
+        </label>
+    </div>
     <div class="form-group stacked" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.ActionType"}}</label>
         <div class="properties-grid">
@@ -119,11 +124,11 @@
     <div class="section-header">
         {{localize "DEDREL.ItemSheet.ChainTriggers"}}
     </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.TriggerText"}}</label>
         <input type="text" name="system.chain_trigger_text" value="{{system.chain_trigger_text}}"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.ChainManeuvers"}}</label>
         <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
     </div>
