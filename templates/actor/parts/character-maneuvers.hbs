@@ -9,7 +9,10 @@
                         class="fas fa-plus"></i></a>
             </div>
         </div>
-        {{#each maneuvers as |item id|}}
+        {{#each maneuversGroups as |group key|}}
+        {{#if group.items.length}}
+        <h3 class="slot-header">{{localize group.label}}</h3>
+        {{#each group.items as |item id|}}
         <div class="item-row flexrow" data-item-id="{{item.id}}">
             <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" data-action="useItem" style="cursor: pointer;" />
             </div>
@@ -27,6 +30,8 @@
                 {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
             </div>
         </div>
+        {{/each}}
+        {{/if}}
         {{/each}}
     </div>
 </div>

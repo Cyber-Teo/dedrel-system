@@ -20,6 +20,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       }),
       skill: new fields.StringField({ initial: "" }),
       damage_formula: new fields.StringField({ initial: "" }),
+      formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
+      equipped: new fields.BooleanField({ initial: false }),
       range: new fields.StringField({ initial: "" }),
 
       properties: new fields.SchemaField({

@@ -45,6 +45,7 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       uses_max: new fields.StringField({ initial: "" }),
       uses_per: new fields.StringField({ initial: "" }),
+      formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
       on_use_macro: new fields.StringField({ initial: "" }),
 
       prerequisites_text: new fields.StringField({ initial: "" }),

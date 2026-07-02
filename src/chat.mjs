@@ -137,6 +137,57 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       });
     }
 
+    // Применение исцеления
+    if (action === "applyHeal") {
+      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
+      const formula = item.system.formula_heal;
+      if (!formula) return;
+      
+      let targets = canvas.tokens.controlled;
+      if (targets.length === 0) targets = Array.from(game.user.targets);
+      
+      if (targets.length === 0) {
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
+      }
+      
+      for (let token of targets) {
+        const targetActor = token.actor;
+        if (!targetActor) continue;
+        
+        let healAmount = 0;
+        let isPercentage = formula.trim().endsWith("%");
+        
+        if (isPercentage) {
+            let percentStr = formula.replace("%", "").trim();
+            let percentVal = parseFloat(percentStr) || 0;
+            let maxHp = targetActor.system.resources.hp.max || 1;
+            healAmount = (percentVal / 100) * maxHp;
+            healAmount = Math.round(healAmount);
+        } else {
+            let roll = new Roll(formula, targetActor.getRollData());
+            await roll.evaluate();
+            healAmount = roll.total;
+        }
+        
+        if (healAmount <= 0) continue;
+        
+        const currentHp = targetActor.system.resources.hp.value;
+        const maxHp = targetActor.system.resources.hp.max;
+        const newHp = Math.min(maxHp, currentHp + healAmount);
+        const actualHealed = newHp - currentHp;
+        
+        if (actualHealed > 0) {
+            await targetActor.update({ "system.resources.hp.value": newHp });
+            
+            let chatMsg = game.i18n.format("DEDREL.Chat.HealApplied", {name: targetActor.name, amount: actualHealed});
+            ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor: actor }), // 'actor' is the one who used the item
+                content: `<div class="dedrel-item-chat"><p>💖 ${chatMsg}</p></div>`
+            });
+        }
+      }
+    }
+
     // Применение эффектов предмета
     if (action === "applyItemEffects") {
       const speaker = message.speaker;

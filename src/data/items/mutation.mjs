@@ -26,6 +26,9 @@ export default class MutationDataModel extends foundry.abstract.TypeDataModel {
       uses_per: new fields.StringField({ initial: "", label: "Uses Per" }),
       
       adds_items: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      
+      formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
+      
       on_add_macro: new fields.StringField({ initial: "", label: "On Add Macro" })
     };
   }

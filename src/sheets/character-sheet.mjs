@@ -111,9 +111,27 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     
     // Categorize Items
     const maneuvers = [];
+    const maneuversGroups = {
+      basic: { label: "DEDREL.ManeuverSources.basic", items: [] },
+      talent: { label: "DEDREL.ManeuverSources.talent", items: [] },
+      mutation: { label: "DEDREL.ManeuverSources.mutation", items: [] }
+    };
     const spells = [];
     const mutations = [];
+    const mutationsGroups = {
+      human: { label: "DEDREL.Bloodline.human", items: [] },
+      demon: { label: "DEDREL.Bloodline.demon", items: [] },
+      dragon: { label: "DEDREL.Bloodline.dragon", items: [] },
+      fay: { label: "DEDREL.Bloodline.fay", items: [] },
+      elf: { label: "DEDREL.Bloodline.elf", items: [] },
+      general: { label: "DEDREL.Bloodline.general", items: [] }
+    };
     const talents = [];
+    const talentsGroups = {
+      attributes: { label: "DEDREL.ActorSheet.Attributes", items: [] },
+      mutations: { label: "DEDREL.ActorSheet.Mutations", items: [] },
+      other: { label: "DEDREL.UI.Other", items: [] }
+    };
     const mutilations = [];
     const inventory = [];
     
@@ -132,14 +150,42 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       
       if (i.type === 'maneuver') {
         maneuvers.push(i);
+        const source = i.system.source || "basic";
+        if (maneuversGroups[source]) {
+          maneuversGroups[source].items.push(i);
+        } else {
+          maneuversGroups.basic.items.push(i);
+        }
         if (isFav) favoriteManeuversSpells.push(i);
       }
       else if (i.type === 'spell') {
         spells.push(i);
         if (isFav) favoriteManeuversSpells.push(i);
       }
-      else if (i.type === 'mutation') mutations.push(i);
-      else if (i.type === 'talent') talents.push(i);
+      else if (i.type === 'mutation') {
+        mutations.push(i);
+        const bloodlines = i.system.prerequisites_bloodlines || [];
+        if (bloodlines.length > 0 && typeof bloodlines[0] === "string") {
+           const bl = bloodlines[0].toLowerCase();
+           if (mutationsGroups[bl]) mutationsGroups[bl].items.push(i);
+           else mutationsGroups.general.items.push(i);
+        } else {
+           mutationsGroups.general.items.push(i);
+        }
+      }
+      else if (i.type === 'talent') {
+        talents.push(i);
+        const reqAttr = i.system.prerequisites_attributes || [];
+        const reqMut = i.system.prerequisites_mutations || [];
+        
+        if (reqAttr.length > 0) {
+           talentsGroups.attributes.items.push(i);
+        } else if (reqMut.length > 0) {
+           talentsGroups.mutations.items.push(i);
+        } else {
+           talentsGroups.other.items.push(i);
+        }
+      }
       else if (i.type === 'mutilation') mutilations.push(i);
       else if (i.type === 'weapon') {
         weapons.push(i);
@@ -363,9 +409,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       actor: actorData,
       system: actorData.system,
       maneuvers,
+      maneuversGroups,
       spells,
       mutations,
+      mutationsGroups,
       talents,
+      talentsGroups,
       mutilations,
       inventory,
       weapons,

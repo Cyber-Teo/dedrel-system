@@ -60,6 +60,7 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
       
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
+      formula_heal: new fields.StringField({ required: true, blank: true }),
       formula_custom: new fields.StringField({ required: true, blank: true }),
       
       save_attribute: new fields.StringField({ required: true, blank: true }),

@@ -31,6 +31,7 @@
       "TargetType": "Target Type",
       "FormulaAttack": "Attack Formula",
       "FormulaDamage": "Damage Formula",
+      "FormulaHeal": "Healing Formula",
       "Source": "Source",
       "ActionType": "Action Type",
       "Subtype": "Subtype",
@@ -59,7 +60,8 @@
       "demon": "Demon",
       "dragon": "Dragon",
       "fay": "Fay",
-      "elf": "Elf"
+      "elf": "Elf",
+      "general": "General"
     },
     "ArmorSlots": {
       "lower": "Lower Layer",
@@ -143,6 +145,7 @@
       "Yes": "Yes",
       "No": "No",
       "None": "None",
+      "Other": "Other",
       "Cancel": "Cancel",
       "Confirm": "Confirm",
       "Description": "Description",
@@ -170,6 +173,8 @@
       "LongRestConfirm": "Are you sure you want to take a long rest (8 hours)? This will restore AP and all abilities on day/short/long rest.",
       "ApplyEffects": "Apply Effects",
       "ApplyDamage": "Apply Damage",
+      "ApplyHeal": "Apply Heal",
+      "HealApplied": "<b>{name}</b> healed for <b>{amount}</b> HP.",
       "Use": "Use",
       "Roll": "Roll",
       "Cancel": "Cancel",

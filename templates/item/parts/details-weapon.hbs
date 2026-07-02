@@ -28,6 +28,10 @@
         <input type="text" name="system.damage_formula" value="{{system.damage_formula}}"/>
     </div>
     <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.FormulaHeal"}}</label>
+        <input type="text" name="system.formula_heal" value="{{system.formula_heal}}"/>
+    </div>
+    <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.ControlZone"}}</label>
         <select name="system.control_zone" data-dtype="Number">
             {{selectOptions zeroToThree selected=system.control_zone}}

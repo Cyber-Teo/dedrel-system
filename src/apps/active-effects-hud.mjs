@@ -65,9 +65,15 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       }).map(e => {
         let tooltip = `<strong>${e.name}</strong>`;
         
+        let durationText = "";
+        
         // Foundry предоставляет готовый e.duration.label, который показывает *оставшееся* время на текущем языке.
         if (e.duration && e.duration.label) {
           tooltip += `<br><em><i class="fas fa-clock"></i> ${e.duration.label}</em>`;
+          const match = e.duration.label.match(/\d+/);
+          if (match) {
+            durationText = match[0];
+          }
         }
 
         if (e.description) {
@@ -80,6 +86,7 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           img: e.img || e.icon || "icons/svg/aura.svg",
           description: e.description || "",
           tooltip: tooltip,
+          durationText: durationText,
           isTechnical: e.flags?.dedrel?.is_technical || false
         };
       }).filter(e => !e.isTechnical);
@@ -142,6 +149,9 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       Hooks.on("updateActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("deleteActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("updateToken", this._onEffectChange.bind(this)),
+      Hooks.on("updateWorldTime", this._onEffectChange.bind(this)),
+      Hooks.on("updateCombat", this._onEffectChange.bind(this)),
+      Hooks.on("updateCombatant", this._onEffectChange.bind(this)),
       Hooks.on("collapseSidebar", this._onCollapseSidebar.bind(this)),
       Hooks.on("canvasReady", this._onCanvasReady.bind(this))
     );

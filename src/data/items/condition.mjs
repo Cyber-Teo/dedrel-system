@@ -22,7 +22,9 @@ export default class ConditionDataModel extends foundry.abstract.TypeDataModel {
       skill_to_remove: new fields.StringField({ initial: "", label: "Skill To Remove" }),
       remove_dc: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Removal DC" }),
       
-      system_flags: new fields.ObjectField({ initial: {} })
+      system_flags: new fields.ObjectField({ initial: {} }),
+      
+      formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" })
     };
   }
 }

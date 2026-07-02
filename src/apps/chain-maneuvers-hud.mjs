@@ -75,7 +75,7 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
         const isAny = triggers.includes("any") || triggers.includes("Any");
         const isMatch = triggers.includes(usedKey) || triggers.includes(this._usedManeuver.name);
 
-        return isAny || isMatch;
+        return (isAny || isMatch) && i.getFlag("dedrel", "isFavorite");
       });
 
       context.chainManeuvers = chains.map(i => {
