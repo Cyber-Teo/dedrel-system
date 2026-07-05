@@ -1,6 +1,6 @@
 <div class="active-effects-list {{#if isCollapsed}}sidebar-collapsed{{/if}}">
   {{#each effects}}
-    <div class="effect-icon" data-effect-id="{{this.id}}" data-tooltip="{{this.tooltip}}" data-tooltip-direction="LEFT">
+    <div class="effect-icon {{#if this.isAuraMarker}}aura-marker{{/if}}" data-effect-id="{{this.id}}" data-effect-uuid="{{this.uuid}}" data-tooltip="{{this.tooltip}}" data-tooltip-direction="LEFT">
       <img src="{{this.img}}" alt="{{this.name}}">
       {{#if this.durationText}}
         <div class="effect-duration">{{this.durationText}}</div>

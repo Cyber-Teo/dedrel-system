@@ -72,7 +72,7 @@
             </p>
             {{/if}}
             <div class="attributes-grid grid-3col">
-                {{#each system.attributes as |attr key|}}
+                {{#each creationData.attributes as |attr key|}}
                 <div class="attribute-item">
                     <span class="attribute-name">{{localize (concat "DEDREL.Attributes." key)}}</span>
                     <div class="attribute-controls">
@@ -99,7 +99,7 @@
             </p>
             {{/if}}
             <div class="skills-grid grid-3col">
-                {{#each system.skills as |skill key|}}
+                {{#each creationData.skills as |skill key|}}
                 <div class="skill-item-create">
                     <span class="skill-name">{{localize (concat "DEDREL.Skills." key)}}</span>
                     <div class="skill-controls">

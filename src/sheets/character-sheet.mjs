@@ -358,29 +358,30 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    // Check for attributes over cap during creation
+    // Check for attributes over cap during creation.
+    // ВАЖНО: не мутируем живую системную модель (actorData.system.*), а формируем
+    // отдельные объекты для контекста рендера. Иначе флаги isOverCap попадают
+    // в подготовленные данные актёра и могут «протечь» в другие места.
     let hasOverCapAttributes = false;
     let hasOverCapSkills = false;
+    const creationAttributes = {};
+    const creationSkills = {};
     if (actorData.flags?.dedrel?.showCreation) {
       for (const [key, attr] of Object.entries(actorData.system.attributes)) {
-        if (attr.rank > 4) {
-          attr.isOverCap = true;
-          hasOverCapAttributes = true;
-        } else {
-          attr.isOverCap = false;
-        }
+        const isOverCap = attr.rank > 4;
+        if (isOverCap) hasOverCapAttributes = true;
+        creationAttributes[key] = { rank: attr.rank, isOverCap };
       }
       for (const [key, skill] of Object.entries(actorData.system.skills)) {
-        if (skill.rank > 3) {
-          skill.isOverCap = true;
-          hasOverCapSkills = true;
-        } else {
-          skill.isOverCap = false;
-        }
+        const isOverCap = skill.rank > 3;
+        if (isOverCap) hasOverCapSkills = true;
+        creationSkills[key] = { rank: skill.rank, isOverCap };
       }
     }
     creationData.hasOverCapAttributes = hasOverCapAttributes;
     creationData.hasOverCapSkills = hasOverCapSkills;
+    creationData.attributes = creationAttributes;
+    creationData.skills = creationSkills;
 
     const permanentEffects = [];
     const temporaryEffects = [];

@@ -56,17 +56,39 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
     context.effects = [];
     
     if (this._actor) {
+      // Маркеры собственных аур носителя: они transfer: false и не входят
+      // в appliedEffects, но игроку нужен быстрый тумблер (ПКМ выключает ауру)
+      const ownMarkers = [];
+      for (const item of this._actor.items) {
+        for (const e of item.effects) {
+          if (!e.disabled && !e.isSuppressed && e.getFlag("dedrel", "aura")) {
+            ownMarkers.push(e);
+          }
+        }
+      }
+      const ownMarkerUuids = new Set(ownMarkers.map(e => e.uuid));
+
       const effectsCollection = this._actor.appliedEffects || this._actor.effects;
-      context.effects = effectsCollection.filter(e => {
+      const visibleEffects = effectsCollection.filter(e => {
         // Show effects that are not disabled and either have a status ID, are a condition, or have an icon/img
         const isCondition = e.flags?.dedrel?.condition === true;
         const hasStatus = e.statuses?.size > 0;
-        return !e.disabled && (isCondition || hasStatus || e.isTemporary);
-      }).map(e => {
+        // Бафы/дебафы, навешенные аурой (см. src/canvas/aura-regions.mjs) —
+        // пассивные, без статуса, но игроку важно видеть, что он под аурой.
+        // Копию СОБСТВЕННОЙ ауры не показываем: её представляет иконка маркера.
+        const auraMarker = e.flags?.dedrel?.auraApplied;
+        const isAuraApplied = !!auraMarker && !ownMarkerUuids.has(auraMarker);
+        return !e.disabled && !(auraMarker && ownMarkerUuids.has(auraMarker))
+          && (isCondition || hasStatus || isAuraApplied || e.isTemporary);
+      });
+      visibleEffects.push(...ownMarkers);
+
+      context.effects = visibleEffects.map(e => {
+        const isAuraMarker = !!e.getFlag("dedrel", "aura");
         let tooltip = `<strong>${e.name}</strong>`;
-        
+
         let durationText = "";
-        
+
         // Foundry предоставляет готовый e.duration.label, который показывает *оставшееся* время на текущем языке.
         if (e.duration && e.duration.label) {
           tooltip += `<br><em><i class="fas fa-clock"></i> ${e.duration.label}</em>`;
@@ -80,13 +102,19 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           tooltip += `<hr>${e.description}`;
         }
 
+        if (isAuraMarker) {
+          tooltip += `<hr><em>${game.i18n.localize("DEDREL.Hud.AuraOffHint")}</em>`;
+        }
+
         return {
           id: e.id,
+          uuid: e.uuid,
           name: e.name,
           img: e.img || e.icon || "icons/svg/aura.svg",
           description: e.description || "",
           tooltip: tooltip,
           durationText: durationText,
+          isAuraMarker: isAuraMarker,
           isTechnical: e.flags?.dedrel?.is_technical || false
         };
       }).filter(e => !e.isTechnical);
@@ -124,19 +152,35 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
     for (const el of effectElements) {
       el.addEventListener("contextmenu", async (event) => {
         event.preventDefault();
-        const effectId = el.dataset.effectId;
-        if (this.actor && effectId) {
-          const effect = this.actor.effects.get(effectId);
-          if (effect) {
-            const confirmed = await foundry.applications.api.DialogV2.confirm({
-              window: { title: game.i18n.localize("DEDREL.Notifications.DeleteEffectTitle") },
-              content: `<p>${game.i18n.format("DEDREL.Notifications.DeleteEffectConfirm", { name: effect.name, actor: this.actor.name })}</p>`,
-              modal: true
-            });
-            if (confirmed) {
-              await effect.delete();
-            }
-          }
+        if (!this.actor) return;
+        // uuid нужен для эффектов, вложенных в предметы (маркеры аур):
+        // их нет в actor.effects
+        const effect = el.dataset.effectUuid
+          ? foundry.utils.fromUuidSync(el.dataset.effectUuid, { strict: false })
+          : this.actor.effects.get(el.dataset.effectId);
+        if (!effect) return;
+
+        // Маркер ауры не удаляем, а выключаем: настройки (радиус, цели)
+        // сохраняются, включить обратно можно кнопкой на карточке предмета в чате
+        if (effect.getFlag("dedrel", "aura")) {
+          const confirmed = await foundry.applications.api.DialogV2.confirm({
+            window: { title: game.i18n.localize("DEDREL.Notifications.DisableAuraTitle") },
+            content: `<p>${game.i18n.format("DEDREL.Notifications.DisableAuraConfirm", { name: effect.name })}</p>`,
+            modal: true
+          });
+          if (!confirmed) return;
+          await effect.update({ disabled: true });
+          ui.notifications.info(game.i18n.format("DEDREL.Notifications.AuraDisabled", { name: effect.name }));
+          return;
+        }
+
+        const confirmed = await foundry.applications.api.DialogV2.confirm({
+          window: { title: game.i18n.localize("DEDREL.Notifications.DeleteEffectTitle") },
+          content: `<p>${game.i18n.format("DEDREL.Notifications.DeleteEffectConfirm", { name: effect.name, actor: this.actor.name })}</p>`,
+          modal: true
+        });
+        if (confirmed) {
+          await effect.delete();
         }
       });
     }
@@ -148,6 +192,11 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       Hooks.on("createActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("updateActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("deleteActiveEffect", this._onEffectChange.bind(this)),
+      // Правки предметов меняют набор transfer-эффектов актёра (например,
+      // удаление таланта уносит его эффекты БЕЗ хуков deleteActiveEffect)
+      Hooks.on("createItem", this._onEffectChange.bind(this)),
+      Hooks.on("updateItem", this._onEffectChange.bind(this)),
+      Hooks.on("deleteItem", this._onEffectChange.bind(this)),
       Hooks.on("updateToken", this._onEffectChange.bind(this)),
       Hooks.on("updateWorldTime", this._onEffectChange.bind(this)),
       Hooks.on("updateCombat", this._onEffectChange.bind(this)),
@@ -180,9 +229,13 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
     this._onControlToken();
   }
 
-  _onEffectChange(effect, ...args) {
+  _onEffectChange(doc, ...args) {
     if (!this.actor) return;
-    if (effect.parent === this.actor) {
+    // Эффект может быть вложен в предмет (transfer-эффекты талантов и т.п.) —
+    // тогда актёр находится на уровень выше (effect.parent.parent).
+    let parent = doc?.parent;
+    if (parent?.documentName === "Item") parent = parent.parent;
+    if (parent === this.actor) {
       this.render();
     }
   }

@@ -4,7 +4,7 @@
   "description": "Dedrel TTRPG system implementation for Foundry VTT v14.",
   "version": "0.1.0",
   "compatibility": {
-    "minimum": "13",
+    "minimum": "14",
     "verified": "14"
   },
   "authors": [
@@ -175,6 +175,9 @@
       "condition": {},
       "ammunition": {},
       "spell": {}
+    },
+    "RegionBehavior": {
+      "dedrelAura": {}
     }
   }
 }

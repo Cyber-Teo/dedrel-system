@@ -17,12 +17,15 @@ import ChainManeuversHUD from "./src/apps/chain-maneuvers-hud.mjs";
 import ActionPointsHUD from "./src/apps/ap-hud.mjs";
 import { placeTemplatePreview } from "./src/canvas/template.mjs";
 import DedrelToken from "./src/canvas/token.mjs";
+import DedrelAuraRegionBehaviorType from "./src/data/region-behaviors/aura.mjs";
 import { DR_KEY_LABELS } from "./src/constants.mjs";
+import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
 
 import "./src/chat.mjs";
 import "./src/macros.mjs";
 import "./src/combat.mjs";
 import "./src/canvas/auras.mjs";
+import "./src/canvas/aura-regions.mjs";
 import "./src/canvas/movement.mjs";
 
 /**
@@ -63,8 +66,21 @@ Hooks.once("init", function() {
   // Кастомный класс для Токена (чтобы отрисовывать дополнительные бары)
   CONFIG.Token.objectClass = DedrelToken;
 
+  // Поведение региона "Аура" (подтип объявлен в system.json → documentTypes.RegionBehavior)
+  CONFIG.RegionBehavior.dataModels.dedrelAura = DedrelAuraRegionBehaviorType;
+  CONFIG.RegionBehavior.typeIcons.dedrelAura = "fa-solid fa-circle-dot";
+
   // Регистрация Active Effects для системы
   CONFIG.ActiveEffect.legacyTransferral = false;
+
+  // Регистрация кастомной фазы "apply" для изменений системных полей (system.*).
+  // ВАЖНО: ядро исполняет только фазы "initial"/"final" и те, что зарегистрированы
+  // здесь И вызваны системой вручную (см. DedrelActor#prepareEmbeddedDocuments).
+  // Без регистрации+вызова изменения с этой фазой молча не применяются.
+  CONFIG.ActiveEffect.phases.apply = {
+    label: "DEDREL.EffectPhases.Apply",
+    hint: "DEDREL.EffectPhases.ApplyHint"
+  };
 
   // Регистрация моделей данных для актёров (Actor)
   CONFIG.Actor.dataModels = {
@@ -192,33 +208,49 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
  * так как интерфейс Foundry V14 не всегда позволяет задать фазу вручную, а без нее TypeDataModel игнорирует эффекты.
  */
 Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
-  if (!effect._source.changes) return;
-  
+  // V14: changes живут в system.changes (у ActiveEffect появилась system-модель).
+  // Читаем из нового места с fallback на легаси top-level.
+  const sourceChanges = effect._source.system?.changes ?? effect._source.changes;
+  if (!Array.isArray(sourceChanges) || sourceChanges.length === 0) return;
+
   let changed = false;
-  const newChanges = effect._source.changes.map(c => {
+  const newChanges = sourceChanges.map(c => {
     if (c.key && c.key.startsWith("system.") && !c.phase) {
       changed = true;
       return { ...c, phase: "apply" };
     }
     return c;
   });
-  
+
   if (changed) {
-    effect.updateSource({ changes: newChanges });
+    effect.updateSource({ "system.changes": newChanges });
+  }
+
+  // Валидация DSL-модификаторов (flags.dedrel.mod): ловим опечатки при авторинге.
+  // Эффект не блокируем — только предупреждаем, parseMod уже залогировал причину.
+  for (const c of sourceChanges) {
+    if (c.key === MOD_CHANGE_KEY && DedrelBonuses.parseMod(c.value) === null) {
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.InvalidModString", {
+        value: foundry.utils.escapeHTML(c.value ?? "")
+      }));
+    }
   }
 });
 
 Hooks.on("preUpdateActiveEffect", (effect, changes, options, userId) => {
-  if (!changes.changes) return;
-  
-  const newChanges = changes.changes.map(c => {
+  // Диф может прийти в system.changes (V14) или changes (легаси). Правим то, что пришло.
+  const incoming = changes.system?.changes ?? changes.changes;
+  if (!Array.isArray(incoming)) return;
+
+  const newChanges = incoming.map(c => {
     if (c.key && c.key.startsWith("system.") && !c.phase) {
       return { ...c, phase: "apply" };
     }
     return c;
   });
-  
-  changes.changes = newChanges;
+
+  if (changes.system?.changes) changes.system.changes = newChanges;
+  else changes.changes = newChanges;
 });
 
 
@@ -233,27 +265,87 @@ Hooks.once("ready", async function () {
     }
   }
 
-  // Загружаем кастомные состояния из компендиума и заменяем стандартные statusEffects
-  const conditionsPack = game.packs.get("dedrel.conditions");
-  if (conditionsPack) {
-    const conditionItems = await conditionsPack.getDocuments();
-    if (conditionItems.length > 0) {
-      CONFIG.statusEffects = conditionItems.map(c => {
-        return {
-          id: c.name.toLowerCase().replace(/[^a-z0-9а-яё]/gi, '_'),
-          name: c.name,
-          icon: c.img,
-          img: c.img,
-          description: c.system.description || "",
-          flags: {
-            dedrel: {
-              condition: true,
-              is_technical: c.system.is_technical || false,
-              category: c.system.category || "negative"
-            }
-          }
-        };
-      });
+  await rebuildStatusEffects();
+
+  // Пересобираем реестр статусов при любом изменении кондиций в компендиумах,
+  // чтобы не требовать перезагрузку мира после правки ключей/эффектов/длительности.
+  const debouncedRebuild = foundry.utils.debounce(rebuildStatusEffects, 250);
+  const onConditionChange = (doc) => {
+    if (doc.documentName === "Item" && doc.type === "condition" && CONDITION_PACKS.includes(doc.pack)) {
+      debouncedRebuild();
     }
-  }
+  };
+  Hooks.on("createItem", onConditionChange);
+  Hooks.on("updateItem", onConditionChange);
+  Hooks.on("deleteItem", onConditionChange);
 });
+
+/**
+ * Компендиумы, из которых собирается реестр статусов (CONFIG.statusEffects).
+ * Пак additional_conditions сюда НЕ входит намеренно: это технические состояния,
+ * которые добавляются талантами как предметы и не должны появляться
+ * в выпадающем меню статусов токена.
+ */
+const CONDITION_PACKS = ["dedrel.conditions"];
+
+/**
+ * Собирает CONFIG.statusEffects из Condition-предметов компендиумов.
+ * ВАЖНО (V14): CONFIG.statusEffects — это Proxy (массив с индексом по id).
+ * Его НЕЛЬЗЯ заменять обычным массивом, иначе ActiveEffect.fromStatusEffect
+ * (строковый доступ CONFIG.statusEffects[statusId]) перестаёт находить статусы.
+ * Поэтому очищаем и наполняем его на месте.
+ */
+async function rebuildStatusEffects() {
+  const conditionItems = [];
+  for (const packId of CONDITION_PACKS) {
+    const pack = game.packs.get(packId);
+    if (pack) conditionItems.push(...await pack.getDocuments());
+  }
+  if (conditionItems.length === 0) return;
+
+  CONFIG.statusEffects.length = 0;
+  for (const c of conditionItems) {
+    const entry = {
+      // Приоритет — системный ключ условия (стабильный, латиницей);
+      // слаг имени остаётся как fallback для условий без ключа.
+      id: c.system.key || c.name.toLowerCase().replace(/[^a-z0-9а-яё]/gi, '_'),
+      name: c.name,
+      icon: c.img,
+      img: c.img,
+      description: c.system.description || "",
+      flags: {
+        dedrel: {
+          condition: true,
+          is_technical: c.system.is_technical || false,
+          category: c.system.category || "negative"
+        }
+      }
+    };
+
+    // Переносим механику состояния: change-строки со всех его эффектов.
+    // Без этого статус, наложенный через HUD, приходит на актёра «пустым».
+    // ВАЖНО (V14): changes живут в effect.system.changes (у ActiveEffect
+    // появилась system-модель); e.changes и e._source.changes — deprecated-шимы,
+    // которые могут вернуть undefined. См. FOUNDRY V14 QUIRKS.md, раздел 11.
+    const changes = [];
+    for (const e of c.effects) {
+      changes.push(...foundry.utils.deepClone(e.system?.changes ?? e._source.changes ?? []));
+    }
+    if (changes.length > 0) entry.changes = changes;
+
+    // Длительность состояния из его системных данных
+    const dur = c.system.duration || {};
+    if (dur.value && dur.units && dur.units !== "permanent") {
+      if (dur.units === "rounds") entry.duration = { rounds: dur.value };
+      else if (dur.units === "turns") entry.duration = { turns: dur.value };
+      else if (dur.units === "seconds") entry.duration = { seconds: dur.value };
+      else if (dur.units === "minutes") entry.duration = { seconds: dur.value * 60 };
+      else if (dur.units === "hours") entry.duration = { seconds: dur.value * 3600 };
+      else if (dur.units === "days") entry.duration = { seconds: dur.value * 86400 };
+    }
+
+    CONFIG.statusEffects[entry.id] = entry;
+  }
+
+  console.log(`Dedrel | Status effects rebuilt: ${conditionItems.length} conditions [${CONFIG.statusEffects.map(s => s.id).join(", ")}]`);
+}

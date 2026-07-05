@@ -189,6 +189,13 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       res.wounds.penalty = -5;
     }
 
+    // Ярость и подобные эффекты (system.bonuses.ignore_wound_penalty > 0):
+    // штраф за ранения обнуляется, но уровень ранения сохраняется —
+    // трек ран на листе и логика лечения продолжают работать.
+    if ((this.bonuses?.ignore_wound_penalty || 0) > 0) {
+      res.wounds.penalty = 0;
+    }
+
     // Luck Points Max
     res.luck_points.max += attrs.luck.rank;
 

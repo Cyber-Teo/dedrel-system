@@ -79,16 +79,14 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
       
-      const bonuses = DedrelBonuses.extractNextActionBonuses(actor, item);
-      if (bonuses.damage !== 0) {
-        formula += ` + ${bonuses.damage}`;
-        const damageKeys = ["system.bonuses.next_damage", "system.bonuses.next_melee_damage", "system.bonuses.next_ranged_damage"];
-        const consumedKeys = bonuses.usedKeys.filter(k => damageKeys.includes(k));
-        if (consumedKeys.length > 0) {
-          await DedrelBonuses.consumeNextActionBonuses(actor, consumedKeys);
-        }
+      // DSL-модификаторы урона (flags.dedrel.mod), например "damage:1d6; filter:melee".
+      // Части могут быть числами или дайсами — добавляем их в формулу как есть.
+      const damageMods = DedrelBonuses.collect(actor, item);
+      for (const part of damageMods.damageParts) {
+        formula += ` + ${part}`;
       }
-      
+
+
       // Попробуем извлечь тип урона прямо из формулы, если он указан в скобках, например 1d6[acid] или 1d6[кислота]
       const match = formula.match(/\[(.*?)\]/);
       if (match) {
@@ -122,7 +120,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       
       await roll.evaluate();
       
-      const apLevel = weapon?.system?.properties?.armor_piercing_value || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
+      // Бронебойность: числовое поле оружия (0-3, редактируется на листе) + DSL-моды
+      // pierce:N от манёвров/эффектов. Легаси-галочка properties.armor_piercing
+      // (булево у старых предметов) даёт 1. Каждая единица снимает 10% DR цели.
+      const weaponAp = weapon?.system?.armor_piercing
+        || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
+      const apLevel = weaponAp + damageMods.pierce;
       
       let damageTypeLabel = drKey ? game.i18n.localize(DR_KEY_LABELS[drKey]) : "";
       
@@ -130,7 +133,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let chatContent = `
         <div class="dice-roll">
           <div class="dice-result">
-            <div class="dice-formula">${roll.formula} ${damageTypeLabel ? `[${damageTypeLabel}]` : ''}</div>
+            <div class="dice-formula">${roll.formula} ${damageTypeLabel ? `[${damageTypeLabel}]` : ''}${apLevel > 0 ? ` &bull; ${game.i18n.format("DEDREL.Chat.ArmorPiercing", {value: apLevel})}` : ''}</div>
             ${await roll.getTooltip()}
             <h4 class="dice-total">${roll.total}</h4>
           </div>
@@ -143,10 +146,13 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       await ChatMessage.create({
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
-        flavor: game.i18n.format("DEDREL.Chat.DamageCardFlavor", {name: item.name}),
+        flavor: game.i18n.format("DEDREL.Chat.DamageCardFlavor", {name: foundry.utils.escapeHTML(item.name)}),
         content: chatContent,
         rolls: [roll]
       });
+
+      // Сжигаем DSL-модификаторы стадии "damage" (бонусы к урону)
+      await DedrelBonuses.consumeStage(actor, item, "damage");
     }
 
     // Применение исцеления
@@ -200,13 +206,25 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
     }
 
+    // Тумблер ауры предмета: включает маркеры, если все выключены, иначе выключает
+    if (action === "toggleAura") {
+      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
+      const markers = item.effects.filter(e => e.getFlag("dedrel", "aura"));
+      if (!markers.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoAuraOnItem"));
+      const enable = markers.every(e => e.disabled);
+      for (const marker of markers) {
+        await marker.update({ disabled: !enable });
+      }
+      ui.notifications.info(game.i18n.format(
+        enable ? "DEDREL.Notifications.AuraEnabled" : "DEDREL.Notifications.AuraDisabled",
+        { name: item.name }
+      ));
+    }
+
     // Применение эффектов предмета
     if (action === "applyItemEffects") {
-      const speaker = message.speaker;
-      const actor = game.actors.get(speaker.actor);
-      if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ActorNotFoundForEffect"));
-      
-      const item = actor.items.get(itemId);
+      // Используем актёра/предмет, разрешённых через getSpeakerActor выше:
+      // это корректно работает и для несвязанных (synthetic) токенов.
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
 
       let targets = canvas.tokens.controlled;
@@ -216,7 +234,14 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
       }
 
-      const effectsToApply = item.effects.filter(e => !e.transfer).map(e => {
+      // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в item.use().
+      // Аура-эффекты тоже: payload (applyTo: "aura") накладывается регионом-аурой,
+      // а маркеры (flags.dedrel.aura) работают только на носителе.
+      const effectsToApply = item.effects.filter(e =>
+        !e.transfer
+        && !["self", "aura"].includes(e.getFlag("dedrel", "applyTo"))
+        && !e.getFlag("dedrel", "aura")
+      ).map(e => {
         let effData = e.toObject();
         effData.origin = item.uuid;
         return effData;

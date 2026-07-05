@@ -161,6 +161,7 @@
       "FreeActionReminder": "Don't forget you can perform Free actions at any time.",
       "AttackCardTitle": "Attack: {name}",
       "DamageCardFlavor": "Damage: {name}",
+      "ArmorPiercing": "Armor Piercing {value}",
       "SpendLuckTitle": "Spend Luck Point",
       "SpendLuckContent": "<p>You can reroll any 1 die (yours or an opponent's).<br><b>You must use the new result.</b></p><p>Spend 1 Luck Point?</p>",
       "LuckChatTitle": "Luck Point!",
@@ -172,6 +173,7 @@
       "ShortRestConfirm": "Are you sure you want to take a short rest (1 hour)? This will restore AP and abilities on short rest.",
       "LongRestConfirm": "Are you sure you want to take a long rest (8 hours)? This will restore AP and all abilities on day/short/long rest.",
       "ApplyEffects": "Apply Effects",
+      "ToggleAura": "Toggle Aura",
       "ApplyDamage": "Apply Damage",
       "ApplyHeal": "Apply Heal",
       "HealApplied": "<b>{name}</b> healed for <b>{amount}</b> HP.",
@@ -196,6 +198,16 @@
       },
       "Edit": "Edit",
       "Delete": "Delete",
+      "EffectSelfHint": "Apply to owner when the item is used (@spentAp, @apCost, @overspent available)",
+      "EffectAuraPayloadHint": "Aura payload: applied to tokens inside the owner's aura",
+      "EffectAuraConfigHint": "Configure aura (radius, targets); this effect becomes the aura marker",
+      "AuraConfigTitle": "Aura Settings: {name}",
+      "AuraEnabled": "Aura enabled",
+      "AuraRadius": "Radius (m)",
+      "AuraDisposition": "Affects",
+      "AuraIncludeSelf": "Affects the bearer",
+      "AuraColor": "Region Color",
+      "AuraConfigHint": "Radius 0 removes the aura entirely (settings are lost). To turn it off temporarily, uncheck 'Aura enabled' — or right-click the aura icon in the effects HUD; the item's chat card has a toggle button too. While enabled, an aura region follows each of the owner's tokens and applies this item's payload effects (marked with the bullseye icon) to tokens inside. If no payload effects are marked, this effect's own changes are distributed instead. Enable 'Affects the bearer' for the owner to receive the aura.",
       "ItemType": "Item Type",
       "Equipped": "Equipped",
       "Damage": "Damage",
@@ -449,6 +461,9 @@
       "ItemCannotBeUsed": "This item cannot be used.",
       "DeleteEffectTitle": "Remove Effect",
       "DeleteEffectConfirm": "Are you sure you want to remove the effect '{name}' from {actor}?",
+      "DeleteItemEffectConfirm": "Are you sure you want to delete the effect '{name}' from item '{item}'?",
+      "DisableAuraTitle": "Disable Aura",
+      "DisableAuraConfirm": "Disable the aura '{name}'? Its settings are kept; re-enable it via the item's chat card.",
       "NoLuckPoints": "You have no luck points!",
       "LuckPointsRestored": "Luck points restored.",
       "GMRestoreTimeOnly": "Only GM can advance time. Charges and AP restored locally.",
@@ -470,6 +485,9 @@
       "SkillCheck": "Check: {name}",
       "ActorNotFound": "Character not found.",
       "ItemNotFound": "Item not found.",
+      "AuraEnabled": "Aura enabled: {name}",
+      "AuraDisabled": "Aura disabled: {name}",
+      "NoAuraOnItem": "This item has no aura configured.",
       "NoDamageFormula": "Damage formula is not set.",
       "ActorNotFoundForEffect": "Could not find the character who used the item.",
       "SelectTargetForEffect": "Select tokens to apply the effect (select yourself or target).",
@@ -494,7 +512,13 @@
       "WeaponAlreadyEquipped": "This weapon is already equipped. Unequip it first.",
       "TwoHandsRequired": "Both hands must be free to equip a two-handed weapon.",
       "NoWeaponSlots": "No free slots for weapon (free up hands or tail).",
-      "MacroNotFound": "Macro with name '{name}' not found."
+      "MacroNotFound": "Macro with name '{name}' not found.",
+      "SelfEffectApplied": "Effect applied to character: {names}",
+      "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see EFFECT_KEYS_CHEAT_SHEET.md)."
+    },
+    "EffectPhases": {
+      "Apply": "Apply (system fields)",
+      "ApplyHint": "Phase for system.* changes — runs before derived data preparation."
     },
     "Dice": {
       "SpecializationBonus": "Specialization (+2)",
@@ -602,6 +626,39 @@
         "Name": "Chain Maneuvers Outside Combat",
         "Hint": "Show the chain maneuvers selection popup even when combat has not started (useful for testing)."
       }
+    },
+    "Aura": {
+      "Dispositions": {
+        "all": "All tokens",
+        "friendly": "Friendly tokens",
+        "hostile": "Hostile tokens"
+      }
+    },
+    "Hud": {
+      "AuraOffHint": "Right-click to disable the aura (re-enable via the item's chat card)"
+    },
+    "RegionBehaviors": {
+      "Aura": {
+        "FIELDS": {
+          "sourceEffectUuid": {
+            "label": "Source Effect",
+            "hint": "UUID of the aura marker Active Effect on the bearer"
+          },
+          "disposition": {
+            "label": "Affects",
+            "hint": "Which tokens receive the aura effects, relative to the bearer's disposition"
+          },
+          "includeSelf": {
+            "label": "Affects the bearer",
+            "hint": "Apply the aura effects to the bearer's own token as well"
+          }
+        }
+      }
+    }
+  },
+  "TYPES": {
+    "RegionBehavior": {
+      "dedrelAura": "Dedrel Aura"
     }
   }
 }

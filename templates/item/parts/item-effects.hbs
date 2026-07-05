@@ -9,6 +9,9 @@
         <img src="{{effect.img}}" width="24" height="24" style="margin-right: 10px; border: none;"/>
         <h4 style="flex: 1; margin: 0;">{{effect.name}}</h4>
         <div class="effect-controls">
+            <a class="effect-control" data-action="toggleEffectSelf" title="{{localize "DEDREL.ItemSheet.EffectSelfHint"}}" {{#if (eq effect.flags.dedrel.applyTo "self")}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-user"></i></a>
+            <a class="effect-control" data-action="toggleEffectAuraPayload" title="{{localize "DEDREL.ItemSheet.EffectAuraPayloadHint"}}" {{#if (eq effect.flags.dedrel.applyTo "aura")}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-bullseye"></i></a>
+            <a class="effect-control" data-action="configureEffectAura" title="{{localize "DEDREL.ItemSheet.EffectAuraConfigHint"}}" {{#if effect.flags.dedrel.aura}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-circle-dot"></i></a>
             <a class="effect-control" data-action="editEffect" title="{{localize "DEDREL.ItemSheet.Edit"}}"><i class="fas fa-edit"></i></a>
             <a class="effect-control" data-action="deleteEffect" title="{{localize "DEDREL.ItemSheet.Delete"}}"><i class="fas fa-trash"></i></a>
         </div>

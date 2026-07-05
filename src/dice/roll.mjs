@@ -57,54 +57,50 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
 
   // Specialization adds +2
   const specBonus = isSpecialized ? 2 : 0;
-  
-  // Прицеливание (Take Aim) дает +2 к дальним выстрелам - обратная совместимость
-  let takeAimBonus = 0;
-  let isTakeAimAttack = false;
-  const takeAimTriggers = ["Выстрел из лука", "Выстрел из арбалета", "Выстрел из огнестрела"];
-  if (actor?.flags?.dedrel?.takeAimBonus && takeAimTriggers.some(t => title.includes(t))) {
-    takeAimBonus = 2;
-    isTakeAimAttack = true;
-  }
-  
-  // Системные бонусы к атаке
+
+  // Предмет, по которому идёт бросок (нужен для DSL-модификаторов атаки)
+  const item = (actor && itemId) ? actor.items.get(itemId) : null;
+
+  // DSL-модификаторы атаки (flags.dedrel.mod), например Прицеливание:
+  // "attack:2; filter:ranged; consume:roll"
   let systemAttackBonus = 0;
-  let consumedAttackKeys = [];
-  if (actor && itemId) {
-    const item = actor.items.get(itemId);
-    if (item) {
-      const bonuses = DedrelBonuses.extractNextActionBonuses(actor, item);
-      if (bonuses.attack !== 0) {
-        systemAttackBonus = bonuses.attack;
-        const attackKeys = ["system.bonuses.next_attack", "system.bonuses.next_melee_attack", "system.bonuses.next_ranged_attack"];
-        consumedAttackKeys = bonuses.usedKeys.filter(k => attackKeys.includes(k));
-      }
-    }
+  if (item && !isSave) {
+    systemAttackBonus = DedrelBonuses.collect(actor, item).attack;
   }
-  
+
   const globalRollBonus = actor?.system?.bonuses?.global_roll || 0;
   const globalSkillBonus = (!isSave) ? (actor?.system?.bonuses?.global_skill || 0) : 0;
   const globalSaveBonus = (isSave) ? (actor?.system?.bonuses?.global_save || 0) : 0;
-  
-  const totalMod = specBonus + bonus + takeAimBonus + systemAttackBonus - penalty - woundPenalty + globalRollBonus + globalSkillBonus + globalSaveBonus;
-  
+
+  // Точка расширения: макросы и модули могут скорректировать итоговый бонус
+  const hookCtx = { actor, item, title, isSave, bonus, penalty, systemAttackBonus };
+  Hooks.callAll("dedrelPreRoll", hookCtx);
+  bonus = hookCtx.bonus;
+  systemAttackBonus = hookCtx.systemAttackBonus;
+
+  // Глобальные бонусы (постоянные эффекты) сводятся в одно слагаемое.
+  // global_roll — ко всем броскам; global_skill — только к не-спасам; global_save — только к спасам.
+  const globalBonus = globalRollBonus + globalSkillBonus + globalSaveBonus;
+
   // Construct parts for formula and tooltip
-  // Create base roll. 
+  // Create base roll.
   // xo10 means explode once on a 10.
   let formulaDisplay = `1d10xo10`;
   if (baseRank) formulaDisplay += ` + ${baseRank} (ранг)`;
   if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
   if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
-  if (takeAimBonus) formulaDisplay += ` + ${takeAimBonus} (прицеливание)`;
   if (systemAttackBonus) formulaDisplay += ` + ${systemAttackBonus} (бафф)`;
+  if (globalBonus > 0) formulaDisplay += ` + ${globalBonus} (система)`;
+  else if (globalBonus < 0) formulaDisplay += ` - ${-globalBonus} (система)`;
   if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
   if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
 
   let rollFormula = `1d10xo10 + ${baseRank}`;
   if (specBonus) rollFormula += ` + ${specBonus}`;
   if (bonus) rollFormula += ` + ${bonus}`;
-  if (takeAimBonus) rollFormula += ` + ${takeAimBonus}`;
   if (systemAttackBonus) rollFormula += ` + ${systemAttackBonus}`;
+  if (globalBonus > 0) rollFormula += ` + ${globalBonus}`;
+  else if (globalBonus < 0) rollFormula += ` - ${-globalBonus}`;
   if (penalty) rollFormula += ` - ${penalty}`;
   if (woundPenalty) rollFormula += ` - ${woundPenalty}`;
 
@@ -167,14 +163,9 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
 
   await ChatMessage.create(chatData);
 
-  // Если использовали прицеливание, удаляем бафф после броска
-  if (isTakeAimAttack) {
-    const effectToRemove = actor.effects.find(e => e.changes.some(c => c.key === "flags.dedrel.takeAimBonus"));
-    if (effectToRemove) await effectToRemove.delete();
-  }
-  
-  // Удаляем использованные системные бонусы к атаке
-  if (consumedAttackKeys.length > 0) {
-    await DedrelBonuses.consumeNextActionBonuses(actor, consumedAttackKeys);
+  // Сжигаем DSL-модификаторы стадии "roll" (бонусы к атаке).
+  // Эффект, у которого остались моды урона (consume:damage), сгорит после броска урона.
+  if (item && !isSave) {
+    await DedrelBonuses.consumeStage(actor, item, "roll");
   }
 }

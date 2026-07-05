@@ -3,6 +3,7 @@ export default class CurrencyData extends foundry.abstract.TypeDataModel {
     const { HTMLField, StringField, NumberField, ObjectField } = foundry.data.fields;
     return {
       description: new HTMLField({ required: false, blank: true, initial: "" }),
+      key: new StringField({ required: false, initial: "" }),
       weight: new NumberField({ required: true, nullable: false, initial: 0, min: 0 }),
       base_price: new NumberField({ required: true, nullable: false, initial: 0, min: 0 }),
       denomination: new StringField({ required: true, nullable: false, initial: "copper" }),

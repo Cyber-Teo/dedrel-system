@@ -4,6 +4,7 @@ export default class ConditionDataModel extends foundry.abstract.TypeDataModel {
     
     return {
       description: new fields.HTMLField({ label: "Description" }),
+      key: new fields.StringField({ initial: "" }),
       category: new fields.StringField({ initial: "negative", label: "Category" }), // "negative", "neutral", "positive", "technical"
       is_technical: new fields.BooleanField({ initial: false, label: "Is Technical" }),
       stackable: new fields.BooleanField({ initial: false, label: "Stackable" }),

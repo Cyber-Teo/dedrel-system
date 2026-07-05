@@ -15,6 +15,18 @@ export default class DedrelActor extends Actor {
     }
   }
 
+  /**
+   * Ядро применяет здесь фазу "initial" (в super). Сразу после неё выполняем
+   * нашу фазу "apply" — в ней живут все изменения системных полей (system.*),
+   * автоматически помечаемые хуком preCreateActiveEffect. Обе фазы отрабатывают
+   * ДО prepareDerivedData, поэтому баффы характеристик участвуют в расчёте
+   * производных, а бонусы к производным полям переживают паттерн "+=".
+   */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    this.applyActiveEffects("apply");
+  }
+
   prepareData() {
     super.prepareData();
     if (this.type === "character" && this.system.senses) {

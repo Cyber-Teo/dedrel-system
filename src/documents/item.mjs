@@ -86,31 +86,24 @@ export default class DedrelItem extends Item {
     const actor = this.actor;
     if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotOwned"));
 
+    // Экранирование имён предметов/оружия перед вставкой в HTML диалогов
+    // (имена задаются пользователем и потенциально содержат разметку).
+    const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
+
     if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good"].includes(this.type)) {
       return this.postToChat();
     }
 
-    let apCost = this.system.ap_cost || 0;
-    
-    // Поддержка скидок ОД от системных ключей
-    const bonuses = DedrelBonuses.extractNextActionBonuses(actor, this);
-    let consumedApKeys = [];
-    
-    if (this.type === "maneuver" || this.type === "spell") {
-      // ВАЖНО: блок НЕ обёрнут в if (apCost > 0), потому что apSet может быть применён
-      // к манёвру даже если тот изначально бесплатный (хотя это редкий случай).
-      // Главное — apDiscount не уводит стоимость ниже 0.
-      if (bonuses.apDiscount > 0 && apCost > 0) {
-        apCost = Math.max(0, apCost - bonuses.apDiscount);
-        consumedApKeys.push("system.bonuses.next_ap_discount");
-      }
-      if (bonuses.apSet !== null) {
-        // apSet применяется всегда при совпадении фильтра (даже если apCost уже 0)
-        apCost = bonuses.apSet;
-        consumedApKeys.push("system.bonuses.next_ap_set");
-      }
-    }
-    
+    // Эффективная стоимость с учётом DSL-модификаторов и глобальной скидки.
+    // apModApplied важен ниже: если бафф сделал манёвр бесплатным, нельзя
+    // делать early-return — нужно пройти поток, чтобы сжечь бафф и отправить карточку.
+    let { cost: apCost, modApplied: apModApplied } = DedrelBonuses.effectiveApCost(actor, this);
+
+    // Точка расширения: макросы и модули могут скорректировать стоимость до диалога
+    const hookCtx = { actor, item: this, apCost };
+    Hooks.callAll("dedrelPreUseItem", hookCtx);
+    apCost = hookCtx.apCost;
+
     
     // Проверка зарядов
     const usesMaxStr = this.system.uses_max || "0";
@@ -192,16 +185,19 @@ export default class DedrelItem extends Item {
       }
     }
 
+    // Наличие self-эффектов тоже блокирует early-return:
+    // их нужно применить через полный поток использования.
+    const hasSelfEffects = this.effects.some(e => e.getFlag("dedrel", "applyTo") === "self");
+
     // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
     const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
-    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
+    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
       return this.sheet.render(true);
     }
 
-    // ВАЖНО: если бонус сделал манёвр бесплатным (consumedApKeys.length > 0), НЕ делаем early-return.
+    // ВАЖНО: если бонус сделал манёвр бесплатным (apModApplied), НЕ делаем early-return.
     // Нужно продолжить поток, чтобы: 1) сжечь бафф, 2) отправить карточку в чат.
-    const hadBonusApplied = consumedApKeys.length > 0;
-    if (apCost === 0 && !hadBonusApplied && !hasCharges && !requiresWeapon && !consumesResources) {
+    if (apCost === 0 && !apModApplied && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects) {
       return this.sheet.render(true);
     }
 
@@ -237,7 +233,7 @@ export default class DedrelItem extends Item {
         `;
         content += `<p style="color: gray; font-size: 12px;">Доступно ОД: ${currentAp}</p>`;
       } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: this.name, cost: apCost})}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: esc(this.name), cost: apCost})}</p>`;
         if (apCost > currentAp) {
           content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: currentAp, cost: apCost})}</p>`;
         }
@@ -253,15 +249,15 @@ export default class DedrelItem extends Item {
 
     if (ammoItem) {
       if (!hasEnoughAmmo) {
-        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Notifications.NotEnoughAmmo", {name: ammoItem.name, current: ammoItem.system.quantity, required: consumeAmount})}</p>`;
+        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Notifications.NotEnoughAmmo", {name: esc(ammoItem.name), current: ammoItem.system.quantity, required: consumeAmount})}</p>`;
       } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: ammoItem.name, count: consumeAmount})}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: esc(ammoItem.name), count: consumeAmount})}</p>`;
       }
     } else if (isSelfConsume) {
       if (!hasEnoughAmmo) {
         content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Notifications.ItemDepleted")}</p>`;
       } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: this.name, count: consumeAmount})}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: esc(this.name), count: consumeAmount})}</p>`;
       }
     }
 
@@ -271,7 +267,7 @@ export default class DedrelItem extends Item {
           <div class="form-group" style="margin-top: 10px;">
             <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.Weapon")}</label>
             <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
-              ${validWeapons.map(w => `<option value="${w.id}">${w.name}</option>`).join("")}
+              ${validWeapons.map(w => `<option value="${w.id}">${esc(w.name)}</option>`).join("")}
             </select>
           </div>
         `;
@@ -330,18 +326,24 @@ export default class DedrelItem extends Item {
               await actor.update(updates);
             }
             
-            // Удаляем баффы стоимости ОД
-            if (consumedApKeys.length > 0) {
-              await DedrelBonuses.consumeNextActionBonuses(actor, consumedApKeys);
+            // Сжигаем DSL-модификаторы стадии "use" (моды стоимости ОД).
+            // Эффект с модами более поздних стадий (attack/damage) сгорит после
+            // соответствующего броска, а не здесь.
+            if (this.type === "maneuver" || this.type === "spell") {
+              await DedrelBonuses.consumeStage(actor, this, "use");
             }
-            
-            
+
+
             // Списание Зарядов
             if (hasCharges) {
               await this.update({ "system.uses_value": usesValue - 1 });
             }
 
             // Списание предметов / боеприпасов
+            // deleteSelfAfter: если сам предмет израсходован до нуля, НЕ удаляем его сразу —
+            // ниже postToChat() обращается к this (this.name, this.actor, this.effects).
+            // Удаляем в самом конце, после отправки карточки.
+            let deleteSelfAfter = false;
             if (ammoItem) {
               const newQty = Math.max(0, ammoItem.system.quantity - consumeAmount);
               if (newQty <= 0) {
@@ -352,8 +354,7 @@ export default class DedrelItem extends Item {
             } else if (isSelfConsume) {
               const newQty = Math.max(0, (this.system.quantity || 0) - consumeAmount);
               if (newQty <= 0) {
-                await this.delete();
-                // Если предмет удален, дальше макросы могут сбоить, но мы прерываемся после postToChat
+                deleteSelfAfter = true;
               } else {
                 await this.update({ "system.quantity": newQty });
               }
@@ -365,6 +366,11 @@ export default class DedrelItem extends Item {
               selectedWeaponId = weaponSelect ? weaponSelect.value : null;
             }
             
+            // Применение шаблонных self-эффектов (flags.dedrel.applyTo = "self")
+            // с подстановкой @spentAp / @apCost / @overspent.
+            // Выполняется ДО макроса, чтобы аварийный люк (on_use_macro) видел уже применённый бафф.
+            await this._applySelfEffects({ spentAp: finalApCost, apCost: this.system.ap_cost || 0 });
+
             // Вызов макроса если есть
             if (this.system.on_use_macro) {
               let macro = game.macros.find(m => m.name === this.system.on_use_macro);
@@ -386,7 +392,13 @@ export default class DedrelItem extends Item {
               }
               
               if (macro) {
-                macro.execute({ actor: actor, item: this, spentAp: finalApCost });
+                // weapon — оружие/щит, выбранные игроком в диалоге использования (если требовалось)
+                macro.execute({
+                  actor: actor,
+                  item: this,
+                  spentAp: finalApCost,
+                  weapon: selectedWeaponId ? actor.items.get(selectedWeaponId) : null
+                });
               } else {
                 ui.notifications.warn(game.i18n.format("DEDREL.Notifications.MacroNotFound", {name: this.system.on_use_macro}));
               }
@@ -404,6 +416,12 @@ export default class DedrelItem extends Item {
                 }
               }
             }
+
+            // Удаляем полностью израсходованный предмет только теперь,
+            // когда карточка уже отправлена и this больше не нужен.
+            if (deleteSelfAfter) {
+              await this.delete();
+            }
           }
         },
         {
@@ -413,6 +431,78 @@ export default class DedrelItem extends Item {
         }
       ]
     });
+  }
+
+  /**
+   * Применяет к владельцу шаблонные эффекты предмета, помеченные
+   * flags.dedrel.applyTo = "self". Это механизм переменной стоимости:
+   * «потраченные ОД конвертируются в параметр» без макросов.
+   *
+   * Плейсхолдеры, подставляемые в changes[].value, name и description:
+   *   @spentAp   — фактически потраченные ОД (ввод игрока при переменной стоимости)
+   *   @apCost    — базовая стоимость манёвра
+   *   @overspent — ОД, потраченные сверх базовой стоимости
+   * Если после подстановки значение — чистая арифметика (например "@spentAp * 2"),
+   * оно вычисляется через Roll.safeEval, чтобы в эффект попало готовое число.
+   *
+   * @param {{spentAp: number, apCost: number}} context
+   */
+  async _applySelfEffects(context) {
+    const actor = this.actor;
+    if (!actor) return;
+
+    const selfEffects = this.effects.filter(e => e.getFlag("dedrel", "applyTo") === "self");
+    if (selfEffects.length === 0) return;
+
+    const spentAp = context.spentAp ?? 0;
+    const baseCost = context.apCost ?? 0;
+    const tokens = {
+      "@spentAp": String(spentAp),
+      "@apCost": String(baseCost),
+      "@overspent": String(Math.max(0, spentAp - baseCost))
+    };
+
+    const substitute = (str) => {
+      if (typeof str !== "string") return str;
+      let out = str;
+      for (const [token, value] of Object.entries(tokens)) {
+        out = out.replaceAll(token, value);
+      }
+      return out;
+    };
+
+    const effectsData = selfEffects.map(e => {
+      const data = e.toObject();
+      delete data._id;
+      // V14: changes живут в system.changes (см. QUIRK 11/12). Берём исходные
+      // изменения из нового места с fallback, подставляем плейсхолдеры и
+      // записываем ОБРАТНО в system.changes. Легаси top-level data.changes
+      // удаляем, чтобы миграция ядра не затёрла им system.changes.
+      const srcChanges = e._source.system?.changes ?? e._source.changes ?? [];
+      const newChanges = foundry.utils.deepClone(srcChanges).map(c => {
+        let value = substitute(c.value);
+        if (typeof value === "string" && /\d/.test(value) && /^[\d\s+\-*/().]+$/.test(value)) {
+          try {
+            value = String(Roll.safeEval(value));
+          } catch (err) {
+            console.warn(`Dedrel | Не удалось вычислить значение эффекта "${value}"`, err);
+          }
+        }
+        return { ...c, value };
+      });
+      delete data.changes;
+      data.system = { ...(data.system || {}), changes: newChanges };
+      data.name = substitute(data.name);
+      if (data.description) data.description = substitute(data.description);
+      data.origin = this.uuid;
+      data.transfer = false;
+      return data;
+    });
+
+    await actor.createEmbeddedDocuments("ActiveEffect", effectsData);
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.SelfEffectApplied", {
+      names: effectsData.map(e => foundry.utils.escapeHTML(e.name)).join(", ")
+    }));
   }
 
   /**
@@ -428,8 +518,10 @@ export default class DedrelItem extends Item {
        const wType = this.system.req_weapon_type || {};
        const wDmg = this.system.req_weapon_damage_type || {};
        const reqSkill = this.system.req_weapon_skill_group || "";
+       // "any" не считается требованием конкретного оружия (согласовано с use()).
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
-                          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing || reqSkill !== "");
+                          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing ||
+                          (reqSkill !== "" && reqSkill !== "any"));
        
        if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
          showCombatButtons = true;
@@ -471,7 +563,14 @@ export default class DedrelItem extends Item {
     // Если у предмета есть эффекты, которые НЕ переносятся автоматически (transfer: false),
     // значит это бафы/дебафы, которые нужно накладывать вручную (например, яд, заклинание).
     // Генерируем кнопку для наложения этих эффектов на выделенные токены.
-    const hasTransferableEffects = this.effects.some(e => !e.transfer);
+    // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в use().
+    // Аура-эффекты (payload applyTo: "aura" и маркеры flags.dedrel.aura) тоже:
+    // их накладывает и снимает регион-аура (см. src/canvas/aura-regions.mjs).
+    const hasTransferableEffects = this.effects.some(e =>
+      !e.transfer
+      && !["self", "aura"].includes(e.getFlag("dedrel", "applyTo"))
+      && !e.getFlag("dedrel", "aura")
+    );
     if (hasTransferableEffects) {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
@@ -480,9 +579,20 @@ export default class DedrelItem extends Item {
       `;
     }
 
+    // Тумблер ауры: включает/выключает эффект-маркер (регион и бафы
+    // создаёт/убирает синхронизация, см. src/canvas/aura-regions.mjs)
+    const hasAuraMarker = this.effects.some(e => e.getFlag("dedrel", "aura"));
+    if (hasAuraMarker) {
+      buttons += `
+        <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
+          <button class="dedrel-chat-action" data-action="toggleAura" data-item-id="${this.id}"><i class="fa-solid fa-circle-dot"></i> ${game.i18n.localize("DEDREL.Chat.ToggleAura")}</button>
+        </div>
+      `;
+    }
+
     let content = `
       <div class="dedrel-item-chat">
-        <h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;">${this.name}</h3>
+        <h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;">${foundry.utils.escapeHTML(this.name)}</h3>
         <div class="description" style="margin-bottom: 8px;">${this.system.description || ""}</div>
         ${buttons}
       </div>

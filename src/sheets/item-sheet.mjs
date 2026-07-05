@@ -29,6 +29,9 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       addEffect: DedrelItemSheet.#onAddEffect,
       editEffect: DedrelItemSheet.#onEditEffect,
       deleteEffect: DedrelItemSheet.#onDeleteEffect,
+      toggleEffectSelf: DedrelItemSheet.#onToggleEffectSelf,
+      toggleEffectAuraPayload: DedrelItemSheet.#onToggleEffectAuraPayload,
+      configureEffectAura: DedrelItemSheet.#onConfigureEffectAura,
       placeTemplate: DedrelItemSheet.#onPlaceTemplate
     }
   };
@@ -324,7 +327,136 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   static async #onDeleteEffect(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
-    if (effect) return effect.delete();
+    if (!effect) return;
+    // Подтверждение против мискликов: удаление эффекта с предмета необратимо
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: game.i18n.localize("DEDREL.Notifications.DeleteEffectTitle") },
+      content: `<p>${game.i18n.format("DEDREL.Notifications.DeleteItemEffectConfirm", { name: effect.name, item: this.document.name })}</p>`,
+      modal: true
+    });
+    if (confirmed) return effect.delete();
+  }
+
+  /**
+   * Переключает режим self-эффекта (flags.dedrel.applyTo = "self").
+   * Такой эффект применяется к владельцу в момент использования предмета,
+   * с подстановкой @spentAp / @apCost / @overspent (см. Item#_applySelfEffects).
+   */
+  static async #onToggleEffectSelf(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (!effect) return;
+    if (effect.getFlag("dedrel", "applyTo") === "self") {
+      // V14: удаление ключа — через ForcedDeletion (_del), легаси "-=key" deprecated
+      await effect.update({ "flags.dedrel.applyTo": _del, transfer: true });
+    } else {
+      // transfer: false обязателен: иначе шаблон с сырыми плейсхолдерами (@spentAp)
+      // пассивно применялся бы к владельцу постоянно, давая NaN в параметрах.
+      await effect.update({ "flags.dedrel.applyTo": "self", transfer: false });
+    }
+  }
+
+  /**
+   * Переключает режим payload-эффекта ауры (flags.dedrel.applyTo = "aura").
+   * Такой эффект не применяется к владельцу и не попадает в кнопку чата:
+   * его вешает регион-аура на токены в зоне (см. src/canvas/aura-regions.mjs).
+   */
+  static async #onToggleEffectAuraPayload(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (!effect) return;
+    if (effect.getFlag("dedrel", "applyTo") === "aura") {
+      await effect.update({ "flags.dedrel.applyTo": _del, transfer: true });
+    } else {
+      // transfer: false обязателен: payload не должен пассивно висеть на владельце
+      await effect.update({ "flags.dedrel.applyTo": "aura", transfer: false });
+    }
+  }
+
+  /**
+   * Диалог настройки эффекта-маркера ауры (flags.dedrel.aura).
+   * Радиус > 0 включает ауру: вокруг токена владельца появится регион-эманация,
+   * который вешает payload-эффекты этого предмета на токены в зоне.
+   */
+  static async #onConfigureEffectAura(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (!effect) return;
+
+    const aura = effect.getFlag("dedrel", "aura") ?? {};
+    const dispositions = {
+      all: game.i18n.localize("DEDREL.Aura.Dispositions.all"),
+      friendly: game.i18n.localize("DEDREL.Aura.Dispositions.friendly"),
+      hostile: game.i18n.localize("DEDREL.Aura.Dispositions.hostile")
+    };
+    const dispositionOptions = Object.entries(dispositions).map(([key, label]) =>
+      `<option value="${key}" ${key === (aura.disposition ?? "all") ? "selected" : ""}>${label}</option>`
+    ).join("");
+
+    // Для свежей ауры (флага ещё нет) чекбокс включён независимо от disabled:
+    // иначе ранее выключенный эффект молча сохранит disabled и аура "не заработает"
+    const enabledChecked = !(Number(aura.radius) > 0) || !effect.disabled;
+    const content = `
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.AuraEnabled")}</label>
+        <input type="checkbox" name="enabled" ${enabledChecked ? "checked" : ""}/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.AuraRadius")}</label>
+        <input type="number" name="radius" min="0" step="0.5" value="${Number(aura.radius) || 0}"/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.AuraDisposition")}</label>
+        <select name="disposition">${dispositionOptions}</select>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.AuraIncludeSelf")}</label>
+        <input type="checkbox" name="includeSelf" ${aura.includeSelf ? "checked" : ""}/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.AuraColor")}</label>
+        <color-picker name="color" value="${aura.color ?? ""}"></color-picker>
+      </div>
+      <p class="hint">${game.i18n.localize("DEDREL.ItemSheet.AuraConfigHint")}</p>
+    `;
+
+    const { DialogV2 } = foundry.applications.api;
+    await DialogV2.wait({
+      window: { title: game.i18n.format("DEDREL.ItemSheet.AuraConfigTitle", { name: effect.name }) },
+      position: { width: 420 },
+      content,
+      buttons: [
+        {
+          action: "save",
+          icon: "fa-solid fa-check",
+          label: game.i18n.localize("DEDREL.Chat.Confirm"),
+          default: true,
+          callback: async (event, button, dialog) => {
+            const html = dialog.element;
+            const radius = parseFloat(html.querySelector('[name="radius"]')?.value) || 0;
+            if (radius <= 0) {
+              await effect.update({ "flags.dedrel.aura": _del });
+              return;
+            }
+            const color = html.querySelector('[name="color"]')?.value || null;
+            await effect.update({
+              "flags.dedrel.aura": {
+                radius,
+                disposition: html.querySelector('[name="disposition"]')?.value ?? "all",
+                includeSelf: html.querySelector('[name="includeSelf"]')?.checked ?? false,
+                color
+              },
+              // Маркер "чистый": transfer: false — сам он ни на кого не действует
+              // (носитель получает payload через includeSelf тем же путём, что и
+              // остальные), поэтому не оставляет статус-иконку на актёре.
+              "flags.dedrel.applyTo": _del,
+              transfer: false,
+              disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
+            });
+          }
+        }
+      ]
+    });
   }
 
   static async #onPlaceTemplate(event, target) {

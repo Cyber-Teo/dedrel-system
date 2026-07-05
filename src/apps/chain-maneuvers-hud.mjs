@@ -1,4 +1,5 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 
 export default class ChainManeuversHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -82,9 +83,11 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
       });
 
       context.chainManeuvers = chains.map(i => {
-        const cost = i.system.ap_cost || 0;
+        // Стоимость с учётом DSL-модификаторов (та же логика, что и в Item#use()),
+        // иначе бесплатные по баффу манёвры отображались бы серыми и некликабельными.
+        const { cost } = DedrelBonuses.effectiveApCost(this._actor, i);
         const canAfford = cost <= currentAp;
-        
+
         return {
           id: i.id,
           name: i.name,
