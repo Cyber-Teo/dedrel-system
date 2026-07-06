@@ -86,6 +86,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         formula += ` + ${part}`;
       }
 
+      if ((actor?.system?.bonuses?.damage_explode || 0) > 0) {
+        // Находим все кубики (например 1d6, 2d10) и добавляем модификатор xo (взрыв один раз).
+        // Используем отрицательный просмотр вперед (?!x), чтобы не дублировать модификатор,
+        // если он уже есть (например от оружия, которое изначально взрывается).
+        formula = formula.replace(/(\d+d\d+)(?!x)/ig, "$1xo");
+      }
 
       // Попробуем извлечь тип урона прямо из формулы, если он указан в скобках, например 1d6[acid] или 1d6[кислота]
       const match = formula.match(/\[(.*?)\]/);
@@ -107,7 +113,11 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           formula = formula.replace(/\[.*?\]/g, '').trim();
       }
       
-      let roll = new Roll(formula, actor.getRollData());
+      let rollData = actor.getRollData();
+      if (weapon) {
+          rollData.weapon = weapon.system;
+      }
+      let roll = new Roll(formula, rollData);
       
       // Возвращаем flavor обратно в кубики для поддержки Dice So Nice
       if (drKey) {
@@ -362,7 +372,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         actor: targetActor,
         title: title,
         baseRank: attrData.rank,
-        isSave: true
+        isSave: true,
+        saveAttr: saveAttr
       });
     }
 

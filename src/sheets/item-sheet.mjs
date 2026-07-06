@@ -93,6 +93,36 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "bows": game.i18n.localize("DEDREL.Skills.bows"),
         "bladed_weapons": game.i18n.localize("DEDREL.Skills.bladed_weapons")
       };
+      context.allSkills = {
+        "crossbows": game.i18n.localize("DEDREL.Skills.crossbows"),
+        "unarmed_combat": game.i18n.localize("DEDREL.Skills.unarmed_combat"),
+        "pole_weapons": game.i18n.localize("DEDREL.Skills.pole_weapons"),
+        "blunt_weapons": game.i18n.localize("DEDREL.Skills.blunt_weapons"),
+        "artillery": game.i18n.localize("DEDREL.Skills.artillery"),
+        "firearms": game.i18n.localize("DEDREL.Skills.firearms"),
+        "throwing": game.i18n.localize("DEDREL.Skills.throwing"),
+        "exotic_weapons": game.i18n.localize("DEDREL.Skills.exotic_weapons"),
+        "magical_attacks": game.i18n.localize("DEDREL.Skills.magical_attacks"),
+        "bows": game.i18n.localize("DEDREL.Skills.bows"),
+        "bladed_weapons": game.i18n.localize("DEDREL.Skills.bladed_weapons"),
+        "armor_use": game.i18n.localize("DEDREL.Skills.armor_use"),
+        "cultural_awareness": game.i18n.localize("DEDREL.Skills.cultural_awareness"),
+        "knowledge": game.i18n.localize("DEDREL.Skills.knowledge"),
+        "logic_reasoning": game.i18n.localize("DEDREL.Skills.logic_reasoning"),
+        "interpretation": game.i18n.localize("DEDREL.Skills.interpretation"),
+        "research": game.i18n.localize("DEDREL.Skills.research"),
+        "craftsmanship": game.i18n.localize("DEDREL.Skills.craftsmanship"),
+        "stealth": game.i18n.localize("DEDREL.Skills.stealth"),
+        "healing": game.i18n.localize("DEDREL.Skills.healing"),
+        "survival": game.i18n.localize("DEDREL.Skills.survival"),
+        "engineering": game.i18n.localize("DEDREL.Skills.engineering"),
+        "atletism": game.i18n.localize("DEDREL.Skills.atletism"),
+        "persuasion": game.i18n.localize("DEDREL.Skills.persuasion"),
+        "insight": game.i18n.localize("DEDREL.Skills.insight"),
+        "deception": game.i18n.localize("DEDREL.Skills.deception"),
+        "intimidation": game.i18n.localize("DEDREL.Skills.intimidation"),
+        "performance": game.i18n.localize("DEDREL.Skills.performance")
+      };
       context.damageTypes = {
         "slashing": game.i18n.localize("DEDREL.ItemSheet.Slashing"),
         "bludgeoning": game.i18n.localize("DEDREL.ItemSheet.Bludgeoning"),

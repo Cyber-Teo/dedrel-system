@@ -10,6 +10,7 @@
                     <span class="skill-name-header">{{localize "DEDREL.ActorSheet.SkillName"}}</span>
                     <span class="skill-spec-header">{{localize "DEDREL.ActorSheet.Specialization"}}</span>
                     <span class="skill-rank-header">{{localize "DEDREL.ActorSheet.Rank"}}</span>
+                    <span class="skill-bonus-header" style="text-align: center; width: 50px;">BONUS</span>
                 </div>
                 <div class="skills-scrollarea">
                     {{#if favoriteSkillsData.length}}
@@ -20,11 +21,12 @@
                             <i class="fas fa-star" style="color: var(--color-text-light-highlight);"></i>
                         </a>
                         <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
-                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
                         <div class="skill-spec" title="{{skill.specialization}}">
                             {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
                         </div>
                         <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
                     </div>
                     {{/each}}
                     {{/if}}
@@ -36,11 +38,12 @@
                             <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
                         </a>
                         <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
-                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
                         <div class="skill-spec" title="{{skill.specialization}}">
                             {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
                         </div>
                         <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
                     </div>
                     {{/each}}
 
@@ -51,11 +54,12 @@
                             <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
                         </a>
                         <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
-                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
                         <div class="skill-spec" title="{{skill.specialization}}">
                             {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
                         </div>
                         <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
                     </div>
                     {{/each}}
 
@@ -66,11 +70,12 @@
                             <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
                         </a>
                         <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
-                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
                         <div class="skill-spec" title="{{skill.specialization}}">
                             {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
                         </div>
                         <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
                     </div>
                     {{/each}}
 
@@ -81,11 +86,12 @@
                             <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
                         </a>
                         <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
-                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
                         <div class="skill-spec" title="{{skill.specialization}}">
                             {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
                         </div>
                         <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
                     </div>
                     {{/each}}
                 </div>

@@ -286,6 +286,7 @@
       "IsEnchanted": "Enchanted",
       "IsReloading": "Reloading",
       "WeaponSkill": "Weapon Skill",
+      "Skill": "Skill",
       "NoSkill": "No Skill",
       "ExperiencePoints": "Experience Points (XP)",
       "ExperienceHint": "Enter a positive number to grant XP, or a negative number (e.g. -5) to deduct XP.",

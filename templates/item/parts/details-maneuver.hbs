@@ -86,10 +86,10 @@
         {{localize "DEDREL.ItemSheet.FormulasAndSaves"}}
     </div>
     <div class="form-group" style="grid-column: 1 / -1;">
-        <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
+        <label>{{localize "DEDREL.ItemSheet.Skill"}}</label>
         <select name="system.skill">
             <option value="">{{localize "DEDREL.ItemSheet.NoSkill"}}</option>
-            {{selectOptions weaponSkills selected=system.skill}}
+            {{selectOptions allSkills selected=system.skill}}
         </select>
     </div>
     <div class="form-group">

@@ -106,11 +106,11 @@
                     <span>RANK</span>
                     <span>SAVE</span>
                 </div>
-                {{#each system.attributes as |attr key|}}
+                {{#each attributesData as |attr key|}}
                 <div class="attribute-block">
                     <a class="attr-name rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-label="{{localize (concat "DEDREL.Attributes." key)}}">{{localize (concat "DEDREL.Attributes." key)}}</a>
                     <span class="attribute-rank-display" title="Rank">{{attr.rank}}</span>
-                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-is-save="true" data-label="{{localize "DEDREL.ActorSheet.SaveThrow"}}: {{localize (concat "DEDREL.Attributes." key)}}" title="{{localize "DEDREL.ActorSheet.MakeSaveThrow"}}">{{attr.rank}}</a>
+                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-attr="{{key}}" data-is-save="true" data-label="{{localize "DEDREL.ActorSheet.SaveThrow"}}: {{localize (concat "DEDREL.Attributes." key)}}" title="{{localize "DEDREL.ActorSheet.MakeSaveThrow"}}">{{attr.final_save}}</a>
                 </div>
                 {{/each}}
             </div>

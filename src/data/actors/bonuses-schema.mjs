@@ -23,6 +23,11 @@ export function getBonusesSchema() {
     // Флаги-переключатели: эффекты добавляют 1 (режим Add), любое значение > 0 = включено.
     // Числовое поле вместо булевого, чтобы несколько одновременных источников
     // (манёвр + талант) складывались и не затирали друг друга при снятии одного.
-    ignore_wound_penalty: new fields.NumberField({ initial: 0, integer: true })
+    ignore_wound_penalty: new fields.NumberField({ initial: 0, integer: true }),
+    infinite_explode: new fields.NumberField({ initial: 0, integer: true }),
+    damage_explode: new fields.NumberField({ initial: 0, integer: true }),
+
+    // Множитель Максимального Здоровья. Значение 0.25 увеличит ХП на 25%.
+    hp_multiplier: new fields.NumberField({ initial: 0 })
   });
 }

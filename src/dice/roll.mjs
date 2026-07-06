@@ -1,6 +1,6 @@
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 
-export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false }) {
+export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false, saveAttr = null, skillId = null }) {
   const situationalTalents = actor ? actor.items.filter(i => 
     (i.type === "talent" || i.type === "mutation") && 
     i.system.has_situational_bonus
@@ -40,7 +40,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
           let bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
           const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
           
-          await executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave });
+          await executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave, saveAttr, skillId });
         }
       },
       {
@@ -52,7 +52,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   });
 }
 
-async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave = false }) {
+async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave = false, saveAttr = null, skillId = null }) {
   const woundPenalty = Math.abs(actor.system.resources.wounds?.penalty || 0);
 
   // Specialization adds +2
@@ -71,6 +71,8 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
   const globalRollBonus = actor?.system?.bonuses?.global_roll || 0;
   const globalSkillBonus = (!isSave) ? (actor?.system?.bonuses?.global_skill || 0) : 0;
   const globalSaveBonus = (isSave) ? (actor?.system?.bonuses?.global_save || 0) : 0;
+  const specificSaveBonus = (isSave && saveAttr) ? (actor?.system?.attributes[saveAttr]?.save_bonus || 0) : 0;
+  const specificSkillBonus = (!isSave && skillId) ? (actor?.system?.skills[skillId]?.bonus || 0) : 0;
 
   // Точка расширения: макросы и модули могут скорректировать итоговый бонус
   const hookCtx = { actor, item, title, isSave, bonus, penalty, systemAttackBonus };
@@ -80,12 +82,17 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
 
   // Глобальные бонусы (постоянные эффекты) сводятся в одно слагаемое.
   // global_roll — ко всем броскам; global_skill — только к не-спасам; global_save — только к спасам.
-  const globalBonus = globalRollBonus + globalSkillBonus + globalSaveBonus;
+  const globalBonus = globalRollBonus + globalSkillBonus + globalSaveBonus + specificSaveBonus + specificSkillBonus;
 
   // Construct parts for formula and tooltip
   // Create base roll.
-  // xo10 means explode once on a 10.
-  let formulaDisplay = `1d10xo10`;
+  // xo10 means explode once on a 10, x10 means explode infinitely.
+  let explodeMod = "xo10";
+  if ((actor?.system?.bonuses?.infinite_explode || 0) > 0) {
+    explodeMod = "x10";
+  }
+
+  let formulaDisplay = `1d10${explodeMod}`;
   if (baseRank) formulaDisplay += ` + ${baseRank} (ранг)`;
   if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
   if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
@@ -95,7 +102,7 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
   if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
   if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
 
-  let rollFormula = `1d10xo10 + ${baseRank}`;
+  let rollFormula = `1d10${explodeMod} + ${baseRank}`;
   if (specBonus) rollFormula += ` + ${specBonus}`;
   if (bonus) rollFormula += ` + ${bonus}`;
   if (systemAttackBonus) rollFormula += ` + ${systemAttackBonus}`;

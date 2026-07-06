@@ -15,22 +15,28 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
     // Helper to generate attribute schema
     const attributeField = () => new fields.SchemaField({
+      rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
+      save_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
+    });
+
+    const bloodlineField = () => new fields.SchemaField({
       rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 })
     });
 
     // Helper to generate skill schema
     const skillField = () => new fields.SchemaField({
       rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      specialization: new fields.StringField({ required: false, initial: "" })
+      specialization: new fields.StringField({ required: false, initial: "" }),
+      bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
     });
 
     return {
       bloodlines: new fields.SchemaField({
-        human: attributeField(),
-        demon: attributeField(),
-        dragon: attributeField(),
-        fay: attributeField(),
-        elf: attributeField()
+        human: bloodlineField(),
+        demon: bloodlineField(),
+        dragon: bloodlineField(),
+        fay: bloodlineField(),
+        elf: bloodlineField()
       }),
       attributes: new fields.SchemaField({
         int: attributeField(),
@@ -172,6 +178,12 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
     // HP Max
     res.hp.max += Math.ceil((attrs.con.rank + attrs.will.rank / 2) * 10);
+    
+    // HP Multiplier (applied after attributes)
+    const hpMult = this.bonuses?.hp_multiplier || 0;
+    if (hpMult !== 0) {
+      res.hp.max = Math.max(1, Math.floor(res.hp.max * (1 + hpMult)));
+    }
 
     // Wounds
     const hpPercent = (res.hp.value / res.hp.max) * 100;

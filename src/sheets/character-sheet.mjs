@@ -406,9 +406,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    const attributesData = foundry.utils.deepClone(actorData.system.attributes);
+    const globalSave = actorData.system.bonuses?.global_save || 0;
+    for (const [key, attr] of Object.entries(attributesData)) {
+      attr.final_save = attr.rank + (attr.save_bonus || 0) + globalSave;
+    }
+
     Object.assign(context, {
       actor: actorData,
       system: actorData.system,
+      attributesData,
       maneuvers,
       maneuversGroups,
       spells,
@@ -686,12 +693,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const label = target.dataset.label;
     const rank = parseInt(target.dataset.rank) || 0;
     const isSave = target.dataset.isSave === "true";
+    const saveAttr = target.dataset.attr;
+    const skillId = target.dataset.skill;
     
     await showRollDialog({
       actor: actor,
       title: label,
       baseRank: rank,
-      isSave: isSave
+      isSave: isSave,
+      saveAttr: saveAttr,
+      skillId: skillId
     });
   }
 

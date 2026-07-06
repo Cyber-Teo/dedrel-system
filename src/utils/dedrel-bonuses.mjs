@@ -66,17 +66,19 @@ export const MOD_CHANGE_KEY = "flags.dedrel.mod";
  *   "shield"       — манёвр требует щита
  *   "skill:<key>"  — манёвр привязан к конкретной группе навыков (req_weapon_skill_group)
  *   "key:<key>"    — манёвр имеет конкретный system.key или name
+ *   "dtype:<type>" — предмет наносит урон определённого типа (piercing, slashing, bludgeoning)
  *
- * @param {Item} maneuver
+ * @param {Item} item
  * @param {string} filter
  * @returns {boolean}
  */
-function matchesFilter(maneuver, filter) {
+function matchesFilter(item, filter) {
   if (!filter || filter === "any") return true;
 
   const tokens = filter.split("|").map(s => s.trim());
-  const wType = maneuver.system.req_weapon_type || {};
-  const skillGroup = maneuver.system.req_weapon_skill_group || "";
+  const wType = item.system.req_weapon_type || item.system.weapon_type || {};
+  const skillGroup = item.system.req_weapon_skill_group || item.system.skill || "";
+  const wDmgType = item.system.req_weapon_damage_type || item.system.damage_type || {};
 
   for (const token of tokens) {
     if (token === "any") return true;
@@ -100,7 +102,11 @@ function matchesFilter(maneuver, filter) {
     }
     if (token.startsWith("key:")) {
       const k = token.slice(4);
-      if (maneuver.system.key === k || maneuver.name === k) return true;
+      if (item.system.key === k || item.name === k) return true;
+    }
+    if (token.startsWith("dtype:")) {
+      const dt = token.slice(6);
+      if (wDmgType[dt]) return true;
     }
   }
   return false;
@@ -155,7 +161,7 @@ export class DedrelBonuses {
         // Такой фильтр никогда не совпадёт, и мод молча не будет работать.
         for (const token of value.split("|").map(s => s.trim()).filter(s => s.length > 0)) {
           if (["any", "ranged", "melee", "shield"].includes(token)) continue;
-          if (token.startsWith("skill:") || token.startsWith("key:")) continue;
+          if (token.startsWith("skill:") || token.startsWith("key:") || token.startsWith("dtype:")) continue;
           console.warn(`Dedrel | Неизвестный токен фильтра "${token}" в строке "${str}". Для ключей манёвров используйте префикс "key:", например "key:${token}".`);
           return null;
         }
