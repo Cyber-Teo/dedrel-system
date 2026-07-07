@@ -198,15 +198,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         }
         
         if (healAmount <= 0) continue;
-        
-        const currentHp = targetActor.system.resources.hp.value;
-        const maxHp = targetActor.system.resources.hp.max;
-        const newHp = Math.min(maxHp, currentHp + healAmount);
-        const actualHealed = newHp - currentHp;
-        
+
+        // Прибавка к ХП с капом по максимуму — общая с тиками кондиций
+        const actualHealed = await targetActor.applyHealing(healAmount);
+
         if (actualHealed > 0) {
-            await targetActor.update({ "system.resources.hp.value": newHp });
-            
+
             let chatMsg = game.i18n.format("DEDREL.Chat.HealApplied", {name: targetActor.name, amount: actualHealed});
             ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: actor }), // 'actor' is the one who used the item
@@ -282,64 +279,20 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       for (let token of targets) {
         const targetActor = token.actor;
         if (!targetActor) continue;
-        
-        let drUnits = 0;
-        if (drKey && targetActor.system.dr && targetActor.system.dr[drKey] !== undefined) {
-          drUnits = targetActor.system.dr[drKey];
-        }
 
-        let drPercent = drUnits * 10;
-        let apPercent = apLevel * 10;
-        
-        // Применяем бронебойность (плоское вычитание процентов)
-        if (drPercent > 0) {
-          drPercent -= apPercent;
-          if (drPercent < 0) drPercent = 0;
-        }
+        // Математика DR/временных ХП живёт в DedrelActor#applyDamage
+        // (общая с тиками кондиций в src/combat.mjs)
+        const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(damage, { drKey, apLevel });
 
-        // Защита не может превышать 100%
-        if (drPercent > 100) drPercent = 100;
-
-        let finalDamage = damage * (1 - drPercent / 100);
-        if (finalDamage < 0) finalDamage = 0;
-        
-        // Небольшое округление, чтобы избежать длинных дробей
-        finalDamage = Math.round(finalDamage * 10) / 10;
-        
-        let blockedDamage = damage - finalDamage;
-        blockedDamage = Math.round(blockedDamage * 10) / 10;
-
-        const currentHp = targetActor.system.resources.hp.value;
-        let tempHp = targetActor.system.resources.hp.temp || 0;
-        let tempHpDamage = 0;
-        
-        if (tempHp > 0) {
-          tempHpDamage = Math.min(tempHp, finalDamage);
-          tempHp -= tempHpDamage;
-          finalDamage -= tempHpDamage;
-        }
-
-        const newHp = Math.max(0, currentHp - finalDamage);
-
-        const updates = { "system.resources.hp.value": newHp };
-        if (tempHpDamage > 0) {
-          updates["system.resources.hp.temp"] = tempHp;
-        }
-
-        await targetActor.update(updates);
-        
-        // totalAppliedDamage - это суммарный урон, который прошел после брони
-        const totalAppliedDamage = finalDamage + tempHpDamage;
-        
         let damageTypeStr = drKey ? `[${game.i18n.localize(DR_KEY_LABELS[drKey])}] ` : "";
-        let chatMsg = game.i18n.format("DEDREL.Chat.DamageTaken", {name: targetActor.name, damage: totalAppliedDamage, type: damageTypeStr});
+        let chatMsg = game.i18n.format("DEDREL.Chat.DamageTaken", {name: targetActor.name, damage: applied, type: damageTypeStr});
 
         if (tempHpDamage > 0) {
           chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageTakenTemp", {tempDamage: tempHpDamage})}</span>`;
         }
 
-        if (blockedDamage > 0) {
-          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: blockedDamage})}</span>`;
+        if (blocked > 0) {
+          chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: blocked})}</span>`;
         }
         
         ChatMessage.create({

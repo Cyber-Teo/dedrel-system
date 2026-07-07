@@ -23,10 +23,11 @@ import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
 import { DEDREL_MAGIC } from "./src/config/magic.mjs";
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
+import DedrelTokenHUD from "./src/apps/token-hud.mjs";
 
 import "./src/chat.mjs";
 import "./src/macros.mjs";
-import "./src/combat.mjs";
+import DedrelCombat from "./src/combat.mjs";
 import "./src/canvas/auras.mjs";
 import "./src/canvas/aura-regions.mjs";
 import "./src/canvas/movement.mjs";
@@ -63,6 +64,9 @@ Hooks.once("init", function() {
     direction: initDirection
   };
 
+  // Кастомный документ боя: тики кондиций в _onStartTurn/_onEndTurn (src/combat.mjs)
+  CONFIG.Combat.documentClass = DedrelCombat;
+
   // Регистрация кастомного класса предмета и моделей данных для предметов (Item)
   CONFIG.Actor.documentClass = DedrelActor;
   CONFIG.Item.documentClass = DedrelItem;
@@ -74,12 +78,21 @@ Hooks.once("init", function() {
   // Кастомный класс для Токена (чтобы отрисовывать дополнительные бары)
   CONFIG.Token.objectClass = DedrelToken;
 
+  // Кастомный HUD токена: клики по стакающимся кондициям добавляют/снимают стаки
+  CONFIG.Token.hudClass = DedrelTokenHUD;
+
   // Поведение региона "Аура" (подтип объявлен в system.json → documentTypes.RegionBehavior)
   CONFIG.RegionBehavior.dataModels.dedrelAura = DedrelAuraRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons.dedrelAura = "fa-solid fa-circle-dot";
 
   // Регистрация Active Effects для системы
   CONFIG.ActiveEffect.legacyTransferral = false;
+
+  // Истёкшие эффекты УДАЛЯЮТСЯ, а не помечаются expired (дефолт "update").
+  // Иначе истёкшая кондиция остаётся на актёре подавленным «зомби»: иконка
+  // пропадает, но toggleStatusEffect/addConditionStack находят её и считают,
+  // что состояние всё ещё висит (например, с максимумом стаков).
+  CONFIG.ActiveEffect.expiryAction = "delete";
 
   // Регистрация кастомной фазы "apply" для изменений системных полей (system.*).
   // ВАЖНО: ядро исполняет только фазы "initial"/"final" и те, что зарегистрированы
@@ -343,10 +356,27 @@ async function rebuildStatusEffects() {
         dedrel: {
           condition: true,
           is_technical: c.system.is_technical || false,
-          category: c.system.category || "negative"
+          category: c.system.category || "negative",
+          // Стакающиеся кондиции: HUD и DedrelActor#addConditionStack читают
+          // эти флаги, чтобы повторные клики наращивали счётчик стаков.
+          stackable: c.system.stackable || false,
+          max_stacks: Math.max(1, c.system.max_stacks || 1),
+          // Обновлять таймер длительности при добавлении стака (см. addConditionStack).
+          refresh_on_stack: c.system.refresh_on_stack || false
         }
       }
     };
+
+    // Периодический урон/лечение: тик исполняет DedrelCombat (src/combat.mjs)
+    const tick = c.system.tick || {};
+    if (tick.formula) {
+      entry.flags.dedrel.tick = {
+        formula: tick.formula,
+        is_heal: tick.is_heal || false,
+        damage_type: tick.damage_type || "",
+        trigger: tick.trigger || "turnStart"
+      };
+    }
 
     // Переносим механику состояния: change-строки со всех его эффектов.
     // Без этого статус, наложенный через HUD, приходит на актёра «пустым».

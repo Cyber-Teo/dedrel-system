@@ -235,7 +235,8 @@ export class DedrelBonuses {
   }
 
   /**
-   * Эффективная стоимость ОД предмета с учётом DSL-модификаторов и глобальной скидки.
+   * Эффективная стоимость ОД предмета с учётом DSL-модификаторов, глобальной скидки
+   * и наценки на ОД (system.bonuses.*_ap_penalty).
    * Единая точка расчёта: используется и в Item#use(), и в HUD цепных манёвров,
    * чтобы отображаемая и фактическая стоимость никогда не расходились.
    *
@@ -249,10 +250,20 @@ export class DedrelBonuses {
 
     if (item.type === "maneuver" || item.type === "spell") {
       const mods = this.collect(actor, item);
-      const globalDiscount = actor.system.bonuses?.global_ap_discount || 0;
-      const totalDiscount = mods.apDiscount + globalDiscount;
-      if (totalDiscount > 0 && apCost > 0) {
-        apCost = Math.max(0, apCost - totalDiscount);
+      const bonuses = actor.system.bonuses || {};
+
+      // Наценка на ОД («штраф на ОД»): глобальная + адресная по типу предмета.
+      // Взаимозачитывается со скидками (скидка − наценка). Применяется только к
+      // предметам с ненулевой базовой стоимостью — бесплатные не облагаются.
+      const apPenalty = (bonuses.global_ap_penalty || 0)
+        + (item.type === "maneuver" ? (bonuses.maneuver_ap_penalty || 0) : 0)
+        + (item.type === "spell" ? (bonuses.spell_ap_penalty || 0) : 0);
+
+      const globalDiscount = bonuses.global_ap_discount || 0;
+      // Чистый модификатор стоимости: скидка увеличивает, наценка уменьшает пул скидки.
+      const netDiscount = mods.apDiscount + globalDiscount - apPenalty;
+      if (netDiscount !== 0 && apCost > 0) {
+        apCost = Math.max(0, apCost - netDiscount);
         if (mods.apDiscount > 0) modApplied = true;
       }
       if (mods.apSet !== null) {

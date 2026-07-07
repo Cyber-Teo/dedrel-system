@@ -344,6 +344,8 @@
       "SpendCharge": "Spend 1 charge? (Remaining: {value}/{max})",
       "OutOfCharges": "Out of charges!",
       "DamageTaken": "<b>{name}</b> takes {damage} {type} damage.",
+      "ConditionTickDamage": "\"{condition}\": <b>{actor}</b> takes {damage} damage{type}.",
+      "ConditionTickHeal": "\"{condition}\": <b>{actor}</b> regains {amount} HP.",
       "DamageTakenTemp": "(To temporary HP: {tempDamage})",
       "DamageBlocked": "(Blocked by armor: {dr} DR)",
       "UseItem": "Use: {name}"
@@ -688,7 +690,8 @@
       "NoWeaponSlots": "No free slots for weapon (free up hands or tail).",
       "MacroNotFound": "Macro with name '{name}' not found.",
       "SelfEffectApplied": "Effect applied to character: {names}",
-      "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see EFFECT_KEYS_CHEAT_SHEET.md)."
+      "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see EFFECT_KEYS_CHEAT_SHEET.md).",
+      "MaxStacksReached": "\"{name}\": maximum stacks reached ({max})."
     },
     "EffectPhases": {
       "Apply": "Apply (system fields)",
@@ -728,16 +731,24 @@
       "IsTechnical": "Technical (Hidden)?",
       "Stackable": "Stackable?",
       "MaxStacks": "Max Stacks",
+      "RefreshOnStack": "Refresh duration on new stack",
+      "TickSection": "Periodic Effect (Tick)",
+      "TickFormula": "Formula (@stacks — stack count)",
+      "TickIsHeal": "Heals (instead of damage)?",
+      "TickDamageType": "Damage type",
+      "TickTrigger": "Trigger",
+      "TickTriggers": {
+        "turnStart": "Turn start",
+        "turnEnd": "Turn end"
+      },
+      "TickNoDR": "Pure (no reduction)",
       "DurationLabel": "Duration",
       "DurationUnits": "Time Units",
       "DurationValue": "Duration Value",
       "ExpiryEvents": "Expiry Events (e.g. turnEnd)",
       "Removal": "Removal / Text",
       "ApplicationText": "Application Text",
-      "RemovalText": "Removal Text",
-      "RemovableBySkill": "Removable By Skill Check?",
-      "SkillToRemove": "Skill Key for Removal",
-      "RemoveDC": "Removal DC"
+      "RemovalText": "Removal Text"
     },
     "ManeuverSources": {
       "basic": "Basic",

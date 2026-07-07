@@ -114,6 +114,8 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           description: e.description || "",
           tooltip: tooltip,
           durationText: durationText,
+          // Счётчик стаков показываем от двух: один стак — обычное состояние
+          stacks: (e.flags?.dedrel?.stacks ?? 1) > 1 ? e.flags.dedrel.stacks : null,
           isAuraMarker: isAuraMarker,
           isTechnical: e.flags?.dedrel?.is_technical || false
         };

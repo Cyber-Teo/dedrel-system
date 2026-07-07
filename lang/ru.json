@@ -455,6 +455,8 @@
       "DamageCardFlavor": "Урон: {name}",
       "ArmorPiercing": "Бронебойность {value}",
       "DamageTaken": "<b>{name}</b> получает {damage} {type} урона.",
+      "ConditionTickDamage": "«{condition}»: <b>{actor}</b> получает {damage} урона{type}.",
+      "ConditionTickHeal": "«{condition}»: <b>{actor}</b> восстанавливает {amount} ХП.",
       "DamageTakenTemp": "(Из них по временным хитам: {tempDamage})",
       "DamageBlocked": "(Заблокировано броней: {dr} DR)",
       "UseItem": "Использование: {name}",
@@ -681,7 +683,8 @@
       "NoWeaponSlots": "Нет свободных слотов для оружия (освободите руки или хвост).",
       "MacroNotFound": "Макрос с именем '{name}' не найден.",
       "SelfEffectApplied": "Эффект применён к персонажу: {names}",
-      "InvalidModString": "Не удалось разобрать DSL-модификатор: \"{value}\". Проверьте синтаксис (см. EFFECT_KEYS_CHEAT_SHEET.md)."
+      "InvalidModString": "Не удалось разобрать DSL-модификатор: \"{value}\". Проверьте синтаксис (см. EFFECT_KEYS_CHEAT_SHEET.md).",
+      "MaxStacksReached": "«{name}»: достигнут максимум стаков ({max})."
     },
     "EffectPhases": {
       "Apply": "Применение (системные поля)",
@@ -721,16 +724,24 @@
       "IsTechnical": "Техническое (Скрытое)?",
       "Stackable": "Суммируется (Стакается)?",
       "MaxStacks": "Макс. Стаков",
+      "RefreshOnStack": "Обновлять таймер при новом стаке",
+      "TickSection": "Периодический эффект (Тик)",
+      "TickFormula": "Формула (@stacks — число стаков)",
+      "TickIsHeal": "Лечит (вместо урона)?",
+      "TickDamageType": "Тип урона",
+      "TickTrigger": "Момент срабатывания",
+      "TickTriggers": {
+        "turnStart": "Начало хода",
+        "turnEnd": "Конец хода"
+      },
+      "TickNoDR": "Чистый (без снижения)",
       "DurationLabel": "Длительность",
       "DurationUnits": "Единицы Времени",
       "DurationValue": "Значение Длительности",
       "ExpiryEvents": "События Снятия (напр. turnEnd)",
       "Removal": "Условия Снятия / Текст",
       "ApplicationText": "Текст при Наложении",
-      "RemovalText": "Текст при Снятии",
-      "RemovableBySkill": "Снимается Проверкой Навыка?",
-      "SkillToRemove": "Ключ Навыка для Снятия",
-      "RemoveDC": "Сложность (DC) Снятия"
+      "RemovalText": "Текст при Снятии"
     },
     "ManeuverSources": {
       "basic": "Базовый",

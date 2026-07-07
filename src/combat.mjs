@@ -1,3 +1,70 @@
+import { DR_KEY_LABELS } from "./constants.mjs";
+
+/**
+ * Кастомный документ боя: тики кондиций — периодический урон от состояний
+ * (system.tick у Item типа condition, перенесён в flags.dedrel.tick статуса
+ * при сборке CONFIG.statusEffects). Lifecycle-методы _onStartTurn/_onEndTurn
+ * ядро вызывает только у активного ГМа и не вызывает при откате хода назад,
+ * поэтому урон применяется ровно один раз. Пропущенные ходы (context.skipped
+ * при перемотке инициативы) не тикают.
+ */
+export default class DedrelCombat extends Combat {
+  async _onStartTurn(combatant, context) {
+    await super._onStartTurn(combatant, context);
+    if (!context.skipped && combatant.actor) await applyConditionTicks(combatant.actor, "turnStart");
+  }
+
+  async _onEndTurn(combatant, context) {
+    await super._onEndTurn(combatant, context);
+    if (!context.skipped && combatant.actor) await applyConditionTicks(combatant.actor, "turnEnd");
+  }
+}
+
+async function applyConditionTicks(actor, trigger) {
+  for (const effect of actor.appliedEffects) {
+    const tick = effect.getFlag("dedrel", "tick");
+    if (!tick?.formula || (tick.trigger || "turnStart") !== trigger) continue;
+
+    const stacks = effect.getFlag("dedrel", "stacks") ?? 1;
+    let roll;
+    try {
+      roll = new Roll(tick.formula, { stacks });
+      await roll.evaluate();
+    } catch (err) {
+      console.error(`Dedrel | Ошибка формулы тика кондиции "${effect.name}": ${tick.formula}`, err);
+      continue;
+    }
+
+    let flavor;
+    if (tick.is_heal) {
+      const healed = await actor.applyHealing(roll.total);
+      flavor = game.i18n.format("DEDREL.Chat.ConditionTickHeal", {
+        actor: actor.name,
+        condition: effect.name,
+        amount: healed
+      });
+    } else {
+      const result = await actor.applyDamage(roll.total, { drKey: tick.damage_type || "" });
+      const typeStr = tick.damage_type && DR_KEY_LABELS[tick.damage_type]
+        ? ` [${game.i18n.localize(DR_KEY_LABELS[tick.damage_type])}]`
+        : "";
+      flavor = game.i18n.format("DEDREL.Chat.ConditionTickDamage", {
+        actor: actor.name,
+        condition: effect.name,
+        damage: result.applied,
+        type: typeStr
+      });
+      if (result.blocked > 0) {
+        flavor += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", { dr: result.blocked })}</span>`;
+      }
+    }
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      flavor
+    });
+  }
+}
+
 Hooks.on("updateCombat", async (combat, changed, options, userId) => {
   if (!game.user.isGM) return;
   if (!combat.started) return;

@@ -1,6 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
+import { DR_KEY_LABELS } from "../constants.mjs";
 /**
  * Основной класс Листа Предмета для системы Dedrel.
  * Наследуется от нового Foundry V2 Application Framework (ItemSheetV2).
@@ -265,6 +266,16 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "permanent": game.i18n.localize("DEDREL.DurationUnits.permanent")
       };
       context.joinedExpiryEvents = (itemData.system.expiry_events || []).join("; ");
+      context.tickTriggers = {
+        "turnStart": game.i18n.localize("DEDREL.Condition.TickTriggers.turnStart"),
+        "turnEnd": game.i18n.localize("DEDREL.Condition.TickTriggers.turnEnd")
+      };
+      context.tickDamageTypes = {
+        "": game.i18n.localize("DEDREL.Condition.TickNoDR")
+      };
+      for (const [key, label] of Object.entries(DR_KEY_LABELS)) {
+        context.tickDamageTypes[key] = game.i18n.localize(label);
+      }
     }
 
     return context;
