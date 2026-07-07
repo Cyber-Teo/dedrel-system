@@ -46,6 +46,24 @@ export function registerSystemSettings() {
     }
   });
 
+  // Опциональное правило Магического Конструктора: что даёт Изобильный Источник.
+  // unlockAll — снимает лимит maxModCost целиком (слабый маг в море становится
+  //   могущественным); requireRank — только открывает 5-й ранг тем, чей Ранг
+  //   Доктрины и так позволяет платить 5 ОД за модификатор (maxModCost >= 5).
+  game.settings.register("dedrel", "abundantSourceMode", {
+    name: "DEDREL.Settings.AbundantSourceMode.Name",
+    hint: "DEDREL.Settings.AbundantSourceMode.Hint",
+    scope: "world",
+    config: true,
+    type: String,
+    choices: {
+      "unlockAll": "DEDREL.Settings.AbundantSourceMode.UnlockAll",
+      "requireRank": "DEDREL.Settings.AbundantSourceMode.RequireRank"
+    },
+    default: "unlockAll",
+    requiresReload: false
+  });
+
   game.settings.register("dedrel", "showChainsOutsideCombat", {
     name: "DEDREL.Settings.ShowChainsOutsideCombat.Name",
     hint: "DEDREL.Settings.ShowChainsOutsideCombat.Hint",

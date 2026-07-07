@@ -1,0 +1,188 @@
+<div class="form-fields-grid">
+    {{#if system.doctrine}}
+    <div class="section-header" style="grid-column: 1 / -1;">
+        {{localize "DEDREL.ItemSheet.SpellBuildData"}}
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <p class="hint" style="margin: 0;">{{localize "DEDREL.ItemSheet.SpellBuildHint"}}</p>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Magic.UI.Doctrine"}}</label>
+        <input type="text" value="{{localize (concat "DEDREL.Magic.Doctrines." system.doctrine)}} ({{system.doctrine_rank_req}}+){{#if system.doctrine_path}} · {{localize (concat "DEDREL.Magic.Paths." system.doctrine_path)}}{{/if}}" disabled/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Magic.UI.SourceScale"}}</label>
+        <input type="text" value="{{localize (concat "DEDREL.Magic.SourceScales." system.source_scale)}}" disabled/>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.SpellBreakdown"}}</label>
+        <input type="text" value="{{system.total_cost_breakdown}}" disabled/>
+    </div>
+    {{/if}}
+
+    <div class="form-group stacked" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.ActionType"}}</label>
+        <div class="properties-grid">
+            <label class="checkbox"><input type="checkbox" name="system.action_type.action" {{checked actionTypeChecked.action}}/> {{localize "DEDREL.ActionTypes.action"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.action_type.reaction" {{checked actionTypeChecked.reaction}}/> {{localize "DEDREL.ActionTypes.reaction"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.action_type.free" {{checked actionTypeChecked.free}}/> {{localize "DEDREL.ActionTypes.free"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.action_type.chain" {{checked actionTypeChecked.chain}}/> {{localize "DEDREL.ActionTypes.chain"}}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.APCost"}}</label>
+        <input type="text" name="system.ap_cost" value="{{system.ap_cost}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label class="checkbox">
+            <input type="checkbox" name="system.is_variable_cost" {{checked system.is_variable_cost}}/> {{localize "DEDREL.ItemSheet.VariableCost"}}
+        </label>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.MaxAPVariable"}}</label>
+        <input type="text" name="system.variable_cost_max" value="{{system.variable_cost_max}}" data-dtype="Number"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.Uses"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Current"}}</label>
+        <input type="text" name="system.uses_value" value="{{system.uses_value}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Maximum"}}</label>
+        <input type="text" name="system.uses_max" value="{{system.uses_max}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Recovery"}}</label>
+        <input type="text" name="system.uses_per" value="{{system.uses_per}}"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.TargetAndArea"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.TargetType"}}</label>
+        <select name="system.target_type">
+            {{selectOptions targetTypes selected=system.target_type}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.NumTargets"}}</label>
+        <input type="text" name="system.target_value" value="{{system.target_value}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.RangeM"}}</label>
+        <input type="text" name="system.target_range" value="{{system.target_range}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.AreaShape"}}</label>
+        <select name="system.template_shape">
+            {{selectOptions templateShapes selected=system.template_shape}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.AreaSizeM"}}</label>
+        <input type="text" name="system.template_size" value="{{system.template_size}}" data-dtype="Number"/>
+    </div>
+    {{#if (and system.template_shape system.template_size)}}
+    <div class="form-group">
+        <button type="button" class="dedrel-action" data-action="placeTemplate" style="width: 100%;"><i class="fa-solid fa-ruler-combined"></i> {{localize "DEDREL.Chat.PlaceTemplate"}}</button>
+    </div>
+    {{/if}}
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.FormulasAndSaves"}}
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.Skill"}}</label>
+        <select name="system.skill">
+            <option value="">{{localize "DEDREL.ItemSheet.NoSkill"}}</option>
+            {{selectOptions allSkills selected=system.skill}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.AttackBonus"}}</label>
+        <input type="text" name="system.attack_bonus" value="{{system.attack_bonus}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
+        <input type="text" name="system.formula_attack" value="{{system.formula_attack}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.FormulaDamage"}}</label>
+        <input type="text" name="system.formula_damage" value="{{system.formula_damage}}" placeholder="4d6[heat]"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.FormulaHeal"}}</label>
+        <input type="text" name="system.formula_heal" value="{{system.formula_heal}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.FormulaCustom"}}</label>
+        <input type="text" name="system.formula_custom" value="{{system.formula_custom}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.SaveAttribute"}}</label>
+        <input type="text" name="system.save_attribute" value="{{system.save_attribute}}" placeholder="will"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.SaveDC"}}</label>
+        <input type="text" name="system.save_dc_formula" value="{{system.save_dc_formula}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ForbiddenDefense"}}</label>
+        <input type="text" name="system.forbidden_defense" value="{{system.forbidden_defense}}"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.ChainTriggers"}}
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.TriggerText"}}</label>
+        <input type="text" name="system.chain_trigger_text" value="{{system.chain_trigger_text}}"/>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.ChainManeuvers"}}</label>
+        <input type="text" name="system.chain_trigger_maneuvers" value="{{joinedChainTriggers}}" placeholder="maneuver1; maneuver2"/>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.OnUseMacro"}}</label>
+        <input type="text" name="system.on_use_macro" value="{{system.on_use_macro}}"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.WeaponRequirements"}}
+    </div>
+    <div class="form-group stacked" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.WeaponType"}}</label>
+        <div class="properties-grid">
+            <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.magic" {{checked system.req_weapon_type.magic}}/> {{localize "DEDREL.ItemSheet.MagicFocus"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.melee" {{checked system.req_weapon_type.melee}}/> {{localize "DEDREL.ItemSheet.Melee"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.ranged" {{checked system.req_weapon_type.ranged}}/> {{localize "DEDREL.ItemSheet.Ranged"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.req_weapon_type.shield" {{checked system.req_weapon_type.shield}}/> {{localize "DEDREL.ItemSheet.Shield"}}</label>
+        </div>
+    </div>
+
+    <div class="section-header" style="grid-column: 1 / -1;">
+        {{localize "DEDREL.ItemSheet.Prerequisites"}}
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.ReqText"}}</label>
+        <input type="text" name="system.prerequisites_text" value="{{system.prerequisites_text}}"/>
+    </div>
+    <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.ReqAttributes"}}</label>
+            <input type="text" name="system.prerequisites_attributes" value="{{joinedPrereqAttributes}}" placeholder="log 2, str 1"/>
+        </div>
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.ReqSkills"}}</label>
+            <input type="text" name="system.prerequisites_skills" value="{{joinedPrereqSkills}}" placeholder="magical_attacks 2"/>
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+            <label>{{localize "DEDREL.ItemSheet.Talents"}}</label>
+            <input type="text" name="system.prerequisites_talents" value="{{joinedPrereqTalents}}" placeholder="talent1; talent2"/>
+        </div>
+    </div>
+</div>

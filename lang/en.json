@@ -44,6 +44,163 @@
       "KeyPlaceholder": "e.g. mutation_tail",
       "ManeuverKeyPlaceholder": "e.g. maneuver_move"
     },
+    "Magic": {
+      "APShort": "AP",
+      "DoctrineGroups": {
+        "matter": "Doctrines of Matter",
+        "essence": "Doctrines of Essence",
+        "boundless": "Doctrines of the Boundless",
+        "innate": "Innate Magic",
+        "psionics": "Psionics"
+      },
+      "Doctrines": {
+        "geomancy": "Geomancy",
+        "hydromancy": "Hydromancy",
+        "pyromancy": "Pyromancy",
+        "ventomancy": "Ventomancy",
+        "biomancy": "Biomancy",
+        "shadowmancy": "Shadowmancy",
+        "aetheromancy": "Aetheromancy",
+        "electromancy": "Electromancy",
+        "temporalmancy": "Temporalmancy",
+        "astralomancy": "Astralomancy",
+        "aether_song": "Aether Song",
+        "blood_magic": "Blood Magic",
+        "chaos_magic": "Chaos Magic",
+        "shapeshifting": "Shapeshifting",
+        "feral_magic": "Feral Magic",
+        "telekinesis": "Telekinesis",
+        "telepathy": "Telepathy",
+        "zero": "Zero"
+      },
+      "Techniques": {
+        "create": "Create/Form",
+        "move": "Direct/Move",
+        "transform": "Alter/Transform",
+        "sense": "Perceive/Sense",
+        "imbue": "Imbue/Infuse"
+      },
+      "Modifiers": {
+        "range": "Range",
+        "targets": "Targets",
+        "area_cone": "Area: Cone",
+        "area_circle": "Area: Radius",
+        "area_line": "Area: Line",
+        "power": "Power",
+        "damage": "Damage",
+        "durability": "Durability",
+        "duration": "Duration",
+        "accuracy": "Accuracy",
+        "form": "Form",
+        "actionType": "Action Type"
+      },
+      "SourceScales": {
+        "none": "No Source",
+        "any": "Source Available",
+        "abundant": "Abundant Source"
+      },
+      "Paths": {
+        "flow": "Path of the Flow",
+        "ice": "Path of Ice",
+        "squall": "Path of the Squall",
+        "echo": "Path of the Echo"
+      },
+      "Categories": {
+        "scale": "Scale",
+        "intensity": "Intensity",
+        "complexity": "Complexity"
+      },
+      "TechHints": {
+        "create": "Creates energy/matter from the Astral where there is none",
+        "move": "Controls the movement of an already existing source",
+        "transform": "Changes the inner properties of matter/energy, but not its position",
+        "sense": "Gathers information about the Doctrine without physical changes",
+        "imbue": "Infuses a magical property of the Doctrine into an object or creature"
+      },
+      "RankHints": {
+        "range": { "1": "Touch", "2": "Up to 5 hexes", "3": "Up to 10 hexes", "4": "Up to 20 hexes", "5": "Up to 30 hexes" },
+        "targets": { "1": "One target", "2": "Two targets", "3": "Three targets", "4": "Four targets", "5": "Five targets" },
+        "area_cone": { "2": "Far row 3 hexes", "3": "Far row 5 hexes", "4": "Far row 7 hexes", "5": "Far row 9 hexes" },
+        "area_circle": { "2": "Radius 1", "3": "Radius 2", "4": "Radius 3", "5": "Radius 4" },
+        "area_line": { "1": "Up to 4 hexes", "2": "Up to 6 hexes", "3": "Up to 8 hexes", "4": "Up to 10 hexes", "5": "Up to 12 hexes" },
+        "power": { "1": "+1/−1 to the next roll (DC 10)", "2": "+2/−2 for 1 round (DC 12)", "3": "Simple condition for [Doctrine Rank] rounds (DC 14)", "4": "+3/−3 for [Doctrine Rank] rounds OR a condition (DC 16)", "5": "Powerful condition (DC 18)" },
+        "durability": { "1": "5 HP", "2": "10 HP", "3": "15 HP", "4": "20 HP", "5": "25 HP" },
+        "duration": { "1": "Instant", "2": "6 rounds", "3": "10 rounds", "4": "Concentration", "5": "One day" },
+        "accuracy": { "1": "+1 to hit", "2": "+2 to hit", "3": "+3 to hit", "4": "+4 to hit", "5": "+5 to hit" },
+        "form": { "1": "Formless", "2": "Bludgeoning", "3": "Slashing", "4": "Piercing", "5": "Complex form" },
+        "actionType": { "1": "Chain", "2": "Reaction" }
+      },
+      "UI": {
+        "Title": "Spell Constructor",
+        "OpenConstructor": "Build a Spell",
+        "NoDoctrines": "No doctrines available: access to doctrines is unlocked by talents.",
+        "SpellName": "Spell Name",
+        "NamePlaceholder": "E.g.: Fireball",
+        "Doctrine": "Doctrine",
+        "GMRank": "Rank (GM)",
+        "SourceScale": "Source Scale",
+        "SceneSourceHint": "Source level on this scene (set by the GM). You may pick lower, but not higher.",
+        "Limits": "Limits: Techniques {tech} · Modifiers {mods} · Max modifier cost {cost} AP",
+        "Techniques": "Techniques",
+        "Modifiers": "Modifiers",
+        "ReasonNotKnown": "Technique not learned (acquired as a talent)",
+        "ReasonNeedsSource": "Requires a Source",
+        "ReasonForbidden": "Not available to this Doctrine",
+        "ReasonOverCap": "Doctrine/Path restriction",
+        "ReasonNeedsAbundant": "Requires an Abundant Source",
+        "ReasonOverMaxCost": "Exceeds the maximum for your Doctrine Rank",
+        "PowerBonus": "Bonus +{n}",
+        "PowerPenalty": "Penalty −{n}",
+        "Total": "Total",
+        "Available": "available",
+        "RequiredRank": "Min. doctrine rank",
+        "Save": "Save",
+        "SaveAndCast": "Save & Cast",
+        "Cast": "Cast",
+        "CastEphemeralHint": "Cast without saving: creates a temporary spell that is removed when combat ends (can be pinned on the sheet).",
+        "CastRankTooLow": "Insufficient rank in the \"{doctrine}\" Doctrine: {req} required, you have {have}.",
+        "CastPathMismatch": "The spell was built for {spellPath}, but {activePath} is active. Switch the path and continue?",
+        "CastInvalid": "The spell build is no longer legal:",
+        "CastCostMismatch": "GM check: spell \"{name}\" ({actor}) has a saved cost of {saved} AP that does not match the recalculated {calc} AP — the item fields may have been edited manually.",
+        "UnnamedSpell": "New Spell",
+        "SavedToActor": "Spell \"{name}\" saved to the character sheet.",
+        "SavedToWorld": "Spell \"{name}\" created in the world (drag it to a compendium).",
+        "DurationRounds": "Duration: {n} round(s)",
+        "Duration_instant": "Instant",
+        "Duration_concentration": "Concentration (until dismissed; unconsciousness breaks it)",
+        "Duration_day": "One day (removed manually)",
+        "DurabilityHp": "Durability: {n} HP",
+        "AppliesCondition": "Applies the \"{name}\" condition (save DC {dc})",
+        "AppliesBonus": "Bonus/penalty {n} to rolls (save DC {dc})",
+        "PowerEffectName": "Spell Power: {n} to rolls",
+        "ConcentrationMarker": "Concentration: {name}",
+        "ConcentrationHint": "The spell lasts while you maintain concentration. Remove this effect to dismiss the spell. Falling unconscious breaks concentration.",
+        "PathSwitched": "{actor} switches the \"{doctrine}\" doctrine path: {path} is now active."
+      },
+      "Errors": {
+        "no_config": "Magic config (CONFIG.DEDREL.magic) is not loaded.",
+        "doctrine_unknown": "Doctrine \"{key}\" is not described in the Constructor config.",
+        "no_doctrine_rank": "You have no rank in the selected Doctrine.",
+        "path_unknown": "Unknown doctrine path: \"{key}\".",
+        "no_techniques": "A spell must contain at least one Technique.",
+        "technique_unknown": "Unknown technique: \"{key}\".",
+        "technique_duplicate": "Technique \"{key}\" is selected twice.",
+        "technique_not_known": "Technique \"{key}\" is not learned (acquired as a talent).",
+        "technique_needs_source": "Technique \"{key}\" requires an available Source.",
+        "too_many_techniques": "Too many Techniques: {count} with a limit of {max}.",
+        "modifier_unknown": "Unknown modifier: \"{key}\".",
+        "modifier_duplicate": "Modifier \"{key}\" is selected twice.",
+        "modifier_rank_unavailable": "Modifier \"{key}\" has no rank {rank}.",
+        "modifier_forbidden": "Modifier \"{key}\" is not available to this Doctrine.",
+        "modifier_over_cap": "\"{key}\": rank {rank} exceeds the cap of {max} (Doctrine/Path restriction).",
+        "modifier_rank_not_allowed": "\"{key}\": rank {rank} is not available (Doctrine/Path restriction).",
+        "modifier_conflict": "\"{key}\" is incompatible with \"{other}\".",
+        "cone_no_range": "Range does not apply to Area: Cone (cast from the caster's cell).",
+        "rank5_needs_abundant": "\"{key}\": rank 5 modifiers require an Abundant Source.",
+        "over_max_mod_cost": "\"{key}\": rank {rank} exceeds the maximum of {max} for your Doctrine Rank.",
+        "too_many_modifiers": "Too many Modifiers: {count} with a limit of {max}."
+      }
+    },
     "Attributes": {
       "int": "Intuition",
       "dex": "Dexterity",
@@ -173,6 +330,7 @@
       "ShortRestConfirm": "Are you sure you want to take a short rest (1 hour)? This will restore AP and abilities on short rest.",
       "LongRestConfirm": "Are you sure you want to take a long rest (8 hours)? This will restore AP and all abilities on day/short/long rest.",
       "ApplyEffects": "Apply Effects",
+      "ApplyCondition": "Apply: {name}",
       "ToggleAura": "Toggle Aura",
       "ApplyDamage": "Apply Damage",
       "ApplyHeal": "Apply Heal",
@@ -241,6 +399,11 @@
       "SaveAttribute": "Save Attribute",
       "SaveDC": "Save DC",
       "ForbiddenDefense": "Forbidden Defense",
+      "AttackBonus": "Attack Bonus (Accuracy)",
+      "MagicFocus": "Magic Focus",
+      "SpellBuildData": "Constructor Data",
+      "SpellBuildHint": "This spell was built by the Constructor. Edit the build via the \"Build a Spell\" button in the window header; the fields below can be edited manually, but the cost is recalculated from the build on cast (a mismatch is whispered to the GM).",
+      "SpellBreakdown": "Cost Breakdown",
       "ChainTriggers": "Chain Triggers",
       "TriggerText": "Trigger Text",
       "ChainManeuvers": "Chain Maneuvers",
@@ -425,6 +588,11 @@
       "CostHint": "Cost: New Rank * 2 XP",
       "SpecifySpecialization": "Specify Specialization",
       "BuyTalentsMutations": "Buy Talents & Mutations",
+      "DoctrineUpgrade": "Doctrine Upgrade",
+      "EphemeralSpellHint": "Temporary spell (removed when combat ends)",
+      "PinSpell": "Pin spell",
+      "DoctrineUpgradeHint": "Access to doctrines is unlocked by talents. Doctrine rank limits the power and number of spell components.",
+      "NoDoctrinesUnlocked": "No doctrines unlocked. Access to doctrines is granted by the corresponding talents.",
       "DragHint": "To purchase a talent or mutation, simply drag the desired item from the compendium into the character sheet. Experience will be deducted automatically if sufficient.",
       "Luck": "Luck",
       "SpendLuck": "Spend Luck Point",
@@ -480,6 +648,11 @@
       "NotEnoughXPOrMaxRank": "Not enough XP or maximum rank reached.",
       "SkillUpgraded": "Skill {key} upgraded to rank {nextRank} for {cost} XP.",
       "NotEnoughXPForSkill": "Not enough XP to upgrade skill.",
+      "DoctrineLocked": "Doctrine is locked: the corresponding talent is required.",
+      "DoctrineUpgraded": "Doctrine \"{name}\" upgraded to rank {rank} for {cost} XP.",
+      "SelectTargetTokens": "Select target tokens to apply the condition.",
+      "ConditionApplied": "Condition \"{name}\" applied ({count} target(s)).",
+      "SpellPinned": "Spell \"{name}\" pinned (no longer temporary).",
       "SelectTokenForMacro": "Please select a token to use the macro.",
       "ItemNotFoundOnActor": "The selected character does not have the item '{itemName}'.",
       "SelectToken": "Please select a token.",
@@ -626,6 +799,12 @@
       "ShowChainsOutsideCombat": {
         "Name": "Chain Maneuvers Outside Combat",
         "Hint": "Show the chain maneuvers selection popup even when combat has not started (useful for testing)."
+      },
+      "AbundantSourceMode": {
+        "Name": "Abundant Source (magic)",
+        "Hint": "What an Abundant Source grants in the Spell Constructor: fully lifts the modifier cost limit imposed by Doctrine Rank (even a weak mage becomes mighty at sea), or merely unlocks rank 5 for those who can already afford it (Doctrine Rank 5+).",
+        "UnlockAll": "Grants everyone access to rank 5 (lifts the rank limit)",
+        "RequireRank": "Unlocks rank 5 only with your own Doctrine Rank 5+"
       }
     },
     "Aura": {
@@ -658,6 +837,9 @@
     }
   },
   "TYPES": {
+    "Item": {
+      "spell": "Spell"
+    },
     "RegionBehavior": {
       "dedrelAura": "Dedrel Aura"
     }

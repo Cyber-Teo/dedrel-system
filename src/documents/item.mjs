@@ -1,5 +1,6 @@
 import { DedrelItemSheet } from "../sheets/item-sheet.mjs";
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
+import { SpellCalculator } from "../utils/spell-calculator.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -92,6 +93,15 @@ export default class DedrelItem extends Item {
 
     if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good"].includes(this.type)) {
       return this.postToChat();
+    }
+
+    // Ре-валидация собранного заклинания (Магический Конструктор): ранг доктрины
+    // мог измениться после сохранения, активный путь может не совпадать со сборкой,
+    // а поля предмета могли быть отредактированы руками. Рукотворные заклинания
+    // без доктрины (или с доктриной вне конфига) проходят без проверки.
+    if (this.type === "spell" && this.system.doctrine && CONFIG.DEDREL?.magic?.doctrines?.[this.system.doctrine]) {
+      const proceed = await this.#validateSpellCast(actor);
+      if (!proceed) return;
     }
 
     // Эффективная стоимость с учётом DSL-модификаторов и глобальной скидки.
@@ -406,8 +416,15 @@ export default class DedrelItem extends Item {
 
             await this.postToChat(selectedWeaponId);
 
-            // Обработка цепных манёвров
-            if (this.type === "maneuver") {
+            // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
+            // кастере без авто-истечения, снимается вручную; потеря сознания
+            // обрывает концентрацию (напоминание в описании эффекта).
+            if (this.type === "spell") {
+              await this._applyConcentrationMarker();
+            }
+
+            // Обработка цепных манёвров (заклинания с Типом действия "В цепи" тоже)
+            if (this.type === "maneuver" || this.type === "spell") {
               const aType = this.system.action_type || {};
               if (aType.action || aType.chain || aType.reaction) {
                 const showOutside = game.settings.get("dedrel", "showChainsOutsideCombat");
@@ -431,6 +448,97 @@ export default class DedrelItem extends Item {
         }
       ]
     });
+  }
+
+  /**
+   * Ре-валидация собранного заклинания перед кастом.
+   * Проверяет ранг доктрины, совпадение активного пути со сборкой (с предложением
+   * переключить путь) и пересчитывает стоимость из исходника сборки; расхождение
+   * пересчёта с сохранённым ap_cost шепчется ГМу (ручная правка полей).
+   * @returns {Promise<boolean>} false — каст отменён.
+   */
+  async #validateSpellCast(actor) {
+    const sys = this.system;
+    const config = CONFIG.DEDREL.magic;
+    const doctrineState = actor.system.doctrines?.[sys.doctrine];
+    const rank = doctrineState?.rank || 0;
+
+    if (rank < (sys.doctrine_rank_req || 0)) {
+      ui.notifications.error(game.i18n.format("DEDREL.Magic.UI.CastRankTooLow", {
+        doctrine: game.i18n.localize(`DEDREL.Magic.Doctrines.${sys.doctrine}`),
+        req: sys.doctrine_rank_req,
+        have: rank
+      }));
+      return false;
+    }
+
+    // Несовпадение пути: предлагаем бесплатно переключиться (правило "в начале хода"
+    // не энфорсим — социальный контроль, переключение публично видно в чате не нужно,
+    // т.к. сам каст уже публичен)
+    const doctrineCfg = config.doctrines[sys.doctrine];
+    if (doctrineCfg.paths && sys.doctrine_path && doctrineState?.active_path !== sys.doctrine_path) {
+      const confirm = await DialogV2.confirm({
+        window: { title: this.name },
+        content: `<p>${game.i18n.format("DEDREL.Magic.UI.CastPathMismatch", {
+          spellPath: game.i18n.localize(`DEDREL.Magic.Paths.${sys.doctrine_path}`),
+          activePath: game.i18n.localize(`DEDREL.Magic.Paths.${doctrineState?.active_path || ""}`)
+        })}</p>`,
+        modal: true
+      });
+      if (!confirm) return false;
+      await actor.update({ [`system.doctrines.${sys.doctrine}.active_path`]: sys.doctrine_path });
+    }
+
+    const build = {
+      doctrine: sys.doctrine,
+      path: sys.doctrine_path,
+      sourceScale: sys.source_scale,
+      techniques: sys.chosen_techniques || [],
+      modifiers: (sys.chosen_modifiers || []).map(m => ({ key: m.key, rank: m.rank, option: m.option }))
+    };
+    const result = SpellCalculator.calculate(build, SpellCalculator.contextFromActor(actor, sys.doctrine), config);
+    if (!result.valid) {
+      ui.notifications.error(`${game.i18n.localize("DEDREL.Magic.UI.CastInvalid")} ${SpellCalculator.localizeErrors(result.errors).join(" ")}`);
+      return false;
+    }
+
+    if (result.totalAp !== sys.ap_cost) {
+      const gmIds = game.users.filter(u => u.isGM).map(u => u.id);
+      if (gmIds.length) {
+        ChatMessage.create({
+          whisper: gmIds,
+          content: `<div class="dedrel-item-chat"><p>${game.i18n.format("DEDREL.Magic.UI.CastCostMismatch", {
+            name: foundry.utils.escapeHTML(this.name),
+            actor: foundry.utils.escapeHTML(actor.name),
+            saved: sys.ap_cost,
+            calc: result.totalAp
+          })}</p></div>`
+        });
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Вешает на кастера эффект-напоминание «Концентрация: <заклинание>», если
+   * в сборке выбран Модификатор Длительность 4 ранга (концентрация).
+   * Без авто-истечения: снимается вручную (HUD статусов); механического
+   * обрыва по потере сознания в v1 нет — только напоминание в описании.
+   */
+  async _applyConcentrationMarker() {
+    const actor = this.actor;
+    if (!actor) return;
+    const durationMod = (this.system.chosen_modifiers || []).find(m => m.key === "duration" && m.rank === 4);
+    if (!durationMod) return;
+
+    await actor.createEmbeddedDocuments("ActiveEffect", [{
+      name: game.i18n.format("DEDREL.Magic.UI.ConcentrationMarker", { name: this.name }),
+      img: this.img,
+      description: game.i18n.localize("DEDREL.Magic.UI.ConcentrationHint"),
+      transfer: false,
+      origin: this.uuid,
+      flags: { dedrel: { concentration: this.name } }
+    }]);
   }
 
   /**
@@ -514,7 +622,8 @@ export default class DedrelItem extends Item {
     
     let showCombatButtons = false;
     let reqWeapon = false;
-    if (this.type === "maneuver" || this.type === "spell") {
+    const isSpell = this.type === "spell";
+    if (this.type === "maneuver" || isSpell) {
        const wType = this.system.req_weapon_type || {};
        const wDmg = this.system.req_weapon_damage_type || {};
        const reqSkill = this.system.req_weapon_skill_group || "";
@@ -522,8 +631,13 @@ export default class DedrelItem extends Item {
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
                           wDmg.piercing || wDmg.bludgeoning || wDmg.slashing ||
                           (reqSkill !== "" && reqSkill !== "any"));
-       
-       if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
+
+       // Заклинания ВСЕГДА требуют фокус (weapon с типом magic), поэтому требование
+       // оружия не признак боевой карточки — смотрим только на формулы/спасбросок,
+       // иначе утилитарные заклинания получали бы бессмысленные кнопки Атаки/Урона.
+       if (isSpell) {
+         showCombatButtons = !!(this.system.formula_attack || this.system.formula_damage || this.system.save_attribute);
+       } else if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
          showCombatButtons = true;
        }
        if (this.system.hide_combat_buttons) {
@@ -536,10 +650,15 @@ export default class DedrelItem extends Item {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
       `;
-      if (showCombatButtons && (this.system.formula_attack || reqWeapon || this.system.skill)) {
+      // Атака: у заклинаний — только если есть формула атаки или урон (бросок
+      // по навыку "Магические атаки"); у манёвров — как раньше
+      const showAttack = isSpell
+        ? (this.system.formula_attack || this.system.formula_damage)
+        : (this.system.formula_attack || reqWeapon || this.system.skill);
+      if (showCombatButtons && showAttack) {
         buttons += `<button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>`;
       }
-      if (showCombatButtons && (this.system.formula_damage || reqWeapon)) {
+      if (showCombatButtons && (this.system.formula_damage || (!isSpell && reqWeapon))) {
         buttons += `<button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>`;
       }
       if (this.system.formula_heal) {
@@ -550,6 +669,36 @@ export default class DedrelItem extends Item {
         buttons += `<button class="dedrel-chat-action" data-action="rollSave" data-save="${this.system.save_attribute}" data-dc="${dc}"><i class="fa-solid fa-shield-halved"></i> ${game.i18n.localize("DEDREL.Chat.Save")} (${this.system.save_attribute.toUpperCase()})</button>`;
       }
       buttons += `</div>`;
+    }
+
+    // Кнопки наложения состояний (собранные заклинания). Актуальная версия
+    // condition-предмета подтягивается из реестра статусов
+    // (CONFIG.statusEffects ← компендиум Conditions) в момент клика.
+    if (this.type === "spell") {
+      const conditionKeys = [];
+      // Модификатор "Сила" с выбранным состоянием
+      const powerMod = (this.system.chosen_modifiers || []).find(m => m.key === "power");
+      if (powerMod?.option && powerMod.option !== "bonus" && powerMod.option !== "penalty") {
+        conditionKeys.push(powerMod.option);
+      }
+      // Уникальное свойство доктрины "Поджигание" (Пиромантия): уронное заклинание
+      // может оставить состояние "Горение"
+      const igniteKey = CONFIG.DEDREL?.magic?.doctrines?.[this.system.doctrine]?.unique?.ignite;
+      if (igniteKey && this.system.formula_damage && !conditionKeys.includes(igniteKey)) {
+        conditionKeys.push(igniteKey);
+      }
+
+      if (conditionKeys.length > 0) {
+        const condButtons = conditionKeys.map(key => {
+          const condName = foundry.utils.escapeHTML(CONFIG.statusEffects[key]?.name || key);
+          return `<button class="dedrel-chat-action" data-action="applySpellCondition" data-status-id="${key}"><i class="fa-solid fa-bolt"></i> ${game.i18n.format("DEDREL.Chat.ApplyCondition", { name: condName })}</button>`;
+        }).join("");
+        buttons += `
+          <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
+            ${condButtons}
+          </div>
+        `;
+      }
     }
 
     if (this.system.template_shape && this.system.template_size) {

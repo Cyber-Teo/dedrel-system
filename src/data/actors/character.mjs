@@ -30,6 +30,18 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
     });
 
+    // Helper to generate doctrine schema (Магический Конструктор).
+    // rank — source-значение, покупается за XP на странице опыта (upgradeDoctrine);
+    //        таланты доступа обычно добавляют +1 через Active Effect (фаза "apply").
+    // unlocked — доступ к доктрине; выдаётся талантом через AE (Override 1).
+    // active_path — активный "путь" двухпутёвых доктрин (гидро/венто),
+    //        переключается свободно в начале хода (тумблер на листе).
+    const doctrineField = (defaultPath = "") => new fields.SchemaField({
+      rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
+      unlocked: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+      active_path: new fields.StringField({ required: false, initial: defaultPath })
+    });
+
     return {
       bloodlines: new fields.SchemaField({
         human: bloodlineField(),
@@ -83,6 +95,46 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         deception: skillField(),
         intimidation: skillField(),
         performance: skillField()
+      }),
+
+      // Доктрины Магического Конструктора. Канонический список из 18 ключей —
+      // "_rules/16. Magic.md"; группы и правила — CONFIG.DEDREL.magic (src/config/magic.mjs)
+      doctrines: new fields.SchemaField({
+        // Доктрины Материи
+        geomancy: doctrineField(),
+        hydromancy: doctrineField("flow"),   // flow | ice
+        pyromancy: doctrineField(),
+        ventomancy: doctrineField("squall"), // squall | echo
+        // Доктрины Сущности
+        biomancy: doctrineField(),
+        shadowmancy: doctrineField(),
+        aetheromancy: doctrineField(),
+        // Доктрины Беспредельного
+        electromancy: doctrineField(),
+        temporalmancy: doctrineField(),
+        astralomancy: doctrineField(),
+        aether_song: doctrineField(),
+        // Врождённая магия
+        blood_magic: doctrineField(),
+        chaos_magic: doctrineField(),
+        shapeshifting: doctrineField(),
+        feral_magic: doctrineField(),
+        // Псионика
+        telekinesis: doctrineField(),
+        telepathy: doctrineField(),
+        zero: doctrineField()
+      }),
+
+      // Известные Магические Техники. Выдаются талантами через AE
+      // (system.magic.techniques.<key> | Override | 1). Конструктор читает эти флаги.
+      magic: new fields.SchemaField({
+        techniques: new fields.SchemaField({
+          create: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+          move: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+          transform: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+          sense: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
+          imbue: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 })
+        })
       }),
 
       resources: new fields.SchemaField({

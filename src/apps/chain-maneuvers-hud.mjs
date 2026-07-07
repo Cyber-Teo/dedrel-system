@@ -59,12 +59,13 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     context.usedManeuverName = this._usedManeuver ? this._usedManeuver.name : "";
 
     if (this._actor && this._usedManeuver) {
-      const allManeuvers = this._actor.items.filter(i => i.type === "maneuver");
+      // Заклинания с Типом действия "В цепи" участвуют наравне с манёврами
+      const allManeuvers = this._actor.items.filter(i => i.type === "maneuver" || i.type === "spell");
       const usedKey = this._usedManeuver.system.key || this._usedManeuver.name || this._usedManeuver.id;
-      
+
       const apUniversal = this._actor.system.resources?.ap_universal?.value || 0;
       const apManeuver = this._actor.system.resources?.ap_maneuver?.value || 0;
-      const currentAp = apUniversal + apManeuver;
+      const apMagic = this._actor.system.resources?.ap_magic?.value || 0;
 
       const chains = allManeuvers.filter(i => {
         // Must be a chain
@@ -86,7 +87,9 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
         // Стоимость с учётом DSL-модификаторов (та же логика, что и в Item#use()),
         // иначе бесплатные по баффу манёвры отображались бы серыми и некликабельными.
         const { cost } = DedrelBonuses.effectiveApCost(this._actor, i);
-        const canAfford = cost <= currentAp;
+        // Пул зависит от типа: манёвры добирают из боевых ОД, заклинания — из ОД Магии
+        const specificAp = i.type === "spell" ? apMagic : apManeuver;
+        const canAfford = cost <= (apUniversal + specificAp);
 
         return {
           id: i.id,

@@ -77,3 +77,22 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
     }
   }
 });
+
+/**
+ * Очистка эфемерных заклинаний (каст "на лету" из Конструктора без сохранения,
+ * flags.dedrel.ephemeral) при завершении/удалении боя. Закреплённые кнопкой
+ * "закрепить" заклинания флага не имеют и не удаляются.
+ * Гейт на активного ГМа: хук приходит всем клиентам, а прав на чужих актёров
+ * у игроков нет (та же схема, что у аур — см. FOUNDRY V14 QUIRKS.md, раздел 13).
+ */
+Hooks.on("deleteCombat", async (combat) => {
+  if (!game.users.activeGM?.isSelf) return;
+  for (const combatant of combat.combatants) {
+    const actor = combatant.actor;
+    if (!actor) continue;
+    const ephemeral = actor.items.filter(i => i.type === "spell" && i.getFlag("dedrel", "ephemeral"));
+    if (ephemeral.length > 0) {
+      await actor.deleteEmbeddedDocuments("Item", ephemeral.map(i => i.id));
+    }
+  }
+});

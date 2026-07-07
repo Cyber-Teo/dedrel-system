@@ -377,6 +377,20 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       });
     }
 
+    // Наложение состояния заклинания (Модификатор "Сила") на выделенные токены.
+    // Правами обычно обладает ГМ; игрок может наложить на собственный токен.
+    if (action === "applySpellCondition") {
+      const statusId = button.dataset.statusId;
+      if (!statusId) return;
+      const targets = canvas.tokens.controlled.filter(t => t.actor);
+      if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetTokens"));
+      for (const token of targets) {
+        await token.actor.toggleStatusEffect(statusId, { active: true });
+      }
+      const condName = CONFIG.statusEffects[statusId]?.name || statusId;
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.ConditionApplied", { name: condName, count: targets.length }));
+    }
+
     // Размещение шаблона
     if (action === "placeTemplate") {
       let shape = button.dataset.shape;

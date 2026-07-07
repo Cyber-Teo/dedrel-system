@@ -26,6 +26,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     actions: {
       changeTab: DedrelItemSheet.#onChangeTab,
       editImage: DedrelItemSheet.#onEditImage,
+      openInConstructor: DedrelItemSheet.#onOpenInConstructor,
       addEffect: DedrelItemSheet.#onAddEffect,
       editEffect: DedrelItemSheet.#onEditEffect,
       deleteEffect: DedrelItemSheet.#onDeleteEffect,
@@ -35,6 +36,24 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       placeTemplate: DedrelItemSheet.#onPlaceTemplate
     }
   };
+
+  /** Кнопка заголовка "Открыть в конструкторе" — только для собранных заклинаний. */
+  _getHeaderControls() {
+    const controls = super._getHeaderControls();
+    if (this.document.type === "spell" && this.document.system.doctrine) {
+      controls.unshift({
+        icon: "fa-solid fa-wand-sparkles",
+        label: "DEDREL.Magic.UI.OpenConstructor",
+        action: "openInConstructor"
+      });
+    }
+    return controls;
+  }
+
+  static #onOpenInConstructor() {
+    // Актор-владелец (embedded) или standalone для мировых предметов (ГМ)
+    game.dedrel.openSpellConstructor(this.document.actor || null, this.document);
+  }
 
   static PARTS = {
     header: { template: "systems/dedrel/templates/item/parts/item-header.hbs" },
@@ -80,7 +99,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
     
-    if (itemData.type === "weapon" || itemData.type === "maneuver") {
+    if (itemData.type === "weapon" || itemData.type === "maneuver" || itemData.type === "spell") {
       context.weaponSkills = {
         "unarmed_combat": game.i18n.localize("DEDREL.Skills.unarmed_combat"),
         "pole_weapons": game.i18n.localize("DEDREL.Skills.pole_weapons"),
@@ -158,7 +177,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
     }
     
-    if (["talent", "mutation", "maneuver", "weapon"].includes(itemData.type)) {
+    if (["talent", "mutation", "maneuver", "weapon", "spell"].includes(itemData.type)) {
       context.bloodlines = {
         "Human": game.i18n.localize("DEDREL.Bloodline.human"),
         "Demon": game.i18n.localize("DEDREL.Bloodline.demon"),
@@ -191,7 +210,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       }
     }
     
-    if (itemData.type === "maneuver") {
+    if (itemData.type === "maneuver" || itemData.type === "spell") {
       context.maneuverSources = {
         "basic": game.i18n.localize("DEDREL.ManeuverSources.basic"),
         "talent": game.i18n.localize("DEDREL.ManeuverSources.talent"),
@@ -284,7 +303,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   _prepareSubmitData(event, form, formData) {
     const data = super._prepareSubmitData(event, form, formData);
     
-    if (["talent", "mutation", "maneuver", "weapon"].includes(this.document.type)) {
+    if (["talent", "mutation", "maneuver", "weapon", "spell"].includes(this.document.type)) {
       const arrayFields = [
         "system.prerequisites_attributes",
         "system.prerequisites_skills",

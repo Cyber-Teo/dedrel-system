@@ -1,0 +1,141 @@
+<div class="spell-constructor-content">
+    {{#unless hasDoctrines}}
+    <p class="hint sc-empty">{{localize "DEDREL.Magic.UI.NoDoctrines"}}</p>
+    {{else}}
+
+    <header class="sc-header">
+        <div class="sc-header-row">
+            <div class="sc-field sc-field-name">
+                <label>{{localize "DEDREL.Magic.UI.SpellName"}}</label>
+                <input type="text" name="spellName" value="{{buildName}}" placeholder="{{localize 'DEDREL.Magic.UI.NamePlaceholder'}}"/>
+            </div>
+            <div class="sc-field">
+                <label>{{localize "DEDREL.Magic.UI.Doctrine"}}</label>
+                <select name="doctrine">
+                    {{#each doctrines as |d|}}
+                    <option value="{{d.key}}" {{#if d.selected}}selected{{/if}}>{{d.label}} ({{d.rank}})</option>
+                    {{/each}}
+                </select>
+            </div>
+            {{#if isStandalone}}
+            <div class="sc-field sc-field-rank">
+                <label>{{localize "DEDREL.Magic.UI.GMRank"}}</label>
+                <select name="gmRank">
+                    <option value="1" {{#if (eq gmRank 1)}}selected{{/if}}>1</option>
+                    <option value="2" {{#if (eq gmRank 2)}}selected{{/if}}>2</option>
+                    <option value="3" {{#if (eq gmRank 3)}}selected{{/if}}>3</option>
+                    <option value="4" {{#if (eq gmRank 4)}}selected{{/if}}>4</option>
+                    <option value="5" {{#if (eq gmRank 5)}}selected{{/if}}>5</option>
+                    <option value="6" {{#if (eq gmRank 6)}}selected{{/if}}>6</option>
+                </select>
+            </div>
+            {{/if}}
+            <div class="sc-field">
+                <label>{{localize "DEDREL.Magic.UI.SourceScale"}}{{#if sceneScaleLabel}} <span class="sc-scene-hint" data-tooltip="{{localize 'DEDREL.Magic.UI.SceneSourceHint'}}">({{sceneScaleLabel}})</span>{{/if}}</label>
+                <select name="sourceScale">
+                    {{#each sourceScales as |s|}}
+                    <option value="{{s.key}}" {{#if s.selected}}selected{{/if}} {{#if s.disabled}}disabled{{/if}}>{{s.label}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class="sc-header-row sc-header-meta">
+            {{#if paths}}
+            <div class="sc-paths">
+                {{#each paths as |p|}}
+                <a class="sc-path-btn {{#if p.selected}}active{{/if}}" data-action="selectPath" data-key="{{p.key}}">{{p.label}}</a>
+                {{/each}}
+            </div>
+            {{/if}}
+            {{#if limits}}
+            <span class="sc-limits hint">{{localize "DEDREL.Magic.UI.Limits" tech=limits.techniques mods=limits.modifiers cost=limits.maxModCost}}</span>
+            {{/if}}
+        </div>
+    </header>
+
+    <div class="spell-constructor-body">
+        <section class="sc-section">
+            <h3>{{localize "DEDREL.Magic.UI.Techniques"}}</h3>
+            <div class="sc-techniques">
+                {{#each techniques as |t|}}
+                <a class="sc-technique {{#if t.selected}}selected{{/if}} {{#if t.disabled}}disabled{{/if}}"
+                   data-action="toggleTechnique" data-key="{{t.key}}"
+                   {{#if t.tooltip}}data-tooltip="{{t.tooltip}}"{{/if}}>
+                    <span class="sc-technique-name">{{t.label}}</span>
+                    <span class="sc-price">{{t.price}}</span>
+                </a>
+                {{/each}}
+            </div>
+        </section>
+
+        <section class="sc-section">
+            <h3>{{localize "DEDREL.Magic.UI.Modifiers"}}</h3>
+            <div class="sc-categories">
+                {{#each categories as |cat|}}
+                <div class="sc-category">
+                    <h4>{{cat.label}}</h4>
+                    {{#each cat.modifiers as |mod|}}
+                    <div class="sc-modifier {{#if mod.forbidden}}forbidden{{/if}} {{#if mod.selected}}selected{{/if}}">
+                        <span class="sc-modifier-name">{{mod.label}}</span>
+                        <span class="sc-ranks">
+                            {{#each mod.ranks as |r|}}
+                            {{#if r.missing}}
+                            <span class="sc-rank missing">&mdash;</span>
+                            {{else}}
+                            <a class="sc-rank {{#if r.isText}}text{{/if}} {{#if r.selected}}selected{{/if}} {{#if r.disabled}}disabled{{/if}}"
+                               data-action="selectModifierRank" data-key="{{mod.key}}" data-rank="{{r.rank}}"
+                               {{#if r.tooltip}}data-tooltip="{{r.tooltip}}"{{/if}}>{{r.cellLabel}}</a>
+                            {{/if}}
+                            {{/each}}
+                        </span>
+                        {{#if mod.powerOptions}}
+                        <select name="powerOption" class="sc-power-option">
+                            {{#each mod.powerOptions as |o|}}
+                            <option value="{{o.value}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>
+                            {{/each}}
+                        </select>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+
+    <footer class="sc-footer">
+        <div class="sc-total-row">
+            <span class="sc-total {{#if notEnoughAp}}over{{/if}}">
+                {{localize "DEDREL.Magic.UI.Total"}}: <strong>{{result.totalAp}}</strong> {{localize "DEDREL.Magic.APShort"}}
+                {{#unless isStandalone}}
+                <span class="hint">({{localize "DEDREL.Magic.UI.Available"}}: {{apAvailable}})</span>
+                {{/unless}}
+            </span>
+            <span class="hint">{{localize "DEDREL.Magic.UI.RequiredRank"}}: {{result.requiredRank}}</span>
+        </div>
+        <div class="sc-breakdown hint">{{breakdownText}}</div>
+        {{#if errors.length}}
+        <ul class="sc-errors">
+            {{#each errors as |e|}}<li>{{e}}</li>{{/each}}
+        </ul>
+        {{/if}}
+        <div class="sc-buttons">
+            {{#unless isStandalone}}
+            <button type="button" data-action="castEphemeral" {{#unless canSave}}disabled{{/unless}}
+                    data-tooltip="{{localize 'DEDREL.Magic.UI.CastEphemeralHint'}}">
+                <i class="fa-solid fa-bolt"></i> {{localize "DEDREL.Magic.UI.Cast"}}
+            </button>
+            {{/unless}}
+            <button type="button" data-action="saveSpell" {{#unless canSave}}disabled{{/unless}}>
+                <i class="fa-solid fa-floppy-disk"></i> {{localize "DEDREL.Magic.UI.Save"}}
+            </button>
+            {{#unless isStandalone}}
+            <button type="button" data-action="saveAndCastSpell" {{#unless canSave}}disabled{{/unless}}>
+                <i class="fa-solid fa-wand-sparkles"></i> {{localize "DEDREL.Magic.UI.SaveAndCast"}}
+            </button>
+            {{/unless}}
+        </div>
+    </footer>
+
+    {{/unless}}
+</div>

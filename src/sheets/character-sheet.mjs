@@ -50,6 +50,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       decreaseSkill: DedrelCharacterSheet.#onDecreaseSkill,
       upgradeAttribute: DedrelCharacterSheet.#onUpgradeAttribute,
       upgradeSkill: DedrelCharacterSheet.#onUpgradeSkill,
+      upgradeDoctrine: DedrelCharacterSheet.#onUpgradeDoctrine,
+      openSpellConstructor: DedrelCharacterSheet.#onOpenSpellConstructor,
+      pinSpell: DedrelCharacterSheet.#onPinSpell,
+      toggleDoctrinePath: DedrelCharacterSheet.#onToggleDoctrinePath,
       toggleEffect: DedrelCharacterSheet.#onToggleEffect,
       editEffect: DedrelCharacterSheet.#onEditEffect,
       deleteEffect: DedrelCharacterSheet.#onDeleteEffect,
@@ -326,6 +330,58 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    // Прокачка Доктрин (Магический Конструктор): показываем только разблокированные
+    // талантами доктрины (unlocked через AE), сгруппированные по группам из конфига.
+    // Цена считается от ПРОИЗВОДНОГО ранга (source + эффекты талантов), т.к. таланты
+    // доступа обычно дарят ранг 1; покупка же пишет +1 в source (см. #onUpgradeDoctrine).
+    xpData.doctrineGroups = [];
+    const magicCfg = CONFIG.DEDREL?.magic;
+    if (magicCfg && actorData.system.doctrines) {
+      const xpAvailable = actorData.system.details.xp || 0;
+      for (const [groupKey, doctrineKeys] of Object.entries(magicCfg.doctrineGroups)) {
+        const groupDoctrines = [];
+        for (const key of doctrineKeys) {
+          const doctrine = actorData.system.doctrines[key];
+          if (!doctrine || !doctrine.unlocked) continue;
+          const rank = doctrine.rank || 0;
+          const isMax = rank >= 6;
+          const cost = isMax ? 0 : (magicCfg.rankXpCosts[rank] ?? 999);
+          groupDoctrines.push({
+            key,
+            rank,
+            isMax,
+            cost,
+            canUpgrade: !isMax && xpAvailable >= cost
+          });
+        }
+        if (groupDoctrines.length > 0) {
+          xpData.doctrineGroups.push({ key: groupKey, doctrines: groupDoctrines });
+        }
+      }
+    }
+    xpData.hasDoctrines = xpData.doctrineGroups.length > 0;
+
+    // Тумблеры Путей двухпутёвых доктрин (гидро/венто) для вкладки Заклинания.
+    // Переключение свободно "в начале хода" — механически не энфорсится,
+    // смена публикуется в чат (социальный контроль).
+    const doctrinePaths = [];
+    if (magicCfg && actorData.system.doctrines) {
+      for (const [key, cfg] of Object.entries(magicCfg.doctrines)) {
+        if (!cfg.paths) continue;
+        const state = actorData.system.doctrines[key];
+        if (!state?.unlocked) continue;
+        doctrinePaths.push({
+          key,
+          label: game.i18n.localize(`DEDREL.Magic.Doctrines.${key}`),
+          paths: Object.entries(cfg.paths).map(([pk, pcfg]) => ({
+            key: pk,
+            label: game.i18n.localize(pcfg.label),
+            active: state.active_path === pk
+          }))
+        });
+      }
+    }
+
     // ==========================================
     // Группировка навыков и избранное
     // ==========================================
@@ -436,6 +492,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       enrichedBiography,
       creationData,
       xpData,
+      doctrinePaths,
       skillGroups,
       favoriteSkillsData,
       equipment_slots,
@@ -955,6 +1012,77 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     } else {
       ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPForSkill"));
     }
+  }
+
+  static async #onOpenSpellConstructor(event, target) {
+    game.dedrel.openSpellConstructor(this.document);
+  }
+
+  /**
+   * Переключает активный Путь двухпутёвой доктрины (Гидромантия/Вентомантия).
+   * Смена публикуется в чат: правило "только в начале хода" не энфорсится
+   * механически, публичность — социальный контроль.
+   */
+  static async #onToggleDoctrinePath(event, target) {
+    const doctrineKey = target.dataset.doctrine;
+    const pathKey = target.dataset.path;
+    const state = this.document.system.doctrines?.[doctrineKey];
+    if (!state || state.active_path === pathKey) return;
+
+    await this.document.update({ [`system.doctrines.${doctrineKey}.active_path`]: pathKey });
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.document }),
+      content: `<div class="dedrel-item-chat"><p>${game.i18n.format("DEDREL.Magic.UI.PathSwitched", {
+        actor: foundry.utils.escapeHTML(this.document.name),
+        doctrine: game.i18n.localize(`DEDREL.Magic.Doctrines.${doctrineKey}`),
+        path: game.i18n.localize(`DEDREL.Magic.Paths.${pathKey}`)
+      })}</p></div>`
+    });
+  }
+
+  /** Снимает флаг эфемерности — временное заклинание становится постоянным. */
+  static async #onPinSpell(event, target) {
+    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
+    const item = itemId ? this.document.items.get(itemId) : null;
+    if (item) {
+      await item.unsetFlag("dedrel", "ephemeral");
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.SpellPinned", { name: item.name }));
+    }
+  }
+
+  static async #onUpgradeDoctrine(event, target) {
+    const key = target.dataset.key;
+    const doctrine = this.document.system.doctrines?.[key];
+    const magicCfg = CONFIG.DEDREL?.magic;
+    if (!doctrine || !magicCfg) return;
+
+    if (!doctrine.unlocked) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.DoctrineLocked"));
+    }
+
+    // Производный ранг (source + подаренный талантом) определяет цену шага,
+    // но +1 пишем в SOURCE: иначе повторно запечём бонус эффекта в базу.
+    const derivedRank = doctrine.rank || 0;
+    if (derivedRank >= 6) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPOrMaxRank"));
+    }
+
+    const cost = magicCfg.rankXpCosts[derivedRank] ?? 999;
+    const currentXp = this.document.system.details.xp || 0;
+    if (currentXp < cost) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPOrMaxRank"));
+    }
+
+    const sourceRank = this.document._source.system.doctrines[key].rank || 0;
+    await this.document.update({
+      [`system.doctrines.${key}.rank`]: sourceRank + 1,
+      "system.details.xp": currentXp - cost
+    });
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.DoctrineUpgraded", {
+      name: game.i18n.localize(`DEDREL.Magic.Doctrines.${key}`),
+      rank: derivedRank + 1,
+      cost: cost
+    }));
   }
 
   static async #onToggleEffect(event, target) {

@@ -75,10 +75,37 @@
         </div>
 
         <div class="experience-section">
+            <h3>{{localize "DEDREL.ActorSheet.DoctrineUpgrade"}}</h3>
+            {{#if xpData.hasDoctrines}}
+            <p class="hint" style="margin-top: -5px; margin-bottom: 15px;">{{localize "DEDREL.ActorSheet.DoctrineUpgradeHint"}}</p>
+            {{#each xpData.doctrineGroups as |group|}}
+            <h4 class="doctrine-group-title">{{localize (concat "DEDREL.Magic.DoctrineGroups." group.key)}}</h4>
+            <div class="attributes-grid grid-3col">
+                {{#each group.doctrines as |doctrine|}}
+                <div class="attribute-item">
+                    <span class="attribute-name">{{localize (concat "DEDREL.Magic.Doctrines." doctrine.key)}}</span>
+                    <span class="attribute-value">{{doctrine.rank}}</span>
+                    {{#if doctrine.isMax}}
+                    <span class="max-rank">{{localize "DEDREL.ActorSheet.MAX"}}</span>
+                    {{else}}
+                    <a class="upgrade-btn {{#unless doctrine.canUpgrade}}disabled{{/unless}}" data-action="upgradeDoctrine" data-key="{{doctrine.key}}" {{#unless doctrine.canUpgrade}}disabled{{/unless}}>
+                        <i class="fas fa-arrow-up"></i> {{doctrine.cost}} XP
+                    </a>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            {{/each}}
+            {{else}}
+            <p class="hint">{{localize "DEDREL.ActorSheet.NoDoctrinesUnlocked"}}</p>
+            {{/if}}
+        </div>
+
+        <div class="experience-section">
             <h3>{{localize "DEDREL.ActorSheet.BuyTalentsMutations"}}</h3>
             <p class="hint">{{localize "DEDREL.ActorSheet.DragHint"}}</p>
         </div>
-        
+
         {{/if}}
     </div>
 </div>

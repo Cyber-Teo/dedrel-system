@@ -66,6 +66,8 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
   let systemAttackBonus = 0;
   if (item && !isSave) {
     systemAttackBonus = DedrelBonuses.collect(actor, item).attack;
+    // Модификатор "Точность" собранного заклинания (Магический Конструктор)
+    systemAttackBonus += item.system.attack_bonus || 0;
   }
 
   const globalRollBonus = actor?.system?.bonuses?.global_roll || 0;

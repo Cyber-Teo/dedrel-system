@@ -57,7 +57,30 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
       target_value: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       template_shape: new fields.StringField({ required: true, blank: true }),
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      
+
+      // === Магический Конструктор: исходник сборки ===
+      // Заполняется Конструктором (SpellConstructorApp); используется для
+      // пере-открытия сборки в конструкторе и ре-валидации при касте.
+      // Справочники ключей: CONFIG.DEDREL.magic (src/config/magic.mjs).
+      doctrine: new fields.StringField({ required: true, blank: true, initial: "", label: "Doctrine Key" }),
+      doctrine_rank_req: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
+      doctrine_path: new fields.StringField({ required: true, blank: true, initial: "" }),
+      source_scale: new fields.StringField({ required: true, blank: true, initial: "none" }), // none | any | abundant
+      chosen_techniques: new fields.ArrayField(new fields.StringField()),
+      chosen_modifiers: new fields.ArrayField(new fields.SchemaField({
+        key: new fields.StringField({ required: true, blank: false }),   // ключ модификатора
+        rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 1, max: 5 }),
+        ap: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }), // цена ПОСЛЕ сродств
+        option: new fields.StringField({ required: false, blank: true, initial: "" })      // выбор внутри ранга: "bonus"/"penalty"/ключ состояния
+      })),
+      total_cost_breakdown: new fields.StringField({ required: true, blank: true, initial: "" }),
+
+      // === Магический Конструктор: скомпилированные исполняемые поля ===
+      // skill — навык броска атаки (конструктор ставит "magical_attacks");
+      // attack_bonus — Модификатор "Точность", добавляется к броску атаки в chat.mjs.
+      skill: new fields.StringField({ initial: "", label: "Override Skill" }),
+      attack_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_heal: new fields.StringField({ required: true, blank: true }),

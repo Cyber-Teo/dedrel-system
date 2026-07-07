@@ -20,6 +20,9 @@ import DedrelToken from "./src/canvas/token.mjs";
 import DedrelAuraRegionBehaviorType from "./src/data/region-behaviors/aura.mjs";
 import { DR_KEY_LABELS } from "./src/constants.mjs";
 import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
+import { DEDREL_MAGIC } from "./src/config/magic.mjs";
+import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
+import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 
 import "./src/chat.mjs";
 import "./src/macros.mjs";
@@ -39,6 +42,11 @@ Hooks.once("init", function() {
 
   // Регистрация настроек системы
   registerSystemSettings();
+
+  // Конфиг магической системы (Магический Конструктор): таблицы Техник,
+  // Модификаторов, лимиты Рангов Доктрин, свойства Доктрин. См. src/config/magic.mjs
+  CONFIG.DEDREL = CONFIG.DEDREL || {};
+  CONFIG.DEDREL.magic = DEDREL_MAGIC;
 
   // Инициатива (стандартный расчет Foundry для системы)
   let initDirection = -1;
@@ -103,11 +111,13 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-experience.hbs",
     "systems/dedrel/templates/actor/parts/character-creation.hbs",
     "systems/dedrel/templates/apps/roll-dialog.hbs",
+    "systems/dedrel/templates/apps/spell-constructor.hbs",
     "systems/dedrel/templates/item/parts/item-header.hbs",
     "systems/dedrel/templates/item/parts/item-navigation.hbs",
     "systems/dedrel/templates/item/parts/item-description.hbs",
     "systems/dedrel/templates/item/parts/item-effects.hbs",
     "systems/dedrel/templates/item/parts/details-maneuver.hbs",
+    "systems/dedrel/templates/item/parts/details-spell.hbs",
     "systems/dedrel/templates/item/parts/details-talent.hbs",
     "systems/dedrel/templates/item/parts/details-armor.hbs",
     "systems/dedrel/templates/item/parts/details-weapon.hbs",
@@ -121,7 +131,7 @@ Hooks.once("init", function() {
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
-    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
+    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
   });
@@ -169,7 +179,22 @@ Hooks.once("init", function() {
     },
     effectsHUD: new ActiveEffectsHUD(),
     chainHUD: new ChainManeuversHUD(),
-    apHUD: new ActionPointsHUD()
+    apHUD: new ActionPointsHUD(),
+    // Движок Магического Конструктора — доступен макросам (смоук-тест "Валидация магии")
+    SpellCalculator,
+
+    /**
+     * Открывает Конструктор Заклинаний.
+     * @param {Actor|null} actor - заклинатель; без актора доступен только ГМу
+     *   (standalone-режим для пресозданных заклинаний).
+     * @param {Item|null} spellItem - существующее заклинание для префилла.
+     */
+    openSpellConstructor: (actor = null, spellItem = null) => {
+      if (!actor && !game.user.isGM) {
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectToken"));
+      }
+      return new SpellConstructorApp({ actor, spellItem }).render(true);
+    }
   };
   
   // Инициализация хуков для глобальных виджетов
@@ -185,6 +210,7 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (item.img === "icons/svg/item-bag.svg") {
     const defaultIcons = {
       maneuver: "systems/dedrel/assets/icons/items/maneuver.svg",
+      spell: "systems/dedrel/assets/icons/items/magic_item.svg",
       talent: "systems/dedrel/assets/icons/items/talent.svg",
       mutation: "systems/dedrel/assets/icons/items/mutation.svg",
       currency: "systems/dedrel/assets/icons/items/currency.svg",
