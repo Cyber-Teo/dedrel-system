@@ -103,6 +103,13 @@ Hooks.once("init", function() {
     hint: "DEDREL.EffectPhases.ApplyHint"
   };
 
+  // Слепота — только визуальная маркировка + механические штрафы (через эффекты
+  // кондиции), БЕЗ авто-отключения зрения токена. Ядро по умолчанию считает статус
+  // с id "blind" (CONFIG.specialStatusEffects.BLIND) особым и гасит зрение носителя
+  // в «глухую черноту» — это путает игроков. Отвязываем спец-статус, чтобы кондиция
+  // "blind" была обычной. Управлять зрением при необходимости — вручную (Vision у токена).
+  CONFIG.specialStatusEffects.BLIND = "";
+
   // Регистрация моделей данных для актёров (Actor)
   CONFIG.Actor.dataModels = {
     ...CONFIG.Actor.dataModels,

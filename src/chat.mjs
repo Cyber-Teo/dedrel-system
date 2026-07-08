@@ -42,13 +42,17 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       if (skillKey && actor.system.skills && actor.system.skills[skillKey]) {
         baseRank = actor.system.skills[skillKey].rank || 0;
       }
-      
+
       await showRollDialog({
         actor: actor,
         title: title,
         baseRank: baseRank,
         itemId: item?.id,
-        isSave: false
+        isSave: false,
+        // Передаём навык, чтобы к атаке применялся его bonus (system.skills.<key>.bonus).
+        // Это un-clamped канал модификатора — в отличие от rank (min: 0), он может
+        // уводить бросок в минус (нужно для штрафов вроде «Ослепления»).
+        skillId: skillKey
       });
     }
     
