@@ -5,6 +5,27 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
+ * Лимит нагрузки контейнера: не даём добавить предмет, если его вес превысит
+ * capacity актора-контейнера (mode === "container", capacity > 0). Ловит все
+ * пути создания вложенного предмета (drag-drop, сокет, макросы).
+ */
+Hooks.on("preCreateItem", (item, data, options, userId) => {
+  const actor = item.parent;
+  if (!(actor instanceof Actor) || actor.type !== "loot") return true;
+  if (actor.system.mode !== "container") return true;
+  const cap = Number(actor.system.capacity) || 0;
+  if (cap <= 0) return true; // без лимита
+  const qty = item.type === "currency" ? 1 : (Number(item.system?.quantity) ?? 1);
+  const incoming = (Number(item.system?.weight) || 0) * qty;
+  const current = Number(actor.system.load) || 0;
+  if (current + incoming > cap) {
+    ui.notifications.warn(game.i18n.format("DEDREL.Loot.CapacityExceeded", { cap }));
+    return false;
+  }
+  return true;
+});
+
+/**
  * Лист актора «Лут/Торговец/Контейнер» (тип loot).
  * Функциональный минимум (дизайн — вторично): режимы, экономика торговца,
  * сток предметов с ценами и кнопками сделок, кошелёк, «разделить деньги»,
@@ -90,7 +111,11 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
       walletCurrencies,
       walletTotal: DedrelCurrency.walletBase(actor),
       discountRows,
-      lootTablesText: (sys.loot_tables || []).join("; ")
+      lootTablesText: (sys.loot_tables || []).join("; "),
+      load: sys.load || 0,
+      capacity: sys.capacity || 0,
+      loadPct: sys.capacity > 0 ? Math.min(100, Math.round(((sys.load || 0) / sys.capacity) * 100)) : 0,
+      overCapacity: sys.capacity > 0 && (sys.load || 0) > sys.capacity
     });
     return context;
   }
@@ -108,6 +133,12 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
 
   _onRender(context, options) {
     super._onRender(context, options);
+
+    // Класс режима на корне окна для отдельной стилизации каждого режима:
+    // .application.loot.loot-mode-{loot|merchant|container}
+    this.element.classList.remove("loot-mode-loot", "loot-mode-merchant", "loot-mode-container");
+    this.element.classList.add(`loot-mode-${this.document.system.mode}`);
+
     for (const row of this.element.querySelectorAll(".loot-item-row")) {
       row.setAttribute("draggable", "true");
       row.addEventListener("dragstart", this.#onDragStart.bind(this));

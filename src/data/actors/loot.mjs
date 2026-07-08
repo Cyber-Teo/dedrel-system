@@ -28,7 +28,12 @@ export default class LootDataModel extends foundry.abstract.TypeDataModel {
       // Персональные скидки по игроку: { userId: procent }
       personal_discounts: new f.ObjectField({ required: false, initial: {} }),
       // Ссылки на RollTable (uuid или имя) для генерации случайного стока
-      loot_tables: new f.ArrayField(new f.StringField(), { initial: [] })
+      loot_tables: new f.ArrayField(new f.StringField(), { initial: [] }),
+
+      // Максимальная нагрузка контейнера (кг). 0 = без лимита. Учитывается вес
+      // предметов внутри + вес монет кошелька; при превышении добавление
+      // предмета блокируется (хук preCreateItem, см. loot-sheet.mjs).
+      capacity: new f.NumberField({ required: true, initial: 0, min: 0 })
     };
   }
 
@@ -42,5 +47,17 @@ export default class LootDataModel extends foundry.abstract.TypeDataModel {
     for (const d of DedrelCurrency.defs()) {
       this.wallet.weight += (Number(this.currency?.[d.key]) || 0) * (Number(d.weight) || 0);
     }
+
+    // Текущая нагрузка контейнера: вес предметов (× количество) + вес монет.
+    let load = this.wallet.weight;
+    if (this.parent?.items) {
+      for (const it of this.parent.items) {
+        const w = Number(it.system?.weight) || 0;
+        if (w <= 0) continue;
+        const qty = it.type === "currency" ? 1 : (Number(it.system?.quantity) ?? 1);
+        load += w * qty;
+      }
+    }
+    this.load = Math.round(load * 100) / 100;
   }
 }

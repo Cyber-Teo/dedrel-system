@@ -66,7 +66,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       unequipWeapon: DedrelCharacterSheet.#onUnequipWeapon,
       collapseCurrency: DedrelCharacterSheet.#onCollapseCurrency,
       depositCurrency: DedrelCharacterSheet.#onDepositCurrency,
-      payCurrency: DedrelCharacterSheet.#onPayCurrency
+      payCurrency: DedrelCharacterSheet.#onPayCurrency,
+      openContainer: DedrelCharacterSheet.#onOpenContainer,
+      createContainer: DedrelCharacterSheet.#onCreateContainer,
+      unlinkContainer: DedrelCharacterSheet.#onUnlinkContainer
     }
   };
 
@@ -143,6 +146,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const mutilations = [];
     const inventory = [];
     const currencyItems = []; // «Рыхлые» монеты-предметы (тип currency) для зачисления в кошелёк
+    const containers = [];    // Предметы-ссылки на акторов-контейнеры (сумки/сундуки)
     
     // New equipment
     const weapons = [];
@@ -156,7 +160,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     for (let i of actorData.items) {
       const isFav = i.getFlag("dedrel", "isFavorite");
-      
+
+      // Предмет-ссылка на контейнер: любой предмет с флагом linkedActorUuid.
+      // Показывается отдельной секцией; его system.weight — вклад в перегрузку
+      // (для «сумки удержания» — фиксированный, независимо от содержимого).
+      const linkedUuid = i.getFlag("dedrel", "linkedActorUuid");
+      if (linkedUuid) {
+        containers.push({ item: i, uuid: linkedUuid });
+        continue;
+      }
+
       if (i.type === 'maneuver') {
         maneuvers.push(i);
         const source = i.system.source || "basic";
@@ -521,6 +534,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       walletTotal,
       walletWeight: actorData.system.wallet?.weight || 0,
       currencyItems,
+      containers,
+      canCreateActors: Actor.canUserCreate(game.user),
       maneuvers,
       maneuversGroups,
       spells,
@@ -884,6 +899,53 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         { action: "cancel", icon: "fa-solid fa-times", label: game.i18n.localize("DEDREL.Chat.Cancel") }
       ]
     });
+  }
+
+  /** Открывает лист привязанного актора-контейнера (сумки/сундука). */
+  static async #onOpenContainer(event, target) {
+    const uuid = target.closest("[data-container-uuid]")?.dataset.containerUuid;
+    const actor = uuid ? await fromUuid(uuid) : null;
+    if (actor) actor.sheet.render(true);
+    else ui.notifications.warn(game.i18n.localize("DEDREL.Container.NotFound"));
+  }
+
+  /** Создаёт новый актор-контейнер и предмет-ссылку на него на этом персонаже. */
+  static async #onCreateContainer(event, target) {
+    if (!Actor.canUserCreate(game.user)) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Container.CannotCreate"));
+    }
+    const containerActor = await Actor.create({
+      name: game.i18n.localize("DEDREL.Container.NewName"),
+      type: "loot",
+      system: { mode: "container" }
+    });
+    if (containerActor) await this._linkContainer(containerActor);
+  }
+
+  /** Отвязывает контейнер: удаляет только предмет-ссылку, актор-контейнер остаётся. */
+  static async #onUnlinkContainer(event, target) {
+    const itemId = target.closest("[data-item-id]")?.dataset.itemId;
+    const item = itemId ? this.document.items.get(itemId) : null;
+    if (!item) return;
+    const { DialogV2 } = foundry.applications.api;
+    const confirm = await DialogV2.confirm({
+      window: { title: game.i18n.localize("DEDREL.Container.Unlink") },
+      content: `<p>${game.i18n.localize("DEDREL.Container.UnlinkConfirm")}</p>`
+    });
+    if (confirm) await item.delete();
+  }
+
+  /** Создаёт на персонаже предмет-ссылку (тип loot) на актор-контейнер. */
+  async _linkContainer(containerActor) {
+    const itemData = {
+      name: containerActor.name,
+      type: "loot",
+      img: containerActor.img,
+      system: { weight: 0, base_price: 0, stackable: false },
+      flags: { dedrel: { linkedActorUuid: containerActor.uuid } }
+    };
+    await this.document.createEmbeddedDocuments("Item", [itemData]);
+    ui.notifications.info(game.i18n.format("DEDREL.Container.Linked", { name: containerActor.name }));
   }
 
   static async #onToggleSkillFavorite(event, target) {
@@ -1349,6 +1411,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     } catch(err) {
       return super._onDrop(event);
     }
+    // Дроп актора-контейнера (тип loot) → создаём предмет-ссылку в инвентаре.
+    if (data.type === "Actor") {
+      const droppedActor = await Actor.implementation.fromDropData(data);
+      if (droppedActor && droppedActor.type === "loot") {
+        await this._linkContainer(droppedActor);
+        return false;
+      }
+      return super._onDrop(event);
+    }
+
     if (data.type !== "Item") return super._onDrop(event);
 
     const item = await Item.implementation.fromDropData(data);

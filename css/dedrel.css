@@ -1675,3 +1675,195 @@ form.dedrel.sheet.item {
   border-color: #7a1ee6;
   box-shadow: 0 0 5px rgba(122, 30, 230, 0.5);
 }
+
+/* =========================================================================
+   Лист Лут/Торговец/Контейнер (актор loot). Базовый scope — .dedrel.loot;
+   режимы уточняются классами .loot-mode-{loot|merchant|container} на корне
+   окна (ставятся в DedrelLootSheet#_onRender).
+   ========================================================================= */
+.dedrel.loot .loot-sheet {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.dedrel.loot .loot-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dedrel.loot .loot-img {
+  border-radius: 4px;
+}
+
+.dedrel.loot .loot-header [data-action="editImage"] {
+  cursor: pointer;
+}
+
+.dedrel.loot .loot-header-main {
+  flex: 1;
+}
+
+.dedrel.loot .loot-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 100%;
+}
+
+.dedrel.loot .loot-mode-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 0.85em;
+}
+
+.dedrel.loot .loot-mode-row select {
+  flex: 0 0 auto;
+}
+
+.dedrel.loot .loot-section {
+  border: 1px solid var(--color-border-dark);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.dedrel.loot .loot-section--grow {
+  flex: 1;
+}
+
+.dedrel.loot .loot-econ-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dedrel.loot .loot-subsection {
+  margin-top: 8px;
+}
+
+.dedrel.loot .loot-subhead {
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.dedrel.loot .loot-discount-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.dedrel.loot .loot-discount-row span {
+  flex: 1;
+}
+
+.dedrel.loot .loot-discount-row input {
+  width: 80px;
+}
+
+.dedrel.loot .loot-btn {
+  margin-top: 4px;
+}
+
+.dedrel.loot .loot-wallet-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.dedrel.loot .loot-coin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+}
+
+.dedrel.loot .loot-coin label {
+  font-size: 0.72em;
+}
+
+.dedrel.loot .loot-coin input {
+  width: 64px;
+  text-align: center;
+}
+
+.dedrel.loot .loot-capacity-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dedrel.loot .loot-load {
+  font-size: 0.85em;
+}
+
+.dedrel.loot .loot-load.over {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.dedrel.loot .loot-maxload {
+  margin-left: auto;
+  font-size: 0.8em;
+}
+
+.dedrel.loot .loot-maxload input {
+  width: 80px;
+}
+
+.dedrel.loot .loot-bar-track {
+  position: relative;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.dedrel.loot .loot-bar-fill {
+  height: 100%;
+  background: #4caf50;
+}
+
+.dedrel.loot .loot-bar-fill.over {
+  background: #c0392b;
+}
+
+.dedrel.loot .loot-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--color-border-light-highlight);
+}
+
+.dedrel.loot .loot-item-name {
+  flex: 1;
+}
+
+.dedrel.loot .loot-item-qty {
+  color: var(--color-text-dark-secondary);
+  font-size: 0.8em;
+}
+
+.dedrel.loot .loot-item-price {
+  font-size: 0.85em;
+  color: var(--color-text-dark-secondary);
+}
+
+.dedrel.loot .loot-empty {
+  color: var(--color-text-dark-secondary);
+  font-style: italic;
+}
+
+.dedrel.loot .loot-hint {
+  font-size: 0.75em;
+  margin-top: 6px;
+}

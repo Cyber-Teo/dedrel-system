@@ -719,7 +719,8 @@
       "Encumbrance": "Encumbrance",
       "EncumbranceImmune": "Immune to encumbrance penalties",
       "EncumbrancePenalty": "Penalty to all rolls",
-      "EncumbranceNoMove": "Cannot move"
+      "EncumbranceNoMove": "Cannot move",
+      "Containers": "Containers"
     },
     "Notifications": {
       "EquipArmorHint": "For armor, use the 'Equip' buttons (slots).",
@@ -985,7 +986,23 @@
       "SoldMsg": "{seller} sold {item} ×{qty} to {merchant} for {price}.",
       "TookMsg": "{taker} took {item} ×{qty} from {loot}.",
       "ServiceMsg": "{buyer} paid for the service \"{item}\" at {merchant} for {price}.",
-      "DividedMsg": "Coins from \"{loot}\" divided: {share} each to {n} recipients."
+      "DividedMsg": "Coins from \"{loot}\" divided: {share} each to {n} recipients.",
+      "Capacity": "Capacity",
+      "Load": "Load",
+      "MaxLoad": "Max load (kg)",
+      "Unlimited": "unlimited",
+      "CapacityExceeded": "Container is full (limit {cap} kg)."
+    },
+    "Container": {
+      "New": "New container",
+      "NewName": "New Container",
+      "Open": "Open",
+      "Unlink": "Unlink",
+      "UnlinkConfirm": "Unlink the container? The link item is removed; the container actor itself remains.",
+      "Linked": "Container linked: {name}",
+      "NotFound": "Linked container not found.",
+      "CannotCreate": "Insufficient permissions to create a container actor (ask the GM).",
+      "Hint": "Drag a container actor (Loot in 'Container' mode) here to link a bag/chest. The link item's weight counts toward encumbrance (fixed for a bag of holding)."
     }
   },
   "DEDREL.Rarity": {
