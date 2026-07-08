@@ -1173,29 +1173,6 @@ form.dedrel.sheet.item {
  * Token HUD: счётчики стаков в палитре статусов
  * ================================================== */
 
-/* Бейджи позиционируются относительно самой палитры: она уже position: absolute
- * в ядре (.placeable-hud .palette). НЕ добавлять сюда своё правило position —
- * селектор с #token-hud перебивает ядро по специфичности и ломает раскладку HUD. */
-
-/* Бейдж накрывает свою ячейку сетки (позиция по --col/--row из JS),
- * цифра прижата к нижнему правому углу иконки. Клики проходят сквозь бейдж. */
-#token-hud .status-effects .dedrel-stack-badge {
-  position: absolute;
-  left: calc(var(--effect-gap) + var(--col) * (var(--effect-size) + var(--effect-gap)));
-  top: calc(var(--effect-gap) + var(--row) * (var(--effect-size) + var(--effect-gap)));
-  width: var(--effect-size);
-  height: var(--effect-size);
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  pointer-events: none;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 1;
-  color: #fff;
-  text-shadow: 0 0 2px #000, 0 1px 2px #000, 0 -1px 2px #000;
-}
-
 /* ==================================================
  * Chain Maneuvers HUD
  * ================================================== */

@@ -45,41 +45,4 @@ export default class DedrelTokenHUD extends foundry.applications.hud.TokenHUD {
     });
   }
 
-  _onRender(context, options) {
-    super._onRender(context, options);
-    this.#renderStackBadges();
-  }
-
-  /**
-   * Счётчики стаков поверх иконок палитры статусов. Иконки — голые <img>
-   * в grid-контейнере, вложить в них бейдж нельзя, а обёртка сломала бы сетку,
-   * поэтому бейджи позиционируются абсолютно по номеру ячейки (CSS-переменные
-   * --col/--row, размеры ячеек берутся из ядровых --effect-size/--effect-gap).
-   * HUD перерендеривается ядром при любом изменении эффектов актёра
-   * (TokenDocument#_onRelatedUpdate), так что счётчики всегда актуальны.
-   */
-  #renderStackBadges() {
-    const actor = this.actor;
-    const palette = this.element?.querySelector(".status-effects");
-    if (!actor || !palette) return;
-
-    palette.querySelectorAll(".dedrel-stack-badge").forEach(el => el.remove());
-    const cols = parseInt(getComputedStyle(palette).getPropertyValue("--effect-columns")) || 5;
-
-    palette.querySelectorAll(".effect-control").forEach((icon, i) => {
-      if (!icon.classList.contains("active")) return;
-      const statusId = icon.dataset.statusId;
-      if (!CONFIG.statusEffects[statusId]?.flags?.dedrel?.stackable) return;
-
-      const effect = actor.effects.find(e => (e.statuses.size === 1) && e.statuses.has(statusId));
-      const stacks = effect?.getFlag("dedrel", "stacks") ?? 1;
-
-      const badge = document.createElement("div");
-      badge.className = "dedrel-stack-badge";
-      badge.style.setProperty("--col", i % cols);
-      badge.style.setProperty("--row", Math.floor(i / cols));
-      badge.textContent = stacks;
-      palette.append(badge);
-    });
-  }
 }

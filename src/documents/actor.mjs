@@ -196,11 +196,13 @@ export default class DedrelActor extends Actor {
       "system.changes": DedrelActor.#scaleStatusChanges(status.changes ?? [], stacks)
     };
     if (refreshDuration) {
-      update["duration.startTime"] = game.time.worldTime;
-      if (game.combat && (effect.duration.rounds || effect.duration.turns)) {
-        update["duration.startRound"] = game.combat.round;
-        update["duration.startTurn"] = game.combat.turn;
-      }
+      // ВАЖНО (V14): остаток длительности вычисляется от объекта `start`
+      // (round/turn/time/combat/combatant), а НЕ от полей duration.startRound/
+      // startTime — их в схеме V14 нет вовсе (duration = {value, units, expiry}).
+      // Прежний код писал в несуществующие поля, поэтому сброс не работал.
+      // Переустанавливаем `start` на текущий момент каноническим методом ядра
+      // (тем же, что и при создании эффекта) — это и есть «сброс таймера».
+      update.start = effect.constructor.getEffectStart();
     }
     await effect.update(update);
     return effect;

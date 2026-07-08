@@ -200,9 +200,11 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       Hooks.on("updateItem", this._onEffectChange.bind(this)),
       Hooks.on("deleteItem", this._onEffectChange.bind(this)),
       Hooks.on("updateToken", this._onEffectChange.bind(this)),
-      Hooks.on("updateWorldTime", this._onEffectChange.bind(this)),
-      Hooks.on("updateCombat", this._onEffectChange.bind(this)),
-      Hooks.on("updateCombatant", this._onEffectChange.bind(this)),
+      // Время/бой не несут актёра — идут отдельным обработчиком, который
+      // переподготавливает длительности и перерисовывает счётчик раундов.
+      Hooks.on("updateWorldTime", this._onTimeChange.bind(this)),
+      Hooks.on("updateCombat", this._onTimeChange.bind(this)),
+      Hooks.on("updateCombatant", this._onTimeChange.bind(this)),
       Hooks.on("collapseSidebar", this._onCollapseSidebar.bind(this)),
       Hooks.on("canvasReady", this._onCanvasReady.bind(this))
     );
@@ -232,13 +234,36 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
   }
 
   _onEffectChange(doc, ...args) {
-    if (!this.actor) return;
+    const current = this._actor;
+    if (!current) return;
     // Эффект может быть вложен в предмет (transfer-эффекты талантов и т.п.) —
     // тогда актёр находится на уровень выше (effect.parent.parent).
     let parent = doc?.parent;
     if (parent?.documentName === "Item") parent = parent.parent;
-    if (parent === this.actor) {
-      this.render();
+    if (parent?.documentName !== "Actor") return;
+    // Сравниваем по id/uuid, а НЕ по ссылке: у несвязанного токена синтетический
+    // актёр пересоздаётся при апдейтах, из-за чего сохранённый this._actor
+    // устаревает и строгое сравнение (parent === this.actor) молча не срабатывало —
+    // панель не обновлялась (напр. счётчик стаков «залипал» до перевыделения).
+    // Заодно переустанавливаем актёра на свежий экземпляр (сеттер перерисует),
+    // чтобы _prepareContext читал актуальные appliedEffects.
+    if (parent.id === current.id || parent.uuid === current.uuid) {
+      this.actor = parent;
     }
+  }
+
+  /**
+   * Продвижение времени мира или раунда/хода боя. Эти хуки не несут актёра,
+   * поэтому фильтровать по нему нельзя. Длительности эффектов (duration.label,
+   * оставшиеся раунды) — ПОДГОТАВЛИВАЕМЫЕ значения (ActiveEffect#_prepareDuration
+   * в prepareDerivedData), а не живые геттеры: ядро на updateWorldTime лишь
+   * прогоняет реестр истечения, но label не пересчитывает. Поэтому вручную
+   * переподготавливаем актёра и перерисовываем — иначе счётчик раундов застывал
+   * до перевыделения токена.
+   */
+  _onTimeChange() {
+    if (!this._actor || !this.rendered) return;
+    this._actor.prepareData();
+    this.render();
   }
 }
