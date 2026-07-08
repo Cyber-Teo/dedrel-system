@@ -1,7 +1,11 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
-import { DR_KEY_LABELS } from "../constants.mjs";
+import { DR_KEY_LABELS, ITEM_RARITY_ENUM } from "../constants.mjs";
+
+// Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
+// Для них рендерится общий блок details-physical.hbs.
+const PHYSICAL_ITEM_TYPES = ["weapon", "armor", "ammunition", "magic_item", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item"];
 /**
  * Основной класс Листа Предмета для системы Dedrel.
  * Наследуется от нового Foundry V2 Application Framework (ItemSheetV2).
@@ -164,6 +168,26 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
     
     context.hasQuantity = itemData.system.quantity !== undefined;
+
+    // Общий блок физических полей (редкость/вес/цена/стакаемость)
+    context.isPhysical = PHYSICAL_ITEM_TYPES.includes(itemData.type);
+    if (context.isPhysical || itemData.type === "service") {
+      context.rarityOptions = {};
+      for (const r of ITEM_RARITY_ENUM) context.rarityOptions[r] = game.i18n.localize(`DEDREL.Rarity.${r}`);
+    }
+    if (context.isPhysical) {
+      context.hasStackable = itemData.system.stackable !== undefined;
+    }
+
+    // Валюта: деноминация выбирается из списка валют мира
+    if (itemData.type === "currency") {
+      context.currencyOptions = { "": "—" };
+      try {
+        const defs = game.settings.get("dedrel", "currencies") || [];
+        for (const def of defs) context.currencyOptions[def.key] = `${def.name} (${def.key})`;
+      } catch (e) {}
+    }
+
     if (itemData.type === "armor") {
       context.armorSlots = {
         "lower": game.i18n.localize("DEDREL.ArmorSlots.lower"),

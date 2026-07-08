@@ -76,9 +76,13 @@ export class DedrelMigration {
    */
   static migrateItemData(itemData) {
     const updateData = {};
-    
-    // Пример будущей миграции:
-    // if (itemData.system.req_weapon_damage_type?.piercing === true) { ... }
+
+    // Нормализация редкости: легаси-значение "very rare" (с пробелом) →
+    // канонический ключ "very_rare" (см. ITEM_RARITY_ENUM). Затрагивает
+    // прежде всего броню, где раньше был выбор с пробелом.
+    if (itemData.system?.rarity === "very rare") {
+      updateData["system.rarity"] = "very_rare";
+    }
 
     return updateData;
   }

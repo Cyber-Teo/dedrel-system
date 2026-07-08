@@ -1,0 +1,38 @@
+<div class="standard-form" style="padding: 8px;">
+    <p class="hint">{{localize "DEDREL.Settings.Currencies.Hint"}}</p>
+    <table class="currency-table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.Key"}}</th>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.CoinName"}}</th>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.Abbr"}}</th>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.BaseValue"}}</th>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.Weight"}}</th>
+                <th style="text-align: left;">{{localize "DEDREL.Settings.Currencies.Color"}}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each rows as |row i|}}
+            <tr class="currency-row">
+                <td><input type="text" class="c-key" value="{{row.key}}" placeholder="gold"/></td>
+                <td><input type="text" class="c-name" value="{{row.name}}" placeholder="Золото"/></td>
+                <td><input type="text" class="c-abbr" value="{{row.abbr}}" placeholder="зл" style="width: 60px;"/></td>
+                <td><input type="number" step="any" class="c-base" value="{{row.base_value}}" style="width: 90px;"/></td>
+                <td><input type="number" step="any" class="c-weight" value="{{row.weight}}" style="width: 80px;"/></td>
+                <td><input type="text" class="c-color" value="{{row.color}}" style="width: 80px;"/></td>
+                <td><a data-action="removeRow" data-index="{{i}}" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 8px;">
+        <button type="button" data-action="addRow"><i class="fas fa-plus"></i> {{localize "DEDREL.Settings.Currencies.AddRow"}}</button>
+    </div>
+
+    <footer class="form-footer" style="display: flex; gap: 8px; margin-top: 12px;">
+        <button type="button" data-action="resetDefaults"><i class="fas fa-rotate-left"></i> {{localize "DEDREL.Settings.Currencies.Reset"}}</button>
+        <button type="submit"><i class="fas fa-save"></i> {{localize "DEDREL.UI.Save"}}</button>
+    </footer>
+</div>

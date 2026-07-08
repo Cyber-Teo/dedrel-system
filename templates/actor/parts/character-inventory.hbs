@@ -1,4 +1,70 @@
 <div class="tab inventory {{tabs.inventory.cssClass}}" data-group="primary" data-tab="inventory">
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Wallet"}}</h2>
+    <div class="wallet-widget" style="border: 1px solid var(--color-border-dark); border-radius: 4px; padding: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.05);">
+        <div class="wallet-currencies" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; justify-content: center;">
+            {{#each walletCurrencies as |cur|}}
+            <div class="wallet-coin" style="display: flex; flex-direction: column; align-items: center; min-width: 70px;">
+                <label style="font-size: 0.75em; color: var(--color-text-dark-secondary);" title="{{cur.name}}">
+                    <i class="fas fa-circle" style="color: {{cur.color}};"></i> {{cur.abbr}}
+                </label>
+                <input type="number" name="system.currency.{{cur.key}}" value="{{cur.count}}" min="0" step="1" data-dtype="Number" style="width: 70px; text-align: center;"/>
+            </div>
+            {{else}}
+            <p style="color: var(--color-text-dark-secondary); font-style: italic; margin: 0;">{{localize "DEDREL.ActorSheet.NoCurrenciesConfigured"}}</p>
+            {{/each}}
+        </div>
+        {{#if walletCurrencies.length}}
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--color-border-light-highlight);">
+            <span style="font-size: 0.85em;">
+                {{localize "DEDREL.ActorSheet.WalletTotal"}}: <b>{{walletTotal}}</b>
+                <span style="color: var(--color-text-dark-secondary); margin-left: 8px;">{{localize "DEDREL.ItemSheet.Weight"}}: {{numberFormat walletWeight decimals=2}} кг</span>
+            </span>
+            <span style="display: flex; gap: 12px;">
+                <a class="item-control" data-action="payCurrency" title="{{localize "DEDREL.ActorSheet.TransferMoney"}}"><i class="fas fa-hand-holding-dollar"></i> {{localize "DEDREL.ActorSheet.TransferSend"}}</a>
+                <a class="item-control" data-action="collapseCurrency" title="{{localize "DEDREL.ActorSheet.CollapseCurrencyHint"}}"><i class="fas fa-layer-group"></i> {{localize "DEDREL.ActorSheet.CollapseCurrency"}}</a>
+            </span>
+        </div>
+        {{/if}}
+        {{#if currencyItems.length}}
+        <div class="loose-coins" style="margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--color-border-light-highlight);">
+            <div style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-bottom: 4px;">{{localize "DEDREL.ActorSheet.LooseCoins"}}</div>
+            {{#each currencyItems as |item|}}
+            <div class="item-row flexrow" data-item-id="{{item.id}}" style="align-items: center;">
+                <div class="item-name" style="flex: 1;"><h4>{{item.name}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em;">({{item.system.value}} {{item.system.denomination}})</span></h4></div>
+                <div class="item-controls">
+                    <a class="item-control" data-action="depositCurrency" title="{{localize "DEDREL.ActorSheet.DepositCurrency"}}"><i class="fas fa-sack-dollar"></i></a>
+                    <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                    {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+
+    {{#if encumbrance}}
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Encumbrance"}}</h2>
+    <div class="encumbrance-widget" style="border: 1px solid var(--color-border-dark); border-radius: 4px; padding: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85em; margin-bottom: 5px;">
+            <span><b>{{encumbrance.label}}</b>
+                {{#if encumbrance.immune}}<i class="fas fa-shield-heart" title="{{localize "DEDREL.ActorSheet.EncumbranceImmune"}}" style="color: var(--color-text-hyperlink); margin-left: 4px;"></i>{{/if}}
+            </span>
+            <span>{{numberFormat encumbrance.total decimals=2}} / {{numberFormat encumbrance.thresholds.heavy decimals=0}} кг</span>
+        </div>
+        <div class="enc-bar-track" style="position: relative; height: 14px; background: rgba(0,0,0,0.25); border-radius: 7px; overflow: hidden; border: 1px solid var(--color-border-dark);">
+            <div class="enc-bar-fill" style="height: 100%; width: {{encumbrance.pct}}%; background: {{encumbrance.color}}; transition: width 0.2s;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.7em; color: var(--color-text-dark-secondary); margin-top: 2px;">
+            <span>{{localize "DEDREL.Encumbrance.light"}}: {{numberFormat encumbrance.thresholds.light decimals=0}}</span>
+            <span>{{localize "DEDREL.Encumbrance.medium"}}: {{numberFormat encumbrance.thresholds.medium decimals=0}}</span>
+            <span>{{localize "DEDREL.Encumbrance.heavy"}}: {{numberFormat encumbrance.thresholds.heavy decimals=0}}</span>
+        </div>
+        {{#if encumbrance.rollPenalty}}
+        <div style="font-size: 0.78em; color: #c0392b; margin-top: 5px;"><i class="fas fa-triangle-exclamation"></i> {{localize "DEDREL.ActorSheet.EncumbrancePenalty"}}: −{{encumbrance.rollPenalty}} {{#if (eq encumbrance.category "overloaded")}}· {{localize "DEDREL.ActorSheet.EncumbranceNoMove"}}{{else if (eq encumbrance.category "heavy")}}· −1м{{/if}}</div>
+        {{/if}}
+    </div>
+    {{/if}}
+
     <h2 class="tab-title">{{localize "DEDREL.ActorSheet.WeaponSlots"}}</h2>
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
         <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">

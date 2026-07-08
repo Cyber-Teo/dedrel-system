@@ -1,0 +1,15 @@
+<div class="form-fields-grid">
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.QuestItem"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.QuestId"}}</label>
+        <input type="text" name="system.quest_id" value="{{system.quest_id}}"/>
+    </div>
+    <div class="form-group">
+        <label class="checkbox"><input type="checkbox" name="system.can_be_sold" {{checked system.can_be_sold}}/> {{localize "DEDREL.ItemSheet.CanBeSold"}}</label>
+    </div>
+    <div class="form-group">
+        <label class="checkbox"><input type="checkbox" name="system.can_be_dropped" {{checked system.can_be_dropped}}/> {{localize "DEDREL.ItemSheet.CanBeDropped"}}</label>
+    </div>
+</div>

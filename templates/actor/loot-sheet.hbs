@@ -1,0 +1,98 @@
+<div class="loot-sheet" style="padding: 8px; display: flex; flex-direction: column; gap: 10px; height: 100%; overflow-y: auto;">
+
+    <header style="display: flex; gap: 10px; align-items: center;">
+        <img class="profile-img" src="{{actor.img}}" {{#if isGM}}data-action="editImage" style="cursor: pointer; border-radius: 4px;"{{/if}} title="{{actor.name}}" width="48" height="48"/>
+        <div style="flex: 1;">
+            <input name="name" type="text" value="{{actor.name}}" style="font-size: 1.2em; font-weight: bold; width: 100%;" {{#unless isGM}}readonly{{/unless}}/>
+            <div style="display: flex; gap: 8px; align-items: center; margin-top: 4px;">
+                <label style="font-size: 0.85em;">{{localize "DEDREL.Loot.Mode"}}:</label>
+                {{#if isGM}}
+                <select name="system.mode" style="flex: 0 0 auto;">{{selectOptions modeOptions selected=system.mode}}</select>
+                {{else}}
+                <span>{{lookup modeOptions system.mode}}</span>
+                {{/if}}
+            </div>
+        </div>
+    </header>
+
+    {{!-- Экономика торговца (GM) --}}
+    {{#if isMerchant}}
+    {{#if isGM}}
+    <fieldset style="border: 1px solid var(--color-border-dark); border-radius: 4px; padding: 8px;">
+        <legend>{{localize "DEDREL.Loot.Economy"}}</legend>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <label>{{localize "DEDREL.Loot.BuyModifier"}} (%)
+                <input type="number" name="system.buy_modifier_pct" value="{{system.buy_modifier_pct}}" data-dtype="Number"/>
+            </label>
+            <label>{{localize "DEDREL.Loot.SellPricePct"}} (%)
+                <input type="number" name="system.sell_price_pct" value="{{system.sell_price_pct}}" min="0" data-dtype="Number"/>
+            </label>
+            <label class="checkbox"><input type="checkbox" name="system.can_sell_to" {{checked system.can_sell_to}}/> {{localize "DEDREL.Loot.CanSellTo"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.infinite_funds" {{checked system.infinite_funds}}/> {{localize "DEDREL.Loot.InfiniteFunds"}}</label>
+        </div>
+
+        <div style="margin-top: 8px;">
+            <label style="font-weight: bold; font-size: 0.85em;">{{localize "DEDREL.Loot.PersonalDiscounts"}} (%)</label>
+            {{#each discountRows as |row|}}
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+                <span style="flex: 1;">{{row.name}}</span>
+                <input type="number" name="system.personal_discounts.{{row.userId}}" value="{{row.pct}}" data-dtype="Number" style="width: 80px;"/>
+            </div>
+            {{/each}}
+        </div>
+
+        <div style="margin-top: 8px;">
+            <label style="font-weight: bold; font-size: 0.85em;">{{localize "DEDREL.Loot.LootTables"}}</label>
+            <input type="text" name="system.loot_tables" value="{{lootTablesText}}" placeholder="Имя таблицы; другая таблица" style="width: 100%;"/>
+            <button type="button" data-action="rollStock" style="margin-top: 4px;"><i class="fas fa-dice"></i> {{localize "DEDREL.Loot.RollStock"}}</button>
+        </div>
+    </fieldset>
+    {{/if}}
+    {{/if}}
+
+    {{!-- Кошелёк --}}
+    <fieldset style="border: 1px solid var(--color-border-dark); border-radius: 4px; padding: 8px;">
+        <legend>{{localize "DEDREL.ActorSheet.Wallet"}} ({{walletTotal}})</legend>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: flex-end;">
+            {{#each walletCurrencies as |cur|}}
+            <div style="display: flex; flex-direction: column; align-items: center; min-width: 64px;">
+                <label style="font-size: 0.72em;"><i class="fas fa-circle" style="color: {{cur.color}};"></i> {{cur.abbr}}</label>
+                <input type="number" name="system.currency.{{cur.key}}" value="{{cur.count}}" min="0" data-dtype="Number" style="width: 64px; text-align: center;" {{#unless isGM}}readonly{{/unless}}/>
+            </div>
+            {{/each}}
+        </div>
+        {{#unless isMerchant}}
+        <button type="button" data-action="divideCoins" style="margin-top: 8px;"><i class="fas fa-scale-balanced"></i> {{localize "DEDREL.Loot.DivideCoins"}}</button>
+        {{/unless}}
+    </fieldset>
+
+    {{!-- Сток предметов --}}
+    <fieldset style="border: 1px solid var(--color-border-dark); border-radius: 4px; padding: 8px; flex: 1;">
+        <legend>{{localize "DEDREL.Loot.Stock"}}
+            {{#if isGM}}<a data-action="createItem" data-type="loot" title="{{localize "DEDREL.ActorSheet.Add"}}"><i class="fas fa-plus"></i></a>{{/if}}
+        </legend>
+        {{#each items as |item|}}
+        <div class="loot-item-row" data-item-id="{{item.id}}" style="display: flex; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px solid var(--color-border-light-highlight);">
+            <img src="{{item.img}}" width="24" height="24"/>
+            <span style="flex: 1;">{{item.name}}{{#if item.quantity}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em;">×{{item.quantity}}</span>{{/if}}</span>
+            {{#if @root.isMerchant}}
+                <span style="font-size: 0.85em; color: var(--color-text-dark-secondary);" title="{{localize "DEDREL.Loot.BuyPrice"}}">{{item.buyPriceLabel}}</span>
+                {{#if item.isService}}
+                <a class="item-control" data-action="buyService" title="{{localize "DEDREL.Loot.Buy"}}"><i class="fas fa-hand-holding-dollar"></i></a>
+                {{else}}
+                <a class="item-control" data-action="buyItem" title="{{localize "DEDREL.Loot.Buy"}}"><i class="fas fa-cart-shopping"></i></a>
+                {{/if}}
+            {{else}}
+                <a class="item-control" data-action="takeItem" title="{{localize "DEDREL.Loot.Take"}}"><i class="fas fa-hand"></i></a>
+            {{/if}}
+            {{#if @root.isGM}}
+            <a class="item-control" data-action="editItem" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+            <a class="item-control" data-action="deleteItem" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+        </div>
+        {{else}}
+        <p style="color: var(--color-text-dark-secondary); font-style: italic;">{{localize "DEDREL.Loot.Empty"}}</p>
+        {{/each}}
+        {{#if isMerchant}}<p class="hint" style="font-size: 0.75em; margin-top: 6px;">{{localize "DEDREL.Loot.SellHint"}}</p>{{/if}}
+    </fieldset>
+</div>

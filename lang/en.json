@@ -19,7 +19,8 @@
     },
     "Sheets": {
       "CharacterSheet": "Dedrel Character Sheet",
-      "ItemSheet": "Dedrel Item Sheet"
+      "ItemSheet": "Dedrel Item Sheet",
+      "LootSheet": "Dedrel Loot/Merchant Sheet"
     },
     "ItemFields": {
       "SystemKey": "System Key",
@@ -118,17 +119,78 @@
         "imbue": "Infuses a magical property of the Doctrine into an object or creature"
       },
       "RankHints": {
-        "range": { "1": "Touch", "2": "Up to 5 hexes", "3": "Up to 10 hexes", "4": "Up to 20 hexes", "5": "Up to 30 hexes" },
-        "targets": { "1": "One target", "2": "Two targets", "3": "Three targets", "4": "Four targets", "5": "Five targets" },
-        "area_cone": { "2": "Far row 3 hexes", "3": "Far row 5 hexes", "4": "Far row 7 hexes", "5": "Far row 9 hexes" },
-        "area_circle": { "2": "Radius 1", "3": "Radius 2", "4": "Radius 3", "5": "Radius 4" },
-        "area_line": { "1": "Up to 4 hexes", "2": "Up to 6 hexes", "3": "Up to 8 hexes", "4": "Up to 10 hexes", "5": "Up to 12 hexes" },
-        "power": { "1": "+1/−1 to the next roll (DC 10)", "2": "+2/−2 for 1 round (DC 12)", "3": "Simple condition for [Doctrine Rank] rounds (DC 14)", "4": "+3/−3 for [Doctrine Rank] rounds OR a condition (DC 16)", "5": "Powerful condition (DC 18)" },
-        "durability": { "1": "5 HP", "2": "10 HP", "3": "15 HP", "4": "20 HP", "5": "25 HP" },
-        "duration": { "1": "Instant", "2": "6 rounds", "3": "10 rounds", "4": "Concentration", "5": "One day" },
-        "accuracy": { "1": "+1 to hit", "2": "+2 to hit", "3": "+3 to hit", "4": "+4 to hit", "5": "+5 to hit" },
-        "form": { "1": "Formless", "2": "Bludgeoning", "3": "Slashing", "4": "Piercing", "5": "Complex form" },
-        "actionType": { "1": "Chain", "2": "Reaction" }
+        "range": {
+          "1": "Touch",
+          "2": "Up to 5 hexes",
+          "3": "Up to 10 hexes",
+          "4": "Up to 20 hexes",
+          "5": "Up to 30 hexes"
+        },
+        "targets": {
+          "1": "One target",
+          "2": "Two targets",
+          "3": "Three targets",
+          "4": "Four targets",
+          "5": "Five targets"
+        },
+        "area_cone": {
+          "2": "Far row 3 hexes",
+          "3": "Far row 5 hexes",
+          "4": "Far row 7 hexes",
+          "5": "Far row 9 hexes"
+        },
+        "area_circle": {
+          "2": "Radius 1",
+          "3": "Radius 2",
+          "4": "Radius 3",
+          "5": "Radius 4"
+        },
+        "area_line": {
+          "1": "Up to 4 hexes",
+          "2": "Up to 6 hexes",
+          "3": "Up to 8 hexes",
+          "4": "Up to 10 hexes",
+          "5": "Up to 12 hexes"
+        },
+        "power": {
+          "1": "+1/−1 to the next roll (DC 10)",
+          "2": "+2/−2 for 1 round (DC 12)",
+          "3": "Simple condition for [Doctrine Rank] rounds (DC 14)",
+          "4": "+3/−3 for [Doctrine Rank] rounds OR a condition (DC 16)",
+          "5": "Powerful condition (DC 18)"
+        },
+        "durability": {
+          "1": "5 HP",
+          "2": "10 HP",
+          "3": "15 HP",
+          "4": "20 HP",
+          "5": "25 HP"
+        },
+        "duration": {
+          "1": "Instant",
+          "2": "6 rounds",
+          "3": "10 rounds",
+          "4": "Concentration",
+          "5": "One day"
+        },
+        "accuracy": {
+          "1": "+1 to hit",
+          "2": "+2 to hit",
+          "3": "+3 to hit",
+          "4": "+4 to hit",
+          "5": "+5 to hit"
+        },
+        "form": {
+          "1": "Formless",
+          "2": "Bludgeoning",
+          "3": "Slashing",
+          "4": "Piercing",
+          "5": "Complex form"
+        },
+        "actionType": {
+          "1": "Chain",
+          "2": "Reaction"
+        }
       },
       "UI": {
         "Title": "Spell Constructor",
@@ -249,7 +311,7 @@
     "ActionTypes": {
       "action": "Action",
       "reaction": "Reaction",
-      "free": "Free",
+      "free": "Free Action",
       "chain": "Chain"
     },
     "TargetTypes": {
@@ -308,7 +370,8 @@
       "Description": "Description",
       "Effects": "Effects",
       "LockItems": "Lock Item Deletion",
-      "UnlockItems": "Unlock Item Deletion"
+      "UnlockItems": "Unlock Item Deletion",
+      "Save": "Save"
     },
     "Chat": {
       "Weapon": "Used Weapon",
@@ -375,7 +438,7 @@
       "ArmorPiercing": "Armor Piercing",
       "Range": "Range (m)",
       "RangeM": "Range (m)",
-      "AddsItems": "Adds Items",
+      "AddsItems": "Adds Items (; separated)",
       "OnAddMacro": "On Add Macro",
       "BasicParameters": "Basic Parameters",
       "Slot": "Slot",
@@ -410,6 +473,11 @@
       "TriggerText": "Trigger Text",
       "ChainManeuvers": "Chain Maneuvers",
       "OnUseMacro": "On Use Macro",
+      "PhysicalProperties": "Physical Properties",
+      "PotionEffect": "Potion Effect",
+      "ScrollSpell": "Scroll Spell",
+      "CraftMaterial": "Crafting Material",
+      "QuestItem": "Quest Item",
       "WeaponRequirements": "Weapon Requirements",
       "WeaponType": "Weapon Type",
       "Melee": "Melee",
@@ -465,6 +533,19 @@
       "Weight": "Weight",
       "BasePrice": "Base Price",
       "Rarity": "Rarity",
+      "Quantity": "Quantity",
+      "Stackable": "Stackable",
+      "MaterialType": "Material Type",
+      "EffectDescription": "Effect Description",
+      "ConsumedOnUse": "Consumed on Use",
+      "SpellId": "Spell ID",
+      "SpellKey": "Spell Key",
+      "QuestId": "Quest ID",
+      "CanBeSold": "Can Be Sold",
+      "CanBeDropped": "Can Be Dropped",
+      "Requirements": "Requirements",
+      "ReqAttributeKey": "Attribute (key)",
+      "ReqAttributeRank": "Attribute (rank)",
       "Subtype": "Subtype",
       "Passive": "Passive",
       "Active": "Active",
@@ -480,8 +561,14 @@
       "ReqTalents": "Talents",
       "ReqMutations": "Mutations",
       "ReqBloodline": "Bloodline",
-      "AddsItems": "Adds Items (; separated)",
-      "OnAddMacro": "On Add Macro"
+      "CurrencySettings": "Currency Settings",
+      "Denomination": "Denomination",
+      "CoinCount": "Coin Count",
+      "WeightPerUnit": "Weight per Coin",
+      "CurrencyItemHint": "The denomination must match a currency key from world settings. When picked up/deposited, coins move into the wallet.",
+      "ServiceSettings": "Service Settings",
+      "ServiceType": "Service Type",
+      "ServiceHint": "A service is intangible: it has no weight and is not added to inventory. On purchase, money is deducted and the item's Active Effects (if any) are applied."
     },
     "ActorSheet": {
       "Tabs": {
@@ -533,7 +620,7 @@
       "Edit": "Edit",
       "Favorite": "Favorite",
       "ProvideSpecialization": "Provide Specialization",
-      "CurrentExperience": "Current Experience",
+      "CurrentExperience": "Current Experience: ",
       "TotalEarned": "Total Earned",
       "CreationMode": "Character Creation Mode",
       "HideCreation": "Hide Creation Block",
@@ -578,15 +665,12 @@
       "NoPermanentEffects": "You have no permanent effects from items.",
       "CannotDeleteEffect": "Cannot delete from here (tied to item)",
       "ExperienceDistribution": "Experience Distribution",
-      "CurrentExperience": "Current Experience: ",
       "TotalGained": "(Total Gained: {total})",
       "ToggleCreationView": "Toggle Character Creation View",
       "HideCreationView": "Hide Creation Block",
-      "AttributeUpgrade": "Attribute Upgrade",
       "ActiveDiscounts": "Active Bloodline Discounts:",
       "NoDiscounts": "You do not have rank 3+ Bloodlines to receive discounts.",
       "MAX": "MAX",
-      "SkillUpgrade": "Skill Upgrade",
       "CostHint": "Cost: New Rank * 2 XP",
       "SpecifySpecialization": "Specify Specialization",
       "BuyTalentsMutations": "Buy Talents & Mutations",
@@ -596,7 +680,6 @@
       "DoctrineUpgradeHint": "Access to doctrines is unlocked by talents. Doctrine rank limits the power and number of spell components.",
       "NoDoctrinesUnlocked": "No doctrines unlocked. Access to doctrines is granted by the corresponding talents.",
       "DragHint": "To purchase a talent or mutation, simply drag the desired item from the compendium into the character sheet. Experience will be deducted automatically if sufficient.",
-      "Luck": "Luck",
       "SpendLuck": "Spend Luck Point",
       "Maximum": "Maximum",
       "ResetLuck": "Reset Luck",
@@ -621,7 +704,22 @@
         "exotic_weapons": "Exotic Weapons",
         "unarmed_combat": "Unarmed Combat",
         "bows": "Bows"
-      }
+      },
+      "Wallet": "Wallet",
+      "WalletTotal": "Total",
+      "CollapseCurrency": "Collapse",
+      "CollapseCurrencyHint": "Redistribute coins across denominations (fewest coins, same value)",
+      "LooseCoins": "Coins to deposit",
+      "DepositCurrency": "Deposit into wallet",
+      "NoCurrenciesConfigured": "No currencies configured (see system settings)",
+      "TransferMoney": "Transfer Money",
+      "TransferTo": "Recipient",
+      "TransferSend": "Transfer",
+      "WalletHave": "have",
+      "Encumbrance": "Encumbrance",
+      "EncumbranceImmune": "Immune to encumbrance penalties",
+      "EncumbrancePenalty": "Penalty to all rolls",
+      "EncumbranceNoMove": "Cannot move"
     },
     "Notifications": {
       "EquipArmorHint": "For armor, use the 'Equip' buttons (slots).",
@@ -691,7 +789,15 @@
       "MacroNotFound": "Macro with name '{name}' not found.",
       "SelfEffectApplied": "Effect applied to character: {names}",
       "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see EFFECT_KEYS_CHEAT_SHEET.md).",
-      "MaxStacksReached": "\"{name}\": maximum stacks reached ({max})."
+      "MaxStacksReached": "\"{name}\": maximum stacks reached ({max}).",
+      "UnknownDenomination": "Unknown currency: {key}. Add it in currency settings.",
+      "CurrencyDeposited": "Deposited to wallet: {value} ({denom}).",
+      "CurrencyCollapsed": "Denominations collapsed.",
+      "NotEnoughFunds": "Not enough funds in the wallet.",
+      "NoActiveGM": "No active GM to process the operation.",
+      "TransferRequested": "Transfer request sent to the GM.",
+      "TransferDone": "{source} transferred money to: {target}.",
+      "NoTransferTargets": "No available recipients."
     },
     "EffectPhases": {
       "Apply": "Apply (system fields)",
@@ -750,30 +856,6 @@
       "ApplicationText": "Application Text",
       "RemovalText": "Removal Text"
     },
-    "ManeuverSources": {
-      "basic": "Basic",
-      "talent": "Talent",
-      "mutation": "Mutation"
-    },
-    "ActionTypes": {
-      "action": "Action",
-      "reaction": "Reaction",
-      "free": "Free Action",
-      "chain": "Chain"
-    },
-    "TargetTypes": {
-      "self": "Self",
-      "creature": "Creature",
-      "point": "Point",
-      "area": "Area"
-    },
-    "TemplateShapes": {
-      "none": "None",
-      "square": "Square",
-      "circle": "Circle",
-      "cone": "Cone",
-      "line": "Line"
-    },
     "ConditionCategories": {
       "negative": "Negative (Debuff)",
       "neutral": "Neutral",
@@ -816,6 +898,22 @@
         "Hint": "What an Abundant Source grants in the Spell Constructor: fully lifts the modifier cost limit imposed by Doctrine Rank (even a weak mage becomes mighty at sea), or merely unlocks rank 5 for those who can already afford it (Doctrine Rank 5+).",
         "UnlockAll": "Grants everyone access to rank 5 (lifts the rank limit)",
         "RequireRank": "Unlocks rank 5 only with your own Doctrine Rank 5+"
+      },
+      "Currencies": {
+        "Name": "World Currencies",
+        "Label": "Configure Currencies",
+        "Title": "World Currencies",
+        "Hint": "The world's list of denominations. base_value is the worth in base units (copper=1, silver=10, gold=100, platinum=1000); used for conversion and total wallet value.",
+        "Key": "Key",
+        "CoinName": "Name",
+        "Abbr": "Abbr.",
+        "BaseValue": "Base Value",
+        "Weight": "Coin Weight",
+        "Color": "Color",
+        "AddRow": "Add Currency",
+        "Reset": "Reset to Defaults",
+        "Saved": "Currencies saved.",
+        "DuplicateKey": "Duplicate currency key: {key}"
       }
     },
     "Aura": {
@@ -845,14 +943,72 @@
           }
         }
       }
+    },
+    "Encumbrance": {
+      "light": "Light",
+      "medium": "Medium",
+      "heavy": "Heavy",
+      "overloaded": "Overloaded"
+    },
+    "Loot": {
+      "Mode": "Mode",
+      "ModeLoot": "Loot",
+      "ModeMerchant": "Merchant",
+      "ModeContainer": "Container",
+      "Economy": "Economy",
+      "BuyModifier": "Markup/Discount",
+      "SellPricePct": "Buyback Price",
+      "CanSellTo": "Accepts sales",
+      "InfiniteFunds": "Infinite funds",
+      "PersonalDiscounts": "Personal Discounts",
+      "LootTables": "Loot Tables (semicolon-separated)",
+      "RollStock": "Generate Stock",
+      "DrawsCount": "Draws per table",
+      "TableNotFound": "Table not found: {ref}",
+      "StockAdded": "Items added: {n}",
+      "StockNone": "Nothing rolled.",
+      "NoLootTables": "No loot tables set.",
+      "Stock": "Stock",
+      "Empty": "Empty",
+      "Buy": "Buy",
+      "Take": "Take",
+      "BuyPrice": "Buy price",
+      "DivideCoins": "Divide coins equally",
+      "NoBuyer": "No active buyer character.",
+      "SellRefused": "The merchant does not accept sales.",
+      "ItemNotSellable": "This item cannot be sold.",
+      "MerchantNoFunds": "The merchant has insufficient funds.",
+      "NothingToDivide": "Nothing to divide.",
+      "SellHint": "To sell: drag your item onto the merchant sheet.",
+      "NewItem": "New {type}",
+      "BoughtMsg": "{buyer} bought {item} ×{qty} from {merchant} for {price}.",
+      "SoldMsg": "{seller} sold {item} ×{qty} to {merchant} for {price}.",
+      "TookMsg": "{taker} took {item} ×{qty} from {loot}.",
+      "ServiceMsg": "{buyer} paid for the service \"{item}\" at {merchant} for {price}.",
+      "DividedMsg": "Coins from \"{loot}\" divided: {share} each to {n} recipients."
     }
+  },
+  "DEDREL.Rarity": {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "very_rare": "Very Rare",
+    "legendary": "Legendary"
   },
   "TYPES": {
     "Item": {
-      "spell": "Spell"
+      "spell": "Spell",
+      "potion": "Potion",
+      "scroll": "Scroll",
+      "craft_material": "Crafting Material",
+      "quest_item": "Quest Item",
+      "service": "Service"
     },
     "RegionBehavior": {
       "dedrelAura": "Dedrel Aura"
+    },
+    "Actor": {
+      "loot": "Loot/Merchant"
     }
   }
 }

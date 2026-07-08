@@ -39,6 +39,15 @@ export function getBonusesSchema() {
     damage_explode: new fields.NumberField({ initial: 0, integer: true }),
 
     // Множитель Максимального Здоровья. Значение 0.25 увеличит ХП на 25%.
-    hp_multiplier: new fields.NumberField({ initial: 0 })
+    hp_multiplier: new fields.NumberField({ initial: 0 }),
+
+    // === Грузоподъёмность и перегрузка (таланты/эффекты) ===
+    // carry_capacity_mult — множитель к порогам переноса (0.5 = +50% ко всем порогам).
+    // carry_capacity_flat — плоская прибавка к порогам в кг (складывается со всеми).
+    // ignore_encumbrance_penalty — флаг-переключатель (>0 = иммунитет к штрафам
+    //   перегрузки: не снижает броски и скорость, но категория/вес всё равно считаются).
+    carry_capacity_mult: new fields.NumberField({ initial: 0 }),
+    carry_capacity_flat: new fields.NumberField({ initial: 0 }),
+    ignore_encumbrance_penalty: new fields.NumberField({ initial: 0, integer: true })
   });
 }

@@ -157,12 +157,18 @@
   "primaryTokenAttribute": "resources.hp",
   "documentTypes": {
     "Actor": {
-      "character": {}
+      "character": {},
+      "loot": {}
     },
     "Item": {
       "currency": {},
       "loot": {},
       "trade_good": {},
+      "potion": {},
+      "scroll": {},
+      "craft_material": {},
+      "quest_item": {},
+      "service": {},
       "mutilation": {},
       "countryoforigin": {},
       "mutation": {},

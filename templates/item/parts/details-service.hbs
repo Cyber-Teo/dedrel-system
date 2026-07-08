@@ -1,0 +1,20 @@
+<div class="form-fields-grid">
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.ServiceSettings"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Rarity"}}</label>
+        <select name="system.rarity" style="width: 100%;">
+            {{selectOptions rarityOptions selected=system.rarity}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.BasePrice"}}</label>
+        <input type="text" name="system.base_price" value="{{system.base_price}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ServiceType"}}</label>
+        <input type="text" name="system.service_type" value="{{system.service_type}}" placeholder="rental, teleport, meal, lodging"/>
+    </div>
+    <p class="hint" style="grid-column: 1 / -1;">{{localize "DEDREL.ItemSheet.ServiceHint"}}</p>
+</div>

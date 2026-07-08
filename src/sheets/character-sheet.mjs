@@ -1,6 +1,7 @@
 import { ItemDataModels } from "../data/items/index.mjs";
 import { ActorDataModels } from "../data/actors/index.mjs";
 import { showRollDialog } from "../dice/roll.mjs";
+import { DedrelSocket } from "../socket.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -62,7 +63,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       equipArmor: DedrelCharacterSheet.#onEquipArmor,
       unequipArmor: DedrelCharacterSheet.#onUnequipArmor,
       equipWeapon: DedrelCharacterSheet.#onEquipWeapon,
-      unequipWeapon: DedrelCharacterSheet.#onUnequipWeapon
+      unequipWeapon: DedrelCharacterSheet.#onUnequipWeapon,
+      collapseCurrency: DedrelCharacterSheet.#onCollapseCurrency,
+      depositCurrency: DedrelCharacterSheet.#onDepositCurrency,
+      payCurrency: DedrelCharacterSheet.#onPayCurrency
     }
   };
 
@@ -138,6 +142,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     };
     const mutilations = [];
     const inventory = [];
+    const currencyItems = []; // «Рыхлые» монеты-предметы (тип currency) для зачисления в кошелёк
     
     // New equipment
     const weapons = [];
@@ -199,6 +204,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       else if (i.type === 'magic_item') {
         magic_items.push(i);
         if (isFav) quickSlots.push(i);
+      }
+      else if (i.type === 'currency') {
+        // Монеты-предметы не идут в общий инвентарь: их зачисляют в кошелёк
+        currencyItems.push(i);
       }
       else {
         inventory.push(i);
@@ -468,10 +477,50 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       attr.final_save = attr.rank + (attr.save_bonus || 0) + globalSave;
     }
 
+    // ==========================================
+    // Кошелёк (мультивалютность)
+    // ==========================================
+    // Список валют — из настройки мира; счётчики — из system.currency актора.
+    const walletCurrencies = [];
+    let walletTotal = 0;
+    try {
+      const defs = game.settings.get("dedrel", "currencies") || [];
+      const counts = actorData.system.currency || {};
+      for (const def of defs) {
+        const count = Number(counts[def.key]) || 0;
+        walletCurrencies.push({ ...def, count });
+        walletTotal += count * (Number(def.base_value) || 0);
+      }
+    } catch (e) {
+      // Настройка валют недоступна
+    }
+
+    // ==========================================
+    // Перегрузка (для индикатора-бара)
+    // ==========================================
+    const enc = actorData.system.resources?.encumbrance;
+    let encumbrance = null;
+    if (enc) {
+      const heavy = enc.thresholds?.heavy || 0;
+      const pct = heavy > 0 ? Math.min(100, Math.round((enc.total / heavy) * 100)) : 0;
+      const colorMap = { light: "#4caf50", medium: "#e0c341", heavy: "#e08a2e", overloaded: "#c0392b" };
+      encumbrance = {
+        ...enc,
+        pct,
+        color: colorMap[enc.category] || "#4caf50",
+        label: game.i18n.localize(`DEDREL.Encumbrance.${enc.category}`)
+      };
+    }
+
     Object.assign(context, {
       actor: actorData,
       system: actorData.system,
       attributesData,
+      encumbrance,
+      walletCurrencies,
+      walletTotal,
+      walletWeight: actorData.system.wallet?.weight || 0,
+      currencyItems,
       maneuvers,
       maneuversGroups,
       spells,
@@ -712,6 +761,129 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (item) {
       await item.update({"system.equipped": false});
     }
+  }
+
+  /**
+   * Зачисляет монеты в кошелёк актора: прибавляет value к счётчику валюты
+   * с ключом denomination. Возвращает true, если валюта известна миру.
+   */
+  static async depositToWallet(actor, denomination, value) {
+    if (!denomination || !value) return false;
+    let defs = [];
+    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    if (!defs.some(d => d.key === denomination)) return false;
+    const current = Number(actor.system.currency?.[denomination]) || 0;
+    await actor.update({ [`system.currency.${denomination}`]: current + Number(value) });
+    return true;
+  }
+
+  /** Зачисляет «рыхлую» монету-предмет в кошелёк и удаляет предмет. */
+  static async #onDepositCurrency(event, target) {
+    const itemId = target.closest(".item-row")?.dataset.itemId;
+    const item = itemId ? this.document.items.get(itemId) : null;
+    if (!item || item.type !== "currency") return;
+    const ok = await DedrelCharacterSheet.depositToWallet(this.document, item.system.denomination, item.system.value);
+    if (!ok) {
+      return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.UnknownDenomination", { key: item.system.denomination }));
+    }
+    const value = item.system.value;
+    const denom = item.system.denomination;
+    await item.delete();
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.CurrencyDeposited", { value, denom }));
+  }
+
+  /**
+   * «Свернуть номинал»: перераспределяет весь кошелёк по деноминациям сверху вниз
+   * (жадный алгоритм по base_value), минимизируя число монет. Общая ценность не
+   * меняется при наличии базовой валюты (base_value = 1); иначе возможен остаток,
+   * который остаётся в наименьшей деноминации.
+   */
+  static async #onCollapseCurrency(event, target) {
+    let defs = [];
+    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    const valued = defs.filter(d => Number(d.base_value) > 0).sort((a, b) => b.base_value - a.base_value);
+    if (!valued.length) return;
+
+    const counts = this.document.system.currency || {};
+    let remainder = 0;
+    for (const d of valued) remainder += (Number(counts[d.key]) || 0) * Number(d.base_value);
+    remainder = Math.round(remainder);
+
+    const update = {};
+    valued.forEach((d, idx) => {
+      const bv = Number(d.base_value);
+      if (idx === valued.length - 1) {
+        // Наименьшая деноминация забирает остаток целиком (сохранение ценности)
+        update[`system.currency.${d.key}`] = Math.round(remainder / bv);
+      } else {
+        const n = Math.floor(remainder / bv);
+        update[`system.currency.${d.key}`] = n;
+        remainder -= n * bv;
+      }
+    });
+    await this.document.update(update);
+    ui.notifications.info(game.i18n.localize("DEDREL.Notifications.CurrencyCollapsed"));
+  }
+
+  /**
+   * Перевод денег другому актору. Открывает диалог выбора получателя и сумм
+   * по валютам; исполнение — через DedrelSocket (напрямую, если хватает прав,
+   * иначе через активного ГМа). Позволяет игрокам расплачиваться, не владея
+   * кошельком получателя.
+   */
+  static async #onPayCurrency(event, target) {
+    const actor = this.document;
+    let defs = [];
+    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
+
+    // Получатели: другие акторы с кошельком (system.currency)
+    const targets = game.actors.filter(a => a.id !== actor.id && a.system?.currency !== undefined);
+    if (!targets.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTransferTargets"));
+
+    const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
+    const targetOptions = targets.map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join("");
+    const currencyRows = defs.map(d => {
+      const have = Number(actor.system.currency?.[d.key]) || 0;
+      return `<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <label style="flex:1;">${esc(d.name)} (${esc(d.abbr)}) — ${game.i18n.localize("DEDREL.ActorSheet.WalletHave")}: ${have}</label>
+          <input type="number" class="pay-amount" data-key="${esc(d.key)}" min="0" step="1" value="0" style="width:80px;"/>
+        </div>`;
+    }).join("");
+
+    const content = `
+      <div class="form-group" style="margin-bottom:8px;">
+        <label style="font-weight:bold;">${game.i18n.localize("DEDREL.ActorSheet.TransferTo")}</label>
+        <select id="pay-target" style="width:100%;">${targetOptions}</select>
+      </div>
+      <div>${currencyRows}</div>`;
+
+    const { DialogV2 } = foundry.applications.api;
+    await DialogV2.wait({
+      window: { title: game.i18n.localize("DEDREL.ActorSheet.TransferMoney") },
+      content,
+      buttons: [
+        {
+          action: "pay",
+          icon: "fa-solid fa-hand-holding-dollar",
+          label: game.i18n.localize("DEDREL.ActorSheet.TransferSend"),
+          default: true,
+          callback: async (event, button, dialog) => {
+            const targetId = dialog.element.querySelector("#pay-target")?.value;
+            const targetActor = game.actors.get(targetId);
+            if (!targetActor) return;
+            const changes = {};
+            for (const inp of dialog.element.querySelectorAll(".pay-amount")) {
+              const amt = parseInt(inp.value) || 0;
+              if (amt > 0) changes[inp.dataset.key] = amt;
+            }
+            if (!Object.keys(changes).length) return;
+            await DedrelSocket.transferCurrency(actor, targetActor, changes);
+          }
+        },
+        { action: "cancel", icon: "fa-solid fa-times", label: game.i18n.localize("DEDREL.Chat.Cancel") }
+      ]
+    });
   }
 
   static async #onToggleSkillFavorite(event, target) {
@@ -1184,6 +1356,18 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     if (item.type === "exp") {
       return this._onDropItemCreate(item.toObject());
+    }
+
+    // Монеты, брошенные на лист: зачисляем в кошелёк, если валюта известна миру.
+    // Иначе (неизвестная деноминация) — падаем в обычное создание предмета.
+    if (item.type === "currency") {
+      const ok = await DedrelCharacterSheet.depositToWallet(this.document, item.system.denomination, item.system.value);
+      if (ok) {
+        ui.notifications.info(game.i18n.format("DEDREL.Notifications.CurrencyDeposited", {
+          value: item.system.value, denom: item.system.denomination
+        }));
+        return false;
+      }
     }
 
     if (item.type === "mutation") {

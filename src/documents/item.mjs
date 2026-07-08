@@ -91,7 +91,7 @@ export default class DedrelItem extends Item {
     // (имена задаются пользователем и потенциально содержат разметку).
     const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
 
-    if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good"].includes(this.type)) {
+    if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good", "potion", "scroll"].includes(this.type)) {
       return this.postToChat();
     }
 

@@ -1,3 +1,34 @@
+// Редкость предметов (см. "_rules/15. Inventory.md"). Канонические ключи —
+// с подчёркиванием (very_rare). Порядок = возрастание ценности/редкости.
+export const ITEM_RARITY_ENUM = ["common", "uncommon", "rare", "very_rare", "legendary"];
+
+export const ITEM_RARITY_LABELS = {
+  common: "DEDREL.Rarity.common",
+  uncommon: "DEDREL.Rarity.uncommon",
+  rare: "DEDREL.Rarity.rare",
+  very_rare: "DEDREL.Rarity.very_rare",
+  legendary: "DEDREL.Rarity.legendary"
+};
+
+// Деноминации валют по умолчанию. Реальный список валют мира задаётся в
+// настройке "currencies" (меню настроек); это лишь дефолтный набор/фолбэк.
+export const CURRENCY_DENOMINATION_ENUM = ["copper", "silver", "gold", "platinum"];
+
+// Дефолтный список валют мира (настройка "currencies"). Каждая валюта:
+//   key        — машинный ключ (латиница), ключ в кошельке актора system.currency.<key>
+//   name       — отображаемое название (можно кириллицей)
+//   abbr       — короткая аббревиатура для UI кошелька
+//   base_value — ценность в общих «базовых единицах» (механизм конвертации:
+//                медь=1, серебро=10, золото=100, платина=1000)
+//   weight     — вес одной монеты (кг), влияет на перегрузку
+//   color      — цвет-акцент в UI
+export const DEFAULT_CURRENCIES = [
+  { key: "copper",   name: "Медь",     abbr: "мд", base_value: 1,    weight: 0.01, color: "#b87333" },
+  { key: "silver",   name: "Серебро",  abbr: "ср", base_value: 10,   weight: 0.01, color: "#c0c0c0" },
+  { key: "gold",     name: "Золото",   abbr: "зл", base_value: 100,  weight: 0.01, color: "#ffd700" },
+  { key: "platinum", name: "Платина",  abbr: "пл", base_value: 1000, weight: 0.01, color: "#e5e4e2" }
+];
+
 export const DR_KEY_LABELS = {
   "piercing": "DEDREL.ItemSheet.Piercing",
   "bludgeoning": "DEDREL.ItemSheet.Bludgeoning",

@@ -1,11 +1,13 @@
+import { ITEM_RARITY_ENUM } from "../../constants.mjs";
+
 export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
-    
+
     return {
       description: new fields.HTMLField({ label: "Description" }),
       key: new fields.StringField({ initial: "" }),
-      rarity: new fields.StringField({ initial: "common", choices: ["common", "uncommon", "rare", "very rare", "legendary"] }),
+      rarity: new fields.StringField({ initial: "common", choices: ITEM_RARITY_ENUM }),
       base_price: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       weight: new fields.NumberField({ initial: 0, min: 0 }),
       slot: new fields.StringField({ initial: "middle", choices: ["lower", "middle", "upper", "universal"] }),

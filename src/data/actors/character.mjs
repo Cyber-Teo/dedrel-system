@@ -206,6 +206,11 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
       bonuses: getBonusesSchema(),
 
+      // Кошелёк: счётчики монет по ключам валют из настройки мира "currencies".
+      // Свободные ключи (ObjectField), т.к. список валют динамический.
+      // Производные wallet.total_base и wallet.weight считаются в prepareDerivedData.
+      currency: new fields.ObjectField({ required: false, initial: {} }),
+
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
 
       details: new fields.SchemaField({
@@ -258,6 +263,22 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // трек ран на листе и логика лечения продолжают работать.
     if ((this.bonuses?.ignore_wound_penalty || 0) > 0) {
       res.wounds.penalty = 0;
+    }
+
+    // Кошелёк: суммарная ценность (в базовых единицах) и вес монет.
+    // Список валют берётся из настройки мира; при недоступности настройки
+    // (ранняя инициализация) кошелёк считается нулевым и пересчитается позже.
+    this.wallet = { total_base: 0, weight: 0 };
+    try {
+      const defs = game.settings.get("dedrel", "currencies") || [];
+      const counts = this.currency || {};
+      for (const def of defs) {
+        const n = Number(counts[def.key]) || 0;
+        this.wallet.total_base += n * (Number(def.base_value) || 0);
+        this.wallet.weight += n * (Number(def.weight) || 0);
+      }
+    } catch (e) {
+      // Настройка валют ещё не готова — оставляем нулевой кошелёк
     }
 
     // Luck Points Max
@@ -338,11 +359,73 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       this.armor_penalty = hasArmorPenalty;
       if (hasArmorPenalty) {
         // Применяем механический штраф за недостаточный навык:
-        // -2 к Инициативе, -2 к Скорости. 
+        // -2 к Инициативе, -2 к Скорости.
         // Этот штраф также отображается в инвентаре для удобства игрока.
         this.initiative -= 2;
         res.movement.max -= 2;
       }
     }
+
+    // ==========================================
+    // Перегрузка (Encumbrance)
+    // ==========================================
+    // Суммарный вес: физические предметы (× количество) + вес монет кошелька.
+    // Пороги = (STR+CON)·5/10/15 кг, модифицируемые талантами
+    // (carry_capacity_mult / carry_capacity_flat). Категория и штрафы
+    // (−1/−3 ко всем броскам, −1м / полная остановка скорости) применяются,
+    // если не выставлен иммунитет ignore_encumbrance_penalty.
+    // Хранится ад-хок в this.resources.encumbrance (как this.wallet) — производное,
+    // в _source не пишется, миграция не нужна.
+    const NON_PHYSICAL = new Set([
+      "maneuver", "talent", "mutation", "condition", "spell", "exp", "countryoforigin", "mutilation"
+    ]);
+    let carriedWeight = this.wallet?.weight || 0;
+    if (this.parent && this.parent.items) {
+      for (const item of this.parent.items) {
+        if (NON_PHYSICAL.has(item.type)) continue;
+        const w = Number(item.system?.weight) || 0;
+        if (w <= 0) continue;
+        // Вес монет-предметов (currency) уже посчитан за всю пачку (value·weight_per_unit),
+        // поэтому их количество не домножаем.
+        const qty = item.type === "currency" ? 1 : (Number(item.system?.quantity) ?? 1);
+        carriedWeight += w * qty;
+      }
+    }
+
+    const capBase = attrs.str.rank + attrs.con.rank;
+    const capMult = 1 + (this.bonuses?.carry_capacity_mult || 0);
+    const capFlat = this.bonuses?.carry_capacity_flat || 0;
+    const thresholds = {
+      light: capBase * 5 * capMult + capFlat,
+      medium: capBase * 10 * capMult + capFlat,
+      heavy: capBase * 15 * capMult + capFlat
+    };
+
+    let category = "light";
+    let rollPenalty = 0;
+    let stopMovement = false;
+    let movePenalty = 0;
+    if (carriedWeight > thresholds.heavy) {
+      category = "overloaded"; rollPenalty = 3; stopMovement = true;
+    } else if (carriedWeight > thresholds.medium) {
+      category = "heavy"; rollPenalty = 3; movePenalty = 1;
+    } else if (carriedWeight > thresholds.light) {
+      category = "medium"; rollPenalty = 1;
+    }
+
+    const immune = (this.bonuses?.ignore_encumbrance_penalty || 0) > 0;
+    if (!immune) {
+      this.bonuses.global_roll -= rollPenalty;
+      if (stopMovement) res.movement.max = 0;
+      else res.movement.max = Math.max(0, res.movement.max - movePenalty);
+    }
+
+    this.resources.encumbrance = {
+      total: Math.round(carriedWeight * 100) / 100,
+      category,
+      thresholds,
+      immune,
+      rollPenalty: immune ? 0 : rollPenalty
+    };
   }
 }

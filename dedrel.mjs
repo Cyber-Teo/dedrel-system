@@ -7,6 +7,7 @@ import { ItemDataModels } from "./src/data/items/index.mjs";
 import { ActorDataModels } from "./src/data/actors/index.mjs";
 import DedrelCharacterSheet from "./src/sheets/character-sheet.mjs";
 import { DedrelItemSheet } from "./src/sheets/item-sheet.mjs";
+import DedrelLootSheet from "./src/sheets/loot-sheet.mjs";
 import DedrelActor from "./src/documents/actor.mjs";
 import DedrelItem from "./src/documents/item.mjs";
 import { DedrelMigration } from "./src/migration.mjs";
@@ -24,6 +25,7 @@ import { DEDREL_MAGIC } from "./src/config/magic.mjs";
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
+import { DedrelSocket } from "./src/socket.mjs";
 
 import "./src/chat.mjs";
 import "./src/macros.mjs";
@@ -129,9 +131,11 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-statuses.hbs",
     "systems/dedrel/templates/actor/parts/character-biography.hbs",
     "systems/dedrel/templates/actor/parts/character-experience.hbs",
+    "systems/dedrel/templates/actor/loot-sheet.hbs",
     "systems/dedrel/templates/actor/parts/character-creation.hbs",
     "systems/dedrel/templates/apps/roll-dialog.hbs",
     "systems/dedrel/templates/apps/spell-constructor.hbs",
+    "systems/dedrel/templates/apps/currency-config.hbs",
     "systems/dedrel/templates/item/parts/item-header.hbs",
     "systems/dedrel/templates/item/parts/item-navigation.hbs",
     "systems/dedrel/templates/item/parts/item-description.hbs",
@@ -142,16 +146,24 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-armor.hbs",
     "systems/dedrel/templates/item/parts/details-weapon.hbs",
     "systems/dedrel/templates/item/parts/details-exp.hbs",
-    "systems/dedrel/templates/item/parts/details-condition.hbs"
+    "systems/dedrel/templates/item/parts/details-condition.hbs",
+    "systems/dedrel/templates/item/parts/details-physical.hbs",
+    "systems/dedrel/templates/item/parts/details-potion.hbs",
+    "systems/dedrel/templates/item/parts/details-scroll.hbs",
+    "systems/dedrel/templates/item/parts/details-craft_material.hbs",
+    "systems/dedrel/templates/item/parts/details-quest_item.hbs",
+    "systems/dedrel/templates/item/parts/details-currency.hbs",
+    "systems/dedrel/templates/item/parts/details-service.hbs"
   ]);
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "DEDREL.Sheets.CharacterSheet" });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelLootSheet, { types: ["loot"], makeDefault: true, label: "DEDREL.Sheets.LootSheet" });
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
-    types: ["currency", "loot", "trade_good", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
+    types: ["currency", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item", "service", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
   });
@@ -310,6 +322,9 @@ Hooks.once("ready", async function () {
       DedrelMigration.migrateWorld(currentVersion);
     }
   }
+
+  // Socket-брокер (переводы валют между акторами; сделки с торговцами — Блок D)
+  DedrelSocket.listen();
 
   await rebuildStatusEffects();
 

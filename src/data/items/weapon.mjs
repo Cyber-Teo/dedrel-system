@@ -1,11 +1,15 @@
+import { physicalItemFields } from "./_physical.mjs";
+
 export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
-    
+
     return {
       description: new fields.HTMLField({ label: "Description" }),
       key: new fields.StringField({ initial: "" }),
-      
+      // Общие физические поля (редкость/вес/цена) для экономики и перегрузки
+      ...physicalItemFields(),
+
       // Basic Stats
       weapon_type: new fields.SchemaField({
         melee: new fields.BooleanField(),

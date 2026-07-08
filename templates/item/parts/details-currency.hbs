@@ -1,0 +1,24 @@
+<div class="form-fields-grid">
+    <div class="section-header">
+        {{localize "DEDREL.ItemSheet.CurrencySettings"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Denomination"}}</label>
+        <select name="system.denomination" style="width: 100%;">
+            {{selectOptions currencyOptions selected=system.denomination}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.CoinCount"}}</label>
+        <input type="text" name="system.value" value="{{system.value}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.WeightPerUnit"}}</label>
+        <input type="text" name="system.weight_per_unit" value="{{system.weight_per_unit}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.BasePrice"}}</label>
+        <input type="text" name="system.base_price" value="{{system.base_price}}" data-dtype="Number"/>
+    </div>
+    <p class="hint" style="grid-column: 1 / -1;">{{localize "DEDREL.ItemSheet.CurrencyItemHint"}}</p>
+</div>

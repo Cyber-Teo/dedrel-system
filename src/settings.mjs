@@ -1,4 +1,25 @@
+import CurrencyConfigApp from "./apps/currency-config.mjs";
+import { DEFAULT_CURRENCIES } from "./constants.mjs";
+
 export function registerSystemSettings() {
+  // Валюты мира (мультивалютность). Список деноминаций редактируется через меню
+  // (CurrencyConfigApp); кошелёк актора хранит счётчики по ключам этих валют.
+  game.settings.register("dedrel", "currencies", {
+    scope: "world",
+    config: false,
+    type: Array,
+    default: DEFAULT_CURRENCIES
+  });
+
+  game.settings.registerMenu("dedrel", "currenciesMenu", {
+    name: "DEDREL.Settings.Currencies.Name",
+    label: "DEDREL.Settings.Currencies.Label",
+    hint: "DEDREL.Settings.Currencies.Hint",
+    icon: "fa-solid fa-coins",
+    type: CurrencyConfigApp,
+    restricted: true
+  });
+
   // Регистрация локализации (как пример настройки системы)
   game.settings.register("dedrel", "systemLanguage", {
     name: "DEDREL.Settings.Language.Name",
