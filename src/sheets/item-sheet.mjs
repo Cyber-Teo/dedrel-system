@@ -2,6 +2,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
 import { DR_KEY_LABELS, ITEM_RARITY_ENUM } from "../constants.mjs";
+import { buildEffectData } from "../config/effect-library.mjs";
 
 // Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
 // Для них рендерится общий блок details-physical.hbs.
@@ -33,11 +34,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       editImage: DedrelItemSheet.#onEditImage,
       openInConstructor: DedrelItemSheet.#onOpenInConstructor,
       addEffect: DedrelItemSheet.#onAddEffect,
+      addEffectFromLibrary: DedrelItemSheet.#onAddEffectFromLibrary,
       editEffect: DedrelItemSheet.#onEditEffect,
       deleteEffect: DedrelItemSheet.#onDeleteEffect,
       toggleEffectSelf: DedrelItemSheet.#onToggleEffectSelf,
       toggleEffectAuraPayload: DedrelItemSheet.#onToggleEffectAuraPayload,
       configureEffectAura: DedrelItemSheet.#onConfigureEffectAura,
+      configureEffectLight: DedrelItemSheet.#onConfigureEffectLight,
       placeTemplate: DedrelItemSheet.#onPlaceTemplate
     }
   };
@@ -428,6 +431,62 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }, { parent: this.document });
   }
 
+  /**
+   * Пикер библиотеки эффектов: выбор готового пресета (CONFIG.DEDREL.effectLibrary)
+   * и штамповка его как Active Effect на предмете. Избавляет от ручной сборки
+   * баффов/ядов/сопротивлений с нуля. См. src/config/effect-library.mjs.
+   */
+  static async #onAddEffectFromLibrary(event, target) {
+    const item = this.document;
+    const lib = CONFIG.DEDREL?.effectLibrary || {};
+    const keys = Object.keys(lib);
+    if (keys.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
+
+    // Группируем пресеты по категории (buff/debuff/...) для читаемого списка
+    const byCat = {};
+    for (const key of keys) {
+      const cat = lib[key].category || "other";
+      (byCat[cat] ??= []).push(key);
+    }
+    const optgroups = Object.entries(byCat).map(([cat, catKeys]) => {
+      const catLabel = game.i18n.localize(`DEDREL.EffectLib.Cat.${cat}`);
+      const options = catKeys.map(k =>
+        `<option value="${k}">${foundry.utils.escapeHTML(game.i18n.localize(lib[k].label))}</option>`
+      ).join("");
+      return `<optgroup label="${foundry.utils.escapeHTML(catLabel)}">${options}</optgroup>`;
+    }).join("");
+
+    const content = `
+      <div class="form-group" style="margin-bottom: 10px;">
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.PickLabel")}</label>
+        <select name="preset" style="width: 100%; padding: 4px;">${optgroups}</select>
+      </div>`;
+
+    await foundry.applications.api.DialogV2.wait({
+      window: { title: game.i18n.localize("DEDREL.EffectLib.PickTitle") },
+      content,
+      buttons: [
+        {
+          action: "add",
+          icon: "fa-solid fa-plus",
+          label: game.i18n.localize("DEDREL.ItemSheet.AddEffect"),
+          default: true,
+          callback: async (event, button, dialog) => {
+            const key = dialog.element.querySelector("[name=preset]")?.value;
+            if (!key) return;
+            const data = buildEffectData(key, { origin: item.uuid });
+            if (data) await item.createEmbeddedDocuments("ActiveEffect", [data]);
+          }
+        },
+        {
+          action: "cancel",
+          icon: "fa-solid fa-times",
+          label: game.i18n.localize("DEDREL.Chat.Cancel")
+        }
+      ]
+    });
+  }
+
   static async #onEditEffect(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
@@ -561,6 +620,107 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
               // остальные), поэтому не оставляет статус-иконку на актёре.
               "flags.dedrel.applyTo": _del,
               transfer: false,
+              disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
+            });
+          }
+        }
+      ]
+    });
+  }
+
+  /**
+   * Диалог настройки света токена (flags.dedrel.tokenLight). Свет применяется хуком
+   * src/canvas/token-light.mjs (у ActiveEffect нет нативного пути к token.light).
+   * Поля повторяют стандартную конфигурацию света Foundry (радиусы, цвет, анимация).
+   * Галка «Включён» служит тумблером: снятие ставит disabled, хук гасит свет.
+   */
+  static async #onConfigureEffectLight(event, target) {
+    const effectId = target.closest(".effect-item").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if (!effect) return;
+
+    const light = effect.getFlag("dedrel", "tokenLight") ?? {};
+    const anim = light.animation ?? {};
+
+    // Типы анимации света берём из ядра Foundry (те же, что в стандартном меню света)
+    const animOptions = [`<option value="" ${!anim.type ? "selected" : ""}>${game.i18n.localize("DEDREL.ItemSheet.LightAnimNone")}</option>`];
+    for (const [key, cfg] of Object.entries(CONFIG.Canvas.lightAnimations ?? {})) {
+      const label = game.i18n.localize(cfg.label);
+      animOptions.push(`<option value="${key}" ${key === anim.type ? "selected" : ""}>${foundry.utils.escapeHTML(label)}</option>`);
+    }
+
+    const content = `
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightEnabled")}</label>
+        <input type="checkbox" name="enabled" ${effect.disabled ? "" : "checked"}/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightDim")}</label>
+        <input type="number" name="dim" min="0" step="0.5" value="${Number(light.dim) || 0}"/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightBright")}</label>
+        <input type="number" name="bright" min="0" step="0.5" value="${Number(light.bright) || 0}"/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightColor")}</label>
+        <color-picker name="color" value="${light.color ?? ""}"></color-picker>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightAlpha")}</label>
+        <input type="number" name="alpha" min="0" max="1" step="0.05" value="${light.alpha ?? 0.5}"/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightAnimType")}</label>
+        <select name="animType">${animOptions.join("")}</select>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightAnimSpeed")}</label>
+        <input type="number" name="animSpeed" min="0" max="10" step="1" value="${anim.speed ?? 5}"/>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightAnimIntensity")}</label>
+        <input type="number" name="animIntensity" min="0" max="10" step="1" value="${anim.intensity ?? 5}"/>
+      </div>
+      <p class="hint">${game.i18n.localize("DEDREL.ItemSheet.LightConfigHint")}</p>
+    `;
+
+    const { DialogV2 } = foundry.applications.api;
+    await DialogV2.wait({
+      window: { title: game.i18n.format("DEDREL.ItemSheet.LightConfigTitle", { name: effect.name }) },
+      position: { width: 420 },
+      content,
+      buttons: [
+        {
+          action: "save",
+          icon: "fa-solid fa-check",
+          label: game.i18n.localize("DEDREL.Chat.Confirm"),
+          default: true,
+          callback: async (event, button, dialog) => {
+            const html = dialog.element;
+            const dim = parseFloat(html.querySelector('[name="dim"]')?.value) || 0;
+            const bright = parseFloat(html.querySelector('[name="bright"]')?.value) || 0;
+            // Оба радиуса 0 — снимаем маркер света (эффект перестаёт быть светящимся)
+            if (dim <= 0 && bright <= 0) {
+              await effect.update({ "flags.dedrel.tokenLight": _del });
+              return;
+            }
+            const animType = html.querySelector('[name="animType"]')?.value || "";
+            const alphaRaw = parseFloat(html.querySelector('[name="alpha"]')?.value);
+            await effect.update({
+              "flags.dedrel.tokenLight": {
+                dim,
+                bright,
+                color: html.querySelector('[name="color"]')?.value || null,
+                alpha: Number.isFinite(alphaRaw) ? alphaRaw : 0.5,
+                animation: {
+                  type: animType || null,
+                  speed: parseInt(html.querySelector('[name="animSpeed"]')?.value) || 0,
+                  intensity: parseInt(html.querySelector('[name="animIntensity"]')?.value) || 0
+                }
+              },
+              // Источник света светит носителю, пока эффект перенесён на владельца
+              transfer: true,
               disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
             });
           }

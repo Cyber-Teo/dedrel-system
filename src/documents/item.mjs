@@ -95,6 +95,13 @@ export default class DedrelItem extends Item {
       return this.postToChat();
     }
 
+    // Свиток без привязанного заклинания использовать нельзя — открываем лист,
+    // чтобы ГМ указал spell_id/spell_key (не тратим свиток впустую).
+    if (this.type === "scroll" && !this.system.spell_id && !this.system.spell_key) {
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ScrollNoSpell"));
+      return this.sheet.render(true);
+    }
+
     // Ре-валидация собранного заклинания (Магический Конструктор): ранг доктрины
     // мог измениться после сохранения, активный путь может не совпадать со сборкой,
     // а поля предмета могли быть отредактированы руками. Рукотворные заклинания
@@ -417,7 +424,13 @@ export default class DedrelItem extends Item {
               }
             }
 
-            await this.postToChat(selectedWeaponId);
+            // Свиток кастует привязанное заклинание (эфемерная копия на акторе),
+            // а не шлёт собственную карточку. Списание свитка уже произошло выше.
+            if (this.type === "scroll") {
+              await this.#castFromScroll();
+            } else {
+              await this.postToChat(selectedWeaponId);
+            }
 
             // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
             // кастере без авто-истечения, снимается вручную; потеря сознания
@@ -451,6 +464,56 @@ export default class DedrelItem extends Item {
         }
       ]
     });
+  }
+
+  /**
+   * Находит заклинание, «запечатанное» в свитке: сначала по spell_id (предмет на
+   * акторе / в мире / по UUID), затем по spell_key (компендиум заклинаний или мир).
+   * @returns {Promise<Item|null>}
+   */
+  async #resolveScrollSpell() {
+    const sys = this.system;
+    if (sys.spell_id) {
+      const onActor = this.actor?.items.get(sys.spell_id);
+      if (onActor?.type === "spell") return onActor;
+      const world = game.items.get(sys.spell_id);
+      if (world?.type === "spell") return world;
+      const byUuid = await fromUuid(sys.spell_id).catch(() => null);
+      if (byUuid?.type === "spell") return byUuid;
+    }
+    if (sys.spell_key) {
+      const pack = game.packs.get("dedrel.spells");
+      if (pack) {
+        const index = await pack.getIndex({ fields: ["system.key"] });
+        const entry = index.find(e => e.system?.key === sys.spell_key);
+        if (entry) return pack.getDocument(entry._id);
+      }
+      const world = game.items.find(i => i.type === "spell" && i.system.key === sys.spell_key);
+      if (world) return world;
+    }
+    return null;
+  }
+
+  /**
+   * Каст заклинания со свитка: свиток даёт магию мимо доктрины и ОД владельца.
+   * Создаём эфемерную копию заклинания на акторе (кнопки карточки чата ищут предмет
+   * по id) и шлём её карточку напрямую через postToChat — НЕ через use(), иначе
+   * нулевая стоимость открыла бы лист, а не отправила карточку, и списались бы ОД.
+   * Эфемерный предмет чистится в конце боя (см. combat.mjs) или макросом.
+   */
+  async #castFromScroll() {
+    const source = await this.#resolveScrollSpell();
+    if (!source) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ScrollSpellNotFound"));
+    const actor = this.actor;
+    if (!actor) return;
+
+    const spellData = source.toObject();
+    delete spellData._id;
+    foundry.utils.setProperty(spellData, "flags.dedrel.ephemeral", true);
+    foundry.utils.setProperty(spellData, "flags.dedrel.fromScroll", this.name);
+
+    const [ephemeral] = await actor.createEmbeddedDocuments("Item", [spellData]);
+    await ephemeral.postToChat();
   }
 
   /**

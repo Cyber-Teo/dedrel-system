@@ -140,6 +140,13 @@
       "system": "dedrel"
     },
     {
+      "name": "active_effects",
+      "label": "Active Effects",
+      "path": "packs/active_effects.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
       "name": "macro",
       "label": "Macro",
       "path": "packs/macro.db",

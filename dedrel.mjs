@@ -24,6 +24,7 @@ import { DR_KEY_LABELS } from "./src/constants.mjs";
 import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
 import { DEDREL_MAGIC } from "./src/config/magic.mjs";
 import { CREATURE_TYPES } from "./src/config/creature-types.mjs";
+import { DEDREL_EFFECT_LIBRARY, buildEffectData } from "./src/config/effect-library.mjs";
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
@@ -35,6 +36,7 @@ import DedrelCombat from "./src/combat.mjs";
 import "./src/canvas/auras.mjs";
 import "./src/canvas/aura-regions.mjs";
 import "./src/canvas/movement.mjs";
+import "./src/canvas/token-light.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -53,6 +55,9 @@ Hooks.once("init", function() {
   CONFIG.DEDREL = CONFIG.DEDREL || {};
   CONFIG.DEDREL.magic = DEDREL_MAGIC;
   CONFIG.DEDREL.creatureTypes = CREATURE_TYPES;
+  // Библиотека переиспользуемых Active Effects (зелья/свитки/баффы). См.
+  // src/config/effect-library.mjs; хелперы — game.dedrel.effects (ready-хук ниже).
+  CONFIG.DEDREL.effectLibrary = DEDREL_EFFECT_LIBRARY;
 
   // Инициатива (стандартный расчет Foundry для системы)
   let initDirection = -1;
@@ -233,6 +238,52 @@ Hooks.once("init", function() {
         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectToken"));
       }
       return new SpellConstructorApp({ actor, spellItem }).render(true);
+    },
+
+    /**
+     * Библиотека переиспользуемых Active Effects (см. src/config/effect-library.mjs).
+     * Позволяет копировать готовые эффекты (яд, баффы, сопротивления) на актёров и
+     * предметы из макросов, не собирая их с нуля.
+     */
+    effects: {
+      /** @returns {object|null} Данные ActiveEffect из пресета библиотеки. */
+      build: (key, opts = {}) => buildEffectData(key, opts),
+
+      /** @returns {string[]} Список доступных ключей пресетов. */
+      list: () => Object.keys(CONFIG.DEDREL.effectLibrary),
+
+      /**
+       * Накладывает пресет на актёров выделенных (или таргетнутых) токенов.
+       * @returns {Promise<number>} Число целей, на которых наложен эффект.
+       */
+      applyToTargets: async (key, opts = {}) => {
+        const data = buildEffectData(key, opts);
+        if (!data) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.EffectPresetUnknown", { key }));
+        let targets = canvas.tokens.controlled;
+        if (targets.length === 0) targets = Array.from(game.user.targets);
+        if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
+        let count = 0;
+        for (const token of targets) {
+          if (!token.actor) continue;
+          await token.actor.createEmbeddedDocuments("ActiveEffect", [data]);
+          count++;
+        }
+        ui.notifications.info(game.i18n.format("DEDREL.Notifications.EffectsApplied", { count }));
+        return count;
+      },
+
+      /**
+       * Штампует пресет как Active Effect на предмете (зелье/оружие/факел) — чтобы
+       * потом накладывать его кнопкой «Применить эффекты» из карточки чата.
+       * @param {Item} item
+       * @returns {Promise<ActiveEffect[]|undefined>}
+       */
+      stampOnItem: async (item, key, opts = {}) => {
+        if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
+        const data = buildEffectData(key, { origin: item.uuid, ...opts });
+        if (!data) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.EffectPresetUnknown", { key }));
+        return item.createEmbeddedDocuments("ActiveEffect", [data]);
+      }
     }
   };
   
