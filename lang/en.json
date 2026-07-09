@@ -20,7 +20,8 @@
     "Sheets": {
       "CharacterSheet": "Dedrel Character Sheet",
       "ItemSheet": "Dedrel Item Sheet",
-      "LootSheet": "Dedrel Loot/Merchant Sheet"
+      "LootSheet": "Dedrel Loot/Merchant Sheet",
+      "NpcSheet": "NPC / Monster"
     },
     "ItemFields": {
       "SystemKey": "System Key",
@@ -411,7 +412,9 @@
       "ConditionTickHeal": "\"{condition}\": <b>{actor}</b> regains {amount} HP.",
       "DamageTakenTemp": "(To temporary HP: {tempDamage})",
       "DamageBlocked": "(Blocked by armor: {dr} DR)",
-      "UseItem": "Use: {name}"
+      "UseItem": "Use: {name}",
+      "DamageAmplified": "(Vulnerability: +{dr} extra damage)",
+      "DamageVsType": "(Vs type: +{pct}% damage)"
     },
     "ItemSheet": {
       "Tabs": {
@@ -722,7 +725,9 @@
       "EncumbrancePenalty": "Penalty to all rolls",
       "EncumbranceNoMove": "Cannot move",
       "Containers": "Containers",
-      "AccessorySlots": "Accessory Slots"
+      "AccessorySlots": "Accessory Slots",
+      "CanReceiveCurrency": "Accepts transfers",
+      "CanReceiveCurrencyHint": "Show this actor in the recipient list when transferring money."
     },
     "Notifications": {
       "EquipArmorHint": "For armor, use the 'Equip' buttons (slots).",
@@ -1025,6 +1030,51 @@
       "right1": "Right hand 1",
       "right2": "Right hand 2",
       "tail": "Tail"
+    },
+    "Npc": {
+      "Tier": "Tier",
+      "TierPeon": "Peon",
+      "TierBoss": "Boss",
+      "Name": "NPC name",
+      "Threat": "Threat / CR",
+      "Hits": "Hits",
+      "Toughness": "Toughness",
+      "Derived": "Calculated automatically",
+      "OverrideHpMax": "Override HP max",
+      "OverrideApMax": "Override AP max",
+      "Abilities": "Abilities",
+      "Equipment": "Equipment",
+      "Use": "Use",
+      "DropHint": "Drag maneuvers, spells, talents and gear here to add them.",
+      "Magic": "Magic",
+      "Doctrines": "Doctrines",
+      "Techniques": "Techniques",
+      "Unlocked": "Access",
+      "Rank": "Rank",
+      "CreatureType": "Creature type",
+      "DrBase": "base",
+      "DrEffective": "effective"
+    },
+    "CreatureTypes": {
+      "beast": "Beast",
+      "magical_beast": "Magical Beast",
+      "elemental": "Elemental",
+      "spirit": "Spirit",
+      "shade": "Shade",
+      "fey": "Fey",
+      "demon": "Demon",
+      "dragon": "Dragon",
+      "elf": "Elf",
+      "undead": "Undead",
+      "cosmic": "Cosmic"
+    },
+    "CreatureType": {
+      "TypeKey": "Creature type",
+      "EffectsHint": "Grant innate bonuses (DR, defenses, speed, immunities) via the Effects tab — they apply to the owner while this item is in its inventory."
+    },
+    "Weapon": {
+      "VsCreatures": "Bonus vs creature types",
+      "VsCreaturesHint": "Potency 0-10: each point adds +10% damage (before the target's DR) if the target has that creature type."
     }
   },
   "DEDREL.Rarity": {
@@ -1041,13 +1091,15 @@
       "scroll": "Scroll",
       "craft_material": "Crafting Material",
       "quest_item": "Quest Item",
-      "service": "Service"
+      "service": "Service",
+      "creature_type": "Creature Type"
     },
     "RegionBehavior": {
       "dedrelAura": "Dedrel Aura"
     },
     "Actor": {
-      "loot": "Loot/Merchant"
+      "loot": "Loot/Merchant",
+      "npc": "NPC / Monster"
     }
   }
 }

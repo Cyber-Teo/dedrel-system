@@ -133,6 +133,13 @@
       "system": "dedrel"
     },
     {
+      "name": "creature_types",
+      "label": "Creature Types",
+      "path": "packs/creature_types.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
       "name": "macro",
       "label": "Macro",
       "path": "packs/macro.db",
@@ -158,7 +165,8 @@
   "documentTypes": {
     "Actor": {
       "character": {},
-      "loot": {}
+      "loot": {},
+      "npc": {}
     },
     "Item": {
       "currency": {},
@@ -180,7 +188,8 @@
       "exp": {},
       "condition": {},
       "ammunition": {},
-      "spell": {}
+      "spell": {},
+      "creature_type": {}
     },
     "RegionBehavior": {
       "dedrelAura": {}

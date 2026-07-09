@@ -8,6 +8,7 @@ import { ActorDataModels } from "./src/data/actors/index.mjs";
 import DedrelCharacterSheet from "./src/sheets/character-sheet.mjs";
 import { DedrelItemSheet } from "./src/sheets/item-sheet.mjs";
 import DedrelLootSheet from "./src/sheets/loot-sheet.mjs";
+import DedrelNpcSheet from "./src/sheets/npc-sheet.mjs";
 import DedrelActor from "./src/documents/actor.mjs";
 import DedrelItem from "./src/documents/item.mjs";
 import { DedrelMigration } from "./src/migration.mjs";
@@ -22,6 +23,7 @@ import DedrelAuraRegionBehaviorType from "./src/data/region-behaviors/aura.mjs";
 import { DR_KEY_LABELS } from "./src/constants.mjs";
 import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
 import { DEDREL_MAGIC } from "./src/config/magic.mjs";
+import { CREATURE_TYPES } from "./src/config/creature-types.mjs";
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
@@ -50,6 +52,7 @@ Hooks.once("init", function() {
   // Модификаторов, лимиты Рангов Доктрин, свойства Доктрин. См. src/config/magic.mjs
   CONFIG.DEDREL = CONFIG.DEDREL || {};
   CONFIG.DEDREL.magic = DEDREL_MAGIC;
+  CONFIG.DEDREL.creatureTypes = CREATURE_TYPES;
 
   // Инициатива (стандартный расчет Foundry для системы)
   let initDirection = -1;
@@ -155,17 +158,19 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-quest_item.hbs",
     "systems/dedrel/templates/item/parts/details-currency.hbs",
     "systems/dedrel/templates/item/parts/details-service.hbs",
-    "systems/dedrel/templates/item/parts/details-equip-slot.hbs"
+    "systems/dedrel/templates/item/parts/details-equip-slot.hbs",
+    "systems/dedrel/templates/item/parts/details-creature_type.hbs"
   ]);
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "DEDREL.Sheets.CharacterSheet" });
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelLootSheet, { types: ["loot"], makeDefault: true, label: "DEDREL.Sheets.LootSheet" });
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelNpcSheet, { types: ["npc"], makeDefault: true, label: "DEDREL.Sheets.NpcSheet" });
 
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Item, "dedrel", DedrelItemSheet, {
-    types: ["currency", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item", "service", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition"],
+    types: ["currency", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item", "service", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition", "creature_type"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
   });

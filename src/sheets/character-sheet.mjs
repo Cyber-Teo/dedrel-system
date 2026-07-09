@@ -794,12 +794,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
    * с ключом denomination. Возвращает true, если валюта известна миру.
    */
   static async depositToWallet(actor, denomination, value) {
-    if (!denomination || !value) return false;
+    const v = Number(value);
+    if (!denomination || !(v > 0)) return false; // только положительное зачисление
     let defs = [];
     try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
     if (!defs.some(d => d.key === denomination)) return false;
     const current = Number(actor.system.currency?.[denomination]) || 0;
-    await actor.update({ [`system.currency.${denomination}`]: current + Number(value) });
+    await actor.update({ [`system.currency.${denomination}`]: current + v });
     return true;
   }
 
@@ -863,8 +864,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
     if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
 
-    // Получатели: другие акторы с кошельком (system.currency)
-    const targets = game.actors.filter(a => a.id !== actor.id && a.system?.currency !== undefined);
+    // Получатели: другие акторы с кошельком, которым разрешён приём денег
+    // (флаг can_receive_currency) — чтобы список не забивался сундуками/лутом.
+    const targets = game.actors.filter(a =>
+      a.id !== actor.id && a.system?.currency !== undefined && a.system?.can_receive_currency);
     if (!targets.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTransferTargets"));
 
     const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));

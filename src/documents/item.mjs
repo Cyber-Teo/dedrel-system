@@ -224,11 +224,14 @@ export default class DedrelItem extends Item {
 
     if (apCost > 0 || isVariable) {
       let apUniversal = actor.system.resources?.ap_universal?.value || 0;
-      if (this.type === "maneuver") {
-        apSpecific = actor.system.resources?.ap_maneuver?.value || 0;
+      // Специальный пул задействуем ТОЛЬКО если он есть в схеме актёра.
+      // У NPC его нет (единый универсальный пул) → стоимость идёт с ap_universal,
+      // и мы не пишем фантомный ключ в actor.update.
+      if (this.type === "maneuver" && actor.system.resources?.ap_maneuver) {
+        apSpecific = actor.system.resources.ap_maneuver.value || 0;
         specificApKey = "system.resources.ap_maneuver.value";
-      } else if (this.type === "spell" || this.type === "magic_item") {
-        apSpecific = actor.system.resources?.ap_magic?.value || 0;
+      } else if ((this.type === "spell" || this.type === "magic_item") && actor.system.resources?.ap_magic) {
+        apSpecific = actor.system.resources.ap_magic.value || 0;
         specificApKey = "system.resources.ap_magic.value";
       }
       currentAp = apUniversal + apSpecific;

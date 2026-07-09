@@ -1,0 +1,12 @@
+<div class="form-group" style="padding: 10px; background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--color-border); margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+    <label style="font-weight: bold; width: 140px;">{{localize "DEDREL.CreatureType.TypeKey"}}</label>
+    <input type="text" name="system.key" value="{{system.key}}" list="creature-type-presets" placeholder="undead" style="flex: 1;"/>
+    <datalist id="creature-type-presets">
+        {{#each creatureTypeOptions as |opt|}}
+            <option value="{{opt.key}}" label="{{localize opt.label}}"></option>
+        {{/each}}
+    </datalist>
+</div>
+<p style="opacity: 0.7; font-size: 12px; padding: 0 10px 10px;">
+    <i class="fa-solid fa-circle-info"></i> {{localize "DEDREL.CreatureType.EffectsHint"}}
+</p>

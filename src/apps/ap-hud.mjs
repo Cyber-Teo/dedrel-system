@@ -94,7 +94,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     }
 
     const actor = token.actor;
-    if (!actor || actor.type !== "character") {
+    if (!actor || !["character", "npc"].includes(actor.type)) {
       this.actor = null;
       this.token = null;
       if (this.rendered) this.close();
@@ -109,7 +109,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
   activateHooks() {
     Hooks.on("controlToken", (token, controlled) => {
       // Find the first controlled character token
-      const controlledTokens = canvas.tokens.controlled.filter(t => t.actor?.type === "character");
+      const controlledTokens = canvas.tokens.controlled.filter(t => ["character", "npc"].includes(t.actor?.type));
       if (controlledTokens.length > 0) {
         this.updateForToken(controlledTokens[0]);
       } else {

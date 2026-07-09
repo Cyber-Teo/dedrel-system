@@ -61,9 +61,17 @@
             </div>
             {{/each}}
         </div>
-        {{#unless isMerchant}}
+        {{#if isLoot}}
         <button type="button" class="loot-btn" data-action="divideCoins"><i class="fas fa-scale-balanced"></i> {{localize "DEDREL.Loot.DivideCoins"}}</button>
-        {{/unless}}
+        {{/if}}
+        {{#if isContainer}}
+        <button type="button" class="loot-btn" data-action="transferMoney"><i class="fas fa-hand-holding-dollar"></i> {{localize "DEDREL.ActorSheet.TransferMoney"}}</button>
+        {{/if}}
+        {{#if isGM}}
+        <label class="checkbox loot-receive-flag" title="{{localize "DEDREL.ActorSheet.CanReceiveCurrencyHint"}}">
+            <input type="checkbox" name="system.can_receive_currency" {{checked system.can_receive_currency}}/> {{localize "DEDREL.ActorSheet.CanReceiveCurrency"}}
+        </label>
+        {{/if}}
     </fieldset>
 
     {{!-- Вместимость контейнера --}}

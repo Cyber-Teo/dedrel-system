@@ -26,6 +26,39 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
 });
 
 /**
+ * Лимит нагрузки контейнера для МОНЕТ: блокируем зачисление новых монет в
+ * кошелёк контейнера (mode container, capacity > 0), если их вес перевесит
+ * capacity. Ловит все пути изменения system.currency (правка на листе, перевод
+ * через сокет, депозит currency-предмета).
+ */
+Hooks.on("preUpdateActor", (actor, changes) => {
+  if (actor.type !== "loot" || actor.system.mode !== "container") return true;
+  const cap = Number(actor.system.capacity) || 0;
+  if (cap <= 0) return true;
+  // changes могут прийти как плоскими ключами ("system.currency.copper"), так и
+  // вложенным объектом ("system.currency": {...}) → нормализуем через expandObject.
+  const expanded = foundry.utils.expandObject(foundry.utils.deepClone(changes));
+  const curChanges = foundry.utils.getProperty(expanded, "system.currency");
+  if (!curChanges || typeof curChanges !== "object") return true;
+
+  const defs = DedrelCurrency.defs();
+  const oldCur = actor.system.currency || {};
+  const newCur = foundry.utils.mergeObject(foundry.utils.deepClone(oldCur), curChanges, { inplace: false });
+  let delta = 0;
+  for (const d of defs) {
+    const w = Number(d.weight) || 0;
+    if (w <= 0) continue;
+    delta += ((Number(newCur[d.key]) || 0) - (Number(oldCur[d.key]) || 0)) * w;
+  }
+  // actor.system.load уже включает вес текущих монет → новая нагрузка = load + delta
+  if (delta > 0 && (Number(actor.system.load) || 0) + delta > cap) {
+    ui.notifications.warn(game.i18n.format("DEDREL.Loot.CapacityExceeded", { cap }));
+    return false;
+  }
+  return true;
+});
+
+/**
  * Лист актора «Лут/Торговец/Контейнер» (тип loot).
  * Функциональный минимум (дизайн — вторично): режимы, экономика торговца,
  * сток предметов с ценами и кнопками сделок, кошелёк, «разделить деньги»,
@@ -48,7 +81,8 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
       takeItem: DedrelLootSheet.#onTakeItem,
       buyService: DedrelLootSheet.#onBuyService,
       rollStock: DedrelLootSheet.#onRollStock,
-      divideCoins: DedrelLootSheet.#onDivideCoins
+      divideCoins: DedrelLootSheet.#onDivideCoins,
+      transferMoney: DedrelLootSheet.#onTransferMoney
     }
   };
 
@@ -159,6 +193,15 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     if (data.type !== "Item") return super._onDrop(event);
 
     const item = await Item.implementation.fromDropData(data);
+    if (!item) return super._onDrop(event);
+
+    // Монеты (currency-предмет), брошенные на лист, зачисляем в кошелёк актора,
+    // а не кладём как предмет. Лимит веса монет проверит хук preUpdateActor.
+    if (item.type === "currency" && this.isEditable) {
+      const ok = await this.#depositCurrencyItem(item);
+      if (ok) return false;
+    }
+
     const srcActor = item?.parent;
     if (!game.user.isGM && srcActor instanceof Actor && srcActor.id !== this.document.id) {
       if (this.document.system.mode === "merchant" && this.document.system.can_sell_to) {
@@ -168,6 +211,34 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
       return;
     }
     return super._onDrop(event);
+  }
+
+  /**
+   * Зачисляет currency-предмет в кошелёк актора-контейнера (без создания
+   * предмета). Проверяет известность деноминации и лимит веса контейнера.
+   * @returns {Promise<boolean>} true, если зачислено (дроп-предмет создавать не нужно)
+   */
+  async #depositCurrencyItem(item) {
+    const denom = item.system?.denomination;
+    const value = Number(item.system?.value) || 0;
+    const defs = DedrelCurrency.defs();
+    const def = defs.find(d => d.key === denom);
+    if (!def || value <= 0) return false; // неизвестная валюта → обычное создание предмета
+
+    // Пред-проверка лимита веса (для контейнера с capacity): вес добавляемых монет.
+    if (this.document.system.mode === "container") {
+      const cap = Number(this.document.system.capacity) || 0;
+      const added = value * (Number(def.weight) || 0);
+      if (cap > 0 && added > 0 && (Number(this.document.system.load) || 0) + added > cap) {
+        ui.notifications.warn(game.i18n.format("DEDREL.Loot.CapacityExceeded", { cap }));
+        return true; // предмет не создаём, но и не зачисляем
+      }
+    }
+
+    const current = Number(this.document.system.currency?.[denom]) || 0;
+    await this.document.update({ [`system.currency.${denom}`]: current + value });
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.CurrencyDeposited", { value, denom }));
+    return true;
   }
 
   // ==== Actions ====
@@ -227,6 +298,72 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     }
     if (!targets.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTransferTargets"));
     await DedrelSocket.distributeCoins(this.document, targets);
+  }
+
+  /**
+   * Перевод денег из контейнера актору-получателю. Игрок переводит своему
+   * привязанному персонажу (game.user.character / контролируемый токен) либо
+   * любому владеемому актору-кошельку; ГМ — любому актору с флагом
+   * can_receive_currency. Исполнение — через DedrelSocket.transferCurrency
+   * (напрямую при наличии прав, иначе через активного ГМа).
+   */
+  static async #onTransferMoney(event, target) {
+    const source = this.document;
+    const defs = DedrelCurrency.defs();
+    if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
+
+    // Получатели: акторы с кошельком, которым разрешён приём денег.
+    // Игроку показываем только владеемых им акторов (обычно его персонаж).
+    const targets = game.actors.filter(a =>
+      a.id !== source.id
+      && a.system?.currency !== undefined
+      && a.system?.can_receive_currency
+      && (game.user.isGM || a.isOwner));
+    if (!targets.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTransferTargets"));
+
+    const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
+    const targetOptions = targets.map(a => `<option value="${a.id}">${esc(a.name)}</option>`).join("");
+    const currencyRows = defs.map(d => {
+      const have = Number(source.system.currency?.[d.key]) || 0;
+      return `<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <label style="flex:1;">${esc(d.name)} (${esc(d.abbr)}) — ${game.i18n.localize("DEDREL.ActorSheet.WalletHave")}: ${have}</label>
+          <input type="number" class="pay-amount" data-key="${esc(d.key)}" min="0" step="1" value="0" style="width:80px;"/>
+        </div>`;
+    }).join("");
+
+    const content = `
+      <div class="form-group" style="margin-bottom:8px;">
+        <label style="font-weight:bold;">${game.i18n.localize("DEDREL.ActorSheet.TransferTo")}</label>
+        <select id="pay-target" style="width:100%;">${targetOptions}</select>
+      </div>
+      <div>${currencyRows}</div>`;
+
+    const { DialogV2 } = foundry.applications.api;
+    await DialogV2.wait({
+      window: { title: game.i18n.localize("DEDREL.ActorSheet.TransferMoney") },
+      content,
+      buttons: [
+        {
+          action: "pay",
+          icon: "fa-solid fa-hand-holding-dollar",
+          label: game.i18n.localize("DEDREL.ActorSheet.TransferSend"),
+          default: true,
+          callback: async (event, button, dialog) => {
+            const targetId = dialog.element.querySelector("#pay-target")?.value;
+            const targetActor = game.actors.get(targetId);
+            if (!targetActor) return;
+            const changes = {};
+            for (const inp of dialog.element.querySelectorAll(".pay-amount")) {
+              const amt = parseInt(inp.value) || 0;
+              if (amt > 0) changes[inp.dataset.key] = amt;
+            }
+            if (!Object.keys(changes).length) return;
+            await DedrelSocket.transferCurrency(source, targetActor, changes);
+          }
+        },
+        { action: "cancel", icon: "fa-solid fa-times", label: game.i18n.localize("DEDREL.Chat.Cancel") }
+      ]
+    });
   }
 
   static async #onRollStock(event, target) {

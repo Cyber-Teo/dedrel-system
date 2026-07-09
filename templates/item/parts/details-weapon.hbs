@@ -105,3 +105,17 @@
         <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
     </div>
 </div>
+
+{{!-- Бонусы против типов существ: сила 0-10 = +N·10% урона до DR цели --}}
+<div class="form-group stacked">
+    <label>{{localize "DEDREL.Weapon.VsCreatures"}}</label>
+    <p style="opacity:.6; font-size:11px; margin:2px 0 6px;">{{localize "DEDREL.Weapon.VsCreaturesHint"}}</p>
+    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:2px 12px;">
+        {{#each vsCreatureRows as |row|}}
+        <div style="display:flex; align-items:center; gap:6px;">
+            <label style="flex:1; font-size:12px;">{{localize row.label}}</label>
+            <input type="number" name="system.vs_creature.{{row.key}}" value="{{row.value}}" min="0" max="10" style="width:44px;"/>
+        </div>
+        {{/each}}
+    </div>
+</div>

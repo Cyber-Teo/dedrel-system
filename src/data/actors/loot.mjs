@@ -20,6 +20,11 @@ export default class LootDataModel extends foundry.abstract.TypeDataModel {
       // Кошелёк
       currency: new f.ObjectField({ required: false, initial: {} }),
 
+      // Может ли актор быть получателем перевода денег (см. character.mjs).
+      // Луту/контейнерам по умолчанию НЕ показываем в списке получателей —
+      // иначе на большой сцене всплывают все сундуки.
+      can_receive_currency: new f.BooleanField({ required: true, initial: false }),
+
       // Экономика торговца
       buy_modifier_pct: new f.NumberField({ required: true, initial: 0 }),        // +наценка / −скидка при покупке игроком
       can_sell_to: new f.BooleanField({ required: true, initial: true }),          // принимает ли продажу от игроков

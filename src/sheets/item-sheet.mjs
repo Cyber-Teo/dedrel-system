@@ -103,6 +103,20 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.system = itemData.system;
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
+
+    // Тип существа: пресеты ключей для дружелюбного выбора (список расширяемый).
+    if (itemData.type === "creature_type") {
+      const keys = CONFIG.DEDREL?.creatureTypes || [];
+      context.creatureTypeOptions = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}` }));
+      context.creatureTypeIsPreset = keys.includes(itemData.system.key);
+    }
+
+    // Оружие: строки «бонус против типа существа» (сила 0-10 на каждый тип).
+    if (itemData.type === "weapon") {
+      const keys = CONFIG.DEDREL?.creatureTypes || [];
+      const vs = itemData.system.vs_creature || {};
+      context.vsCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: Number(vs[k]) || 0 }));
+    }
     
     if (itemData.type === "weapon" || itemData.type === "maneuver" || itemData.type === "spell") {
       context.weaponSkills = {

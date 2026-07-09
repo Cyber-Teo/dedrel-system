@@ -1920,3 +1920,17 @@ form.dedrel.sheet.item {
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Лист NPC / Монстра (актор npc).
+   Квирк ApplicationV2: .window-content обрезан (overflow:hidden), поэтому
+   скроллит внутренний корень листа. Ему нужны flex-заполнение, min-height:0
+   и overflow-y:auto (см. FOUNDRY V14 QUIRKS.md, тот же приём, что у .loot-sheet).
+   ========================================================================== */
+.dedrel.npc .npc-sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

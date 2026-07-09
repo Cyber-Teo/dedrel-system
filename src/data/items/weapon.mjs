@@ -51,6 +51,12 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
+
+      // Бонусы против типов существ. Карта { <ключ типа>: potency(0-10) }.
+      // Если цель несёт тип (Item creature_type), урон умножается на
+      // (1 + potency·0.1) ДО вычета DR цели. Ключи — из CONFIG.DEDREL.creatureTypes
+      // (расширяемо через конфиг). Свободный объект → новые типы не требуют миграции.
+      vs_creature: new fields.ObjectField({ initial: {} }),
       
       // Properties
       is_auxiliary: new fields.BooleanField({ initial: false }),

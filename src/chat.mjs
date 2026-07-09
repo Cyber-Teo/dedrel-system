@@ -142,6 +142,17 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       const apLevel = weaponAp + damageMods.pierce;
       
       let damageTypeLabel = drKey ? game.i18n.localize(DR_KEY_LABELS[drKey]) : "";
+
+      // Бонусы «против типов существ»: источник — используемое оружие (бьют
+      // всегда через манёвр, но подстрахуемся и на прямой удар оружием).
+      // Сериализуем ненулевые пары "тип:сила" в data-атрибут кнопки урона.
+      const vsWeapon = weapon || (item.type === "weapon" ? item : null);
+      const vsMapSrc = vsWeapon?.system?.vs_creature || {};
+      const vsTypesStr = Object.entries(vsMapSrc)
+        .map(([t, p]) => [t, Number(p) || 0])
+        .filter(([t, p]) => t && p > 0)
+        .map(([t, p]) => `${t}:${p}`)
+        .join(",");
       
       // Формируем HTML для отображения результатов броска кубиков в чате
       let chatContent = `
@@ -153,7 +164,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           </div>
         </div>
         <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
-           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${drKey}" data-ap="${apLevel}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${drKey}" data-ap="${apLevel}" data-vs-types="${vsTypesStr}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
         </div>
       `;
       
@@ -273,20 +284,37 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       const damage = parseInt(button.dataset.damage) || 0;
       const drKey = button.dataset.type || "";
       const apLevel = parseInt(button.dataset.ap) || 0;
+      // Карта бонусов против типов: "undead:5,shade:3" → { undead:5, shade:3 }.
+      const vsMap = {};
+      for (const pair of (button.dataset.vsTypes || "").split(",").filter(Boolean)) {
+        const [t, p] = pair.split(":");
+        vsMap[t] = Number(p) || 0;
+      }
 
       // Сначала берем выделенные токены (controlled), если их нет - берем таргеты (targets)
       let targets = canvas.tokens.controlled;
       if (targets.length === 0) targets = Array.from(game.user.targets);
-      
+
       if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTargetForDamage"));
 
       for (let token of targets) {
         const targetActor = token.actor;
         if (!targetActor) continue;
 
+        // Бонус «против типа»: берём максимальную силу среди типов, которые
+        // несёт цель, и усиливаем урон на potency·10% ДО вычета DR.
+        let dmg = damage;
+        let vsPotency = 0;
+        for (const key of (targetActor.creatureTypeKeys || [])) {
+          if ((vsMap[key] || 0) > vsPotency) vsPotency = vsMap[key];
+        }
+        if (vsPotency > 0) {
+          dmg = Math.round(damage * (1 + vsPotency * 0.1) * 10) / 10;
+        }
+
         // Математика DR/временных ХП живёт в DedrelActor#applyDamage
         // (общая с тиками кондиций в src/combat.mjs)
-        const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(damage, { drKey, apLevel });
+        const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(dmg, { drKey, apLevel });
 
         let damageTypeStr = drKey ? `[${game.i18n.localize(DR_KEY_LABELS[drKey])}] ` : "";
         let chatMsg = game.i18n.format("DEDREL.Chat.DamageTaken", {name: targetActor.name, damage: applied, type: damageTypeStr});
@@ -295,8 +323,15 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageTakenTemp", {tempDamage: tempHpDamage})}</span>`;
         }
 
+        if (vsPotency > 0) {
+          chatMsg += ` <span style="color: var(--color-warning, #c0392b); font-weight: bold; font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageVsType", {pct: vsPotency * 10})}</span>`;
+        }
+
         if (blocked > 0) {
           chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: blocked})}</span>`;
+        } else if (blocked < 0) {
+          // Отрицательный DR = уязвимость: урон усилен на -blocked.
+          chatMsg += ` <span style="color: var(--color-warning, #c0392b); font-weight: bold; font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageAmplified", {dr: -blocked})}</span>`;
         }
         
         ChatMessage.create({

@@ -1,4 +1,17 @@
 export default class DedrelActor extends Actor {
+  /**
+   * Ключи типов существа, которые несёт актёр (по вложенным Item creature_type).
+   * Используется для бонуса оружия/эффектов «против типа» и как индикатор на листе.
+   * @returns {string[]}
+   */
+  get creatureTypeKeys() {
+    const keys = [];
+    for (const item of this.items) {
+      if (item.type === "creature_type" && item.system?.key) keys.push(item.system.key);
+    }
+    return keys;
+  }
+
   async _preCreate(data, options, userId) {
     await super._preCreate(data, options, userId);
     
@@ -15,6 +28,37 @@ export default class DedrelActor extends Actor {
     }
   }
 
+  async _preUpdate(changed, options, user) {
+    // Баланс кошелька не может быть отрицательным: любые отрицательные счётчики
+    // валют в обновлении зажимаем в 0. Ловит все пути записи (инлайн-инпуты
+    // листа с обходом client-side min="0", сокет-переводы, депозит монет).
+    this.#clampCurrencyUpdate(changed);
+    return super._preUpdate(changed, options, user);
+  }
+
+  /** Зажимает отрицательные значения system.currency.* в 0 в объекте обновления. */
+  #clampCurrencyUpdate(changed) {
+    if (!changed || typeof changed !== "object") return;
+    const clampObj = (obj) => {
+      if (!obj || typeof obj !== "object") return;
+      for (const k of Object.keys(obj)) {
+        const v = Number(obj[k]);
+        if (Number.isFinite(v) && v < 0) obj[k] = 0;
+      }
+    };
+    for (const key of Object.keys(changed)) {
+      // Отдельный счётчик валюты: "system.currency.<key>".
+      if (key.startsWith("system.currency.")) {
+        const v = Number(changed[key]);
+        if (Number.isFinite(v) && v < 0) changed[key] = 0;
+      }
+      // Кошелёк целиком плоским ключом: "system.currency": { <key>: value }.
+      else if (key === "system.currency") clampObj(changed[key]);
+    }
+    // Кошелёк целиком вложенным объектом: system.currency = { <key>: value }.
+    clampObj(changed?.system?.currency);
+  }
+
   /**
    * Ядро применяет здесь фазу "initial" (в super). Сразу после неё выполняем
    * нашу фазу "apply" — в ней живут все изменения системных полей (system.*),
@@ -25,6 +69,30 @@ export default class DedrelActor extends Actor {
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
     this.applyActiveEffects("apply");
+  }
+
+  /**
+   * Расширение ядра: транслируемые (transfer) эффекты АКСЕССУАРА применяются к
+   * актору только когда аксессуар экипирован в слот. Аксессуар = предмет с
+   * непустым system.equip_slot (кольца, амулеты, пояса, диадемы, шлемы-аксессуары).
+   * «Экипирован» = его id стоит в одном из system.equipment_slots актора.
+   *
+   * Прочие предметы (мутации, таланты, обычные магические предметы без слота)
+   * ведут себя как в ядре — их transfer-эффекты применяются, пока предмет в
+   * инвентаре. На акторах без equipment_slots (лут/контейнер) гейтинга нет.
+   */
+  *allApplicableEffects() {
+    const slots = this.system?.equipment_slots;
+    for (const effect of this.effects) yield effect;
+    for (const item of this.items) {
+      if (slots && item.system?.equip_slot) {
+        const equipped = Object.values(slots).some(s => s?.item_id === item.id);
+        if (!equipped) continue;
+      }
+      for (const effect of item.effects) {
+        if (effect.transfer) yield effect;
+      }
+    }
   }
 
   prepareData() {
@@ -93,7 +161,8 @@ export default class DedrelActor extends Actor {
    * @returns {Promise<{applied: number, blocked: number, tempHpDamage: number}>}
    */
   async applyDamage(damage, { drKey = "", apLevel = 0 } = {}) {
-    if (!this.system.resources?.hp) return { applied: 0, blocked: 0, tempHpDamage: 0 };
+    const isPeon = this.type === "npc" && this.system.tier === "peon";
+    if (!isPeon && !this.system.resources?.hp) return { applied: 0, blocked: 0, tempHpDamage: 0 };
 
     let drUnits = 0;
     if (drKey && this.system.dr && this.system.dr[drKey] !== undefined) {
@@ -111,6 +180,18 @@ export default class DedrelActor extends Actor {
     let finalDamage = Math.max(0, damage * (1 - drPercent / 100));
     finalDamage = Math.round(finalDamage * 10) / 10;
     const blocked = Math.round((damage - finalDamage) * 10) / 10;
+
+    // Пеон: здоровье в «попаданиях». Урон ПОСЛЕ DR сравнивается с порогом
+    // прочности; попадание ≥ toughness снимает ровно 1 хит, слабее — 0.
+    if (isPeon) {
+      const hits = this.system.resources.hits;
+      const toughness = this.system.toughness || 0;
+      const removed = finalDamage >= toughness && finalDamage > 0 ? 1 : 0;
+      if (removed > 0) {
+        await this.update({ "system.resources.hits.value": Math.max(0, hits.value - removed) });
+      }
+      return { applied: removed, blocked, tempHpDamage: 0, hitsRemoved: removed };
+    }
 
     const currentHp = this.system.resources.hp.value;
     let tempHp = this.system.resources.hp.temp || 0;

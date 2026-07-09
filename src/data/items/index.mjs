@@ -18,6 +18,7 @@ import ScrollDataModel from './scroll.mjs';
 import CraftMaterialDataModel from './craft_material.mjs';
 import QuestItemDataModel from './quest_item.mjs';
 import ServiceDataModel from './service.mjs';
+import CreatureTypeData from './creature_type.mjs';
 
 export const ItemDataModels = {
   currency: CurrencyData,
@@ -39,5 +40,6 @@ export const ItemDataModels = {
   exp: ExpData,
   condition: ConditionDataModel,
   ammunition: AmmunitionDataModel,
-  spell: SpellDataModel
+  spell: SpellDataModel,
+  creature_type: CreatureTypeData
 };

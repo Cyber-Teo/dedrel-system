@@ -4,6 +4,7 @@
  * и содержит логику для расчета производных (Derived) характеристик.
  */
 import { getBonusesSchema } from "./bonuses-schema.mjs";
+import { buildAttributes, buildSkills, buildDefenses, buildDR, buildEquipmentSlots, buildDoctrines, buildMagic } from "./shared-schema.mjs";
 
 export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   /**
@@ -13,33 +14,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
 
-    // Helper to generate attribute schema
-    const attributeField = () => new fields.SchemaField({
-      rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
-      save_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
-    });
-
     const bloodlineField = () => new fields.SchemaField({
       rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 })
-    });
-
-    // Helper to generate skill schema
-    const skillField = () => new fields.SchemaField({
-      rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      specialization: new fields.StringField({ required: false, initial: "" }),
-      bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
-    });
-
-    // Helper to generate doctrine schema (Магический Конструктор).
-    // rank — source-значение, покупается за XP на странице опыта (upgradeDoctrine);
-    //        таланты доступа обычно добавляют +1 через Active Effect (фаза "apply").
-    // unlocked — доступ к доктрине; выдаётся талантом через AE (Override 1).
-    // active_path — активный "путь" двухпутёвых доктрин (гидро/венто),
-    //        переключается свободно в начале хода (тумблер на листе).
-    const doctrineField = (defaultPath = "") => new fields.SchemaField({
-      rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
-      unlocked: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      active_path: new fields.StringField({ required: false, initial: defaultPath })
     });
 
     return {
@@ -50,92 +26,15 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         fay: bloodlineField(),
         elf: bloodlineField()
       }),
-      attributes: new fields.SchemaField({
-        int: attributeField(),
-        dex: attributeField(),
-        log: attributeField(),
-        rea: attributeField(),
-        str: attributeField(),
-        will: attributeField(),
-        con: attributeField(),
-        luck: attributeField(),
-        cha: attributeField()
-      }),
+      attributes: buildAttributes(),
 
-      skills: new fields.SchemaField({
-        // Combat
-        crossbows: skillField(),
-        unarmed_combat: skillField(),
-        pole_weapons: skillField(),
-        blunt_weapons: skillField(),
-        artillery: skillField(),
-        firearms: skillField(),
-        throwing: skillField(),
-        exotic_weapons: skillField(),
-        magical_attacks: skillField(),
-        bows: skillField(),
-        bladed_weapons: skillField(),
-        armor_use: skillField(),
-        // Intellectual
-        cultural_awareness: skillField(),
-        knowledge: skillField(),
-        logic_reasoning: skillField(),
-        interpretation: skillField(),
-        research: skillField(),
-        // Practical
-        craftsmanship: skillField(),
-        stealth: skillField(),
-        healing: skillField(),
-        survival: skillField(),
-        engineering: skillField(),
-        atletism: skillField(),
-        // Social
-        persuasion: skillField(),
-        insight: skillField(),
-        deception: skillField(),
-        intimidation: skillField(),
-        performance: skillField()
-      }),
+      skills: buildSkills(),
 
-      // Доктрины Магического Конструктора. Канонический список из 18 ключей —
-      // "_rules/16. Magic.md"; группы и правила — CONFIG.DEDREL.magic (src/config/magic.mjs)
-      doctrines: new fields.SchemaField({
-        // Доктрины Материи
-        geomancy: doctrineField(),
-        hydromancy: doctrineField("flow"),   // flow | ice
-        pyromancy: doctrineField(),
-        ventomancy: doctrineField("squall"), // squall | echo
-        // Доктрины Сущности
-        biomancy: doctrineField(),
-        shadowmancy: doctrineField(),
-        aetheromancy: doctrineField(),
-        // Доктрины Беспредельного
-        electromancy: doctrineField(),
-        temporalmancy: doctrineField(),
-        astralomancy: doctrineField(),
-        aether_song: doctrineField(),
-        // Врождённая магия
-        blood_magic: doctrineField(),
-        chaos_magic: doctrineField(),
-        shapeshifting: doctrineField(),
-        feral_magic: doctrineField(),
-        // Псионика
-        telekinesis: doctrineField(),
-        telepathy: doctrineField(),
-        zero: doctrineField()
-      }),
+      // Доктрины Магического Конструктора (18 канонических ключей) и известные
+      // техники — общий источник в shared-schema.mjs (тот же набор у NPC-босса).
+      doctrines: buildDoctrines(),
 
-      // Известные Магические Техники. Выдаются талантами через AE
-      // (system.magic.techniques.<key> | Override | 1). Конструктор читает эти флаги.
-      magic: new fields.SchemaField({
-        techniques: new fields.SchemaField({
-          create: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-          move: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-          transform: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-          sense: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-          imbue: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 })
-        })
-      }),
+      magic: buildMagic(),
 
       resources: new fields.SchemaField({
         hp: new fields.SchemaField({
@@ -173,48 +72,11 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         darkvision: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
 
-      defenses: new fields.SchemaField({
-        block: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
-        dodge: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
-        mdef: new fields.NumberField({ required: false, integer: true, initial: 0 }) // Derived
-      }),
+      defenses: buildDefenses(),
 
-      dr: new fields.SchemaField({
-        slashing: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        piercing: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        bludgeoning: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        heat: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        cold: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        necrotic: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        radiant: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        electric: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        sonic: new fields.NumberField({ required: false, integer: true, initial: 0 }),
-        acid: new fields.NumberField({ required: false, integer: true, initial: 0 })
-      }),
+      dr: buildDR(),
 
-      equipment_slots: new fields.SchemaField({
-        main_hand: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "weapon" }) }),
-        off_hand: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "shield" }) }),
-        tail: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "" }) }),
-        armor_upper: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
-        armor_middle: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
-        armor_lower: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
-        magic_item_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
-        magic_item_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
-        ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) }),
-
-        // Слоты аксессуаров. Принимают предметы по их system.equip_slot:
-        //   head — шлем (броня) / диадема (магический предмет); neck — ожерелье;
-        //   torso — пояс; кисти/хвост (acc_*) — кольца и браслеты (equip_slot "hand").
-        head: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "head" }) }),
-        neck: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "neck" }) }),
-        torso: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "torso" }) }),
-        acc_left_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
-        acc_left_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
-        acc_right_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
-        acc_right_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
-        acc_tail: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) })
-      }),
+      equipment_slots: buildEquipmentSlots(),
 
       bonuses: getBonusesSchema(),
 
@@ -222,6 +84,11 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       // Свободные ключи (ObjectField), т.к. список валют динамический.
       // Производные wallet.total_base и wallet.weight считаются в prepareDerivedData.
       currency: new fields.ObjectField({ required: false, initial: {} }),
+
+      // Может ли актор быть получателем перевода денег. Фильтрует список
+      // получателей в диалогах перевода, чтобы на большой сцене не всплывали
+      // все сундуки/лут. По умолчанию персонажи — принимают.
+      can_receive_currency: new fields.BooleanField({ required: true, initial: true }),
 
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
 
@@ -389,7 +256,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // Хранится ад-хок в this.resources.encumbrance (как this.wallet) — производное,
     // в _source не пишется, миграция не нужна.
     const NON_PHYSICAL = new Set([
-      "maneuver", "talent", "mutation", "condition", "spell", "exp", "countryoforigin", "mutilation"
+      "maneuver", "talent", "mutation", "condition", "spell", "exp", "countryoforigin", "mutilation", "creature_type"
     ]);
     let carriedWeight = this.wallet?.weight || 0;
     if (this.parent && this.parent.items) {

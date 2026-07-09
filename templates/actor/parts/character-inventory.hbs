@@ -19,7 +19,10 @@
                 {{localize "DEDREL.ActorSheet.WalletTotal"}}: <b>{{walletTotal}}</b>
                 <span style="color: var(--color-text-dark-secondary); margin-left: 8px;">{{localize "DEDREL.ItemSheet.Weight"}}: {{numberFormat walletWeight decimals=2}} кг</span>
             </span>
-            <span style="display: flex; gap: 12px;">
+            <span style="display: flex; gap: 12px; align-items: center;">
+                <label class="checkbox" style="font-size: 0.8em; color: var(--color-text-dark-secondary);" title="{{localize "DEDREL.ActorSheet.CanReceiveCurrencyHint"}}">
+                    <input type="checkbox" name="system.can_receive_currency" {{checked system.can_receive_currency}}/> {{localize "DEDREL.ActorSheet.CanReceiveCurrency"}}
+                </label>
                 <a class="item-control" data-action="payCurrency" title="{{localize "DEDREL.ActorSheet.TransferMoney"}}"><i class="fas fa-hand-holding-dollar"></i> {{localize "DEDREL.ActorSheet.TransferSend"}}</a>
                 <a class="item-control" data-action="collapseCurrency" title="{{localize "DEDREL.ActorSheet.CollapseCurrencyHint"}}"><i class="fas fa-layer-group"></i> {{localize "DEDREL.ActorSheet.CollapseCurrency"}}</a>
             </span>

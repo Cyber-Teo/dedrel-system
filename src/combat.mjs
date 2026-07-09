@@ -77,7 +77,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
       let updatedAny = false;
       for (const combatant of combat.combatants) {
         const actor = combatant.actor;
-        if (!actor || actor.type !== "character") continue;
+        if (!actor || !["character", "npc"].includes(actor.type)) continue;
         const res = actor.system.resources;
         if (!res) continue;
         
@@ -111,7 +111,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
   if (restoreTiming === "startOfTurn" && (changed.turn !== undefined || changed.round !== undefined)) {
     if (options.direction === 1 || options.direction === undefined) {
       const combatant = combat.combatant;
-      if (combatant && combatant.actor && combatant.actor.type === "character") {
+      if (combatant && combatant.actor && ["character", "npc"].includes(combatant.actor.type)) {
         const actor = combatant.actor;
         const res = actor.system.resources;
         if (res) {
