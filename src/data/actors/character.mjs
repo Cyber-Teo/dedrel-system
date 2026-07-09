@@ -201,7 +201,19 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         armor_lower: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "armor" }) }),
         magic_item_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
         magic_item_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "magic_item" }) }),
-        ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) })
+        ammo: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "loot" }) }),
+
+        // Слоты аксессуаров. Принимают предметы по их system.equip_slot:
+        //   head — шлем (броня) / диадема (магический предмет); neck — ожерелье;
+        //   torso — пояс; кисти/хвост (acc_*) — кольца и браслеты (equip_slot "hand").
+        head: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "head" }) }),
+        neck: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "neck" }) }),
+        torso: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "torso" }) }),
+        acc_left_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
+        acc_left_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
+        acc_right_1: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
+        acc_right_2: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) }),
+        acc_tail: new fields.SchemaField({ item_id: new fields.StringField({ initial: "" }), type: new fields.StringField({ initial: "hand" }) })
       }),
 
       bonuses: getBonusesSchema(),

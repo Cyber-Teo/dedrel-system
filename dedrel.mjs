@@ -132,6 +132,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/actor/parts/character-biography.hbs",
     "systems/dedrel/templates/actor/parts/character-experience.hbs",
     "systems/dedrel/templates/actor/loot-sheet.hbs",
+    "systems/dedrel/templates/actor/parts/accessory-slot.hbs",
     "systems/dedrel/templates/actor/parts/character-creation.hbs",
     "systems/dedrel/templates/apps/roll-dialog.hbs",
     "systems/dedrel/templates/apps/spell-constructor.hbs",
@@ -153,7 +154,8 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-craft_material.hbs",
     "systems/dedrel/templates/item/parts/details-quest_item.hbs",
     "systems/dedrel/templates/item/parts/details-currency.hbs",
-    "systems/dedrel/templates/item/parts/details-service.hbs"
+    "systems/dedrel/templates/item/parts/details-service.hbs",
+    "systems/dedrel/templates/item/parts/details-equip-slot.hbs"
   ]);
 
   // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов

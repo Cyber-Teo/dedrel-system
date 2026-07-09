@@ -67,7 +67,7 @@
 
     <h2 class="tab-title">{{localize "DEDREL.ActorSheet.WeaponSlots"}}</h2>
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+        <div class="slot-box equip-slot" data-equip-slot="main_hand" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MainHand"}}</h4>
             {{#if equipment_slots.main_hand}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.main_hand.name}}</div>
@@ -76,7 +76,7 @@
             <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
             {{/if}}
         </div>
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+        <div class="slot-box equip-slot" data-equip-slot="off_hand" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.OffHand"}}</h4>
             {{#if equipment_slots.off_hand}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.off_hand.name}}</div>
@@ -85,7 +85,7 @@
             <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
             {{/if}}
         </div>
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05); {{#unless hasTail}}opacity: 0.5; pointer-events: none;{{/unless}}">
+        <div class="slot-box equip-slot" data-equip-slot="tail" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05); {{#unless hasTail}}opacity: 0.5; pointer-events: none;{{/unless}}">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.Tail"}} {{#unless hasTail}}<i class="fas fa-lock" title="{{localize "DEDREL.ActorSheet.MutationRequired"}}"></i>{{/unless}}</h4>
             {{#if equipment_slots.tail}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.tail.name}}</div>
@@ -142,7 +142,7 @@
     </div>
 
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+        <div class="slot-box equip-slot" data-equip-slot="armor_upper" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.UpperLayer"}}</h4>
             {{#if equipment_slots.armor_upper}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_upper.name}}</div>
@@ -151,7 +151,7 @@
             <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+        <div class="slot-box equip-slot" data-equip-slot="armor_middle" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MiddleLayer"}}</h4>
             {{#if equipment_slots.armor_middle}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_middle.name}}</div>
@@ -160,7 +160,7 @@
             <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
-        <div class="slot-box" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+        <div class="slot-box equip-slot" data-equip-slot="armor_lower" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
             <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.LowerLayer"}}</h4>
             {{#if equipment_slots.armor_lower}}
             <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_lower.name}}</div>
@@ -169,6 +169,20 @@
             <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
             {{/if}}
         </div>
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.AccessorySlots"}}</h2>
+    <div class="acc-slots-grid">
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="head" accept="head" label=(localize "DEDREL.AccSlot.head") item=equipment_slots.head}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="neck" accept="neck" label=(localize "DEDREL.AccSlot.neck") item=equipment_slots.neck}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="torso" accept="torso" label=(localize "DEDREL.AccSlot.torso") item=equipment_slots.torso}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_tail" accept="hand" label=(localize "DEDREL.AccSlot.tail") item=equipment_slots.acc_tail requiresTail=true}}
+    </div>
+    <div class="acc-slots-grid acc-hands">
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_left_1" accept="hand" label=(localize "DEDREL.AccSlot.left1") item=equipment_slots.acc_left_1}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_left_2" accept="hand" label=(localize "DEDREL.AccSlot.left2") item=equipment_slots.acc_left_2}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_right_1" accept="hand" label=(localize "DEDREL.AccSlot.right1") item=equipment_slots.acc_right_1}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_right_2" accept="hand" label=(localize "DEDREL.AccSlot.right2") item=equipment_slots.acc_right_2}}
     </div>
 
     <h2 class="tab-title">{{localize "DEDREL.ActorSheet.ArmorInventory"}}</h2>

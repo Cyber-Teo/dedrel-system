@@ -179,6 +179,18 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.hasStackable = itemData.system.stackable !== undefined;
     }
 
+    // Аксессуарный слот (для типов, поддерживающих system.equip_slot)
+    context.hasEquipSlot = ["armor", "magic_item", "loot"].includes(itemData.type);
+    if (context.hasEquipSlot) {
+      context.equipSlotOptions = {
+        "": game.i18n.localize("DEDREL.EquipSlot.none"),
+        head: game.i18n.localize("DEDREL.EquipSlot.head"),
+        neck: game.i18n.localize("DEDREL.EquipSlot.neck"),
+        torso: game.i18n.localize("DEDREL.EquipSlot.torso"),
+        hand: game.i18n.localize("DEDREL.EquipSlot.hand")
+      };
+    }
+
     // Валюта: деноминация выбирается из списка валют мира
     if (itemData.type === "currency") {
       context.currencyOptions = { "": "—" };

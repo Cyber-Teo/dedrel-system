@@ -6,6 +6,9 @@
     {{#if isPhysical}}
         {{> "systems/dedrel/templates/item/parts/details-physical.hbs"}}
     {{/if}}
+    {{#if hasEquipSlot}}
+        {{> "systems/dedrel/templates/item/parts/details-equip-slot.hbs"}}
+    {{/if}}
     {{#if (or (eq item.type "loot") (eq item.type "magic_item"))}}
     <div class="form-group" style="padding: 10px; border-bottom: 1px solid var(--color-border); margin-bottom: 10px;">
         <label>{{localize "DEDREL.ItemFields.FormulaHeal"}}</label>

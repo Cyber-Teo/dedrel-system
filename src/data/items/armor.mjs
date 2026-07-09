@@ -1,4 +1,4 @@
-import { ITEM_RARITY_ENUM } from "../../constants.mjs";
+import { ITEM_RARITY_ENUM, ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
 
 export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -8,6 +8,9 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       description: new fields.HTMLField({ label: "Description" }),
       key: new fields.StringField({ initial: "" }),
       rarity: new fields.StringField({ initial: "common", choices: ITEM_RARITY_ENUM }),
+      // Аксессуарный слот: если задан (напр. "head" для шлема), броня надевается
+      // в слот аксессуара, а не в слои тела (slot). Пусто = обычная броня тела.
+      equip_slot: new fields.StringField({ required: false, blank: true, initial: "", choices: ACCESSORY_SLOT_TYPES }),
       base_price: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       weight: new fields.NumberField({ initial: 0, min: 0 }),
       slot: new fields.StringField({ initial: "middle", choices: ["lower", "middle", "upper", "universal"] }),

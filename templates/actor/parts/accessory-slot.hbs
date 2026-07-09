@@ -1,0 +1,9 @@
+<div class="slot-box equip-slot acc-slot{{#if requiresTail}}{{#unless @root.hasTail}} acc-slot-locked{{/unless}}{{/if}}" data-equip-slot="{{slotKey}}" data-slot-kind="accessory" data-accept="{{accept}}">
+    <div class="acc-slot-label">{{label}}{{#if requiresTail}}{{#unless @root.hasTail}} <i class="fas fa-lock" title="{{localize "DEDREL.ActorSheet.MutationRequired"}}"></i>{{/unless}}{{/if}}</div>
+    {{#if item}}
+    <div class="acc-slot-item" title="{{item.name}}">{{item.name}}</div>
+    <a class="item-control" data-action="unequipSlot" data-slot="{{slotKey}}" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i></a>
+    {{else}}
+    <div class="acc-slot-empty">{{localize "DEDREL.ActorSheet.Empty"}}</div>
+    {{/if}}
+</div>

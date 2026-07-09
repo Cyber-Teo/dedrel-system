@@ -1,10 +1,14 @@
+import { ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
+
 export default class LootData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const { HTMLField, StringField, NumberField, BooleanField } = foundry.data.fields;
     return {
       description: new HTMLField({ required: false, blank: true, initial: "" }),
       key: new StringField({ required: false, initial: "" }),
-      rarity: new StringField({ required: true, initial: "common" }), 
+      rarity: new StringField({ required: true, initial: "common" }),
+      // Аксессуарный слот (пояс→torso, ожерелье→neck и т.п. для «безделушек»)
+      equip_slot: new StringField({ required: false, blank: true, initial: "", choices: ACCESSORY_SLOT_TYPES }),
       weight: new NumberField({ required: true, initial: 0, min: 0 }),
       base_price: new NumberField({ required: true, initial: 0, min: 0 }),
       stackable: new BooleanField({ required: true, initial: true }),

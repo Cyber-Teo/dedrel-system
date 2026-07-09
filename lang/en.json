@@ -568,7 +568,8 @@
       "CurrencyItemHint": "The denomination must match a currency key from world settings. When picked up/deposited, coins move into the wallet.",
       "ServiceSettings": "Service Settings",
       "ServiceType": "Service Type",
-      "ServiceHint": "A service is intangible: it has no weight and is not added to inventory. On purchase, money is deducted and the item's Active Effects (if any) are applied."
+      "ServiceHint": "A service is intangible: it has no weight and is not added to inventory. On purchase, money is deducted and the item's Active Effects (if any) are applied.",
+      "EquipSlot": "Accessory Slot"
     },
     "ActorSheet": {
       "Tabs": {
@@ -720,7 +721,8 @@
       "EncumbranceImmune": "Immune to encumbrance penalties",
       "EncumbrancePenalty": "Penalty to all rolls",
       "EncumbranceNoMove": "Cannot move",
-      "Containers": "Containers"
+      "Containers": "Containers",
+      "AccessorySlots": "Accessory Slots"
     },
     "Notifications": {
       "EquipArmorHint": "For armor, use the 'Equip' buttons (slots).",
@@ -798,7 +800,10 @@
       "NoActiveGM": "No active GM to process the operation.",
       "TransferRequested": "Transfer request sent to the GM.",
       "TransferDone": "{source} transferred money to: {target}.",
-      "NoTransferTargets": "No available recipients."
+      "NoTransferTargets": "No available recipients.",
+      "WrongSlotKind": "This item cannot go into this slot.",
+      "WrongArmorSlot": "This armor does not fit the selected layer.",
+      "TailSlotLocked": "The tail slot is unavailable: a matching mutation is required."
     },
     "EffectPhases": {
       "Apply": "Apply (system fields)",
@@ -1003,6 +1008,23 @@
       "NotFound": "Linked container not found.",
       "CannotCreate": "Insufficient permissions to create a container actor (ask the GM).",
       "Hint": "Drag a container actor (Loot in 'Container' mode) here to link a bag/chest. The link item's weight counts toward encumbrance (fixed for a bag of holding)."
+    },
+    "EquipSlot": {
+      "none": "— (not an accessory)",
+      "head": "Head",
+      "neck": "Neck",
+      "torso": "Torso",
+      "hand": "Ring/Bracelet"
+    },
+    "AccSlot": {
+      "head": "Head",
+      "neck": "Neck",
+      "torso": "Torso",
+      "left1": "Left hand 1",
+      "left2": "Left hand 2",
+      "right1": "Right hand 1",
+      "right2": "Right hand 2",
+      "tail": "Tail"
     }
   },
   "DEDREL.Rarity": {

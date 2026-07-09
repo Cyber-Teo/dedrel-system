@@ -10,6 +10,11 @@ export const ITEM_RARITY_LABELS = {
   legendary: "DEDREL.Rarity.legendary"
 };
 
+// Категории слотов аксессуаров (значения поля предмета system.equip_slot).
+// head — шлем/диадема; neck — ожерелье; torso — пояс; hand — кольца/браслеты
+// (подходят в любой слот кисти/хвоста). Пустая строка = не аксессуар.
+export const ACCESSORY_SLOT_TYPES = ["head", "neck", "torso", "hand"];
+
 // Деноминации валют по умолчанию. Реальный список валют мира задаётся в
 // настройке "currencies" (меню настроек); это лишь дефолтный набор/фолбэк.
 export const CURRENCY_DENOMINATION_ENUM = ["copper", "silver", "gold", "platinum"];

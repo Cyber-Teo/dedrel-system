@@ -69,7 +69,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       payCurrency: DedrelCharacterSheet.#onPayCurrency,
       openContainer: DedrelCharacterSheet.#onOpenContainer,
       createContainer: DedrelCharacterSheet.#onCreateContainer,
-      unlinkContainer: DedrelCharacterSheet.#onUnlinkContainer
+      unlinkContainer: DedrelCharacterSheet.#onUnlinkContainer,
+      unequipSlot: DedrelCharacterSheet.#onUnequipSlot
     }
   };
 
@@ -230,14 +231,17 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     const hasTail = mutations.some(m => m.system.key && m.system.key.includes("tail"));
 
-    const equipment_slots = {
-      armor_upper: actorData.system.equipment_slots?.armor_upper?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_upper.item_id) : null,
-      armor_middle: actorData.system.equipment_slots?.armor_middle?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_middle.item_id) : null,
-      armor_lower: actorData.system.equipment_slots?.armor_lower?.item_id ? actorData.items.get(actorData.system.equipment_slots.armor_lower.item_id) : null,
-      main_hand: actorData.system.equipment_slots?.main_hand?.item_id ? actorData.items.get(actorData.system.equipment_slots.main_hand.item_id) : null,
-      off_hand: actorData.system.equipment_slots?.off_hand?.item_id ? actorData.items.get(actorData.system.equipment_slots.off_hand.item_id) : null,
-      tail: actorData.system.equipment_slots?.tail?.item_id ? actorData.items.get(actorData.system.equipment_slots.tail.item_id) : null,
+    const slotItem = (key) => {
+      const id = actorData.system.equipment_slots?.[key]?.item_id;
+      return id ? actorData.items.get(id) : null;
     };
+    const equipment_slots = {};
+    for (const key of [
+      "armor_upper", "armor_middle", "armor_lower", "main_hand", "off_hand", "tail",
+      "head", "neck", "torso", "acc_left_1", "acc_left_2", "acc_right_1", "acc_right_2", "acc_tail"
+    ]) {
+      equipment_slots[key] = slotItem(key);
+    }
 
     // Enrich HTML for biography using namespaced TextEditor
     const enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(actorData.system.details?.biography || "", {
@@ -585,6 +589,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     for (let el of dragTargets) {
       el.setAttribute("draggable", "true");
       el.addEventListener("dragstart", this.#onDragStart.bind(this));
+    }
+
+    // Подсветка слотов экипировки при перетаскивании (сам дроп обрабатывает _onDrop)
+    for (const slot of this.element.querySelectorAll(".equip-slot")) {
+      slot.addEventListener("dragover", (ev) => { ev.preventDefault(); slot.classList.add("drag-over"); });
+      slot.addEventListener("dragleave", () => slot.classList.remove("drag-over"));
+      slot.addEventListener("drop", () => slot.classList.remove("drag-over"));
     }
   }
 
@@ -946,6 +957,130 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     };
     await this.document.createEmbeddedDocuments("Item", [itemData]);
     ui.notifications.info(game.i18n.format("DEDREL.Container.Linked", { name: containerActor.name }));
+  }
+
+  /** Экипирует предмет в КОНКРЕТНЫЙ слот (drag-n-drop в слот экипировки). */
+  async #equipToSlot(item, slotKey, kind, accept) {
+    if (kind === "accessory") return this.#equipAccessoryToSlot(item, slotKey, accept);
+    if (kind === "weapon" && item.type === "weapon") return this.#equipWeaponToSlot(item, slotKey);
+    if (kind === "armor" && item.type === "armor") return this.#equipArmorToSlot(item, slotKey);
+    return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongSlotKind"));
+  }
+
+  /** Экипирует аксессуар (по совпадению system.equip_slot с типом слота). */
+  async #equipAccessoryToSlot(item, slotKey, accept) {
+    const es = item.system.equip_slot;
+    if (!es || es !== accept) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongSlotKind"));
+    }
+    // Слот хвоста требует соответствующую мутацию
+    if (slotKey === "acc_tail") {
+      const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
+      if (!hasTail) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TailSlotLocked"));
+    }
+    const ACC = ["head", "neck", "torso", "acc_left_1", "acc_left_2", "acc_right_1", "acc_right_2", "acc_tail"];
+    const slots = this.document.system.equipment_slots;
+    const updates = {};
+    // Снимаем предмет из других аксессуарных слотов, если он там уже стоит
+    for (const s of ACC) {
+      if (s !== slotKey && slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
+    }
+    updates[`system.equipment_slots.${slotKey}.item_id`] = item.id;
+    await this.document.update(updates);
+  }
+
+  async #equipWeaponToSlot(item, slotKey) {
+    const slots = this.document.system.equipment_slots;
+    const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
+    if (slotKey === "tail" && !hasTail) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TailSlotLocked"));
+    }
+
+    const updates = {};
+    // Освобождаем слоты, где этот предмет уже стоит
+    for (const s of ["main_hand", "off_hand", "tail"]) {
+      if (slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
+    }
+
+    if (item.system.is_twohanded) {
+      // Двуручное занимает обе руки — снимаем текущих владельцев main/off
+      for (const s of ["main_hand", "off_hand"]) {
+        const cid = slots[s]?.item_id;
+        if (cid && cid !== item.id) {
+          const cur = this.document.items.get(cid);
+          if (cur) await cur.update({ "system.equipped": false });
+        }
+      }
+      updates["system.equipment_slots.main_hand.item_id"] = item.id;
+      updates["system.equipment_slots.off_hand.item_id"] = item.id;
+    } else {
+      // Снимаем то, что было в целевом слоте (если 2H — освобождаем и парный)
+      const cid = slots[slotKey]?.item_id;
+      if (cid && cid !== item.id) {
+        const cur = this.document.items.get(cid);
+        if (cur?.system.is_twohanded) {
+          updates["system.equipment_slots.main_hand.item_id"] = "";
+          updates["system.equipment_slots.off_hand.item_id"] = "";
+        }
+        if (cur) await cur.update({ "system.equipped": false });
+      }
+      updates[`system.equipment_slots.${slotKey}.item_id`] = item.id;
+    }
+
+    await this.document.update(updates);
+    await item.update({ "system.equipped": true });
+  }
+
+  async #equipArmorToSlot(item, slotKey) {
+    // Броня-аксессуар (шлем и т.п.) не идёт в слои тела — только в свой слот аксессуара
+    if (item.system.equip_slot) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongArmorSlot"));
+    }
+    const allowedMap = {
+      lower: ["armor_lower"],
+      middle: ["armor_middle"],
+      upper: ["armor_upper"],
+      universal: ["armor_lower", "armor_middle", "armor_upper"]
+    };
+    const allowed = allowedMap[item.system.slot] || [];
+    if (!allowed.includes(slotKey)) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongArmorSlot"));
+    }
+
+    const slots = this.document.system.equipment_slots;
+    const isExclusive = item.system.properties?.exclusive_slot;
+    const updates = {};
+
+    if (isExclusive) {
+      updates["system.equipment_slots.armor_upper.item_id"] = "";
+      updates["system.equipment_slots.armor_middle.item_id"] = "";
+      updates["system.equipment_slots.armor_lower.item_id"] = "";
+      updates[`system.equipment_slots.${slotKey}.item_id`] = item.id;
+    } else {
+      // Нельзя надеть поверх эксклюзивной брони
+      for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
+        const cid = slots[s]?.item_id;
+        if (cid) {
+          const cur = this.document.items.get(cid);
+          if (cur?.system.properties?.exclusive_slot) {
+            return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CannotEquipExclusive"));
+          }
+        }
+      }
+      // Снимаем предмет из других слотов, если он уже надет
+      for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
+        if (s !== slotKey && slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
+      }
+      updates[`system.equipment_slots.${slotKey}.item_id`] = item.id;
+    }
+
+    await this.document.update(updates);
+  }
+
+  /** Снимает предмет из произвольного слота экипировки (аксессуары). */
+  static async #onUnequipSlot(event, target) {
+    const slot = target.dataset.slot;
+    if (slot) await this.document.update({ [`system.equipment_slots.${slot}.item_id`]: "" });
   }
 
   static async #onToggleSkillFavorite(event, target) {
@@ -1425,6 +1560,18 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     const item = await Item.implementation.fromDropData(data);
     if (!item) return super._onDrop(event);
+
+    // Экипировка перетаскиванием: дроп оружия/брони на конкретный слот.
+    // Работает для предметов, уже принадлежащих этому актору; внешние предметы
+    // сначала падают в инвентарь (стандартное поведение), затем их можно надеть.
+    const slotEl = event.target?.closest?.(".equip-slot");
+    if (slotEl) {
+      const ownItem = this.document.items.get(item.id);
+      if (ownItem) {
+        await this.#equipToSlot(ownItem, slotEl.dataset.equipSlot, slotEl.dataset.slotKind, slotEl.dataset.accept);
+        return false;
+      }
+    }
 
     if (item.type === "exp") {
       return this._onDropItemCreate(item.toObject());
