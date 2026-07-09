@@ -6,7 +6,7 @@ export async function placeTemplatePreview(templateData, item) {
   const t = templateData.t;
   
   let shape;
-  let name = item ? `${item.name}` : `Шаблон`;
+  let name = item ? `${item.name}` : game.i18n.localize("DEDREL.Chat.TemplateDefaultName");
 
   switch (t) {
     case "circle":

@@ -225,8 +225,9 @@ Hooks.on("deleteActiveEffect", (effect) => {
   if (touchesAura(effect)) queueActorSync(actorOfEffect(effect));
 });
 
-// Экипировка/снятие предмета меняет isSuppressed его transfer-эффектов
-// без отдельных хуков по эффектам — синкаем актёра при правке предмета с аурами.
+// Экипировка/снятие предмета меняет применимость его эффектов (гейт в
+// DedrelActor#allApplicableEffects) без отдельных хуков по эффектам —
+// синкаем актёра при правке предмета с аурами.
 function onItemChange(item) {
   if (item.parent?.documentName !== "Actor") return;
   if (!item.effects.some(e => e.getFlag("dedrel", "aura"))) return;

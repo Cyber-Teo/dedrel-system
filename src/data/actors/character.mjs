@@ -265,8 +265,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         const w = Number(item.system?.weight) || 0;
         if (w <= 0) continue;
         // Вес монет-предметов (currency) уже посчитан за всю пачку (value·weight_per_unit),
-        // поэтому их количество не домножаем.
-        const qty = item.type === "currency" ? 1 : (Number(item.system?.quantity) ?? 1);
+        // поэтому их количество не домножаем. У типов без поля quantity (броня,
+        // торговые товары) количество считается равным 1 — ?? внутри Number(),
+        // иначе Number(undefined) даёт NaN и рушит весь подсчёт веса.
+        const qty = item.type === "currency" ? 1 : Number(item.system?.quantity ?? 1);
         carriedWeight += w * qty;
       }
     }

@@ -8,7 +8,7 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     tag: "div",
     window: {
       frame: true,
-      title: "Chain Maneuvers",
+      title: "DEDREL.Hud.ChainManeuvers",
       minimizable: true
     },
     position: {

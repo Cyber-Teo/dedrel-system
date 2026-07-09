@@ -231,7 +231,8 @@
         "PowerEffectName": "Spell Power: {n} to rolls",
         "ConcentrationMarker": "Concentration: {name}",
         "ConcentrationHint": "The spell lasts while you maintain concentration. Remove this effect to dismiss the spell. Falling unconscious breaks concentration.",
-        "PathSwitched": "{actor} switches the \"{doctrine}\" doctrine path: {path} is now active."
+        "PathSwitched": "{actor} switches the \"{doctrine}\" doctrine path: {path} is now active.",
+        "GMSuffix": "(GM)"
       },
       "Errors": {
         "no_config": "Magic config (CONFIG.DEDREL.magic) is not loaded.",
@@ -407,7 +408,13 @@
       "DamageBlocked": "(Blocked by armor: {dr} DR)",
       "UseItem": "Use: {name}",
       "DamageAmplified": "(Vulnerability: +{dr} extra damage)",
-      "DamageVsType": "(Vs type: +{pct}% damage)"
+      "DamageVsType": "(Vs type: +{pct}% damage)",
+      "PlaceTemplate": "Place Template",
+      "Save": "Saving Throw",
+      "VariableCostLabel": "Spend AP (from {min} to {max}):",
+      "VariableCostMax": "max.",
+      "AvailableAP": "Available AP: {current}",
+      "TemplateDefaultName": "Template"
     },
     "ItemSheet": {
       "Tabs": {
@@ -580,7 +587,8 @@
       "ServiceSettings": "Service Settings",
       "ServiceType": "Service Type",
       "ServiceHint": "A service is intangible: it has no weight and is not added to inventory. On purchase, money is deducted and the item's Active Effects (if any) are applied.",
-      "EquipSlot": "Accessory Slot"
+      "EquipSlot": "Accessory Slot",
+      "NewEffect": "New Effect"
     },
     "ActorSheet": {
       "Tabs": {
@@ -594,7 +602,8 @@
         "Mutations": "Mutations",
         "Talents": "Talents",
         "Statuses": "Statuses",
-        "Biography": "Biography"
+        "Biography": "Biography",
+        "NpcConfig": "Tuning"
       },
       "Mutations": "Mutations",
       "Talents": "Talents",
@@ -819,7 +828,12 @@
       "NoTransferTargets": "No available recipients.",
       "WrongSlotKind": "This item cannot go into this slot.",
       "WrongArmorSlot": "This armor does not fit the selected layer.",
-      "TailSlotLocked": "The tail slot is unavailable: a matching mutation is required."
+      "TailSlotLocked": "The tail slot is unavailable: a matching mutation is required.",
+      "InvalidTemplateData": "Invalid template data (shape/size)",
+      "ItemNotFoundMacro": "Item “{name}” not found on the selected character",
+      "NotEnoughSpeed": "Not enough speed: need {cost}, available {current}",
+      "SelectTokenForSave": "Select a token or assign a character for the saving throw",
+      "NewItemName": "New: {type}"
     },
     "EffectPhases": {
       "Apply": "Apply (system fields)",
@@ -853,7 +867,17 @@
       "ApplicableTalents": "Applicable Talents",
       "TalentsHint": "(Talent hints will be displayed here)",
       "CriticalFumble": "CRITICAL FUMBLE! (Confirmation roll: 1)",
-      "FumbleAverted": "Fumble averted. (Confirmation roll: {fumbleResult})"
+      "FumbleAverted": "Fumble averted. (Confirmation roll: {fumbleResult})",
+      "FumbleTotal": "FUMBLE",
+      "Parts": {
+        "rank": "rank",
+        "spec": "spec.",
+        "bonus": "bonus",
+        "buff": "buff",
+        "system": "system",
+        "penalty": "penalty",
+        "wounds": "wounds"
+      }
     },
     "Creation": {
       "Title": "Character Creation Block",
@@ -967,7 +991,9 @@
       }
     },
     "Hud": {
-      "AuraOffHint": "Right-click to disable the aura (re-enable via the item's chat card)"
+      "AuraOffHint": "Right-click to disable the aura (re-enable via the item's chat card)",
+      "ActionPoints": "Action Points",
+      "ChainManeuvers": "Chain Maneuvers"
     },
     "RegionBehaviors": {
       "Aura": {
@@ -1085,7 +1111,15 @@
       "Rank": "Rank",
       "CreatureType": "Creature type",
       "DrBase": "base",
-      "DrEffective": "effective"
+      "DrEffective": "effective",
+      "ConfigResources": "Health & resources",
+      "ConfigAttributes": "Attributes (base rank / save bonus)",
+      "ConfigSkills": "Skills (base rank / bonus)",
+      "HitsMax": "Hits max",
+      "OverrideMovementMax": "Override speed max",
+      "SaveBonus": "Save bonus",
+      "Bonus": "Bonus",
+      "Darkvision": "Darkvision (m)"
     },
     "CreatureTypes": {
       "beast": "Beast",

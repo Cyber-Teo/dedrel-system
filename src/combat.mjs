@@ -66,7 +66,15 @@ async function applyConditionTicks(actor, trigger) {
 }
 
 Hooks.on("updateCombat", async (combat, changed, options, userId) => {
-  if (!game.user.isGM) return;
+  // Гейт на АКТИВНОГО ГМа (а не любого isGM): при двух ГМ-клиентах восстановление
+  // ОД исполнялось бы дважды (идемпотентно, но дублировало нотификации).
+  // Закрытие chain-HUD ниже — клиентское, идёт до гейта.
+  if (changed.turn !== undefined || changed.round !== undefined) {
+    if (game.dedrel.chainHUD && game.dedrel.chainHUD.actor) {
+      game.dedrel.chainHUD.closeHUD();
+    }
+  }
+  if (!game.users.activeGM?.isSelf) return;
   if (!combat.started) return;
 
   const restoreTiming = game.settings.get("dedrel", "apRestoreTiming") || "startOfTurn";
@@ -137,12 +145,6 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
     }
   }
 
-  // Закрытие окна цепных манёвров при смене хода (чтобы не загромождать интерфейс)
-  if (changed.turn !== undefined || changed.round !== undefined) {
-    if (game.dedrel.chainHUD && game.dedrel.chainHUD.actor) {
-      game.dedrel.chainHUD.closeHUD();
-    }
-  }
 });
 
 /**

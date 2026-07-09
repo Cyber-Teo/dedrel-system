@@ -59,7 +59,8 @@ export default class LootDataModel extends foundry.abstract.TypeDataModel {
       for (const it of this.parent.items) {
         const w = Number(it.system?.weight) || 0;
         if (w <= 0) continue;
-        const qty = it.type === "currency" ? 1 : (Number(it.system?.quantity) ?? 1);
+        // ?? внутри Number(): у типов без quantity Number(undefined) дал бы NaN
+        const qty = it.type === "currency" ? 1 : Number(it.system?.quantity ?? 1);
         load += w * qty;
       }
     }

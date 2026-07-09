@@ -65,9 +65,7 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       is_twohanded: new fields.BooleanField({ initial: false }),
       is_thrown: new fields.BooleanField({ initial: false }),
       is_enchanted: new fields.BooleanField({ initial: false }),
-      is_reloading: new fields.BooleanField({ initial: false }),
-      
-      equipped: new fields.BooleanField({ initial: false })
+      is_reloading: new fields.BooleanField({ initial: false })
     };
   }
 }

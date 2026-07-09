@@ -425,7 +425,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
 
   static async #onAddEffect(event, target) {
     return ActiveEffect.implementation.create({
-      name: "Новый Эффект",
+      name: game.i18n.localize("DEDREL.ItemSheet.NewEffect"),
       icon: "icons/svg/aura.svg",
       origin: this.document.uuid
     }, { parent: this.document });

@@ -1105,7 +1105,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onCreateItem(event, target) {
     const type = target.dataset.type;
     const itemData = {
-      name: `Новый ${type}`,
+      // Локализованное имя типа из TYPES.Item.<type> (те же ключи, что в диалоге создания)
+      name: game.i18n.format("DEDREL.Notifications.NewItemName", {
+        type: game.i18n.localize(`TYPES.Item.${type}`)
+      }),
       type: type
     };
     return this.document.createEmbeddedDocuments("Item", [itemData]);

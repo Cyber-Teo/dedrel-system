@@ -103,6 +103,9 @@
         <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> {{localize "DEDREL.ItemSheet.IsEnchanted"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
+        {{!-- Экипировано: у персонажа выставляется листом (слоты рук), у NPC — вручную здесь.
+              От этого флага зависят transfer-эффекты оружия и фильтр оружия в Item#use. --}}
+        <label class="checkbox"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{localize "DEDREL.ItemSheet.Equipped"}}</label>
     </div>
 </div>
 

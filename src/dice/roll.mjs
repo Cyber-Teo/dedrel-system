@@ -94,15 +94,16 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
     explodeMod = "x10";
   }
 
+  const partLabel = (key) => game.i18n.localize(`DEDREL.Dice.Parts.${key}`);
   let formulaDisplay = `1d10${explodeMod}`;
-  if (baseRank) formulaDisplay += ` + ${baseRank} (ранг)`;
-  if (specBonus) formulaDisplay += ` + ${specBonus} (спец.)`;
-  if (bonus) formulaDisplay += ` + ${bonus} (бонус)`;
-  if (systemAttackBonus) formulaDisplay += ` + ${systemAttackBonus} (бафф)`;
-  if (globalBonus > 0) formulaDisplay += ` + ${globalBonus} (система)`;
-  else if (globalBonus < 0) formulaDisplay += ` - ${-globalBonus} (система)`;
-  if (penalty) formulaDisplay += ` - ${penalty} (штраф)`;
-  if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (раны)`;
+  if (baseRank) formulaDisplay += ` + ${baseRank} (${partLabel("rank")})`;
+  if (specBonus) formulaDisplay += ` + ${specBonus} (${partLabel("spec")})`;
+  if (bonus) formulaDisplay += ` + ${bonus} (${partLabel("bonus")})`;
+  if (systemAttackBonus) formulaDisplay += ` + ${systemAttackBonus} (${partLabel("buff")})`;
+  if (globalBonus > 0) formulaDisplay += ` + ${globalBonus} (${partLabel("system")})`;
+  else if (globalBonus < 0) formulaDisplay += ` - ${-globalBonus} (${partLabel("system")})`;
+  if (penalty) formulaDisplay += ` - ${penalty} (${partLabel("penalty")})`;
+  if (woundPenalty) formulaDisplay += ` - ${woundPenalty} (${partLabel("wounds")})`;
 
   let rollFormula = `1d10${explodeMod} + ${baseRank}`;
   if (specBonus) rollFormula += ` + ${specBonus}`;
@@ -156,7 +157,7 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
       <div class="dice-result">
         <div class="dice-formula" style="font-size: 12px; line-height: 1.2; padding: 5px; text-align: left;">${formulaDisplay}</div>
         ${rollHtml}
-        <h4 class="dice-total ${isCritFumble ? 'critical-fumble' : ''}">${isCritFumble ? 'ПРОВАЛ' : roll.total}</h4>
+        <h4 class="dice-total ${isCritFumble ? 'critical-fumble' : ''}">${isCritFumble ? game.i18n.localize("DEDREL.Dice.FumbleTotal") : roll.total}</h4>
         ${customChatAddon}
       </div>
     </div>

@@ -7,7 +7,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     tag: "div",
     window: {
       frame: true,
-      title: "Action Points",
+      title: "DEDREL.Hud.ActionPoints",
       positioned: true,
       minimizable: true
     },

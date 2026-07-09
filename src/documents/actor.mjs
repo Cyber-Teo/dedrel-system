@@ -72,22 +72,31 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Расширение ядра: транслируемые (transfer) эффекты АКСЕССУАРА применяются к
-   * актору только когда аксессуар экипирован в слот. Аксессуар = предмет с
-   * непустым system.equip_slot (кольца, амулеты, пояса, диадемы, шлемы-аксессуары).
-   * «Экипирован» = его id стоит в одном из system.equipment_slots актора.
+   * Расширение ядра: транслируемые (transfer) эффекты ЭКИПИРУЕМЫХ предметов
+   * применяются к актору только пока предмет экипирован. Ядро само такого
+   * подавления не делает (isSuppressed по умолчанию false — это обязанность
+   * системы), поэтому без гейта зачарованный меч баффал бы владельца из рюкзака.
    *
-   * Прочие предметы (мутации, таланты, обычные магические предметы без слота)
-   * ведут себя как в ядре — их transfer-эффекты применяются, пока предмет в
-   * инвентаре. На акторах без equipment_slots (лут/контейнер) гейтинга нет.
+   *  - Аксессуары (непустой system.equip_slot: кольца, амулеты, шлемы-аксессуары):
+   *    «экипирован» = id стоит в одном из system.equipment_slots актора.
+   *  - Оружие: system.equipped (выставляется листом при взятии в руки/хвост).
+   *  - Броня тела (armor без equip_slot): id стоит в одном из слоёв брони.
+   *
+   * Прочие предметы (мутации, таланты, зелья и т.п.) ведут себя как в ядре —
+   * их transfer-эффекты применяются, пока предмет в инвентаре. На акторах без
+   * equipment_slots (лут/контейнер) гейтится только оружие (по system.equipped).
    */
   *allApplicableEffects() {
     const slots = this.system?.equipment_slots;
+    const inSlot = (item) => Object.values(slots).some(s => s?.item_id === item.id);
     for (const effect of this.effects) yield effect;
     for (const item of this.items) {
       if (slots && item.system?.equip_slot) {
-        const equipped = Object.values(slots).some(s => s?.item_id === item.id);
-        if (!equipped) continue;
+        if (!inSlot(item)) continue;
+      } else if (item.type === "weapon") {
+        if (!item.system?.equipped) continue;
+      } else if (slots && item.type === "armor") {
+        if (!inSlot(item)) continue;
       }
       for (const effect of item.effects) {
         if (effect.transfer) yield effect;

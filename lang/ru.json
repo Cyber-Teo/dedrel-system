@@ -231,7 +231,8 @@
         "PowerEffectName": "Сила заклинания: {n} к броскам",
         "ConcentrationMarker": "Концентрация: {name}",
         "ConcentrationHint": "Заклинание действует, пока вы поддерживаете концентрацию. Снимите эффект, чтобы отменить заклинание. Потеря сознания обрывает концентрацию.",
-        "PathSwitched": "{actor} переключает путь доктрины «{doctrine}»: теперь активен {path}."
+        "PathSwitched": "{actor} переключает путь доктрины «{doctrine}»: теперь активен {path}.",
+        "GMSuffix": "(ГМ)"
       },
       "Errors": {
         "no_config": "Конфиг магии (CONFIG.DEDREL.magic) не загружен.",
@@ -421,9 +422,7 @@
       "AreaShape": "Форма области",
       "AreaSizeM": "Размер области (м)",
       "FormulasAndSaves": "Формулы и Спасброски",
-      "AdditionalFormula": "Доп. формула",
       "SaveAttribute": "Атрибут спасброска",
-      "DifficultyDC": "Сложность (DC)",
       "ForbiddenDefense": "Запрет защиты",
       "AttackBonus": "Бонус к попаданию (Точность)",
       "MagicFocus": "Магический фокус",
@@ -532,7 +531,16 @@
       "ServiceSettings": "Настройки услуги",
       "ServiceType": "Тип услуги",
       "ServiceHint": "Услуга нематериальна: не имеет веса и не кладётся в инвентарь. При покупке списываются деньги и применяются Active Effects предмета (если есть).",
-      "EquipSlot": "Слот аксессуара"
+      "EquipSlot": "Слот аксессуара",
+      "ArmorProperties": "Свойства доспеха",
+      "BasicParameters": "Основные параметры",
+      "DamageResistance": "Снижение урона (DR)",
+      "FormulaCustom": "Своя формула",
+      "Modifiers": "Модификаторы",
+      "SaveDC": "Сл. спасброска",
+      "Slot": "Слот",
+      "WeightClass": "Класс веса",
+      "NewEffect": "Новый эффект"
     },
     "Chat": {
       "Attack": "Атака",
@@ -550,7 +558,6 @@
       "Roll": "Бросок",
       "Cancel": "Отмена",
       "AttackCardTitle": "Атака: {name}",
-      "AttackCardFlavor": "Использует {name}",
       "DamageCardFlavor": "Урон: {name}",
       "ArmorPiercing": "Бронебойность {value}",
       "DamageTaken": "<b>{name}</b> получает {damage} {type} урона.",
@@ -574,7 +581,14 @@
       "LuckChatFlavor": "<b>{name}</b> тратит Очко Удачи.",
       "LuckChatDesc": "<i>Переброс 1 кубика (свой или противника), используется новый результат.</i>",
       "DamageAmplified": "(Уязвимость: +{dr} доп. урона)",
-      "DamageVsType": "(Против типа: +{pct}% урона)"
+      "DamageVsType": "(Против типа: +{pct}% урона)",
+      "Confirm": "Подтвердить",
+      "PlaceTemplate": "Разместить шаблон",
+      "Save": "Спасбросок",
+      "VariableCostLabel": "Трата ОД (от {min} до {max}):",
+      "VariableCostMax": "макс.",
+      "AvailableAP": "Доступно ОД: {current}",
+      "TemplateDefaultName": "Шаблон"
     },
     "ActorSheet": {
       "Tabs": {
@@ -588,7 +602,8 @@
         "Mutations": "Мутации",
         "Talents": "Таланты",
         "Statuses": "Статусы",
-        "Biography": "Биография"
+        "Biography": "Биография",
+        "NpcConfig": "Настройка"
       },
       "Mutations": "Мутации",
       "Talents": "Таланты",
@@ -613,7 +628,6 @@
       "EquipmentSlots": "Слоты Экипировки",
       "Weapons": "Оружие",
       "MagicItems": "Магические предметы",
-      "Notes": "Заметки",
       "DamageResistance": "Сопротивление урону (DR)",
       "GeneralInventory": "Общий Инвентарь",
       "WeaponSlots": "Слоты оружия",
@@ -814,7 +828,12 @@
       "NoTransferTargets": "Нет доступных получателей.",
       "WrongSlotKind": "Этот предмет нельзя поместить в этот слот.",
       "WrongArmorSlot": "Эта броня не подходит для выбранного слоя.",
-      "TailSlotLocked": "Слот хвоста недоступен: требуется соответствующая мутация."
+      "TailSlotLocked": "Слот хвоста недоступен: требуется соответствующая мутация.",
+      "InvalidTemplateData": "Некорректные данные шаблона (форма/размер)",
+      "ItemNotFoundMacro": "Предмет «{name}» не найден у выбранного персонажа",
+      "NotEnoughSpeed": "Недостаточно скорости: нужно {cost}, доступно {current}",
+      "SelectTokenForSave": "Выберите токен или назначьте персонажа для спасброска",
+      "NewItemName": "Новый: {type}"
     },
     "EffectPhases": {
       "Apply": "Применение (системные поля)",
@@ -848,7 +867,17 @@
       "ApplicableTalents": "Применимые таланты",
       "TalentsHint": "(Здесь будут отображаться подсказки от талантов)",
       "CriticalFumble": "КРИТИЧЕСКИЙ ПРОВАЛ! (Подтверждающий бросок: 1)",
-      "FumbleAverted": "Провал предотвращён. (Подтверждающий бросок: {fumbleResult})"
+      "FumbleAverted": "Провал предотвращён. (Подтверждающий бросок: {fumbleResult})",
+      "FumbleTotal": "ПРОВАЛ",
+      "Parts": {
+        "rank": "ранг",
+        "spec": "спец.",
+        "bonus": "бонус",
+        "buff": "бафф",
+        "system": "система",
+        "penalty": "штраф",
+        "wounds": "раны"
+      }
     },
     "Creation": {
       "Title": "Блок создания персонажа",
@@ -962,7 +991,9 @@
       }
     },
     "Hud": {
-      "AuraOffHint": "ПКМ — выключить ауру (включить обратно можно с карточки предмета в чате)"
+      "AuraOffHint": "ПКМ — выключить ауру (включить обратно можно с карточки предмета в чате)",
+      "ActionPoints": "Очки Действия",
+      "ChainManeuvers": "Цепные манёвры"
     },
     "RegionBehaviors": {
       "Aura": {
@@ -1080,7 +1111,15 @@
       "Rank": "Ранг",
       "CreatureType": "Тип существа",
       "DrBase": "база",
-      "DrEffective": "итог"
+      "DrEffective": "итог",
+      "ConfigResources": "Здоровье и ресурсы",
+      "ConfigAttributes": "Атрибуты (базовый ранг / бонус спасброска)",
+      "ConfigSkills": "Навыки (базовый ранг / бонус)",
+      "HitsMax": "Макс. попаданий",
+      "OverrideMovementMax": "Переопр. макс. скорости",
+      "SaveBonus": "Бонус спасброска",
+      "Bonus": "Бонус",
+      "Darkvision": "Тёмное зрение (м)"
     },
     "CreatureTypes": {
       "beast": "Животные",

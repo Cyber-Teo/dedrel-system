@@ -1,0 +1,216 @@
+<div class="tab inventory {{tabs.inventory.cssClass}}" data-group="primary" data-tab="inventory">
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.WeaponSlots"}}</h2>
+    <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <div class="slot-box equip-slot" data-equip-slot="main_hand" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MainHand"}}</h4>
+            {{#if equipment_slots.main_hand}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.main_hand.name}}</div>
+            <a class="item-control" data-action="unequipWeapon" data-slot="main_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
+            {{/if}}
+        </div>
+        <div class="slot-box equip-slot" data-equip-slot="off_hand" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.OffHand"}}</h4>
+            {{#if equipment_slots.off_hand}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.off_hand.name}}</div>
+            <a class="item-control" data-action="unequipWeapon" data-slot="off_hand" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
+            {{/if}}
+        </div>
+        <div class="slot-box equip-slot" data-equip-slot="tail" data-slot-kind="weapon" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05); {{#unless hasTail}}opacity: 0.5; pointer-events: none;{{/unless}}">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.Tail"}} {{#unless hasTail}}<i class="fas fa-lock" title="{{localize "DEDREL.ActorSheet.MutationRequired"}}"></i>{{/unless}}</h4>
+            {{#if equipment_slots.tail}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.tail.name}}</div>
+            <a class="item-control" data-action="unequipWeapon" data-slot="tail" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.Empty"}}</div>
+            {{/if}}
+        </div>
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Weapons"}}</h2>
+    <div class="item-list">
+        {{#each weapons as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name rollable" data-action="useItem">
+                <h4>{{item.name}}{{#if (ne item.system.quantity undefined)}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">[x{{item.system.quantity}}]</span>{{/if}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="equipWeapon" title="{{localize "DEDREL.ActorSheet.Equip"}}"><i
+                        class="fas fa-hand-rock"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.ArmorSlots"}}</h2>
+    {{#if system.armor_penalty}}
+    <div class="armor-penalty-warning" style="background: rgba(255, 0, 0, 0.1); border: 1px solid var(--color-text-dark-primary); color: #b72a2a; padding: 5px; margin-bottom: 10px; border-radius: 4px; text-align: center;">
+        <i class="fas fa-exclamation-triangle"></i> {{localize "DEDREL.ActorSheet.ArmorPenaltyWarning"}}
+    </div>
+    {{/if}}
+    
+    <div class="dr-display" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 15px; background: rgba(0,0,0,0.1); padding: 8px; border-radius: 4px; border: 1px solid var(--color-border-dark);">
+        <div style="width: 100%; font-weight: bold; margin-bottom: 5px; border-bottom: 1px solid var(--color-border-light-highlight); padding-bottom: 3px;">
+            {{localize "DEDREL.ActorSheet.DamageResistance"}}
+        </div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Slashing"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-slash"></i> <b>{{system.dr.slashing}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Piercing"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-bullseye"></i> <b>{{system.dr.piercing}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Bludgeoning"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-gavel"></i> <b>{{system.dr.bludgeoning}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Fire"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-fire"></i> <b>{{system.dr.heat}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Cold"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-snowflake"></i> <b>{{system.dr.cold}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Lightning"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-bolt"></i> <b>{{system.dr.electric}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Thunder"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-volume-high"></i> <b>{{system.dr.sonic}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Radiant"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-sun"></i> <b>{{system.dr.radiant}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Necrotic"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-skull"></i> <b>{{system.dr.necrotic}}</b></div>
+        <div class="dr-item" title="{{localize "DEDREL.ItemSheet.Acid"}}" style="display: flex; align-items: center; gap: 3px;"><i class="fa-solid fa-flask"></i> <b>{{system.dr.acid}}</b></div>
+    </div>
+
+    <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <div class="slot-box equip-slot" data-equip-slot="armor_upper" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.UpperLayer"}}</h4>
+            {{#if equipment_slots.armor_upper}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_upper.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_upper" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
+            {{/if}}
+        </div>
+        <div class="slot-box equip-slot" data-equip-slot="armor_middle" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.MiddleLayer"}}</h4>
+            {{#if equipment_slots.armor_middle}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_middle.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_middle" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
+            {{/if}}
+        </div>
+        <div class="slot-box equip-slot" data-equip-slot="armor_lower" data-slot-kind="armor" style="flex: 1; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;">{{localize "DEDREL.ActorSheet.LowerLayer"}}</h4>
+            {{#if equipment_slots.armor_lower}}
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{equipment_slots.armor_lower.name}}</div>
+            <a class="item-control" data-action="unequipArmor" data-slot="armor_lower" title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.Unequip"}}</a>
+            {{else}}
+            <div style="color: var(--color-text-dark-secondary); font-size: 0.9em; font-style: italic;">{{localize "DEDREL.ActorSheet.EmptySlot"}}</div>
+            {{/if}}
+        </div>
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.AccessorySlots"}}</h2>
+    <div class="acc-slots-grid">
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="head" accept="head" label=(localize "DEDREL.AccSlot.head") item=equipment_slots.head}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="neck" accept="neck" label=(localize "DEDREL.AccSlot.neck") item=equipment_slots.neck}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="torso" accept="torso" label=(localize "DEDREL.AccSlot.torso") item=equipment_slots.torso}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_tail" accept="hand" label=(localize "DEDREL.AccSlot.tail") item=equipment_slots.acc_tail requiresTail=true}}
+    </div>
+    <div class="acc-slots-grid acc-hands">
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_left_1" accept="hand" label=(localize "DEDREL.AccSlot.left1") item=equipment_slots.acc_left_1}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_left_2" accept="hand" label=(localize "DEDREL.AccSlot.left2") item=equipment_slots.acc_left_2}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_right_1" accept="hand" label=(localize "DEDREL.AccSlot.right1") item=equipment_slots.acc_right_1}}
+        {{> "systems/dedrel/templates/actor/parts/accessory-slot.hbs" slotKey="acc_right_2" accept="hand" label=(localize "DEDREL.AccSlot.right2") item=equipment_slots.acc_right_2}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.ArmorInventory"}}</h2>
+    <div class="item-list">
+        {{#each armors as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name rollable" data-action="useItem">
+                <h4>{{item.name}}{{#if (ne item.system.quantity undefined)}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">[x{{item.system.quantity}}]</span>{{/if}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="equipArmor" title="{{localize "DEDREL.ActorSheet.Equip"}}"><i class="fas fa-tshirt"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.MagicItems"}}</h2>
+    <div class="item-list">
+        {{#each magic_items as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name rollable" data-action="useItem">
+                <h4>{{item.name}}{{#if (ne item.system.quantity undefined)}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">[x{{item.system.quantity}}]</span>{{/if}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="toggle-favorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}"><i
+                        class="{{#if item.flags.dedrel.isFavorite}}fas{{else}}far{{/if}} fa-star"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Containers"}}
+        {{#if canCreateActors}}<a class="item-control" data-action="createContainer" title="{{localize "DEDREL.Container.New"}}"><i class="fas fa-plus"></i></a>{{/if}}
+    </h2>
+    <div class="item-list">
+        {{#each containers as |c|}}
+        <div class="item-row flexrow" data-item-id="{{c.item.id}}" data-container-uuid="{{c.uuid}}">
+            <div class="item-image rollable" data-action="openContainer"><img src="{{c.item.img}}" title="{{c.item.name}}" width="24" height="24"/></div>
+            <div class="item-name rollable" data-action="openContainer">
+                <h4><i class="fas fa-box" style="margin-right: 4px; color: var(--color-text-dark-secondary);"></i>{{c.item.name}}
+                    <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">({{numberFormat c.item.system.weight decimals=1}} кг)</span>
+                </h4>
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="openContainer" title="{{localize "DEDREL.Container.Open"}}"><i class="fas fa-box-open"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                <a class="item-control" data-action="unlinkContainer" title="{{localize "DEDREL.Container.Unlink"}}"><i class="fas fa-link-slash"></i></a>
+            </div>
+        </div>
+        {{else}}
+        <p style="color: var(--color-text-dark-secondary); font-style: italic; font-size: 0.85em; padding: 4px;">{{localize "DEDREL.Container.Hint"}}</p>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.GeneralInventory"}}</h2>
+    <div class="item-list">
+        <div class="item-list-header flexrow">
+            <div class="item-name">{{localize "DEDREL.UI.Name"}}</div>
+            <div class="item-controls">
+                <a class="item-control" data-action="create" data-type="loot" title="{{localize "DEDREL.ActorSheet.Add"}}"><i
+                        class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        {{#each inventory as |item id|}}
+        <div class="item-row flexrow" data-item-id="{{item.id}}">
+            <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+            </div>
+            <div class="item-name rollable" data-action="useItem">
+                <h4>{{item.name}}{{#if (ne item.system.quantity undefined)}} <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">[x{{item.system.quantity}}]</span>{{/if}}</h4>
+                {{#if item.system.has_charges}}
+                <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                {{/if}}
+            </div>
+            <div class="item-controls">
+                <a class="item-control" data-action="toggle-favorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}"><i
+                        class="{{#if item.flags.dedrel.isFavorite}}fas{{else}}far{{/if}} fa-star"></i></a>
+                <a class="item-control" data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fas fa-edit"></i></a>
+                {{#unless @root.itemsLocked}}<a class="item-control" data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fas fa-trash"></i></a>{{/unless}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

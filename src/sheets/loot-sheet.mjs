@@ -15,7 +15,8 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (actor.system.mode !== "container") return true;
   const cap = Number(actor.system.capacity) || 0;
   if (cap <= 0) return true; // без лимита
-  const qty = item.type === "currency" ? 1 : (Number(item.system?.quantity) ?? 1);
+  // ?? внутри Number(): у типов без quantity Number(undefined) дал бы NaN
+  const qty = item.type === "currency" ? 1 : Number(item.system?.quantity ?? 1);
   const incoming = (Number(item.system?.weight) || 0) * qty;
   const current = Number(actor.system.load) || 0;
   if (current + incoming > cap) {

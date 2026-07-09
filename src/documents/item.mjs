@@ -154,23 +154,30 @@ export default class DedrelItem extends Item {
       if (requiresWeapon) {
         validWeapons = actor.items.filter(i => {
           if (i.type !== "weapon" || !i.system.equipped) return false;
-          
+
           if (reqSkill && reqSkill !== "any" && i.system.skill !== reqSkill) return false;
-          
+
           const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
           if (hasReqType) {
             const wt = i.system.weapon_type || {};
-            let matchType = (wt.melee && wType.melee) || (wt.ranged && wType.ranged) || 
+            let matchType = (wt.melee && wType.melee) || (wt.ranged && wType.ranged) ||
                             (wt.shield && wType.shield) || (wt.magic && wType.magic);
             if (!matchType) return false;
           }
-          
+
           const hasReqDmg = wDmg.piercing || wDmg.bludgeoning || wDmg.slashing;
           if (hasReqDmg) {
             const wd = i.system.damage_type || {};
-            let matchDmg = (wd.piercing && wDmg.piercing) || (wd.bludgeoning && wDmg.bludgeoning) || 
+            let matchDmg = (wd.piercing && wDmg.piercing) || (wd.bludgeoning && wDmg.bludgeoning) ||
                            (wd.slashing && wDmg.slashing);
             if (!matchDmg) return false;
+          }
+
+          // Требуемые свойства оружия (двуручное, быстрое, метательное и т.п.):
+          // оружие должно обладать КАЖДЫМ отмеченным свойством. Флаги свойств у
+          // оружия лежат плоско в system (is_twohanded, is_fast, ...).
+          for (const [prop, required] of Object.entries(wProp)) {
+            if (required && !i.system[prop]) return false;
           }
           return true;
         });
@@ -245,13 +252,14 @@ export default class DedrelItem extends Item {
       
       if (isVariable) {
         maxAp = Math.min(maxAp, currentAp);
+        const maxLabel = this.system.variable_cost_max || game.i18n.localize("DEDREL.Chat.VariableCostMax");
         content += `
           <div class="form-group" style="margin-top: 10px;">
-            <label style="font-weight: bold;">Трата ОД (от ${minAp} до ${this.system.variable_cost_max || 'макс.'}):</label>
+            <label style="font-weight: bold;">${game.i18n.format("DEDREL.Chat.VariableCostLabel", { min: minAp, max: maxLabel })}</label>
             <input type="number" id="use-ap-cost" value="${minAp}" min="${minAp}" max="${maxAp}" style="width: 100%; padding: 4px;">
           </div>
         `;
-        content += `<p style="color: gray; font-size: 12px;">Доступно ОД: ${currentAp}</p>`;
+        content += `<p style="color: gray; font-size: 12px;">${game.i18n.format("DEDREL.Chat.AvailableAP", { current: currentAp })}</p>`;
       } else {
         content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: esc(this.name), cost: apCost})}</p>`;
         if (apCost > currentAp) {

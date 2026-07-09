@@ -1,0 +1,101 @@
+{{!-- Вкладка «Настройка» NPC: все ручные (source) параметры, которые у персонажа
+      растут через опыт/создание, здесь выставляются напрямую. Инпуты берут
+      значения из _source (не из производных), иначе submit «запёк» бы вклад
+      эффектов/талантов/брони в базу. --}}
+<div class="tab config {{tabs.config.cssClass}}" data-group="primary" data-tab="config">
+
+    <h2 class="tab-title">{{localize "DEDREL.Npc.ConfigResources"}}</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 15px;">
+        {{#if isPeon}}
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;">{{localize "DEDREL.Npc.HitsMax"}}</label>
+            <input type="number" name="system.resources.hits.max" value="{{srcHitsMax}}" style="width: 60px;"/>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;">{{localize "DEDREL.Npc.Toughness"}}</label>
+            <input type="number" name="system.toughness" value="{{srcToughness}}" style="width: 60px;"/>
+        </div>
+        {{else}}
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;" title="{{localize "DEDREL.Npc.Derived"}}">{{localize "DEDREL.Npc.OverrideHpMax"}} <span style="opacity:.5;">({{system.resources.hp.max}})</span></label>
+            <input type="number" name="system.overrides.hp_max" value="{{srcOverrides.hp_max}}" placeholder="auto" style="width: 60px;"/>
+        </div>
+        {{/if}}
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;" title="{{localize "DEDREL.Npc.Derived"}}">{{localize "DEDREL.Npc.OverrideApMax"}} <span style="opacity:.5;">({{system.resources.ap_universal.max}})</span></label>
+            <input type="number" name="system.overrides.ap_max" value="{{srcOverrides.ap_max}}" placeholder="auto" style="width: 60px;"/>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;" title="{{localize "DEDREL.Npc.Derived"}}">{{localize "DEDREL.Npc.OverrideMovementMax"}} <span style="opacity:.5;">({{system.resources.movement.max}})</span></label>
+            <input type="number" name="system.overrides.movement_max" value="{{srcOverrides.movement_max}}" placeholder="auto" style="width: 60px;"/>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <label style="font-size: 12px;">{{localize "DEDREL.Npc.Darkvision"}}</label>
+            <input type="number" name="system.senses.darkvision" value="{{system.senses.darkvision}}" style="width: 60px;"/>
+        </div>
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.Npc.ConfigAttributes"}}</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 16px; margin-bottom: 15px;">
+        {{#each srcAttributes as |attr|}}
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <label style="flex: 1; font-size: 12px;">{{localize attr.label}}</label>
+            <input type="number" name="system.attributes.{{attr.key}}.rank" value="{{attr.rank}}" title="{{localize "DEDREL.Npc.Rank"}}" style="width: 44px;"/>
+            <input type="number" name="system.attributes.{{attr.key}}.save_bonus" value="{{attr.save_bonus}}" title="{{localize "DEDREL.Npc.SaveBonus"}}" style="width: 44px; opacity: .8;"/>
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.Npc.ConfigSkills"}}</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 24px; margin-bottom: 15px;">
+        {{#each srcSkillGroups as |group|}}
+        <div style="margin-bottom: 8px;">
+            <h3 class="skill-group-header">{{localize group.label}}</h3>
+            {{#each group.skills as |skill|}}
+            <div style="display: flex; align-items: center; gap: 6px; padding: 1px 0;">
+                <label style="flex: 1; font-size: 12px;">{{localize skill.label}}</label>
+                <input type="number" name="system.skills.{{skill.key}}.rank" value="{{skill.rank}}" title="{{localize "DEDREL.Npc.Rank"}}" style="width: 44px;"/>
+                <input type="number" name="system.skills.{{skill.key}}.bonus" value="{{skill.bonus}}" title="{{localize "DEDREL.Npc.Bonus"}}" style="width: 44px; opacity: .8;"/>
+            </div>
+            {{/each}}
+        </div>
+        {{/each}}
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.ActorSheet.DamageResistance"}} <span style="font-weight: normal; opacity: .6; font-size: 12px;">({{localize "DEDREL.Npc.DrBase"}} / {{localize "DEDREL.Npc.DrEffective"}})</span></h2>
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; font-size: 12px; margin-bottom: 15px;">
+        <div title="{{localize "DEDREL.ItemSheet.Slashing"}}"><i class="fa-solid fa-slash"></i> <input type="number" name="system.dr.slashing" value="{{srcDr.slashing}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.slashing}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Piercing"}}"><i class="fa-solid fa-bullseye"></i> <input type="number" name="system.dr.piercing" value="{{srcDr.piercing}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.piercing}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Bludgeoning"}}"><i class="fa-solid fa-gavel"></i> <input type="number" name="system.dr.bludgeoning" value="{{srcDr.bludgeoning}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.bludgeoning}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Fire"}}"><i class="fa-solid fa-fire"></i> <input type="number" name="system.dr.heat" value="{{srcDr.heat}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.heat}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Cold"}}"><i class="fa-solid fa-snowflake"></i> <input type="number" name="system.dr.cold" value="{{srcDr.cold}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.cold}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Lightning"}}"><i class="fa-solid fa-bolt"></i> <input type="number" name="system.dr.electric" value="{{srcDr.electric}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.electric}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Thunder"}}"><i class="fa-solid fa-volume-high"></i> <input type="number" name="system.dr.sonic" value="{{srcDr.sonic}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.sonic}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Radiant"}}"><i class="fa-solid fa-sun"></i> <input type="number" name="system.dr.radiant" value="{{srcDr.radiant}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.radiant}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Necrotic"}}"><i class="fa-solid fa-skull"></i> <input type="number" name="system.dr.necrotic" value="{{srcDr.necrotic}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.necrotic}}</small></div>
+        <div title="{{localize "DEDREL.ItemSheet.Acid"}}"><i class="fa-solid fa-flask"></i> <input type="number" name="system.dr.acid" value="{{srcDr.acid}}" style="width: 36px;"/><small style="opacity: .6;">/{{effDr.acid}}</small></div>
+    </div>
+
+    <h2 class="tab-title">{{localize "DEDREL.Npc.Magic"}}</h2>
+
+    <div style="font-size: 12px; opacity: .8; margin-bottom: 2px;">{{localize "DEDREL.Npc.Techniques"}}</div>
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px 12px; margin-bottom: 10px;">
+        {{#each srcTechniques as |tech|}}
+        <div style="display: flex; align-items: center; gap: 4px;">
+            <label style="flex: 1; font-size: 11px;">{{localize tech.label}}</label>
+            <input type="number" name="system.magic.techniques.{{tech.key}}" value="{{tech.value}}" style="width: 38px;"/>
+        </div>
+        {{/each}}
+    </div>
+
+    <div style="font-size: 12px; opacity: .8; margin-bottom: 2px;">{{localize "DEDREL.Npc.Doctrines"}} <span style="opacity: .6;">({{localize "DEDREL.Npc.Rank"}} / {{localize "DEDREL.Npc.Unlocked"}})</span></div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 16px; margin-bottom: 15px;">
+        {{#each doctrines as |doc|}}
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <label style="flex: 1; font-size: 11px;">{{localize doc.label}}</label>
+            <input type="number" name="system.doctrines.{{doc.key}}.rank" value="{{doc.rank}}" title="{{localize "DEDREL.Npc.Rank"}}" style="width: 38px;"/>
+            <input type="number" name="system.doctrines.{{doc.key}}.unlocked" value="{{doc.unlocked}}" title="{{localize "DEDREL.Npc.Unlocked"}}" style="width: 38px;"/>
+        </div>
+        {{/each}}
+    </div>
+</div>

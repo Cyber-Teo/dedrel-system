@@ -1,0 +1,162 @@
+        <div class="main-bottom">
+            <div class="skills-list">
+                <div class="skills-header">
+                    <span class="skill-name-header">{{localize "DEDREL.ActorSheet.SkillName"}}</span>
+                    <span class="skill-spec-header">{{localize "DEDREL.ActorSheet.Specialization"}}</span>
+                    <span class="skill-rank-header">{{localize "DEDREL.ActorSheet.Rank"}}</span>
+                    <span class="skill-bonus-header" style="text-align: center; width: 50px;">BONUS</span>
+                </div>
+                <div class="skills-scrollarea">
+                    {{#if favoriteSkillsData.length}}
+                    <h3 class="skill-group-header favorite-skills-header"><i class="fas fa-star" style="color: var(--color-text-light-highlight);"></i> {{localize "DEDREL.ActorSheet.FavoriteSkills"}}</h3>
+                    {{#each favoriteSkillsData as |skill|}}
+                    <div class="skill-item" data-skill-id="{{skill.key}}">
+                        <a class="skill-control" data-action="toggleSkillFavorite" title="{{localize "DEDREL.ActorSheet.RemoveFavorite"}}" style="margin-right: 5px;">
+                            <i class="fas fa-star" style="color: var(--color-text-light-highlight);"></i>
+                        </a>
+                        <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <div class="skill-spec" title="{{skill.specialization}}">
+                            {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
+                        </div>
+                        <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+
+                    <h3 class="skill-group-header">{{localize "DEDREL.ActorSheet.CombatSkills"}}</h3>
+                    {{#each skillGroups.combat as |skill|}}
+                    <div class="skill-item" data-skill-id="{{skill.key}}">
+                        <a class="skill-control" data-action="toggleSkillFavorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}" style="margin-right: 5px;">
+                            <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
+                        </a>
+                        <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <div class="skill-spec" title="{{skill.specialization}}">
+                            {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
+                        </div>
+                        <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
+                    </div>
+                    {{/each}}
+
+                    <h3 class="skill-group-header">{{localize "DEDREL.ActorSheet.IntellectualSkills"}}</h3>
+                    {{#each skillGroups.intellectual as |skill|}}
+                    <div class="skill-item" data-skill-id="{{skill.key}}">
+                        <a class="skill-control" data-action="toggleSkillFavorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}" style="margin-right: 5px;">
+                            <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
+                        </a>
+                        <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <div class="skill-spec" title="{{skill.specialization}}">
+                            {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
+                        </div>
+                        <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
+                    </div>
+                    {{/each}}
+
+                    <h3 class="skill-group-header">{{localize "DEDREL.ActorSheet.PracticalSkills"}}</h3>
+                    {{#each skillGroups.practical as |skill|}}
+                    <div class="skill-item" data-skill-id="{{skill.key}}">
+                        <a class="skill-control" data-action="toggleSkillFavorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}" style="margin-right: 5px;">
+                            <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
+                        </a>
+                        <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <div class="skill-spec" title="{{skill.specialization}}">
+                            {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
+                        </div>
+                        <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
+                    </div>
+                    {{/each}}
+
+                    <h3 class="skill-group-header">{{localize "DEDREL.ActorSheet.SocialSkills"}}</h3>
+                    {{#each skillGroups.social as |skill|}}
+                    <div class="skill-item" data-skill-id="{{skill.key}}">
+                        <a class="skill-control" data-action="toggleSkillFavorite" title="{{localize "DEDREL.ActorSheet.ToggleFavorite"}}" style="margin-right: 5px;">
+                            <i class="{{#if skill.isFavorite}}fas{{else}}far{{/if}} fa-star" {{#if skill.isFavorite}}style="color: var(--color-text-light-highlight);"{{/if}}></i>
+                        </a>
+                        <img src="systems/dedrel/assets/icons/skills/{{skill.key}}.svg" onerror="this.src='icons/svg/d20.svg'" width="24" height="24" class="skill-icon" style="margin-right: 5px;" />
+                        <a class="skill-name rollable" data-action="rollCheck" data-rank="{{skill.rank}}" data-skill="{{skill.key}}" data-label="{{localize (concat "DEDREL.Skills." skill.key)}}">{{localize (concat "DEDREL.Skills." skill.key)}}</a>
+                        <div class="skill-spec" title="{{skill.specialization}}">
+                            {{#if skill.specialization}}{{skill.specialization}}{{else}}<span style="opacity: 0.3;">...</span>{{/if}}
+                        </div>
+                        <span class="skill-rank-display">{{skill.rank}}</span>
+                        <span class="skill-bonus-display" title="Bonus" style="text-align: center; width: 50px; font-weight: bold; color: var(--color-text-light-highlight);">{{skill.bonus}}</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="quick-slots">
+                <h3 class="slot-header">{{localize "DEDREL.ActorSheet.EquippedWeapons"}}</h3>
+                <div class="item-list">
+                    {{#each equippedWeapons as |item id|}}
+                    <div class="item-row flexrow" data-item-id="{{item.id}}">
+                        <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24"
+                                height="24" /></div>
+                        <div class="item-name rollable" data-action="useItem">
+                            <h4>{{item.name}}</h4>
+                            {{#if item.system.has_charges}}
+                            <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                            {{/if}}
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="toggle-favorite"
+                                title="{{localize "DEDREL.ActorSheet.Unequip"}}"><i class="fas fa-star"></i></a>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="item-slot empty-slot">{{localize "DEDREL.ActorSheet.EmptySlotWeapon"}}
+                    </div>
+                    {{/each}}
+                </div>
+
+                <h3 class="slot-header">{{localize "DEDREL.ActorSheet.QuickSlotsItems"}}</h3>
+                <div class="item-list">
+                    {{#each quickSlots as |item id|}}
+                    <div class="item-row flexrow" data-item-id="{{item.id}}">
+                        <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24"
+                                height="24" /></div>
+                        <div class="item-name rollable" data-action="useItem">
+                            <h4>{{item.name}}</h4>
+                            {{#if item.system.has_charges}}
+                            <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                            {{/if}}
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="toggle-favorite"
+                                title="{{localize "DEDREL.ActorSheet.RemoveFavorite"}}"><i class="fas fa-star"></i></a>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="item-slot empty-slot">{{localize "DEDREL.ActorSheet.EmptySlotItem"}}</div>
+                    {{/each}}
+                </div>
+
+                <h3 class="slot-header">{{localize "DEDREL.ActorSheet.FavoriteManeuversSpells"}}</h3>
+                <div class="item-list">
+                    {{#each favoriteManeuversSpells as |item id|}}
+                    <div class="item-row flexrow" data-item-id="{{item.id}}">
+                        <div class="item-image rollable" data-action="useItem"><img src="{{item.img}}" title="{{item.name}}" width="24"
+                                height="24" /></div>
+                        <div class="item-name rollable" data-action="useItem">
+                            <h4>{{item.name}}</h4>
+                            {{#if item.system.has_charges}}
+                            <span class="item-charges" style="font-size: 0.8em; color: var(--color-text-dark-secondary); margin-left: 5px;">({{item.system.uses_value}}/{{item.system.uses_max}})</span>
+                            {{/if}}
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="toggle-favorite"
+                                title="{{localize "DEDREL.ActorSheet.RemoveFavorite"}}"><i class="fas fa-star"></i></a>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="item-slot empty-slot">{{localize "DEDREL.ActorSheet.EmptySlotManeuverSpell"}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>

@@ -60,20 +60,20 @@ async function refreshActorTokenLight(actor) {
 // (CONFIG.ActiveEffect.expiryAction = "delete", см. FOUNDRY V14 QUIRKS.md §15).
 for (const hook of ["createActiveEffect", "deleteActiveEffect"]) {
   Hooks.on(hook, (effect) => {
-    if (!game.user.isGM || !hasTokenLight(effect)) return;
+    if (!game.users.activeGM?.isSelf || !hasTokenLight(effect)) return;
     refreshActorTokenLight(effectActor(effect));
   });
 }
 
 // Вкл/выкл (disabled) или правка самого маркера света
 Hooks.on("updateActiveEffect", (effect) => {
-  if (!game.user.isGM || !hasTokenLight(effect)) return;
+  if (!game.users.activeGM?.isSelf || !hasTokenLight(effect)) return;
   refreshActorTokenLight(effectActor(effect));
 });
 
 // Новый токен актёра, у которого уже висит световой эффект (перетаскивание на сцену)
 Hooks.on("createToken", (tokenDoc) => {
-  if (!game.user.isGM) return;
+  if (!game.users.activeGM?.isSelf) return;
   const actor = tokenDoc.actor;
   if (actor?.appliedEffects.some(hasTokenLight)) refreshActorTokenLight(actor);
 });

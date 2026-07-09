@@ -79,7 +79,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
 
   get title() {
     const base = game.i18n.localize("DEDREL.Magic.UI.Title");
-    return this.actor ? `${base}: ${this.actor.name}` : `${base} (ГМ)`;
+    return this.actor ? `${base}: ${this.actor.name}` : `${base} ${game.i18n.localize("DEDREL.Magic.UI.GMSuffix")}`;
   }
 
   /** Префилл сборки из сохранённого spell-Item (кнопка "Открыть в конструкторе"). */

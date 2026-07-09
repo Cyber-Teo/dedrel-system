@@ -1,120 +1,123 @@
-const { HandlebarsApplicationMixin } = foundry.applications.api;
-const { ActorSheetV2 } = foundry.applications.sheets;
+import DedrelCharacterSheet from "./character-sheet.mjs";
 
 /**
- * Лист актёра «NPC / Монстр» (тип npc). Функциональный минимум (дизайн —
- * вторично): переключатель тира (peon/boss), боевые статы, единый пул ОД,
- * здоровье (хиты у пеона / HP у босса), DR, навыки и панель способностей
- * (обычные Item'ы — манёвры/заклинания/таланты/мутации — с кнопкой «Использовать»).
+ * Лист актёра «NPC / Монстр» (тип npc) — подкласс листа персонажа.
+ * Наследует всю функциональность (вкладки, экипировка со слотами, спасброски,
+ * избранные навыки, drag-n-drop, сохранение скролла), заменяя два места:
+ *   - main: шапка NPC (тир/угроза, хиты пеона или HP босса, типы существа)
+ *     вместо шапки персонажа (удача/опыт/три пула ОД);
+ *   - config (вместо вкладки «Опыт»): все ручные настройки — базовые ранги
+ *     атрибутов/навыков, override производных, DR, техники/доктрины. У NPC
+ *     нет прокачки за XP, значения выставляются ГМом напрямую.
  *
- * Добавление способностей/экипировки — перетаскиванием на лист (обрабатывает
- * базовый ActorSheetV2._onDrop). Активация предмета — через item.use(), как у
- * персонажа, поэтому существующий контент работает без пересоздания.
+ * ВАЖНО: инпуты вкладки «Настройка» берут значения из _source (не из
+ * производного system), иначе submit «запекает» вклад эффектов/брони в базу.
  */
-export default class DedrelNpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
+
+// Категории навыков для UI (тот же порядок, что на листе персонажа).
+const SKILL_CATEGORIES = {
+  combat: { label: "DEDREL.ActorSheet.CombatSkills", keys: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"] },
+  intellectual: { label: "DEDREL.ActorSheet.IntellectualSkills", keys: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"] },
+  practical: { label: "DEDREL.ActorSheet.PracticalSkills", keys: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism"] },
+  social: { label: "DEDREL.ActorSheet.SocialSkills", keys: ["persuasion", "insight", "deception", "intimidation", "performance"] }
+};
+
+export default class DedrelNpcSheet extends DedrelCharacterSheet {
   static DEFAULT_OPTIONS = {
-    classes: ["dedrel", "sheet", "actor", "npc"],
-    tag: "form",
-    window: { resizable: true, controls: [] },
-    position: { width: 620, height: 720 },
-    form: { submitOnChange: true, closeOnSubmit: false },
-    actions: {
-      editImage: DedrelNpcSheet.#onEditImage,
-      useItem: DedrelNpcSheet.#onUseItem,
-      editItem: DedrelNpcSheet.#onEditItem,
-      deleteItem: DedrelNpcSheet.#onDeleteItem
-    }
+    classes: ["dedrel", "sheet", "actor", "npc"]
   };
 
   static PARTS = {
-    body: { template: "systems/dedrel/templates/actor/npc-sheet.hbs" }
+    navigation: { template: "systems/dedrel/templates/actor/parts/character-navigation.hbs" },
+    main: { template: "systems/dedrel/templates/actor/parts/npc-main.hbs" },
+    inventory: { template: "systems/dedrel/templates/actor/parts/npc-inventory.hbs" },
+    maneuvers: { template: "systems/dedrel/templates/actor/parts/character-maneuvers.hbs" },
+    spells: { template: "systems/dedrel/templates/actor/parts/character-spells.hbs" },
+    mutations: { template: "systems/dedrel/templates/actor/parts/character-mutations.hbs" },
+    talents: { template: "systems/dedrel/templates/actor/parts/character-talents.hbs" },
+    statuses: { template: "systems/dedrel/templates/actor/parts/character-statuses.hbs" },
+    biography: { template: "systems/dedrel/templates/actor/parts/character-biography.hbs" },
+    config: { template: "systems/dedrel/templates/actor/parts/npc-config.hbs" }
   };
 
-  get title() { return this.document.name; }
+  static TABS = {
+    primary: {
+      tabs: [
+        { id: "main", label: "DEDREL.ActorSheet.Tabs.Main" },
+        { id: "inventory", label: "DEDREL.ActorSheet.Tabs.Inventory" },
+        { id: "maneuvers", label: "DEDREL.ActorSheet.Tabs.Maneuvers" },
+        { id: "spells", label: "DEDREL.ActorSheet.Tabs.Spells" },
+        { id: "mutations", label: "DEDREL.ActorSheet.Tabs.Mutations" },
+        { id: "talents", label: "DEDREL.ActorSheet.Tabs.Talents" },
+        { id: "statuses", label: "DEDREL.ActorSheet.Tabs.Statuses" },
+        { id: "biography", label: "DEDREL.ActorSheet.Tabs.Biography" },
+        { id: "config", label: "DEDREL.ActorSheet.Tabs.NpcConfig" }
+      ],
+      initial: "main",
+      navSelector: ".tabs[data-group='primary']",
+      contentSelector: ".sheet-body"
+    }
+  };
 
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const actor = this.document;
-    const sys = actor.system;
+    const sys = this.document.system;
+    const src = this.document._source.system;
 
-    // ВАЖНО: редактируемые «базовые» инпуты берут значение из _source (не из
-    // производного sys), иначе submit «запекает» вклад эффектов/талантов/брони
-    // в источник. Производные значения показываем отдельно (read-only / подсказкой).
-    const src = actor._source.system;
+    // Типы существа показываются чипами в шапке — из общего инвентаря убираем.
+    const creatureTypes = [];
+    context.inventory = context.inventory.filter(i => {
+      if (i.type !== "creature_type") return true;
+      const label = i.system.key ? game.i18n.localize(`DEDREL.CreatureTypes.${i.system.key}`) : "";
+      creatureTypes.push({ id: i.id, name: i.name, key: i.system.key, label });
+      return false;
+    });
 
-    // Атрибуты — ранг из source (эффекты могут баффать атрибут).
-    const attributes = Object.keys(sys.attributes).map(key => ({
+    // Базовые (source) значения для вкладки «Настройка».
+    const srcAttributes = Object.keys(sys.attributes).map(key => ({
       key, label: `DEDREL.Attributes.${key}`,
-      rank: src.attributes[key].rank
+      rank: src.attributes[key].rank,
+      save_bonus: src.attributes[key].save_bonus
     }));
 
-    // Способности и экипировка группами. Активируемые — через useItem.
-    const groups = { ability: [], weapon: [], armor: [], other: [] };
-    const creatureTypes = [];
-    const ABIL = new Set(["maneuver", "spell", "talent", "mutation", "condition", "magic_item"]);
-    for (const i of actor.items) {
-      if (i.type === "creature_type") {
-        const label = i.system.key ? game.i18n.localize(`DEDREL.CreatureTypes.${i.system.key}`) : "";
-        creatureTypes.push({ id: i.id, name: i.name, key: i.system.key, label });
-        continue;
-      }
-      const row = { id: i.id, name: i.name, img: i.img, type: i.type, apCost: i.system?.ap_cost ?? null };
-      if (ABIL.has(i.type)) groups.ability.push(row);
-      else if (i.type === "weapon") groups.weapon.push(row);
-      else if (i.type === "armor") groups.armor.push(row);
-      else groups.other.push(row);
-    }
+    const srcSkillGroups = Object.values(SKILL_CATEGORIES).map(cat => ({
+      label: cat.label,
+      skills: cat.keys.map(key => ({
+        key, label: `DEDREL.Skills.${key}`,
+        rank: src.skills[key].rank,
+        bonus: src.skills[key].bonus
+      }))
+    }));
 
-    // Доктрины магии — ранг/доступ из source (таланты дают +1 через AE).
+    // Доктрины и техники — из source (таланты могут давать +1 через AE).
     const doctrines = Object.keys(sys.doctrines).map(key => ({
       key, label: `DEDREL.Magic.Doctrines.${key}`,
       rank: src.doctrines[key].rank,
       unlocked: src.doctrines[key].unlocked
     }));
-
-    // Техники — из source (выдаются талантами через AE).
     const srcTechniques = Object.keys(sys.magic.techniques).map(key => ({
       key, label: `DEDREL.Magic.Techniques.${key}`,
       value: src.magic.techniques[key]
     }));
 
     Object.assign(context, {
-      actor, system: sys,
-      editable: this.isEditable,
       isPeon: sys.tier === "peon",
       isBoss: sys.tier === "boss",
       tierOptions: {
         peon: game.i18n.localize("DEDREL.Npc.TierPeon"),
         boss: game.i18n.localize("DEDREL.Npc.TierBoss")
       },
-      attributes, groups, doctrines, srcTechniques, creatureTypes,
-      // DR — производное поле (база + броня + эффекты). Инпуты правят base из
-      // _source, эффективный DR показываем подсказкой.
+      creatureTypes,
+      srcAttributes,
+      srcSkillGroups,
+      doctrines,
+      srcTechniques,
       srcDr: src.dr,
-      effDr: sys.dr
+      effDr: sys.dr,
+      srcOverrides: src.overrides,
+      srcHitsMax: src.resources.hits.max,
+      srcToughness: src.toughness
     });
     return context;
-  }
-
-  // ==== Actions ====
-  static async #onEditImage(event, target) {
-    const fp = new foundry.applications.apps.FilePicker.implementation({
-      type: "image", current: this.document.img,
-      callback: path => this.document.update({ img: path })
-    });
-    return fp.browse();
-  }
-
-  static async #onUseItem(event, target) {
-    const item = this.document.items.get(target.closest("[data-item-id]").dataset.itemId);
-    if (item) return item.use();
-  }
-  static async #onEditItem(event, target) {
-    const item = this.document.items.get(target.closest("[data-item-id]").dataset.itemId);
-    if (item) item.sheet.render(true);
-  }
-  static async #onDeleteItem(event, target) {
-    const item = this.document.items.get(target.closest("[data-item-id]").dataset.itemId);
-    if (item) item.deleteDialog();
   }
 }

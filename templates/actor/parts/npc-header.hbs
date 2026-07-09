@@ -1,0 +1,177 @@
+<header class="sheet-header">
+    <div class="header-top flexrow">
+        <div class="header-left">
+            {{#if isPeon}}
+            {{!-- Пеон: здоровье в «попаданиях» + порог прочности --}}
+            <div class="stat-block hp-block">
+                <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+                    <label>{{localize "DEDREL.Npc.Hits"}}</label>
+                    <div class="stat-inputs">
+                        <input type="text" name="system.resources.hits.value" value="{{system.resources.hits.value}}" data-dtype="Number" />
+                        <span class="separator">/</span>
+                        <span class="max-val" title="{{localize "DEDREL.ActorSheet.Maximum"}}">{{system.resources.hits.max}}</span>
+                    </div>
+                </div>
+                <div class="wounds-track" title="{{localize "DEDREL.ActorSheet.WoundsTrack"}}">
+                    <div class="wound-box {{#if (and (eq system.resources.wounds.level 1) (lt system.resources.hits.value system.resources.hits.max))}}active{{/if}}">
+                        <span>—</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 2)}}active{{/if}}">
+                        <span>-1</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 3)}}active{{/if}}">
+                        <span>-3</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 4)}}active{{/if}}">
+                        <span>-5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-block temp-hp-block">
+                <label>{{localize "DEDREL.Npc.Toughness"}}</label>
+                <input type="text" name="system.toughness" value="{{srcToughness}}" data-dtype="Number" />
+            </div>
+            {{else}}
+            {{!-- Босс: обычное HP (max — производное, переопределяется на вкладке «Настройка») --}}
+            <div class="stat-block hp-block">
+                <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+                    <label>HP</label>
+                    <div class="stat-inputs">
+                        <input type="text" name="system.resources.hp.value" value="{{system.resources.hp.value}}"
+                            data-dtype="Number" />
+                        <span class="separator">/</span>
+                        <span class="max-val" title="{{localize "DEDREL.ActorSheet.Maximum"}}">{{system.resources.hp.max}}</span>
+                    </div>
+                </div>
+                <div class="wounds-track" title="{{localize "DEDREL.ActorSheet.WoundsTrack"}}">
+                    <div class="wound-box {{#if (and (eq system.resources.wounds.level 1) (lt system.resources.hp.value system.resources.hp.max))}}active{{/if}}">
+                        <span>—</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 2)}}active{{/if}}">
+                        <span>-1</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 3)}}active{{/if}}">
+                        <span>-3</span>
+                    </div>
+                    <div class="wound-box {{#if (eq system.resources.wounds.level 4)}}active{{/if}}">
+                        <span>-5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="stat-block temp-hp-block">
+                <label>Temp HP</label>
+                <input type="text" name="system.resources.hp.temp" value="{{system.resources.hp.temp}}"
+                    data-dtype="Number" />
+            </div>
+            {{/if}}
+
+            <!-- Rest Buttons -->
+            <div class="rest-buttons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                <button type="button" class="rest-btn" data-action="shortRest" title="{{localize "DEDREL.ActorSheet.ShortRest"}}" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-campground"></i> {{localize "DEDREL.ActorSheet.ShortRest"}}</button>
+                <button type="button" class="rest-btn" data-action="longRest" title="{{localize "DEDREL.ActorSheet.LongRest"}}" style="display: flex; align-items: center; justify-content: center; gap: 5px; padding: 5px;"><i class="fas fa-bed"></i> {{localize "DEDREL.ActorSheet.LongRest"}}</button>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- Row 1: Имя, тир и угроза -->
+            <div class="header-row top-row">
+                <div class="name-wrapper">
+                    <h1 class="dedrel-charname">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize "DEDREL.Npc.Name"}}" />
+                    </h1>
+                </div>
+                <div class="stat-block exp-block">
+                    <label>{{localize "DEDREL.Npc.Tier"}} / {{localize "DEDREL.Npc.Threat"}}</label>
+                    <div style="display: flex; gap: 4px; align-items: center;">
+                        <select name="system.tier">
+                            {{#each tierOptions as |label key|}}
+                            <option value="{{key}}" {{#if (eq key @root.system.tier)}}selected{{/if}}>{{label}}</option>
+                            {{/each}}
+                        </select>
+                        <input type="text" name="system.details.threat" value="{{system.details.threat}}"
+                               placeholder="{{localize "DEDREL.Npc.Threat"}}" style="width: 70px;"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Единый пул ОД -->
+            <div class="ap-bars">
+                <div class="ap-bar universal">
+                    <input type="text" name="system.resources.ap_universal.value"
+                        value="{{system.resources.ap_universal.value}}" data-dtype="Number" />
+                    <span class="separator">/</span>
+                    <span class="max-val">{{system.resources.ap_universal.max}}</span>
+                    <label>{{localize "DEDREL.ActorSheet.UniversalAP"}}</label>
+                </div>
+            </div>
+
+            <!-- Row 3: Блок атрибутов со спасбросками -->
+            <div class="attributes-grid">
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                <div class="attributes-header">
+                    <span>ATTR</span>
+                    <span>RANK</span>
+                    <span>SAVE</span>
+                </div>
+                {{#each attributesData as |attr key|}}
+                <div class="attribute-block">
+                    <a class="attr-name rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-label="{{localize (concat "DEDREL.Attributes." key)}}">{{localize (concat "DEDREL.Attributes." key)}}</a>
+                    <span class="attribute-rank-display" title="Rank">{{attr.rank}}</span>
+                    <a class="attr-save rollable" data-action="rollCheck" data-rank="{{attr.rank}}" data-attr="{{key}}" data-is-save="true" data-label="{{localize "DEDREL.ActorSheet.SaveThrow"}}: {{localize (concat "DEDREL.Attributes." key)}}" title="{{localize "DEDREL.ActorSheet.MakeSaveThrow"}}">{{attr.final_save}}</a>
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- Row 4: Защиты и Скорость -->
+            <div class="defenses-box">
+                <div class="defense-item">
+                    <label>BLOCK</label>
+                    <span class="derived-val">{{system.defenses.block}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>DODGE</label>
+                    <span class="derived-val">{{system.defenses.dodge}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>MDEF</label>
+                    <span class="derived-val">{{system.defenses.mdef}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>INIT</label>
+                    <span class="derived-val">{{system.initiative}}</span>
+                </div>
+                <div class="defense-item">
+                    <label>SPEED</label>
+                    <div class="speed-inputs" style="display: flex; align-items: center; gap: 5px;">
+                        <input type="text" name="system.resources.movement.value" value="{{system.resources.movement.value}}" data-dtype="Number" style="width: 30px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid var(--color-border); color: #fff; height: 26px; border-radius: 3px; font-weight: bold; font-size: 16px;" />
+                        <span class="separator">/</span>
+                        <span class="max-val" style="font-size: 18px; font-weight: bold; color: #fff;">{{system.resources.movement.max}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 5: Типы существа (Item creature_type — влияют на «оружие против типа») -->
+            <div class="npc-creature-types" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 6px;">
+                <label style="font-size: 12px; opacity: .8;">{{localize "DEDREL.Npc.CreatureType"}}:</label>
+                {{#each creatureTypes as |ct|}}
+                <span class="item-row" data-item-id="{{ct.id}}" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border: 1px solid var(--color-border-light-tertiary, #0003); border-radius: 10px; font-size: 12px;">
+                    {{#if ct.label}}{{ct.label}}{{else}}{{ct.name}}{{/if}}
+                    <a data-action="edit" title="{{localize "DEDREL.ActorSheet.Edit"}}"><i class="fa-solid fa-edit"></i></a>
+                    {{#unless @root.itemsLocked}}<a data-action="delete" title="{{localize "DEDREL.ActorSheet.Delete"}}"><i class="fa-solid fa-xmark"></i></a>{{/unless}}
+                </span>
+                {{else}}
+                <span style="font-size: 11px; opacity: .5;">{{localize "DEDREL.Npc.DropHint"}}</span>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</header>
