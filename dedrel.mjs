@@ -298,25 +298,101 @@ Hooks.once("init", function() {
  */
 Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (item.img === "icons/svg/item-bag.svg") {
+    // Иконка по умолчанию по типу предмета. Файл: assets/icons/items/<тип>.svg.
+    // Картинки добавляются вручную; типы без файла временно покажут битую иконку.
     const defaultIcons = {
-      maneuver: "systems/dedrel/assets/icons/items/maneuver.svg",
-      spell: "systems/dedrel/assets/icons/items/magic_item.svg",
-      talent: "systems/dedrel/assets/icons/items/talent.svg",
-      mutation: "systems/dedrel/assets/icons/items/mutation.svg",
       currency: "systems/dedrel/assets/icons/items/currency.svg",
       loot: "systems/dedrel/assets/icons/items/loot.svg",
       trade_good: "systems/dedrel/assets/icons/items/trade_good.svg",
+      potion: "systems/dedrel/assets/icons/items/potion.svg",
+      scroll: "systems/dedrel/assets/icons/items/scroll.svg",
+      craft_material: "systems/dedrel/assets/icons/items/craft_material.svg",
+      quest_item: "systems/dedrel/assets/icons/items/quest_item.svg",
+      service: "systems/dedrel/assets/icons/items/service.svg",
       mutilation: "systems/dedrel/assets/icons/items/mutilation.svg",
+      countryoforigin: "systems/dedrel/assets/icons/items/countryoforigin.svg",
+      mutation: "systems/dedrel/assets/icons/items/mutation.svg",
+      talent: "systems/dedrel/assets/icons/items/talent.svg",
+      maneuver: "systems/dedrel/assets/icons/items/maneuver.svg",
       weapon: "systems/dedrel/assets/icons/items/weapon.svg",
       armor: "systems/dedrel/assets/icons/items/armor.svg",
       magic_item: "systems/dedrel/assets/icons/items/magic_item.svg",
-      exp: "icons/magic/light/orb-lightbulb-gray.webp"
+      exp: "systems/dedrel/assets/icons/items/exp.svg",
+      condition: "systems/dedrel/assets/icons/items/condition.svg",
+      ammunition: "systems/dedrel/assets/icons/items/ammunition.svg",
+      spell: "systems/dedrel/assets/icons/items/spell.svg",
+      creature_type: "systems/dedrel/assets/icons/items/creature_type.svg"
     };
     if (defaultIcons[item.type]) {
       item.updateSource({ img: defaultIcons[item.type] });
     }
   }
 });
+
+/**
+ * Диалог создания предмета: заменяем выпадающий список типов на компактную
+ * сетку карточек «иконка + подпись». Исходный <select> остаётся в форме
+ * (скрытым) и синхронизируется — сохранение через FormDataExtended не ломается.
+ *
+ * Вешаем на renderApplicationV2 (родитель в цепочке DialogV2) — он гарантированно
+ * вызывается для окна создания документа; фильтр по типам ниже отсекает всё лишнее.
+ */
+function dedrelBuildItemTypeGrid(app, element) {
+  const root = element instanceof HTMLElement ? element : app?.element;
+  if (!root?.querySelector) return;
+  const select = root.querySelector('select[name="type"]');
+  if (!select) return;
+
+  // Только диалог создания Item: все опции должны быть типами предметов.
+  const itemTypes = new Set(CONFIG.Item.documentClass.TYPES);
+  const options = Array.from(select.options);
+  if (!options.length || !options.every(o => itemTypes.has(o.value))) return;
+  if (root.querySelector(".dedrel-type-grid")) return; // уже построено
+
+  console.debug("[Dedrel] Строю сетку типов предметов:", options.map(o => o.value));
+
+  const grid = document.createElement("div");
+  grid.className = "dedrel-type-grid";
+
+  for (const opt of options) {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "dedrel-type-card";
+    card.dataset.type = opt.value;
+    if (opt.value === select.value) card.classList.add("selected");
+
+    const tile = document.createElement("span");
+    tile.className = "dedrel-type-tile";
+    const img = document.createElement("img");
+    img.src = `systems/dedrel/assets/icons/items/${opt.value}.svg`;
+    img.alt = "";
+    // Пока для типа нет своей картинки — показываем стандартный «рюкзак».
+    img.addEventListener("error", () => { img.src = "icons/svg/item-bag.svg"; }, { once: true });
+    tile.append(img);
+
+    const label = document.createElement("span");
+    label.className = "dedrel-type-label";
+    label.textContent = opt.textContent;
+
+    card.append(tile, label);
+    card.addEventListener("click", () => {
+      select.value = opt.value;
+      select.dispatchEvent(new Event("change", { bubbles: true })); // обновит подсказку и placeholder имени
+      grid.querySelectorAll(".dedrel-type-card.selected").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+    });
+    grid.append(card);
+  }
+
+  // Прячем оригинальный select, вставляем сетку в ту же группу формы.
+  const formFields = select.closest(".form-fields");
+  if (formFields) formFields.style.display = "none";
+  (formFields ?? select).after(grid);
+
+  // Немного шире окно, чтобы в ряд помещалось больше карточек.
+  app?.setPosition?.({ width: 460 });
+}
+Hooks.on("renderApplicationV2", dedrelBuildItemTypeGrid);
 
 /**
  * Хуки "preCreateActiveEffect" и "preUpdateActiveEffect"

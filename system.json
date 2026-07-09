@@ -21,137 +21,188 @@
   ],
   "packs": [
     {
+      "name": "actors",
+      "label": "Actors",
+      "path": "packs/actors.db",
+      "type": "Actor",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/actors.svg"
+    },
+    {
       "name": "mutations",
       "label": "Mutations",
       "path": "packs/mutations.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/mutations.svg"
     },
     {
       "name": "conditions",
       "label": "Conditions",
       "path": "packs/conditions.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/conditions.svg"
     },
     {
       "name": "talents",
       "label": "Talents",
       "path": "packs/talents.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/talents.svg"
     },
     {
       "name": "maneuvers",
       "label": "Maneuvers",
       "path": "packs/maneuvers.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/maneuvers.svg"
     },
     {
       "name": "weapons",
       "label": "Weapons",
       "path": "packs/weapons.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/weapons.svg"
     },
     {
       "name": "armors",
       "label": "Armors",
       "path": "packs/armors.db",
       "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "magic_items",
-      "label": "Magic Items",
-      "path": "packs/magic_items.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "loot",
-      "label": "Loot & Items",
-      "path": "packs/loot.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "trade_goods",
-      "label": "Trade Goods",
-      "path": "packs/trade_goods.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "currencies",
-      "label": "Currencies",
-      "path": "packs/currencies.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "mutilations",
-      "label": "Mutilations",
-      "path": "packs/mutilations.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "countriesoforigin",
-      "label": "Countries of Origin",
-      "path": "packs/countriesoforigin.db",
-      "type": "Item",
-      "system": "dedrel"
-    },
-    {
-      "name": "spells",
-      "label": "Spells",
-      "path": "packs/spells.db",
-      "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/armors.svg"
     },
     {
       "name": "ammunition",
       "label": "Ammunition",
       "path": "packs/ammunition.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/ammunition.svg"
     },
     {
-      "name": "additional_conditions",
-      "label": "Additional Conditions",
-      "path": "packs/additional_conditions.db",
+      "name": "spells",
+      "label": "Spells",
+      "path": "packs/spells.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/spells.svg"
     },
     {
-      "name": "experience",
-      "label": "Experience",
-      "path": "packs/experience.db",
+      "name": "magic_items",
+      "label": "Magic Items",
+      "path": "packs/magic_items.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/magic_items.svg"
+    },
+    {
+      "name": "potions",
+      "label": "Potions",
+      "path": "packs/potions.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/potions.svg"
+    },
+    {
+      "name": "scrolls",
+      "label": "Scrolls",
+      "path": "packs/scrolls.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/scrolls.svg"
+    },
+    {
+      "name": "loot",
+      "label": "Loot & Items",
+      "path": "packs/loot.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/loot.svg"
+    },
+    {
+      "name": "trade_goods",
+      "label": "Trade Goods",
+      "path": "packs/trade_goods.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/trade_goods.svg"
+    },
+    {
+      "name": "craft_materials",
+      "label": "Crafting Materials",
+      "path": "packs/craft_materials.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/craft_materials.svg"
+    },
+    {
+      "name": "currencies",
+      "label": "Currencies",
+      "path": "packs/currencies.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/currencies.svg"
+    },
+    {
+      "name": "mutilations",
+      "label": "Mutilations",
+      "path": "packs/mutilations.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/mutilations.svg"
+    },
+    {
+      "name": "countriesoforigin",
+      "label": "Countries of Origin",
+      "path": "packs/countriesoforigin.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/countriesoforigin.svg"
     },
     {
       "name": "creature_types",
       "label": "Creature Types",
       "path": "packs/creature_types.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/creature_types.svg"
+    },
+    {
+      "name": "additional_conditions",
+      "label": "Additional Conditions",
+      "path": "packs/additional_conditions.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/additional_conditions.svg"
+    },
+    {
+      "name": "experience",
+      "label": "Experience",
+      "path": "packs/experience.db",
+      "type": "Item",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/experience.svg"
     },
     {
       "name": "active_effects",
       "label": "Active Effects",
       "path": "packs/active_effects.db",
       "type": "Item",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/active_effects.svg"
     },
     {
       "name": "macro",
       "label": "Macro",
       "path": "packs/macro.db",
       "type": "Macro",
-      "system": "dedrel"
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/macro.svg"
     }
   ],
   "languages": [

@@ -1934,3 +1934,80 @@ form.dedrel.sheet.item {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+/* ==========================================================================
+   Сетка выбора типа в диалоге создания предмета (замена <select>).
+   Компактные карточки «иконка + подпись», см. хук renderApplicationV2 в dedrel.mjs.
+   Селекторы усилены (.dedrel-type-grid ...) + сброс стилей кнопки Foundry,
+   иначе ядро навязывает кнопке ширину/padding/line-height и текст наезжает.
+   ========================================================================== */
+.dedrel-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 4px;
+  margin-top: 4px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 2px;
+}
+.dedrel-type-grid .dedrel-type-card {
+  all: unset;                 /* сброс дефолтных стилей <button> из ядра */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 7px 3px 6px;
+  cursor: pointer;
+  border: 1px solid var(--color-border-dark, #2b2733);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-primary, #e9e6ef);
+  font-family: var(--font-primary, sans-serif);
+  line-height: 1.15;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+.dedrel-type-grid .dedrel-type-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: #8b7fc0;
+}
+.dedrel-type-grid .dedrel-type-card.selected {
+  background: rgba(124, 58, 237, 0.22);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 1px #7c3aed inset;
+}
+.dedrel-type-grid .dedrel-type-card:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 1px;
+}
+/* тёмная плитка под иконкой — чтобы белые силуэты читались в любой теме */
+.dedrel-type-grid .dedrel-type-tile {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background: #26222e;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.dedrel-type-grid .dedrel-type-tile img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  pointer-events: none;
+  border: none;
+  background: none;
+}
+.dedrel-type-grid .dedrel-type-label {
+  flex: 0 0 auto;
+  width: 100%;
+  font-size: 11px;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}

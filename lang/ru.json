@@ -8,14 +8,7 @@
       "TypeCurrency": "Валюта",
       "TypeLoot": "Добыча",
       "TypeTradeGood": "Торговый товар",
-      "TypeMutilation": "Увечье",
-      "TYPES.Item.countryoforigin": "Происхождение",
-      "TYPES.Item.mutation": "Мутация",
-      "TYPES.Item.talent": "Талант",
-      "TYPES.Item.maneuver": "Манёвр",
-      "TYPES.Item.weapon": "Оружие",
-      "TYPES.Item.armor": "Броня",
-      "TYPES.Item.magic_item": "Магический предмет"
+      "TypeMutilation": "Увечье"
     },
     "Sheets": {
       "CharacterSheet": "Лист персонажа Dedrel",
@@ -1120,12 +1113,26 @@
   },
   "TYPES": {
     "Item": {
-      "spell": "Заклинание",
+      "currency": "Валюта",
+      "loot": "Добыча",
+      "trade_good": "Торговый товар",
       "potion": "Зелье",
       "scroll": "Свиток",
       "craft_material": "Ремесленный материал",
       "quest_item": "Квестовый предмет",
       "service": "Услуга",
+      "mutilation": "Увечье",
+      "countryoforigin": "Происхождение",
+      "mutation": "Мутация",
+      "talent": "Талант",
+      "maneuver": "Манёвр",
+      "weapon": "Оружие",
+      "armor": "Броня",
+      "magic_item": "Магический предмет",
+      "exp": "Опыт",
+      "condition": "Состояние",
+      "ammunition": "Боеприпасы",
+      "spell": "Заклинание",
       "creature_type": "Тип существа"
     },
     "RegionBehavior": {

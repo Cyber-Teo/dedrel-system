@@ -8,14 +8,7 @@
       "TypeCurrency": "Currency",
       "TypeLoot": "Loot",
       "TypeTradeGood": "Trade Good",
-      "TypeMutilation": "Mutilation",
-      "TYPES.Item.countryoforigin": "Origin",
-      "TYPES.Item.mutation": "Mutation",
-      "TYPES.Item.talent": "Talent",
-      "TYPES.Item.maneuver": "Maneuver",
-      "TYPES.Item.weapon": "Weapon",
-      "TYPES.Item.armor": "Armor",
-      "TYPES.Item.magic_item": "Magic Item"
+      "TypeMutilation": "Mutilation"
     },
     "Sheets": {
       "CharacterSheet": "Dedrel Character Sheet",
@@ -1125,12 +1118,26 @@
   },
   "TYPES": {
     "Item": {
-      "spell": "Spell",
+      "currency": "Currency",
+      "loot": "Loot",
+      "trade_good": "Trade Good",
       "potion": "Potion",
       "scroll": "Scroll",
       "craft_material": "Crafting Material",
       "quest_item": "Quest Item",
       "service": "Service",
+      "mutilation": "Mutilation",
+      "countryoforigin": "Origin",
+      "mutation": "Mutation",
+      "talent": "Talent",
+      "maneuver": "Maneuver",
+      "weapon": "Weapon",
+      "armor": "Armor",
+      "magic_item": "Magic Item",
+      "exp": "Experience",
+      "condition": "Condition",
+      "ammunition": "Ammunition",
+      "spell": "Spell",
       "creature_type": "Creature Type"
     },
     "RegionBehavior": {
