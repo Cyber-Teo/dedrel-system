@@ -2,7 +2,7 @@
   "id": "dedrel",
   "title": "Dedrel TTRPG System",
   "description": "Dedrel TTRPG system implementation for Foundry VTT v14.",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "compatibility": {
     "minimum": "14",
     "verified": "14"

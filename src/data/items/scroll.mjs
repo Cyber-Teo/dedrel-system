@@ -1,4 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 /**
  * Свиток — одноразовый носитель заклинания. Хранит ссылку на предмет-заклинание
@@ -15,6 +16,7 @@ export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
       description: new HTMLField({ required: false, blank: true, initial: "" }),
       key: new StringField({ required: false, initial: "" }),
       ...physicalItemFields({ weight: 0.01, rarity: "uncommon" }),
+      ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: true }),
       // Заклинание, заключённое в свитке: ссылка на Item типа spell.

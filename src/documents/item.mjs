@@ -1,6 +1,7 @@
 import { DedrelItemSheet } from "../sheets/item-sheet.mjs";
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 import { SpellCalculator } from "../utils/spell-calculator.mjs";
+import { hasTokenLightChanges } from "../config/effect-library.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -93,6 +94,24 @@ export default class DedrelItem extends Item {
 
     if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good", "potion", "scroll"].includes(this.type)) {
       return this.postToChat();
+    }
+
+    // Светильник-тумблер: у предмета с собственным transfer-эффектом света
+    // (факел, лампа) использование ПЕРЕКЛЮЧАЕТ свет (disabled эффекта), а не
+    // накладывает копии на актёра. Свет — нативные change-строки token.light.*,
+    // ядро применяет/гасит их само. Оружие/броню не трогаем (их use — атака,
+    // а свет и так гейтится экипировкой); зелья и свитки — расходники.
+    if (["magic_item", "loot", "trade_good"].includes(this.type)) {
+      const lightEffects = this.effects.filter(e => e.transfer && hasTokenLightChanges(e));
+      if (lightEffects.length) {
+        const enable = lightEffects.some(e => e.disabled);
+        for (const effect of lightEffects) await effect.update({ disabled: !enable });
+        ui.notifications.info(game.i18n.format(
+          enable ? "DEDREL.Notifications.LightOn" : "DEDREL.Notifications.LightOff",
+          { name: this.name }
+        ));
+        return;
+      }
     }
 
     // Свиток без привязанного заклинания использовать нельзя — открываем лист,

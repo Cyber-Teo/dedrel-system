@@ -1,4 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 /**
  * Зелье — расходуемый предмет с мгновенным эффектом (лечение/бафф/дебафф).
@@ -16,6 +17,7 @@ export default class PotionDataModel extends foundry.abstract.TypeDataModel {
       description: new HTMLField({ required: false, blank: true, initial: "" }),
       key: new StringField({ required: false, initial: "" }),
       ...physicalItemFields({ weight: 0.1 }),
+      ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: true }),
       // Краткое описание эффекта для игрока (в дополнение к description)

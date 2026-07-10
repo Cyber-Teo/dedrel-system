@@ -1,4 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 /**
  * Квестовый предмет — привязан к заданию. По умолчанию не продаётся и не
@@ -12,6 +13,7 @@ export default class QuestItemDataModel extends foundry.abstract.TypeDataModel {
       description: new HTMLField({ required: false, blank: true, initial: "" }),
       key: new StringField({ required: false, initial: "" }),
       ...physicalItemFields(),
+      ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: false }),
       // Задание, к которому относится предмет (id или название)

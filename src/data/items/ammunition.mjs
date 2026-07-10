@@ -1,4 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 export default class AmmunitionDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -9,6 +10,7 @@ export default class AmmunitionDataModel extends foundry.abstract.TypeDataModel 
       key: new fields.StringField({ required: false, initial: "" }),
       // Общие физические поля (редкость/вес/цена)
       ...physicalItemFields({ weight: 0.05 }),
+      ...craftingFields(),
       ammo_type: new fields.StringField({ initial: "arrow", label: "Ammo Type" }), // arrow, bolt, bullet, etc.
       quantity: new fields.NumberField({ initial: 20, integer: true, min: 0, label: "Quantity" }),
       stackable: new fields.BooleanField({ initial: true }),

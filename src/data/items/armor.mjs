@@ -1,4 +1,5 @@
 import { ITEM_RARITY_ENUM, ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -13,6 +14,8 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       equip_slot: new fields.StringField({ required: false, blank: true, initial: "", choices: ACCESSORY_SLOT_TYPES }),
       base_price: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       weight: new fields.NumberField({ initial: 0, min: 0 }),
+      // Встроенный «чертёж» (состав/наценка) — см. _crafting.mjs
+      ...craftingFields(),
       slot: new fields.StringField({ initial: "middle", choices: ["lower", "middle", "upper", "universal"] }),
       weight_class: new fields.StringField({ initial: "light", choices: ["light", "medium", "heavy"] }),
       

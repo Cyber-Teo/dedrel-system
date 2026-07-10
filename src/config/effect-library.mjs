@@ -105,23 +105,25 @@ export const DEDREL_EFFECT_LIBRARY = {
   },
 
   // ── Утилита ──────────────────────────────────────────────────────────────
-  // Свет токена: у ActiveEffect нет нативного пути к token.light, поэтому маркер
-  // `tokenLight` читает собственный хук (src/canvas/token-light.mjs) и патчит свет
-  // носящего токена, восстанавливая исходный при снятии. Значения dim/bright — в
-  // единицах сцены (метры; сетка гексов = 2 м). Источник эффекта: факел ~ 8/4 м.
+  // Свет токена: нативные change-ключи `token.light.*` (V14). Ядро применяет их
+  // эфемерно на каждом клиенте (TokenDocument#applyActiveEffects), ничего не
+  // записывая в документ токена: снятие/подавление эффекта гасит свет само.
+  // Значения dim/bright — в единицах сцены (метры; сетка гексов = 2 м).
+  // Источник пресета: факел ~ 8/4 м.
   light: {
     label: "DEDREL.EffectLib.Light",
     img: "icons/magic/light/torch-fire-orange.webp",
     category: "utility",
     duration: {},
-    changes: [],
-    tokenLight: {
-      dim: 8,
-      bright: 4,
-      color: "#ff9329",
-      alpha: 0.5,
-      animation: { type: "torch", speed: 3, intensity: 4 }
-    }
+    changes: [
+      { key: "token.light.dim", type: "override", value: "8" },
+      { key: "token.light.bright", type: "override", value: "4" },
+      { key: "token.light.color", type: "override", value: "#ff9329" },
+      { key: "token.light.alpha", type: "override", value: "0.5" },
+      { key: "token.light.animation.type", type: "override", value: "torch" },
+      { key: "token.light.animation.speed", type: "override", value: "3" },
+      { key: "token.light.animation.intensity", type: "override", value: "4" }
+    ]
   }
 };
 
@@ -157,8 +159,6 @@ export function buildEffectData(key, opts = {}) {
     };
   }
   if (opts.stacks) dedrelFlags.stacks = opts.stacks;
-  // Маркер света токена (применяется хуком token-light.mjs, не через system.changes)
-  if (preset.tokenLight) dedrelFlags.tokenLight = opts.tokenLight || { ...preset.tokenLight };
 
   const data = {
     name,
@@ -175,4 +175,54 @@ export function buildEffectData(key, opts = {}) {
   if (opts.origin) data.origin = opts.origin;
 
   return data;
+}
+
+/* ── Свет токена (нативные change-ключи `token.light.*`, V14) ─────────────── */
+
+const TOKEN_LIGHT_PREFIX = "token.light.";
+
+/** Есть ли у эффекта (документа или сырых данных) световые change-строки. */
+export function hasTokenLightChanges(effectData) {
+  return (effectData.system?.changes ?? []).some(c => c.key?.startsWith(TOKEN_LIGHT_PREFIX));
+}
+
+/**
+ * Читает change-строки `token.light.*` в плоский объект настроек света.
+ * Принимает и документ ActiveEffect, и сырые данные (toObject).
+ * @returns {{dim, bright, color, alpha, animation: {type, speed, intensity}}|null}
+ */
+export function readTokenLightChanges(effectData) {
+  const light = {};
+  for (const c of effectData.system?.changes ?? []) {
+    if (!c.key?.startsWith(TOKEN_LIGHT_PREFIX)) continue;
+    foundry.utils.setProperty(light, c.key.slice(TOKEN_LIGHT_PREFIX.length), c.value);
+  }
+  return foundry.utils.isEmpty(light) ? null : light;
+}
+
+/**
+ * Собирает change-строки `token.light.*` из плоского объекта настроек света.
+ * Значения changes — всегда строки (так хранит схема ядра); касты к типам полей
+ * LightData ядро выполняет само при применении.
+ */
+export function buildTokenLightChanges({ dim = 0, bright = 0, color = null, alpha = 0.5, animation = {} } = {}) {
+  const changes = [
+    { key: "token.light.dim", type: "override", value: String(dim) },
+    { key: "token.light.bright", type: "override", value: String(bright) },
+    { key: "token.light.alpha", type: "override", value: String(alpha) }
+  ];
+  if (color) changes.push({ key: "token.light.color", type: "override", value: String(color) });
+  if (animation?.type) {
+    changes.push({ key: "token.light.animation.type", type: "override", value: String(animation.type) });
+    if (animation.speed != null) changes.push({ key: "token.light.animation.speed", type: "override", value: String(animation.speed) });
+    if (animation.intensity != null) changes.push({ key: "token.light.animation.intensity", type: "override", value: String(animation.intensity) });
+  }
+  return changes;
+}
+
+/** Change-строки эффекта без световых (для замены/удаления света). */
+export function stripTokenLightChanges(effectData) {
+  return (effectData.system?.changes ?? [])
+    .filter(c => !c.key?.startsWith(TOKEN_LIGHT_PREFIX))
+    .map(c => ({ ...c }));
 }

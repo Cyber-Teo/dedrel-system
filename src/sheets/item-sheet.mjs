@@ -1,8 +1,8 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
-import { DR_KEY_LABELS, ITEM_RARITY_ENUM } from "../constants.mjs";
-import { buildEffectData } from "../config/effect-library.mjs";
+import { DR_KEY_LABELS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM } from "../constants.mjs";
+import { buildEffectData, buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
 
 // Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
 // Для них рендерится общий блок details-physical.hbs.
@@ -41,7 +41,11 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       toggleEffectAuraPayload: DedrelItemSheet.#onToggleEffectAuraPayload,
       configureEffectAura: DedrelItemSheet.#onConfigureEffectAura,
       configureEffectLight: DedrelItemSheet.#onConfigureEffectLight,
-      placeTemplate: DedrelItemSheet.#onPlaceTemplate
+      placeTemplate: DedrelItemSheet.#onPlaceTemplate,
+      deleteCraftIngredient: DedrelItemSheet.#onDeleteCraftIngredient,
+      recomputeCraftPrice: DedrelItemSheet.#onRecomputeCraftPrice,
+      addMaterialGrant: DedrelItemSheet.#onAddMaterialGrant,
+      deleteMaterialGrant: DedrelItemSheet.#onDeleteMaterialGrant
     }
   };
 
@@ -68,7 +72,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     navigation: { template: "systems/dedrel/templates/item/parts/item-navigation.hbs" },
     details: { template: "systems/dedrel/templates/item/parts/item-details.hbs" },
     description: { template: "systems/dedrel/templates/item/parts/item-description.hbs" },
-    effects: { template: "systems/dedrel/templates/item/parts/item-effects.hbs" }
+    effects: { template: "systems/dedrel/templates/item/parts/item-effects.hbs" },
+    crafting: { template: "systems/dedrel/templates/item/parts/item-crafting.hbs" }
   };
 
   get title() {
@@ -80,7 +85,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       tabs: [
         { id: "details", label: "DEDREL.ItemSheet.Tabs.Details" },
         { id: "description", label: "DEDREL.ItemSheet.Tabs.Description" },
-        { id: "effects", label: "DEDREL.ItemSheet.Tabs.Effects" }
+        { id: "effects", label: "DEDREL.ItemSheet.Tabs.Effects" },
+        { id: "crafting", label: "DEDREL.ItemSheet.Tabs.Crafting" }
       ],
       initial: "description",
       navSelector: ".tabs[data-group='primary']",
@@ -106,6 +112,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.system = itemData.system;
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
+
+    // Вкладка «Эффекты»: строки с вычисленными признаками для подсветки кнопок
+    // (свет хранится change-строками token.light.*, из шаблона его не увидеть)
+    context.effectRows = itemData.effects.map(e => ({
+      effect: e,
+      hasLight: hasTokenLightChanges(e)
+    }));
 
     // Тип существа: пресеты ключей для дружелюбного выбора (список расширяемый).
     if (itemData.type === "creature_type") {
@@ -196,6 +209,18 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.hasStackable = itemData.system.stackable !== undefined;
     }
 
+    // Вкладка встроенного чертежа (system.crafting): только для ГМа, чтобы
+    // игрок не видел рецепт предмета из своего инвентаря
+    context.showCrafting = context.isPhysical && game.user.isGM && itemData.system.crafting !== undefined;
+    if (context.showCrafting) {
+      context.craftDisciplineOptions = { "": "—" };
+      for (const d of CRAFT_DISCIPLINE_ENUM) {
+        context.craftDisciplineOptions[d] = game.i18n.localize(`DEDREL.CraftDisciplines.${d}`);
+      }
+    } else {
+      delete context.tabs.crafting;
+    }
+
     // Аксессуарный слот (для типов, поддерживающих system.equip_slot)
     context.hasEquipSlot = ["armor", "magic_item", "loot"].includes(itemData.type);
     if (context.hasEquipSlot) {
@@ -206,6 +231,22 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         torso: game.i18n.localize("DEDREL.EquipSlot.torso"),
         hand: game.i18n.localize("DEDREL.EquipSlot.hand")
       };
+    }
+
+    // Ремесленный материал: класс, применимость, варианты комплектации (grants)
+    if (itemData.type === "craft_material") {
+      context.materialClassOptions = {};
+      for (const c of MATERIAL_CLASS_ENUM) {
+        context.materialClassOptions[c] = game.i18n.localize(`DEDREL.MaterialClass.${c}`);
+      }
+      // Слоты варианта редактируются текстом "common; uncommon" (ключи тиров)
+      context.grantRows = (itemData.system.grants || []).map((g, index) => ({
+        index,
+        label: g.label,
+        bonus: g.bonus,
+        slotsText: (g.slots || []).join("; ")
+      }));
+      context.slotTierHint = SLOT_TIER_ENUM.join(", ");
     }
 
     // Валюта: деноминация выбирается из списка валют мира
@@ -346,6 +387,79 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     if (activeTab) {
       activeTab.scrollTop = this._savedScrollTop;
     }
+    this.#bindCraftingListeners();
+  }
+
+  /**
+   * Слушатели блока «Крафт»: дроп предмета-ингредиента и правка количества.
+   * Инпуты количеств и grants НАМЕРЕННО без name: массивы объектов нельзя
+   * доверять FormDataExtended (см. FOUNDRY V14 QUIRKS §7) — обновляем массив
+   * целиком через document.update.
+   */
+  #bindCraftingListeners() {
+    const root = this.element;
+    if (!root) return;
+
+    const zone = root.querySelector("[data-drop='craft-ingredient']");
+    if (zone) {
+      zone.addEventListener("dragover", ev => ev.preventDefault());
+      zone.addEventListener("drop", ev => this.#onDropCraftIngredient(ev));
+    }
+
+    for (const input of root.querySelectorAll(".craft-ingredient-amount")) {
+      input.addEventListener("change", ev => {
+        ev.stopPropagation();
+        const idx = Number(ev.currentTarget.dataset.ingredientIndex);
+        const ingredients = this.document.system.crafting.ingredients.map(i => ({ ...i }));
+        if (!ingredients[idx]) return;
+        ingredients[idx].amount = Math.max(0, parseFloat(ev.currentTarget.value) || 0);
+        this.document.update({ "system.crafting.ingredients": ingredients });
+      });
+    }
+
+    // Варианты комплектации материала (label/bonus/slots) — тот же паттерн
+    for (const input of root.querySelectorAll(".material-grant-field")) {
+      input.addEventListener("change", ev => {
+        ev.stopPropagation();
+        const idx = Number(ev.currentTarget.dataset.grantIndex);
+        const field = ev.currentTarget.dataset.grantField;
+        const grants = (this.document.system.grants || []).map(g => ({ ...g, slots: [...(g.slots || [])] }));
+        if (!grants[idx] || !field) return;
+        const value = ev.currentTarget.value;
+        if (field === "bonus") grants[idx].bonus = Math.max(0, parseInt(value) || 0);
+        else if (field === "slots") {
+          grants[idx].slots = value.split(/[;,]/).map(s => s.trim()).filter(s => SLOT_TIER_ENUM.includes(s));
+        }
+        else grants[idx].label = value;
+        this.document.update({ "system.grants": grants });
+      });
+    }
+  }
+
+  /** Дроп предмета в состав чертежа: добавляет ингредиент (или +1 меру). */
+  async #onDropCraftIngredient(event) {
+    event.preventDefault();
+    if (!game.user.isGM || !this.isEditable) return;
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      return;
+    }
+    if (data.type !== "Item") return;
+    const dropped = await Item.implementation.fromDropData(data);
+    if (!dropped) return;
+    if (dropped.uuid === this.document.uuid) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Crafting.SelfIngredient"));
+    }
+    if (dropped.system?.base_price === undefined) {
+      return ui.notifications.warn(game.i18n.localize("DEDREL.Crafting.NotPhysicalIngredient"));
+    }
+    const ingredients = this.document.system.crafting.ingredients.map(i => ({ ...i }));
+    const existing = ingredients.find(i => i.uuid === dropped.uuid);
+    if (existing) existing.amount += 1;
+    else ingredients.push({ uuid: dropped.uuid, name: dropped.name, amount: 1 });
+    await this.document.update({ "system.crafting.ingredients": ingredients });
   }
 
   changeTab(tab, group, options={}) {
@@ -629,17 +743,29 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Диалог настройки света токена (flags.dedrel.tokenLight). Свет применяется хуком
-   * src/canvas/token-light.mjs (у ActiveEffect нет нативного пути к token.light).
-   * Поля повторяют стандартную конфигурацию света Foundry (радиусы, цвет, анимация).
-   * Галка «Включён» служит тумблером: снятие ставит disabled, хук гасит свет.
+   * Пресеты для быстрого заполнения диалога света (радиусы — в метрах сцены).
+   * Ключи анимации — из CONFIG.Canvas.lightAnimations ядра.
+   */
+  static #LIGHT_PRESETS = {
+    torch:   { dim: 8,  bright: 4,   color: "#ff9329", alpha: 0.5,  animation: { type: "torch", speed: 3, intensity: 4 } },
+    lantern: { dim: 12, bright: 6,   color: "#ffd28a", alpha: 0.4,  animation: { type: "torch", speed: 1, intensity: 2 } },
+    candle:  { dim: 3,  bright: 1.5, color: "#ff9329", alpha: 0.35, animation: { type: "torch", speed: 2, intensity: 2 } },
+    magic:   { dim: 6,  bright: 3,   color: "#7fd4ff", alpha: 0.45, animation: { type: "pulse", speed: 2, intensity: 3 } }
+  };
+
+  /**
+   * Диалог настройки света токена. Свет хранится стандартными change-строками
+   * эффекта с ключами `token.light.*` — ядро V14 применяет их к токену носителя
+   * эфемерно (TokenDocument#applyActiveEffects), поэтому снятие/подавление
+   * эффекта гасит свет само, без записи в документ токена и без участия ГМа.
+   * Галка «Включён» служит тумблером: снятие ставит disabled.
    */
   static async #onConfigureEffectLight(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
     if (!effect) return;
 
-    const light = effect.getFlag("dedrel", "tokenLight") ?? {};
+    const light = readTokenLightChanges(effect) ?? {};
     const anim = light.animation ?? {};
 
     // Типы анимации света берём из ядра Foundry (те же, что в стандартном меню света)
@@ -649,7 +775,16 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       animOptions.push(`<option value="${key}" ${key === anim.type ? "selected" : ""}>${foundry.utils.escapeHTML(label)}</option>`);
     }
 
+    // Кнопки-пресеты: заполняют поля формы, сохранение — по общей кнопке
+    const presetButtons = Object.keys(DedrelItemSheet.#LIGHT_PRESETS).map(key =>
+      `<button type="button" data-light-preset="${key}">${game.i18n.localize(`DEDREL.ItemSheet.LightPreset${key.capitalize()}`)}</button>`
+    ).join("");
+
     const content = `
+      <div class="form-group">
+        <label>${game.i18n.localize("DEDREL.ItemSheet.LightPresets")}</label>
+        <div class="form-fields">${presetButtons}</div>
+      </div>
       <div class="form-group">
         <label>${game.i18n.localize("DEDREL.ItemSheet.LightEnabled")}</label>
         <input type="checkbox" name="enabled" ${effect.disabled ? "" : "checked"}/>
@@ -690,6 +825,22 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       window: { title: game.i18n.format("DEDREL.ItemSheet.LightConfigTitle", { name: effect.name }) },
       position: { width: 420 },
       content,
+      render: (event, dialog) => {
+        const html = dialog.element;
+        for (const btn of html.querySelectorAll("[data-light-preset]")) {
+          btn.addEventListener("click", () => {
+            const p = DedrelItemSheet.#LIGHT_PRESETS[btn.dataset.lightPreset];
+            if (!p) return;
+            html.querySelector('[name="dim"]').value = p.dim;
+            html.querySelector('[name="bright"]').value = p.bright;
+            html.querySelector('[name="color"]').value = p.color;
+            html.querySelector('[name="alpha"]').value = p.alpha;
+            html.querySelector('[name="animType"]').value = p.animation.type;
+            html.querySelector('[name="animSpeed"]').value = p.animation.speed;
+            html.querySelector('[name="animIntensity"]').value = p.animation.intensity;
+          });
+        }
+      },
       buttons: [
         {
           action: "save",
@@ -700,25 +851,27 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
             const html = dialog.element;
             const dim = parseFloat(html.querySelector('[name="dim"]')?.value) || 0;
             const bright = parseFloat(html.querySelector('[name="bright"]')?.value) || 0;
-            // Оба радиуса 0 — снимаем маркер света (эффект перестаёт быть светящимся)
+            const otherChanges = stripTokenLightChanges(effect);
+            // Оба радиуса 0 — убираем световые changes (эффект перестаёт светиться)
             if (dim <= 0 && bright <= 0) {
-              await effect.update({ "flags.dedrel.tokenLight": _del });
+              await effect.update({ "system.changes": otherChanges });
               return;
             }
             const animType = html.querySelector('[name="animType"]')?.value || "";
             const alphaRaw = parseFloat(html.querySelector('[name="alpha"]')?.value);
+            const lightChanges = buildTokenLightChanges({
+              dim,
+              bright,
+              color: html.querySelector('[name="color"]')?.value || null,
+              alpha: Number.isFinite(alphaRaw) ? alphaRaw : 0.5,
+              animation: {
+                type: animType || null,
+                speed: parseInt(html.querySelector('[name="animSpeed"]')?.value) || 0,
+                intensity: parseInt(html.querySelector('[name="animIntensity"]')?.value) || 0
+              }
+            });
             await effect.update({
-              "flags.dedrel.tokenLight": {
-                dim,
-                bright,
-                color: html.querySelector('[name="color"]')?.value || null,
-                alpha: Number.isFinite(alphaRaw) ? alphaRaw : 0.5,
-                animation: {
-                  type: animType || null,
-                  speed: parseInt(html.querySelector('[name="animSpeed"]')?.value) || 0,
-                  intensity: parseInt(html.querySelector('[name="animIntensity"]')?.value) || 0
-                }
-              },
+              "system.changes": [...otherChanges, ...lightChanges],
               // Источник света светит носителю, пока эффект перенесён на владельца
               transfer: true,
               disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
@@ -727,6 +880,65 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         }
       ]
     });
+  }
+
+  static async #onDeleteCraftIngredient(event, target) {
+    const idx = Number(target.dataset.ingredientIndex);
+    const ingredients = this.document.system.crafting.ingredients
+      .filter((_, i) => i !== idx)
+      .map(i => ({ ...i }));
+    await this.document.update({ "system.crafting.ingredients": ingredients });
+  }
+
+  /**
+   * Пересчёт цены предмета из состава (план крафта §1):
+   *   cost_price = Σ(base_price ингредиента × amount) / output_quantity
+   *   base_price = cost_price × (1 + markup_pct/100)
+   * Деление на output_quantity: состав задаётся на ОДИН цикл крафта, а цена —
+   * за единицу продукта (цикл может давать несколько склянок).
+   * Одноуровневый: берёт ТЕКУЩИЕ base_price ингредиентов. Каскадный пересчёт
+   * всей экономики (продукт-в-продукте) — макрос «Пересчёт экономики» (итерация 3).
+   */
+  static async #onRecomputeCraftPrice(event, target) {
+    const crafting = this.document.system.crafting;
+    let cost = 0;
+    const missing = [];
+    for (const ing of crafting.ingredients) {
+      const doc = ing.uuid ? await fromUuid(ing.uuid) : null;
+      const price = doc?.system?.base_price;
+      if (typeof price !== "number") {
+        missing.push(ing.name || ing.uuid || "?");
+        continue;
+      }
+      cost += price * (ing.amount || 0);
+    }
+    cost = cost / Math.max(1, crafting.output_quantity || 1);
+    cost = Math.round(cost * 100) / 100;
+    // base_price округляем до целого: у части типов (armor) поле integer
+    const price = Math.round(cost * (1 + (crafting.markup_pct || 0) / 100));
+    await this.document.update({
+      "system.crafting.cost_price": cost,
+      "system.base_price": price
+    });
+    if (missing.length) {
+      ui.notifications.warn(game.i18n.format("DEDREL.Crafting.RecomputeMissing", { list: missing.join(", ") }));
+    } else {
+      ui.notifications.info(game.i18n.format("DEDREL.Crafting.RecomputeDone", { cost, price }));
+    }
+  }
+
+  static async #onAddMaterialGrant() {
+    const grants = (this.document.system.grants || []).map(g => ({ ...g, slots: [...(g.slots || [])] }));
+    grants.push({ label: "", bonus: 0, slots: [] });
+    await this.document.update({ "system.grants": grants });
+  }
+
+  static async #onDeleteMaterialGrant(event, target) {
+    const idx = Number(target.dataset.grantIndex);
+    const grants = (this.document.system.grants || [])
+      .filter((_, i) => i !== idx)
+      .map(g => ({ ...g, slots: [...(g.slots || [])] }));
+    await this.document.update({ "system.grants": grants });
   }
 
   static async #onPlaceTemplate(event, target) {

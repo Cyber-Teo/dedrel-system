@@ -36,7 +36,6 @@ import DedrelCombat from "./src/combat.mjs";
 import "./src/canvas/auras.mjs";
 import "./src/canvas/aura-regions.mjs";
 import "./src/canvas/movement.mjs";
-import "./src/canvas/token-light.mjs";
 
 /**
  * Хук "init" вызывается Foundry один раз при загрузке.
@@ -165,6 +164,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-potion.hbs",
     "systems/dedrel/templates/item/parts/details-scroll.hbs",
     "systems/dedrel/templates/item/parts/details-craft_material.hbs",
+    "systems/dedrel/templates/item/parts/details-crafting.hbs",
     "systems/dedrel/templates/item/parts/details-quest_item.hbs",
     "systems/dedrel/templates/item/parts/details-currency.hbs",
     "systems/dedrel/templates/item/parts/details-service.hbs",

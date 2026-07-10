@@ -1,4 +1,5 @@
 import { ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
+import { craftingFields } from "./_crafting.mjs";
 
 export default class LootData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -11,6 +12,7 @@ export default class LootData extends foundry.abstract.TypeDataModel {
       equip_slot: new StringField({ required: false, blank: true, initial: "", choices: ACCESSORY_SLOT_TYPES }),
       weight: new NumberField({ required: true, initial: 0, min: 0 }),
       base_price: new NumberField({ required: true, initial: 0, min: 0 }),
+      ...craftingFields(),
       stackable: new BooleanField({ required: true, initial: true }),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       formula_heal: new StringField({ initial: "", label: "Healing Formula" })

@@ -1,4 +1,5 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+import { hasTokenLightChanges } from "../config/effect-library.mjs";
 
 export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -78,8 +79,10 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
         // Копию СОБСТВЕННОЙ ауры не показываем: её представляет иконка маркера.
         const auraMarker = e.flags?.dedrel?.auraApplied;
         const isAuraApplied = !!auraMarker && !ownMarkerUuids.has(auraMarker);
+        // Световые эффекты (token.light.*) показываем всегда: игроку нужен
+        // быстрый доступ к тумблеру (ПКМ гасит), без костыля с длительностью
         return !e.disabled && !(auraMarker && ownMarkerUuids.has(auraMarker))
-          && (isCondition || hasStatus || isAuraApplied || e.isTemporary);
+          && (isCondition || hasStatus || isAuraApplied || e.isTemporary || hasTokenLightChanges(e));
       });
       visibleEffects.push(...ownMarkers);
 
@@ -104,6 +107,8 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
 
         if (isAuraMarker) {
           tooltip += `<hr><em>${game.i18n.localize("DEDREL.Hud.AuraOffHint")}</em>`;
+        } else if (e.transfer && e.parent instanceof Item && hasTokenLightChanges(e)) {
+          tooltip += `<hr><em>${game.i18n.localize("DEDREL.Hud.LightOffHint")}</em>`;
         }
 
         return {
@@ -173,6 +178,22 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           if (!confirmed) return;
           await effect.update({ disabled: true });
           ui.notifications.info(game.i18n.format("DEDREL.Notifications.AuraDisabled", { name: effect.name }));
+          return;
+        }
+
+        // Transfer-эффект живёт НА ПРЕДМЕТЕ (фонарь, зачарованная вещь) и виден
+        // в HUD как эффект актёра: delete() снёс бы его с самого предмета вместе
+        // с настройками. Вместо удаления выключаем (disabled) — включить обратно
+        // можно использованием предмета (тумблер света) или с его листа.
+        if (effect.transfer && effect.parent instanceof Item) {
+          const confirmed = await foundry.applications.api.DialogV2.confirm({
+            window: { title: game.i18n.localize("DEDREL.Notifications.DisableItemEffectTitle") },
+            content: `<p>${game.i18n.format("DEDREL.Notifications.DisableItemEffectConfirm", { name: effect.name, item: effect.parent.name })}</p>`,
+            modal: true
+          });
+          if (!confirmed) return;
+          await effect.update({ disabled: true });
+          ui.notifications.info(game.i18n.format("DEDREL.Notifications.ItemEffectDisabled", { name: effect.name, item: effect.parent.name }));
           return;
         }
 

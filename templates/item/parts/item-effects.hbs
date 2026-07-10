@@ -5,7 +5,8 @@
     <a class="effect-control" data-action="addEffect" title="{{localize "DEDREL.ItemSheet.AddEffect"}}" style="flex: 0 0 auto; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 4px;"><i class="fas fa-plus"></i> {{localize "DEDREL.ItemSheet.AddEffect"}}</a>
 </div>
 <div class="effects-list">
-    {{#each item.effects as |effect|}}
+    {{#each effectRows as |row|}}
+    {{#with row.effect as |effect|}}
     <div class="effect-item flexrow" data-effect-id="{{effect.id}}" style="padding: 5px; border-bottom: 1px solid var(--color-border-dark); align-items: center;">
         <img src="{{effect.img}}" width="24" height="24" style="margin-right: 10px; border: none;"/>
         <h4 style="flex: 1; margin: 0;">{{effect.name}}</h4>
@@ -13,11 +14,12 @@
             <a class="effect-control" data-action="toggleEffectSelf" title="{{localize "DEDREL.ItemSheet.EffectSelfHint"}}" {{#if (eq effect.flags.dedrel.applyTo "self")}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-user"></i></a>
             <a class="effect-control" data-action="toggleEffectAuraPayload" title="{{localize "DEDREL.ItemSheet.EffectAuraPayloadHint"}}" {{#if (eq effect.flags.dedrel.applyTo "aura")}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-bullseye"></i></a>
             <a class="effect-control" data-action="configureEffectAura" title="{{localize "DEDREL.ItemSheet.EffectAuraConfigHint"}}" {{#if effect.flags.dedrel.aura}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-circle-dot"></i></a>
-            <a class="effect-control" data-action="configureEffectLight" title="{{localize "DEDREL.ItemSheet.EffectLightConfigHint"}}" {{#if effect.flags.dedrel.tokenLight}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-lightbulb"></i></a>
+            <a class="effect-control" data-action="configureEffectLight" title="{{localize "DEDREL.ItemSheet.EffectLightConfigHint"}}" {{#if row.hasLight}}style="color: var(--color-text-hyperlink, #4a90d9);"{{else}}style="opacity: 0.4;"{{/if}}><i class="fas fa-lightbulb"></i></a>
             <a class="effect-control" data-action="editEffect" title="{{localize "DEDREL.ItemSheet.Edit"}}"><i class="fas fa-edit"></i></a>
             <a class="effect-control" data-action="deleteEffect" title="{{localize "DEDREL.ItemSheet.Delete"}}"><i class="fas fa-trash"></i></a>
         </div>
     </div>
+    {{/with}}
     {{else}}
     <p class="hint">{{localize "DEDREL.ItemSheet.NoEffects"}}</p>
     {{/each}}

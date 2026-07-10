@@ -34,6 +34,17 @@ export const DEFAULT_CURRENCIES = [
   { key: "platinum", name: "Платина",  abbr: "пл", base_value: 1000, weight: 0.01, color: "#e5e4e2" }
 ];
 
+// Функциональные ремёсла системы крафта (craft/New Craft.md): значения поля
+// system.crafting.discipline и дисциплина рецептов. Пустая строка = не задано.
+export const CRAFT_DISCIPLINE_ENUM = ["alchemy", "smithing", "inscription", "weaving", "carpentry", "jewelry", "engineering"];
+
+// Классы ремесленных материалов (system.material_class у craft_material).
+// Семь канонических типов сырья из правил крафта.
+export const MATERIAL_CLASS_ENUM = ["metal", "mineral", "wood", "herb", "leather", "cloth", "creature_part"];
+
+// Тиры слотов улучшений оружия/брони (без legendary: очень редкий — максимум).
+export const SLOT_TIER_ENUM = ["common", "uncommon", "rare", "very_rare"];
+
 export const DR_KEY_LABELS = {
   "piercing": "DEDREL.ItemSheet.Piercing",
   "bludgeoning": "DEDREL.ItemSheet.Bludgeoning",
