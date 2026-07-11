@@ -458,6 +458,8 @@
       "ItemType": "Item Type",
       "Equipped": "Equipped",
       "Damage": "Damage",
+      "DamageBase": "Base Damage",
+      "DamageFormulasHint": "The formula next to a damage type is used by maneuvers of that type; if empty, the base damage formula applies.",
       "ControlZone": "Control Zone",
       "ArmorPiercing": "Armor Piercing",
       "Range": "Range (m)",
@@ -540,7 +542,7 @@
       "IsSlow": "Slow",
       "IsTwohanded": "Two-handed",
       "IsThrown": "Thrown",
-      "IsEnchanted": "Enchanted",
+      "IsVariableGrip": "Variable grip",
       "IsReloading": "Reloading",
       "WeaponSkill": "Weapon Skill",
       "Skill": "Skill",
@@ -1197,7 +1199,8 @@
       "dragon": "Dragon",
       "elf": "Elf",
       "undead": "Undead",
-      "cosmic": "Cosmic"
+      "cosmic": "Cosmic",
+      "construct": "Construct"
     },
     "CreatureType": {
       "TypeKey": "Creature type",

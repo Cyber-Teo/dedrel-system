@@ -62,23 +62,26 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let formula = item.system.formula_damage;
       let drKey = "";
       
-      // Определяем тип урона из требований манёвра
+      // Определяем тип урона из требований манёвра. Если манёвр допускает
+      // несколько типов, предпочитаем тот, которым реально обладает оружие.
       if (item.type === "maneuver" && item.system.req_weapon_damage_type) {
         const reqDmg = item.system.req_weapon_damage_type;
-        if (reqDmg.piercing) drKey = "piercing";
-        else if (reqDmg.bludgeoning) drKey = "bludgeoning";
-        else if (reqDmg.slashing) drKey = "slashing";
+        const wDmg = weapon?.system?.damage_type || {};
+        const order = ["piercing", "bludgeoning", "slashing"];
+        drKey = order.find(k => reqDmg[k] && wDmg[k]) || order.find(k => reqDmg[k]) || "";
       }
-      
-      // Если у манёвра нет своей формулы, берем формулу и тип урона от оружия
+
+      // Если у манёвра нет своей формулы, берем формулу и тип урона от оружия:
+      // сначала формула конкретного типа (damage_formulas), потом базовая.
       if (!formula && weapon) {
-        formula = weapon.system.damage_formula;
         if (!drKey) {
            const wDmg = weapon.system.damage_type;
            if (wDmg.piercing) drKey = "piercing";
            else if (wDmg.bludgeoning) drKey = "bludgeoning";
            else if (wDmg.slashing) drKey = "slashing";
         }
+        const perType = weapon.system.damage_formulas || {};
+        formula = (drKey && perType[drKey]) || weapon.system.damage_formula;
       }
       
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));

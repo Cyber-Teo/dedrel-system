@@ -8,13 +8,19 @@
             <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> {{localize "DEDREL.ItemSheet.Magic"}}</label>
         </div>
     </div>
+    {{!-- Урон по типам: чекбокс включает тип (по нему гейтятся манёвры),
+          формула справа — урон ИМЕННО этого типа. Пустая формула = базовая. --}}
     <div class="form-group stacked" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.DamageType"}}</label>
-        <div class="properties-grid">
-            <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> {{localize "DEDREL.ItemSheet.Piercing"}}</label>
-            <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> {{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+        <div class="damage-types-grid">
             <label class="checkbox"><input type="checkbox" name="system.damage_type.slashing" {{checked system.damage_type.slashing}}/> {{localize "DEDREL.ItemSheet.Slashing"}}</label>
+            <input type="text" name="system.damage_formulas.slashing" value="{{system.damage_formulas.slashing}}" placeholder="{{system.damage_formula}}"/>
+            <label class="checkbox"><input type="checkbox" name="system.damage_type.piercing" {{checked system.damage_type.piercing}}/> {{localize "DEDREL.ItemSheet.Piercing"}}</label>
+            <input type="text" name="system.damage_formulas.piercing" value="{{system.damage_formulas.piercing}}" placeholder="{{system.damage_formula}}"/>
+            <label class="checkbox"><input type="checkbox" name="system.damage_type.bludgeoning" {{checked system.damage_type.bludgeoning}}/> {{localize "DEDREL.ItemSheet.Bludgeoning"}}</label>
+            <input type="text" name="system.damage_formulas.bludgeoning" value="{{system.damage_formulas.bludgeoning}}" placeholder="{{system.damage_formula}}"/>
         </div>
+        <p class="hint-text">{{localize "DEDREL.ItemSheet.DamageFormulasHint"}}</p>
     </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
@@ -24,7 +30,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label>{{localize "DEDREL.ItemSheet.Damage"}}</label>
+        <label>{{localize "DEDREL.ItemSheet.DamageBase"}}</label>
         <input type="text" name="system.damage_formula" value="{{system.damage_formula}}"/>
     </div>
     <div class="form-group">
@@ -39,13 +45,16 @@
     </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.ArmorPiercing"}}</label>
-        <select name="system.armor_piercing" data-dtype="Number">
-            {{selectOptions zeroToThree selected=system.armor_piercing}}
-        </select>
+        <input type="number" name="system.armor_piercing" value="{{system.armor_piercing}}" min="0" max="10" data-dtype="Number"/>
     </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.Range"}}</label>
         <input type="text" name="system.range" value="{{system.range}}"/>
+    </div>
+
+    {{!-- Пререквизиты владения: требования по рангам атрибутов/навыков --}}
+    <div class="section-header" style="grid-column: 1 / -1;">
+        {{localize "DEDREL.ItemSheet.Prerequisites"}}
     </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.AttributesKeyRank"}}</label>
@@ -101,8 +110,8 @@
         <label class="checkbox"><input type="checkbox" name="system.is_slow" {{checked system.is_slow}}/> {{localize "DEDREL.ItemSheet.IsSlow"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> {{localize "DEDREL.ItemSheet.IsTwohanded"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
-        <label class="checkbox"><input type="checkbox" name="system.is_enchanted" {{checked system.is_enchanted}}/> {{localize "DEDREL.ItemSheet.IsEnchanted"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_variable_grip" {{checked system.is_variable_grip}}/> {{localize "DEDREL.ItemSheet.IsVariableGrip"}}</label>
         {{!-- Экипировано: у персонажа выставляется листом (слоты рук), у NPC — вручную здесь.
               От этого флага зависят transfer-эффекты оружия и фильтр оружия в Item#use. --}}
         <label class="checkbox"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{localize "DEDREL.ItemSheet.Equipped"}}</label>
@@ -112,12 +121,12 @@
 {{!-- Бонусы против типов существ: сила 0-10 = +N·10% урона до DR цели --}}
 <div class="form-group stacked">
     <label>{{localize "DEDREL.Weapon.VsCreatures"}}</label>
-    <p style="opacity:.6; font-size:11px; margin:2px 0 6px;">{{localize "DEDREL.Weapon.VsCreaturesHint"}}</p>
-    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:2px 12px;">
+    <p class="hint-text">{{localize "DEDREL.Weapon.VsCreaturesHint"}}</p>
+    <div class="vs-creature-grid">
         {{#each vsCreatureRows as |row|}}
-        <div style="display:flex; align-items:center; gap:6px;">
-            <label style="flex:1; font-size:12px;">{{localize row.label}}</label>
-            <input type="number" name="system.vs_creature.{{row.key}}" value="{{row.value}}" min="0" max="10" style="width:44px;"/>
+        <div class="vs-creature-row {{#if row.value}}has-value{{/if}}">
+            <label>{{localize row.label}}</label>
+            <input type="number" name="system.vs_creature.{{row.key}}" value="{{row.value}}" min="0" max="10"/>
         </div>
         {{/each}}
     </div>

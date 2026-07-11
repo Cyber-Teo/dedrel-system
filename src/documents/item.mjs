@@ -160,8 +160,7 @@ export default class DedrelItem extends Item {
       }
       
       const wProp = this.system.req_weapon_property || {};
-      if (wProp.is_auxiliary || wProp.is_fast || wProp.is_slow || 
-          wProp.is_twohanded || wProp.is_thrown || wProp.is_enchanted || wProp.is_reloading) {
+      if (Object.values(wProp).some(Boolean)) {
         requiresWeapon = true;
       }
       

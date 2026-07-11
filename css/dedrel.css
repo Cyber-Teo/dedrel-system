@@ -668,6 +668,74 @@ form.dedrel.sheet.item {
   margin: 0;
 }
 
+/* Урон по типам: чекбокс типа слева, формула этого типа справа */
+.dedrel.sheet.item .damage-types-grid {
+  display: grid;
+  grid-template-columns: minmax(110px, auto) 1fr;
+  width: 100%;
+  gap: 4px 10px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.dedrel.sheet.item .damage-types-grid .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.dedrel.sheet.item .damage-types-grid .checkbox input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.dedrel.sheet.item .damage-types-grid input[type="text"] {
+  width: 100%;
+}
+
+/* Бонусы против типов существ: аккуратная сетка «название — сила» */
+.dedrel.sheet.item .vs-creature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  width: 100%;
+  gap: 3px 14px;
+  margin-top: 6px;
+}
+
+.dedrel.sheet.item .vs-creature-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.dedrel.sheet.item .vs-creature-row label {
+  flex: 1;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.dedrel.sheet.item .vs-creature-row.has-value label {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.dedrel.sheet.item .vs-creature-row input {
+  flex: 0 0 48px;
+  width: 48px;
+  text-align: center;
+}
+
+.dedrel.sheet.item .hint-text {
+  opacity: 0.6;
+  font-size: 11px;
+  margin: 2px 0 4px;
+}
+
 .dedrel.sheet.item .item-type-badge {
   background: var(--color-primary);
   color: #fff;

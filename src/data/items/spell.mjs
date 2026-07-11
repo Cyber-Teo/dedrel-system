@@ -41,8 +41,8 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
         is_slow: new fields.BooleanField(),
         is_twohanded: new fields.BooleanField(),
         is_thrown: new fields.BooleanField(),
-        is_enchanted: new fields.BooleanField(),
-        is_reloading: new fields.BooleanField()
+        is_reloading: new fields.BooleanField(),
+        is_variable_grip: new fields.BooleanField()
       }),
       
       prerequisites_text: new fields.StringField({ required: true, blank: true }),

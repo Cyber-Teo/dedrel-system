@@ -26,7 +26,16 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         slashing: new fields.BooleanField()
       }),
       skill: new fields.StringField({ initial: "" }),
+      // Базовая формула урона — фолбэк, если для типа не задана своя (damage_formulas)
       damage_formula: new fields.StringField({ initial: "" }),
+      // Формулы урона ПО ТИПАМ: манёвр с req_weapon_damage_type берёт формулу
+      // своего типа; пустая строка = использовать damage_formula. Так глефа может
+      // бить slashing 1d8 и piercing 1d4 — выбор режима делается выбором манёвра.
+      damage_formulas: new fields.SchemaField({
+        slashing: new fields.StringField({ initial: "" }),
+        piercing: new fields.StringField({ initial: "" }),
+        bludgeoning: new fields.StringField({ initial: "" })
+      }),
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
       equipped: new fields.BooleanField({ initial: false }),
       range: new fields.StringField({ initial: "" }),
@@ -53,7 +62,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
-      armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
+      // Бронебойность 0-10: каждая единица гасит 10% DR цели (10 = игнорирует DR полностью)
+      armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
 
       // Бонусы против типов существ. Карта { <ключ типа>: potency(0-10) }.
       // Если цель несёт тип (Item creature_type), урон умножается на
@@ -61,14 +71,16 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       // (расширяемо через конфиг). Свободный объект → новые типы не требуют миграции.
       vs_creature: new fields.ObjectField({ initial: {} }),
       
-      // Properties
+      // Properties — плоские флаги свойств; по ним гейтятся манёвры (req_weapon_property)
       is_auxiliary: new fields.BooleanField({ initial: false }),
       is_fast: new fields.BooleanField({ initial: false }),
       is_slow: new fields.BooleanField({ initial: false }),
       is_twohanded: new fields.BooleanField({ initial: false }),
       is_thrown: new fields.BooleanField({ initial: false }),
-      is_enchanted: new fields.BooleanField({ initial: false }),
-      is_reloading: new fields.BooleanField({ initial: false })
+      is_reloading: new fields.BooleanField({ initial: false }),
+      // Вариативный хват: можно держать одной или двумя руками; при двуручном
+      // хвате ступень дайса урона растёт (1d4→1d6→1d8→1d10→1d12)
+      is_variable_grip: new fields.BooleanField({ initial: false })
     };
   }
 }
