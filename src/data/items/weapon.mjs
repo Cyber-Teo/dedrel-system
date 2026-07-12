@@ -64,6 +64,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
       // Бронебойность 0-10: каждая единица гасит 10% DR цели (10 = игнорирует DR полностью)
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
+      // Качество/редкость НЕ дублируем: у оружия уже есть rarity (physicalItemFields,
+      // common→legendary) — тяжесть осечек огнестрела читается из него (src/dice/roll.mjs).
 
       // Бонусы против типов существ. Карта { <ключ типа>: potency(0-10) }.
       // Если цель несёт тип (Item creature_type), урон умножается на

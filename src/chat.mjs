@@ -54,7 +54,9 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         // Передаём навык, чтобы к атаке применялся его bonus (system.skills.<key>.bonus).
         // Это un-clamped канал модификатора — в отличие от rank (min: 0), он может
         // уводить бросок в минус (нужно для штрафов вроде «Ослепления»).
-        skillId: skillKey
+        skillId: skillKey,
+        // Оружие нужно броску для осечек пороха (натуральная 1 + редкость оружия)
+        weaponId: weapon?.id
       });
     }
     

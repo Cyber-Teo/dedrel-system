@@ -908,6 +908,12 @@
         "wounds": "wounds"
       }
     },
+    "Misfire": {
+      "Title": "MISFIRE ({weapon})",
+      "Jam": "The weapon is jammed — clearing it takes a maneuver.",
+      "ShotLost": "The shot is lost — reload and keep firing.",
+      "ButNoHint": "Talent \"{name}\": you may cancel this misfire (uses left: {uses})."
+    },
     "Creation": {
       "Title": "Character Creation Block",
       "UnlockTitle": "Unlock Editing",

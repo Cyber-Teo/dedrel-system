@@ -1,6 +1,21 @@
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 
-export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false, saveAttr = null, skillId = null }) {
+/**
+ * Тяжесть осечки пороха по редкости оружия (канон: _rules/13. Weapons.md).
+ * Шанс ФИКСИРОВАН — натуральная 1 на атаке огнестрелом (normal); подтверждённый
+ * крит-провал (второй куб тоже 1) — тяжёлый исход (confirmed). null — осечки нет.
+ * Легендарки не подводят никогда. «Кустарное» (тяжёлый клин/повреждение) в enum
+ * редкости отсутствует — это решение Мастера, автоматизация его не покрывает.
+ */
+const MISFIRE_BY_RARITY = {
+  common:    { normal: "Jam",      confirmed: "Jam" },
+  uncommon:  { normal: "ShotLost", confirmed: "Jam" },
+  rare:      { normal: null,       confirmed: "ShotLost" },
+  very_rare: { normal: null,       confirmed: "ShotLost" },
+  legendary: { normal: null,       confirmed: null }
+};
+
+export async function showRollDialog({ actor, title, baseRank, itemId, isSave = false, saveAttr = null, skillId = null, weaponId = null }) {
   const situationalTalents = actor ? actor.items.filter(i => 
     (i.type === "talent" || i.type === "mutation") && 
     i.system.has_situational_bonus
@@ -40,7 +55,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
           let bonus = parseInt(html.querySelector('[name="bonus"]')?.value) || 0;
           const penalty = parseInt(html.querySelector('[name="penalty"]')?.value) || 0;
           
-          await executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave, saveAttr, skillId });
+          await executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave, saveAttr, skillId, weaponId });
         }
       },
       {
@@ -52,7 +67,7 @@ export async function showRollDialog({ actor, title, baseRank, itemId, isSave = 
   });
 }
 
-async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave = false, saveAttr = null, skillId = null }) {
+async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonus, penalty, isSave = false, saveAttr = null, skillId = null, weaponId = null }) {
   const woundPenalty = Math.abs(actor.system.resources.wounds?.penalty || 0);
 
   // Specialization adds +2
@@ -141,6 +156,25 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
         // Since the first die was a 1, its value is already 1 in the roll total.
         // We just add a note that a fumble was averted.
         customChatAddon = `<div class="dedrel-fumble-averted" style="color: black; font-style: italic; margin-top: 5px;">${game.i18n.format("DEDREL.Dice.FumbleAverted", {fumbleResult: fumbleResult})}</div>`;
+      }
+
+      // Осечка пороха: натуральная 1 на атаке огнестрелом. Переиспользуем уже
+      // брошенный подтверждающий куб крит-провала для тяжёлого исхода.
+      const weapon = (weaponId && actor) ? actor.items.get(weaponId) : null;
+      if (!isSave && weapon?.system?.skill === "firearms") {
+        const outcomes = MISFIRE_BY_RARITY[weapon.system.rarity] || MISFIRE_BY_RARITY.common;
+        const outcome = isCritFumble ? outcomes.confirmed : outcomes.normal;
+        if (outcome) {
+          const wName = foundry.utils.escapeHTML(weapon.name);
+          customChatAddon += `<div class="dedrel-misfire" style="color: #b45309; font-weight: bold; margin-top: 5px;">`
+            + `${game.i18n.format("DEDREL.Misfire.Title", { weapon: wName })}: ${game.i18n.localize(`DEDREL.Misfire.${outcome}`)}</div>`;
+          // Подсказка про талант Удачи «А вот и нет!» — отмену осечки, если есть заряды
+          const butNo = actor.items.find(i => i.type === "talent" && i.system.key === "but_no");
+          if (butNo && (butNo.system.uses_value || 0) > 0) {
+            customChatAddon += `<div style="font-style: italic; margin-top: 3px;">`
+              + `${game.i18n.format("DEDREL.Misfire.ButNoHint", { name: foundry.utils.escapeHTML(butNo.name), uses: butNo.system.uses_value })}</div>`;
+          }
+        }
       }
     }
   }
