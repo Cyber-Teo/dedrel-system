@@ -1,6 +1,7 @@
 import { ItemDataModels } from "../data/items/index.mjs";
 import { ActorDataModels } from "../data/actors/index.mjs";
 import { showRollDialog } from "../dice/roll.mjs";
+import { confirmPrerequisites } from "../utils/prerequisites.mjs";
 import { DedrelSocket } from "../socket.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -737,7 +738,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
 
     const equipment_slots = this.document.system.equipment_slots;
-    const isTwoHanded = item.system.is_twohanded;
+    // Парное (is_paired) занимает обе руки так же, как двуручное
+    const isTwoHanded = item.system.is_twohanded || item.system.is_paired;
     const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
 
     const updates = {};
@@ -776,7 +778,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const updates = {};
     const item = this.document.items.get(itemId);
     
-    if (item && item.system.is_twohanded) {
+    if (item && (item.system.is_twohanded || item.system.is_paired)) {
       updates["system.equipment_slots.main_hand.item_id"] = "";
       updates["system.equipment_slots.off_hand.item_id"] = "";
     } else {
@@ -1005,8 +1007,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       if (slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
     }
 
-    if (item.system.is_twohanded) {
-      // Двуручное занимает обе руки — снимаем текущих владельцев main/off
+    if (item.system.is_twohanded || item.system.is_paired) {
+      // Двуручное/парное занимает обе руки — снимаем текущих владельцев main/off
       for (const s of ["main_hand", "off_hand"]) {
         const cid = slots[s]?.item_id;
         if (cid && cid !== item.id) {
@@ -1017,11 +1019,11 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       updates["system.equipment_slots.main_hand.item_id"] = item.id;
       updates["system.equipment_slots.off_hand.item_id"] = item.id;
     } else {
-      // Снимаем то, что было в целевом слоте (если 2H — освобождаем и парный)
+      // Снимаем то, что было в целевом слоте (если 2H/парное — освобождаем оба)
       const cid = slots[slotKey]?.item_id;
       if (cid && cid !== item.id) {
         const cur = this.document.items.get(cid);
-        if (cur?.system.is_twohanded) {
+        if (cur?.system.is_twohanded || cur?.system.is_paired) {
           updates["system.equipment_slots.main_hand.item_id"] = "";
           updates["system.equipment_slots.off_hand.item_id"] = "";
         }
@@ -1595,6 +1597,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    // Проверка пререквизитов при добавлении таланта/мутации/манёвра извне.
+    // Манёвры тоже гейтятся: есть базовые манёвры с требованиями рангов навыков
+    // («Выстрел с упора», «Добивание»). Невыполненные требования не блокируют
+    // жёстко: Мастер подтверждает через диалог.
+    if (["talent", "mutation", "maneuver"].includes(item.type) && !this.document.items.get(item.id)) {
+      const proceed = await confirmPrerequisites(this.document, item);
+      if (!proceed) return false;
+    }
+
     if (item.type === "mutation") {
       const targetElement = event.target.closest(".drop-zone");
       if (targetElement) {
@@ -1607,9 +1618,6 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         const itemObj = item.toObject();
         itemObj.system.starting = true;
         
-        // Prerequisites check logic goes here
-        // E.g. itemObj.system.prerequisites_bloodlines
-
         if (dropType === "mutation-useful") {
            itemObj.system.mutation_type = "useful";
            // Re-calculate points

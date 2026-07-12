@@ -79,8 +79,11 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       is_thrown: new fields.BooleanField({ initial: false }),
       is_reloading: new fields.BooleanField({ initial: false }),
       // Вариативный хват: можно держать одной или двумя руками; при двуручном
-      // хвате ступень дайса урона растёт (1d4→1d6→1d8→1d10→1d12)
-      is_variable_grip: new fields.BooleanField({ initial: false })
+      // хвате урон поднимается на ступень Лестницы (кнопка на карточке чата)
+      is_variable_grip: new fields.BooleanField({ initial: false }),
+      // Парное: одна сущность-«пара» (катары, когти) занимает ОБА слота рук при
+      // экипировке, как двуручное, но двуручным ХВАТОМ не считается
+      is_paired: new fields.BooleanField({ initial: false })
     };
   }
 }

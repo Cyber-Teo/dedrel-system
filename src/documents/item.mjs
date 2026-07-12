@@ -1,5 +1,6 @@
 import { DedrelItemSheet } from "../sheets/item-sheet.mjs";
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
+import { heldTwoHanded } from "../utils/grip.mjs";
 import { SpellCalculator } from "../utils/spell-calculator.mjs";
 import { hasTokenLightChanges } from "../config/effect-library.mjs";
 const { DialogV2 } = foundry.applications.api;
@@ -168,12 +169,31 @@ export default class DedrelItem extends Item {
       if (reqSkill && reqSkill !== "any") {
         requiresWeapon = true;
       }
-      
+
+      // Гейт по конкретному оружию: подстроки ищутся в system.key И в имени
+      // (без регистра), совпадение любой подстроки достаточно. Магические и
+      // материальные варианты проходят, пока наследуют базовый key/имя
+      // ("adamantine_greatsword", «Адамантиновый двуручный меч»).
+      const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
+      if (reqKeys.length > 0) {
+        requiresWeapon = true;
+      }
+
       if (requiresWeapon) {
         validWeapons = actor.items.filter(i => {
           if (i.type !== "weapon" || !i.system.equipped) return false;
 
           if (reqSkill && reqSkill !== "any" && i.system.skill !== reqSkill) return false;
+
+          if (reqKeys.length > 0) {
+            const wKey = (i.system.key || "").toLowerCase();
+            const wName = i.name.toLowerCase();
+            const matchKey = reqKeys.some(k => {
+              const needle = k.trim().toLowerCase();
+              return wKey.includes(needle) || wName.includes(needle);
+            });
+            if (!matchKey) return false;
+          }
 
           const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
           if (hasReqType) {
@@ -192,10 +212,17 @@ export default class DedrelItem extends Item {
           }
 
           // Требуемые свойства оружия (двуручное, быстрое, метательное и т.п.):
-          // оружие должно обладать КАЖДЫМ отмеченным свойством. Флаги свойств у
-          // оружия лежат плоско в system (is_twohanded, is_fast, ...).
-          for (const [prop, required] of Object.entries(wProp)) {
-            if (required && !i.system[prop]) return false;
+          // как и у типов оружия/урона, достаточно ЛЮБОГО из отмеченных (ИЛИ).
+          // Между категориями требований действует «И». Флаги свойств у оружия
+          // лежат плоско в system (is_twohanded, is_fast, ...).
+          // is_twohanded — требование двуручного ХВАТА: истинно двуручное проходит
+          // всегда, вариативный хват (is_variable_grip) — со свободной второй рукой.
+          const requiredProps = Object.entries(wProp).filter(([, req]) => req).map(([p]) => p);
+          if (requiredProps.length > 0) {
+            const matchProp = requiredProps.some(p =>
+              p === "is_twohanded" ? heldTwoHanded(actor, i) : !!i.system[p]
+            );
+            if (!matchProp) return false;
           }
           return true;
         });
@@ -719,9 +746,11 @@ export default class DedrelItem extends Item {
        const wType = this.system.req_weapon_type || {};
        const wDmg = this.system.req_weapon_damage_type || {};
        const reqSkill = this.system.req_weapon_skill_group || "";
+       const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
        // "any" не считается требованием конкретного оружия (согласовано с use()).
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
                           wDmg.piercing || wDmg.bludgeoning || wDmg.slashing ||
+                          reqKeys.length > 0 ||
                           (reqSkill !== "" && reqSkill !== "any"));
 
        // Заклинания ВСЕГДА требуют фокус (weapon с типом magic), поэтому требование
@@ -751,7 +780,22 @@ export default class DedrelItem extends Item {
         buttons += `<button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>`;
       }
       if (showCombatButtons && (this.system.formula_damage || (!isSpell && reqWeapon))) {
-        buttons += `<button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>`;
+        // Вариативный хват: отдельная кнопка урона «двуручным хватом» (+1 ступень
+        // Лестницы). Свободна ли рука — проверяется в момент клика (chat.mjs),
+        // потому что экипировка могла измениться после отправки карточки.
+        // Если манёвр ТРЕБУЕТ двуручный хват (req_weapon_property.is_twohanded),
+        // обычная кнопка урона для вариативного оружия прячется — одноручный
+        // бросок с такого манёвра всегда был бы неправильным.
+        const cardWeapon = weaponId ? this.actor?.items.get(weaponId) : null;
+        const variableGrip = !!(cardWeapon?.system?.is_variable_grip && !cardWeapon.system.is_twohanded);
+        const requiresTwoHanded = !isSpell && !!this.system.req_weapon_property?.is_twohanded;
+
+        if (!(variableGrip && requiresTwoHanded)) {
+          buttons += `<button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.Damage")}</button>`;
+        }
+        if (variableGrip) {
+          buttons += `<button class="dedrel-chat-action" data-action="rollDamage" data-item-id="${this.id}" data-grip="2h" ${weaponAttr}><i class="fa-solid fa-hands-holding"></i> ${game.i18n.localize("DEDREL.Chat.DamageTwoHanded")}</button>`;
+        }
       }
       if (this.system.formula_heal) {
         buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
@@ -831,10 +875,22 @@ export default class DedrelItem extends Item {
       `;
     }
 
+    // Запрещённая защита — ручная механика: соблюдается за столом, поэтому
+    // обязана быть видна на карточке (у манёвров — Финт, у заклинаний —
+    // модификатор Конструктора forbidDefense).
+    let forbiddenNote = "";
+    const forbidden = this.system.forbidden_defense;
+    if (forbidden) {
+      const defKey = { block: "DEDREL.Chat.ForbiddenBlock", dodge: "DEDREL.Chat.ForbiddenDodge" }[forbidden];
+      const defText = defKey ? game.i18n.localize(defKey) : foundry.utils.escapeHTML(forbidden);
+      forbiddenNote = `<div style="margin-bottom: 8px; font-weight: bold; color: var(--color-level-error, #b22);"><i class="fa-solid fa-ban"></i> ${defText}</div>`;
+    }
+
     let content = `
       <div class="dedrel-item-chat">
         <h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;">${foundry.utils.escapeHTML(this.name)}</h3>
         <div class="description" style="margin-bottom: 8px;">${this.system.description || ""}</div>
+        ${forbiddenNote}
         ${buttons}
       </div>
     `;

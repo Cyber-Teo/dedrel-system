@@ -287,6 +287,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.joinedPrereqMutations = (itemData.system.prerequisites_mutations || []).join("; ");
       context.joinedPrereqBloodlines = (itemData.system.prerequisites_bloodlines || []).join("; ");
       context.joinedAddsItems = (itemData.system.adds_items || []).join("; ");
+      context.joinedReqWeaponKeys = (itemData.system.req_weapon_keys || []).join("; ");
     }
     
     if (itemData.type === "talent" || itemData.type === "mutation") {
@@ -489,7 +490,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "system.prerequisites_mutations",
         "system.prerequisites_bloodlines",
         "system.adds_items",
-        "system.chain_trigger_maneuvers"
+        "system.chain_trigger_maneuvers",
+        "system.req_weapon_keys"
       ];
       for (const field of arrayFields) {
         let val = data[field];

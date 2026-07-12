@@ -2,6 +2,8 @@ import { showRollDialog } from "./dice/roll.mjs";
 import { placeTemplatePreview } from "./canvas/template.mjs";
 import { DR_KEY_LABELS } from "./constants.mjs";
 import { DedrelBonuses } from "./utils/dedrel-bonuses.mjs";
+import { stepFormula } from "./utils/dice-ladder.mjs";
+import { heldTwoHanded } from "./utils/grip.mjs";
 
 /**
  * Хук "renderChatMessageHTML" вызывается при рендеринге сообщения в чат.
@@ -87,8 +89,42 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
       
       // DSL-модификаторы урона (flags.dedrel.mod), например "damage:1d6; filter:melee".
-      // Части могут быть числами или дайсами — добавляем их в формулу как есть.
       const damageMods = DedrelBonuses.collect(actor, item);
+
+      // Двуручный хват (кнопка «Урон (двуручный хват)» у вариативного оружия):
+      // +1 ступень Лестницы. Свободна ли вторая рука — проверяем в момент клика.
+      let gripStep = 0;
+      if (button.dataset.grip === "2h") {
+        if (!heldTwoHanded(actor, weapon)) {
+          return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TwoHandedGripNeedsFreeHand"));
+        }
+        gripStep = 1;
+      }
+
+      // Сдвиг по лестнице кубов двигает ТОЛЬКО базовую формулу
+      // (1d4→1d6→2d4→2d6→2d8→3d6), поэтому применяется до аддитивных частей.
+      // Источники складываются: собственный сдвиг манёвра (weapon_dice_step) +
+      // DSL-моды dice_step + двуручный хват. ПРАВИЛО ЛЕСТНИЦЫ: суммарный подъём
+      // не может превысить +1 ступень (никаких 3d6 из ржавого кинжала стопкой
+      // бафов); сдвиг вниз (нерфы) не ограничен.
+      const totalDiceStep = Math.min(
+        (item.system.weapon_dice_step || 0) + damageMods.diceStep + gripStep,
+        1
+      );
+      if (totalDiceStep) {
+        // Ссылки на урон оружия (@weapon.damage_formula, @weapon.damage_formulas.<тип>)
+        // — подстановки rollData, а не литеральные кубы: разворачиваем их до сдвига,
+        // иначе лестнице нечего двигать (например, "@weapon.damage_formula + 4").
+        if (weapon) {
+          const perType = weapon.system.damage_formulas || {};
+          formula = formula
+            .replace(/@weapon\.damage_formulas\.(\w+)/g, (m, k) => perType[k] ? `(${perType[k]})` : m)
+            .replace(/@weapon\.damage_formula(?!s)\b/g, m => weapon.system.damage_formula ? `(${weapon.system.damage_formula})` : m);
+        }
+        formula = stepFormula(formula, totalDiceStep);
+      }
+
+      // Аддитивные части могут быть числами или дайсами — добавляем как есть.
       for (const part of damageMods.damageParts) {
         formula += ` + ${part}`;
       }

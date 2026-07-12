@@ -13,6 +13,9 @@
  *   ap_discount:N  — скидка ОД (складываются, стоимость не ниже 0)
  *   attack:N       — бонус к броску атаки (складываются)
  *   damage:X       — добавка к формуле урона; число или дайсы, например "1d6"
+ *   dice_step:N    — сдвиг БАЗОВОЙ формулы урона по лестнице кубов
+ *                    1d4→1d6→2d4→2d6→2d8→3d6 (складываются; N может быть
+ *                    отрицательным — нерф; см. src/utils/dice-ladder.mjs)
  *   pierce:N       — бронебойность урона (складываются между собой и с
  *                    бронебойностью оружия; каждая единица снимает 10% DR цели)
  *
@@ -29,6 +32,8 @@
  *   "attack:2; filter:ranged; consume:roll"          — Прицеливание
  *   "damage:1d6; filter:melee"                       — +1d6 к следующему удару
  *   "attack:1; filter:skill:bows; consume:never"     — постоянный +1 к атакам из лука
+ *   "dice_step:1; filter:dtype:bludgeoning"          — следующий дробящий удар на ступень выше
+ *   "dice_step:-1; filter:melee; consume:never"      — постоянный нерф: урон на ступень ниже
  *
  * ВАЖНО: движок читает change-строки КАЖДОГО эффекта отдельно
  * (actor.appliedEffects → effect.changes) — включая эффекты, перенесённые
@@ -50,6 +55,7 @@ const DEFAULT_CONSUME = {
   ap_discount: "use",
   attack: "roll",
   damage: "damage",
+  dice_step: "damage",
   pierce: "damage"
 };
 
@@ -191,12 +197,13 @@ export class DedrelBonuses {
    *   apDiscount: number,        — суммарная скидка ОД
    *   attack: number,            — суммарный бонус к атаке
    *   damageParts: string[],     — добавки к формуле урона (числа или дайсы)
+   *   diceStep: number,          — суммарный сдвиг базовой формулы по лестнице кубов
    *   pierce: number,            — суммарная бронебойность урона
    *   hasMatches: boolean        — есть ли хоть один совпавший мод
    * }}
    */
   static collect(actor, item) {
-    const result = { apSet: null, apDiscount: 0, attack: 0, damageParts: [], pierce: 0, hasMatches: false };
+    const result = { apSet: null, apDiscount: 0, attack: 0, damageParts: [], diceStep: 0, pierce: 0, hasMatches: false };
     if (!actor || !item) return result;
 
     for (const mod of this.#iterateMatchedMods(actor, item)) {
@@ -221,6 +228,11 @@ export class DedrelBonuses {
         }
         case "damage": {
           result.damageParts.push(mod.value);
+          break;
+        }
+        case "dice_step": {
+          const v = parseInt(mod.value, 10);
+          if (!Number.isNaN(v)) result.diceStep += v;
           break;
         }
         case "pierce": {

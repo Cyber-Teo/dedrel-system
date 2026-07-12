@@ -78,6 +78,7 @@ export const DEDREL_MAGIC = {
    *   hp                  → прочность создаваемого объекта
    *   rounds/special      → длительность эффектов
    *   attackBonus         → system.attack_bonus
+   *   forbidDefense       → system.forbidden_defense ("block"/"dodge")
    *   damageType          → тип урона в formula_damage ("4d6[heat]")
    *   saveDc              → system.save_dc_formula
    *   bonus/conditions    → эффект "Силы": табличный бонус/штраф ИЛИ состояние
@@ -233,6 +234,18 @@ export const DEDREL_MAGIC = {
       ranks: {
         1: { chain: true },    // В цепи: можно действовать сразу после этого заклинания
         2: { reaction: true }  // Реакция: кастуется вне хода за ОД, сбережённые в прошлый ход
+      }
+    },
+    // Запрет защиты: цель лишается выбранного способа защиты против этого
+    // заклинания (компилируется в system.forbidden_defense, как у манёвра "Финт").
+    // Единственный ранг 4 (канон: _rules/16. Magic.md) — гейт по рангу доктрины
+    // через maxModCost; блок/уклонение выбирается опцией (механика как у "Силы").
+    forbidDefense: {
+      category: "complexity",
+      label: "DEDREL.Magic.Modifiers.forbidDefense",
+      textRanks: true,
+      ranks: {
+        4: { forbidDefenseChoice: ["block", "dodge"] }
       }
     }
   },

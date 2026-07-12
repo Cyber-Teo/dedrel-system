@@ -34,6 +34,14 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
         slashing: new fields.BooleanField()
       }),
       req_weapon_skill_group: new fields.StringField({ required: true, blank: true, initial: "any" }),
+      // Гейт по конкретному оружию: подстроки, ищутся в system.key И в имени
+      // оружия без учёта регистра (OR по списку). Пример: ["greatsword"] пускает
+      // «Адамантиновый двуручный меч» с key "adamantine_greatsword".
+      req_weapon_keys: new fields.ArrayField(new fields.StringField(), { initial: [] }),
+      // Собственный сдвиг урона манёвра по Лестнице (1d4→1d6→2d4→2d6→2d8→3d6):
+      // бросок урона с карточки манёвра двигает кубы оружия на N ступеней.
+      // Складывается с DSL-модами dice_step. Отрицательное значение — нерф.
+      weapon_dice_step: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       req_weapon_property: new fields.SchemaField({
         is_auxiliary: new fields.BooleanField(),
         is_fast: new fields.BooleanField(),
@@ -41,7 +49,8 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
         is_twohanded: new fields.BooleanField(),
         is_thrown: new fields.BooleanField(),
         is_reloading: new fields.BooleanField(),
-        is_variable_grip: new fields.BooleanField()
+        is_variable_grip: new fields.BooleanField(),
+        is_paired: new fields.BooleanField()
       }),
       
       prerequisites_text: new fields.StringField({ required: true, blank: true }),
@@ -58,6 +67,10 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       
       skill: new fields.StringField({ initial: "", label: "Override Skill" }),
+      // Вшитый бонус к броску атаки манёвра (читается в src/dice/roll.mjs наравне
+      // с «Точностью» заклинаний). Для манёвров со встроенным прицеливанием
+      // («Выстрел с упора») — чтобы бонус не висел статусом и не плодил сущности.
+      attack_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_heal: new fields.StringField({ required: true, blank: true }),

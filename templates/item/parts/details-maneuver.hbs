@@ -92,19 +92,31 @@
             {{selectOptions allSkills selected=system.skill}}
         </select>
     </div>
-    <div class="form-group">
+    {{!-- Формулы — на всю ширину: в полях живут длинные выражения
+          вроде "@weapon.damage_formula + 4", в пол-колонки их не видно. --}}
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
         <input type="text" name="system.formula_attack" value="{{system.formula_attack}}"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemFields.FormulaDamage"}}</label>
         <input type="text" name="system.formula_damage" value="{{system.formula_damage}}"/>
     </div>
-    <div class="form-group">
+    <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.WeaponDiceStep"}}</label>
+            <input type="text" name="system.weapon_dice_step" value="{{system.weapon_dice_step}}" data-dtype="Number"/>
+        </div>
+        <div class="form-group">
+            <label>{{localize "DEDREL.ItemSheet.AttackBonus"}}</label>
+            <input type="text" name="system.attack_bonus" value="{{system.attack_bonus}}" data-dtype="Number"/>
+        </div>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemFields.FormulaHeal"}}</label>
         <input type="text" name="system.formula_heal" value="{{system.formula_heal}}"/>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.FormulaCustom"}}</label>
         <input type="text" name="system.formula_custom" value="{{system.formula_custom}}"/>
     </div>
@@ -166,11 +178,16 @@
             <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_thrown" {{checked system.req_weapon_property.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
             <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_variable_grip" {{checked system.req_weapon_property.is_variable_grip}}/> {{localize "DEDREL.ItemSheet.IsVariableGrip"}}</label>
             <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_reloading" {{checked system.req_weapon_property.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
+            <label class="checkbox"><input type="checkbox" name="system.req_weapon_property.is_paired" {{checked system.req_weapon_property.is_paired}}/> {{localize "DEDREL.ItemSheet.IsPaired"}}</label>
         </div>
     </div>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.WeaponSkill"}}</label>
         <input type="text" name="system.req_weapon_skill_group" value="{{system.req_weapon_skill_group}}"/>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label>{{localize "DEDREL.ItemSheet.WeaponKeys"}}</label>
+        <input type="text" name="system.req_weapon_keys" value="{{joinedReqWeaponKeys}}" placeholder="greatsword; двуручный меч"/>
     </div>
 
     <div class="section-header" style="grid-column: 1 / -1;">

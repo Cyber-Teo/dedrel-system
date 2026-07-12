@@ -254,7 +254,13 @@ export class SpellCalculator {
       formula_damage: "",
       formula_heal: "",
       save_attribute: "",
-      save_dc_formula: ""
+      save_dc_formula: "",
+      forbidden_defense: (() => {
+        const choices = rankData("forbidDefense")?.forbidDefenseChoice;
+        if (!choices?.length) return "";
+        const opt = mods.forbidDefense?.option;
+        return choices.includes(opt) ? opt : choices[0];
+      })()
     };
 
     // ЛЮБОЕ сотворение магии требует фокуса: экипированного оружия с типом

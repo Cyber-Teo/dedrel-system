@@ -298,6 +298,19 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }
       }
 
+      // Запрет защиты: выбор "блок или уклонение" тем же селектом опций
+      if (k === "forbidDefense" && chosen) {
+        const choices = cfg.ranks[chosen.rank]?.forbidDefenseChoice || [];
+        if (choices.length > 0) {
+          if (!choices.includes(chosen.option)) chosen.option = choices[0];
+          row.powerOptions = choices.map(v => ({
+            value: v,
+            label: i18n.localize(`DEDREL.Magic.UI.Forbid_${v}`),
+            selected: v === chosen.option
+          }));
+        }
+      }
+
       categories[cfg.category]?.push(row);
     }
     context.categories = [
@@ -354,11 +367,14 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       this.gmRank = Math.min(Math.max(parseInt(ev.currentTarget.value) || 1, 1), 6);
       this.render();
     });
-    html.querySelector('[name="powerOption"]')?.addEventListener("change", ev => {
-      const chosen = this.build.modifiers.power;
+    // Селекты опций модификаторов ("Сила", "Запрет защиты"): какому модификатору
+    // принадлежит селект, определяет data-mod-key строки
+    html.querySelectorAll('[name="powerOption"]').forEach(el => el.addEventListener("change", ev => {
+      const key = ev.currentTarget.dataset.modKey || "power";
+      const chosen = this.build.modifiers[key];
       if (chosen) chosen.option = ev.currentTarget.value;
       this.render();
-    });
+    }));
   }
 
   /* ------------------------------------------------------------------ */

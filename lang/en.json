@@ -87,7 +87,8 @@
         "duration": "Duration",
         "accuracy": "Accuracy",
         "form": "Form",
-        "actionType": "Action Type"
+        "actionType": "Action Type",
+        "forbidDefense": "Forbid Defense"
       },
       "SourceScales": {
         "none": "No Source",
@@ -113,6 +114,9 @@
         "imbue": "Infuses a magical property of the Doctrine into an object or creature"
       },
       "RankHints": {
+        "forbidDefense": {
+          "4": "Block or Dodge"
+        },
         "range": {
           "1": "Touch",
           "2": "Up to 5 hexes",
@@ -206,6 +210,8 @@
         "ReasonNeedsAbundant": "Requires an Abundant Source",
         "ReasonOverMaxCost": "Exceeds the maximum for your Doctrine Rank",
         "PowerBonus": "Bonus +{n}",
+        "Forbid_block": "Forbid block",
+        "Forbid_dodge": "Forbid dodge",
         "PowerPenalty": "Penalty −{n}",
         "Total": "Total",
         "Available": "available",
@@ -369,6 +375,8 @@
       "Save": "Save"
     },
     "Chat": {
+      "ForbiddenBlock": "Cannot be blocked — the target may only dodge",
+      "ForbiddenDodge": "Cannot be dodged — the target may only block",
       "Weapon": "Used Weapon",
       "NoEquippedWeapon": "No suitable equipped weapon",
       "ChainTriggered": "Available chains after {name}",
@@ -384,6 +392,7 @@
       "LuckChatDesc": "<i>Reroll 1 die (yours or opponent's), must use the new result.</i>",
       "Attack": "Attack",
       "Damage": "Damage",
+      "DamageTwoHanded": "Damage (Two-Handed Grip)",
       "WillBeConsumed": "Will be consumed: {name} x{count}",
       "ShortRestConfirm": "Are you sure you want to take a short rest (1 hour)? This will restore AP and abilities on short rest.",
       "LongRestConfirm": "Are you sure you want to take a long rest (8 hours)? This will restore AP and all abilities on day/short/long rest.",
@@ -544,7 +553,10 @@
       "IsThrown": "Thrown",
       "IsVariableGrip": "Variable grip",
       "IsReloading": "Reloading",
+      "IsPaired": "Paired",
       "WeaponSkill": "Weapon Skill",
+      "WeaponKeys": "Specific Weapons (key/name substrings, ;-separated)",
+      "WeaponDiceStep": "Weapon Dice Step (damage ladder, ±N)",
       "Skill": "Skill",
       "NoSkill": "No Skill",
       "ExperiencePoints": "Experience Points (XP)",
@@ -770,6 +782,9 @@
       "ItemEffectDisabled": "Effect disabled: {name} ({item})",
       "DisableAuraTitle": "Disable Aura",
       "DisableAuraConfirm": "Disable the aura '{name}'? Its settings are kept; re-enable it via the item's chat card.",
+      "TwoHandedGripNeedsFreeHand": "Two-handed grip requires a free off-hand.",
+      "PrereqNotMetTitle": "Prerequisites Not Met",
+      "PrereqNotMetConfirm": "\"{name}\": prerequisites not met — {reqs}. Add anyway?",
       "NoLuckPoints": "You have no luck points!",
       "LuckPointsRestored": "Luck points restored.",
       "GMRestoreTimeOnly": "Only GM can advance time. Charges and AP restored locally.",

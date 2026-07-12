@@ -22,6 +22,7 @@ import DedrelToken from "./src/canvas/token.mjs";
 import DedrelAuraRegionBehaviorType from "./src/data/region-behaviors/aura.mjs";
 import { DR_KEY_LABELS } from "./src/constants.mjs";
 import { DedrelBonuses, MOD_CHANGE_KEY } from "./src/utils/dedrel-bonuses.mjs";
+import { DICE_LADDER, stepDice, stepFormula } from "./src/utils/dice-ladder.mjs";
 import { DEDREL_MAGIC } from "./src/config/magic.mjs";
 import { CREATURE_TYPES } from "./src/config/creature-types.mjs";
 import { DEDREL_EFFECT_LIBRARY, buildEffectData } from "./src/config/effect-library.mjs";
@@ -57,6 +58,9 @@ Hooks.once("init", function() {
   // Библиотека переиспользуемых Active Effects (зелья/свитки/баффы). См.
   // src/config/effect-library.mjs; хелперы — game.dedrel.effects (ready-хук ниже).
   CONFIG.DEDREL.effectLibrary = DEDREL_EFFECT_LIBRARY;
+  // Лестница урона (1d4→1d6→2d4→2d6→2d8→3d6) — глобальный инструмент сдвига
+  // кубов для бафов/нерфов (DSL-операция dice_step). См. src/utils/dice-ladder.mjs.
+  CONFIG.DEDREL.diceLadder = DICE_LADDER;
 
   // Инициатива (стандартный расчет Foundry для системы)
   let initDirection = -1;
@@ -190,6 +194,10 @@ Hooks.once("init", function() {
 
   // Экспортируем глобальные методы для макросов
   game.dedrel = {
+    // Лестница урона: сдвиг кубов для макросов/валидации.
+    // Пример: game.dedrel.dice.stepFormula("2d6", 1) → "2d8"
+    dice: { LADDER: DICE_LADDER, stepDice, stepFormula },
+
     rollItemMacro: async (itemName) => {
       const speaker = ChatMessage.getSpeaker();
       let actor;

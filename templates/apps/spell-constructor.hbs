@@ -89,7 +89,7 @@
                             {{/each}}
                         </span>
                         {{#if mod.powerOptions}}
-                        <select name="powerOption" class="sc-power-option">
+                        <select name="powerOption" class="sc-power-option" data-mod-key="{{mod.key}}">
                             {{#each mod.powerOptions as |o|}}
                             <option value="{{o.value}}" {{#if o.selected}}selected{{/if}}>{{o.label}}</option>
                             {{/each}}
