@@ -2,7 +2,7 @@ import { showRollDialog } from "./dice/roll.mjs";
 import { placeTemplatePreview } from "./canvas/template.mjs";
 import { DR_KEY_LABELS } from "./constants.mjs";
 import { DedrelBonuses } from "./utils/dedrel-bonuses.mjs";
-import { stepFormula } from "./utils/dice-ladder.mjs";
+import { stepFormula, formulaAverage } from "./utils/dice-ladder.mjs";
 import { heldTwoHanded } from "./utils/grip.mjs";
 
 /**
@@ -65,24 +65,39 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       let formula = item.system.formula_damage;
       let drKey = "";
-      
-      // Определяем тип урона из требований манёвра. Если манёвр допускает
-      // несколько типов, предпочитаем тот, которым реально обладает оружие.
+      const dmgOrder = ["piercing", "bludgeoning", "slashing"];
+
+      // Среди типов-кандидатов, которыми РЕАЛЬНО обладает оружие, выбираем тот,
+      // чья формула урона больше по среднему (Лестница урона) — чтобы, например,
+      // Добивание мечом било сильным рубящим (2d6), а не слабым колющим (1d6).
+      // Ничья (равные средние) — по приоритету dmgOrder.
+      const bestDamageType = (candidates) => {
+        const perType = weapon?.system?.damage_formulas || {};
+        const base = weapon?.system?.damage_formula || "";
+        let best = "", bestAvg = -1;
+        for (const k of dmgOrder) {
+          if (!candidates.includes(k)) continue;
+          const a = formulaAverage(perType[k] || base);
+          if (a > bestAvg) { bestAvg = a; best = k; }
+        }
+        return best;
+      };
+
+      // Тип урона из требований манёвра. Если манёвр допускает несколько типов,
+      // берём тот, что оружие реально имеет И который бьёт сильнее.
       if (item.type === "maneuver" && item.system.req_weapon_damage_type) {
         const reqDmg = item.system.req_weapon_damage_type;
         const wDmg = weapon?.system?.damage_type || {};
-        const order = ["piercing", "bludgeoning", "slashing"];
-        drKey = order.find(k => reqDmg[k] && wDmg[k]) || order.find(k => reqDmg[k]) || "";
+        const shared = dmgOrder.filter(k => reqDmg[k] && wDmg[k]);
+        drKey = bestDamageType(shared) || dmgOrder.find(k => reqDmg[k]) || "";
       }
 
-      // Если у манёвра нет своей формулы, берем формулу и тип урона от оружия:
+      // Если у манёвра нет своей формулы, берём формулу и тип урона от оружия:
       // сначала формула конкретного типа (damage_formulas), потом базовая.
       if (!formula && weapon) {
         if (!drKey) {
-           const wDmg = weapon.system.damage_type;
-           if (wDmg.piercing) drKey = "piercing";
-           else if (wDmg.bludgeoning) drKey = "bludgeoning";
-           else if (wDmg.slashing) drKey = "slashing";
+          const wDmg = weapon.system.damage_type || {};
+          drKey = bestDamageType(dmgOrder.filter(k => wDmg[k]));
         }
         const perType = weapon.system.damage_formulas || {};
         formula = (drKey && perType[drKey]) || weapon.system.damage_formula;

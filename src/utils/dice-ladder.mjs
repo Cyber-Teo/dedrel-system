@@ -91,3 +91,24 @@ export function stepLabel(index) {
   const s = DICE_LADDER[Math.clamp(index, 0, DICE_LADDER.length - 1)];
   return `${s.count}d${s.faces}`;
 }
+
+/**
+ * Среднее значение формулы урона: сумма средних всех кубовых термов (NdM) и
+ * плоских модификаторов (+N/-N) с учётом знака. Нужно, чтобы сравнить формулы
+ * разных типов урона одного оружия и выбрать бо́льшую (см. выбор типа в chat.mjs).
+ * Термы с переменными (@attributes...) не оцениваются и в сумму не входят.
+ * @param {string} formula - например "2d6", "2d8xo + 2", "1d6"
+ * @returns {number}
+ */
+export function formulaAverage(formula) {
+  if (typeof formula !== "string" || !formula) return 0;
+  let total = 0;
+  const re = /([+-]?)\s*(?:(\d+)d(\d+)|(\d+))/gi;
+  let m;
+  while ((m = re.exec(formula)) !== null) {
+    const sign = m[1] === "-" ? -1 : 1;
+    if (m[2]) total += sign * avg(parseInt(m[2], 10), parseInt(m[3], 10));
+    else if (m[4] !== undefined) total += sign * parseInt(m[4], 10);
+  }
+  return total;
+}

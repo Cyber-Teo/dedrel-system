@@ -1227,6 +1227,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     
     const updateData = {};
     const res = actor.system.resources;
+    // По правилам отдых ОД не восстанавливает (они и так откатываются каждый раунд).
+    // Сброс оставлен намеренно — для тестирования манёвров вне боя: важно видеть,
+    // сколько ОД что стоит, проверять комбо-цепочки и т.д.
     if (res.ap_universal) updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
     if (res.ap_magic) updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
     if (res.ap_maneuver) updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
