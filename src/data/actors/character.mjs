@@ -106,6 +106,36 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
    * Здесь мы рассчитываем все вторичные (производные) характеристики,
    * такие как Максимум ХП, Блок, Уворот, Инициатива, исходя из базовых атрибутов.
    */
+  /**
+   * Обнуляем производные значения-аккумуляторы (те, что ниже считаются через `+=`)
+   * в НАЧАЛЕ каждого цикла подготовки. Иначе повторный вызов prepareData() без
+   * предшествующего reset() (например, ядро/модуль по хуку updateWorldTime —
+   * см. active-effects-hud `_onTimeChange`) накапливает значения поверх уже
+   * посчитанных и удваивает максимумы. Симптом: короткий отдых продвигает время
+   * мира -> HUD эффектов вызывает actor.prepareData() -> max ОД становится 2×,
+   * а performRest сохраняет value = (удвоенный) max -> на листе «2 / 1».
+   * prepareBaseData идёт ДО применения Active Effects, поэтому вклад эффектов
+   * не теряется (эффекты добавляются после обнуления, затем += домешивает атрибуты).
+   */
+  prepareBaseData() {
+    super.prepareBaseData();
+    // Фолбэки соответствуют initial соответствующих полей схемы (hp.max = 10).
+    const getSrc = (path, dflt = 0) => foundry.utils.getProperty(this._source, path) ?? dflt;
+    const res = this.resources;
+    res.hp.max = getSrc("resources.hp.max", 10);
+    res.luck_points.max = getSrc("resources.luck_points.max");
+    res.ap_universal.max = getSrc("resources.ap_universal.max");
+    res.ap_maneuver.max = getSrc("resources.ap_maneuver.max");
+    res.ap_magic.max = getSrc("resources.ap_magic.max");
+    res.movement.max = getSrc("resources.movement.max");
+    const def = this.defenses;
+    def.block = getSrc("defenses.block");
+    def.dodge = getSrc("defenses.dodge");
+    def.mdef = getSrc("defenses.mdef");
+    this.initiative = getSrc("initiative");
+    for (const key of Object.keys(this.dr)) this.dr[key] = getSrc(`dr.${key}`);
+  }
+
   prepareDerivedData() {
     super.prepareDerivedData();
     const attrs = this.attributes;

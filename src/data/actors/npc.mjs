@@ -95,6 +95,31 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
     };
   }
 
+  /**
+   * Обнуляем производные значения-аккумуляторы (считаются ниже через `+=`)
+   * в начале каждого цикла подготовки. Без этого повторный prepareData() без
+   * reset() (например, ядро/модуль на updateWorldTime — см. active-effects-hud
+   * `_onTimeChange`) накапливает поверх уже посчитанного и удваивает максимумы:
+   * короткий отдых продвигает время мира -> HUD зовёт actor.prepareData() ->
+   * max ОД становится 2× -> сохранённый value = max даёт «2 / 1» на листе.
+   * Идёт ДО применения Active Effects, поэтому их вклад не теряется.
+   * Фолбэки соответствуют initial соответствующих полей схемы (hp.max = 10).
+   */
+  prepareBaseData() {
+    super.prepareBaseData();
+    const getSrc = (path, dflt = 0) => foundry.utils.getProperty(this._source, path) ?? dflt;
+    const res = this.resources;
+    res.hp.max = getSrc("resources.hp.max", 10);
+    res.ap_universal.max = getSrc("resources.ap_universal.max");
+    res.movement.max = getSrc("resources.movement.max");
+    const def = this.defenses;
+    def.block = getSrc("defenses.block");
+    def.dodge = getSrc("defenses.dodge");
+    def.mdef = getSrc("defenses.mdef");
+    this.initiative = getSrc("initiative");
+    for (const key of Object.keys(this.dr)) this.dr[key] = getSrc(`dr.${key}`);
+  }
+
   prepareDerivedData() {
     super.prepareDerivedData();
     const attrs = this.attributes;
