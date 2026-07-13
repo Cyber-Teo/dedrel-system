@@ -1,8 +1,9 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
-import { DR_KEY_LABELS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM } from "../constants.mjs";
+import { DR_KEY_LABELS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM, AMMO_TYPE_ENUM, AMMO_TYPE_LABELS } from "../constants.mjs";
 import { buildEffectData, buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
+import { getRangedClass, ammoMatchesWeapon } from "../utils/ranged.mjs";
 
 // Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
 // Для них рендерится общий блок details-physical.hbs.
@@ -45,7 +46,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       deleteCraftIngredient: DedrelItemSheet.#onDeleteCraftIngredient,
       recomputeCraftPrice: DedrelItemSheet.#onRecomputeCraftPrice,
       addMaterialGrant: DedrelItemSheet.#onAddMaterialGrant,
-      deleteMaterialGrant: DedrelItemSheet.#onDeleteMaterialGrant
+      deleteMaterialGrant: DedrelItemSheet.#onDeleteMaterialGrant,
+      useAmmo: DedrelItemSheet.#onUseAmmo
     }
   };
 
@@ -67,10 +69,22 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     game.dedrel.openSpellConstructor(this.document.actor || null, this.document);
   }
 
+  /**
+   * Кнопка «Использовать» на вкладке боеприпасов оружия: назначает боеприпас
+   * активным (system.consume_target). Повторный клик по активному — снимает выбор.
+   */
+  static async #onUseAmmo(event, target) {
+    const ammoId = target.dataset.ammoId;
+    if (!ammoId) return;
+    const current = this.document.system.consume_target;
+    await this.document.update({ "system.consume_target": current === ammoId ? "" : ammoId });
+  }
+
   static PARTS = {
     header: { template: "systems/dedrel/templates/item/parts/item-header.hbs" },
     navigation: { template: "systems/dedrel/templates/item/parts/item-navigation.hbs" },
     details: { template: "systems/dedrel/templates/item/parts/item-details.hbs" },
+    ammunition: { template: "systems/dedrel/templates/item/parts/item-ammunition.hbs" },
     description: { template: "systems/dedrel/templates/item/parts/item-description.hbs" },
     effects: { template: "systems/dedrel/templates/item/parts/item-effects.hbs" },
     crafting: { template: "systems/dedrel/templates/item/parts/item-crafting.hbs" }
@@ -84,6 +98,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     primary: {
       tabs: [
         { id: "details", label: "DEDREL.ItemSheet.Tabs.Details" },
+        { id: "ammunition", label: "DEDREL.ItemSheet.Tabs.Ammunition" },
         { id: "description", label: "DEDREL.ItemSheet.Tabs.Description" },
         { id: "effects", label: "DEDREL.ItemSheet.Tabs.Effects" },
         { id: "crafting", label: "DEDREL.ItemSheet.Tabs.Crafting" }
@@ -127,11 +142,19 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.creatureTypeIsPreset = keys.includes(itemData.system.key);
     }
 
-    // Оружие: строки «бонус против типа существа» (сила 0-10 на каждый тип).
-    if (itemData.type === "weapon") {
+    // Оружие и боеприпас: строки «бонус против типа существа» (сила 0-10 на тип).
+    if (itemData.type === "weapon" || itemData.type === "ammunition") {
       const keys = CONFIG.DEDREL?.creatureTypes || [];
       const vs = itemData.system.vs_creature || {};
       context.vsCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: Number(vs[k]) || 0 }));
+    }
+
+    // Боеприпас: селекты типа боеприпаса и типа доп. урона (любой ключ Лестницы).
+    if (itemData.type === "ammunition") {
+      context.ammoTypeOptions = {};
+      for (const t of AMMO_TYPE_ENUM) context.ammoTypeOptions[t] = game.i18n.localize(AMMO_TYPE_LABELS[t]);
+      context.damageTypeOptions = { "": "—" };
+      for (const [k, labelKey] of Object.entries(DR_KEY_LABELS)) context.damageTypeOptions[k] = game.i18n.localize(labelKey);
     }
     
     if (itemData.type === "weapon" || itemData.type === "maneuver" || itemData.type === "spell") {
@@ -145,6 +168,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "exotic_weapons": game.i18n.localize("DEDREL.Skills.exotic_weapons"),
         "magical_attacks": game.i18n.localize("DEDREL.Skills.magical_attacks"),
         "bows": game.i18n.localize("DEDREL.Skills.bows"),
+        "crossbows": game.i18n.localize("DEDREL.Skills.crossbows"),
         "bladed_weapons": game.i18n.localize("DEDREL.Skills.bladed_weapons")
       };
       context.allSkills = {
@@ -184,17 +208,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
-      
-      context.ammoOptions = { "": "None" };
-      if (this.document.actor) {
-        this.document.actor.items.forEach(i => {
-          if (i.type === "ammunition" || i.type === "weapon") {
-            if (i.id !== this.document.id) {
-              context.ammoOptions[i.id] = `${i.name} (${i.system.quantity || 0})`;
-            }
-          }
-        });
-      }
     }
     
     context.hasQuantity = itemData.system.quantity !== undefined;
@@ -219,6 +232,28 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       }
     } else {
       delete context.tabs.crafting;
+    }
+
+    // Вкладка «Боеприпасы»: только на оружии, распознанном как лук/арбалет/огнестрел
+    // (getRangedClass отсекает метательное и ближнее). Список — совместимые боеприпасы
+    // с актёра-владельца; активный отмечен (== consume_target).
+    const rangedClass = itemData.type === "weapon" ? getRangedClass(itemData) : null;
+    context.showAmmoTab = !!rangedClass;
+    if (context.showAmmoTab) {
+      context.rangedClassLabel = game.i18n.localize(`DEDREL.Ammo.Class.${rangedClass.class}`);
+      context.ammoTypeLabel = game.i18n.localize(AMMO_TYPE_LABELS[rangedClass.ammo]);
+      const activeId = itemData.system.consume_target;
+      const list = [];
+      if (itemData.actor) {
+        for (const i of itemData.actor.items) {
+          if (ammoMatchesWeapon(i, itemData)) {
+            list.push({ id: i.id, name: i.name, img: i.img, quantity: i.system.quantity || 0, active: i.id === activeId });
+          }
+        }
+      }
+      context.ammoList = list;
+    } else {
+      delete context.tabs.ammunition;
     }
 
     // Аксессуарный слот (для типов, поддерживающих system.equip_slot)

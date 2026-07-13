@@ -385,6 +385,7 @@
       "AttackCardTitle": "Attack: {name}",
       "DamageCardFlavor": "Damage: {name}",
       "ArmorPiercing": "Armor Piercing {value}",
+      "VsTypeCardLabel": "Vs creatures:",
       "SpendLuckTitle": "Spend Luck Point",
       "SpendLuckContent": "<p>You can reroll any 1 die (yours or an opponent's).<br><b>You must use the new result.</b></p><p>Spend 1 Luck Point?</p>",
       "LuckChatTitle": "Luck Point!",
@@ -430,7 +431,8 @@
         "Details": "Details",
         "Description": "Description",
         "Effects": "Effects",
-        "Crafting": "Crafting"
+        "Crafting": "Crafting",
+        "Ammunition": "Ammunition"
       },
       "Edit": "Edit",
       "Delete": "Delete",
@@ -1230,6 +1232,33 @@
     "Weapon": {
       "VsCreatures": "Bonus vs creature types",
       "VsCreaturesHint": "Potency 0-10: each point adds +10% damage (before the target's DR) if the target has that creature type."
+    },
+    "Ammo": {
+      "Section": "Ammunition",
+      "AmmoType": "Ammo type",
+      "BonusDamage": "Bonus damage",
+      "DamageFormula": "Damage formula",
+      "DamageType": "Damage type",
+      "Recovery": "Recovery after firing",
+      "RecoveryChance": "Recovery chance (%)",
+      "RecoveryHint": "Chance the ammo survives the shot and can be picked up. Ignored for firearms (shot) — spent powder is not recoverable.",
+      "Compatible": "Compatible ammunition",
+      "NoneAvailable": "No compatible ammunition in inventory.",
+      "Use": "Use",
+      "InUse": "Active",
+      "RecoverySurvived": "<i class=\"fa-solid fa-hand-holding\"></i> <b>{name}</b>: ammo survived — can be recovered.",
+      "RecoveryBroken": "<i class=\"fa-solid fa-heart-crack\"></i> <b>{name}</b>: ammo broke.",
+      "RecoveryPartial": "<i class=\"fa-solid fa-hand-holding\"></i> <b>{name}</b>: {recovered} of {count} survived — can be recovered.",
+      "Type": {
+        "arrow": "Arrow",
+        "bolt": "Bolt",
+        "shot": "Shot (bullet+powder)"
+      },
+      "Class": {
+        "bow": "Bow",
+        "crossbow": "Crossbow",
+        "firearm": "Firearm"
+      }
     }
   },
   "DEDREL.Rarity": {

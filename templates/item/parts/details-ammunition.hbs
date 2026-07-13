@@ -1,0 +1,52 @@
+<div class="form-fields-grid">
+    <div class="section-header">
+        {{localize "DEDREL.Ammo.Section"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Ammo.AmmoType"}}</label>
+        <select name="system.ammo_type">
+            {{selectOptions ammoTypeOptions selected=system.ammo_type}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ArmorPiercing"}}</label>
+        <input type="number" name="system.armor_piercing" value="{{system.armor_piercing}}" min="0" data-dtype="Number"/>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.Ammo.BonusDamage"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Ammo.DamageFormula"}}</label>
+        <input type="text" name="system.damage_bonus" value="{{system.damage_bonus}}" placeholder="1d6"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Ammo.DamageType"}}</label>
+        <select name="system.damage_bonus_type">
+            {{selectOptions damageTypeOptions selected=system.damage_bonus_type}}
+        </select>
+    </div>
+
+    <div class="section-header">
+        {{localize "DEDREL.Ammo.Recovery"}}
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Ammo.RecoveryChance"}}</label>
+        <input type="number" name="system.recovery_chance" value="{{system.recovery_chance}}" min="0" max="100" data-dtype="Number"/>
+    </div>
+    <p class="hint-text" style="grid-column: 1 / -1;">{{localize "DEDREL.Ammo.RecoveryHint"}}</p>
+</div>
+
+{{!-- Бонусы против типов существ: сила 0-10 = +N·10% урона до DR цели (как у оружия) --}}
+<div class="form-group stacked">
+    <label>{{localize "DEDREL.Weapon.VsCreatures"}}</label>
+    <p class="hint-text">{{localize "DEDREL.Weapon.VsCreaturesHint"}}</p>
+    <div class="vs-creature-grid">
+        {{#each vsCreatureRows as |row|}}
+        <div class="vs-creature-row {{#if row.value}}has-value{{/if}}">
+            <label>{{localize row.label}}</label>
+            <input type="number" name="system.vs_creature.{{row.key}}" value="{{row.value}}" min="0" max="10"/>
+        </div>
+        {{/each}}
+    </div>
+</div>

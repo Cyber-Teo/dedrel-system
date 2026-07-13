@@ -52,25 +52,30 @@ export function checkPrerequisites(actor, system) {
   const failed = [];
   const sys = actor.system;
 
-  for (const entry of system.prerequisites_attributes || []) {
+  // Пустые/пробельные элементы массивов — это НЕ требования, а артефакт импорта
+  // (пустая ячейка CSV → [""] вместо []). Их нужно отбрасывать, иначе «пустой»
+  // пререк ошибочно считается невыполненным и диалог всплывает без причины.
+  const clean = arr => (arr || []).filter(e => String(e).trim().length > 0);
+
+  for (const entry of clean(system.prerequisites_attributes)) {
     if (!entryMet(entry, alt => rankAltMet(sys.attributes, alt))) failed.push(entry);
   }
 
-  for (const entry of system.prerequisites_skills || []) {
+  for (const entry of clean(system.prerequisites_skills)) {
     if (!entryMet(entry, alt => rankAltMet(sys.skills, alt))) failed.push(entry);
   }
 
-  for (const entry of system.prerequisites_talents || []) {
+  for (const entry of clean(system.prerequisites_talents)) {
     if (!entryMet(entry, alt => itemAltMet(actor, "talent", alt))) failed.push(entry);
   }
 
-  for (const entry of system.prerequisites_mutations || []) {
+  for (const entry of clean(system.prerequisites_mutations)) {
     if (!entryMet(entry, alt => itemAltMet(actor, "mutation", alt))) failed.push(entry);
   }
 
   // Линии крови: числовой элемент — легаси-уточнение ранга предыдущего имени.
   const bloodlineEntries = [];
-  for (const entry of system.prerequisites_bloodlines || []) {
+  for (const entry of clean(system.prerequisites_bloodlines)) {
     const str = String(entry).trim();
     if (/^\d+$/.test(str) && bloodlineEntries.length > 0) {
       const prev = bloodlineEntries[bloodlineEntries.length - 1];

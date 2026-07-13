@@ -45,6 +45,26 @@ export const MATERIAL_CLASS_ENUM = ["metal", "mineral", "wood", "herb", "leather
 // Тиры слотов улучшений оружия/брони (без legendary: очень редкий — максимум).
 export const SLOT_TIER_ENUM = ["common", "uncommon", "rare", "very_rare"];
 
+// Типы боеприпасов (system.ammo_type у ammunition) и их привязка к классу
+// дальнобойного оружия. Порядок в RANGED_CLASS_KEYS важен: firearm и crossbow
+// проверяются ДО bow, т.к. подстрока "bow" содержится в "crossbow".
+export const AMMO_TYPE_ENUM = ["arrow", "bolt", "shot"];
+
+export const AMMO_TYPE_LABELS = {
+  arrow: "DEDREL.Ammo.Type.arrow",
+  bolt: "DEDREL.Ammo.Type.bolt",
+  shot: "DEDREL.Ammo.Type.shot"
+};
+
+// Класс дальнобойного оружия определяется по ключу/названию (подстрока).
+// ammo — совместимый тип боеприпаса; consumable_recovery=false → боеприпас
+// нельзя подобрать после выстрела (порох огнестрела).
+export const RANGED_CLASS_KEYS = [
+  { class: "firearm",  ammo: "shot",  keys: ["musket", "pistol", "arquebus"], recoverable: false },
+  { class: "crossbow", ammo: "bolt",  keys: ["crossbow"], recoverable: true },
+  { class: "bow",      ammo: "arrow", keys: ["bow"], recoverable: true }
+];
+
 export const DR_KEY_LABELS = {
   "piercing": "DEDREL.ItemSheet.Piercing",
   "bludgeoning": "DEDREL.ItemSheet.Bludgeoning",

@@ -229,24 +229,17 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Проверка боеприпасов и расходуемых предметов
-    let ammoItem = null;
+    // Проверка расходуемых предметов.
+    // ВАЖНО: боеприпас оружия (consume_target) здесь НЕ трогаем — оружие само по
+    // себе не «стреляет». Выстрел = манёвр с req_weapon; боеприпас выбранного
+    // оружия списывается в колбэке ниже. Иначе клик по оружию в инвентаре
+    // (item.use → лист) превращался бы в диалог расхода боеприпаса.
     let consumeAmount = this.system.consume_amount || 1;
     let isSelfConsume = false;
     let hasEnoughAmmo = true;
     let consumesResources = false;
 
-    if (this.type === "weapon" && this.system.consume_target) {
-      ammoItem = actor.items.get(this.system.consume_target);
-      consumesResources = true;
-      if (ammoItem) {
-        if (ammoItem.system.quantity < consumeAmount) {
-          hasEnoughAmmo = false;
-        }
-      } else {
-        hasEnoughAmmo = false; // Привязанный предмет не найден
-      }
-    } else if (this.system.properties?.consumed_on_use || this.system.consumable || this.type === "ammunition") {
+    if (this.system.properties?.consumed_on_use || this.system.consumable || this.type === "ammunition") {
       isSelfConsume = true;
       consumesResources = true;
       if ((this.system.quantity || 0) < consumeAmount) {
@@ -320,13 +313,7 @@ export default class DedrelItem extends Item {
       }
     }
 
-    if (ammoItem) {
-      if (!hasEnoughAmmo) {
-        content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Notifications.NotEnoughAmmo", {name: esc(ammoItem.name), current: ammoItem.system.quantity, required: consumeAmount})}</p>`;
-      } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: esc(ammoItem.name), count: consumeAmount})}</p>`;
-      }
-    } else if (isSelfConsume) {
+    if (isSelfConsume) {
       if (!hasEnoughAmmo) {
         content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Notifications.ItemDepleted")}</p>`;
       } else {
@@ -379,6 +366,34 @@ export default class DedrelItem extends Item {
               return;
             }
 
+            // Боеприпас ВЫБРАННОГО оружия (манёвр-выстрел с req_weapon). Резолвим и
+            // валидируем ДО траты ОД, чтобы не списать ОД при пустом колчане.
+            let weaponAmmo = null;
+            let weaponAmmoAmount = 1;
+            let ammoSnapshot = null;
+            if (requiresWeapon) {
+              const selEl = dialog.element.querySelector("#use-weapon-select");
+              const selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
+              if (selWeapon?.system?.consume_target) {
+                weaponAmmo = actor.items.get(selWeapon.system.consume_target);
+                weaponAmmoAmount = selWeapon.system.consume_amount || 1;
+                if (!weaponAmmo || (weaponAmmo.system.quantity || 0) < weaponAmmoAmount) {
+                  ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
+                  return;
+                }
+                // Снапшот бонусов боеприпаса СЕЙЧАС — ниже он может быть удалён
+                // (последняя единица), а бросок урона (карта атаки) читает эти
+                // данные из флага сообщения уже после списания.
+                const as = weaponAmmo.system;
+                ammoSnapshot = {
+                  ap: as.armor_piercing || 0,
+                  dmg: as.damage_bonus || "",
+                  dmgType: as.damage_bonus_type || "",
+                  vs: as.vs_creature || {}
+                };
+              }
+            }
+
             // Списание ОД
             if (finalApCost > 0) {
               let apUniversal = actor.system.resources?.ap_universal?.value || 0;
@@ -417,14 +432,24 @@ export default class DedrelItem extends Item {
             // ниже postToChat() обращается к this (this.name, this.actor, this.effects).
             // Удаляем в самом конце, после отправки карточки.
             let deleteSelfAfter = false;
-            if (ammoItem) {
-              const newQty = Math.max(0, ammoItem.system.quantity - consumeAmount);
+            if (weaponAmmo) {
+              // Данные для проверки сбора снимаем ДО возможного удаления предмета.
+              const aName = weaponAmmo.name;
+              const aType = weaponAmmo.system.ammo_type;
+              const aRecovery = weaponAmmo.system.recovery_chance || 0;
+              const newQty = Math.max(0, (weaponAmmo.system.quantity || 0) - weaponAmmoAmount);
               if (newQty <= 0) {
-                await ammoItem.delete();
+                await weaponAmmo.delete();
               } else {
-                await ammoItem.update({ "system.quantity": newQty });
+                await weaponAmmo.update({ "system.quantity": newQty });
               }
-            } else if (isSelfConsume) {
+              // Поломка/сбор: shot (порох) не подбирается. Иначе на каждую списанную
+              // единицу кидаем recovery_chance и сообщаем, сколько уцелело.
+              if (aType !== "shot" && weaponAmmoAmount > 0) {
+                await this.#reportAmmoRecovery(actor, aName, aRecovery, weaponAmmoAmount);
+              }
+            }
+            if (isSelfConsume) {
               const newQty = Math.max(0, (this.system.quantity || 0) - consumeAmount);
               if (newQty <= 0) {
                 deleteSelfAfter = true;
@@ -482,7 +507,7 @@ export default class DedrelItem extends Item {
             if (this.type === "scroll") {
               await this.#castFromScroll();
             } else {
-              await this.postToChat(selectedWeaponId);
+              await this.postToChat(selectedWeaponId, ammoSnapshot);
             }
 
             // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
@@ -733,10 +758,43 @@ export default class DedrelItem extends Item {
   }
 
   /**
+   * Проверка сбора боеприпаса после выстрела: на каждую списанную единицу кидаем
+   * d100, уцелевшие (результат ≤ recovery_chance) можно подобрать нарративно.
+   * Сообщение в чат носит информативный характер — предмет-«россыпь» не создаётся.
+   * @param {Actor} actor
+   * @param {string} name  - имя боеприпаса (снято до возможного удаления)
+   * @param {number} chance - шанс сохранности, %
+   * @param {number} count - сколько единиц списано за выстрел
+   */
+  async #reportAmmoRecovery(actor, name, chance, count) {
+    const roll = new Roll(`${count}d100`);
+    await roll.evaluate();
+    const results = roll.dice[0]?.results?.map(r => r.result) || [];
+    const recovered = results.filter(v => v <= chance).length;
+    const esc = foundry.utils.escapeHTML;
+
+    let content;
+    if (count === 1) {
+      content = recovered
+        ? game.i18n.format("DEDREL.Ammo.RecoverySurvived", { name: esc(name) })
+        : game.i18n.format("DEDREL.Ammo.RecoveryBroken", { name: esc(name) });
+    } else {
+      content = game.i18n.format("DEDREL.Ammo.RecoveryPartial", { name: esc(name), recovered, count });
+    }
+
+    await ChatMessage.create({
+      user: game.user.id,
+      speaker: ChatMessage.getSpeaker({ actor }),
+      content: `<div class="dedrel-ammo-recovery">${content}</div>`,
+      rolls: [roll]
+    });
+  }
+
+  /**
    * Отправляет карточку предмета в чат. Боевые кнопки (Атака/Урон) добавляются только боевым предметам.
    * @param {string|null} weaponId - ID выбранного оружия (если есть)
    */
-  async postToChat(weaponId = null) {
+  async postToChat(weaponId = null, ammoSnapshot = null) {
     let weaponAttr = weaponId ? `data-weapon-id="${weaponId}"` : "";
     
     let showCombatButtons = false;
@@ -895,10 +953,16 @@ export default class DedrelItem extends Item {
       </div>
     `;
 
-    await ChatMessage.create({
+    const messageData = {
       user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: content
-    });
+    };
+    // Снапшот боеприпаса (AP/доп. урон/vs_creature) кладём во флаг — бросок урона
+    // с этой карты (chat.mjs) читает его, т.к. сам боеприпас мог быть уже списан.
+    if (ammoSnapshot && (ammoSnapshot.ap || ammoSnapshot.dmg || Object.keys(ammoSnapshot.vs || {}).length)) {
+      messageData.flags = { dedrel: { ammo: ammoSnapshot } };
+    }
+    await ChatMessage.create(messageData);
   }
 }

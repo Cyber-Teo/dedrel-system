@@ -173,12 +173,21 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           formula = formula.replace(/\[.*?\]/g, '').trim();
       }
       
+      // Снапшот боеприпаса с карты атаки (flags.dedrel.ammo): AP/доп. урон/vs_creature.
+      // Сам боеприпас к этому моменту мог быть уже списан — данные берём из флага.
+      const ammo = message.getFlag("dedrel", "ammo") || null;
+
+      // Доп. урон боеприпаса ТОГО ЖЕ типа (или без явного типа) вливается в основную
+      // формулу; урон другого типа роллится отдельным пакетом ниже (свой DR цели).
+      const ammoSameType = ammo?.dmg && (!ammo.dmgType || ammo.dmgType === drKey);
+      if (ammoSameType) formula += ` + ${ammo.dmg}`;
+
       let rollData = actor.getRollData();
       if (weapon) {
           rollData.weapon = weapon.system;
       }
       let roll = new Roll(formula, rollData);
-      
+
       // Возвращаем flavor обратно в кубики для поддержки Dice So Nice
       if (drKey) {
           for (let term of roll.terms) {
@@ -187,49 +196,76 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
               }
           }
       }
-      
+
       await roll.evaluate();
-      
+
       // Бронебойность: числовое поле оружия (0-3, редактируется на листе) + DSL-моды
-      // pierce:N от манёвров/эффектов. Легаси-галочка properties.armor_piercing
-      // (булево у старых предметов) даёт 1. Каждая единица снимает 10% DR цели.
+      // pierce:N от манёвров/эффектов + AP боеприпаса. Легаси-галочка
+      // properties.armor_piercing (булево у старых предметов) даёт 1. Каждая
+      // единица снимает 10% DR цели.
       const weaponAp = weapon?.system?.armor_piercing
         || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
-      const apLevel = weaponAp + damageMods.pierce;
-      
-      let damageTypeLabel = drKey ? game.i18n.localize(DR_KEY_LABELS[drKey]) : "";
+      const apLevel = weaponAp + damageMods.pierce + (ammo?.ap || 0);
 
-      // Бонусы «против типов существ»: источник — используемое оружие (бьют
-      // всегда через манёвр, но подстрахуемся и на прямой удар оружием).
+      // Бонусы «против типов существ»: оружие + боеприпас (силы складываются по типу).
       // Сериализуем ненулевые пары "тип:сила" в data-атрибут кнопки урона.
       const vsWeapon = weapon || (item.type === "weapon" ? item : null);
-      const vsMapSrc = vsWeapon?.system?.vs_creature || {};
+      const vsMapSrc = { ...(vsWeapon?.system?.vs_creature || {}) };
+      if (ammo?.vs) {
+        for (const [t, p] of Object.entries(ammo.vs)) vsMapSrc[t] = (Number(vsMapSrc[t]) || 0) + (Number(p) || 0);
+      }
       const vsTypesStr = Object.entries(vsMapSrc)
         .map(([t, p]) => [t, Number(p) || 0])
         .filter(([t, p]) => t && p > 0)
         .map(([t, p]) => `${t}:${p}`)
         .join(",");
-      
-      // Формируем HTML для отображения результатов броска кубиков в чате
-      let chatContent = `
+
+      // Рендер одного пакета урона (основной + опциональный от боеприпаса другого типа).
+      const damageBlock = (r, dk, ap, vsStr, tooltip) => {
+        const label = dk ? game.i18n.localize(DR_KEY_LABELS[dk]) : "";
+        // Строка «против существ»: перечисляем типы и потенциальный бонус (+сила·10%).
+        // Фактический бонус зависит от типа цели — считается при применении урона.
+        const vsParts = (vsStr || "").split(",").filter(Boolean).map(pair => {
+          const [t, p] = pair.split(":");
+          return `${game.i18n.localize(`DEDREL.CreatureTypes.${t}`)} +${(Number(p) || 0) * 10}%`;
+        });
+        const vsLine = vsParts.length
+          ? `<div class="dice-formula" style="opacity: 0.85;"><i class="fa-solid fa-dragon"></i> ${game.i18n.localize("DEDREL.Chat.VsTypeCardLabel")} ${vsParts.join(", ")}</div>`
+          : "";
+        return `
         <div class="dice-roll">
           <div class="dice-result">
-            <div class="dice-formula">${roll.formula} ${damageTypeLabel ? `[${damageTypeLabel}]` : ''}${apLevel > 0 ? ` &bull; ${game.i18n.format("DEDREL.Chat.ArmorPiercing", {value: apLevel})}` : ''}</div>
-            ${await roll.getTooltip()}
-            <h4 class="dice-total">${roll.total}</h4>
+            <div class="dice-formula">${r.formula} ${label ? `[${label}]` : ''}${ap > 0 ? ` &bull; ${game.i18n.format("DEDREL.Chat.ArmorPiercing", {value: ap})}` : ''}</div>
+            ${vsLine}
+            ${tooltip}
+            <h4 class="dice-total">${r.total}</h4>
           </div>
         </div>
         <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
-           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${roll.total}" data-type="${drKey}" data-ap="${apLevel}" data-vs-types="${vsTypesStr}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
-        </div>
-      `;
-      
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${r.total}" data-type="${dk}" data-ap="${ap}" data-vs-types="${vsStr}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
+        </div>`;
+      };
+
+      let chatContent = damageBlock(roll, drKey, apLevel, vsTypesStr, await roll.getTooltip());
+      const rolls = [roll];
+
+      // Отдельный пакет: доп. урон боеприпаса ДРУГОГО типа (своё AP=0, свой DR).
+      if (ammo?.dmg && ammo.dmgType && ammo.dmgType !== drKey) {
+        let ammoRoll = new Roll(ammo.dmg, rollData);
+        for (let term of ammoRoll.terms) {
+          if (term.faces !== undefined) term.options.flavor = ammo.dmgType;
+        }
+        await ammoRoll.evaluate();
+        chatContent += damageBlock(ammoRoll, ammo.dmgType, 0, "", await ammoRoll.getTooltip());
+        rolls.push(ammoRoll);
+      }
+
       await ChatMessage.create({
         user: game.user.id,
         speaker: ChatMessage.getSpeaker({ actor: actor }),
         flavor: game.i18n.format("DEDREL.Chat.DamageCardFlavor", {name: foundry.utils.escapeHTML(item.name)}),
         content: chatContent,
-        rolls: [roll]
+        rolls
       });
 
       // Сжигаем DSL-модификаторы стадии "damage" (бонусы к урону)

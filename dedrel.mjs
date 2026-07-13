@@ -172,6 +172,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-quest_item.hbs",
     "systems/dedrel/templates/item/parts/details-currency.hbs",
     "systems/dedrel/templates/item/parts/details-service.hbs",
+    "systems/dedrel/templates/item/parts/details-ammunition.hbs",
     "systems/dedrel/templates/item/parts/details-equip-slot.hbs",
     "systems/dedrel/templates/item/parts/details-creature_type.hbs"
   ]);

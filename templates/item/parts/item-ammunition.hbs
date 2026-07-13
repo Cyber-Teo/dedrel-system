@@ -1,0 +1,30 @@
+<div class="tab ammunition {{tabs.ammunition.cssClass}}" data-group="primary" data-tab="ammunition">
+    {{#if showAmmoTab}}
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemFields.ConsumeAmount"}}</label>
+        <input type="number" name="system.consume_amount" value="{{system.consume_amount}}" min="0" data-dtype="Number"/>
+    </div>
+
+    <div class="section-header" style="margin-top: 10px;">
+        {{localize "DEDREL.Ammo.Compatible"}} &mdash; {{ammoTypeLabel}}
+    </div>
+
+    {{#if ammoList.length}}
+    <ul class="ammo-list">
+        {{#each ammoList as |ammo|}}
+        <li class="ammo-row {{#if ammo.active}}active{{/if}}">
+            <img class="ammo-icon" src="{{ammo.img}}" alt="{{ammo.name}}"/>
+            <span class="ammo-name">{{ammo.name}}</span>
+            <span class="ammo-qty">&times;{{ammo.quantity}}</span>
+            <button type="button" class="ammo-use-btn {{#if ammo.active}}active{{/if}}"
+                    data-action="useAmmo" data-ammo-id="{{ammo.id}}">
+                {{#if ammo.active}}{{localize "DEDREL.Ammo.InUse"}}{{else}}{{localize "DEDREL.Ammo.Use"}}{{/if}}
+            </button>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p class="hint-text">{{localize "DEDREL.Ammo.NoneAvailable"}}</p>
+    {{/if}}
+    {{/if}}
+</div>

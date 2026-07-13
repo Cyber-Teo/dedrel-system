@@ -379,7 +379,8 @@
         "Details": "Детали",
         "Description": "Описание",
         "Effects": "Эффекты",
-        "Crafting": "Крафт"
+        "Crafting": "Крафт",
+        "Ammunition": "Боеприпасы"
       },
       "Edit": "Редактировать",
       "Delete": "Удалить",
@@ -581,6 +582,7 @@
       "AttackCardTitle": "Атака: {name}",
       "DamageCardFlavor": "Урон: {name}",
       "ArmorPiercing": "Бронебойность {value}",
+      "VsTypeCardLabel": "Против существ:",
       "DamageTaken": "<b>{name}</b> получает {damage} {type} урона.",
       "ConditionTickDamage": "«{condition}»: <b>{actor}</b> получает {damage} урона{type}.",
       "ConditionTickHeal": "«{condition}»: <b>{actor}</b> восстанавливает {amount} ХП.",
@@ -1230,6 +1232,33 @@
     "Weapon": {
       "VsCreatures": "Бонус против типов существ",
       "VsCreaturesHint": "Сила 0-10: каждая единица даёт +10% урона (до DR цели), если цель несёт этот тип существа."
+    },
+    "Ammo": {
+      "Section": "Боеприпас",
+      "AmmoType": "Тип боеприпаса",
+      "BonusDamage": "Дополнительный урон",
+      "DamageFormula": "Формула урона",
+      "DamageType": "Тип урона",
+      "Recovery": "Сбор после выстрела",
+      "RecoveryChance": "Шанс сохранности (%)",
+      "RecoveryHint": "Вероятность, что боеприпас уцелеет и его можно будет подобрать. У огнестрела (пуля) игнорируется — порох не подбирается.",
+      "Compatible": "Совместимые боеприпасы",
+      "NoneAvailable": "Нет подходящих боеприпасов в инвентаре.",
+      "Use": "Использовать",
+      "InUse": "Активен",
+      "RecoverySurvived": "<i class=\"fa-solid fa-hand-holding\"></i> <b>{name}</b>: боеприпас уцелел — можно подобрать.",
+      "RecoveryBroken": "<i class=\"fa-solid fa-heart-crack\"></i> <b>{name}</b>: боеприпас сломался.",
+      "RecoveryPartial": "<i class=\"fa-solid fa-hand-holding\"></i> <b>{name}</b>: уцелело {recovered} из {count} — можно подобрать.",
+      "Type": {
+        "arrow": "Стрела",
+        "bolt": "Болт",
+        "shot": "Заряд (пуля+порох)"
+      },
+      "Class": {
+        "bow": "Лук",
+        "crossbow": "Арбалет",
+        "firearm": "Огнестрел"
+      }
     }
   },
   "DEDREL.Rarity": {

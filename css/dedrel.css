@@ -736,6 +736,60 @@ form.dedrel.sheet.item {
   margin: 2px 0 4px;
 }
 
+/* Вкладка «Боеприпасы» на листе дальнобойного оружия */
+.dedrel.sheet.item ul.ammo-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dedrel.sheet.item .ammo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border: 1px solid var(--color-border-light-tertiary, #bbb);
+  border-radius: 4px;
+}
+
+.dedrel.sheet.item .ammo-row.active {
+  border-color: var(--color-primary, #7a6a3a);
+  background: rgba(122, 106, 58, 0.08);
+}
+
+.dedrel.sheet.item .ammo-row .ammo-icon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border: none;
+}
+
+.dedrel.sheet.item .ammo-row .ammo-name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.dedrel.sheet.item .ammo-row .ammo-qty {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.dedrel.sheet.item .ammo-row .ammo-use-btn {
+  flex: 0 0 auto;
+  width: auto;
+  line-height: 1.2;
+  padding: 2px 10px;
+}
+
+.dedrel.sheet.item .ammo-row .ammo-use-btn.active {
+  background: var(--color-primary, #7a6a3a);
+  color: #fff;
+}
+
 .dedrel.sheet.item .item-type-badge {
   background: var(--color-primary);
   color: #fff;

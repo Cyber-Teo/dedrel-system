@@ -1607,6 +1607,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (["talent", "mutation", "maneuver"].includes(item.type) && !this.document.items.get(item.id)) {
       const proceed = await confirmPrerequisites(this.document, item);
       if (!proceed) return false;
+      // ВАЖНО: confirmPrerequisites делает await (диалог). event.dataTransfer живёт
+      // только во время синхронной обработки drop — после await он протухает, и
+      // super._onDrop (который читает его повторно) молча ничего не создаёт.
+      // Талант/манёвр поэтому создаём напрямую из уже разрешённого item.
+      // Мутация идёт дальше — у неё своя логика стартовых зон ниже.
+      if (item.type !== "mutation") {
+        return this.document.createEmbeddedDocuments("Item", [item.toObject()]);
+      }
     }
 
     if (item.type === "mutation") {
@@ -1652,6 +1660,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         }
         
         return this.document.createEmbeddedDocuments("Item", [itemObj]);
+      }
+      // Внешняя мутация вне стартовой зоны (приобретена после создания): создаём
+      // напрямую — super._onDrop полагался бы на протухший после await dataTransfer.
+      // Уже принадлежащую актору мутацию (пересортировка, await не было) отдаём
+      // стандартному super._onDrop ниже, чтобы не создать дубликат.
+      if (!this.document.items.get(item.id)) {
+        return this.document.createEmbeddedDocuments("Item", [item.toObject()]);
       }
     }
 

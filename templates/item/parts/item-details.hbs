@@ -32,6 +32,8 @@
         {{> "systems/dedrel/templates/item/parts/details-currency.hbs"}}
     {{else if (eq item.type "service")}}
         {{> "systems/dedrel/templates/item/parts/details-service.hbs"}}
+    {{else if (eq item.type "ammunition")}}
+        {{> "systems/dedrel/templates/item/parts/details-ammunition.hbs"}}
     {{/if}}
     {{#if (eq item.type "maneuver")}}
         {{> "systems/dedrel/templates/item/parts/details-maneuver.hbs"}}
