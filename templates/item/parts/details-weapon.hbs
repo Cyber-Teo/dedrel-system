@@ -96,12 +96,25 @@
         <label class="checkbox"><input type="checkbox" name="system.is_twohanded" {{checked system.is_twohanded}}/> {{localize "DEDREL.ItemSheet.IsTwohanded"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_thrown" {{checked system.is_thrown}}/> {{localize "DEDREL.ItemSheet.IsThrown"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_reloading" {{checked system.is_reloading}}/> {{localize "DEDREL.ItemSheet.IsReloading"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_point_blank" {{checked system.is_point_blank}}/> {{localize "DEDREL.ItemSheet.IsPointBlank"}}</label>
+        <label class="checkbox"><input type="checkbox" name="system.is_scatter" {{checked system.is_scatter}}/> {{localize "DEDREL.ItemSheet.IsScatter"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_variable_grip" {{checked system.is_variable_grip}}/> {{localize "DEDREL.ItemSheet.IsVariableGrip"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_paired" {{checked system.is_paired}}/> {{localize "DEDREL.ItemSheet.IsPaired"}}</label>
         {{!-- Экипировано: у персонажа выставляется листом (слоты рук), у NPC — вручную здесь.
               От этого флага зависят transfer-эффекты оружия и фильтр оружия в Item#use. --}}
         <label class="checkbox"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{localize "DEDREL.ItemSheet.Equipped"}}</label>
     </div>
+    {{#if system.is_reloading}}
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.ReloadCost"}}</label>
+        <select name="system.reload_cost" data-dtype="Number">
+            {{selectOptions oneToThree selected=system.reload_cost}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="checkbox"><input type="checkbox" name="system.loaded" {{checked system.loaded}}/> {{localize "DEDREL.ItemSheet.Loaded"}}</label>
+    </div>
+    {{/if}}
 </div>
 
 {{!-- Бонусы против типов существ: сила 0-10 = +N·10% урона до DR цели --}}

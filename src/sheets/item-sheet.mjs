@@ -207,6 +207,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "piercing": game.i18n.localize("DEDREL.ItemSheet.Piercing")
       };
       context.zeroToThree = { 0: "0", 1: "1", 2: "2", 3: "3" };
+      context.oneToThree = { 1: "1", 2: "2", 3: "3" };
       context.zeroToSix = { 0: "0", 1: "1", 2: "2", 3: "3", 4: "4", 5: "5", 6: "6" };
     }
     

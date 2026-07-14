@@ -18,7 +18,11 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       ap_cost: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       is_variable_cost: new fields.BooleanField({ initial: false }),
       variable_cost_max: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      
+      // Манёвр-перезарядка: заряжает выбранное перезаряжаемое оружие (loaded=true),
+      // а цену ОД берёт из оружия (system.reload_cost 1-3), игнорируя ap_cost.
+      // Такой манёвр не расходует боеприпас и не блокируется состоянием заряда.
+      is_reload_action: new fields.BooleanField({ initial: false }),
+
       uses_value: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       uses_max: new fields.StringField({ required: true, blank: true, initial: "0" }),
       uses_per: new fields.StringField({ required: true, blank: true }),

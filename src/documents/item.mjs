@@ -229,6 +229,15 @@ export default class DedrelItem extends Item {
       }
     }
 
+    // Перезарядка: стоимость ОД диктует само оружие (system.reload_cost 1-3), а не
+    // манёвр. Для отображения в диалоге берём первое валидное оружие; в колбэке
+    // цена пересчитывается по фактически выбранному стволу (у актёра может быть
+    // несколько перезаряжаемых). Так игрок не перезарядит аркебузу дёшево.
+    const isReloadAction = this.type === "maneuver" && this.system.is_reload_action;
+    if (isReloadAction && validWeapons.length > 0) {
+      apCost = validWeapons[0].system.reload_cost || 1;
+    }
+
     // Проверка расходуемых предметов.
     // ВАЖНО: боеприпас оружия (consume_target) здесь НЕ трогаем — оружие само по
     // себе не «стреляет». Выстрел = манёвр с req_weapon; боеприпас выбранного
@@ -353,10 +362,34 @@ export default class DedrelItem extends Item {
           icon: "fa-solid fa-check",
           label: game.i18n.localize("DEDREL.Chat.Confirm"),
           callback: async (event, button, dialog) => {
+            // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
+            // проверки заряда, расхода боеприпаса и карточки.
+            let selWeapon = null;
+            if (requiresWeapon) {
+              const selEl = dialog.element.querySelector("#use-weapon-select");
+              selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
+            }
+
             let finalApCost = apCost;
             if (isVariable) {
               const inputEl = dialog.element.querySelector("#use-ap-cost");
               if (inputEl) finalApCost = parseInt(inputEl.value) || minAp;
+            }
+            // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
+            if (isReloadAction && selWeapon) {
+              finalApCost = selWeapon.system.reload_cost || 1;
+            }
+
+            // Выстрел из перезаряжаемого оружия: атакующий манёвр (цель — не сам
+            // стрелок, с боевыми кнопками) перезаряжаемым стволом. Прицеливание и
+            // прочие self-подготовки под это не подпадают. Из разряженного нельзя.
+            const isReloadingShot = requiresWeapon && !isReloadAction
+              && !!selWeapon?.system?.is_reloading
+              && this.system.target_type !== "self"
+              && !this.system.hide_combat_buttons;
+            if (isReloadingShot && !selWeapon.system.loaded) {
+              ui.notifications.warn(game.i18n.format("DEDREL.Notifications.WeaponNotLoaded", { name: selWeapon.name }));
+              return;
             }
 
             if (finalApCost > 0 && finalApCost > currentAp) {
@@ -377,9 +410,8 @@ export default class DedrelItem extends Item {
             let weaponAmmo = null;
             let weaponAmmoAmount = 1;
             let ammoSnapshot = null;
-            if (requiresWeapon) {
-              const selEl = dialog.element.querySelector("#use-weapon-select");
-              const selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
+            // Перезарядка боеприпас НЕ расходует (его тратит выстрел) — пропускаем.
+            if (requiresWeapon && !isReloadAction) {
               if (selWeapon?.system?.consume_target) {
                 weaponAmmo = actor.items.get(selWeapon.system.consume_target);
                 weaponAmmoAmount = selWeapon.system.consume_amount || 1;
@@ -464,12 +496,16 @@ export default class DedrelItem extends Item {
               }
             }
 
-            let selectedWeaponId = null;
-            if (requiresWeapon) {
-              const weaponSelect = dialog.element.querySelector("#use-weapon-select");
-              selectedWeaponId = weaponSelect ? weaponSelect.value : null;
+            // Состояние заряда: выстрел разряжает ствол, перезарядка — заряжает.
+            if (isReloadingShot && selWeapon) {
+              await selWeapon.update({ "system.loaded": false });
+            } else if (isReloadAction && selWeapon) {
+              await selWeapon.update({ "system.loaded": true });
+              ui.notifications.info(game.i18n.format("DEDREL.Notifications.WeaponReloaded", { name: selWeapon.name }));
             }
-            
+
+            const selectedWeaponId = requiresWeapon ? (selWeapon?.id ?? null) : null;
+
             // Применение шаблонных self-эффектов (flags.dedrel.applyTo = "self")
             // с подстановкой @spentAp / @apCost / @overspent.
             // Выполняется ДО макроса, чтобы аварийный люк (on_use_macro) видел уже применённый бафф.
@@ -953,11 +989,21 @@ export default class DedrelItem extends Item {
       forbiddenNote = `<div style="margin-bottom: 8px; font-weight: bold; color: var(--color-level-error, #b22);"><i class="fa-solid fa-ban"></i> ${defText}</div>`;
     }
 
+    // Напоминание о перезарядке: выстрел, оставивший ствол разряженным, помечает
+    // это на карточке. Без кнопки — перезарядка совершается своим манёвром из HUD,
+    // а стрелок волен отложить её (карточка к тому моменту уже уедет вверх).
+    let reloadNote = "";
+    const cardWeaponReload = weaponId ? this.actor?.items.get(weaponId) : null;
+    if (cardWeaponReload?.system?.is_reloading && !cardWeaponReload.system.loaded) {
+      reloadNote = `<div style="margin-bottom: 8px; font-weight: bold; color: var(--color-level-warning, #b8860b);"><i class="fa-solid fa-rotate-right"></i> ${game.i18n.format("DEDREL.Chat.NeedsReload", { name: foundry.utils.escapeHTML(cardWeaponReload.name) })}</div>`;
+    }
+
     let content = `
       <div class="dedrel-item-chat">
         <h3 style="border-bottom: 1px solid var(--color-border-dark); padding-bottom: 3px; margin-bottom: 8px;">${foundry.utils.escapeHTML(this.name)}</h3>
         <div class="description" style="margin-bottom: 8px;">${this.system.description || ""}</div>
         ${forbiddenNote}
+        ${reloadNote}
         ${buttons}
       </div>
     `;

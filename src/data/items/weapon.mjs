@@ -80,6 +80,18 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       is_twohanded: new fields.BooleanField({ initial: false }),
       is_thrown: new fields.BooleanField({ initial: false }),
       is_reloading: new fields.BooleanField({ initial: false }),
+      // Цена перезарядки в ОД (1-3): один манёвр «Перезарядка» стоит столько ОД,
+      // тяжёлый огнестрел дороже (мушкет 2, аркебуза 3). Стоимость диктует оружие,
+      // а не манёвр — игрок не может перезарядиться дёшево (см. item.mjs use()).
+      reload_cost: new fields.NumberField({ initial: 1, integer: true, min: 1, max: 3 }),
+      // Заряжено ли перезаряжаемое оружие. Выстрел (расход боеприпаса) разряжает,
+      // манёвр «Перезарядка» заряжает. Из разряженного стрелять нельзя.
+      loaded: new fields.BooleanField({ initial: true }),
+      // В упор: выстрел не провоцирует атаку по возможности (флаг без автоматики)
+      is_point_blank: new fields.BooleanField({ initial: false }),
+      // Картечь: выстрел конусом ~6 м, один бросок атаки/урона на все цели
+      // (флаг без автоматики; такому оружию не выдаются оружейные манёвры)
+      is_scatter: new fields.BooleanField({ initial: false }),
       // Вариативный хват: можно держать одной или двумя руками; при двуручном
       // хвате урон поднимается на ступень Лестницы (кнопка на карточке чата)
       is_variable_grip: new fields.BooleanField({ initial: false }),

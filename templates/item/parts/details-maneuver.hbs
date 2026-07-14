@@ -32,6 +32,11 @@
         <label>{{localize "DEDREL.ItemSheet.MaxAPVariable"}}</label>
         <input type="text" name="system.variable_cost_max" value="{{system.variable_cost_max}}" data-dtype="Number"/>
     </div>
+    <div class="form-group">
+        <label class="checkbox" title="{{localize 'DEDREL.ItemSheet.IsReloadActionHint'}}">
+            <input type="checkbox" name="system.is_reload_action" {{checked system.is_reload_action}}/> {{localize "DEDREL.ItemSheet.IsReloadAction"}}
+        </label>
+    </div>
 
     <div class="section-header">
         {{localize "DEDREL.ItemSheet.Uses"}}
