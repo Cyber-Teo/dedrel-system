@@ -167,6 +167,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-physical.hbs",
     "systems/dedrel/templates/item/parts/details-potion.hbs",
     "systems/dedrel/templates/item/parts/details-scroll.hbs",
+    "systems/dedrel/templates/item/parts/details-magic_item.hbs",
     "systems/dedrel/templates/item/parts/details-craft_material.hbs",
     "systems/dedrel/templates/item/parts/details-crafting.hbs",
     "systems/dedrel/templates/item/parts/details-quest_item.hbs",

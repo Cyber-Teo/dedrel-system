@@ -431,7 +431,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const itemData = {
       name: this.build.name || game.i18n.localize("DEDREL.Magic.UI.UnnamedSpell"),
       type: "spell",
-      img: "systems/dedrel/assets/icons/items/magic_item.svg",
+      img: "systems/dedrel/assets/icons/items/spell.svg",
       system: {
         ...result.compiled.system,
         description: this.#buildDescription(result)

@@ -251,15 +251,21 @@ export default class DedrelItem extends Item {
     // их нужно применить через полный поток использования.
     const hasSelfEffects = this.effects.some(e => e.getFlag("dedrel", "applyTo") === "self");
 
+    // Активная нагрузка (вшитое заклинание / лечение) тоже требует полного потока,
+    // иначе жезл/амулет без зарядов и ОД просто открыл бы лист вместо срабатывания.
+    const hasBoundSpell = (this.type === "scroll" || this.type === "magic_item")
+      && (this.system.spell_id || this.system.spell_key);
+    const hasActivePayload = hasBoundSpell || !!this.system.formula_heal;
+
     // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
     const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
-    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
+    if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && !hasActivePayload && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
       return this.sheet.render(true);
     }
 
     // ВАЖНО: если бонус сделал манёвр бесплатным (apModApplied), НЕ делаем early-return.
     // Нужно продолжить поток, чтобы: 1) сжечь бафф, 2) отправить карточку в чат.
-    if (apCost === 0 && !apModApplied && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects) {
+    if (apCost === 0 && !apModApplied && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && !hasActivePayload) {
       return this.sheet.render(true);
     }
 
@@ -502,10 +508,12 @@ export default class DedrelItem extends Item {
               }
             }
 
-            // Свиток кастует привязанное заклинание (эфемерная копия на акторе),
-            // а не шлёт собственную карточку. Списание свитка уже произошло выше.
-            if (this.type === "scroll") {
-              await this.#castFromScroll();
+            // Свиток и magic_item со вшитым заклинанием кастуют его (эфемерная копия
+            // на акторе), а не шлют собственную карточку. Списание/заряд уже сняты выше.
+            const castsBoundSpell = this.type === "scroll"
+              || (this.type === "magic_item" && (this.system.spell_id || this.system.spell_key));
+            if (castsBoundSpell) {
+              await this.#castBoundSpell();
             } else {
               await this.postToChat(selectedWeaponId, ammoSnapshot);
             }
@@ -545,11 +553,12 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Находит заклинание, «запечатанное» в свитке: сначала по spell_id (предмет на
-   * акторе / в мире / по UUID), затем по spell_key (компендиум заклинаний или мир).
+   * Находит заклинание, «запечатанное» в носителе (свиток или magic_item-жезл):
+   * сначала по spell_id (предмет на акторе / в мире / по UUID), затем по spell_key
+   * (компендиум заклинаний или мир).
    * @returns {Promise<Item|null>}
    */
-  async #resolveScrollSpell() {
+  async #resolveBoundSpell() {
     const sys = this.system;
     if (sys.spell_id) {
       const onActor = this.actor?.items.get(sys.spell_id);
@@ -573,14 +582,14 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Каст заклинания со свитка: свиток даёт магию мимо доктрины и ОД владельца.
-   * Создаём эфемерную копию заклинания на акторе (кнопки карточки чата ищут предмет
-   * по id) и шлём её карточку напрямую через postToChat — НЕ через use(), иначе
-   * нулевая стоимость открыла бы лист, а не отправила карточку, и списались бы ОД.
-   * Эфемерный предмет чистится в конце боя (см. combat.mjs) или макросом.
+   * Каст вшитого заклинания (свиток или magic_item-жезл): носитель даёт магию мимо
+   * доктрины и ОД владельца. Создаём эфемерную копию заклинания на акторе (кнопки
+   * карточки чата ищут предмет по id) и шлём её карточку напрямую через postToChat —
+   * НЕ через use(), иначе нулевая стоимость открыла бы лист, а не отправила карточку,
+   * и списались бы ОД. Эфемерный предмет чистится в конце боя (см. combat.mjs) или макросом.
    */
-  async #castFromScroll() {
-    const source = await this.#resolveScrollSpell();
+  async #castBoundSpell() {
+    const source = await this.#resolveBoundSpell();
     if (!source) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ScrollSpellNotFound"));
     const actor = this.actor;
     if (!actor) return;
@@ -588,7 +597,7 @@ export default class DedrelItem extends Item {
     const spellData = source.toObject();
     delete spellData._id;
     foundry.utils.setProperty(spellData, "flags.dedrel.ephemeral", true);
-    foundry.utils.setProperty(spellData, "flags.dedrel.fromScroll", this.name);
+    foundry.utils.setProperty(spellData, "flags.dedrel.fromItem", this.name);
 
     const [ephemeral] = await actor.createEmbeddedDocuments("Item", [spellData]);
     await ephemeral.postToChat();
