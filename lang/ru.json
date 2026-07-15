@@ -620,6 +620,7 @@
       "DamageVsType": "(Против типа: +{pct}% урона)",
       "Confirm": "Подтвердить",
       "PlaceTemplate": "Разместить шаблон",
+      "ScatterCone": "Разместить конус картечи",
       "Save": "Спасбросок",
       "VariableCostLabel": "Трата ОД (от {min} до {max}):",
       "VariableCostMax": "макс.",

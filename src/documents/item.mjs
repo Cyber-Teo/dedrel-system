@@ -948,6 +948,29 @@ export default class DedrelItem extends Item {
       `;
     }
 
+    // Картечь (аркебуза и пр.): scatter-оружие стреляет тем же манёвром-выстрелом,
+    // но по площади. Кнопки Атаки/Урона остаются как у обычного выстрела (один
+    // бросок на всех накрытых); дополнительно рисуем кнопку конуса. Длина конуса —
+    // из range оружия (парсим ведущее число), угол — стандартный (template.mjs).
+    // Только карточка ВЫСТРЕЛА, не перезарядка/прицеливание/прочие self-манёвры
+    // с тем же оружием: те же критерии, что isReloadingShot в use() — манёвр бьёт
+    // по цели (не self), требует оружие, не помечен перезарядкой и не прячет бой.
+    const isShotCard = reqWeapon
+      && !this.system.is_reload_action
+      && this.system.target_type !== "self"
+      && !this.system.hide_combat_buttons;
+    const cardWeaponScatter = (isShotCard && weaponId) ? this.actor?.items.get(weaponId) : null;
+    if (cardWeaponScatter?.system?.is_scatter) {
+      const coneSize = parseFloat(String(cardWeaponScatter.system.range || "").match(/[\d.]+/)?.[0] || "") || 0;
+      if (coneSize > 0) {
+        buttons += `
+          <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px;">
+            <button class="dedrel-chat-action" data-action="placeTemplate" data-shape="cone" data-size="${coneSize}"><i class="fa-solid fa-wind"></i> ${game.i18n.localize("DEDREL.Chat.ScatterCone")}</button>
+          </div>
+        `;
+      }
+    }
+
     // Если у предмета есть эффекты, которые НЕ переносятся автоматически (transfer: false),
     // значит это бафы/дебафы, которые нужно накладывать вручную (например, яд, заклинание).
     // Генерируем кнопку для наложения этих эффектов на выделенные токены.

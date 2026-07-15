@@ -421,6 +421,7 @@
       "DamageAmplified": "(Vulnerability: +{dr} extra damage)",
       "DamageVsType": "(Vs type: +{pct}% damage)",
       "PlaceTemplate": "Place Template",
+      "ScatterCone": "Place Scatter Cone",
       "Save": "Saving Throw",
       "VariableCostLabel": "Spend AP (from {min} to {max}):",
       "VariableCostMax": "max.",

@@ -738,6 +738,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
 
     const equipment_slots = this.document.system.equipment_slots;
+    // Слот занят только если его item_id резолвится в СУЩЕСТВУЮЩИЙ предмет.
+    // Мёртвая ссылка (id удалённого оружия) в UI рисуется пустым слотом
+    // (slotItem() → null), поэтому проверка по сырой строке ложно блокировала
+    // экипировку («нужны обе руки», хотя руки визуально свободны).
+    const slotFree = (key) => {
+      const id = equipment_slots[key]?.item_id;
+      return !id || !this.document.items.get(id);
+    };
     // Парное (is_paired) занимает обе руки так же, как двуручное
     const isTwoHanded = item.system.is_twohanded || item.system.is_paired;
     const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
@@ -745,18 +753,18 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const updates = {};
 
     if (isTwoHanded) {
-      if (!equipment_slots.main_hand.item_id && !equipment_slots.off_hand.item_id) {
+      if (slotFree("main_hand") && slotFree("off_hand")) {
          updates["system.equipment_slots.main_hand.item_id"] = item.id;
          updates["system.equipment_slots.off_hand.item_id"] = item.id;
       } else {
          return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TwoHandsRequired"));
       }
     } else {
-      if (!equipment_slots.main_hand.item_id) {
+      if (slotFree("main_hand")) {
          updates["system.equipment_slots.main_hand.item_id"] = item.id;
-      } else if (!equipment_slots.off_hand.item_id) {
+      } else if (slotFree("off_hand")) {
          updates["system.equipment_slots.off_hand.item_id"] = item.id;
-      } else if (hasTail && !equipment_slots.tail.item_id) {
+      } else if (hasTail && slotFree("tail")) {
          updates["system.equipment_slots.tail.item_id"] = item.id;
       } else {
          return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoWeaponSlots"));

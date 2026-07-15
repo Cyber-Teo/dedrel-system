@@ -156,7 +156,30 @@ export default class DedrelActor extends Actor {
 
   _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
-    if (game.user.id === userId) this._syncVisionToTokens();
+    if (game.user.id === userId) {
+      this._syncVisionToTokens();
+      this.#clearSlotsForDeletedItems(collection, ids);
+    }
+  }
+
+  /**
+   * Чистит ссылки в equipment_slots на удалённые предметы. Без этого удаление
+   * экипированного оружия/аксессуара оставляет «мёртвый» item_id: слот в UI
+   * рисуется пустым (лист резолвит id → null), но проверки, читающие сырую
+   * строку, считают его занятым (ложное «нужны обе руки», см. character-sheet).
+   */
+  #clearSlotsForDeletedItems(collection, ids) {
+    if (collection !== "items") return;
+    const slots = this.system?.equipment_slots;
+    if (!slots) return;
+    const gone = new Set(ids);
+    const updates = {};
+    for (const [key, slot] of Object.entries(slots)) {
+      if (slot?.item_id && gone.has(slot.item_id)) {
+        updates[`system.equipment_slots.${key}.item_id`] = "";
+      }
+    }
+    if (Object.keys(updates).length) this.update(updates);
   }
 
   /**
