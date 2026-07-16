@@ -2156,3 +2156,66 @@ form.dedrel.sheet.item {
   overflow-wrap: anywhere;
   hyphens: auto;
 }
+
+/* ============================================
+   HUD управления временем (TimeHUD)
+   ============================================ */
+.dedrel-time-hud .time-hud-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.dedrel-time-hud .time-hud-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px;
+}
+
+.dedrel-time-hud .time-hud-tod-icon {
+  font-size: 1.6em;
+  flex: 0 0 auto;
+  width: 32px;
+  text-align: center;
+}
+
+.dedrel-time-hud .time-hud-date-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dedrel-time-hud .time-hud-date-line {
+  font-weight: bold;
+}
+
+.dedrel-time-hud .time-hud-time-line {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.dedrel-time-hud .time-hud-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.dedrel-time-hud .time-hud-buttons button:last-child {
+  grid-column: 1 / -1;
+}
+
+.dedrel-time-hud .time-hud-rests {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  border-top: 1px solid var(--color-border-dark, #444);
+  padding-top: 8px;
+}
+
+.dedrel-time-hud button {
+  font-size: 0.85em;
+  line-height: 1.6;
+  white-space: nowrap;
+}

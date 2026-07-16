@@ -1133,6 +1133,82 @@
       "ActionPoints": "Очки Действия",
       "ChainManeuvers": "Цепные манёвры"
     },
+    "Time": {
+      "Title": "Мировое время",
+      "DateLine": "{weekday}, {day} {month} {year} г.",
+      "PlusHour": "+1 час",
+      "PlusCustom": "+N часов",
+      "PlusDay": "+1 день",
+      "PlusWeek": "+1 неделя",
+      "PlusMonth": "+1 месяц",
+      "ShiftHint": "Shift+клик — сдвинуть время назад",
+      "CustomTitle": "Сдвиг времени",
+      "CustomPrompt": "На сколько часов сдвинуть время? (отрицательное — назад)",
+      "CustomConfirm": "Сдвинуть",
+      "RestConfirm": "Отдыхают: {names}. Время будет сдвинуто, ресурсы восстановлены.",
+      "RestChatMessage": "Отдохнули: {names}.",
+      "NoRestTargets": "Нет целей для отдыха: выделите токены или создайте персонажей игроков.",
+      "Morning": "Утро",
+      "Day": "День",
+      "Evening": "Вечер",
+      "Night": "Ночь"
+    },
+    "Calendar": {
+      "Name": "Календарь Дедрела",
+      "Description": "12 месяцев по 30 дней, год 1005 от основания.",
+      "Months": {
+        "January": "Января",
+        "February": "Февраля",
+        "March": "Марта",
+        "April": "Апреля",
+        "May": "Мая",
+        "June": "Июня",
+        "July": "Июля",
+        "August": "Августа",
+        "September": "Сентября",
+        "October": "Октября",
+        "November": "Ноября",
+        "December": "Декабря"
+      },
+      "MonthsAbbr": {
+        "January": "Янв",
+        "February": "Фев",
+        "March": "Мар",
+        "April": "Апр",
+        "May": "Май",
+        "June": "Июн",
+        "July": "Июл",
+        "August": "Авг",
+        "September": "Сен",
+        "October": "Окт",
+        "November": "Ноя",
+        "December": "Дек"
+      },
+      "Days": {
+        "Monday": "Понедельник",
+        "Tuesday": "Вторник",
+        "Wednesday": "Среда",
+        "Thursday": "Четверг",
+        "Friday": "Пятница",
+        "Saturday": "Суббота",
+        "Sunday": "Воскресенье"
+      },
+      "DaysAbbr": {
+        "Monday": "Пн",
+        "Tuesday": "Вт",
+        "Wednesday": "Ср",
+        "Thursday": "Чт",
+        "Friday": "Пт",
+        "Saturday": "Сб",
+        "Sunday": "Вс"
+      },
+      "Seasons": {
+        "Spring": "Весна",
+        "Summer": "Лето",
+        "Fall": "Осень",
+        "Winter": "Зима"
+      }
+    },
     "RegionBehaviors": {
       "Aura": {
         "FIELDS": {

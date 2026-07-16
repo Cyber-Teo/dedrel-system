@@ -1224,12 +1224,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
 
-  static async performRest(actor, restType) {
-    if (game.user.isGM) {
-      const timeAdvance = restType === "long" ? 28800 : 3600;
-      await game.time.advance(timeAdvance);
-    } else {
-      ui.notifications.info(game.i18n.localize("DEDREL.Notifications.GMRestoreTimeOnly"));
+  static async performRest(actor, restType, { advanceTime = true, notify = true } = {}) {
+    // advanceTime: false — время уже сдвинуто снаружи (групповой отдых из TimeHUD),
+    // иначе каждый актёр группы двигал бы мировое время повторно.
+    if (advanceTime) {
+      if (game.user.isGM) {
+        await game.time.advance(restType === "long" ? 28800 : 3600);
+      } else {
+        ui.notifications.info(game.i18n.localize("DEDREL.Notifications.GMRestoreTimeOnly"));
+      }
     }
     
     const updateData = {};
@@ -1272,7 +1275,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       await actor.updateEmbeddedDocuments("Item", itemUpdates);
     }
     
-    ui.notifications.info(game.i18n.format("DEDREL.Notifications.RestPerformed", {name: actor.name, restType: restType === "long" ? game.i18n.localize("DEDREL.Notifications.RestLong") : game.i18n.localize("DEDREL.Notifications.RestShort")}));
+    if (notify) ui.notifications.info(game.i18n.format("DEDREL.Notifications.RestPerformed", {name: actor.name, restType: restType === "long" ? game.i18n.localize("DEDREL.Notifications.RestLong") : game.i18n.localize("DEDREL.Notifications.RestShort")}));
   }
 
   static async #onToggleCreationLock(event, target) {

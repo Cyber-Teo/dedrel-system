@@ -1,0 +1,34 @@
+<div class="time-hud-content">
+    <div class="time-hud-date">
+        <i class="time-hud-tod-icon {{todIcon}}" data-tooltip="{{todLabel}}"></i>
+        <div class="time-hud-date-text">
+            <span class="time-hud-date-line">{{dateLine}}</span>
+            <span class="time-hud-time-line">{{timeLine}}{{#if season}} · {{season}}{{/if}}</span>
+        </div>
+    </div>
+    <div class="time-hud-buttons" data-tooltip="{{localize "DEDREL.Time.ShiftHint"}}" data-tooltip-direction="DOWN">
+        <button type="button" data-action="advance" data-hours="1">
+            <i class="fa-solid fa-clock"></i> {{localize "DEDREL.Time.PlusHour"}}
+        </button>
+        <button type="button" data-action="advanceCustom">
+            <i class="fa-solid fa-stopwatch"></i> {{localize "DEDREL.Time.PlusCustom"}}
+        </button>
+        <button type="button" data-action="advance" data-days="1">
+            <i class="fa-solid fa-sun"></i> {{localize "DEDREL.Time.PlusDay"}}
+        </button>
+        <button type="button" data-action="advance" data-days="7">
+            <i class="fa-solid fa-calendar-week"></i> {{localize "DEDREL.Time.PlusWeek"}}
+        </button>
+        <button type="button" data-action="advance" data-days="30">
+            <i class="fa-solid fa-calendar-days"></i> {{localize "DEDREL.Time.PlusMonth"}}
+        </button>
+    </div>
+    <div class="time-hud-rests">
+        <button type="button" data-action="rest" data-rest-type="short">
+            <i class="fa-solid fa-mug-hot"></i> {{localize "DEDREL.ActorSheet.ShortRest"}}
+        </button>
+        <button type="button" data-action="rest" data-rest-type="long">
+            <i class="fa-solid fa-campground"></i> {{localize "DEDREL.ActorSheet.LongRest"}}
+        </button>
+    </div>
+</div>

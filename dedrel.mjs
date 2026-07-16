@@ -29,6 +29,8 @@ import { DEDREL_EFFECT_LIBRARY, buildEffectData } from "./src/config/effect-libr
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
+import TimeHUD from "./src/apps/time-hud.mjs";
+import { DEDREL_CALENDAR_CONFIG } from "./src/config/calendar.mjs";
 import { DedrelSocket } from "./src/socket.mjs";
 
 import "./src/chat.mjs";
@@ -100,6 +102,12 @@ Hooks.once("init", function() {
 
   // Регистрация Active Effects для системы
   CONFIG.ActiveEffect.legacyTransferral = false;
+
+  // Календарь мира Дедрел (12 месяцев × 30 дней, год 1005 при worldTime = 0).
+  // GameTime конструируется ядром ПОСЛЕ init (в setupGame), поэтому простое
+  // присваивание конфига здесь подхватывается без ручного initializeCalendar().
+  // Длительности эффектов в units "hours"/"days" конвертируются через него же.
+  CONFIG.time.worldCalendarConfig = DEDREL_CALENDAR_CONFIG;
 
   // Истёкшие эффекты УДАЛЯЮТСЯ, а не помечаются expired (дефолт "update").
   // Иначе истёкшая кондиция остаётся на актёре подавленным «зомби»: иконка
@@ -239,6 +247,7 @@ Hooks.once("init", function() {
     effectsHUD: new ActiveEffectsHUD(),
     chainHUD: new ChainManeuversHUD(),
     apHUD: new ActionPointsHUD(),
+    timeHUD: new TimeHUD(),
     // Движок Магического Конструктора — доступен макросам (смоук-тест "Валидация магии")
     SpellCalculator,
 
@@ -305,6 +314,25 @@ Hooks.once("init", function() {
   // Инициализация хуков для глобальных виджетов
   game.dedrel.effectsHUD.activateHooks();
   game.dedrel.apHUD.activateHooks();
+  game.dedrel.timeHUD.activateHooks();
+});
+
+/**
+ * Кнопка HUD управления временем на панели инструментов сцены
+ * (группа «Токены», видна только ГМу — время двигает game.settings ядра).
+ */
+Hooks.on("getSceneControlButtons", controls => {
+  if (!game.user?.isGM) return;
+  const tokens = controls.tokens;
+  if (!tokens) return;
+  tokens.tools.dedrelTime = {
+    name: "dedrelTime",
+    order: 100,
+    title: "DEDREL.Time.Title",
+    icon: "fa-solid fa-hourglass-half",
+    button: true,
+    onChange: () => game.dedrel.timeHUD.toggle()
+  };
 });
 
 /**
