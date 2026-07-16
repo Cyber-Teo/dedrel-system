@@ -120,6 +120,22 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     return this.#sceneSourceScale(doctrineKey) ?? "none";
   }
 
+  /**
+   * Опции селекта из компендиума: [{ value, label }], label = имя предмета.
+   * keyField задан ("system.key") — value берётся из него (ключ состояния,
+   * записи без ключа отбрасываются); иначе value = имя предмета.
+   * Индекс пака кэшируется ядром — повторные вызовы дёшевы.
+   */
+  async #packOptions(packId, keyField = "") {
+    const pack = game.packs.get(packId);
+    if (!pack) return [];
+    const index = keyField ? await pack.getIndex({ fields: [keyField] }) : await pack.getIndex();
+    return [...index]
+      .map(e => ({ value: keyField ? (foundry.utils.getProperty(e, keyField) || "") : e.name, label: e.name }))
+      .filter(o => o.value)
+      .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+  }
+
   /** build → плоский формат SpellCalculator + context текущего режима. */
   #compute(config) {
     const build = {
@@ -168,23 +184,32 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const limits = config.rankLimits[Math.min(Math.max(doctrineRank, 1), 6)];
     context.limits = limits;
 
-    // --- Путь двухпутёвой доктрины ---
+    // --- Путь: купленная талантом специализация (гайд §1); "без пути" легален всегда ---
     context.paths = null;
     let pathCfg = null;
     if (doctrineCfg.paths) {
-      const pathKeys = Object.keys(doctrineCfg.paths);
-      if (!pathKeys.includes(this.build.path)) this.build.path = pathKeys[0];
-      pathCfg = doctrineCfg.paths[this.build.path];
-      context.paths = pathKeys.map(k => ({
-        key: k,
-        label: i18n.localize(`DEDREL.Magic.Paths.${k}`),
-        selected: k === this.build.path
-      }));
+      const state = this.isStandalone ? null : this.actor.system.doctrines[this.build.doctrine];
+      const knownKeys = Object.keys(doctrineCfg.paths)
+        .filter(pk => this.isStandalone || state?.paths?.[pk]);
+      if (this.build.path && !knownKeys.includes(this.build.path)) this.build.path = "";
+      pathCfg = this.build.path ? doctrineCfg.paths[this.build.path] : null;
+      if (knownKeys.length) {
+        context.paths = [
+          { key: "", label: i18n.localize("DEDREL.Magic.UI.NoPath"), selected: !this.build.path },
+          ...knownKeys.map(k => ({
+            key: k,
+            label: i18n.localize(doctrineCfg.paths[k].label),
+            selected: k === this.build.path
+          }))
+        ];
+      }
     } else {
       this.build.path = "";
     }
 
-    // --- Масштаб Источника ---
+    // --- Масштаб Источника (доктрины ignoresSource живут вне этой концепции) ---
+    context.hideSource = !!doctrineCfg.ignoresSource;
+    if (context.hideSource) this.build.sourceScale = "none";
     // Флаг сцены (ГМ-макрос "Источники сцены") — потолок для игроков: можно выбрать
     // уровень НИЖЕ сценового (осторожная магия), но не выше. ГМ не ограничен;
     // отсутствие флага = без ограничений (уровень источника судит ГМ устно).
@@ -209,6 +234,37 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     // --- Правила цен/запретов для подсветки (та же логика, что в calculate) ---
     const { deltas, forbidden, caps } = SpellCalculator.rulesFor(doctrineCfg, pathCfg);
     const priceOf = (target, base) => Math.max(0, base + (deltas[target] || 0));
+    // Доктринные модификаторы и формы (путь переопределяет формы, добавляет модификаторы)
+    const ownedDoctrinal = new Set([...(doctrineCfg.modifiers || []), ...(pathCfg?.modifiers || [])]);
+    const forms = pathCfg?.forms ?? doctrineCfg.forms ?? [];
+
+    // --- Анонс особенностей доктрины/пути: сродства, ограничения, запреты, капы ---
+    const nameOf = (target) => {
+      const [kind, key] = target.split(":");
+      return i18n.localize(kind === "tech" ? `DEDREL.Magic.Techniques.${key}` : `DEDREL.Magic.Modifiers.${key}`);
+    };
+    const rules = [];
+    if (doctrineCfg.ladderShift) rules.push(i18n.format("DEDREL.Magic.UI.RuleLadderShift", { n: doctrineCfg.ladderShift }));
+    if (doctrineCfg.ignoresSource) rules.push(i18n.localize("DEDREL.Magic.UI.RuleIgnoresSource"));
+    for (const [target, delta] of Object.entries(deltas)) {
+      if (!delta) continue;
+      rules.push(i18n.format(delta < 0 ? "DEDREL.Magic.UI.RuleDiscount" : "DEDREL.Magic.UI.RuleSurcharge",
+        { n: Math.abs(delta), name: nameOf(target) }));
+    }
+    for (const target of forbidden) {
+      rules.push(i18n.format("DEDREL.Magic.UI.RuleForbidden", { name: nameOf(target) }));
+    }
+    for (const [target, cap] of Object.entries(caps)) {
+      if (cap.maxRank !== undefined) rules.push(i18n.format("DEDREL.Magic.UI.RuleMaxRank", { name: nameOf(target), n: cap.maxRank }));
+      if (Array.isArray(cap.allowedRanks)) rules.push(i18n.format("DEDREL.Magic.UI.RuleAllowedRanks", { name: nameOf(target), list: cap.allowedRanks.join(", ") }));
+    }
+    for (const modKey of ownedDoctrinal) {
+      rules.push(i18n.format("DEDREL.Magic.UI.RuleDoctrinalMod", { name: i18n.localize(`DEDREL.Magic.Modifiers.${modKey}`) }));
+    }
+    rules.push(forms.length
+      ? i18n.format("DEDREL.Magic.UI.RuleForms", { list: forms.map(f => i18n.localize(`DEDREL.Magic.Forms.${f}`)).join(", ") })
+      : i18n.localize("DEDREL.Magic.UI.RuleNoForms"));
+    context.doctrineRules = rules;
 
     // --- Техники ---
     const apShort = i18n.localize("DEDREL.Magic.APShort");
@@ -232,15 +288,16 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     });
 
     // --- Модификаторы по категориям ---
+    // Доктринные модификаторы рендерятся только владельцу (доктрине/пути из
+    // конфига), Форма — только при непустом списке форм: чужие строки скрыты.
     const categories = { scale: [], intensity: [], complexity: [] };
     for (const [k, cfg] of Object.entries(config.modifiers)) {
+      if (cfg.doctrinal && !ownedDoctrinal.has(k)) continue;
+      if (cfg.requiresForms && forms.length === 0) continue;
       const target = `mod:${k}`;
       const isForbidden = forbidden.has(target);
       const cap = caps[target];
       const chosen = this.build.modifiers[k];
-
-      // Дайс урона зависит от активного пути (Эхо: d4) — подсказка считается динамически
-      const damageDie = pathCfg?.special?.damageDie || config.modifiers.damage.die;
 
       const ranks = [];
       for (let r = 1; r <= 5; r++) {
@@ -250,16 +307,17 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         if (isForbidden) reason = i18n.localize("DEDREL.Magic.UI.ReasonForbidden");
         else if (cap?.maxRank !== undefined && r > cap.maxRank) reason = i18n.localize("DEDREL.Magic.UI.ReasonOverCap");
         else if (Array.isArray(cap?.allowedRanks) && !cap.allowedRanks.includes(r)) reason = i18n.localize("DEDREL.Magic.UI.ReasonOverCap");
-        else if (!abundant && r === 5) reason = i18n.localize("DEDREL.Magic.UI.ReasonNeedsAbundant");
+        else if (!abundant && !doctrineCfg.ignoresSource && r === 5) reason = i18n.localize("DEDREL.Magic.UI.ReasonNeedsAbundant");
         else if (!bypassMaxCost && r > limits.maxModCost) reason = i18n.localize("DEDREL.Magic.UI.ReasonOverMaxCost");
 
-        // Подсказка "что даёт этот ранг": для урона — динамически (дайс пути),
-        // для остальных — из локали RankHints
+        // Подсказка "что даёт этот ранг": для урона — динамически по Лестнице
+        // (сдвиг доктрины + бонус Изобильного Источника), для остальных — RankHints
         const hint = k === "damage"
-          ? `${rankCfg.diceCount}${damageDie}`
+          ? SpellCalculator.damageFormulaFor(config, doctrineCfg, r, this.build.sourceScale)
           : (i18n.has(`DEDREL.Magic.RankHints.${k}.${r}`) ? i18n.localize(`DEDREL.Magic.RankHints.${k}.${r}`) : "");
 
-        const price = priceOf(target, r);
+        // priceDelta — собственная надбавка модификатора (Области: +1 ОД)
+        const price = Math.max(0, r + (deltas[target] || 0) + (cfg.priceDelta || 0));
         ranks.push({
           rank: r,
           price,
@@ -280,21 +338,63 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         ranks
       };
 
-      // Модификатор "Сила" рангов 3-5: выбор "табличный бонус/штраф ИЛИ состояние".
-      // Названия состояний берём из реестра статусов (собран из компендиума Conditions).
+      // Модификатор "Сила": выбор "табличный штраф ИЛИ состояние" (бонусных
+      // ветвей больше нет — бафы уехали в "Воодушевление" Эха). Список состояний —
+      // кураторский компендиум magic_conditions (conditionsFromPack); при пустом
+      // паке — канонические массивы conditions ранга (имена из реестра статусов).
       if (k === "power" && chosen) {
         const rankCfg = cfg.ranks[chosen.rank];
         const options = [];
-        if (rankCfg?.bonus) {
-          options.push({ value: "bonus", label: i18n.format("DEDREL.Magic.UI.PowerBonus", { n: rankCfg.bonus }) });
-          options.push({ value: "penalty", label: i18n.format("DEDREL.Magic.UI.PowerPenalty", { n: rankCfg.bonus }) });
+        if (rankCfg?.penalty) {
+          options.push({ value: "penalty", label: i18n.format("DEDREL.Magic.UI.PowerPenalty", { n: rankCfg.penalty }) });
         }
-        for (const condKey of rankCfg?.conditions || []) {
-          options.push({ value: condKey, label: CONFIG.statusEffects[condKey]?.name || condKey });
+        if (rankCfg?.conditions?.length) {
+          const packOpts = cfg.conditionsFromPack ? await this.#packOptions(cfg.conditionsFromPack, "system.key") : [];
+          if (packOpts.length) {
+            options.push(...packOpts);
+          } else {
+            for (const condKey of rankCfg.conditions) {
+              options.push({ value: condKey, label: CONFIG.statusEffects[condKey]?.name || condKey });
+            }
+          }
         }
         if (options.length > 0) {
-          if (!chosen.option) chosen.option = options[0].value;
+          if (!options.some(o => o.value === chosen.option)) chosen.option = options[0].value;
           row.powerOptions = options.map(o => ({ ...o, selected: o.value === chosen.option }));
+        }
+      }
+
+      // Модификаторы с выбором из пака (Адаптация ← biomancy_adaptations):
+      // селект показывает имена предметов компендиума; пуст — остаётся подсказка ранга
+      if (cfg.optionsFromPack && chosen) {
+        const packOpts = await this.#packOptions(cfg.optionsFromPack);
+        if (packOpts.length > 0) {
+          if (!packOpts.some(o => o.value === chosen.option)) chosen.option = packOpts[0].value;
+          row.powerOptions = packOpts.map(o => ({ ...o, selected: o.value === chosen.option }));
+        }
+      }
+
+      // Форма: выбор конкретного физического типа из списка форм доктрины/пути
+      if (k === "form" && chosen) {
+        if (!forms.includes(chosen.option)) chosen.option = forms[0];
+        row.powerOptions = forms.map(f => ({
+          value: f,
+          label: i18n.localize(`DEDREL.Magic.Forms.${f}`),
+          selected: f === chosen.option
+        }));
+      }
+
+      // Насыщение (ранги 1–3): выбор свойства — навык/защита, урон оружию или DR
+      if (k === "imbuement" && chosen) {
+        const rankCfg = cfg.ranks[chosen.rank];
+        const choices = rankCfg?.imbueChoice || [];
+        if (choices.length > 0) {
+          if (!choices.includes(chosen.option)) chosen.option = choices[0];
+          row.powerOptions = choices.map(v => ({
+            value: v,
+            label: i18n.format(`DEDREL.Magic.UI.Imbue_${v}`, { n: rankCfg.imbueValue }),
+            selected: v === chosen.option
+          }));
         }
       }
 
@@ -467,7 +567,10 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const lines = [`<p><em>${result.compiled.system.total_cost_breakdown}</em></p>`];
 
     const facts = [];
-    facts.push(`${i18n.localize("DEDREL.Magic.UI.SourceScale")}: ${i18n.localize(CONFIG.DEDREL.magic.sourceScales[this.build.sourceScale].label)}`);
+    const doctrineCfg = CONFIG.DEDREL.magic.doctrines[this.build.doctrine];
+    if (!doctrineCfg?.ignoresSource) {
+      facts.push(`${i18n.localize("DEDREL.Magic.UI.SourceScale")}: ${i18n.localize(CONFIG.DEDREL.magic.sourceScales[this.build.sourceScale].label)}`);
+    }
     if (this.build.path) facts.push(i18n.localize(`DEDREL.Magic.Paths.${this.build.path}`));
     if (extras.durationRounds) facts.push(i18n.format("DEDREL.Magic.UI.DurationRounds", { n: extras.durationRounds }));
     if (extras.durationSpecial) facts.push(i18n.localize(`DEDREL.Magic.UI.Duration_${extras.durationSpecial}`));
@@ -479,33 +582,61 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     if (extras.powerBonus) {
       facts.push(i18n.format("DEDREL.Magic.UI.AppliesBonus", { n: extras.powerBonus, dc: result.compiled.system.save_dc_formula }));
     }
+    // Текстовые эффекты доктринных модификаторов (замедление Сковывания, Пыльная
+    // завеса, форс-мув Принуждения, Адаптация...) — строка таблицы из RankHints
+    for (const note of extras.factNotes || []) {
+      const label = i18n.localize(`DEDREL.Magic.Modifiers.${note.key}`);
+      const hintKey = `DEDREL.Magic.RankHints.${note.key}.${note.rank}`;
+      const hint = i18n.has(hintKey) ? i18n.localize(hintKey) : "";
+      const dc = note.saveDc ? ` (${i18n.format("DEDREL.Magic.UI.SaveDcShort", { dc: note.saveDc })})` : "";
+      // Выбор из пака (Адаптация: имя предмета-адаптации) — дописываем к строке
+      const opt = note.option ? ` — ${note.option}` : "";
+      facts.push(`${label} ${note.rank}: ${hint}${opt}${dc}`);
+    }
     if (facts.length) lines.push(`<p>${facts.join(" · ")}</p>`);
     return lines.join("");
   }
 
   /**
-   * Эффекты предмета: табличный бонус/штраф «Силы» → transfer:false эффект,
-   * который накладывается кнопкой «Применить эффекты» карточки чата.
-   * Состояния (appliedConditions) вешаются через реестр статусов при касте (Фаза 4).
+   * Эффекты предмета: накладываются кнопкой «Применить эффекты» карточки чата.
+   *  - штраф «Силы» / бонус «Воодушевления» → transfer:false эффект на броски
+   *    (длительность — по durationMode ранга, иначе от Длительности сборки);
+   *  - «Насыщение» → transfer:false эффект-маркер (v1: величина и свойство в
+   *    описании, конкретный ключ навыка/DR правит ГМ; без Длительности — 1 раунд).
+   * Состояния (appliedConditions) вешаются через реестр статусов при касте.
    */
   #buildEffects(result) {
     const extras = result.compiled.extras;
-    if (!extras.powerBonus) return [];
-    const rounds = extras.durationRounds || 1;
-    return [{
-      name: game.i18n.format("DEDREL.Magic.UI.PowerEffectName", {
-        n: `${extras.powerBonus > 0 ? "+" : ""}${extras.powerBonus}`
-      }),
-      img: "systems/dedrel/assets/icons/items/magic_item.svg",
-      transfer: false,
-      duration: { rounds },
-      system: {
-        changes: [{
-          key: "system.bonuses.global_roll",
-          type: "add",
-          value: String(extras.powerBonus)
-        }]
-      }
-    }];
+    const effects = [];
+    if (extras.powerBonus) {
+      effects.push({
+        name: game.i18n.format("DEDREL.Magic.UI.PowerEffectName", {
+          n: `${extras.powerBonus > 0 ? "+" : ""}${extras.powerBonus}`
+        }),
+        img: "systems/dedrel/assets/icons/items/magic_item.svg",
+        transfer: false,
+        duration: { rounds: extras.powerEffectRounds || extras.durationRounds || 1 },
+        system: {
+          changes: [{
+            key: "system.bonuses.global_roll",
+            type: "add",
+            value: String(extras.powerBonus)
+          }]
+        }
+      });
+    }
+    if (extras.imbue) {
+      const optKey = extras.imbue.option ? `DEDREL.Magic.UI.Imbue_${extras.imbue.option}` : "DEDREL.Magic.RankHints.imbuement.4";
+      effects.push({
+        name: game.i18n.format("DEDREL.Magic.UI.ImbueEffectName", {
+          detail: game.i18n.format(optKey, { n: extras.imbue.value })
+        }),
+        img: "systems/dedrel/assets/icons/items/magic_item.svg",
+        transfer: false,
+        duration: { rounds: extras.durationRounds || 1 },
+        description: game.i18n.localize("DEDREL.Magic.UI.ImbueEffectHint")
+      });
+    }
+    return effects;
   }
 }

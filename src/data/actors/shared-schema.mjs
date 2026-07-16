@@ -113,15 +113,25 @@ export function buildDR() {
  * Доктрина Магического Конструктора.
  * rank — source-значение (покупается за XP; таланты доступа дают +1 через AE).
  * unlocked — доступ к доктрине (выдаётся талантом через AE Override 1).
- * active_path — активный "путь" двухпутёвых доктрин (гидро/венто).
+ * paths.<key> — купленные Пути-специализации (талант пути:
+ *   AE system.doctrines.<doctrine>.paths.<path> | Override | 1).
+ *   Переключаемой "стойки" active_path больше нет: сборка сама несёт путь,
+ *   при касте проверяется лишь то, что путь известен магу.
  */
-function doctrineField(defaultPath = "") {
+function doctrineField(pathKeys = []) {
   const fields = foundry.data.fields;
-  return new fields.SchemaField({
+  const schema = {
     rank: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
-    unlocked: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-    active_path: new fields.StringField({ required: false, initial: defaultPath })
-  });
+    unlocked: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 })
+  };
+  if (pathKeys.length) {
+    const paths = {};
+    for (const p of pathKeys) {
+      paths[p] = new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 });
+    }
+    schema.paths = new fields.SchemaField(paths);
+  }
+  return new fields.SchemaField(schema);
 }
 
 /**
@@ -134,9 +144,9 @@ export function buildDoctrines() {
   return new fields.SchemaField({
     // Доктрины Материи
     geomancy: doctrineField(),
-    hydromancy: doctrineField("flow"),   // flow | ice
+    hydromancy: doctrineField(["flow", "ice"]),
     pyromancy: doctrineField(),
-    ventomancy: doctrineField("squall"), // squall | echo
+    ventomancy: doctrineField(["squall", "echo"]),
     // Доктрины Сущности
     biomancy: doctrineField(),
     shadowmancy: doctrineField(),

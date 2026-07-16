@@ -13,10 +13,11 @@
  *
  * Термины:
  *  build   — сборка: { doctrine, path, sourceScale, techniques: ["create"],
- *            modifiers: [{ key, rank, option }] }
+ *            modifiers: [{ key, rank, option }] }. path: "" = без пути (база).
  *  context — окружение: { doctrineRank, knownTechniques: {create:1,...},
- *            ignoreKnown } (ignoreKnown — ГМ-режим: не проверять изученность
- *            техник; ранг доктрины ГМ задаёт вручную через doctrineRank)
+ *            knownPaths: {ice:1,...}, ignoreKnown } (ignoreKnown — ГМ-режим:
+ *            не проверять изученность техник и путей; ранг доктрины ГМ задаёт
+ *            вручную через doctrineRank)
  */
 export class SpellCalculator {
 
@@ -47,22 +48,34 @@ export class SpellCalculator {
     if (doctrineRank < 1) errors.push({ code: "no_doctrine_rank" });
     const limits = config.rankLimits[Math.min(Math.max(doctrineRank, 1), 6)];
 
-    // Активный путь двухпутёвой доктрины (гидро/венто)
+    // Путь — купленная талантом специализация; сборка без пути легальна всегда
     let pathKey = "";
     let pathCfg = null;
-    if (doctrineCfg.paths) {
-      pathKey = build.path || Object.keys(doctrineCfg.paths)[0];
-      pathCfg = doctrineCfg.paths[pathKey];
+    if (build.path) {
+      pathCfg = doctrineCfg.paths?.[build.path];
       if (!pathCfg) {
         errors.push({ code: "path_unknown", data: { key: build.path } });
-        pathKey = "";
+      } else if (!context.ignoreKnown && !(context.knownPaths?.[build.path])) {
+        errors.push({ code: "path_not_known", data: { key: build.path } });
+        pathCfg = null;
+      } else {
+        pathKey = build.path;
       }
     }
 
     const { deltas, forbidden, caps } = this.rulesFor(doctrineCfg, pathCfg);
+    // Доктринные модификаторы, которыми владеет доктрина (+ путь добавляет свои)
+    const ownedDoctrinal = new Set([...(doctrineCfg.modifiers || []), ...(pathCfg?.modifiers || [])]);
+    // Формы урона: список пути переопределяет список доктрины целиком
+    const forms = pathCfg?.forms ?? doctrineCfg.forms ?? [];
 
-    const sourceScale = build.sourceScale || "none";
-    const abundant = !!config.sourceScales[sourceScale]?.ignoresMaxModCost;
+    // Доктрины с ignoresSource (Телекинез, Биомантия): концепция Источника
+    // неприменима — масштаб принудительно "none", move доступна всегда,
+    // 5-й ранг модификаторов открывается Рангом Доктрины 5 (обычный maxModCost).
+    const ignoresSource = !!doctrineCfg.ignoresSource;
+    const sourceScale = ignoresSource ? "none" : (build.sourceScale || "none");
+    const sourceCfg = config.sourceScales[sourceScale];
+    const abundant = !!sourceCfg?.ignoresMaxModCost;
     // Режим Изобильного Источника (настройка мира abundantSourceMode):
     //   unlockAll   — снимает maxModCost целиком (все ранги доступны);
     //   requireRank — только открывает 5-й ранг, maxModCost продолжает действовать.
@@ -79,10 +92,14 @@ export class SpellCalculator {
       if (!cfg) { errors.push({ code: "technique_unknown", data: { key: t } }); continue; }
       if (seenTech.has(t)) { errors.push({ code: "technique_duplicate", data: { key: t } }); continue; }
       seenTech.add(t);
+      if (forbidden.has(`tech:${t}`)) {
+        errors.push({ code: "technique_forbidden", data: { key: t } });
+        continue;
+      }
       if (!context.ignoreKnown && !(context.knownTechniques?.[t])) {
         errors.push({ code: "technique_not_known", data: { key: t } });
       }
-      if (cfg.requiresSource && sourceScale === "none") {
+      if (cfg.requiresSource && sourceScale === "none" && !ignoresSource) {
         errors.push({ code: "technique_needs_source", data: { key: t } });
       }
       const base = cfg.ap;
@@ -97,6 +114,7 @@ export class SpellCalculator {
     // --- Модификаторы ---
     const modifiers = build.modifiers || [];
     const chosenModKeys = new Set(modifiers.map(m => m.key));
+    const hasArea = ["area_cone", "area_circle", "area_line"].some(k => chosenModKeys.has(k));
     const seenMods = new Set();
     const reportedConflicts = new Set();
     let maxModRank = 0;
@@ -115,9 +133,27 @@ export class SpellCalculator {
       }
 
       const target = `mod:${m.key}`;
+      // Доктринный модификатор доступен только владельцу (доктрине/пути из конфига)
+      if (cfg.doctrinal && !ownedDoctrinal.has(m.key)) {
+        errors.push({ code: "modifier_not_owned", data: { key: m.key } });
+        continue;
+      }
+      // Форма доступна только доктрине/пути с непустым списком форм
+      if (cfg.requiresForms && forms.length === 0) {
+        errors.push({ code: "modifier_forbidden", data: { key: m.key } });
+        continue;
+      }
       if (forbidden.has(target)) {
         errors.push({ code: "modifier_forbidden", data: { key: m.key } });
         continue;
+      }
+      // Зависимости: "модификатор требует технику" (Насыщение → imbue),
+      // "модификатор требует Область" (Пыльная завеса)
+      if (cfg.requiresTechnique && !seenTech.has(cfg.requiresTechnique)) {
+        errors.push({ code: "modifier_needs_technique", data: { key: m.key, tech: cfg.requiresTechnique } });
+      }
+      if (cfg.requiresArea && !hasArea) {
+        errors.push({ code: "modifier_needs_area", data: { key: m.key } });
       }
       const cap = caps[target];
       if (cap) {
@@ -144,9 +180,9 @@ export class SpellCalculator {
         errors.push({ code: "cone_no_range", data: { key: m.key } });
       }
 
-      // Ранговые лимиты. 5-й ранг всегда требует Изобильного Источника;
-      // снимает ли изобилие maxModCost для остальных проверок — зависит от режима.
-      if (!abundant && rank === 5) {
+      // Ранговые лимиты. 5-й ранг требует Изобильного Источника — кроме доктрин
+      // ignoresSource, где его гейтит Ранг Доктрины 5 через обычный maxModCost.
+      if (!abundant && !ignoresSource && rank === 5) {
         errors.push({ code: "rank5_needs_abundant", data: { key: m.key } });
       } else if (!bypassMaxCost && rank > limits.maxModCost) {
         errors.push({ code: "over_max_mod_cost", data: { key: m.key, rank, max: limits.maxModCost } });
@@ -154,7 +190,9 @@ export class SpellCalculator {
 
       maxModRank = Math.max(maxModRank, rank);
       const base = rank; // базовая цена модификатора в ОД равна его рангу
-      const delta = deltas[target] || 0;
+      // priceDelta — собственная надбавка модификатора (Области: +1 ОД),
+      // складывается со сродствами/ограничениями доктрины и пути
+      const delta = (deltas[target] || 0) + (cfg.priceDelta || 0);
       breakdown.push({ kind: "modifier", key: m.key, rank, option: m.option || "", base, delta, final: Math.max(0, base + delta) });
     }
     if (seenMods.size > limits.modifiers) {
@@ -177,7 +215,7 @@ export class SpellCalculator {
 
     const valid = errors.length === 0;
     const compiled = valid
-      ? this.compile(build, { config, doctrineCfg, pathKey, pathCfg, breakdown, totalAp, requiredRank, sourceScale })
+      ? this.compile(build, { config, doctrineCfg, pathKey, pathCfg, forms, breakdown, totalAp, requiredRank, sourceScale, doctrineRank })
       : null;
 
     return { valid, errors, totalAp, requiredRank, breakdown, compiled };
@@ -213,10 +251,32 @@ export class SpellCalculator {
   }
 
   /**
+   * Формула урона по Лестнице: ступень ранга + сдвиг доктрины (Пиро: +1)
+   * + бонус Изобильного Источника, кламп ступенью VII.
+   * Используется и компилятором, и подсказками UI.
+   */
+  static damageFormulaFor(config, doctrineCfg, rank, sourceScale) {
+    const rankCfg = config.modifiers.damage.ranks[rank];
+    if (!rankCfg) return "";
+    const sourceBonus = doctrineCfg.ignoresSource ? 0 : (config.sourceScales[sourceScale]?.damageStepBonus || 0);
+    const steps = Object.keys(config.damageLadder).map(Number);
+    const maxStep = Math.max(...steps);
+    const step = Math.min(rankCfg.step + (doctrineCfg.ladderShift || 0) + sourceBonus, maxStep);
+    return config.damageLadder[step] || "";
+  }
+
+  /** Длительность эффекта доктринного модификатора по durationMode. */
+  static #modeRounds(mode, doctrineRank) {
+    if (mode === "doctrineRank") return Math.max(1, doctrineRank | 0);
+    if (typeof mode === "string" && mode.startsWith("rounds:")) return parseInt(mode.slice(7)) || 1;
+    return 1; // instant: "следующий бросок" — эффект на 1 раунд
+  }
+
+  /**
    * Компиляция валидной сборки в патч item.system (+ служебные поля caster-side).
    * Возвращаемый объект содержит ТОЛЬКО поля схемы SpellDataModel и блок extras.
    */
-  static compile(build, { config, doctrineCfg, pathKey, pathCfg, breakdown, totalAp, requiredRank, sourceScale }) {
+  static compile(build, { config, doctrineCfg, pathKey, pathCfg, forms, breakdown, totalAp, requiredRank, sourceScale, doctrineRank }) {
     const mods = {};
     for (const b of breakdown) {
       if (b.kind === "modifier") mods[b.key] = b;
@@ -272,57 +332,92 @@ export class SpellCalculator {
     sys.req_weapon_type = { melee: false, ranged: false, shield: false, magic: true };
 
     // --- Масштаб: дальность / цели / области ---
-    // Правила оперируют гексами, движок шаблонов (chat.mjs placeTemplate →
-    // placeTemplatePreview) — метрами сцены. template_size пишем СРАЗУ в метрах
-    // (1 гекс = config.hexSizeMeters); target_range оставляем в гексах — это
-    // язык правил, поле чисто отображательное.
-    const hexM = config.hexSizeMeters || 2;
+    // Правила и движок шаблонов (chat.mjs placeTemplate) оперируют метрами сцены;
+    // значения рангов хранятся сразу в метрах. Без Масштаба — заклинание на себя.
     const range = rankData("range");
-    if (range) sys.target_range = String(range.hexes);
+    if (range) sys.target_range = String(range.meters);
     const targets = rankData("targets");
     if (targets) sys.target_value = targets.targets;
     const cone = rankData("area_cone");
-    // Конус 60° от клетки заклинателя: дальний ряд из N гексов лежит на дистанции N-1 гексов
-    if (cone) { sys.template_shape = "cone"; sys.template_size = (cone.farRowHexes - 1) * hexM; sys.target_type = "area"; }
+    if (cone) { sys.template_shape = "cone"; sys.template_size = cone.lengthMeters; sys.target_type = "area"; }
     const circle = rankData("area_circle");
-    if (circle) { sys.template_shape = "circle"; sys.template_size = circle.radius * hexM; sys.target_type = "area"; }
+    if (circle) { sys.template_shape = "circle"; sys.template_size = circle.radiusMeters; sys.target_type = "area"; }
     const line = rankData("area_line");
-    if (line) { sys.template_shape = "ray"; sys.template_size = line.hexes * hexM; sys.target_type = "area"; }
+    if (line) { sys.template_shape = "ray"; sys.template_size = line.lengthMeters; sys.target_type = "area"; }
 
-    // --- Урон: дайс от пути (Эхо: d4), тип — Форма > спец-путь > базовый тип доктрины ---
+    // --- Урон по Лестнице; тип — Форма (опция) > спец-путь > базовый тип доктрины ---
     const damage = rankData("damage");
     if (damage) {
-      const die = pathCfg?.special?.damageDie || config.modifiers.damage.die;
-      const form = rankData("form");
+      const formula = this.damageFormulaFor(config, doctrineCfg, mods.damage.rank, sourceScale);
       let damageType = "";
-      if (form && form.damageType && form.damageType !== "complex") damageType = form.damageType;
+      const formOption = mods.form ? (forms.includes(mods.form.option) ? mods.form.option : forms[0]) : "";
+      if (formOption) damageType = formOption;
       else if (pathCfg?.special?.damageType) damageType = pathCfg.special.damageType;
       else if (doctrineCfg.baseDamageType) damageType = doctrineCfg.baseDamageType;
-      sys.formula_damage = `${damage.diceCount}${die}` + (damageType ? `[${damageType}]` : "");
+      sys.formula_damage = formula + (damageType ? `[${damageType}]` : "");
     }
 
-    // --- Сила: спасбросок + эффект (табличный бонус/штраф ИЛИ состояние) ---
+    // --- Лечение (Биомантия): конвейер formula_heal → кнопка "Исцелить" в карточке ---
+    const heal = rankData("heal");
+    if (heal) sys.formula_heal = heal.heal;
+
+    // --- Эффекты доктринных модификаторов: спасбросок + штраф/бонус/состояния ---
     const extras = {
       appliedConditions: [],
-      powerBonus: 0,
+      powerBonus: 0,          // штраф "Силы" (отрицательный) либо бонус "Воодушевления"
+      powerEffectRounds: 0,   // длительность эффекта бонуса/штрафа (durationMode)
+      pushMeters: 0,          // принудительное перемещение (Принуждение/Сбивание 3)
+      factNotes: [],          // { key, rank, saveDc } — строки RankHints в описание
+      imbue: null,            // { rank, value, option } — Насыщение
       durationRounds: 0,
       durationSpecial: "",
       durabilityHp: rankData("durability")?.hp || 0
     };
 
-    const power = rankData("power");
-    if (power) {
-      sys.save_dc_formula = String(power.saveDc);
+    let maxSaveDc = 0;
+    for (const b of breakdown) {
+      if (b.kind !== "modifier") continue;
+      const rankCfg = config.modifiers[b.key]?.ranks?.[b.rank];
+      if (!rankCfg) continue;
+
+      if (rankCfg.saveDc) maxSaveDc = Math.max(maxSaveDc, rankCfg.saveDc);
+
+      if (b.key === "power") {
+        // Выбор игрока: табличный штраф ИЛИ состояние из списка ранга
+        const option = b.option;
+        if (option && option !== "penalty") {
+          // option = ключ condition-предмета: актуальная версия подтягивается из
+          // компендиума Conditions при применении (toggleStatusEffect)
+          extras.appliedConditions.push(option);
+        } else if (rankCfg.penalty) {
+          extras.powerBonus = -rankCfg.penalty;
+          extras.powerEffectRounds = SpellCalculator.#modeRounds(rankCfg.durationMode, doctrineRank);
+        } else if (rankCfg.conditions?.length) {
+          extras.appliedConditions.push(rankCfg.conditions[0]);
+        }
+      } else if (b.key === "inspire") {
+        extras.powerBonus = rankCfg.bonus || 0;
+        extras.powerEffectRounds = SpellCalculator.#modeRounds(rankCfg.durationMode, doctrineRank);
+      } else if (b.key === "imbuement") {
+        extras.imbue = {
+          rank: b.rank,
+          value: rankCfg.imbueValue || 0,
+          option: rankCfg.imbueChoice?.includes(b.option) ? b.option : (rankCfg.imbueChoice?.[0] || "")
+        };
+      } else if (rankCfg.conditions?.length) {
+        // Прочие доктринные модификаторы (Сковывание, Сбивание, Удушение):
+        // состояния фиксированы рангом, выбора нет
+        extras.appliedConditions.push(...rankCfg.conditions);
+      }
+
+      if (rankCfg.pushMeters) extras.pushMeters = Math.max(extras.pushMeters, rankCfg.pushMeters);
+      // option — для модификаторов с выбором из пака (Адаптация): попадает в описание
+      if (rankCfg.hintFact) extras.factNotes.push({ key: b.key, rank: b.rank, saveDc: rankCfg.saveDc || 0, option: b.option || "" });
+    }
+    if (maxSaveDc) {
+      sys.save_dc_formula = String(maxSaveDc);
       // Атрибут спасброска правилами не зафиксирован; Воля — дефолт, ГМ меняет на листе
       sys.save_attribute = "will";
-      const option = mods.power.option;
-      if (option && option !== "bonus" && option !== "penalty") {
-        // option = ключ condition-предмета: актуальная версия подтягивается из
-        // компендиума Conditions при применении (toggleStatusEffect, Фаза 4)
-        extras.appliedConditions.push(option);
-      } else if (power.bonus) {
-        extras.powerBonus = option === "penalty" ? -power.bonus : power.bonus;
-      }
     }
 
     const duration = rankData("duration");
@@ -366,6 +461,9 @@ export class SpellCalculator {
       if (data.other && game.i18n.has(`DEDREL.Magic.Modifiers.${data.other}`)) {
         data.other = game.i18n.localize(`DEDREL.Magic.Modifiers.${data.other}`);
       }
+      if (data.tech && game.i18n.has(`DEDREL.Magic.Techniques.${data.tech}`)) {
+        data.tech = game.i18n.localize(`DEDREL.Magic.Techniques.${data.tech}`);
+      }
       return game.i18n.format(`DEDREL.Magic.Errors.${e.code}`, data);
     });
   }
@@ -378,6 +476,7 @@ export class SpellCalculator {
     return {
       doctrineRank: actor.system.doctrines?.[doctrineKey]?.rank || 0,
       knownTechniques: actor.system.magic?.techniques || {},
+      knownPaths: actor.system.doctrines?.[doctrineKey]?.paths || {},
       ignoreKnown: false
     };
   }

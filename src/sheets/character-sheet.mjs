@@ -55,7 +55,6 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       upgradeDoctrine: DedrelCharacterSheet.#onUpgradeDoctrine,
       openSpellConstructor: DedrelCharacterSheet.#onOpenSpellConstructor,
       pinSpell: DedrelCharacterSheet.#onPinSpell,
-      toggleDoctrinePath: DedrelCharacterSheet.#onToggleDoctrinePath,
       toggleEffect: DedrelCharacterSheet.#onToggleEffect,
       editEffect: DedrelCharacterSheet.#onEditEffect,
       deleteEffect: DedrelCharacterSheet.#onDeleteEffect,
@@ -388,24 +387,24 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
     xpData.hasDoctrines = xpData.doctrineGroups.length > 0;
 
-    // Тумблеры Путей двухпутёвых доктрин (гидро/венто) для вкладки Заклинания.
-    // Переключение свободно "в начале хода" — механически не энфорсится,
-    // смена публикуется в чат (социальный контроль).
+    // Изученные Пути доктрин (куплены талантами) — плашка на вкладке Заклинания.
+    // Переключаемой "стойки" больше нет: путь выбирается в сборке Конструктора.
     const doctrinePaths = [];
     if (magicCfg && actorData.system.doctrines) {
       for (const [key, cfg] of Object.entries(magicCfg.doctrines)) {
         if (!cfg.paths) continue;
         const state = actorData.system.doctrines[key];
         if (!state?.unlocked) continue;
-        doctrinePaths.push({
-          key,
-          label: game.i18n.localize(`DEDREL.Magic.Doctrines.${key}`),
-          paths: Object.entries(cfg.paths).map(([pk, pcfg]) => ({
-            key: pk,
-            label: game.i18n.localize(pcfg.label),
-            active: state.active_path === pk
-          }))
-        });
+        const known = Object.entries(cfg.paths)
+          .filter(([pk]) => state.paths?.[pk])
+          .map(([pk, pcfg]) => ({ key: pk, label: game.i18n.localize(pcfg.label) }));
+        if (known.length) {
+          doctrinePaths.push({
+            key,
+            label: game.i18n.localize(`DEDREL.Magic.Doctrines.${key}`),
+            paths: known
+          });
+        }
       }
     }
 
@@ -1406,27 +1405,6 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     game.dedrel.openSpellConstructor(this.document);
   }
 
-  /**
-   * Переключает активный Путь двухпутёвой доктрины (Гидромантия/Вентомантия).
-   * Смена публикуется в чат: правило "только в начале хода" не энфорсится
-   * механически, публичность — социальный контроль.
-   */
-  static async #onToggleDoctrinePath(event, target) {
-    const doctrineKey = target.dataset.doctrine;
-    const pathKey = target.dataset.path;
-    const state = this.document.system.doctrines?.[doctrineKey];
-    if (!state || state.active_path === pathKey) return;
-
-    await this.document.update({ [`system.doctrines.${doctrineKey}.active_path`]: pathKey });
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: this.document }),
-      content: `<div class="dedrel-item-chat"><p>${game.i18n.format("DEDREL.Magic.UI.PathSwitched", {
-        actor: foundry.utils.escapeHTML(this.document.name),
-        doctrine: game.i18n.localize(`DEDREL.Magic.Doctrines.${doctrineKey}`),
-        path: game.i18n.localize(`DEDREL.Magic.Paths.${pathKey}`)
-      })}</p></div>`
-    });
-  }
 
   /** Снимает флаг эфемерности — временное заклинание становится постоянным. */
   static async #onPinSpell(event, target) {

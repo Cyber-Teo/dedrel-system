@@ -88,7 +88,15 @@
         "accuracy": "Accuracy",
         "form": "Form",
         "actionType": "Action Type",
-        "forbidDefense": "Forbid Defense"
+        "forbidDefense": "Forbid Defense",
+        "imbuement": "Imbuement",
+        "inspire": "Inspiration",
+        "constrain": "Constraint",
+        "knockdown": "Knockdown",
+        "dust_veil": "Dust Veil",
+        "choke": "Choke",
+        "heal": "Healing",
+        "adapt": "Adaptation"
       },
       "SourceScales": {
         "none": "No Source",
@@ -114,48 +122,84 @@
         "imbue": "Infuses a magical property of the Doctrine into an object or creature"
       },
       "RankHints": {
-        "forbidDefense": {
-          "4": "Block or Dodge"
-        },
         "range": {
-          "1": "Touch",
-          "2": "Up to 5 hexes",
-          "3": "Up to 10 hexes",
-          "4": "Up to 20 hexes",
-          "5": "Up to 30 hexes"
+          "1": "Touch (2 m)",
+          "2": "Up to 10 m",
+          "3": "Up to 20 m",
+          "4": "Up to 40 m",
+          "5": "Up to 60 m"
         },
         "targets": {
-          "1": "One target",
           "2": "Two targets",
           "3": "Three targets",
           "4": "Four targets",
           "5": "Five targets"
         },
         "area_cone": {
-          "2": "Far row 3 hexes",
-          "3": "Far row 5 hexes",
-          "4": "Far row 7 hexes",
-          "5": "Far row 9 hexes"
+          "2": "Length 4 m",
+          "3": "Length 8 m",
+          "4": "Length 12 m",
+          "5": "Length 16 m"
         },
         "area_circle": {
-          "2": "Radius 1",
-          "3": "Radius 2",
-          "4": "Radius 3",
-          "5": "Radius 4"
+          "2": "Radius 2 m",
+          "3": "Radius 4 m",
+          "4": "Radius 6 m",
+          "5": "Radius 8 m"
         },
         "area_line": {
-          "1": "Up to 4 hexes",
-          "2": "Up to 6 hexes",
-          "3": "Up to 8 hexes",
-          "4": "Up to 10 hexes",
-          "5": "Up to 12 hexes"
+          "1": "Up to 8 m",
+          "2": "Up to 12 m",
+          "3": "Up to 16 m",
+          "4": "Up to 20 m",
+          "5": "Up to 24 m"
         },
         "power": {
-          "1": "+1/−1 to the next roll (DC 10)",
-          "2": "+2/−2 for 1 round (DC 12)",
-          "3": "Simple condition for [Doctrine Rank] rounds (DC 14)",
-          "4": "+3/−3 for [Doctrine Rank] rounds OR a condition (DC 16)",
-          "5": "Powerful condition (DC 18)"
+          "1": "−1 penalty to the target's next roll (DC 10)",
+          "2": "−2 penalty for 1 round (DC 12)",
+          "3": "−2 penalty for [Doctrine Rank] rounds OR a condition (DC 14)",
+          "4": "−3 penalty for [Doctrine Rank] rounds OR a condition (DC 16)",
+          "5": "A powerful condition for 1 round (DC 18)"
+        },
+        "inspire": {
+          "1": "+1 bonus to the target's next roll",
+          "2": "+2 bonus for 1 round",
+          "4": "+3 bonus for [Doctrine Rank] rounds"
+        },
+        "constrain": {
+          "2": "Icing: speed −50% for [Doctrine Rank] rounds",
+          "3": "Entangled: speed 0, no dodging, 1 round",
+          "5": "Deep freeze: full paralysis for 1 round"
+        },
+        "knockdown": {
+          "2": "Knock prone",
+          "3": "Wash away: push 4 m and knock prone"
+        },
+        "dust_veil": {
+          "2": "Vision impaired in the Area: −2 to attacks into/out of/through it, normal sight limited to 2 m"
+        },
+        "choke": {
+          "4": "Suffocating for [Doctrine Rank] rounds"
+        },
+        "heal": {
+          "1": "Heal 2d4",
+          "2": "Heal 2d6",
+          "3": "Heal 2d8",
+          "4": "Heal 3d6",
+          "5": "Heal 3d8"
+        },
+        "adapt": {
+          "1": "Temporary rank 1 mutation (hostile targets get a save)",
+          "2": "Temporary rank 2 mutation (hostile targets get a save)",
+          "3": "Temporary rank 3 mutation (hostile targets get a save)",
+          "4": "Temporary rank 4 mutation (hostile targets get a save)",
+          "5": "Temporary rank 5 mutation (hostile targets get a save)"
+        },
+        "imbuement": {
+          "1": "+1 to a skill/defense, OR +1 elemental weapon damage, OR DR 1 vs one damage type",
+          "2": "+2 to a skill/defense, OR +2 elemental weapon damage, OR DR 2 vs one damage type",
+          "3": "+3 to a skill/defense, OR +3 elemental weapon damage, OR DR 3 vs one damage type",
+          "4": "Weapon strikes one Ladder step higher"
         },
         "durability": {
           "1": "5 HP",
@@ -165,11 +209,10 @@
           "5": "25 HP"
         },
         "duration": {
-          "1": "Instant",
           "2": "6 rounds",
           "3": "10 rounds",
           "4": "Concentration",
-          "5": "One day"
+          "5": "A day"
         },
         "accuracy": {
           "1": "+1 to hit",
@@ -179,15 +222,14 @@
           "5": "+5 to hit"
         },
         "form": {
-          "1": "Formless",
-          "2": "Bludgeoning",
-          "3": "Slashing",
-          "4": "Piercing",
-          "5": "Complex form"
+          "2": "Physical form of the element"
         },
         "actionType": {
           "1": "Chain",
           "2": "Reaction"
+        },
+        "forbidDefense": {
+          "4": "Block or Dodge"
         }
       },
       "UI": {
@@ -209,7 +251,6 @@
         "ReasonOverCap": "Doctrine/Path restriction",
         "ReasonNeedsAbundant": "Requires an Abundant Source",
         "ReasonOverMaxCost": "Exceeds the maximum for your Doctrine Rank",
-        "PowerBonus": "Bonus +{n}",
         "Forbid_block": "Forbid block",
         "Forbid_dodge": "Forbid dodge",
         "PowerPenalty": "Penalty −{n}",
@@ -221,7 +262,6 @@
         "Cast": "Cast",
         "CastEphemeralHint": "Cast without saving: creates a temporary spell that is removed when combat ends (can be pinned on the sheet).",
         "CastRankTooLow": "Insufficient rank in the \"{doctrine}\" Doctrine: {req} required, you have {have}.",
-        "CastPathMismatch": "The spell was built for {spellPath}, but {activePath} is active. Switch the path and continue?",
         "CastInvalid": "The spell build is no longer legal:",
         "CastCostMismatch": "GM check: spell \"{name}\" ({actor}) has a saved cost of {saved} AP that does not match the recalculated {calc} AP — the item fields may have been edited manually.",
         "UnnamedSpell": "New Spell",
@@ -237,8 +277,27 @@
         "PowerEffectName": "Spell Power: {n} to rolls",
         "ConcentrationMarker": "Concentration: {name}",
         "ConcentrationHint": "The spell lasts while you maintain concentration. Remove this effect to dismiss the spell. Falling unconscious breaks concentration.",
-        "PathSwitched": "{actor} switches the \"{doctrine}\" doctrine path: {path} is now active.",
-        "GMSuffix": "(GM)"
+        "GMSuffix": "(GM)",
+        "NoPath": "No path",
+        "KnownPathsHint": "Known doctrine Paths (unlocked by talents). The path is chosen when building a spell.",
+        "CastPathNotKnown": "You do not know the path \"{path}\": access to a Path is unlocked by a talent.",
+        "SaveDcShort": "DC {dc}",
+        "Imbue_skill": "+{n} to a skill or defense",
+        "Imbue_weapon": "+{n} elemental weapon damage",
+        "Imbue_dr": "DR {n} vs one damage type",
+        "ImbueEffectName": "Imbuement: {detail}",
+        "ImbueEffectHint": "The property must derive from the doctrine's element (free-effects frame, rules §5). The GM adjusts the specific skill/damage type/DR in the effect. No stacking: one Imbuement per target.",
+        "DoctrineRulesTitle": "Traits:",
+        "RuleDiscount": "−{n} AP: {name}",
+        "RuleSurcharge": "+{n} AP: {name}",
+        "RuleForbidden": "Unavailable: {name}",
+        "RuleMaxRank": "{name}: rank ≤ {n}",
+        "RuleAllowedRanks": "{name}: ranks {list}",
+        "RuleLadderShift": "Damage: +{n} Ladder step",
+        "RuleIgnoresSource": "Independent of Source Scale",
+        "RuleForms": "Forms: {list}",
+        "RuleNoForms": "Forms unavailable",
+        "RuleDoctrinalMod": "Doctrinal modifier: {name}"
       },
       "Errors": {
         "no_config": "Magic config (CONFIG.DEDREL.magic) is not loaded.",
@@ -261,7 +320,17 @@
         "cone_no_range": "Range does not apply to Area: Cone (cast from the caster's cell).",
         "rank5_needs_abundant": "\"{key}\": rank 5 modifiers require an Abundant Source.",
         "over_max_mod_cost": "\"{key}\": rank {rank} exceeds the maximum of {max} for your Doctrine Rank.",
-        "too_many_modifiers": "Too many Modifiers: {count} with a limit of {max}."
+        "too_many_modifiers": "Too many Modifiers: {count} with a limit of {max}.",
+        "technique_forbidden": "The technique \"{key}\" is unavailable to this Doctrine.",
+        "path_not_known": "The path \"{key}\" is not known (access is unlocked by a talent).",
+        "modifier_not_owned": "The modifier \"{key}\" is doctrinal and does not belong to this Doctrine/Path.",
+        "modifier_needs_technique": "The modifier \"{key}\" requires the \"{tech}\" technique in the build.",
+        "modifier_needs_area": "The modifier \"{key}\" requires an Area modifier in the build."
+      },
+      "Forms": {
+        "bludgeoning": "Bludgeoning",
+        "slashing": "Slashing",
+        "piercing": "Piercing"
       }
     },
     "Attributes": {

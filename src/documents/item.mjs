@@ -123,10 +123,11 @@ export default class DedrelItem extends Item {
     }
 
     // Ре-валидация собранного заклинания (Магический Конструктор): ранг доктрины
-    // мог измениться после сохранения, активный путь может не совпадать со сборкой,
-    // а поля предмета могли быть отредактированы руками. Рукотворные заклинания
-    // без доктрины (или с доктриной вне конфига) проходят без проверки.
-    if (this.type === "spell" && this.system.doctrine && CONFIG.DEDREL?.magic?.doctrines?.[this.system.doctrine]) {
+    // мог измениться после сохранения, путь сборки должен быть известен магу,
+    // а поля предмета могли быть отредактированы руками. Для линейных доктрин
+    // (доктрина указана, но в конфиге Конструктора её нет — Эфиромантия, Телепатия
+    // и т.п.) проверяется только гейт ранга. Заклинания без доктрины — без проверки.
+    if (this.type === "spell" && this.system.doctrine) {
       const proceed = await this.#validateSpellCast(actor);
       if (!proceed) return;
     }
@@ -641,9 +642,10 @@ export default class DedrelItem extends Item {
 
   /**
    * Ре-валидация собранного заклинания перед кастом.
-   * Проверяет ранг доктрины, совпадение активного пути со сборкой (с предложением
-   * переключить путь) и пересчитывает стоимость из исходника сборки; расхождение
-   * пересчёта с сохранённым ap_cost шепчется ГМу (ручная правка полей).
+   * Проверяет ранг доктрины, изученность пути сборки (пути — купленные таланты)
+   * и пересчитывает стоимость из исходника сборки; расхождение пересчёта
+   * с сохранённым ap_cost шепчется ГМу (ручная правка полей).
+   * Для линейных доктрин (нет в конфиге Конструктора) — только гейт ранга.
    * @returns {Promise<boolean>} false — каст отменён.
    */
   async #validateSpellCast(actor) {
@@ -661,21 +663,16 @@ export default class DedrelItem extends Item {
       return false;
     }
 
-    // Несовпадение пути: предлагаем бесплатно переключиться (правило "в начале хода"
-    // не энфорсим — социальный контроль, переключение публично видно в чате не нужно,
-    // т.к. сам каст уже публичен)
-    const doctrineCfg = config.doctrines[sys.doctrine];
-    if (doctrineCfg.paths && sys.doctrine_path && doctrineState?.active_path !== sys.doctrine_path) {
-      const confirm = await DialogV2.confirm({
-        window: { title: this.name },
-        content: `<p>${game.i18n.format("DEDREL.Magic.UI.CastPathMismatch", {
-          spellPath: game.i18n.localize(`DEDREL.Magic.Paths.${sys.doctrine_path}`),
-          activePath: game.i18n.localize(`DEDREL.Magic.Paths.${doctrineState?.active_path || ""}`)
-        })}</p>`,
-        modal: true
-      });
-      if (!confirm) return false;
-      await actor.update({ [`system.doctrines.${sys.doctrine}.active_path`]: sys.doctrine_path });
+    // Линейная доктрина (фикс-заклинания, гайд §5): сборки нет — дальше проверять нечего
+    const doctrineCfg = config?.doctrines?.[sys.doctrine];
+    if (!doctrineCfg) return true;
+
+    // Путь сборки должен быть известен магу (куплен талантом); "без пути" легален всегда
+    if (sys.doctrine_path && !doctrineState?.paths?.[sys.doctrine_path]) {
+      ui.notifications.error(game.i18n.format("DEDREL.Magic.UI.CastPathNotKnown", {
+        path: game.i18n.localize(`DEDREL.Magic.Paths.${sys.doctrine_path}`)
+      }));
+      return false;
     }
 
     const build = {

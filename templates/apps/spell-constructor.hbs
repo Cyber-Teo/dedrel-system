@@ -30,6 +30,7 @@
                 </select>
             </div>
             {{/if}}
+            {{#unless hideSource}}
             <div class="sc-field">
                 <label>{{localize "DEDREL.Magic.UI.SourceScale"}}{{#if sceneScaleLabel}} <span class="sc-scene-hint" data-tooltip="{{localize 'DEDREL.Magic.UI.SceneSourceHint'}}">({{sceneScaleLabel}})</span>{{/if}}</label>
                 <select name="sourceScale">
@@ -38,6 +39,7 @@
                     {{/each}}
                 </select>
             </div>
+            {{/unless}}
         </div>
         <div class="sc-header-row sc-header-meta">
             {{#if paths}}
@@ -51,6 +53,12 @@
             <span class="sc-limits hint">{{localize "DEDREL.Magic.UI.Limits" tech=limits.techniques mods=limits.modifiers cost=limits.maxModCost}}</span>
             {{/if}}
         </div>
+        {{#if doctrineRules.length}}
+        <div class="sc-doctrine-rules">
+            <span class="sc-doctrine-rules-title">{{localize "DEDREL.Magic.UI.DoctrineRulesTitle"}}</span>
+            {{#each doctrineRules as |r|}}<span class="sc-doctrine-rule">{{r}}</span>{{/each}}
+        </div>
+        {{/if}}
     </header>
 
     <div class="spell-constructor-body">

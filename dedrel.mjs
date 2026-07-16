@@ -495,8 +495,12 @@ Hooks.once("ready", async function () {
  * Пак additional_conditions сюда НЕ входит намеренно: это технические состояния,
  * которые добавляются талантами как предметы и не должны появляться
  * в выпадающем меню статусов токена.
+ * magic_conditions — кураторский пул состояний доктринных Модификаторов
+ * («Сила» и т.п.): его предметы попадают и в реестр (чтобы наложение по ключу
+ * работало), и в селект Магического Конструктора. Идёт ПОСЛЕ conditions:
+ * при совпадении ключей версия из magic_conditions выигрывает.
  */
-const CONDITION_PACKS = ["dedrel.conditions"];
+const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions"];
 
 /**
  * Собирает CONFIG.statusEffects из Condition-предметов компендиумов.

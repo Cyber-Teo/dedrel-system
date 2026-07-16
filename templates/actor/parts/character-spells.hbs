@@ -5,10 +5,10 @@
             <i class="fa-solid fa-wand-sparkles"></i> {{localize "DEDREL.Magic.UI.OpenConstructor"}}
         </a>
         {{#each doctrinePaths as |d|}}
-        <span class="doctrine-path-toggle">
+        <span class="doctrine-path-toggle" data-tooltip="{{localize 'DEDREL.Magic.UI.KnownPathsHint'}}">
             <span class="doctrine-path-name">{{d.label}}:</span>
             {{#each d.paths as |p|}}
-            <a class="doctrine-path-btn {{#if p.active}}active{{/if}}" data-action="toggleDoctrinePath" data-doctrine="{{d.key}}" data-path="{{p.key}}">{{p.label}}</a>
+            <span class="doctrine-path-btn active">{{p.label}}</span>
             {{/each}}
         </span>
         {{/each}}

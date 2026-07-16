@@ -45,6 +45,20 @@
       "banner": "systems/dedrel/assets/banners/conditions.svg"
     },
     {
+      "name": "magic_conditions",
+      "label": "Magic Conditions",
+      "path": "packs/magic_conditions.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
+      "name": "biomancy_adaptations",
+      "label": "Biomancy Adaptations",
+      "path": "packs/biomancy_adaptations.db",
+      "type": "Item",
+      "system": "dedrel"
+    },
+    {
       "name": "talents",
       "label": "Talents",
       "path": "packs/talents.db",

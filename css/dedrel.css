@@ -1533,6 +1533,29 @@ form.dedrel.sheet.item {
   justify-content: space-between;
 }
 
+/* Анонс особенностей доктрины/пути: сродства, ограничения, запреты, формы */
+.dedrel.spell-constructor .sc-doctrine-rules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 6px;
+  font-size: 11px;
+  align-items: center;
+}
+
+.dedrel.spell-constructor .sc-doctrine-rules-title {
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.dedrel.spell-constructor .sc-doctrine-rule {
+  padding: 1px 6px;
+  border: 1px solid var(--color-border-light-tertiary, #7a7971);
+  border-radius: 8px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
 .dedrel.spell-constructor .sc-field {
   display: flex;
   flex-direction: column;
