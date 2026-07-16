@@ -48,9 +48,18 @@
         <input type="number" name="system.armor_piercing" value="{{system.armor_piercing}}" min="0" max="10" data-dtype="Number"/>
     </div>
     <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Cleaving"}}</label>
+        <input type="number" name="system.cleaving" value="{{system.cleaving}}" min="0" max="10" data-dtype="Number" title="{{localize 'DEDREL.ItemSheet.CleavingHint'}}"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Deflecting"}}</label>
+        <input type="number" name="system.deflecting" value="{{system.deflecting}}" min="0" data-dtype="Number" title="{{localize 'DEDREL.ItemSheet.DeflectingWeaponHint'}}"/>
+    </div>
+    <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.Range"}}</label>
         <input type="text" name="system.range" value="{{system.range}}"/>
     </div>
+    <p class="hint" style="grid-column: 1 / -1; margin: 0;">{{localize "DEDREL.ItemSheet.CleavingHint"}}</p>
 
     {{!-- Пререквизиты владения: требования по рангам атрибутов/навыков --}}
     <div class="section-header" style="grid-column: 1 / -1;">

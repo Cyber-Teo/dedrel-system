@@ -234,7 +234,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         }
       }
 
-      let maxArmorWeight = 0; // 0 = light or none, 1 = medium, 2 = heavy
+      let maxArmorWeight = 0; // 0 = лёгкая, 1 = средняя, 2 = тяжёлая (см. гейт ниже)
 
       for (const armor of equippedArmors) {
         for (const [key, value] of Object.entries(armor.system.dr || {})) {
@@ -242,15 +242,45 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
             this.dr[key] += (value || 0);
           }
         }
+        // modifiers.* — ручная «щель» под материальные/магические добавки сверх
+        // лекала. Механику свойств сюда дублировать не нужно: она выводится ниже.
         if (armor.system.modifiers) {
           def.dodge += (armor.system.modifiers.dodge || 0);
           def.block += (armor.system.modifiers.block || 0);
           res.movement.max += (armor.system.modifiers.movement || 0);
+          if (this.skills?.stealth) this.skills.stealth.bonus += (armor.system.modifiers.stealth || 0);
         }
+
+        // Свойства лекала (12. Armor §Свойства). Штрафы принадлежат предмету,
+        // поэтому считаются с каждого надетого слоя и складываются — правила
+        // явно разрешают это для «Жесткого» («складывается со штрафами от типа»).
+        // props.encumbering здесь СОЗНАТЕЛЬНО не обрабатывается: канала для
+        // штрафа к стрелковым/магическим атакам у актора нет (см. NOTES.md).
+        const props = armor.system.properties || {};
+        if (props.rigid) def.dodge -= 1;
+        if (props.loud && this.skills?.stealth) this.skills.stealth.bonus -= 2;
+        def.block += (props.deflecting || 0);
 
         const weightClass = armor.system.weight_class;
         if (weightClass === "heavy") maxArmorWeight = Math.max(maxArmorWeight, 2);
         else if (weightClass === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
+      }
+
+      // Бонусы/штрафы ТИПА доспеха: определяются самым тяжёлым надетым слоем и
+      // берутся только с него — не суммируются по слоям (12. Armor §Типы доспехов).
+      // Без доспеха типа нет вовсе, поэтому голый персонаж не получает бонус лёгкого.
+      if (equippedArmors.length) {
+        if (maxArmorWeight === 0) { def.dodge += 1; def.block -= 1; }   // лёгкий
+        else if (maxArmorWeight === 2) { def.dodge -= 1; def.block += 1; } // тяжёлый
+        // средний (1) — без бонусов и штрафов
+      }
+
+      // Щит и «Вспомогательное» оружие в свободной руке дают Блок, пока в руке.
+      const offHandId = slots.off_hand?.item_id;
+      const offHand = offHandId ? this.parent.items.get(offHandId) : null;
+      if (offHand && offHand.type === "weapon") {
+        def.block += (offHand.system.deflecting || 0);
+        if (offHand.system.is_auxiliary) def.block += 1;
       }
 
       // ==========================================
@@ -267,11 +297,13 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
       this.armor_penalty = hasArmorPenalty;
       if (hasArmorPenalty) {
-        // Применяем механический штраф за недостаточный навык:
-        // -2 к Инициативе, -2 к Скорости.
-        // Этот штраф также отображается в инвентаре для удобства игрока.
+        // Штраф за несоответствие ранга (12. Armor §Навык): −2 ко ВСЕМ проверкам
+        // навыков, −2 к Инициативе, −4 м к Скорости. global_skill бьёт только
+        // не-спасброски (src/dice/roll.mjs) — это и есть «проверки навыков».
+        this.bonuses.global_skill -= 2;
         this.initiative -= 2;
-        res.movement.max -= 2;
+        // База скорости = 2+DEX, поэтому −4 способно увести её в минус.
+        res.movement.max = Math.max(0, res.movement.max - 4);
       }
     }
 

@@ -29,26 +29,32 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label>{{localize "DEDREL.Crafting.WeightClass"}}</label>
+        <input type="text" name="system.weight_class" value="{{system.weight_class}}" placeholder="normal, heavy, light"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.Crafting.Slots"}}</label>
+        <select class="material-slots-field" style="width: 100%;">
+            {{selectOptions materialSlotOptions selected=materialSlot}}
+        </select>
+    </div>
+    <p class="hint" style="grid-column: 1 / -1; margin: 0;">{{localize "DEDREL.Crafting.SlotsHint"}}</p>
+
     <div class="section-header">
-        {{localize "DEDREL.Crafting.Grants"}}
-        <a data-action="addMaterialGrant" title="{{localize 'DEDREL.Crafting.AddGrant'}}" style="float: right;"><i class="fa-solid fa-plus"></i></a>
+        {{localize "DEDREL.Crafting.Signature"}}
     </div>
-    {{#if grantRows.length}}
-    {{! Шапка колонок: пропорции flex совпадают со строками ниже }}
-    <div style="grid-column: 1 / -1; display: flex; gap: 4px; opacity: 0.75; font-size: 0.85em;">
-        <span style="flex: 3;">{{localize "DEDREL.Crafting.GrantLabel"}}</span>
-        <span style="flex: 1;">{{localize "DEDREL.Crafting.GrantBonus"}}</span>
-        <span style="flex: 2;">{{localize "DEDREL.Crafting.GrantSlots"}}</span>
-        <span style="width: 22px;"></span>
+    <div style="grid-column: 1 / -1;">
+        <label style="display: block; font-weight: bold; margin-bottom: 2px;">{{localize "DEDREL.Crafting.SignatureArmor"}}</label>
+        <input type="text" name="system.signature.armor" value="{{system.signature.armor}}" placeholder="{{localize 'DEDREL.Crafting.SignatureArmorPlaceholder'}}" style="width: 100%;"/>
     </div>
-    {{/if}}
-    {{#each grantRows as |grant|}}
-    <div style="grid-column: 1 / -1; display: flex; gap: 4px; align-items: center;">
-        <input type="text" class="material-grant-field" data-grant-index="{{grant.index}}" data-grant-field="label" value="{{grant.label}}" placeholder="{{localize 'DEDREL.Crafting.GrantLabelPlaceholder'}}" style="flex: 3;"/>
-        <input type="number" class="material-grant-field" data-grant-index="{{grant.index}}" data-grant-field="bonus" value="{{grant.bonus}}" min="0" step="1" title="{{localize 'DEDREL.Crafting.GrantBonusHint'}}" style="flex: 1;"/>
-        <input type="text" class="material-grant-field" data-grant-index="{{grant.index}}" data-grant-field="slots" value="{{grant.slotsText}}" placeholder="common; uncommon" title="{{../slotTierHint}}" style="flex: 2;"/>
-        <a data-action="deleteMaterialGrant" data-grant-index="{{grant.index}}" title="{{localize 'DEDREL.Crafting.DeleteGrant'}}" style="width: 22px; text-align: center;"><i class="fa-solid fa-trash"></i></a>
+    <div style="grid-column: 1 / -1;">
+        <label style="display: block; font-weight: bold; margin-bottom: 2px;">{{localize "DEDREL.Crafting.SignatureWeapon"}}</label>
+        <input type="text" name="system.signature.weapon" value="{{system.signature.weapon}}" placeholder="{{localize 'DEDREL.Crafting.SignatureWeaponPlaceholder'}}" style="width: 100%;"/>
     </div>
-    {{/each}}
-    <p class="hint" style="grid-column: 1 / -1; margin: 4px 0 0;">{{localize "DEDREL.Crafting.GrantsHint"}} ({{slotTierHint}})</p>
+    <div style="grid-column: 1 / -1;">
+        <label style="display: block; font-weight: bold; margin-bottom: 2px;">{{localize "DEDREL.Crafting.SignatureMagic"}}</label>
+        <input type="text" name="system.signature.magic" value="{{system.signature.magic}}" placeholder="{{localize 'DEDREL.Crafting.SignatureMagicPlaceholder'}}" style="width: 100%;"/>
+    </div>
+    <p class="hint" style="grid-column: 1 / -1; margin: 4px 0 0;">{{localize "DEDREL.Crafting.SignatureHint"}}</p>
 </div>

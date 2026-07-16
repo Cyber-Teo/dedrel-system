@@ -45,8 +45,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       placeTemplate: DedrelItemSheet.#onPlaceTemplate,
       deleteCraftIngredient: DedrelItemSheet.#onDeleteCraftIngredient,
       recomputeCraftPrice: DedrelItemSheet.#onRecomputeCraftPrice,
-      addMaterialGrant: DedrelItemSheet.#onAddMaterialGrant,
-      deleteMaterialGrant: DedrelItemSheet.#onDeleteMaterialGrant,
       useAmmo: DedrelItemSheet.#onUseAmmo
     }
   };
@@ -269,20 +267,19 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
     }
 
-    // Ремесленный материал: класс, применимость, варианты комплектации (grants)
+    // Ремесленный материал: класс, применимость, магоёмкость (слоты)
     if (itemData.type === "craft_material") {
       context.materialClassOptions = {};
       for (const c of MATERIAL_CLASS_ENUM) {
         context.materialClassOptions[c] = game.i18n.localize(`DEDREL.MaterialClass.${c}`);
       }
-      // Слоты варианта редактируются текстом "common; uncommon" (ключи тиров)
-      context.grantRows = (itemData.system.grants || []).map((g, index) => ({
-        index,
-        label: g.label,
-        bonus: g.bonus,
-        slotsText: (g.slots || []).join("; ")
-      }));
-      context.slotTierHint = SLOT_TIER_ENUM.join(", ");
+      // Магоёмкость: материал даёт 0 или 1 слот (колонка Slots в materials.csv —
+      // всегда «no» либо «<цвет> 1»), поэтому редактор — простой выбор тира.
+      context.materialSlotOptions = { "": game.i18n.localize("DEDREL.SlotTiers.none") };
+      for (const t of SLOT_TIER_ENUM) {
+        context.materialSlotOptions[t] = game.i18n.localize(`DEDREL.SlotTiers.${t}`);
+      }
+      context.materialSlot = (itemData.system.slots || [])[0] ?? "";
     }
 
     // Валюта: деноминация выбирается из списка валют мира
@@ -429,7 +426,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
 
   /**
    * Слушатели блока «Крафт»: дроп предмета-ингредиента и правка количества.
-   * Инпуты количеств и grants НАМЕРЕННО без name: массивы объектов нельзя
+   * Инпуты количеств и слотов материала НАМЕРЕННО без name: массивы нельзя
    * доверять FormDataExtended (см. FOUNDRY V14 QUIRKS §7) — обновляем массив
    * целиком через document.update.
    */
@@ -454,21 +451,14 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       });
     }
 
-    // Варианты комплектации материала (label/bonus/slots) — тот же паттерн
-    for (const input of root.querySelectorAll(".material-grant-field")) {
-      input.addEventListener("change", ev => {
+    // Магоёмкость материала: выбор тира. Поле в схеме — массив (счётчик слотов
+    // выражается повтором тира), поэтому пишем [] или [тир].
+    const slotsInput = root.querySelector(".material-slots-field");
+    if (slotsInput) {
+      slotsInput.addEventListener("change", ev => {
         ev.stopPropagation();
-        const idx = Number(ev.currentTarget.dataset.grantIndex);
-        const field = ev.currentTarget.dataset.grantField;
-        const grants = (this.document.system.grants || []).map(g => ({ ...g, slots: [...(g.slots || [])] }));
-        if (!grants[idx] || !field) return;
-        const value = ev.currentTarget.value;
-        if (field === "bonus") grants[idx].bonus = Math.max(0, parseInt(value) || 0);
-        else if (field === "slots") {
-          grants[idx].slots = value.split(/[;,]/).map(s => s.trim()).filter(s => SLOT_TIER_ENUM.includes(s));
-        }
-        else grants[idx].label = value;
-        this.document.update({ "system.grants": grants });
+        const tier = ev.currentTarget.value;
+        this.document.update({ "system.slots": SLOT_TIER_ENUM.includes(tier) ? [tier] : [] });
       });
     }
   }
@@ -963,20 +953,6 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     } else {
       ui.notifications.info(game.i18n.format("DEDREL.Crafting.RecomputeDone", { cost, price }));
     }
-  }
-
-  static async #onAddMaterialGrant() {
-    const grants = (this.document.system.grants || []).map(g => ({ ...g, slots: [...(g.slots || [])] }));
-    grants.push({ label: "", bonus: 0, slots: [] });
-    await this.document.update({ "system.grants": grants });
-  }
-
-  static async #onDeleteMaterialGrant(event, target) {
-    const idx = Number(target.dataset.grantIndex);
-    const grants = (this.document.system.grants || [])
-      .filter((_, i) => i !== idx)
-      .map(g => ({ ...g, slots: [...(g.slots || [])] }));
-    await this.document.update({ "system.grants": grants });
   }
 
   static async #onPlaceTemplate(event, target) {

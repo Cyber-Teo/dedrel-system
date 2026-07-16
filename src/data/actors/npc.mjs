@@ -158,19 +158,41 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
         }
       }
 
-      let maxArmorWeight = 0; // 0 лёгкая/нет, 1 средняя, 2 тяжёлая
+      let maxArmorWeight = 0; // 0 лёгкая, 1 средняя, 2 тяжёлая (см. гейт ниже)
       for (const armor of equippedArmors) {
         for (const [key, value] of Object.entries(armor.system.dr || {})) {
           if (this.dr[key] !== undefined) this.dr[key] += (value || 0);
         }
+        // modifiers.* — ручная «щель» сверх лекала; механику свойств выводим ниже.
         if (armor.system.modifiers) {
           def.dodge += (armor.system.modifiers.dodge || 0);
           def.block += (armor.system.modifiers.block || 0);
           res.movement.max += (armor.system.modifiers.movement || 0);
+          if (this.skills?.stealth) this.skills.stealth.bonus += (armor.system.modifiers.stealth || 0);
         }
+        // Свойства лекала — см. подробный разбор в character.mjs (включая то,
+        // почему encumbering здесь не обрабатывается).
+        const props = armor.system.properties || {};
+        if (props.rigid) def.dodge -= 1;
+        if (props.loud && this.skills?.stealth) this.skills.stealth.bonus -= 2;
+        def.block += (props.deflecting || 0);
+
         const wc = armor.system.weight_class;
         if (wc === "heavy") maxArmorWeight = Math.max(maxArmorWeight, 2);
         else if (wc === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
+      }
+
+      // Тип берётся только с самого тяжёлого слоя; без доспеха типа нет.
+      if (equippedArmors.length) {
+        if (maxArmorWeight === 0) { def.dodge += 1; def.block -= 1; }
+        else if (maxArmorWeight === 2) { def.dodge -= 1; def.block += 1; }
+      }
+
+      const offHandId = slots.off_hand?.item_id;
+      const offHand = offHandId ? this.parent.items.get(offHandId) : null;
+      if (offHand && offHand.type === "weapon") {
+        def.block += (offHand.system.deflecting || 0);
+        if (offHand.system.is_auxiliary) def.block += 1;
       }
 
       const armorUseRank = this.skills?.armor_use?.rank || 0;
@@ -179,8 +201,9 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
       if (maxArmorWeight === 1 && armorUseRank < 2) hasArmorPenalty = true;
       this.armor_penalty = hasArmorPenalty;
       if (hasArmorPenalty) {
+        this.bonuses.global_skill -= 2;
         this.initiative -= 2;
-        res.movement.max -= 2;
+        res.movement.max = Math.max(0, res.movement.max - 4);
       }
     }
 

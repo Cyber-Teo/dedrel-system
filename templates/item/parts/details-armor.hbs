@@ -64,6 +64,7 @@
     <div class="section-header">
         {{localize "DEDREL.ItemSheet.Modifiers"}}
     </div>
+    <p class="hint" style="grid-column: 1 / -1; margin: 0;">{{localize "DEDREL.ItemSheet.ArmorModifiersHint"}}</p>
     <div class="form-group">
         <label>{{localize "DEDREL.ItemSheet.Evasion"}}</label>
         <input type="text" name="system.modifiers.dodge" value="{{system.modifiers.dodge}}" data-dtype="Number"/>
@@ -98,7 +99,18 @@
             <label class="checkbox"><input type="checkbox" name="system.properties.encumbering" {{checked system.properties.encumbering}}/> {{localize "DEDREL.ItemSheet.Encumbering"}}</label>
             <label class="checkbox"><input type="checkbox" name="system.properties.weak_point_protection" {{checked system.properties.weak_point_protection}}/> {{localize "DEDREL.ItemSheet.WeakPointProtection"}}</label>
         </div>
+        <p class="hint" style="margin: 4px 0 0;">{{localize "DEDREL.ItemSheet.ArmorPropertiesHint"}}</p>
     </div>
+
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Deflecting"}}</label>
+        <input type="text" name="system.properties.deflecting" value="{{system.properties.deflecting}}" data-dtype="Number"/>
+    </div>
+    <div class="form-group">
+        <label>{{localize "DEDREL.ItemSheet.Cohesion"}}</label>
+        <input type="text" name="system.properties.cohesion" value="{{system.properties.cohesion}}" data-dtype="Number" title="{{localize 'DEDREL.ItemSheet.CohesionHint'}}"/>
+    </div>
+    <p class="hint" style="grid-column: 1 / -1; margin: 0;">{{localize "DEDREL.ItemSheet.CohesionHint"}}</p>
 
     <div class="section-header">
         {{localize "DEDREL.ItemSheet.Uses"}}

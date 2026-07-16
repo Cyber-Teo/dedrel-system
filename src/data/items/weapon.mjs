@@ -64,6 +64,13 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
       // Бронебойность 0-10: каждая единица гасит 10% DR цели (10 = игнорирует DR полностью)
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
+      // Рассекание N (Cleaving) — отменяет N Твёрдости (cohesion) брони цели, то есть
+      // возвращает Бронебойности её работу (craft/Armor Rework Plan.md §5).
+      // ПОКА ДЕКОРАТИВНО: в расчёт урона не входит, в правилах не зафиксировано.
+      cleaving: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
+      // Отражающий N — +N к Блоку, пока оружие в руке. Валюта щита
+      // (_rules/12. Armor.md §Базовые щиты: средний 1, ростовой 2).
+      deflecting: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       // Качество/редкость НЕ дублируем: у оружия уже есть rarity (physicalItemFields,
       // common→legendary) — тяжесть осечек огнестрела читается из него (src/dice/roll.mjs).
 

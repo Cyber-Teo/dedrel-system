@@ -8,9 +8,15 @@ import { MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM } from "../../constants.mjs";
  * (craft/New Craft.md). Блок crafting тоже подключён: обработанные материалы
  * (слитки из руды, кожа из шкур) сами являются продуктами крафта.
  *
- * grants — варианты комплектации для оружейных/броневых материалов: крафтер
- * при создании изделия выбирает ОДИН вариант (паттерн «+1 И обычный слот
- * ИЛИ необычный слот»). У чисто ингредиентных материалов массив пуст.
+ * Грамматика материала после реворка 2026-07-15 (craft/Armor Rework Plan.md §2) —
+ * четыре фиксированные оси, одинаковые у всех материалов:
+ *   rarity        — качество (tier), из physicalItemFields;
+ *   slots         — магоёмкость: список тиров слотов улучшений;
+ *   weight_class  — вес/хват;
+ *   signature     — ОДНА качественная штука, отдельно для брони/оружия/магии.
+ *
+ * Плоского «+N ко всему» материал не даёт: прежний grants[].bonus снят, мощность
+ * живёт в лекалах и слотах. Источник истины по значениям — tables/materials.csv.
  */
 export default class CraftMaterialDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -29,27 +35,41 @@ export default class CraftMaterialDataModel extends foundry.abstract.TypeDataMod
       material_class: new StringField({ required: true, initial: "metal", choices: MATERIAL_CLASS_ENUM }),
       // Текст особых свойств (вес −50%, урон нежити и т.п.)
       special_rules: new StringField({ required: false, blank: true, initial: "" }),
+      // Вес/хват — ось §2. Пока свободный текст (normal/heavy/light): механика
+      // сдвига весового класса не зафиксирована, привязываться к enum рано.
+      weight_class: new StringField({ required: false, blank: true, initial: "normal" }),
+      // Магоёмкость: по одной записи на слот, значение — тир (лесенка §6
+      // белый/зелёный/синий/фиолетовый). Пустой массив = «магию не держит».
+      slots: new ArrayField(new StringField({ choices: SLOT_TIER_ENUM })),
+      // Сигнатура — по одной на область применения, свободный текст.
+      signature: new SchemaField({
+        armor: new StringField({ required: false, blank: true, initial: "" }),
+        weapon: new StringField({ required: false, blank: true, initial: "" }),
+        magic: new StringField({ required: false, blank: true, initial: "" })
+      }),
       // К каким изделиям материал применим как ОСНОВНОЙ (для лекал оружия/брони)
       applicable_to: new SchemaField({
         weapon: new BooleanField({ required: true, initial: false }),
         armor: new BooleanField({ required: true, initial: false }),
         shield: new BooleanField({ required: true, initial: false }),
         jewelry: new BooleanField({ required: true, initial: false })
-      }),
-      // Варианты комплектации изделия из этого материала (выбирается один)
-      grants: new ArrayField(new SchemaField({
-        label: new StringField({ required: true, blank: true, initial: "" }),
-        bonus: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
-        slots: new ArrayField(new StringField({ choices: SLOT_TIER_ENUM }))
-      }))
+      })
     };
   }
 
-  /** Маппинг легаси-тегов material_type в канонический material_class. */
   static migrateData(source) {
+    // Легаси-теги material_type → канонический material_class.
     if (!source.material_class && source.material_type) {
       const map = { ore: "metal", herb: "herb", wood: "wood", skin: "leather", cloth: "cloth" };
       if (map[source.material_type]) source.material_class = map[source.material_type];
+    }
+    // Легаси-grants (варианты «+1 И слот ИЛИ слот») → плоская магоёмкость.
+    // Бонус отбрасываем осознанно: плоского +N в новой грамматике нет. Из
+    // вариантов берём первый непустой — выбор произвольный, поэтому значения
+    // всё равно перезаписывает макрос «Реворк материалов» из materials.csv.
+    if (!source.slots && Array.isArray(source.grants)) {
+      const withSlots = source.grants.find(g => g?.slots?.length);
+      source.slots = withSlots ? [...withSlots.slots] : [];
     }
     return super.migrateData(source);
   }
