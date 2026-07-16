@@ -274,9 +274,11 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 
     // Применение исцеления
     if (action === "applyHeal") {
-      if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
-      const formula = item.system.formula_heal;
-      if (!formula) return;
+      // Расходуемое зелье к этому моменту уже удалено из инвентаря (quantity 0),
+      // поэтому формулу берём из data-атрибута кнопки, а живой предмет — лишь
+      // запасной источник для старых карточек без атрибута.
+      const formula = button.dataset.healFormula || item?.system.formula_heal;
+      if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       
       let targets = canvas.tokens.controlled;
       if (targets.length === 0) targets = Array.from(game.user.targets);
@@ -290,31 +292,36 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         if (!targetActor) continue;
         
         let healAmount = 0;
+        let roll = null;
         let isPercentage = formula.trim().endsWith("%");
-        
+
         if (isPercentage) {
             let percentStr = formula.replace("%", "").trim();
             let percentVal = parseFloat(percentStr) || 0;
             let maxHp = targetActor.system.resources.hp.max || 1;
-            healAmount = (percentVal / 100) * maxHp;
-            healAmount = Math.round(healAmount);
+            healAmount = Math.round((percentVal / 100) * maxHp);
         } else {
-            let roll = new Roll(formula, targetActor.getRollData());
+            roll = new Roll(formula, targetActor.getRollData());
             await roll.evaluate();
             healAmount = roll.total;
         }
-        
+
         if (healAmount <= 0) continue;
 
         // Прибавка к ХП с капом по максимуму — общая с тиками кондиций
         const actualHealed = await targetActor.applyHealing(healAmount);
 
         if (actualHealed > 0) {
-
             let chatMsg = game.i18n.format("DEDREL.Chat.HealApplied", {name: targetActor.name, amount: actualHealed});
+            // Дайсовое лечение показываем как настоящий бросок (разбивка + анимация
+            // Dice So Nice через rolls), процент — просто числом.
+            const rollBlock = roll
+              ? `<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${roll.formula}</div>${await roll.getTooltip()}<h4 class="dice-total">${roll.total}</h4></div></div>`
+              : "";
             ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: actor }), // 'actor' is the one who used the item
-                content: `<div class="dedrel-item-chat"><p>💖 ${chatMsg}</p></div>`
+                content: `<div class="dedrel-item-chat"><p style="color: #4caf50; font-weight: bold;">${chatMsg}</p>${rollBlock}</div>`,
+                rolls: roll ? [roll] : []
             });
         }
       }

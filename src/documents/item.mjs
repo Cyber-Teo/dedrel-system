@@ -898,7 +898,10 @@ export default class DedrelItem extends Item {
         }
       }
       if (this.system.formula_heal) {
-        buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
+        // Формулу дублируем в data-атрибут: расходуемое зелье к моменту клика по
+        // кнопке уже удалено из инвентаря (quantity 0 → delete в use()), поэтому
+        // обработчик не может достать её из живого предмета по item-id.
+        buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}" data-heal-formula="${foundry.utils.escapeHTML(this.system.formula_heal)}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
       }
       if (showCombatButtons && this.system.save_attribute) {
         const dc = this.system.save_dc || this.system.save_dc_formula || "";
