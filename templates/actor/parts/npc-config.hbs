@@ -7,13 +7,11 @@
     <h2 class="tab-title">{{localize "DEDREL.Npc.ConfigResources"}}</h2>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 15px;">
         {{#if isPeon}}
+        {{!-- Порог прочности редактируется в шапке (npc-header.hbs): второй инпут
+              с тем же name сломал бы submit всей формы. --}}
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
             <label style="font-size: 12px;">{{localize "DEDREL.Npc.HitsMax"}}</label>
             <input type="number" name="system.resources.hits.max" value="{{srcHitsMax}}" style="width: 60px;"/>
-        </div>
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-            <label style="font-size: 12px;">{{localize "DEDREL.Npc.Toughness"}}</label>
-            <input type="number" name="system.toughness" value="{{srcToughness}}" style="width: 60px;"/>
         </div>
         {{else}}
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
