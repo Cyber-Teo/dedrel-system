@@ -28,6 +28,7 @@ import { CREATURE_TYPES } from "./src/config/creature-types.mjs";
 import { DEDREL_EFFECT_LIBRARY, buildEffectData } from "./src/config/effect-library.mjs";
 import { SpellCalculator } from "./src/utils/spell-calculator.mjs";
 import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
+import EffectKeyBrowserApp from "./src/apps/effect-key-browser.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
 import TimeHUD from "./src/apps/time-hud.mjs";
 import { DEDREL_CALENDAR_CONFIG } from "./src/config/calendar.mjs";
@@ -161,6 +162,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/apps/roll-dialog.hbs",
     "systems/dedrel/templates/apps/spell-constructor.hbs",
     "systems/dedrel/templates/apps/currency-config.hbs",
+    "systems/dedrel/templates/apps/effect-key-browser.hbs",
     "systems/dedrel/templates/item/parts/item-header.hbs",
     "systems/dedrel/templates/item/parts/item-navigation.hbs",
     "systems/dedrel/templates/item/parts/item-description.hbs",
@@ -265,6 +267,15 @@ Hooks.once("init", function() {
     },
 
     /**
+     * Открывает «Справочник ключей» — каталог ключей Active Effects с поиском
+     * и конструктор DSL-строк flags.dedrel.mod (см. src/apps/effect-key-browser.mjs).
+     */
+    openEffectKeyBrowser: () => {
+      game.dedrel._effectKeyBrowser ??= new EffectKeyBrowserApp();
+      return game.dedrel._effectKeyBrowser.render(true);
+    },
+
+    /**
      * Библиотека переиспользуемых Active Effects (см. src/config/effect-library.mjs).
      * Позволяет копировать готовые эффекты (яд, баффы, сопротивления) на актёров и
      * предметы из макросов, не собирая их с нуля.
@@ -332,6 +343,14 @@ Hooks.on("getSceneControlButtons", controls => {
     icon: "fa-solid fa-hourglass-half",
     button: true,
     onChange: () => game.dedrel.timeHUD.toggle()
+  };
+  tokens.tools.dedrelEffectKeys = {
+    name: "dedrelEffectKeys",
+    order: 101,
+    title: "DEDREL.KeyBrowser.Title",
+    icon: "fa-solid fa-key",
+    button: true,
+    onChange: () => game.dedrel.openEffectKeyBrowser()
   };
 });
 

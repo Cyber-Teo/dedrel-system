@@ -1,6 +1,105 @@
 {
   "DEDREL": {
     "SystemName": "Dedrel System",
+    "KeyBrowser": {
+      "Title": "Effect Key Browser",
+      "SearchPlaceholder": "Search: name or key...",
+      "ModesHint": "Gray column — recommended change mode. A penalty is the same field with a negative value (Add mode).",
+      "ModeTooltip": "Recommended change mode",
+      "CopyKey": "Copy key",
+      "Copied": "Copied: {text}",
+      "Cat": {
+        "Attributes": "Attributes",
+        "Skills": "Skills",
+        "Derived": "Defenses & Derived",
+        "Bonuses": "System Bonuses",
+        "DR": "Damage Reduction (DR)",
+        "AP": "Action Points (pool maximum)",
+        "Magic": "Magic: Doctrines, Paths, Techniques"
+      },
+      "Sub": {
+        "Rank": "rank",
+        "Bonus": "roll bonus",
+        "SaveBonus": "save bonus",
+        "Unlocked": "access",
+        "Technique": "Technique"
+      },
+      "Note": {
+        "Skills": "Use .bonus for roll bonuses/penalties (also applies to attacks with that skill). .rank is for permanent training only: Add clamps it at 0.",
+        "Bonuses": "A penalty is the same field with a negative value. Fields marked \"Add | 1\" are toggle flags."
+      },
+      "Entry": {
+        "Dodge": "Dodge",
+        "Block": "Block",
+        "MDef": "Magic Defense",
+        "Initiative": "Initiative",
+        "Movement": "Speed (movement)",
+        "HPMax": "Maximum HP",
+        "LuckMax": "Maximum Luck Points",
+        "Darkvision": "Darkvision"
+      },
+      "Bonus": {
+        "global_roll": "Bonus to ALL rolls",
+        "global_skill": "Bonus to skills and attacks (not saves)",
+        "global_save": "Bonus to saving throws",
+        "global_ap_discount": "AP discount on any maneuvers/spells",
+        "global_ap_penalty": "AP surcharge: maneuvers AND spells",
+        "maneuver_ap_penalty": "AP surcharge: maneuvers only",
+        "spell_ap_penalty": "AP surcharge: spells only",
+        "ignore_wound_penalty": "Ignore wound penalties",
+        "infinite_explode": "Infinite exploding dice",
+        "damage_explode": "Exploding damage dice",
+        "hp_multiplier": "Max HP multiplier",
+        "carry_capacity_mult": "Carry capacity multiplier",
+        "carry_capacity_flat": "Carry capacity, flat bonus (kg)",
+        "ignore_encumbrance_penalty": "Ignore encumbrance penalties"
+      },
+      "DslTitle": "\"Next maneuver\" modifier builder",
+      "DslHint": "Put the key on the left into the effect's change row and the built string into its value. Change mode (Add/Override) is irrelevant. Give a consumable carrier a duration (usually 1 round).",
+      "Operation": "Operation",
+      "FilterLabel": "Applies to (OR conditions)",
+      "AddFilter": "Add OR condition",
+      "RemoveFilter": "Remove condition",
+      "ConsumeLabel": "Consumed",
+      "CopyDsl": "Copy string",
+      "InvalidDsl": "The modifier string failed validation — see console (F12) for details.",
+      "KeyPlaceholder": "maneuver system.key, e.g. headshot",
+      "Op": {
+        "attack": "attack — attack roll bonus",
+        "damage": "damage — addition to the damage formula",
+        "dice_step": "dice_step — Damage Ladder shift",
+        "pierce": "pierce — armor piercing",
+        "ap_discount": "ap_discount — AP discount",
+        "ap_set": "ap_set — set AP cost"
+      },
+      "OpHint": {
+        "attack": "Stacks with other bonuses. Consumed after the attack roll by default.",
+        "damage": "Number or dice (1d6). Appended to the formula as is, not shifted by the Ladder. Consumed after the damage roll.",
+        "dice_step": "1d4→1d6→2d4→2d6→2d8→3d6; total raise is capped at +1 step, negative N is an uncapped nerf. Consumed after the damage roll.",
+        "pierce": "Each point removes 10% of the target's DR; stacks with weapon armor piercing. Consumed after the damage roll.",
+        "ap_discount": "Discounts stack, cost never below 0. Consumed when AP is spent.",
+        "ap_set": "The minimum of several values is used. Consumed when AP is spent."
+      },
+      "Filter": {
+        "any": "any maneuver",
+        "melee": "melee",
+        "ranged": "ranged",
+        "shield": "with a shield",
+        "skill": "skill group",
+        "dtype": "damage type",
+        "key": "specific maneuver (key)",
+        "doctrine": "spell doctrine",
+        "tech": "Technique in the build",
+        "mod": "Modifier in the build"
+      },
+      "Consume": {
+        "auto": "auto ({value})",
+        "use": "when AP is spent",
+        "roll": "after the attack roll",
+        "damage": "after the damage roll",
+        "never": "never (permanent)"
+      }
+    },
     "Actor": {
       "TypeCharacter": "Character"
     },

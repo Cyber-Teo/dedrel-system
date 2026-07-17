@@ -1,0 +1,100 @@
+<div class="ekb-content">
+
+    {{!-- Поиск по каталогу --}}
+    <div class="ekb-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" class="ekb-search-input" value="{{search}}"
+               placeholder="{{localize 'DEDREL.KeyBrowser.SearchPlaceholder'}}" autocomplete="off">
+    </div>
+    <p class="ekb-modes-hint">{{localize "DEDREL.KeyBrowser.ModesHint"}}</p>
+
+    {{!-- Каталог ключей system.* --}}
+    <div class="ekb-list">
+        {{#each catalog}}
+        <details class="ekb-category" data-category="{{id}}" {{#if open}}open{{/if}}>
+            <summary>
+                <span class="ekb-cat-label">{{label}}</span>
+                <span class="ekb-count">{{entries.length}}</span>
+            </summary>
+            {{#if note}}<p class="ekb-note">{{note}}</p>{{/if}}
+            {{#each entries}}
+            <div class="ekb-row" data-search="{{searchText}}">
+                <span class="ekb-label">{{label}}</span>
+                <span class="ekb-mode" data-tooltip="{{localize 'DEDREL.KeyBrowser.ModeTooltip'}}">{{mode}}{{#if hint}} | {{hint}}{{/if}}</span>
+                <code class="ekb-key">{{key}}</code>
+                <button type="button" class="ekb-copy" data-action="copyKey" data-key="{{key}}"
+                        data-tooltip="{{localize 'DEDREL.KeyBrowser.CopyKey'}}">
+                    <i class="fa-solid fa-copy"></i>
+                </button>
+            </div>
+            {{/each}}
+        </details>
+        {{/each}}
+    </div>
+
+    {{!-- Конструктор DSL flags.dedrel.mod --}}
+    <section class="ekb-dsl">
+        <header class="ekb-dsl-header">
+            <span class="ekb-cat-label">{{localize "DEDREL.KeyBrowser.DslTitle"}}</span>
+            <code class="ekb-key">{{modChangeKey}}</code>
+            <button type="button" class="ekb-copy" data-action="copyKey" data-key="{{modChangeKey}}"
+                    data-tooltip="{{localize 'DEDREL.KeyBrowser.CopyKey'}}">
+                <i class="fa-solid fa-copy"></i>
+            </button>
+        </header>
+        <p class="ekb-note">{{localize "DEDREL.KeyBrowser.DslHint"}}</p>
+
+        <div class="ekb-dsl-grid">
+            <label>{{localize "DEDREL.KeyBrowser.Operation"}}</label>
+            <div class="ekb-dsl-op-row">
+                <select class="ekb-dsl-op">
+                    {{#each dsl.ops}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+                </select>
+                <input type="text" class="ekb-dsl-value" value="{{dsl.value}}" placeholder="{{dsl.valuePlaceholder}}" autocomplete="off">
+            </div>
+
+            <label></label>
+            <p class="ekb-op-hint">{{dsl.opHint}}</p>
+
+            <label>{{localize "DEDREL.KeyBrowser.FilterLabel"}}</label>
+            <div class="ekb-filters">
+                {{#each dsl.filters}}
+                <div class="ekb-filter-row" data-index="{{index}}">
+                    <select class="ekb-f-type">
+                        {{#each types}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+                    </select>
+                    {{#if (eq valueKind "select")}}
+                    <select class="ekb-f-value">
+                        <option value=""></option>
+                        {{#each options}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+                    </select>
+                    {{/if}}
+                    {{#if (eq valueKind "text")}}
+                    <input type="text" class="ekb-f-value" value="{{value}}"
+                           placeholder="{{localize 'DEDREL.KeyBrowser.KeyPlaceholder'}}" autocomplete="off">
+                    {{/if}}
+                    <button type="button" class="ekb-remove-filter" data-action="removeFilter" data-index="{{index}}"
+                            data-tooltip="{{localize 'DEDREL.KeyBrowser.RemoveFilter'}}">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                {{/each}}
+                <button type="button" class="ekb-add-filter" data-action="addFilter">
+                    <i class="fa-solid fa-plus"></i> {{localize "DEDREL.KeyBrowser.AddFilter"}}
+                </button>
+            </div>
+
+            <label>{{localize "DEDREL.KeyBrowser.ConsumeLabel"}}</label>
+            <select class="ekb-dsl-consume">
+                {{#each dsl.consumeOptions}}<option value="{{key}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+            </select>
+        </div>
+
+        <div class="ekb-dsl-result">
+            <code class="ekb-dsl-preview {{#unless dsl.valid}}invalid{{/unless}}">{{dsl.string}}</code>
+            <button type="button" class="ekb-copy-dsl" data-action="copyDsl">
+                <i class="fa-solid fa-copy"></i> {{localize "DEDREL.KeyBrowser.CopyDsl"}}
+            </button>
+        </div>
+    </section>
+</div>
