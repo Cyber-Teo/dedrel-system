@@ -519,7 +519,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const skillCategories = {
       combat: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"],
       intellectual: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"],
-      practical: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism"],
+      practical: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism", "perception"],
       social: ["persuasion", "insight", "deception", "intimidation", "performance"]
     };
 

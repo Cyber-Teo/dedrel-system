@@ -73,6 +73,7 @@ export function buildSkills() {
     survival: skillField(),
     engineering: skillField(),
     atletism: skillField(),
+    perception: skillField(),
     // Social
     persuasion: skillField(),
     insight: skillField(),
