@@ -112,16 +112,68 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
   /**
    * Подготовка данных для передачи в Handlebars шаблоны.
-   * Здесь мы сортируем предметы по категориям, рассчитываем стоимость прокачки и логику создания персонажа.
+   * Оркестратор: каждая секция контекста собирается своим #prepare*-хелпером
+   * (предметы, слоты, создание персонажа, цены прокачки, навыки, эффекты,
+   * кошелёк, перегрузка), здесь — только сборка в context.
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const actorData = this.document;
-    
+
     // Блокировка удаления предметов
     context.itemsLocked = this.document.getFlag("dedrel", "itemsLocked") ?? true;
-    
-    // Categorize Items
+
+    const items = this.#prepareItems(actorData);
+    const equipment_slots = this.#prepareEquipmentSlots(actorData);
+
+    // Enrich HTML for biography using namespaced TextEditor
+    const enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(actorData.system.details?.biography || "", {
+      async: true,
+      secrets: this.document.isOwner,
+      rollData: this.document.getRollData()
+    });
+
+    const creationData = this.#prepareCreationData(actorData, items.mutations);
+    const xpData = this.#prepareXpData(actorData);
+    const doctrinePaths = this.#prepareDoctrinePaths(actorData);
+    const { skillGroups, favoriteSkillsData } = this.#prepareSkillGroups(actorData);
+    const { permanentEffects, temporaryEffects } = this.#prepareEffects(actorData);
+    const attributesData = this.#prepareAttributesData(actorData);
+    const { walletCurrencies, walletTotal } = this.#prepareWallet(actorData);
+    const encumbrance = this.#prepareEncumbrance(actorData);
+
+    Object.assign(context, {
+      actor: actorData,
+      system: actorData.system,
+      attributesData,
+      encumbrance,
+      walletCurrencies,
+      walletTotal,
+      walletWeight: actorData.system.wallet?.weight || 0,
+      canCreateActors: Actor.canUserCreate(game.user),
+      ...items,
+      permanentEffects,
+      temporaryEffects,
+      enrichedBiography,
+      creationData,
+      xpData,
+      doctrinePaths,
+      skillGroups,
+      favoriteSkillsData,
+      equipment_slots,
+      tabs: this._prepareTabs("primary"),
+      editable: this.isEditable
+    });
+
+    return context;
+  }
+
+  /**
+   * Категоризация предметов актёра по типам и группам для вкладок листа,
+   * плюс избранное (манёвры/заклинания и быстрые слоты) и признак хвоста.
+   * @returns {object} Пакет массивов и групп для спреда в контекст рендера.
+   */
+  #prepareItems(actorData) {
     const maneuvers = [];
     const maneuversGroups = {
       basic: { label: "DEDREL.ManeuverSources.basic", items: [] },
@@ -148,13 +200,11 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const inventory = [];
     const currencyItems = []; // «Рыхлые» монеты-предметы (тип currency) для зачисления в кошелёк
     const containers = [];    // Предметы-ссылки на акторов-контейнеры (сумки/сундуки)
-    
-    // New equipment
+
     const weapons = [];
     const armors = [];
     const magic_items = [];
 
-    // Favorites
     const favoriteManeuversSpells = [];
     const quickSlots = [];
     const equippedWeapons = [];
@@ -200,7 +250,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         talents.push(i);
         const reqAttr = i.system.prerequisites_attributes || [];
         const reqMut = i.system.prerequisites_mutations || [];
-        
+
         if (reqAttr.length > 0) {
            talentsGroups.attributes.items.push(i);
         } else if (reqMut.length > 0) {
@@ -231,6 +281,19 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     const hasTail = mutations.some(m => m.system.key && m.system.key.includes("tail"));
 
+    return {
+      maneuvers, maneuversGroups, spells, mutations, mutationsGroups,
+      talents, talentsGroups, mutilations, inventory, currencyItems, containers,
+      weapons, armors, magic_items,
+      favoriteManeuversSpells, quickSlots, equippedWeapons, hasTail
+    };
+  }
+
+  /**
+   * Резолв слотов экипировки: item_id каждого слота → живой предмет актёра
+   * (или null, если слот пуст либо ссылка мёртвая).
+   */
+  #prepareEquipmentSlots(actorData) {
     const slotItem = (key) => {
       const id = actorData.system.equipment_slots?.[key]?.item_id;
       return id ? actorData.items.get(id) : null;
@@ -242,15 +305,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     ]) {
       equipment_slots[key] = slotItem(key);
     }
+    return equipment_slots;
+  }
 
-    // Enrich HTML for biography using namespaced TextEditor
-    const enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(actorData.system.details?.biography || "", {
-      async: true,
-      secrets: this.document.isOwner,
-      rollData: this.document.getRollData()
-    });
-
-    // Calculate creation data
+  /**
+   * Данные режима создания персонажа: потраченные очки родословных/атрибутов/
+   * навыков/мутаций и проверка превышения капов создания.
+   */
+  #prepareCreationData(actorData, mutations) {
     const creationData = {
       bloodlinesUsed: 0,
       attributesUsed: 0,
@@ -267,11 +329,11 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         creationData.bloodlinesUsed += (v.rank - 1);
       }
     }
-    
+
     for (const [k, v] of Object.entries(this.document._source.system.attributes)) {
       creationData.attributesUsed += (v.rank - 1);
     }
-    
+
     if (this.document._source.system.skills) {
       for (const [k, v] of Object.entries(this.document._source.system.skills)) {
         creationData.skillsUsed += v.rank;
@@ -289,10 +351,42 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         }
       }
     }
-    
+
     creationData.mutationsMax += Math.min(creationData.harmfulMutationsCount, 2);
 
-    // Calculate Upgrade Costs
+    // Check for attributes over cap during creation.
+    // ВАЖНО: не мутируем живую системную модель (actorData.system.*), а формируем
+    // отдельные объекты для контекста рендера. Иначе флаги isOverCap попадают
+    // в подготовленные данные актёра и могут «протечь» в другие места.
+    let hasOverCapAttributes = false;
+    let hasOverCapSkills = false;
+    const creationAttributes = {};
+    const creationSkills = {};
+    if (actorData.flags?.dedrel?.showCreation) {
+      for (const [key, attr] of Object.entries(actorData.system.attributes)) {
+        const isOverCap = attr.rank > 4;
+        if (isOverCap) hasOverCapAttributes = true;
+        creationAttributes[key] = { rank: attr.rank, isOverCap };
+      }
+      for (const [key, skill] of Object.entries(actorData.system.skills)) {
+        const isOverCap = skill.rank > 3;
+        if (isOverCap) hasOverCapSkills = true;
+        creationSkills[key] = { rank: skill.rank, isOverCap };
+      }
+    }
+    creationData.hasOverCapAttributes = hasOverCapAttributes;
+    creationData.hasOverCapSkills = hasOverCapSkills;
+    creationData.attributes = creationAttributes;
+    creationData.skills = creationSkills;
+
+    return creationData;
+  }
+
+  /**
+   * Цены прокачки за опыт: атрибуты (со скидками от родословных), навыки
+   * и доктрины Магического Конструктора.
+   */
+  #prepareXpData(actorData) {
     const xpData = {
       attributes: {},
       skills: {},
@@ -336,7 +430,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         const discount = getDiscount(key);
         let finalCost = baseCost - discount;
         if (finalCost < 1) finalCost = 1;
-        
+
         xpData.attributes[key] = {
            cost: finalCost,
            canUpgrade: ((actorData.system.details.xp || 0) >= finalCost)
@@ -387,9 +481,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
     xpData.hasDoctrines = xpData.doctrineGroups.length > 0;
 
-    // Изученные Пути доктрин (куплены талантами) — плашка на вкладке Заклинания.
-    // Переключаемой "стойки" больше нет: путь выбирается в сборке Конструктора.
+    return xpData;
+  }
+
+  /**
+   * Изученные Пути доктрин (куплены талантами) — плашка на вкладке Заклинания.
+   * Переключаемой "стойки" больше нет: путь выбирается в сборке Конструктора.
+   */
+  #prepareDoctrinePaths(actorData) {
     const doctrinePaths = [];
+    const magicCfg = CONFIG.DEDREL?.magic;
     if (magicCfg && actorData.system.doctrines) {
       for (const [key, cfg] of Object.entries(magicCfg.doctrines)) {
         if (!cfg.paths) continue;
@@ -407,11 +508,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         }
       }
     }
+    return doctrinePaths;
+  }
 
-    // ==========================================
-    // Группировка навыков и избранное
-    // ==========================================
-    // Навыки в DataModel хранятся плоским списком, но в UI разбиты по категориям.
+  /**
+   * Группировка навыков по категориям и сборка избранных.
+   * Навыки в DataModel хранятся плоским списком, но в UI разбиты по категориям.
+   */
+  #prepareSkillGroups(actorData) {
     const skillCategories = {
       combat: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"],
       intellectual: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"],
@@ -433,41 +537,24 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
         const skillObj = { key: key, ...skillData, isFavorite: favSkillsFlag.includes(key), category: category };
         skillGroups[category].push(skillObj);
-        
+
         if (skillObj.isFavorite) {
           favoriteSkillsData.push(skillObj);
         }
       }
     }
 
-    // Check for attributes over cap during creation.
-    // ВАЖНО: не мутируем живую системную модель (actorData.system.*), а формируем
-    // отдельные объекты для контекста рендера. Иначе флаги isOverCap попадают
-    // в подготовленные данные актёра и могут «протечь» в другие места.
-    let hasOverCapAttributes = false;
-    let hasOverCapSkills = false;
-    const creationAttributes = {};
-    const creationSkills = {};
-    if (actorData.flags?.dedrel?.showCreation) {
-      for (const [key, attr] of Object.entries(actorData.system.attributes)) {
-        const isOverCap = attr.rank > 4;
-        if (isOverCap) hasOverCapAttributes = true;
-        creationAttributes[key] = { rank: attr.rank, isOverCap };
-      }
-      for (const [key, skill] of Object.entries(actorData.system.skills)) {
-        const isOverCap = skill.rank > 3;
-        if (isOverCap) hasOverCapSkills = true;
-        creationSkills[key] = { rank: skill.rank, isOverCap };
-      }
-    }
-    creationData.hasOverCapAttributes = hasOverCapAttributes;
-    creationData.hasOverCapSkills = hasOverCapSkills;
-    creationData.attributes = creationAttributes;
-    creationData.skills = creationSkills;
+    return { skillGroups, favoriteSkillsData };
+  }
 
+  /**
+   * Эффекты для вкладки «Статусы»: собственные эффекты актёра (временные)
+   * и эффекты с предметов (постоянные), с подбором иконки для отображения.
+   */
+  #prepareEffects(actorData) {
     const permanentEffects = [];
     const temporaryEffects = [];
-    
+
     for (const e of actorData.effects) {
       const effect = e.toObject(false);
       effect.id = e.id;
@@ -475,7 +562,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       effect.displayIcon = (effect.img && effect.img !== "icons/svg/aura.svg") ? effect.img : (effect.parent?.img || "icons/svg/aura.svg");
       temporaryEffects.push(effect);
     }
-    
+
     for (const item of actorData.items) {
       if (item.effects && item.effects.size > 0) {
         for (const e of item.effects) {
@@ -488,16 +575,27 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
+    return { permanentEffects, temporaryEffects };
+  }
+
+  /**
+   * Копия атрибутов с итоговым спасброском (ранг + бонус атрибута + глобальный
+   * бонус). Копия — чтобы не мутировать живую системную модель.
+   */
+  #prepareAttributesData(actorData) {
     const attributesData = foundry.utils.deepClone(actorData.system.attributes);
     const globalSave = actorData.system.bonuses?.global_save || 0;
     for (const [key, attr] of Object.entries(attributesData)) {
       attr.final_save = attr.rank + (attr.save_bonus || 0) + globalSave;
     }
+    return attributesData;
+  }
 
-    // ==========================================
-    // Кошелёк (мультивалютность)
-    // ==========================================
-    // Список валют — из настройки мира; счётчики — из system.currency актора.
+  /**
+   * Кошелёк (мультивалютность): список валют — из настройки мира,
+   * счётчики — из system.currency актора.
+   */
+  #prepareWallet(actorData) {
     const walletCurrencies = [];
     let walletTotal = 0;
     try {
@@ -511,65 +609,26 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     } catch (e) {
       // Настройка валют недоступна
     }
+    return { walletCurrencies, walletTotal };
+  }
 
-    // ==========================================
-    // Перегрузка (для индикатора-бара)
-    // ==========================================
+  /**
+   * Перегрузка для индикатора-бара: процент заполнения до порога «тяжело»,
+   * цвет и локализованная подпись категории.
+   */
+  #prepareEncumbrance(actorData) {
     const enc = actorData.system.resources?.encumbrance;
-    let encumbrance = null;
-    if (enc) {
-      const heavy = enc.thresholds?.heavy || 0;
-      const pct = heavy > 0 ? Math.min(100, Math.round((enc.total / heavy) * 100)) : 0;
-      const colorMap = { light: "#4caf50", medium: "#e0c341", heavy: "#e08a2e", overloaded: "#c0392b" };
-      encumbrance = {
-        ...enc,
-        pct,
-        color: colorMap[enc.category] || "#4caf50",
-        label: game.i18n.localize(`DEDREL.Encumbrance.${enc.category}`)
-      };
-    }
+    if (!enc) return null;
 
-    Object.assign(context, {
-      actor: actorData,
-      system: actorData.system,
-      attributesData,
-      encumbrance,
-      walletCurrencies,
-      walletTotal,
-      walletWeight: actorData.system.wallet?.weight || 0,
-      currencyItems,
-      containers,
-      canCreateActors: Actor.canUserCreate(game.user),
-      maneuvers,
-      maneuversGroups,
-      spells,
-      mutations,
-      mutationsGroups,
-      talents,
-      talentsGroups,
-      mutilations,
-      inventory,
-      weapons,
-      armors,
-      magic_items,
-      favoriteManeuversSpells,
-      quickSlots,
-      equippedWeapons,
-      permanentEffects,
-      temporaryEffects,
-      enrichedBiography,
-      creationData,
-      xpData,
-      doctrinePaths,
-      skillGroups,
-      favoriteSkillsData,
-      equipment_slots,
-      hasTail,
-      tabs: this._prepareTabs("primary"),
-      editable: this.isEditable
-    });
-
-    return context;
+    const heavy = enc.thresholds?.heavy || 0;
+    const pct = heavy > 0 ? Math.min(100, Math.round((enc.total / heavy) * 100)) : 0;
+    const colorMap = { light: "#4caf50", medium: "#e0c341", heavy: "#e08a2e", overloaded: "#c0392b" };
+    return {
+      ...enc,
+      pct,
+      color: colorMap[enc.category] || "#4caf50",
+      label: game.i18n.localize(`DEDREL.Encumbrance.${enc.category}`)
+    };
   }
 
   async _preRender(context, options) {
