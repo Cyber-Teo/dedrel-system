@@ -22,6 +22,10 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       // а цену ОД берёт из оружия (system.reload_cost 1-3), игнорируя ap_cost.
       // Такой манёвр не расходует боеприпас и не блокируется состоянием заряда.
       is_reload_action: new fields.BooleanField({ initial: false }),
+      // Манёвр чтения свитка (16. Magic §10): цена ОД берётся с выбранного
+      // свитка (производная от редкости), оплата только универсальными ОД,
+      // каст и расход — на предмете-свитке. Зеркало паттерна is_reload_action.
+      is_scroll_read: new fields.BooleanField({ initial: false }),
 
       uses_value: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       uses_max: new fields.StringField({ required: true, blank: true, initial: "0" }),
@@ -30,7 +34,8 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       req_weapon_type: new fields.SchemaField({
         melee: new fields.BooleanField(),
         ranged: new fields.BooleanField(),
-        shield: new fields.BooleanField()
+        shield: new fields.BooleanField(),
+        magic: new fields.BooleanField()
       }),
       req_weapon_damage_type: new fields.SchemaField({
         piercing: new fields.BooleanField(),

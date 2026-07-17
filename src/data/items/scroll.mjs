@@ -42,4 +42,17 @@ export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
     migrateCraftingData(source);
     return super.migrateData(source);
   }
+
+  /**
+   * Цена чтения свитка (16. Magic §10) — производная от редкости, не хранится.
+   * Оплачивается только универсальными ОД: свиток не попадает в ветки
+   * специальных пулов Item##resolveApPools. Legendary — сюжетные уникумы вне
+   * лестницы записи.
+   */
+  static READ_COST_BY_RARITY = { common: 2, uncommon: 3, rare: 4, very_rare: 5, legendary: 6 };
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.ap_cost = ScrollDataModel.READ_COST_BY_RARITY[this.rarity] ?? 2;
+  }
 }

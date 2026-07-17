@@ -104,6 +104,21 @@ export default class DedrelItem extends Item {
       return this.sheet.render(true);
     }
 
+    // Чтение свитка (16. Magic §10): свиток держат свободной конечностью.
+    // Слоты рук резолвим в живые предметы (мёртвая ссылка руку не занимает);
+    // истинно двуручное оружие занимает обе руки независимо от слотов.
+    // Проверка общая для прямого клика по свитку и манёвра чтения.
+    if (this.type === "scroll" || (this.type === "maneuver" && this.system.is_scroll_read)) {
+      const slots = actor.system.equipment_slots || {};
+      const handItem = (s) => actor.items.get(slots[s]?.item_id);
+      const main = handItem("main_hand");
+      const off = handItem("off_hand");
+      const noFreeHand = (main && off) || main?.system?.is_twohanded || off?.system?.is_twohanded;
+      if (noFreeHand) {
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ScrollNoFreeHand"));
+      }
+    }
+
     // Ре-валидация собранного заклинания (Магический Конструктор): ранг доктрины
     // мог измениться после сохранения, путь сборки должен быть известен магу,
     // а поля предмета могли быть отредактированы руками. Для линейных доктрин
@@ -140,6 +155,22 @@ export default class DedrelItem extends Item {
     const isReloadAction = this.type === "maneuver" && this.system.is_reload_action;
     if (isReloadAction && validWeapons.length > 0) {
       apCost = validWeapons[0].system.reload_cost || 1;
+    }
+
+    // Чтение свитка: цену ОД диктует выбранный свиток (производная от редкости),
+    // как перезарядка берёт цену с оружия. Для диалога — цена первого свитка,
+    // в #confirmUse пересчитывается по фактически выбранному.
+    const isScrollRead = this.type === "maneuver" && this.system.is_scroll_read;
+    let validScrolls = [];
+    if (isScrollRead) {
+      validScrolls = actor.items.filter(i =>
+        i.type === "scroll" && (i.system.quantity || 0) > 0
+        && (i.system.spell_id || i.system.spell_key)
+      );
+      if (!validScrolls.length) {
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoScrollsToRead"));
+      }
+      apCost = validScrolls[0].system.ap_cost || 0;
     }
 
     // Проверка расходуемых предметов.
@@ -194,6 +225,7 @@ export default class DedrelItem extends Item {
       actor, apCost, isVariable, minAp, ...pools,
       hasCharges, usesValue, usesMax,
       requiresWeapon, validWeapons, isReloadAction,
+      isScrollRead, validScrolls,
       isSelfConsume, consumeAmount, hasEnoughAmmo
     };
 
@@ -245,6 +277,15 @@ export default class DedrelItem extends Item {
    * @returns {{requiresWeapon: boolean, validWeapons: Item[]}}
    */
   #collectWeaponRequirements(actor) {
+    // Чтение свитка (16. Magic §10): всегда требует экипированный магический
+    // фокус — как сотворение магии. Свобода второй руки проверяется в use().
+    if (this.type === "scroll") {
+      const validWeapons = actor.items.filter(i =>
+        i.type === "weapon" && i.system.equipped && i.system.weapon_type?.magic
+      );
+      return { requiresWeapon: true, validWeapons };
+    }
+
     if (this.type !== "maneuver" && this.type !== "spell") {
       return { requiresWeapon: false, validWeapons: [] };
     }
@@ -328,7 +369,9 @@ export default class DedrelItem extends Item {
     let apSpecific = 0;
     let specificApKey = "";
 
-    if (this.type === "maneuver" && actor.system.resources?.ap_maneuver) {
+    // Чтение свитка платится ТОЛЬКО универсальными ОД (16. Magic §10):
+    // чужая магия с листа — не тренированная моторика и не своё сотворение.
+    if (this.type === "maneuver" && !this.system.is_scroll_read && actor.system.resources?.ap_maneuver) {
       apSpecific = actor.system.resources.ap_maneuver.value || 0;
       specificApKey = "system.resources.ap_maneuver.value";
     } else if ((this.type === "spell" || this.type === "magic_item") && actor.system.resources?.ap_magic) {
@@ -399,6 +442,17 @@ export default class DedrelItem extends Item {
       }
     }
 
+    if (ctx.isScrollRead && ctx.validScrolls.length > 0) {
+      content += `
+        <div class="form-group" style="margin-top: 10px;">
+          <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.ScrollSelect")}</label>
+          <select name="scrollId" id="use-scroll-select" style="width: 100%; padding: 4px;">
+            ${ctx.validScrolls.map(s => `<option value="${s.id}">${esc(s.name)} (${s.system.ap_cost} ${game.i18n.localize("DEDREL.Magic.APShort")})</option>`).join("")}
+          </select>
+        </div>
+      `;
+    }
+
     content += `</div>`;
     return content;
   }
@@ -414,7 +468,7 @@ export default class DedrelItem extends Item {
   async #confirmUse(dialog, ctx) {
     const { actor, apCost, isVariable, minAp, currentAp,
             hasCharges, usesValue, requiresWeapon, isReloadAction,
-            isSelfConsume, consumeAmount, hasEnoughAmmo } = ctx;
+            isScrollRead, isSelfConsume, consumeAmount, hasEnoughAmmo } = ctx;
 
     // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
     // проверки заряда, расхода боеприпаса и карточки.
@@ -422,6 +476,12 @@ export default class DedrelItem extends Item {
     if (requiresWeapon) {
       const selEl = dialog.element.querySelector("#use-weapon-select");
       selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
+      // Без валидного оружия использовать нельзя (диалог показывал только
+      // предупреждение — не даём подтвердить манёвр/свиток «голыми руками»).
+      if (!selWeapon) {
+        ui.notifications.warn(game.i18n.localize("DEDREL.Chat.NoEquippedWeapon"));
+        return;
+      }
     }
 
     let finalApCost = apCost;
@@ -432,6 +492,18 @@ export default class DedrelItem extends Item {
     // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
     if (isReloadAction && selWeapon) {
       finalApCost = selWeapon.system.reload_cost || 1;
+    }
+
+    // Чтение свитка: фактическая цена ОД — из выбранного свитка.
+    let selScroll = null;
+    if (isScrollRead) {
+      const scrollEl = dialog.element.querySelector("#use-scroll-select");
+      selScroll = scrollEl?.value ? actor.items.get(scrollEl.value) : null;
+      if (!selScroll) {
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoScrollsToRead"));
+        return;
+      }
+      finalApCost = selScroll.system.ap_cost || 0;
     }
 
     // Выстрел из перезаряжаемого оружия: атакующий манёвр (цель — не сам
@@ -530,7 +602,17 @@ export default class DedrelItem extends Item {
     // на акторе), а не шлют собственную карточку. Списание/заряд уже сняты выше.
     const castsBoundSpell = this.type === "scroll"
       || (this.type === "magic_item" && (this.system.spell_id || this.system.spell_key));
-    if (castsBoundSpell) {
+    if (isScrollRead && selScroll) {
+      // Манёвр чтения кастует заклинание выбранного свитка и расходует его;
+      // собственную карточку манёвр не постит — карточкой служит сам каст.
+      await selScroll.#castBoundSpell();
+      const newQty = Math.max(0, (selScroll.system.quantity || 0) - 1);
+      if (newQty <= 0) {
+        await selScroll.delete();
+      } else {
+        await selScroll.update({ "system.quantity": newQty });
+      }
+    } else if (castsBoundSpell) {
       await this.#castBoundSpell();
     } else {
       await this.postToChat(selectedWeaponId, ammo.ammoSnapshot);
