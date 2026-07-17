@@ -1392,13 +1392,18 @@
     "CreatureTypes": {
       "beast": "Животные",
       "magical_beast": "Магические твари",
+      "plant": "Растения",
+      "ooze": "Слизи",
       "elemental": "Элементали",
+      "ethereal": "Эфирные",
+      "astral": "Астральные",
       "spirit": "Духи",
       "shade": "Тени",
       "fey": "Феи",
       "demon": "Демоны",
       "dragon": "Драконы",
       "elf": "Эльфы",
+      "human": "Люди",
       "undead": "Нежить",
       "cosmic": "Космические",
       "construct": "Конструкты"

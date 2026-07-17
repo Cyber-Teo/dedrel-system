@@ -1392,13 +1392,18 @@
     "CreatureTypes": {
       "beast": "Beast",
       "magical_beast": "Magical Beast",
+      "plant": "Plant",
+      "ooze": "Ooze",
       "elemental": "Elemental",
+      "ethereal": "Ethereal",
+      "astral": "Astral",
       "spirit": "Spirit",
       "shade": "Shade",
       "fey": "Fey",
       "demon": "Demon",
       "dragon": "Dragon",
       "elf": "Elf",
+      "human": "Human",
       "undead": "Undead",
       "cosmic": "Cosmic",
       "construct": "Construct"
