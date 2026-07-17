@@ -34,6 +34,8 @@
  *   "attack:1; filter:skill:bows; consume:never"     — постоянный +1 к атакам из лука
  *   "dice_step:1; filter:dtype:bludgeoning"          — следующий дробящий удар на ступень выше
  *   "dice_step:-1; filter:melee; consume:never"      — постоянный нерф: урон на ступень ниже
+ *   "ap_discount:1; filter:tech:imbue; consume:never" — материал фокуса: заклинания
+ *                    с Насыщением дешевле на 1 ОД (пока предмет экипирован)
  *
  * ВАЖНО: движок читает change-строки КАЖДОГО эффекта отдельно
  * (actor.appliedEffects → effect.changes) — включая эффекты, перенесённые
@@ -74,6 +76,11 @@ export const MOD_CHANGE_KEY = "flags.dedrel.mod";
  *   "key:<key>"    — манёвр имеет конкретный system.key или name
  *   "dtype:<type>" — предмет наносит урон определённого типа (piercing, slashing, bludgeoning)
  *
+ * Токены для заклинаний Конструктора (синтаксис ключей как в CONFIG.DEDREL.magic):
+ *   "doctrine:<key>" — заклинание доктрины (system.doctrine; работает и для линейных)
+ *   "tech:<key>"     — в сборке есть Техника (chosen_techniques)
+ *   "mod:<key>"      — в сборке есть Модификатор (chosen_modifiers)
+ *
  * @param {Item} item
  * @param {string} filter
  * @returns {boolean}
@@ -113,6 +120,18 @@ function matchesFilter(item, filter) {
     if (token.startsWith("dtype:")) {
       const dt = token.slice(6);
       if (wDmgType[dt]) return true;
+    }
+    if (token.startsWith("doctrine:")) {
+      const d = token.slice(9);
+      if (item.system.doctrine === d) return true;
+    }
+    if (token.startsWith("tech:")) {
+      const t = token.slice(5);
+      if ((item.system.chosen_techniques || []).includes(t)) return true;
+    }
+    if (token.startsWith("mod:")) {
+      const mk = token.slice(4);
+      if ((item.system.chosen_modifiers || []).some(m => m.key === mk)) return true;
     }
   }
   return false;
@@ -168,6 +187,7 @@ export class DedrelBonuses {
         for (const token of value.split("|").map(s => s.trim()).filter(s => s.length > 0)) {
           if (["any", "ranged", "melee", "shield"].includes(token)) continue;
           if (token.startsWith("skill:") || token.startsWith("key:") || token.startsWith("dtype:")) continue;
+          if (token.startsWith("doctrine:") || token.startsWith("tech:") || token.startsWith("mod:")) continue;
           console.warn(`Dedrel | Неизвестный токен фильтра "${token}" в строке "${str}". Для ключей манёвров используйте префикс "key:", например "key:${token}".`);
           return null;
         }
