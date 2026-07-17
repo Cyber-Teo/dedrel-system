@@ -86,12 +86,6 @@ export function stepFormula(formula, steps) {
   });
 }
 
-/** Человекочитаемая строка ступени: stepLabel(3) → "2d6". */
-export function stepLabel(index) {
-  const s = DICE_LADDER[Math.clamp(index, 0, DICE_LADDER.length - 1)];
-  return `${s.count}d${s.faces}`;
-}
-
 /**
  * Среднее значение формулы урона: сумма средних всех кубовых термов (NdM) и
  * плоских модификаторов (+N/-N) с учётом знака. Нужно, чтобы сравнить формулы
