@@ -71,6 +71,8 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       uses_max: new fields.StringField({ initial: "" }),
       uses_per: new fields.StringField({ initial: "" }),
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new fields.StringField({ initial: "" }),
       on_use_macro: new fields.StringField({ initial: "" }),
 
       prerequisites_text: new fields.StringField({ initial: "" }),

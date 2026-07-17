@@ -168,7 +168,7 @@ export default class DedrelItem extends Item {
     // иначе жезл/амулет без зарядов и ОД просто открыл бы лист вместо срабатывания.
     const hasBoundSpell = (this.type === "scroll" || this.type === "magic_item")
       && (this.system.spell_id || this.system.spell_key);
-    const hasActivePayload = hasBoundSpell || !!this.system.formula_heal;
+    const hasActivePayload = hasBoundSpell || !!this.system.formula_heal || !!this.system.formula_temp_hp;
 
     // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
     const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
@@ -947,7 +947,7 @@ export default class DedrelItem extends Item {
     }
 
     let buttons = "";
-    if (showCombatButtons || this.system.formula_heal) {
+    if (showCombatButtons || this.system.formula_heal || this.system.formula_temp_hp) {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
       `;
@@ -982,6 +982,10 @@ export default class DedrelItem extends Item {
         // кнопке уже удалено из инвентаря (quantity 0 → delete в #confirmUse), поэтому
         // обработчик не может достать её из живого предмета по item-id.
         buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}" data-heal-formula="${foundry.utils.escapeHTML(this.system.formula_heal)}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
+      }
+      if (this.system.formula_temp_hp) {
+        // Как и formula_heal: дублируем в data-атрибут для расходуемых носителей
+        buttons += `<button class="dedrel-chat-action" data-action="applyTempHp" data-item-id="${this.id}" data-temphp-formula="${foundry.utils.escapeHTML(this.system.formula_temp_hp)}"><i class="fa-solid fa-shield-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyTempHp")}</button>`;
       }
       if (showCombatButtons && this.system.save_attribute) {
         const dc = this.system.save_dc || this.system.save_dc_formula || "";

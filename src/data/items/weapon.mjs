@@ -37,6 +37,8 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         bludgeoning: new fields.StringField({ initial: "" })
       }),
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new fields.StringField({ initial: "" }),
       equipped: new fields.BooleanField({ initial: false }),
       range: new fields.StringField({ initial: "" }),
 

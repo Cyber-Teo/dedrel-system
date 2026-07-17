@@ -38,6 +38,8 @@ export default class MagicItemDataModel extends foundry.abstract.TypeDataModel {
       spell_id: new fields.StringField({ required: false, initial: "" }),
       spell_key: new fields.StringField({ required: false, initial: "" }),
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new fields.StringField({ initial: "" }),
       on_use_macro: new fields.StringField({ required: false, initial: "" }),
       // Перезаряжаемые заряды: uses_max>0 включает механику (item.prepareDerivedData),
       // списание в Item#use, авто-восстановление на отдыхе по uses_per.

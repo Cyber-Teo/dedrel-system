@@ -29,6 +29,8 @@ export default class PotionDataModel extends foundry.abstract.TypeDataModel {
       uses_max: new StringField({ required: false, initial: "" }),
       uses_per: new StringField({ required: false, initial: "" }),
       formula_heal: new StringField({ required: false, initial: "", label: "Healing Formula" }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new StringField({ required: false, initial: "" }),
       on_use_macro: new StringField({ required: false, initial: "" }),
       requirements: new SchemaField({
         text: new StringField({ required: false, initial: "" }),

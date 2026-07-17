@@ -15,7 +15,9 @@ export default class LootData extends foundry.abstract.TypeDataModel {
       ...craftingFields(),
       stackable: new BooleanField({ required: true, initial: true }),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
-      formula_heal: new StringField({ initial: "", label: "Healing Formula" })
+      formula_heal: new StringField({ initial: "", label: "Healing Formula" }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new StringField({ initial: "" })
     };
   }
 

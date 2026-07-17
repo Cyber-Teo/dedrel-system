@@ -1302,6 +1302,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (res.ap_universal) updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
     if (res.ap_magic) updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
     if (res.ap_maneuver) updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
+    // Временные хиты сгорают на любом отдыхе (правила: "9. Combat and Damage" §4)
+    if (res.hp?.temp) updateData["system.resources.hp.temp"] = 0;
     
     await actor.update(updateData);
     

@@ -78,6 +78,8 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_heal: new fields.StringField({ required: true, blank: true }),
+      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      formula_temp_hp: new fields.StringField({ required: true, blank: true }),
       formula_custom: new fields.StringField({ required: true, blank: true }),
       
       save_attribute: new fields.StringField({ required: true, blank: true }),

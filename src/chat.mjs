@@ -327,6 +327,55 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
     }
 
+    if (action === "applyTempHp") {
+      // Зеркало applyHeal: формула из data-атрибута (расходуемый носитель к этому
+      // моменту мог быть удалён), поддержка "N%" от максимума ХП цели.
+      // Выдачи СКЛАДЫВАЮТСЯ с текущими временными хитами (правила: "9. Combat and Damage" §4).
+      const formula = button.dataset.temphpFormula || item?.system.formula_temp_hp;
+      if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
+
+      let targets = canvas.tokens.controlled;
+      if (targets.length === 0) targets = Array.from(game.user.targets);
+
+      if (targets.length === 0) {
+        return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
+      }
+
+      for (let token of targets) {
+        const targetActor = token.actor;
+        if (!targetActor) continue;
+
+        let amount = 0;
+        let roll = null;
+
+        if (formula.trim().endsWith("%")) {
+            const percentVal = parseFloat(formula.replace("%", "").trim()) || 0;
+            const maxHp = targetActor.system.resources.hp.max || 1;
+            amount = Math.round((percentVal / 100) * maxHp);
+        } else {
+            roll = new Roll(formula, targetActor.getRollData());
+            await roll.evaluate();
+            amount = roll.total;
+        }
+
+        if (amount <= 0) continue;
+
+        const granted = await targetActor.grantTempHp(amount);
+
+        if (granted > 0) {
+            const chatMsg = game.i18n.format("DEDREL.Chat.TempHpApplied", {name: targetActor.name, amount: granted});
+            const rollBlock = roll
+              ? `<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${roll.formula}</div>${await roll.getTooltip()}<h4 class="dice-total">${roll.total}</h4></div></div>`
+              : "";
+            ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                content: `<div class="dedrel-item-chat"><p style="color: #1565c0; font-weight: bold;">${chatMsg}</p>${rollBlock}</div>`,
+                rolls: roll ? [roll] : []
+            });
+        }
+      }
+    }
+
     // Тумблер ауры предмета: включает маркеры, если все выключены, иначе выключает
     if (action === "toggleAura") {
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));

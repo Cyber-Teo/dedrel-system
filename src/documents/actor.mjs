@@ -258,6 +258,22 @@ export default class DedrelActor extends Actor {
     return healed;
   }
 
+  /**
+   * Выдаёт временные хиты (правила: "_rules/9. Combat and Damage.md" §4).
+   * Выдачи из разных источников СКЛАДЫВАЮТСЯ; сгорают на любом отдыхе
+   * (performRest) или выбиваются уроном (applyDamage снимает их первыми).
+   * Прямой апдейт source, НЕ Active Effect: эффект пересчитывался бы каждый
+   * prepareData и "отращивал" бы буфер после каждого поглощения урона.
+   * @param {number} amount
+   * @returns {Promise<number>} фактически выданные временные хиты
+   */
+  async grantTempHp(amount) {
+    const hp = this.system.resources?.hp;
+    if (!hp || amount <= 0) return 0;
+    await this.update({ "system.resources.hp.temp": (hp.temp || 0) + amount });
+    return amount;
+  }
+
   /* -------------------------------------------- */
   /*  Стакающиеся кондиции                         */
   /* -------------------------------------------- */
