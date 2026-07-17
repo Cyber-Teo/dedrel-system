@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -109,5 +109,10 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       // экипировке, как двуручное, но двуручным ХВАТОМ не считается
       is_paired: new fields.BooleanField({ initial: false })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

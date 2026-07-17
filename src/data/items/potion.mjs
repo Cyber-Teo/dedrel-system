@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
  * Зелье — расходуемый предмет с мгновенным эффектом (лечение/бафф/дебафф).
@@ -38,5 +38,10 @@ export default class PotionDataModel extends foundry.abstract.TypeDataModel {
         })
       })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

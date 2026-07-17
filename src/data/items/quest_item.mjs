@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
  * Квестовый предмет — привязан к заданию. По умолчанию не продаётся и не
@@ -21,5 +21,10 @@ export default class QuestItemDataModel extends foundry.abstract.TypeDataModel {
       can_be_sold: new BooleanField({ required: true, initial: false }),
       can_be_dropped: new BooleanField({ required: true, initial: false })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

@@ -41,3 +41,14 @@ export function craftingFields() {
     })
   };
 }
+
+/**
+ * Миграция легаси-данных блока crafting. Вызывать из static migrateData(source)
+ * КАЖДОЙ модели, спредящей craftingFields(): choices-валидация дисциплины
+ * выполняется до подготовки данных, и устаревшее значение роняет инициализацию
+ * всего предмета (Failed to initialize Item).
+ */
+export function migrateCraftingData(source) {
+  // Дисциплина "Ткачество" переименована в "Шитьё" (2026-07-16): weaving → tailoring.
+  if (source.crafting?.discipline === "weaving") source.crafting.discipline = "tailoring";
+}

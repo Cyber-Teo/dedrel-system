@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 import { MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM } from "../../constants.mjs";
 
 /**
@@ -71,6 +71,7 @@ export default class CraftMaterialDataModel extends foundry.abstract.TypeDataMod
       const withSlots = source.grants.find(g => g?.slots?.length);
       source.slots = withSlots ? [...withSlots.slots] : [];
     }
+    migrateCraftingData(source);
     return super.migrateData(source);
   }
 }

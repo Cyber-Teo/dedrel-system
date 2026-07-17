@@ -36,7 +36,7 @@ export const DEFAULT_CURRENCIES = [
 
 // Функциональные ремёсла системы крафта (craft/New Craft.md): значения поля
 // system.crafting.discipline и дисциплина рецептов. Пустая строка = не задано.
-export const CRAFT_DISCIPLINE_ENUM = ["alchemy", "smithing", "inscription", "weaving", "carpentry", "jewelry", "engineering"];
+export const CRAFT_DISCIPLINE_ENUM = ["alchemy", "smithing", "inscription", "tailoring", "carpentry", "jewelry", "engineering"];
 
 // Классы ремесленных материалов (system.material_class у craft_material).
 // Семь канонических типов сырья из правил крафта.

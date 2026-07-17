@@ -1,5 +1,5 @@
 import { ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 export default class LootData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -17,5 +17,10 @@ export default class LootData extends foundry.abstract.TypeDataModel {
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       formula_heal: new StringField({ initial: "", label: "Healing Formula" })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

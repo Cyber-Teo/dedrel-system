@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 import { AMMO_TYPE_ENUM } from "../../constants.mjs";
 
 export default class AmmunitionDataModel extends foundry.abstract.TypeDataModel {
@@ -35,6 +35,7 @@ export default class AmmunitionDataModel extends foundry.abstract.TypeDataModel 
     // ammo_type стал enum (arrow|bolt|shot). Легаси-значение "bullet" (огнестрел)
     // переименовано в "shot" — иначе choices-валидация отвергла бы его.
     if (source.ammo_type === "bullet") source.ammo_type = "shot";
+    migrateCraftingData(source);
     return super.migrateData(source);
   }
 }

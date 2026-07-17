@@ -1,5 +1,5 @@
 import { ITEM_RARITY_ENUM, ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -82,5 +82,10 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
 
       equipped: new fields.BooleanField({ initial: false })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 import { ACCESSORY_SLOT_TYPES } from "../../constants.mjs";
 
 /**
@@ -53,5 +53,10 @@ export default class MagicItemDataModel extends foundry.abstract.TypeDataModel {
         })
       })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

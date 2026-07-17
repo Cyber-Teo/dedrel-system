@@ -1,5 +1,5 @@
 import { physicalItemFields } from "./_physical.mjs";
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
  * Свиток — одноразовый носитель заклинания. Хранит ссылку на предмет-заклинание
@@ -36,5 +36,10 @@ export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
         })
       })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }

@@ -1,4 +1,4 @@
-import { craftingFields } from "./_crafting.mjs";
+import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 export default class TradeGoodData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -13,5 +13,10 @@ export default class TradeGoodData extends foundry.abstract.TypeDataModel {
       unit_type: new StringField({ required: true, initial: "item" }),
       stackable: new BooleanField({ required: true, initial: true })
     };
+  }
+
+  static migrateData(source) {
+    migrateCraftingData(source);
+    return super.migrateData(source);
   }
 }
