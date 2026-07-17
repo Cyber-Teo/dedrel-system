@@ -83,37 +83,19 @@ export default class DedrelItem extends Item {
 
   /**
    * Метод активации/использования предмета (вызывается при клике по предмету или броске).
-   * Проверяет необходимые ресурсы (Очки Действия), выбирает подходящее оружие и отправляет результат в чат.
+   * Оркестратор потока: гейты по типу → эффективная стоимость → требования к оружию
+   * и ресурсам → early-return для пассивок → диалог подтверждения.
+   * Сборка диалога — #buildUseDialogContent, исполнение — #confirmUse.
    */
   async use() {
     const actor = this.actor;
     if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotOwned"));
 
-    // Экранирование имён предметов/оружия перед вставкой в HTML диалогов
-    // (имена задаются пользователем и потенциально содержат разметку).
-    const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
-
     if (!["maneuver", "talent", "mutation", "spell", "magic_item", "weapon", "armor", "loot", "trade_good", "potion", "scroll"].includes(this.type)) {
       return this.postToChat();
     }
 
-    // Светильник-тумблер: у предмета с собственным transfer-эффектом света
-    // (факел, лампа) использование ПЕРЕКЛЮЧАЕТ свет (disabled эффекта), а не
-    // накладывает копии на актёра. Свет — нативные change-строки token.light.*,
-    // ядро применяет/гасит их само. Оружие/броню не трогаем (их use — атака,
-    // а свет и так гейтится экипировкой); зелья и свитки — расходники.
-    if (["magic_item", "loot", "trade_good"].includes(this.type)) {
-      const lightEffects = this.effects.filter(e => e.transfer && hasTokenLightChanges(e));
-      if (lightEffects.length) {
-        const enable = lightEffects.some(e => e.disabled);
-        for (const effect of lightEffects) await effect.update({ disabled: !enable });
-        ui.notifications.info(game.i18n.format(
-          enable ? "DEDREL.Notifications.LightOn" : "DEDREL.Notifications.LightOff",
-          { name: this.name }
-        ));
-        return;
-      }
-    }
+    if (await this.#toggleLightEffects()) return;
 
     // Свиток без привязанного заклинания использовать нельзя — открываем лист,
     // чтобы ГМ указал spell_id/spell_key (не тратим свиток впустую).
@@ -142,7 +124,6 @@ export default class DedrelItem extends Item {
     Hooks.callAll("dedrelPreUseItem", hookCtx);
     apCost = hookCtx.apCost;
 
-    
     // Проверка зарядов
     const usesMaxStr = this.system.uses_max || "0";
     const usesMax = parseInt(usesMaxStr, 10) || 0;
@@ -150,88 +131,10 @@ export default class DedrelItem extends Item {
     const hasCharges = usesMax > 0;
 
     // Проверка на потребность в оружии
-    let requiresWeapon = false;
-    let validWeapons = [];
-    
-    if (this.type === "maneuver" || this.type === "spell") {
-      const wType = this.system.req_weapon_type || {};
-      const wDmg = this.system.req_weapon_damage_type || {};
-      if (wType.melee || wType.ranged || wType.shield || wType.magic ||
-          wDmg.piercing || wDmg.bludgeoning || wDmg.slashing) {
-        requiresWeapon = true;
-      }
-      
-      const wProp = this.system.req_weapon_property || {};
-      if (Object.values(wProp).some(Boolean)) {
-        requiresWeapon = true;
-      }
-      
-      const reqSkill = this.system.req_weapon_skill_group || "";
-      if (reqSkill && reqSkill !== "any") {
-        requiresWeapon = true;
-      }
-
-      // Гейт по конкретному оружию: подстроки ищутся в system.key И в имени
-      // (без регистра), совпадение любой подстроки достаточно. Магические и
-      // материальные варианты проходят, пока наследуют базовый key/имя
-      // ("adamantine_greatsword", «Адамантиновый двуручный меч»).
-      const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
-      if (reqKeys.length > 0) {
-        requiresWeapon = true;
-      }
-
-      if (requiresWeapon) {
-        validWeapons = actor.items.filter(i => {
-          if (i.type !== "weapon" || !i.system.equipped) return false;
-
-          if (reqSkill && reqSkill !== "any" && i.system.skill !== reqSkill) return false;
-
-          if (reqKeys.length > 0) {
-            const wKey = (i.system.key || "").toLowerCase();
-            const wName = i.name.toLowerCase();
-            const matchKey = reqKeys.some(k => {
-              const needle = k.trim().toLowerCase();
-              return wKey.includes(needle) || wName.includes(needle);
-            });
-            if (!matchKey) return false;
-          }
-
-          const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
-          if (hasReqType) {
-            const wt = i.system.weapon_type || {};
-            let matchType = (wt.melee && wType.melee) || (wt.ranged && wType.ranged) ||
-                            (wt.shield && wType.shield) || (wt.magic && wType.magic);
-            if (!matchType) return false;
-          }
-
-          const hasReqDmg = wDmg.piercing || wDmg.bludgeoning || wDmg.slashing;
-          if (hasReqDmg) {
-            const wd = i.system.damage_type || {};
-            let matchDmg = (wd.piercing && wDmg.piercing) || (wd.bludgeoning && wDmg.bludgeoning) ||
-                           (wd.slashing && wDmg.slashing);
-            if (!matchDmg) return false;
-          }
-
-          // Требуемые свойства оружия (двуручное, быстрое, метательное и т.п.):
-          // как и у типов оружия/урона, достаточно ЛЮБОГО из отмеченных (ИЛИ).
-          // Между категориями требований действует «И». Флаги свойств у оружия
-          // лежат плоско в system (is_twohanded, is_fast, ...).
-          // is_twohanded — требование двуручного ХВАТА: истинно двуручное проходит
-          // всегда, вариативный хват (is_variable_grip) — со свободной второй рукой.
-          const requiredProps = Object.entries(wProp).filter(([, req]) => req).map(([p]) => p);
-          if (requiredProps.length > 0) {
-            const matchProp = requiredProps.some(p =>
-              p === "is_twohanded" ? heldTwoHanded(actor, i) : !!i.system[p]
-            );
-            if (!matchProp) return false;
-          }
-          return true;
-        });
-      }
-    }
+    const { requiresWeapon, validWeapons } = this.#collectWeaponRequirements(actor);
 
     // Перезарядка: стоимость ОД диктует само оружие (system.reload_cost 1-3), а не
-    // манёвр. Для отображения в диалоге берём первое валидное оружие; в колбэке
+    // манёвр. Для отображения в диалоге берём первое валидное оружие; в #confirmUse
     // цена пересчитывается по фактически выбранному стволу (у актёра может быть
     // несколько перезаряжаемых). Так игрок не перезарядит аркебузу дёшево.
     const isReloadAction = this.type === "maneuver" && this.system.is_reload_action;
@@ -242,7 +145,7 @@ export default class DedrelItem extends Item {
     // Проверка расходуемых предметов.
     // ВАЖНО: боеприпас оружия (consume_target) здесь НЕ трогаем — оружие само по
     // себе не «стреляет». Выстрел = манёвр с req_weapon; боеприпас выбранного
-    // оружия списывается в колбэке ниже. Иначе клик по оружию в инвентаре
+    // оружия списывается в #confirmUse. Иначе клик по оружию в инвентаре
     // (item.use → лист) превращался бы в диалог расхода боеприпаса.
     let consumeAmount = this.system.consume_amount || 1;
     let isSelfConsume = false;
@@ -279,71 +182,215 @@ export default class DedrelItem extends Item {
       return this.sheet.render(true);
     }
 
-    // Подготовка диалогового окна
-    let content = `<div style="margin-bottom: 15px;">`;
-    
-    let currentAp = 0;
+    // Пулы ОД считаем один раз: они нужны и диалогу (доступно ОД, потолок
+    // переменной цены), и #confirmUse (списание из специального/универсального).
+    const isVariable = this.system.is_variable_cost;
+    const minAp = apCost;
+    const pools = (apCost > 0 || isVariable)
+      ? this.#resolveApPools()
+      : { currentAp: 0, apSpecific: 0, specificApKey: "" };
+
+    const ctx = {
+      actor, apCost, isVariable, minAp, ...pools,
+      hasCharges, usesValue, usesMax,
+      requiresWeapon, validWeapons, isReloadAction,
+      isSelfConsume, consumeAmount, hasEnoughAmmo
+    };
+
+    await DialogV2.wait({
+      window: { title: game.i18n.format("DEDREL.Chat.UseItem", {name: this.name}) },
+      content: this.#buildUseDialogContent(ctx),
+      buttons: [
+        {
+          action: "confirm",
+          icon: "fa-solid fa-check",
+          label: game.i18n.localize("DEDREL.Chat.Confirm"),
+          callback: (event, button, dialog) => this.#confirmUse(dialog, ctx)
+        },
+        {
+          action: "cancel",
+          icon: "fa-solid fa-times",
+          label: game.i18n.localize("DEDREL.Chat.Cancel")
+        }
+      ]
+    });
+  }
+
+  /**
+   * Светильник-тумблер: у предмета с собственным transfer-эффектом света
+   * (факел, лампа) использование ПЕРЕКЛЮЧАЕТ свет (disabled эффекта), а не
+   * накладывает копии на актёра. Свет — нативные change-строки token.light.*,
+   * ядро применяет/гасит их само. Оружие/броню не трогаем (их use — атака,
+   * а свет и так гейтится экипировкой); зелья и свитки — расходники.
+   * @returns {Promise<boolean>} true — предмет оказался светильником и был переключён.
+   */
+  async #toggleLightEffects() {
+    if (!["magic_item", "loot", "trade_good"].includes(this.type)) return false;
+    const lightEffects = this.effects.filter(e => e.transfer && hasTokenLightChanges(e));
+    if (!lightEffects.length) return false;
+
+    const enable = lightEffects.some(e => e.disabled);
+    for (const effect of lightEffects) await effect.update({ disabled: !enable });
+    ui.notifications.info(game.i18n.format(
+      enable ? "DEDREL.Notifications.LightOn" : "DEDREL.Notifications.LightOff",
+      { name: this.name }
+    ));
+    return true;
+  }
+
+  /**
+   * Определяет, требует ли манёвр/заклинание оружие, и отбирает подходящие
+   * экипированные стволы. Между категориями требований действует «И», внутри
+   * категории достаточно ЛЮБОГО из отмеченных («ИЛИ»).
+   * @returns {{requiresWeapon: boolean, validWeapons: Item[]}}
+   */
+  #collectWeaponRequirements(actor) {
+    if (this.type !== "maneuver" && this.type !== "spell") {
+      return { requiresWeapon: false, validWeapons: [] };
+    }
+
+    const wType = this.system.req_weapon_type || {};
+    const wDmg = this.system.req_weapon_damage_type || {};
+    const wProp = this.system.req_weapon_property || {};
+    const reqSkill = this.system.req_weapon_skill_group || "";
+    // Гейт по конкретному оружию: подстроки ищутся в system.key И в имени
+    // (без регистра), совпадение любой подстроки достаточно. Магические и
+    // материальные варианты проходят, пока наследуют базовый key/имя
+    // ("adamantine_greatsword", «Адамантиновый двуручный меч»).
+    const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
+
+    const requiresWeapon = !!(
+      wType.melee || wType.ranged || wType.shield || wType.magic ||
+      wDmg.piercing || wDmg.bludgeoning || wDmg.slashing ||
+      Object.values(wProp).some(Boolean) ||
+      (reqSkill && reqSkill !== "any") ||
+      reqKeys.length > 0
+    );
+    if (!requiresWeapon) return { requiresWeapon: false, validWeapons: [] };
+
+    const validWeapons = actor.items.filter(i => {
+      if (i.type !== "weapon" || !i.system.equipped) return false;
+
+      if (reqSkill && reqSkill !== "any" && i.system.skill !== reqSkill) return false;
+
+      if (reqKeys.length > 0) {
+        const wKey = (i.system.key || "").toLowerCase();
+        const wName = i.name.toLowerCase();
+        const matchKey = reqKeys.some(k => {
+          const needle = k.trim().toLowerCase();
+          return wKey.includes(needle) || wName.includes(needle);
+        });
+        if (!matchKey) return false;
+      }
+
+      const hasReqType = wType.melee || wType.ranged || wType.shield || wType.magic;
+      if (hasReqType) {
+        const wt = i.system.weapon_type || {};
+        let matchType = (wt.melee && wType.melee) || (wt.ranged && wType.ranged) ||
+                        (wt.shield && wType.shield) || (wt.magic && wType.magic);
+        if (!matchType) return false;
+      }
+
+      const hasReqDmg = wDmg.piercing || wDmg.bludgeoning || wDmg.slashing;
+      if (hasReqDmg) {
+        const wd = i.system.damage_type || {};
+        let matchDmg = (wd.piercing && wDmg.piercing) || (wd.bludgeoning && wDmg.bludgeoning) ||
+                       (wd.slashing && wDmg.slashing);
+        if (!matchDmg) return false;
+      }
+
+      // Требуемые свойства оружия (двуручное, быстрое, метательное и т.п.):
+      // флаги свойств у оружия лежат плоско в system (is_twohanded, is_fast, ...).
+      // is_twohanded — требование двуручного ХВАТА: истинно двуручное проходит
+      // всегда, вариативный хват (is_variable_grip) — со свободной второй рукой.
+      const requiredProps = Object.entries(wProp).filter(([, req]) => req).map(([p]) => p);
+      if (requiredProps.length > 0) {
+        const matchProp = requiredProps.some(p =>
+          p === "is_twohanded" ? heldTwoHanded(actor, i) : !!i.system[p]
+        );
+        if (!matchProp) return false;
+      }
+      return true;
+    });
+
+    return { requiresWeapon: true, validWeapons };
+  }
+
+  /**
+   * Доступные пулы ОД для оплаты предмета. Специальный пул задействуем ТОЛЬКО
+   * если он есть в схеме актёра. У NPC его нет (единый универсальный пул) →
+   * стоимость идёт с ap_universal, и мы не пишем фантомный ключ в actor.update.
+   * @returns {{currentAp: number, apSpecific: number, specificApKey: string}}
+   */
+  #resolveApPools() {
+    const actor = this.actor;
+    const apUniversal = actor.system.resources?.ap_universal?.value || 0;
     let apSpecific = 0;
     let specificApKey = "";
-    
-    let isVariable = this.system.is_variable_cost;
-    let minAp = apCost;
-    let maxAp = this.system.variable_cost_max || 99;
 
-    if (apCost > 0 || isVariable) {
-      let apUniversal = actor.system.resources?.ap_universal?.value || 0;
-      // Специальный пул задействуем ТОЛЬКО если он есть в схеме актёра.
-      // У NPC его нет (единый универсальный пул) → стоимость идёт с ap_universal,
-      // и мы не пишем фантомный ключ в actor.update.
-      if (this.type === "maneuver" && actor.system.resources?.ap_maneuver) {
-        apSpecific = actor.system.resources.ap_maneuver.value || 0;
-        specificApKey = "system.resources.ap_maneuver.value";
-      } else if ((this.type === "spell" || this.type === "magic_item") && actor.system.resources?.ap_magic) {
-        apSpecific = actor.system.resources.ap_magic.value || 0;
-        specificApKey = "system.resources.ap_magic.value";
-      }
-      currentAp = apUniversal + apSpecific;
-      
-      if (isVariable) {
-        maxAp = Math.min(maxAp, currentAp);
+    if (this.type === "maneuver" && actor.system.resources?.ap_maneuver) {
+      apSpecific = actor.system.resources.ap_maneuver.value || 0;
+      specificApKey = "system.resources.ap_maneuver.value";
+    } else if ((this.type === "spell" || this.type === "magic_item") && actor.system.resources?.ap_magic) {
+      apSpecific = actor.system.resources.ap_magic.value || 0;
+      specificApKey = "system.resources.ap_magic.value";
+    }
+
+    return { currentAp: apUniversal + apSpecific, apSpecific, specificApKey };
+  }
+
+  /**
+   * HTML диалога подтверждения использования: стоимость ОД (фиксированная или
+   * переменная с инпутом), заряды, расход самого предмета и выбор оружия.
+   * @param {object} ctx - контекст использования, собранный в use()
+   */
+  #buildUseDialogContent(ctx) {
+    // Экранирование имён предметов/оружия перед вставкой в HTML диалога
+    // (имена задаются пользователем и потенциально содержат разметку).
+    const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
+    let content = `<div style="margin-bottom: 15px;">`;
+
+    if (ctx.apCost > 0 || ctx.isVariable) {
+      if (ctx.isVariable) {
+        const maxAp = Math.min(this.system.variable_cost_max || 99, ctx.currentAp);
         const maxLabel = this.system.variable_cost_max || game.i18n.localize("DEDREL.Chat.VariableCostMax");
         content += `
           <div class="form-group" style="margin-top: 10px;">
-            <label style="font-weight: bold;">${game.i18n.format("DEDREL.Chat.VariableCostLabel", { min: minAp, max: maxLabel })}</label>
-            <input type="number" id="use-ap-cost" value="${minAp}" min="${minAp}" max="${maxAp}" style="width: 100%; padding: 4px;">
+            <label style="font-weight: bold;">${game.i18n.format("DEDREL.Chat.VariableCostLabel", { min: ctx.minAp, max: maxLabel })}</label>
+            <input type="number" id="use-ap-cost" value="${ctx.minAp}" min="${ctx.minAp}" max="${maxAp}" style="width: 100%; padding: 4px;">
           </div>
         `;
-        content += `<p style="color: gray; font-size: 12px;">${game.i18n.format("DEDREL.Chat.AvailableAP", { current: currentAp })}</p>`;
+        content += `<p style="color: gray; font-size: 12px;">${game.i18n.format("DEDREL.Chat.AvailableAP", { current: ctx.currentAp })}</p>`;
       } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: esc(this.name), cost: apCost})}</p>`;
-        if (apCost > currentAp) {
-          content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: currentAp, cost: apCost})}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.SpendAP", {name: esc(this.name), cost: ctx.apCost})}</p>`;
+        if (ctx.apCost > ctx.currentAp) {
+          content += `<p style="color: red; font-weight: bold;">${game.i18n.format("DEDREL.Chat.NotEnoughAPDialog", {current: ctx.currentAp, cost: ctx.apCost})}</p>`;
         }
       }
     }
 
-    if (hasCharges) {
-      content += `<p>${game.i18n.format("DEDREL.Chat.SpendCharge", {value: usesValue, max: usesMax})}</p>`;
-      if (usesValue <= 0) {
+    if (ctx.hasCharges) {
+      content += `<p>${game.i18n.format("DEDREL.Chat.SpendCharge", {value: ctx.usesValue, max: ctx.usesMax})}</p>`;
+      if (ctx.usesValue <= 0) {
         content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Chat.OutOfCharges")}</p>`;
       }
     }
 
-    if (isSelfConsume) {
-      if (!hasEnoughAmmo) {
+    if (ctx.isSelfConsume) {
+      if (!ctx.hasEnoughAmmo) {
         content += `<p style="color: red; font-weight: bold;">${game.i18n.localize("DEDREL.Notifications.ItemDepleted")}</p>`;
       } else {
-        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: esc(this.name), count: consumeAmount})}</p>`;
+        content += `<p>${game.i18n.format("DEDREL.Chat.WillBeConsumed", {name: esc(this.name), count: ctx.consumeAmount})}</p>`;
       }
     }
 
-    if (requiresWeapon) {
-      if (validWeapons.length > 0) {
+    if (ctx.requiresWeapon) {
+      if (ctx.validWeapons.length > 0) {
         content += `
           <div class="form-group" style="margin-top: 10px;">
             <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.Weapon")}</label>
             <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
-              ${validWeapons.map(w => `<option value="${w.id}">${esc(w.name)}</option>`).join("")}
+              ${ctx.validWeapons.map(w => `<option value="${w.id}">${esc(w.name)}</option>`).join("")}
             </select>
           </div>
         `;
@@ -353,240 +400,273 @@ export default class DedrelItem extends Item {
     }
 
     content += `</div>`;
+    return content;
+  }
 
-    await DialogV2.wait({
-      window: { title: game.i18n.format("DEDREL.Chat.UseItem", {name: this.name}) },
-      content: content,
-      buttons: [
-        {
-          action: "confirm",
-          icon: "fa-solid fa-check",
-          label: game.i18n.localize("DEDREL.Chat.Confirm"),
-          callback: async (event, button, dialog) => {
-            // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
-            // проверки заряда, расхода боеприпаса и карточки.
-            let selWeapon = null;
-            if (requiresWeapon) {
-              const selEl = dialog.element.querySelector("#use-weapon-select");
-              selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
-            }
+  /**
+   * Исполнение подтверждённого использования: резолв выбранного оружия и
+   * фактической стоимости → валидация ресурсов → списание (ОД, DSL-моды,
+   * заряды, боеприпас, сам предмет) → последствия (self-эффекты, макрос,
+   * карточка или каст вшитого заклинания, концентрация, цепные манёвры).
+   * @param {DialogV2} dialog - открытый диалог (для чтения инпутов)
+   * @param {object} ctx - контекст использования, собранный в use()
+   */
+  async #confirmUse(dialog, ctx) {
+    const { actor, apCost, isVariable, minAp, currentAp,
+            hasCharges, usesValue, requiresWeapon, isReloadAction,
+            isSelfConsume, consumeAmount, hasEnoughAmmo } = ctx;
 
-            let finalApCost = apCost;
-            if (isVariable) {
-              const inputEl = dialog.element.querySelector("#use-ap-cost");
-              if (inputEl) finalApCost = parseInt(inputEl.value) || minAp;
-            }
-            // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
-            if (isReloadAction && selWeapon) {
-              finalApCost = selWeapon.system.reload_cost || 1;
-            }
+    // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
+    // проверки заряда, расхода боеприпаса и карточки.
+    let selWeapon = null;
+    if (requiresWeapon) {
+      const selEl = dialog.element.querySelector("#use-weapon-select");
+      selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
+    }
 
-            // Выстрел из перезаряжаемого оружия: атакующий манёвр (цель — не сам
-            // стрелок, с боевыми кнопками) перезаряжаемым стволом. Прицеливание и
-            // прочие self-подготовки под это не подпадают. Из разряженного нельзя.
-            const isReloadingShot = requiresWeapon && !isReloadAction
-              && !!selWeapon?.system?.is_reloading
-              && this.system.target_type !== "self"
-              && !this.system.hide_combat_buttons;
-            if (isReloadingShot && !selWeapon.system.loaded) {
-              ui.notifications.warn(game.i18n.format("DEDREL.Notifications.WeaponNotLoaded", { name: selWeapon.name }));
-              return;
-            }
+    let finalApCost = apCost;
+    if (isVariable) {
+      const inputEl = dialog.element.querySelector("#use-ap-cost");
+      if (inputEl) finalApCost = parseInt(inputEl.value) || minAp;
+    }
+    // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
+    if (isReloadAction && selWeapon) {
+      finalApCost = selWeapon.system.reload_cost || 1;
+    }
 
-            if (finalApCost > 0 && finalApCost > currentAp) {
-              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
-              return;
-            }
-            if (hasCharges && usesValue <= 0) {
-              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughUses"));
-              return;
-            }
-            if (!hasEnoughAmmo) {
-              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
-              return;
-            }
+    // Выстрел из перезаряжаемого оружия: атакующий манёвр (цель — не сам
+    // стрелок, с боевыми кнопками) перезаряжаемым стволом. Прицеливание и
+    // прочие self-подготовки под это не подпадают. Из разряженного нельзя.
+    const isReloadingShot = requiresWeapon && !isReloadAction
+      && !!selWeapon?.system?.is_reloading
+      && this.system.target_type !== "self"
+      && !this.system.hide_combat_buttons;
+    if (isReloadingShot && !selWeapon.system.loaded) {
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.WeaponNotLoaded", { name: selWeapon.name }));
+      return;
+    }
 
-            // Боеприпас ВЫБРАННОГО оружия (манёвр-выстрел с req_weapon). Резолвим и
-            // валидируем ДО траты ОД, чтобы не списать ОД при пустом колчане.
-            let weaponAmmo = null;
-            let weaponAmmoAmount = 1;
-            let ammoSnapshot = null;
-            // Перезарядка боеприпас НЕ расходует (его тратит выстрел) — пропускаем.
-            if (requiresWeapon && !isReloadAction) {
-              if (selWeapon?.system?.consume_target) {
-                weaponAmmo = actor.items.get(selWeapon.system.consume_target);
-                weaponAmmoAmount = selWeapon.system.consume_amount || 1;
-                if (!weaponAmmo || (weaponAmmo.system.quantity || 0) < weaponAmmoAmount) {
-                  ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
-                  return;
-                }
-                // Снапшот бонусов боеприпаса СЕЙЧАС — ниже он может быть удалён
-                // (последняя единица), а бросок урона (карта атаки) читает эти
-                // данные из флага сообщения уже после списания.
-                const as = weaponAmmo.system;
-                ammoSnapshot = {
-                  ap: as.armor_piercing || 0,
-                  dmg: as.damage_bonus || "",
-                  dmgType: as.damage_bonus_type || "",
-                  vs: as.vs_creature || {}
-                };
-              }
-            }
+    if (finalApCost > 0 && finalApCost > currentAp) {
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
+      return;
+    }
+    if (hasCharges && usesValue <= 0) {
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughUses"));
+      return;
+    }
+    if (!hasEnoughAmmo) {
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
+      return;
+    }
 
-            // Списание ОД
-            if (finalApCost > 0) {
-              let apUniversal = actor.system.resources?.ap_universal?.value || 0;
-              let costLeft = finalApCost;
-              let updates = {};
-              
-              if (specificApKey) {
-                let specificSpend = Math.min(apSpecific, costLeft);
-                updates[specificApKey] = apSpecific - specificSpend;
-                costLeft -= specificSpend;
-              }
-              
-              if (costLeft > 0) {
-                let uniSpend = Math.min(apUniversal, costLeft);
-                updates["system.resources.ap_universal.value"] = apUniversal - uniSpend;
-              }
-              
-              await actor.update(updates);
-            }
-            
-            // Сжигаем DSL-модификаторы стадии "use" (моды стоимости ОД).
-            // Эффект с модами более поздних стадий (attack/damage) сгорит после
-            // соответствующего броска, а не здесь.
-            if (this.type === "maneuver" || this.type === "spell") {
-              await DedrelBonuses.consumeStage(actor, this, "use");
-            }
+    // Боеприпас ВЫБРАННОГО оружия (манёвр-выстрел с req_weapon). Резолвим и
+    // валидируем ДО траты ОД, чтобы не списать ОД при пустом колчане.
+    // Перезарядка боеприпас НЕ расходует (его тратит выстрел) — пропускаем.
+    let ammo = { weaponAmmo: null, weaponAmmoAmount: 1, ammoSnapshot: null };
+    if (requiresWeapon && !isReloadAction && selWeapon?.system?.consume_target) {
+      const resolved = this.#resolveWeaponAmmo(selWeapon);
+      if (!resolved) {
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAmmoOrItems"));
+        return;
+      }
+      ammo = resolved;
+    }
 
+    // Списание ОД
+    if (finalApCost > 0) {
+      await this.#spendAp(finalApCost, ctx);
+    }
 
-            // Списание Зарядов
-            if (hasCharges) {
-              await this.update({ "system.uses_value": usesValue - 1 });
-            }
+    // Сжигаем DSL-модификаторы стадии "use" (моды стоимости ОД).
+    // Эффект с модами более поздних стадий (attack/damage) сгорит после
+    // соответствующего броска, а не здесь.
+    if (this.type === "maneuver" || this.type === "spell") {
+      await DedrelBonuses.consumeStage(actor, this, "use");
+    }
 
-            // Списание предметов / боеприпасов
-            // deleteSelfAfter: если сам предмет израсходован до нуля, НЕ удаляем его сразу —
-            // ниже postToChat() обращается к this (this.name, this.actor, this.effects).
-            // Удаляем в самом конце, после отправки карточки.
-            let deleteSelfAfter = false;
-            if (weaponAmmo) {
-              // Данные для проверки сбора снимаем ДО возможного удаления предмета.
-              const aName = weaponAmmo.name;
-              const aType = weaponAmmo.system.ammo_type;
-              const aRecovery = weaponAmmo.system.recovery_chance || 0;
-              const newQty = Math.max(0, (weaponAmmo.system.quantity || 0) - weaponAmmoAmount);
-              if (newQty <= 0) {
-                await weaponAmmo.delete();
-              } else {
-                await weaponAmmo.update({ "system.quantity": newQty });
-              }
-              // Поломка/сбор: shot (порох) не подбирается. Иначе на каждую списанную
-              // единицу кидаем recovery_chance и сообщаем, сколько уцелело.
-              if (aType !== "shot" && weaponAmmoAmount > 0) {
-                await this.#reportAmmoRecovery(actor, aName, aRecovery, weaponAmmoAmount);
-              }
-            }
-            if (isSelfConsume) {
-              const newQty = Math.max(0, (this.system.quantity || 0) - consumeAmount);
-              if (newQty <= 0) {
-                deleteSelfAfter = true;
-              } else {
-                await this.update({ "system.quantity": newQty });
-              }
-            }
+    // Списание Зарядов
+    if (hasCharges) {
+      await this.update({ "system.uses_value": usesValue - 1 });
+    }
 
-            // Состояние заряда: выстрел разряжает ствол, перезарядка — заряжает.
-            if (isReloadingShot && selWeapon) {
-              await selWeapon.update({ "system.loaded": false });
-            } else if (isReloadAction && selWeapon) {
-              await selWeapon.update({ "system.loaded": true });
-              ui.notifications.info(game.i18n.format("DEDREL.Notifications.WeaponReloaded", { name: selWeapon.name }));
-            }
+    // Списание предметов / боеприпасов
+    // deleteSelfAfter: если сам предмет израсходован до нуля, НЕ удаляем его сразу —
+    // ниже postToChat() обращается к this (this.name, this.actor, this.effects).
+    // Удаляем в самом конце, после отправки карточки.
+    let deleteSelfAfter = false;
+    if (ammo.weaponAmmo) {
+      await this.#spendWeaponAmmo(ammo.weaponAmmo, ammo.weaponAmmoAmount);
+    }
+    if (isSelfConsume) {
+      const newQty = Math.max(0, (this.system.quantity || 0) - consumeAmount);
+      if (newQty <= 0) {
+        deleteSelfAfter = true;
+      } else {
+        await this.update({ "system.quantity": newQty });
+      }
+    }
 
-            const selectedWeaponId = requiresWeapon ? (selWeapon?.id ?? null) : null;
+    // Состояние заряда: выстрел разряжает ствол, перезарядка — заряжает.
+    if (isReloadingShot && selWeapon) {
+      await selWeapon.update({ "system.loaded": false });
+    } else if (isReloadAction && selWeapon) {
+      await selWeapon.update({ "system.loaded": true });
+      ui.notifications.info(game.i18n.format("DEDREL.Notifications.WeaponReloaded", { name: selWeapon.name }));
+    }
 
-            // Применение шаблонных self-эффектов (flags.dedrel.applyTo = "self")
-            // с подстановкой @spentAp / @apCost / @overspent.
-            // Выполняется ДО макроса, чтобы аварийный люк (on_use_macro) видел уже применённый бафф.
-            await this._applySelfEffects({ spentAp: finalApCost, apCost: this.system.ap_cost || 0 });
+    const selectedWeaponId = requiresWeapon ? (selWeapon?.id ?? null) : null;
 
-            // Вызов макроса если есть
-            if (this.system.on_use_macro) {
-              let macro = game.macros.find(m => m.name === this.system.on_use_macro);
-              if (!macro) {
-                if (this.system.on_use_macro.startsWith("Compendium.") || this.system.on_use_macro.startsWith("Macro.")) {
-                  macro = await fromUuid(this.system.on_use_macro);
-                } else {
-                  for (let pack of game.packs.values()) {
-                    if (pack.documentName === "Macro") {
-                      const index = await pack.getIndex();
-                      const entry = index.find(e => e.name === this.system.on_use_macro);
-                      if (entry) {
-                        macro = await pack.getDocument(entry._id);
-                        break;
-                      }
-                    }
-                  }
-                }
-              }
-              
-              if (macro) {
-                // weapon — оружие/щит, выбранные игроком в диалоге использования (если требовалось)
-                macro.execute({
-                  actor: actor,
-                  item: this,
-                  spentAp: finalApCost,
-                  weapon: selectedWeaponId ? actor.items.get(selectedWeaponId) : null
-                });
-              } else {
-                ui.notifications.warn(game.i18n.format("DEDREL.Notifications.MacroNotFound", {name: this.system.on_use_macro}));
-              }
-            }
+    // Применение шаблонных self-эффектов (flags.dedrel.applyTo = "self")
+    // с подстановкой @spentAp / @apCost / @overspent.
+    // Выполняется ДО макроса, чтобы аварийный люк (on_use_macro) видел уже применённый бафф.
+    await this._applySelfEffects({ spentAp: finalApCost, apCost: this.system.ap_cost || 0 });
 
-            // Свиток и magic_item со вшитым заклинанием кастуют его (эфемерная копия
-            // на акторе), а не шлют собственную карточку. Списание/заряд уже сняты выше.
-            const castsBoundSpell = this.type === "scroll"
-              || (this.type === "magic_item" && (this.system.spell_id || this.system.spell_key));
-            if (castsBoundSpell) {
-              await this.#castBoundSpell();
-            } else {
-              await this.postToChat(selectedWeaponId, ammoSnapshot);
-            }
+    // Вызов макроса если есть
+    if (this.system.on_use_macro) {
+      await this.#runOnUseMacro(finalApCost, selectedWeaponId);
+    }
 
-            // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
-            // кастере без авто-истечения, снимается вручную; потеря сознания
-            // обрывает концентрацию (напоминание в описании эффекта).
-            if (this.type === "spell") {
-              await this._applyConcentrationMarker();
-            }
+    // Свиток и magic_item со вшитым заклинанием кастуют его (эфемерная копия
+    // на акторе), а не шлют собственную карточку. Списание/заряд уже сняты выше.
+    const castsBoundSpell = this.type === "scroll"
+      || (this.type === "magic_item" && (this.system.spell_id || this.system.spell_key));
+    if (castsBoundSpell) {
+      await this.#castBoundSpell();
+    } else {
+      await this.postToChat(selectedWeaponId, ammo.ammoSnapshot);
+    }
 
-            // Обработка цепных манёвров (заклинания с Типом действия "В цепи" тоже)
-            if (this.type === "maneuver" || this.type === "spell") {
-              const aType = this.system.action_type || {};
-              if (aType.action || aType.chain || aType.reaction) {
-                const showOutside = game.settings.get("dedrel", "showChainsOutsideCombat");
-                if (game.combat?.started || showOutside) {
-                  game.dedrel.chainHUD.showFor(actor, this);
-                }
-              }
-            }
+    // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
+    // кастере без авто-истечения, снимается вручную; потеря сознания
+    // обрывает концентрацию (напоминание в описании эффекта).
+    if (this.type === "spell") {
+      await this._applyConcentrationMarker();
+    }
 
-            // Удаляем полностью израсходованный предмет только теперь,
-            // когда карточка уже отправлена и this больше не нужен.
-            if (deleteSelfAfter) {
-              await this.delete();
+    // Обработка цепных манёвров (заклинания с Типом действия "В цепи" тоже)
+    if (this.type === "maneuver" || this.type === "spell") {
+      const aType = this.system.action_type || {};
+      if (aType.action || aType.chain || aType.reaction) {
+        const showOutside = game.settings.get("dedrel", "showChainsOutsideCombat");
+        if (game.combat?.started || showOutside) {
+          game.dedrel.chainHUD.showFor(actor, this);
+        }
+      }
+    }
+
+    // Удаляем полностью израсходованный предмет только теперь,
+    // когда карточка уже отправлена и this больше не нужен.
+    if (deleteSelfAfter) {
+      await this.delete();
+    }
+  }
+
+  /**
+   * Резолвит боеприпас выбранного оружия (consume_target) и снимает снапшот его
+   * бонусов. Снапшот нужен СЕЙЧАС: при списании последней единицы предмет
+   * удаляется, а бросок урона (карта атаки) читает эти данные из флага
+   * сообщения уже после списания.
+   * @returns {{weaponAmmo: Item, weaponAmmoAmount: number, ammoSnapshot: object}|null} null — боеприпаса нет или не хватает.
+   */
+  #resolveWeaponAmmo(selWeapon) {
+    const weaponAmmo = this.actor.items.get(selWeapon.system.consume_target);
+    const weaponAmmoAmount = selWeapon.system.consume_amount || 1;
+    if (!weaponAmmo || (weaponAmmo.system.quantity || 0) < weaponAmmoAmount) return null;
+
+    const as = weaponAmmo.system;
+    return {
+      weaponAmmo,
+      weaponAmmoAmount,
+      ammoSnapshot: {
+        ap: as.armor_piercing || 0,
+        dmg: as.damage_bonus || "",
+        dmgType: as.damage_bonus_type || "",
+        vs: as.vs_creature || {}
+      }
+    };
+  }
+
+  /**
+   * Списывает ОД: сперва из специального пула (манёвры → ap_maneuver, магия →
+   * ap_magic, см. #resolveApPools), остаток — из универсального.
+   */
+  async #spendAp(cost, { apSpecific, specificApKey }) {
+    const apUniversal = this.actor.system.resources?.ap_universal?.value || 0;
+    let costLeft = cost;
+    const updates = {};
+
+    if (specificApKey) {
+      const specificSpend = Math.min(apSpecific, costLeft);
+      updates[specificApKey] = apSpecific - specificSpend;
+      costLeft -= specificSpend;
+    }
+
+    if (costLeft > 0) {
+      const uniSpend = Math.min(apUniversal, costLeft);
+      updates["system.resources.ap_universal.value"] = apUniversal - uniSpend;
+    }
+
+    await this.actor.update(updates);
+  }
+
+  /**
+   * Списывает боеприпас за выстрел (последняя единица удаляет предмет) и кидает
+   * проверку сбора. Поломка/сбор: shot (порох) не подбирается; иначе на каждую
+   * списанную единицу кидаем recovery_chance и сообщаем, сколько уцелело.
+   */
+  async #spendWeaponAmmo(weaponAmmo, amount) {
+    // Данные для проверки сбора снимаем ДО возможного удаления предмета.
+    const aName = weaponAmmo.name;
+    const aType = weaponAmmo.system.ammo_type;
+    const aRecovery = weaponAmmo.system.recovery_chance || 0;
+
+    const newQty = Math.max(0, (weaponAmmo.system.quantity || 0) - amount);
+    if (newQty <= 0) {
+      await weaponAmmo.delete();
+    } else {
+      await weaponAmmo.update({ "system.quantity": newQty });
+    }
+
+    if (aType !== "shot" && amount > 0) {
+      await this.#reportAmmoRecovery(this.actor, aName, aRecovery, amount);
+    }
+  }
+
+  /**
+   * Резолв и запуск on_use_macro: имя в мире → UUID (Compendium./Macro.) →
+   * имя в паках макросов.
+   */
+  async #runOnUseMacro(spentAp, selectedWeaponId) {
+    const actor = this.actor;
+    let macro = game.macros.find(m => m.name === this.system.on_use_macro);
+    if (!macro) {
+      if (this.system.on_use_macro.startsWith("Compendium.") || this.system.on_use_macro.startsWith("Macro.")) {
+        macro = await fromUuid(this.system.on_use_macro);
+      } else {
+        for (let pack of game.packs.values()) {
+          if (pack.documentName === "Macro") {
+            const index = await pack.getIndex();
+            const entry = index.find(e => e.name === this.system.on_use_macro);
+            if (entry) {
+              macro = await pack.getDocument(entry._id);
+              break;
             }
           }
-        },
-        {
-          action: "cancel",
-          icon: "fa-solid fa-times",
-          label: game.i18n.localize("DEDREL.Chat.Cancel")
         }
-      ]
-    });
+      }
+    }
+
+    if (macro) {
+      // weapon — оружие/щит, выбранные игроком в диалоге использования (если требовалось)
+      macro.execute({
+        actor: actor,
+        item: this,
+        spentAp: spentAp,
+        weapon: selectedWeaponId ? actor.items.get(selectedWeaponId) : null
+      });
+    } else {
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.MacroNotFound", {name: this.system.on_use_macro}));
+    }
   }
 
   /**
@@ -899,7 +979,7 @@ export default class DedrelItem extends Item {
       }
       if (this.system.formula_heal) {
         // Формулу дублируем в data-атрибут: расходуемое зелье к моменту клика по
-        // кнопке уже удалено из инвентаря (quantity 0 → delete в use()), поэтому
+        // кнопке уже удалено из инвентаря (quantity 0 → delete в #confirmUse), поэтому
         // обработчик не может достать её из живого предмета по item-id.
         buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}" data-heal-formula="${foundry.utils.escapeHTML(this.system.formula_heal)}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
       }
@@ -953,7 +1033,7 @@ export default class DedrelItem extends Item {
     // бросок на всех накрытых); дополнительно рисуем кнопку конуса. Длина конуса —
     // из range оружия (парсим ведущее число), угол — стандартный (template.mjs).
     // Только карточка ВЫСТРЕЛА, не перезарядка/прицеливание/прочие self-манёвры
-    // с тем же оружием: те же критерии, что isReloadingShot в use() — манёвр бьёт
+    // с тем же оружием: те же критерии, что isReloadingShot в #confirmUse — манёвр бьёт
     // по цели (не self), требует оружие, не помечен перезарядкой и не прячет бой.
     const isShotCard = reqWeapon
       && !this.system.is_reload_action
@@ -974,7 +1054,7 @@ export default class DedrelItem extends Item {
     // Если у предмета есть эффекты, которые НЕ переносятся автоматически (transfer: false),
     // значит это бафы/дебафы, которые нужно накладывать вручную (например, яд, заклинание).
     // Генерируем кнопку для наложения этих эффектов на выделенные токены.
-    // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в use().
+    // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в #confirmUse.
     // Аура-эффекты (payload applyTo: "aura" и маркеры flags.dedrel.aura) тоже:
     // их накладывает и снимает регион-аура (см. src/canvas/aura-regions.mjs).
     const hasTransferableEffects = this.effects.some(e =>
