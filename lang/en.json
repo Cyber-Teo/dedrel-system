@@ -31,7 +31,7 @@
       "Entry": {
         "Dodge": "Dodge",
         "Block": "Block",
-        "MDef": "Magic Defense",
+        "MDef": "Mental Defense",
         "Initiative": "Initiative",
         "Movement": "Speed (movement)",
         "HPMax": "Maximum HP",
