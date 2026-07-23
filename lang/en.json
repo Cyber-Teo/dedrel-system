@@ -1523,7 +1523,9 @@
     },
     "Weapon": {
       "VsCreatures": "Bonus vs creature types",
-      "VsCreaturesHint": "Potency 0-10: each point adds +10% damage (before the target's DR) if the target has that creature type."
+      "VsCreaturesHint": "Potency 0-10: each point adds +10% damage (before the target's DR) if the target has that creature type.",
+      "BypassCreatures": "Type breaker (ignore DR)",
+      "BypassCreaturesHint": "Check a type: against such a target the weapon ignores the DR granted by that type (enchantment/material) — armor and natural defense still apply."
     },
     "Ammo": {
       "Section": "Ammunition",

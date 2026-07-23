@@ -143,3 +143,17 @@
         {{/each}}
     </div>
 </div>
+
+{{!-- Вскрыватель типа: чекбокс = игнорировать DR, дарованный этим типом (зачарование/материал) --}}
+<div class="form-group stacked">
+    <label>{{localize "DEDREL.Weapon.BypassCreatures"}}</label>
+    <p class="hint-text">{{localize "DEDREL.Weapon.BypassCreaturesHint"}}</p>
+    <div class="vs-creature-grid">
+        {{#each bypassCreatureRows as |row|}}
+        <div class="vs-creature-row {{#if row.value}}has-value{{/if}}">
+            <label>{{localize row.label}}</label>
+            <input type="checkbox" name="system.bypass_creature.{{row.key}}" {{checked row.value}}/>
+        </div>
+        {{/each}}
+    </div>
+</div>

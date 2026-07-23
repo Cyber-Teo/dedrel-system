@@ -147,6 +147,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.vsCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: Number(vs[k]) || 0 }));
     }
 
+    // Оружие: строки «вскрыватель типа» (чекбокс на тип) — игнорирует DR этого типа.
+    if (itemData.type === "weapon") {
+      const keys = CONFIG.DEDREL?.creatureTypes || [];
+      const bypass = itemData.system.bypass_creature || {};
+      context.bypassCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: !!bypass[k] }));
+    }
+
     // Боеприпас: селекты типа боеприпаса и типа доп. урона (любой ключ Лестницы).
     if (itemData.type === "ammunition") {
       context.ammoTypeOptions = {};

@@ -220,8 +220,15 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         .map(([t, p]) => `${t}:${p}`)
         .join(",");
 
+      // Вскрыватель типа: ключи типов, против которых оружие настроено (bypass_creature=true).
+      // При применении DR, дарованный этим типом цели, игнорируется (см. applyDamage).
+      const bypassStr = Object.entries(vsWeapon?.system?.bypass_creature || {})
+        .filter(([t, v]) => t && v)
+        .map(([t]) => t)
+        .join(",");
+
       // Рендер одного пакета урона (основной + опциональный от боеприпаса другого типа).
-      const damageBlock = (r, dk, ap, vsStr, tooltip) => {
+      const damageBlock = (r, dk, ap, vsStr, tooltip, bypass = "") => {
         const label = dk ? game.i18n.localize(DR_KEY_LABELS[dk]) : "";
         // Строка «против существ»: перечисляем типы и потенциальный бонус (+сила·10%).
         // Фактический бонус зависит от типа цели — считается при применении урона.
@@ -242,11 +249,11 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           </div>
         </div>
         <div class="chat-actions" style="display: flex; justify-content: center; width: 100%; margin-top: 8px;">
-           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${r.total}" data-type="${dk}" data-ap="${ap}" data-vs-types="${vsStr}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
+           <button class="dedrel-chat-action" data-action="applyDamage" data-damage="${r.total}" data-type="${dk}" data-ap="${ap}" data-vs-types="${vsStr}" data-bypass-types="${bypass}" style="width: 100%;"><i class="fas fa-tint"></i> ${game.i18n.localize("DEDREL.Chat.ApplyDamage")}</button>
         </div>`;
       };
 
-      let chatContent = damageBlock(roll, drKey, apLevel, vsTypesStr, await roll.getTooltip());
+      let chatContent = damageBlock(roll, drKey, apLevel, vsTypesStr, await roll.getTooltip(), bypassStr);
       const rolls = [roll];
 
       // Отдельный пакет: доп. урон боеприпаса ДРУГОГО типа (своё AP=0, свой DR).
@@ -256,7 +263,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           if (term.faces !== undefined) term.options.flavor = ammo.dmgType;
         }
         await ammoRoll.evaluate();
-        chatContent += damageBlock(ammoRoll, ammo.dmgType, 0, "", await ammoRoll.getTooltip());
+        chatContent += damageBlock(ammoRoll, ammo.dmgType, 0, "", await ammoRoll.getTooltip(), bypassStr);
         rolls.push(ammoRoll);
       }
 
@@ -438,6 +445,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         const [t, p] = pair.split(":");
         vsMap[t] = Number(p) || 0;
       }
+      // Вскрыватель типа: список ключей типов, чей DR оружие игнорирует.
+      const bypassTypes = (button.dataset.bypassTypes || "").split(",").filter(Boolean);
 
       // Сначала берем выделенные токены (controlled), если их нет - берем таргеты (targets)
       let targets = canvas.tokens.controlled;
@@ -462,7 +471,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 
         // Математика DR/временных ХП живёт в DedrelActor#applyDamage
         // (общая с тиками кондиций в src/combat.mjs)
-        const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(dmg, { drKey, apLevel });
+        const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(dmg, { drKey, apLevel, bypassTypes });
 
         let damageTypeStr = drKey ? `[${game.i18n.localize(DR_KEY_LABELS[drKey])}] ` : "";
         let chatMsg = game.i18n.format("DEDREL.Chat.DamageTaken", {name: targetActor.name, damage: applied, type: damageTypeStr});

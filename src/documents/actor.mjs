@@ -190,15 +190,24 @@ export default class DedrelActor extends Actor {
    * @param {object} [options]
    * @param {string} [options.drKey] - тип урона (ключ system.dr), "" — без снижения
    * @param {number} [options.apLevel] - уровень бронебойности (каждый уровень гасит 10% DR)
+   * @param {string[]} [options.bypassTypes] - типы существ, чей DR игнорирует оружие-вскрыватель
    * @returns {Promise<{applied: number, blocked: number, tempHpDamage: number}>}
    */
-  async applyDamage(damage, { drKey = "", apLevel = 0 } = {}) {
+  async applyDamage(damage, { drKey = "", apLevel = 0, bypassTypes = [] } = {}) {
     const isPeon = this.type === "npc" && this.system.tier === "peon";
     if (!isPeon && !this.system.resources?.hp) return { applied: 0, blocked: 0, tempHpDamage: 0 };
 
     let drUnits = 0;
     if (drKey && this.system.dr && this.system.dr[drKey] !== undefined) {
       drUnits = this.system.dr[drKey];
+
+      // Вскрыватель типа: если оружие настроено против одного из типов цели,
+      // вычитаем ровно тот DR, что дал этот тип (сумма его эффектов по drKey) —
+      // существо бьётся «как обычная плоть», броня/прочее остаются.
+      // См. _rules/18. Enemies.md §Вскрыватель типа.
+      if (bypassTypes.length) {
+        drUnits -= this.#creatureTypeDrContribution(drKey, bypassTypes);
+      }
     }
 
     // Единица DR = 10% снижения; бронебойность вычитается плоско из процентов
@@ -241,6 +250,30 @@ export default class DedrelActor extends Actor {
     await this.update(updates);
 
     return { applied: finalDamage + tempHpDamage, blocked, tempHpDamage };
+  }
+
+  /**
+   * Сколько DR по типу урона drKey дали активные эффекты Item'ов creature_type,
+   * чьи ключи есть в bypassTypes. Источник истины — сами change-строки типа,
+   * поэтому дублировать DR в отдельный слой не нужно (см. applyDamage).
+   * @param {string} drKey
+   * @param {string[]} bypassTypes
+   * @returns {number} суммарные единицы DR, дарованные совпавшими типами
+   */
+  #creatureTypeDrContribution(drKey, bypassTypes) {
+    const ADD = CONST.ACTIVE_EFFECT_MODES.ADD;
+    const targetKey = `system.dr.${drKey}`;
+    let sum = 0;
+    for (const item of this.items) {
+      if (item.type !== "creature_type" || !bypassTypes.includes(item.system.key)) continue;
+      for (const effect of item.effects) {
+        if (effect.disabled) continue;
+        for (const change of effect.changes) {
+          if (change.key === targetKey && change.mode === ADD) sum += Number(change.value) || 0;
+        }
+      }
+    }
+    return sum;
   }
 
   /**

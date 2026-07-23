@@ -81,7 +81,15 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       // (1 + potency·0.1) ДО вычета DR цели. Ключи — из CONFIG.DEDREL.creatureTypes
       // (расширяемо через конфиг). Свободный объект → новые типы не требуют миграции.
       vs_creature: new fields.ObjectField({ initial: {} }),
-      
+
+      // «Вскрыватель типа»: карта { <ключ типа>: true } — оружие настроено против
+      // этих типов (зачарование/особый материал). Против цели такого типа система
+      // ВЫЧИТАЕТ из её DR ровно вклад этого типа (сумма его эффектов), оставляя
+      // броню/природный базовый DR (см. applyDamage, _rules/18. Enemies.md §Вскрыватель типа).
+      // Сейчас выставляется вручную на листе; при вводе крафта переедет на
+      // зачарования/материалы (серебро→shade, адамантин→construct). См. NOTES.md.
+      bypass_creature: new fields.ObjectField({ initial: {} }),
+
       // Properties — плоские флаги свойств; по ним гейтятся манёвры (req_weapon_property)
       is_auxiliary: new fields.BooleanField({ initial: false }),
       is_fast: new fields.BooleanField({ initial: false }),
