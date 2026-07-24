@@ -1087,7 +1087,8 @@
       "FromLibrary": "From Library",
       "PickTitle": "Effect Library",
       "PickLabel": "Choose a preset effect:",
-      "Empty": "The effect library is empty.",
+      "Empty": "The «Active Effects» compendium has no entries with effects.",
+      "PackMissing": "The «Active Effects» compendium was not found.",
       "Cat": {
         "buff": "Buffs",
         "debuff": "Debuffs",

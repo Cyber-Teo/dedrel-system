@@ -2,7 +2,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
 import { DR_KEY_LABELS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM, AMMO_TYPE_ENUM, AMMO_TYPE_LABELS } from "../constants.mjs";
-import { buildEffectData, buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
+import { buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
 import { getRangedClass, ammoMatchesWeapon } from "../utils/ranged.mjs";
 
 // Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
@@ -582,34 +582,32 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Пикер библиотеки эффектов: выбор готового пресета (CONFIG.DEDREL.effectLibrary)
-   * и штамповка его как Active Effect на предмете. Избавляет от ручной сборки
-   * баффов/ядов/сопротивлений с нуля. См. src/config/effect-library.mjs.
+   * Пикер библиотеки эффектов: выбор записи из компендиума `active_effects`
+   * (источник истины) и копирование её встроенных Active Effect(ов) на предмет.
+   * Избавляет от ручной сборки баффов/ядов/сопротивлений с нуля: чтобы эффект
+   * появился в списке — достаточно добавить его в компендиум, правка кода не нужна.
    */
   static async #onAddEffectFromLibrary(event, target) {
     const item = this.document;
-    const lib = CONFIG.DEDREL?.effectLibrary || {};
-    const keys = Object.keys(lib);
-    if (keys.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
+    const pack = game.packs.get(`${game.system.id}.active_effects`);
+    if (!pack) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.PackMissing"));
 
-    // Группируем пресеты по категории (buff/debuff/...) для читаемого списка
-    const byCat = {};
-    for (const key of keys) {
-      const cat = lib[key].category || "other";
-      (byCat[cat] ??= []).push(key);
-    }
-    const optgroups = Object.entries(byCat).map(([cat, catKeys]) => {
-      const catLabel = game.i18n.localize(`DEDREL.EffectLib.Cat.${cat}`);
-      const options = catKeys.map(k =>
-        `<option value="${k}">${foundry.utils.escapeHTML(game.i18n.localize(lib[k].label))}</option>`
-      ).join("");
-      return `<optgroup label="${foundry.utils.escapeHTML(catLabel)}">${options}</optgroup>`;
-    }).join("");
+    // Полные документы нужны ради встроенных эффектов (индекс их не содержит).
+    // В список идут только записи, реально несущие Active Effect(ы).
+    const docs = await pack.getDocuments();
+    const entries = docs
+      .filter(d => d.effects.size > 0)
+      .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    if (entries.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
+
+    const options = entries.map(d =>
+      `<option value="${d.id}">${foundry.utils.escapeHTML(d.name)}</option>`
+    ).join("");
 
     const content = `
       <div class="form-group" style="margin-bottom: 10px;">
         <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.PickLabel")}</label>
-        <select name="preset" style="width: 100%; padding: 4px;">${optgroups}</select>
+        <select name="entry" style="width: 100%; padding: 4px;">${options}</select>
       </div>`;
 
     await foundry.applications.api.DialogV2.wait({
@@ -622,10 +620,19 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
           label: game.i18n.localize("DEDREL.ItemSheet.AddEffect"),
           default: true,
           callback: async (event, button, dialog) => {
-            const key = dialog.element.querySelector("[name=preset]")?.value;
-            if (!key) return;
-            const data = buildEffectData(key, { origin: item.uuid });
-            if (data) await item.createEmbeddedDocuments("ActiveEffect", [data]);
+            const id = dialog.element.querySelector("[name=entry]")?.value;
+            const source = entries.find(d => d.id === id);
+            if (!source) return;
+            // Копируем встроенные эффекты записи как шаблон: сбрасываем _id,
+            // привязываем origin к текущему предмету. Фазу system.*-изменений
+            // проставит хук preCreateActiveEffect (QUIRKS §12).
+            const data = source.effects.map(e => {
+              const o = e.toObject();
+              delete o._id;
+              o.origin = item.uuid;
+              return o;
+            });
+            if (data.length) await item.createEmbeddedDocuments("ActiveEffect", data);
           }
         },
         {
