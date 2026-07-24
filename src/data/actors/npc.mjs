@@ -61,8 +61,10 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         }),
         movement: new fields.SchemaField({
-          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived / override
-          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+          // Скорость в МЕТРАХ (см. _rules/5). Не integer: возможен дробный расход
+          // и нецелые значения на безсеточных картах.
+          max: new fields.NumberField({ required: false, initial: 0 }), // Derived / override
+          value: new fields.NumberField({ required: true, initial: 0 })
         }),
         // Производный трек ран (для пеона считается из hits, для босса — из hp).
         wounds: new fields.SchemaField({
@@ -140,7 +142,8 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
 
     // === Инициатива и скорость ===
     this.initiative += Math.max(attrs.int.rank, attrs.rea.rank);
-    res.movement.max += Math.floor(2 + attrs.dex.rank);
+    // Скорость в МЕТРАХ: (2 + Ловкость) × 2 (см. _rules/5).
+    res.movement.max += (2 + attrs.dex.rank) * 2;
 
     // === HP босса (та же формула, что у персонажа) ===
     res.hp.max += Math.ceil((attrs.con.rank + attrs.will.rank / 2) * 10);

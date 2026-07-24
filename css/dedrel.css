@@ -1502,12 +1502,36 @@ form.dedrel.sheet.item {
   box-shadow: 0 0 8px #4B0082, inset 0 0 5px rgba(255,255,255,0.2);
 }
 
-/* Speed (Sky Blue) */
+/* Speed (Sky Blue) — полоска с заполнением (метры, дробные) */
 .ap-row.speed .ap-label { color: #85c1e9; }
-.ap-row.speed .ap-cube.active {
+.ap-speed-bar {
+  position: relative;
+  width: 90px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.ap-speed-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
   background: #85c1e9;
-  border-color: #b3dcf2;
-  box-shadow: 0 0 8px #85c1e9, inset 0 0 5px rgba(255,255,255,0.5);
+  box-shadow: 0 0 6px #85c1e9, inset 0 0 3px rgba(255,255,255,0.5);
+  transition: width 0.25s ease;
+}
+.ap-speed-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0 0 3px #000, 0 0 3px #000;
 }
 
 /* ==========================================================================

@@ -63,8 +63,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         }),
         movement: new fields.SchemaField({
-          max: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
-          value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+          // Скорость измеряется в МЕТРАХ (см. _rules/5). Не integer: на безсеточных
+          // картах и при дробном расходе значение может быть нецелым (напр. 6.5 м).
+          max: new fields.NumberField({ required: false, initial: 0 }), // Derived
+          value: new fields.NumberField({ required: true, initial: 0 })
         })
       }),
 
@@ -217,8 +219,9 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // Initiative
     this.initiative += Math.max(attrs.int.rank, attrs.rea.rank);
 
-    // Movement
-    res.movement.max += Math.floor(2 + attrs.dex.rank);
+    // Movement — запас в МЕТРАХ за раунд: (2 + Ловкость) × 2 (см. _rules/5).
+    // Множитель ×2 = «метры на клетку» (1 клетка сетки Foundry = 2 м).
+    res.movement.max += (2 + attrs.dex.rank) * 2;
 
     // DR and Armor calculation
     // this.dr is now part of the schema, so Active Effects can modify it.
@@ -302,7 +305,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         // не-спасброски (src/dice/roll.mjs) — это и есть «проверки навыков».
         this.bonuses.global_skill -= 2;
         this.initiative -= 2;
-        // База скорости = 2+DEX, поэтому −4 способно увести её в минус.
+        // −4 метра к Скорости (значение в метрах, как в правилах).
         res.movement.max = Math.max(0, res.movement.max - 4);
       }
     }
@@ -313,7 +316,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // Суммарный вес: физические предметы (× количество) + вес монет кошелька.
     // Пороги = (STR+CON)·5/10/15 кг, модифицируемые талантами
     // (carry_capacity_mult / carry_capacity_flat). Категория и штрафы
-    // (−1/−3 ко всем броскам, −1м / полная остановка скорости) применяются,
+    // (−1/−3 ко всем броскам, −2 м / полная остановка скорости) применяются,
     // если не выставлен иммунитет ignore_encumbrance_penalty.
     // Хранится ад-хок в this.resources.encumbrance (как this.wallet) — производное,
     // в _source не пишется, миграция не нужна.
@@ -351,7 +354,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     if (carriedWeight > thresholds.heavy) {
       category = "overloaded"; rollPenalty = 3; stopMovement = true;
     } else if (carriedWeight > thresholds.medium) {
-      category = "heavy"; rollPenalty = 3; movePenalty = 1;
+      category = "heavy"; rollPenalty = 3; movePenalty = 2; // −2 м (см. _rules/15)
     } else if (carriedWeight > thresholds.light) {
       category = "medium"; rollPenalty = 1;
     }

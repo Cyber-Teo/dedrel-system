@@ -9,7 +9,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     tag: "div",
     window: {
       frame: true,
-      title: "DEDREL.Hud.ActionPoints",
+      title: "DEDREL.Hud.BattleHud",
       positioned: true,
       minimizable: true
     },
@@ -77,12 +77,14 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
       active: i < magVal
     }));
 
+    // Скорость в метрах — дробная, поэтому полоска (а не кубики как у ОД).
     const speedMax = res.movement?.max || 0;
     const speedVal = res.movement?.value || 0;
+    const round1 = (x) => Math.round(x * 10) / 10;
     context.hasSpeed = speedMax > 0;
-    context.speed = Array.from({length: speedMax}, (_, i) => ({
-      active: i < speedVal
-    }));
+    context.speedVal = round1(speedVal);
+    context.speedMax = round1(speedMax);
+    context.speedPercent = speedMax > 0 ? Math.min(100, Math.round((speedVal / speedMax) * 100)) : 0;
 
     // Избранное для выпадающих меню (те же источники, что и на листе персонажа)
     this.#prepareFavorites(context);

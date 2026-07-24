@@ -28,33 +28,31 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
     distance = canvas.grid.measureDistance(waypoints[0], waypoints[1]);
   }
 
-  // Расчет расхода скорости. 
-  // Настройки сцены (grid distance) используются напрямую, но 1 единица скорости = 2 метра.
-  // Так как мы договорились опираться на настройки сцены, то:
-  // Если сцена в метрах, и 1 клетка = 2 метра, то distance = 2. Следовательно, это 1 скорость.
-  // То есть SpeedCost = distance / canvas.scene.grid.distance (что дает количество клеток)
-  // И 1 клетка = 1 скорость. Значит расход равен количеству клеток.
-  const gridDistance = canvas.scene.grid.distance;
-  const speedCost = distance / gridDistance;
+  // Скорость измеряется в МЕТРАХ. measurePath().distance уже возвращает дистанцию
+  // в единицах сцены (метрах) через клеточный движок Foundry — он считает в клетках
+  // даже при выключенной сетке, поэтому опираемся на его результат, а не на пиксели.
+  // Округляем до десятых, чтобы избежать накопления погрешности float.
+  const speedCost = Math.round(distance * 10) / 10;
 
   if (speedCost > 0) {
     const currentSpeed = res.movement.value;
-    
+    const round = (x) => Math.round(x * 10) / 10;
+
     // Если это отмена (Undo / Ctrl+Z), возвращаем скорость
     if (options.undo || options.isUndo) {
-      const newSpeed = Math.min(res.movement.max, currentSpeed + Math.ceil(speedCost));
+      const newSpeed = Math.min(res.movement.max, round(currentSpeed + speedCost));
       actor.update({ "system.resources.movement.value": newSpeed });
       return;
     }
 
     if (speedCost > currentSpeed) {
-      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.NotEnoughSpeed", {cost: Math.ceil(speedCost), current: currentSpeed}));
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.NotEnoughSpeed", {cost: speedCost, current: round(currentSpeed)}));
       // Мы не блокируем движение (чтобы игроки могли ошибаться или договариваться с ГМом), но предупреждаем
     }
-    
+
     // Вычитаем скорость, не опуская ниже 0
-    const newSpeed = Math.max(0, currentSpeed - Math.ceil(speedCost));
-    
+    const newSpeed = Math.max(0, round(currentSpeed - speedCost));
+
     // Добавляем обновление актора в очередь
     actor.update({ "system.resources.movement.value": newSpeed });
   }

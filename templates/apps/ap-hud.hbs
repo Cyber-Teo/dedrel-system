@@ -38,10 +38,9 @@
     {{#if hasSpeed}}
     <div class="ap-row speed">
       <div class="ap-label">SPD</div>
-      <div class="ap-cubes">
-        {{#each speed}}
-        <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
-        {{/each}}
+      <div class="ap-speed-bar">
+        <div class="ap-speed-fill" style="width: {{speedPercent}}%;"></div>
+        <span class="ap-speed-text">{{speedVal}} / {{speedMax}} м</span>
       </div>
     </div>
     {{/if}}
