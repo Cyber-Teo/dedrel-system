@@ -30,6 +30,24 @@
         </div>
     </div>
 
+    {{!-- Естественное оружие (когти/укус) — не занимает слот руки. Блок появляется,
+          только если у актёра есть оружие с флагом natural. --}}
+    {{#if hasNaturalWeapon}}
+    <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+        {{#each naturalWeapons as |weapon|}}
+        <div class="slot-box" style="flex: 1; min-width: 140px; border: 1px solid var(--color-border-dark); padding: 5px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.05);">
+            <h4 style="border-bottom: 1px solid var(--color-border-light-highlight); margin-bottom: 5px; padding-bottom: 3px;"><i class="fas fa-paw"></i> {{localize "DEDREL.ActorSheet.NaturalWeapon"}}</h4>
+            <div class="item-name" style="font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">{{weapon.name}}</div>
+            {{#if weapon.system.equipped}}
+            <a class="item-control" data-action="unequipWeapon" data-item-id="{{weapon.id}}" title="{{localize "DEDREL.ActorSheet.RetractNatural"}}"><i class="fas fa-times"></i> {{localize "DEDREL.ActorSheet.RetractNatural"}}</a>
+            {{else}}
+            <a class="item-control" data-action="equipWeapon" data-item-id="{{weapon.id}}" title="{{localize "DEDREL.ActorSheet.ExtendNatural"}}"><i class="fas fa-hand-fist"></i> {{localize "DEDREL.ActorSheet.ExtendNatural"}}</a>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
     <h2 class="tab-title">{{localize "DEDREL.ActorSheet.Weapons"}}</h2>
     <div class="item-list">
         {{#each weapons as |item id|}}

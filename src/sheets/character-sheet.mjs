@@ -208,6 +208,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const favoriteManeuversSpells = [];
     const quickSlots = [];
     const equippedWeapons = [];
+    const naturalWeapons = [];
 
     for (let i of actorData.items) {
       const isFav = i.getFlag("dedrel", "isFavorite");
@@ -262,6 +263,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       else if (i.type === 'mutilation') mutilations.push(i);
       else if (i.type === 'weapon') {
         weapons.push(i);
+        // Естественное оружие идёт в свой блок (выпустить/спрятать); если оно
+        // «выпущено» (equipped) — попадает и в панель быстрых атак наравне с обычным.
+        if (i.system.properties?.natural) naturalWeapons.push(i);
         if (i.system.equipped) equippedWeapons.push(i);
       }
       else if (i.type === 'armor') armors.push(i);
@@ -285,7 +289,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       maneuvers, maneuversGroups, spells, mutations, mutationsGroups,
       talents, talentsGroups, mutilations, inventory, currencyItems, containers,
       weapons, armors, magic_items,
-      favoriteManeuversSpells, quickSlots, equippedWeapons, hasTail
+      favoriteManeuversSpells, quickSlots, equippedWeapons, hasTail,
+      naturalWeapons, hasNaturalWeapon: naturalWeapons.length > 0
     };
   }
 
@@ -787,12 +792,22 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   static async #onEquipWeapon(event, target) {
-    const itemId = target.closest(".item-row").dataset.itemId;
+    // Кнопка живёт либо в строке инвентаря (.item-row), либо в блоке
+    // естественного оружия (data-item-id прямо на кнопке «Выпустить»).
+    const itemId = target.closest(".item-row")?.dataset.itemId || target.dataset.itemId;
     const item = this.document.items.get(itemId);
     if (!item || item.type !== "weapon") return;
 
     if (item.system.equipped) {
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WeaponAlreadyEquipped"));
+    }
+
+    // Естественное оружие (когти/укус с мутации): «экипировано», но НЕ занимает
+    // слот руки — руки остаются свободны. Живёт в отдельном блоке листа, а вся
+    // слотовая логика (хват, Блок от щита) читает слоты рук и его не видит.
+    if (item.system.properties?.natural) {
+      await item.update({ "system.equipped": true });
+      return;
     }
 
     const equipment_slots = this.document.system.equipment_slots;
@@ -836,7 +851,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   static async #onUnequipWeapon(event, target) {
-    const slot = target.dataset.slot; 
+    // Естественное оружие не лежит в слоте руки — «спрятать» = снять флаг equipped
+    // по item-id прямо из его блока на листе (data-item-id, без data-slot).
+    if (target.dataset.itemId && !target.dataset.slot) {
+      const natural = this.document.items.get(target.dataset.itemId);
+      if (natural) await natural.update({ "system.equipped": false });
+      return;
+    }
+
+    const slot = target.dataset.slot;
     const equipment_slots = this.document.system.equipment_slots;
     const itemId = equipment_slots[slot]?.item_id;
     if (!itemId) return;
@@ -1061,6 +1084,11 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   async #equipWeaponToSlot(item, slotKey) {
+    // Естественное оружие руку не занимает даже при перетаскивании на слот —
+    // просто помечаем экипированным (появится в своём блоке).
+    if (item.system.properties?.natural) {
+      return item.update({ "system.equipped": true });
+    }
     const slots = this.document.system.equipment_slots;
     const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
     if (slotKey === "tail" && !hasTail) {
