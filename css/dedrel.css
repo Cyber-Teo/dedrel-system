@@ -1421,16 +1421,31 @@ form.dedrel.sheet.item {
   /* top: auto !important; */
 }
 
+/* Окно HUD не должно обрезать раскрытые дропдаун-панели меню */
+#dedrel-ap-hud,
+#dedrel-ap-hud .window-content {
+  overflow: visible;
+}
+
 .ap-hud-container {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  gap: 15px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
   background: rgba(0, 0, 0, 0.7);
   border: 1px solid var(--color-border-dark);
   border-radius: 8px;
   padding: 8px 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.8);
   pointer-events: auto;
+}
+
+.ap-resources {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
 }
 
 .ap-row {
@@ -1485,6 +1500,121 @@ form.dedrel.sheet.item {
   background: #4B0082;
   border-color: #7a1ee6;
   box-shadow: 0 0 8px #4B0082, inset 0 0 5px rgba(255,255,255,0.2);
+}
+
+/* Speed (Sky Blue) */
+.ap-row.speed .ap-label { color: #85c1e9; }
+.ap-row.speed .ap-cube.active {
+  background: #85c1e9;
+  border-color: #b3dcf2;
+  box-shadow: 0 0 8px #85c1e9, inset 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* ==========================================================================
+   Выпадающие меню HUD (избранные навыки / манёвры-заклинания / быстрые слоты)
+   ========================================================================== */
+.ap-menus {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 6px;
+}
+
+.ap-menu {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+}
+
+.ap-menu-btn {
+  flex: 1 1 auto;
+  height: 26px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-light-highlight, #f0f0e0);
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ap-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+.ap-menu-btn.active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.ap-menu-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 60;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid var(--color-border-dark);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+.ap-menu-panel.open {
+  display: flex;
+}
+
+.ap-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: var(--color-text-light-primary, #e0e0d0);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ap-menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+.ap-menu-item img {
+  border: none;
+  flex: 0 0 auto;
+}
+.ap-menu-name {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ap-menu-bonus {
+  flex: 0 0 auto;
+  font-weight: bold;
+  color: var(--color-text-light-highlight, #f0f0e0);
+}
+.ap-menu-charges {
+  flex: 0 0 auto;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+.ap-menu-empty {
+  padding: 6px 8px;
+  font-size: 0.85em;
+  font-style: italic;
+  opacity: 0.6;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Inventory Tab Headers */

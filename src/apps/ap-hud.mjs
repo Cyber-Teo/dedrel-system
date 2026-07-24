@@ -1,3 +1,5 @@
+import { showRollDialog } from "../dice/roll.mjs";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 export default class ActionPointsHUD extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -16,6 +18,11 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
       height: "auto",
       top: 0,
       left: 0
+    },
+    actions: {
+      toggleMenu: ActionPointsHUD.#onToggleMenu,
+      hudRollCheck: ActionPointsHUD.#onRollCheck,
+      hudUseItem: ActionPointsHUD.#onUseItem
     }
   };
 
@@ -73,16 +80,115 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     const speedMax = res.movement?.max || 0;
     const speedVal = res.movement?.value || 0;
     context.hasSpeed = speedMax > 0;
-    context.speedVal = speedVal;
-    context.speedMax = speedMax;
-    // Calculate percentage for visual bar fill
-    context.speedPercent = speedMax > 0 ? Math.round((speedVal / speedMax) * 100) : 0;
+    context.speed = Array.from({length: speedMax}, (_, i) => ({
+      active: i < speedVal
+    }));
+
+    // Избранное для выпадающих меню (те же источники, что и на листе персонажа)
+    this.#prepareFavorites(context);
 
     return context;
   }
 
+  /**
+   * Собирает избранные навыки, манёвры/заклинания и быстрые слоты
+   * (флаг `dedrel.isFavorite` на предметах, флаг `dedrel.favoriteSkills` на актёре).
+   */
+  #prepareFavorites(context) {
+    const favSkillsFlag = this.actor.getFlag("dedrel", "favoriteSkills") || [];
+    const skills = this.actor.system.skills || {};
+    context.favSkills = favSkillsFlag
+      .filter(key => skills[key])
+      .map(key => ({
+        key,
+        rank: skills[key].rank,
+        bonus: skills[key].bonus,
+        name: game.i18n.localize(`DEDREL.Skills.${key}`)
+      }));
+
+    const favAbilities = [];
+    const quickSlots = [];
+    for (const i of this.actor.items) {
+      if (!i.getFlag("dedrel", "isFavorite")) continue;
+      const entry = {
+        id: i.id,
+        name: i.name,
+        img: i.img,
+        hasCharges: i.system.has_charges,
+        uses: i.system.uses_value,
+        max: i.system.uses_max
+      };
+      if (i.type === "maneuver" || i.type === "spell") favAbilities.push(entry);
+      else if (i.type === "magic_item") quickSlots.push(entry);
+      // Прочий «расходный» инвентарь (зелья/свитки и т.п.), кроме экипировки
+      else if (!["weapon", "armor", "currency"].includes(i.type)) quickSlots.push(entry);
+    }
+    context.favAbilities = favAbilities;
+    context.quickSlots = quickSlots;
+  }
+
   _onRender(context, options) {
     super._onRender(context, options);
+    // Закрытие открытых меню по клику вне HUD
+    if (this.#outsideClickHandler) {
+      document.removeEventListener("click", this.#outsideClickHandler);
+    }
+    this.#outsideClickHandler = (event) => {
+      if (this.element && !this.element.contains(event.target)) this.#closeMenus();
+    };
+    document.addEventListener("click", this.#outsideClickHandler);
+  }
+
+  async close(options) {
+    if (this.#outsideClickHandler) {
+      document.removeEventListener("click", this.#outsideClickHandler);
+      this.#outsideClickHandler = null;
+    }
+    return super.close(options);
+  }
+
+  #outsideClickHandler = null;
+
+  /** Свернуть все раскрытые панели меню и снять подсветку с кнопок. */
+  #closeMenus() {
+    if (!this.element) return;
+    this.element.querySelectorAll(".ap-menu-panel.open").forEach(p => p.classList.remove("open"));
+    this.element.querySelectorAll(".ap-menu-btn.active").forEach(b => b.classList.remove("active"));
+  }
+
+  /** Клик по кнопке меню — раскрыть/свернуть панель (одновременно открыта одна). */
+  static #onToggleMenu(event, target) {
+    const menuId = target.dataset.menu;
+    const panel = this.element.querySelector(`.ap-menu-panel[data-menu="${menuId}"]`);
+    if (!panel) return;
+    const wasOpen = panel.classList.contains("open");
+    this.#closeMenus();
+    if (!wasOpen) {
+      panel.classList.add("open");
+      target.classList.add("active");
+    }
+  }
+
+  /** Клик по избранному навыку в меню — бросок проверки. */
+  static async #onRollCheck(event, target) {
+    if (!this.actor) return;
+    await showRollDialog({
+      actor: this.actor,
+      title: target.dataset.label,
+      baseRank: parseInt(target.dataset.rank) || 0,
+      skillId: target.dataset.skill
+    });
+  }
+
+  /** Клик по избранному манёвру/заклинанию/слоту — использование предмета. */
+  static async #onUseItem(event, target) {
+    if (!this.actor) return;
+    const item = this.actor.items.get(target.dataset.itemId);
+    if (item && typeof item.use === "function") {
+      await item.use();
+    } else if (item) {
+      ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemCannotBeUsed"));
+    }
   }
 
   updateForToken(token) {
@@ -118,16 +224,39 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     });
 
     Hooks.on("updateActor", (actor, changes, options, userId) => {
+      const isOurActor = this.actor && this.actor.id === actor.id;
+
+      // Смена избранных навыков (флаг актёра) — перерисовать меню HUD.
+      if (isOurActor && foundry.utils.hasProperty(changes, "flags.dedrel.favoriteSkills")) {
+        this.render({ force: true });
+      }
+
       if (foundry.utils.hasProperty(changes, "system.resources")) {
         // Обновляем наш HUD
-        if (this.actor && this.actor.id === actor.id) {
+        if (isOurActor) {
           this.render({ force: true });
         }
-        
+
         // Заставляем Foundry перерисовать наши кастомные бары на токенах
         actor.getActiveTokens().forEach(token => {
           token.renderFlags.set({ refreshBars: true });
         });
+      }
+    });
+
+    // Изменение состава/избранности предметов — обновить выпадающие меню.
+    const refreshOnItem = (item) => {
+      if (this.actor && item.parent?.id === this.actor.id && this.rendered) {
+        this.render({ force: true });
+      }
+    };
+    Hooks.on("createItem", refreshOnItem);
+    Hooks.on("deleteItem", refreshOnItem);
+    Hooks.on("updateItem", (item, changes) => {
+      // Реагируем на смену флага избранного или расход зарядов.
+      if (foundry.utils.hasProperty(changes, "flags.dedrel.isFavorite") ||
+          foundry.utils.hasProperty(changes, "system.uses_value")) {
+        refreshOnItem(item);
       }
     });
   }

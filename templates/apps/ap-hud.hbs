@@ -1,49 +1,102 @@
 {{#if visible}}
 <div class="ap-hud-container">
-  
-  {{#if maneuver.length}}
-  <div class="ap-row maneuver">
-    <div class="ap-label">MAN</div>
-    <div class="ap-cubes">
-      {{#each maneuver}}
-      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
-  
-  {{#if universal.length}}
-  <div class="ap-row universal">
-    <div class="ap-label">UNI</div>
-    <div class="ap-cubes">
-      {{#each universal}}
-      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
-      {{/each}}
-    </div>
-  </div>
-  {{/if}}
 
-  {{#if magic.length}}
-  <div class="ap-row magic">
-    <div class="ap-label">MAG</div>
-    <div class="ap-cubes">
-      {{#each magic}}
-      <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
-      {{/each}}
+  <div class="ap-resources">
+    {{#if maneuver.length}}
+    <div class="ap-row maneuver">
+      <div class="ap-label">MAN</div>
+      <div class="ap-cubes">
+        {{#each maneuver}}
+        <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+        {{/each}}
+      </div>
     </div>
-  </div>
-  {{/if}}
+    {{/if}}
 
-  {{#if hasSpeed}}
-  <div class="ap-row speed">
-    <div class="ap-label" style="color: #85c1e9;">SPD</div>
-    <div class="ap-bar-container" style="width: 80px; display: flex; align-items: center; padding: 2px; background: rgba(0,0,0,0.5); border-radius: 4px; border: 1px solid rgba(255,255,255,0.2);">
-      <div class="ap-speed-bar" style="height: 16px; background: #85c1e9; width: {{speedPercent}}%; min-width: 20%; border-radius: 2px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 5px #85c1e9, inset 0 0 3px rgba(255,255,255,0.5); transition: width 0.3s ease;">
-        <span style="color: #000; font-size: 13px; font-weight: 900; line-height: 1; white-space: nowrap;">{{speedVal}} / {{speedMax}}</span>
+    {{#if universal.length}}
+    <div class="ap-row universal">
+      <div class="ap-label">UNI</div>
+      <div class="ap-cubes">
+        {{#each universal}}
+        <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if magic.length}}
+    <div class="ap-row magic">
+      <div class="ap-label">MAG</div>
+      <div class="ap-cubes">
+        {{#each magic}}
+        <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+
+    {{#if hasSpeed}}
+    <div class="ap-row speed">
+      <div class="ap-label">SPD</div>
+      <div class="ap-cubes">
+        {{#each speed}}
+        <div class="ap-cube {{#if this.active}}active{{/if}}"></div>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="ap-menus">
+    <div class="ap-menu">
+      <button type="button" class="ap-menu-btn" data-action="toggleMenu" data-menu="skills">
+        {{localize "DEDREL.Hud.MenuSkills"}}
+      </button>
+      <div class="ap-menu-panel" data-menu="skills">
+        {{#each favSkills as |skill|}}
+        <a class="ap-menu-item rollable" data-action="hudRollCheck" data-skill="{{skill.key}}"
+          data-rank="{{skill.rank}}" data-label="{{skill.name}}">
+          <span class="ap-menu-name">{{skill.name}}</span>
+          <span class="ap-menu-bonus">{{skill.bonus}}</span>
+        </a>
+        {{else}}
+        <div class="ap-menu-empty">{{localize "DEDREL.Hud.MenuEmpty"}}</div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="ap-menu">
+      <button type="button" class="ap-menu-btn" data-action="toggleMenu" data-menu="abilities">
+        {{localize "DEDREL.Hud.MenuAbilities"}}
+      </button>
+      <div class="ap-menu-panel" data-menu="abilities">
+        {{#each favAbilities as |item|}}
+        <a class="ap-menu-item rollable" data-action="hudUseItem" data-item-id="{{item.id}}">
+          <span class="ap-menu-name">{{item.name}}</span>
+          {{#if item.hasCharges}}<span class="ap-menu-charges">{{item.uses}}/{{item.max}}</span>{{/if}}
+        </a>
+        {{else}}
+        <div class="ap-menu-empty">{{localize "DEDREL.Hud.MenuEmpty"}}</div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="ap-menu">
+      <button type="button" class="ap-menu-btn" data-action="toggleMenu" data-menu="slots">
+        {{localize "DEDREL.Hud.MenuSlots"}}
+      </button>
+      <div class="ap-menu-panel" data-menu="slots">
+        {{#each quickSlots as |item|}}
+        <a class="ap-menu-item rollable" data-action="hudUseItem" data-item-id="{{item.id}}">
+          <span class="ap-menu-name">{{item.name}}</span>
+          {{#if item.hasCharges}}<span class="ap-menu-charges">{{item.uses}}/{{item.max}}</span>{{/if}}
+        </a>
+        {{else}}
+        <div class="ap-menu-empty">{{localize "DEDREL.Hud.MenuEmpty"}}</div>
+        {{/each}}
       </div>
     </div>
   </div>
-  {{/if}}
 
 </div>
 {{/if}}

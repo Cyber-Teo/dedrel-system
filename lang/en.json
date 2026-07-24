@@ -1244,7 +1244,11 @@
       "LightOffHint": "Right-click to extinguish the light (light it again by using the item in the inventory)",
       "AuraOffHint": "Right-click to disable the aura (re-enable via the item's chat card)",
       "ActionPoints": "Action Points",
-      "ChainManeuvers": "Chain Maneuvers"
+      "ChainManeuvers": "Chain Maneuvers",
+      "MenuSkills": "Skills",
+      "MenuAbilities": "Maneuvers",
+      "MenuSlots": "Slots",
+      "MenuEmpty": "Nothing marked as favorite"
     },
     "Time": {
       "Title": "World Time",
