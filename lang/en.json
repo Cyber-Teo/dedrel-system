@@ -1030,7 +1030,6 @@
       "SelectTargetForEffect": "Select tokens to apply the effect (select yourself or target).",
       "NoEffectsOnItem": "There are no temporary effects to apply on the item.",
       "EffectsApplied": "Effects applied to {count} token(s).",
-      "EffectPresetUnknown": "Unknown effect preset: {key}",
       "ScrollNoSpell": "No spell is bound to this scroll. Set it on the scroll sheet (spell_id or spell_key).",
       "ScrollNoFreeHand": "You need a free hand to hold the scroll.",
       "NoScrollsToRead": "No scrolls with a bound spell in the inventory.",
@@ -1089,12 +1088,6 @@
       "PickLabel": "Choose a preset effect:",
       "Empty": "The «Active Effects» compendium has no entries with effects.",
       "PackMissing": "The «Active Effects» compendium was not found.",
-      "Cat": {
-        "buff": "Buffs",
-        "debuff": "Debuffs",
-        "utility": "Utility",
-        "other": "Other"
-      },
       "Light": "Light",
       "Poison": "Poison",
       "PoisonStrong": "Strong Poison",

@@ -276,49 +276,15 @@ Hooks.once("init", function() {
     },
 
     /**
-     * Библиотека переиспользуемых Active Effects (см. src/config/effect-library.mjs).
-     * Позволяет копировать готовые эффекты (яд, баффы, сопротивления) на актёров и
-     * предметы из макросов, не собирая их с нуля.
+     * Сид-библиотека Active Effects (src/config/effect-library.mjs). Источник истины
+     * рантайма — компендиум active_effects; эффекты оттуда копирует пикер «Из
+     * библиотеки» на листе предмета и макрос copy_active_effect. Конфиг же служит
+     * кодовым сидом: build() собирает данные эффекта, из которых seed_effect_library
+     * засевает компендиум.
      */
     effects: {
-      /** @returns {object|null} Данные ActiveEffect из пресета библиотеки. */
-      build: (key, opts = {}) => buildEffectData(key, opts),
-
-      /** @returns {string[]} Список доступных ключей пресетов. */
-      list: () => Object.keys(CONFIG.DEDREL.effectLibrary),
-
-      /**
-       * Накладывает пресет на актёров выделенных (или таргетнутых) токенов.
-       * @returns {Promise<number>} Число целей, на которых наложен эффект.
-       */
-      applyToTargets: async (key, opts = {}) => {
-        const data = buildEffectData(key, opts);
-        if (!data) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.EffectPresetUnknown", { key }));
-        let targets = canvas.tokens.controlled;
-        if (targets.length === 0) targets = Array.from(game.user.targets);
-        if (targets.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
-        let count = 0;
-        for (const token of targets) {
-          if (!token.actor) continue;
-          await token.actor.createEmbeddedDocuments("ActiveEffect", [data]);
-          count++;
-        }
-        ui.notifications.info(game.i18n.format("DEDREL.Notifications.EffectsApplied", { count }));
-        return count;
-      },
-
-      /**
-       * Штампует пресет как Active Effect на предмете (зелье/оружие/факел) — чтобы
-       * потом накладывать его кнопкой «Применить эффекты» из карточки чата.
-       * @param {Item} item
-       * @returns {Promise<ActiveEffect[]|undefined>}
-       */
-      stampOnItem: async (item, key, opts = {}) => {
-        if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
-        const data = buildEffectData(key, { origin: item.uuid, ...opts });
-        if (!data) return ui.notifications.warn(game.i18n.format("DEDREL.Notifications.EffectPresetUnknown", { key }));
-        return item.createEmbeddedDocuments("ActiveEffect", [data]);
-      }
+      /** @returns {object|null} Данные ActiveEffect из пресета-сида (для сид-макроса). */
+      build: (key, opts = {}) => buildEffectData(key, opts)
     }
   };
   
