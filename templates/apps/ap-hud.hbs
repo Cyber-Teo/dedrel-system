@@ -56,7 +56,8 @@
         <a class="ap-menu-item rollable" data-action="hudRollCheck" data-skill="{{skill.key}}"
           data-rank="{{skill.rank}}" data-label="{{skill.name}}">
           <span class="ap-menu-name">{{skill.name}}</span>
-          <span class="ap-menu-bonus">{{skill.bonus}}</span>
+          <span class="ap-menu-rank" title="{{localize "DEDREL.ActorSheet.Rank"}}">{{skill.rank}}</span>
+          <span class="ap-menu-bonus" title="BONUS">{{numberFormat skill.bonus sign=true}}</span>
         </a>
         {{else}}
         <div class="ap-menu-empty">{{localize "DEDREL.Hud.MenuEmpty"}}</div>
