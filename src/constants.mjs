@@ -77,3 +77,21 @@ export const DR_KEY_LABELS = {
   "sonic": "DEDREL.ItemSheet.Thunder",
   "acid": "DEDREL.ItemSheet.Acid"
 };
+
+/**
+ * Ступени сопротивлений и уязвимостей (_rules/18. Enemies.md §Уязвимости и
+ * особенности типов). value — единицы DR (1 единица = 10% урона); отрицательные
+ * applyDamage() читает как уязвимость (усиление входящего урона).
+ *
+ * Это комбинаторика (6 ступеней × 10 типов урона), поэтому такие эффекты
+ * собираются генератором в пикере «Из библиотеки», а не лежат готовыми записями
+ * в компендиуме active_effects — иначе список пикера распухает до 60 строк.
+ */
+export const DR_TIERS = {
+  weak_resist: { value: 2, label: "DEDREL.EffectLib.Tier.WeakResist", img: "icons/svg/shield.svg" },
+  strong_resist: { value: 5, label: "DEDREL.EffectLib.Tier.StrongResist", img: "icons/svg/mage-shield.svg" },
+  immunity: { value: 10, label: "DEDREL.EffectLib.Tier.Immunity", img: "icons/svg/holy-shield.svg" },
+  vulnerability: { value: -2, label: "DEDREL.EffectLib.Tier.Vulnerability", img: "icons/svg/downgrade.svg" },
+  strong_vulnerability: { value: -5, label: "DEDREL.EffectLib.Tier.StrongVulnerability", img: "icons/svg/downgrade.svg" },
+  extreme_vulnerability: { value: -10, label: "DEDREL.EffectLib.Tier.ExtremeVulnerability", img: "icons/svg/degen.svg" }
+};

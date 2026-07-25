@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 import { placeTemplatePreview } from "../canvas/template.mjs";
-import { DR_KEY_LABELS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM, AMMO_TYPE_ENUM, AMMO_TYPE_LABELS } from "../constants.mjs";
+import { DR_KEY_LABELS, DR_TIERS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM, AMMO_TYPE_ENUM, AMMO_TYPE_LABELS } from "../constants.mjs";
 import { buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
 import { getRangedClass, ammoMatchesWeapon } from "../utils/ranged.mjs";
 
@@ -582,37 +582,78 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Пикер библиотеки эффектов: выбор записи из компендиума `active_effects`
-   * (источник истины) и копирование её встроенных Active Effect(ов) на предмет.
-   * Избавляет от ручной сборки баффов/ядов/сопротивлений с нуля: чтобы эффект
-   * появился в списке — достаточно добавить его в компендиум, правка кода не нужна.
+   * Пикер библиотеки эффектов. Два режима:
+   *  - «Библиотека» — выбор записи из компендиума `active_effects` (источник истины)
+   *    и копирование её встроенных Active Effect(ов). Чтобы эффект появился в списке,
+   *    достаточно добавить его в компендиум, правка кода не нужна.
+   *  - «Сопротивление/уязвимость» — генератор: DR-эффект собирается на лету из типа
+   *    урона и ступени (DR_TIERS). Комбинаторику (6 × 10) держим генератором, иначе
+   *    она забивает список компендиума и выбирать в нём становится нечем.
    */
   static async #onAddEffectFromLibrary(event, target) {
     const item = this.document;
     const pack = game.packs.get(`${game.system.id}.active_effects`);
-    if (!pack) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.PackMissing"));
 
     // Полные документы нужны ради встроенных эффектов (индекс их не содержит).
     // В список идут только записи, реально несущие Active Effect(ы).
-    const docs = await pack.getDocuments();
+    const docs = pack ? await pack.getDocuments() : [];
     const entries = docs
       .filter(d => d.effects.size > 0)
       .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
-    if (entries.length === 0) return ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
 
-    const options = entries.map(d =>
-      `<option value="${d.id}">${foundry.utils.escapeHTML(d.name)}</option>`
-    ).join("");
+    // Пак может отсутствовать или быть пустым — генератор работает и без него.
+    const hasLibrary = entries.length > 0;
+    if (!pack) ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.PackMissing"));
+    else if (!hasLibrary) ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
+
+    const opts = (pairs) => pairs
+      .map(([value, label]) => `<option value="${value}">${foundry.utils.escapeHTML(label)}</option>`)
+      .join("");
+
+    const entryOptions = opts(entries.map(d => [d.id, d.name]));
+    const typeOptions = opts(Object.entries(DR_KEY_LABELS).map(([k, l]) => [k, game.i18n.localize(l)]));
+    const tierOptions = opts(Object.entries(DR_TIERS).map(([k, t]) => [
+      k, `${game.i18n.localize(t.label)} (DR ${t.value > 0 ? "+" : ""}${t.value})`
+    ]));
 
     const content = `
       <div class="form-group" style="margin-bottom: 10px;">
-        <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.PickLabel")}</label>
-        <select name="entry" style="width: 100%; padding: 4px;">${options}</select>
+        <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.ModeLabel")}</label>
+        <select name="mode" style="width: 100%; padding: 4px;">
+          <option value="library" ${hasLibrary ? "" : "disabled"}>${game.i18n.localize("DEDREL.EffectLib.ModeLibrary")}</option>
+          <option value="dr" ${hasLibrary ? "" : "selected"}>${game.i18n.localize("DEDREL.EffectLib.ModeDr")}</option>
+        </select>
+      </div>
+      <div data-mode-block="library" style="${hasLibrary ? "" : "display: none;"}">
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.PickLabel")}</label>
+          <select name="entry" style="width: 100%; padding: 4px;">${entryOptions}</select>
+        </div>
+      </div>
+      <div data-mode-block="dr" style="${hasLibrary ? "display: none;" : ""}">
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.DrTypeLabel")}</label>
+          <select name="drType" style="width: 100%; padding: 4px;">${typeOptions}</select>
+        </div>
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label style="font-weight: bold; display: block; margin-bottom: 4px;">${game.i18n.localize("DEDREL.EffectLib.DrTierLabel")}</label>
+          <select name="drTier" style="width: 100%; padding: 4px;">${tierOptions}</select>
+        </div>
+        <p class="hint">${game.i18n.localize("DEDREL.EffectLib.DrHint")}</p>
       </div>`;
 
     await foundry.applications.api.DialogV2.wait({
       window: { title: game.i18n.localize("DEDREL.EffectLib.PickTitle") },
       content,
+      render: (event, dialog) => {
+        const html = dialog.element;
+        html.querySelector('[name="mode"]')?.addEventListener("change", (ev) => {
+          const mode = ev.target.value;
+          for (const block of html.querySelectorAll("[data-mode-block]")) {
+            block.style.display = block.dataset.modeBlock === mode ? "" : "none";
+          }
+        });
+      },
       buttons: [
         {
           action: "add",
@@ -620,18 +661,19 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
           label: game.i18n.localize("DEDREL.ItemSheet.AddEffect"),
           default: true,
           callback: async (event, button, dialog) => {
-            const id = dialog.element.querySelector("[name=entry]")?.value;
-            const source = entries.find(d => d.id === id);
-            if (!source) return;
-            // Копируем встроенные эффекты записи как шаблон: сбрасываем _id,
-            // привязываем origin к текущему предмету. Фазу system.*-изменений
+            const html = dialog.element;
+            const mode = html.querySelector('[name="mode"]')?.value;
+            const data = mode === "dr"
+              ? DedrelItemSheet.#buildDrEffectData(html.querySelector('[name="drType"]')?.value, html.querySelector('[name="drTier"]')?.value)
+              : (entries.find(d => d.id === html.querySelector('[name="entry"]')?.value)?.effects ?? []).map(e => {
+                // Копируем встроенные эффекты записи как шаблон: сбрасываем _id.
+                const o = e.toObject();
+                delete o._id;
+                return o;
+              });
+            // origin привязываем к текущему предмету. Фазу system.*-изменений
             // проставит хук preCreateActiveEffect (QUIRKS §12).
-            const data = source.effects.map(e => {
-              const o = e.toObject();
-              delete o._id;
-              o.origin = item.uuid;
-              return o;
-            });
+            for (const d of data) d.origin = item.uuid;
             if (data.length) await item.createEmbeddedDocuments("ActiveEffect", data);
           }
         },
@@ -642,6 +684,28 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         }
       ]
     });
+  }
+
+  /**
+   * Собирает данные Active Effect для ступени сопротивления/уязвимости.
+   * @param {string} drKey - тип урона (ключ system.dr)
+   * @param {string} tierKey - ступень из DR_TIERS
+   * @returns {object[]} массив данных эффекта (пустой, если аргументы неизвестны)
+   */
+  static #buildDrEffectData(drKey, tierKey) {
+    const tier = DR_TIERS[tierKey];
+    const typeLabel = DR_KEY_LABELS[drKey];
+    if (!tier || !typeLabel) return [];
+    const name = game.i18n.format("DEDREL.EffectLib.DrEffectName", {
+      tier: game.i18n.localize(tier.label),
+      type: game.i18n.localize(typeLabel)
+    });
+    return [{
+      name,
+      img: tier.img,
+      transfer: true,
+      system: { changes: [{ key: `system.dr.${drKey}`, type: "add", value: tier.value }] }
+    }];
   }
 
   static async #onEditEffect(event, target) {

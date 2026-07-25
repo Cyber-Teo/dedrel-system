@@ -224,10 +224,13 @@ export default class DedrelActor extends Actor {
 
     // Пеон: здоровье в «попаданиях». Урон ПОСЛЕ DR сравнивается с порогом
     // прочности; попадание ≥ toughness снимает ровно 1 хит, слабее — 0.
+    // Дробный остаток от DR округляется вверх до целого: пеон не должен выживать
+    // из-за 2.9 против Прочности 3 — считаем в пользу атакующего.
     if (isPeon) {
       const hits = this.system.resources.hits;
       const toughness = this.system.toughness || 0;
-      const removed = finalDamage >= toughness && finalDamage > 0 ? 1 : 0;
+      const peonDamage = Math.ceil(finalDamage);
+      const removed = peonDamage >= toughness && peonDamage > 0 ? 1 : 0;
       if (removed > 0) {
         await this.update({ "system.resources.hits.value": Math.max(0, hits.value - removed) });
       }

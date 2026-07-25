@@ -276,14 +276,15 @@ Hooks.once("init", function() {
     },
 
     /**
-     * Сид-библиотека Active Effects (src/config/effect-library.mjs). Источник истины
-     * рантайма — компендиум active_effects; эффекты оттуда копирует пикер «Из
-     * библиотеки» на листе предмета и макрос copy_active_effect. Конфиг же служит
-     * кодовым сидом: build() собирает данные эффекта, из которых seed_effect_library
-     * засевает компендиум.
+     * Пресеты Active Effects из кода (src/config/effect-library.mjs) — легаси.
+     * Источник истины рантайма — компендиум active_effects: авторские эффекты
+     * копирует пикер «Из библиотеки» на листе предмета и макрос copy_active_effect,
+     * а комбинаторные (сопротивления/уязвимости) собирает генератор того же пикера.
+     * Сид-макрос, ради которого жил build(), удалён; API оставлен для ручных вызовов
+     * из макросов до чистки конфига (см. NOTES.md).
      */
     effects: {
-      /** @returns {object|null} Данные ActiveEffect из пресета-сида (для сид-макроса). */
+      /** @returns {object|null} Данные ActiveEffect из пресета. */
       build: (key, opts = {}) => buildEffectData(key, opts)
     }
   };

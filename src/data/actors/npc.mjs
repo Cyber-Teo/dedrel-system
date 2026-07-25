@@ -230,6 +230,9 @@ export default class NpcDataModel extends foundry.abstract.TypeDataModel {
     else if (hpPercent > 50) { res.wounds.level = 2; res.wounds.penalty = -1; }
     else if (hpPercent > 25) { res.wounds.level = 3; res.wounds.penalty = -3; }
     else { res.wounds.level = 4; res.wounds.penalty = -5; }
+    // Пеон штрафы за раны не получает: при 1-3 хитах первое же попадание сажало
+    // его на -3/-5 и выключало из боя. Уровень ран остаётся как индикатор морали.
+    if (this.tier === "peon") res.wounds.penalty = 0;
     if ((this.bonuses?.ignore_wound_penalty || 0) > 0) res.wounds.penalty = 0;
   }
 }
