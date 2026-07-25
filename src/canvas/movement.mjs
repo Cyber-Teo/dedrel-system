@@ -5,7 +5,9 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
   if (!canvas.ready) return;
 
   const actor = tokenDocument.actor;
-  if (!actor || actor.type !== "character") return;
+  // Бюджет Скорости общий для персонажей и NPC: перемещение не манёвр и
+  // считается метрами у всех (_rules/9. Combat and Damage «Передвижение и Скорость»).
+  if (!actor || !["character", "npc"].includes(actor.type)) return;
   
   const res = actor.system.resources;
   if (!res || !res.movement) return;

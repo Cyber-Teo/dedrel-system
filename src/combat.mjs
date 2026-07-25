@@ -1,4 +1,5 @@
 import { DR_KEY_LABELS } from "./constants.mjs";
+import { ActionEconomy } from "./utils/action-economy.mjs";
 
 /**
  * Кастомный документ боя: тики кондиций — периодический урон от состояний
@@ -107,6 +108,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
           await actor.update(updateData);
           updatedAny = true;
         }
+        await ActionEconomy.resetAction(actor);
       }
 
       if (updatedAny) {
@@ -140,6 +142,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
           if (Object.keys(updateData).length > 0) {
             await actor.update(updateData);
           }
+          await ActionEconomy.resetAction(actor);
         }
       }
     }

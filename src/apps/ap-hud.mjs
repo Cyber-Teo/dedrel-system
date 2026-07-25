@@ -1,4 +1,5 @@
 import { showRollDialog } from "../dice/roll.mjs";
+import { ActionEconomy } from "../utils/action-economy.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -40,6 +41,25 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
 
   get isRendered() {
     return this.rendered;
+  }
+
+  /** Имя выбранного токена в заголовке: ГМ переключается между бойцами и теряет,
+   *  чей HUD перед ним. */
+  get title() {
+    const base = game.i18n.localize("DEDREL.Hud.BattleHud");
+    const name = this.token?.name || this.actor?.name;
+    return name ? `${base}: ${name}` : base;
+  }
+
+  /** Ядро подставляет заголовок только на ПЕРВОМ рендере
+   *  (Application#_configureRenderOptions), а HUD переезжает с токена на токен —
+   *  поэтому обновляем имя на каждом. */
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+    if (this.hasFrame) {
+      options.window ??= {};
+      options.window.title = this.title;
+    }
   }
 
   async _prepareContext(options) {
@@ -85,6 +105,12 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     context.speedVal = round1(speedVal);
     context.speedMax = round1(speedMax);
     context.speedPercent = speedMax > 0 ? Math.min(100, Math.round((speedVal / speedMax) * 100)) : 0;
+
+    // Индикатор «одно Действие за ход»: показываем только в бою, иначе он
+    // висел бы вечно потраченным между стычками (сброс идёт по началу хода).
+    context.showAction = !!game.combat?.started;
+    context.actionSpent = ActionEconomy.isActionSpent(this.actor);
+    context.hasStatusRow = context.showAction || context.hasSpeed;
 
     // Избранное для выпадающих меню (те же источники, что и на листе персонажа)
     this.#prepareFavorites(context);
@@ -230,6 +256,12 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
 
       // Смена избранных навыков (флаг актёра) — перерисовать меню HUD.
       if (isOurActor && foundry.utils.hasProperty(changes, "flags.dedrel.favoriteSkills")) {
+        this.render({ force: true });
+      }
+
+      // Индикатор Действия живёт во флаге, а не в system.resources —
+      // без отдельной ветки он бы залипал до ближайшей траты ОД.
+      if (isOurActor && foundry.utils.hasProperty(changes, "flags.dedrel.actionSpent")) {
         this.render({ force: true });
       }
 

@@ -3,6 +3,7 @@ import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 import { heldTwoHanded } from "../utils/grip.mjs";
 import { SpellCalculator } from "../utils/spell-calculator.mjs";
 import { hasTokenLightChanges } from "../config/effect-library.mjs";
+import { ActionEconomy } from "../utils/action-economy.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -87,7 +88,7 @@ export default class DedrelItem extends Item {
    * и ресурсам → early-return для пассивок → диалог подтверждения.
    * Сборка диалога — #buildUseDialogContent, исполнение — #confirmUse.
    */
-  async use() {
+  async use(options = {}) {
     const actor = this.actor;
     if (!actor) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotOwned"));
 
@@ -221,8 +222,14 @@ export default class DedrelItem extends Item {
       ? this.#resolveApPools()
       : { currentAp: 0, apSpecific: 0, specificApKey: "" };
 
+    // Режим применения (Действие / Цепь / Реакция) решается здесь, а не флагами
+    // карточки: манёвр может быть помечен сразу несколькими типами.
+    const actionMode = (this.type === "maneuver" || this.type === "spell")
+      ? ActionEconomy.resolveMode(actor, this, options.mode)
+      : "free";
+
     const ctx = {
-      actor, apCost, isVariable, minAp, ...pools,
+      actor, apCost, isVariable, minAp, ...pools, actionMode,
       hasCharges, usesValue, usesMax,
       requiresWeapon, validWeapons, isReloadAction,
       isScrollRead, validScrolls,
@@ -468,7 +475,8 @@ export default class DedrelItem extends Item {
   async #confirmUse(dialog, ctx) {
     const { actor, apCost, isVariable, minAp, currentAp,
             hasCharges, usesValue, requiresWeapon, isReloadAction,
-            isScrollRead, isSelfConsume, consumeAmount, hasEnoughAmmo } = ctx;
+            isScrollRead, isSelfConsume, consumeAmount, hasEnoughAmmo,
+            actionMode } = ctx;
 
     // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
     // проверки заряда, расхода боеприпаса и карточки.
@@ -547,6 +555,16 @@ export default class DedrelItem extends Item {
     // Списание ОД
     if (finalApCost > 0) {
       await this.#spendAp(finalApCost, ctx);
+    }
+
+    // Отметка «Действие за ход потрачено» (_rules/14. Combat Maneuvers).
+    // Предупреждаем, но не блокируем: реакция может законно сработать и в свой
+    // ход, а автоматика такой случай не отличит.
+    if (actionMode === "action") {
+      const wasSpent = await ActionEconomy.spendAction(actor);
+      if (wasSpent) {
+        ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ActionAlreadySpent", { name: this.name }));
+      }
     }
 
     // Сжигаем DSL-модификаторы стадии "use" (моды стоимости ОД).

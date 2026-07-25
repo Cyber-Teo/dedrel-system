@@ -1454,6 +1454,17 @@ form.dedrel.sheet.item {
   gap: 10px;
 }
 
+/* Второй ряд HUD: Действие и Скорость. Отдельной строкой, потому что в бою
+   ряд с кубиками ОД вместе с ними уезжал за край экрана. */
+.ap-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 .ap-label {
   font-family: monospace;
   font-weight: bold;
@@ -1504,6 +1515,30 @@ form.dedrel.sheet.item {
 
 /* Speed (Sky Blue) — полоска с заполнением (метры, дробные) */
 .ap-row.speed .ap-label { color: #85c1e9; }
+/* Индикатор «одно Действие за ход» (см. src/utils/action-economy.mjs) */
+.ap-action-state {
+  width: 90px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ap-action-state.ready {
+  background: rgba(39, 174, 96, 0.35);
+  color: #d5f5e3;
+  box-shadow: inset 0 0 4px rgba(46, 204, 113, 0.6);
+}
+.ap-action-state.spent {
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.45);
+}
+
 .ap-speed-bar {
   position: relative;
   width: 90px;

@@ -1077,7 +1077,8 @@
       "ItemNotFoundMacro": "Item “{name}” not found on the selected character",
       "NotEnoughSpeed": "Not enough speed: need {cost}, available {current}",
       "SelectTokenForSave": "Select a token or assign a character for the saving throw",
-      "NewItemName": "New: {type}"
+      "NewItemName": "New: {type}",
+      "ActionAlreadySpent": "Your Action for this turn is already spent — \"{name}\" goes beyond it. Reactions and chain maneuvers do not consume the Action."
     },
     "EffectPhases": {
       "Apply": "Apply (system fields)",
@@ -1259,7 +1260,10 @@
       "MenuSkills": "Skills",
       "MenuAbilities": "Maneuvers",
       "MenuSlots": "Slots",
-      "MenuEmpty": "Nothing marked as favorite"
+      "MenuEmpty": "Nothing marked as favorite",
+      "ActionReady": "Available",
+      "ActionSpent": "Spent",
+      "ActionHint": "One Action per turn. Chain maneuvers and reactions do not consume it; movement is not a maneuver and does not count."
     },
     "Time": {
       "Title": "World Time",

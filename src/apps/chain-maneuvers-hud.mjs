@@ -110,8 +110,10 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     
     const item = this.actor.items.get(itemId);
     if (item) {
+      // Запуск ИМЕННО цепью: манёвр, помеченный и Действием, и Цепью, не должен
+      // съедать Действие за ход, если его вызвали из этого HUD (см. action-economy.mjs).
       // Use the maneuver. The `use` method inside Item will trigger a new HUD if it's an action/chain
-      await item.use();
+      await item.use({ mode: "chain" });
     }
   }
 

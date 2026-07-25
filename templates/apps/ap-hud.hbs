@@ -35,6 +35,20 @@
     </div>
     {{/if}}
 
+  </div>
+
+  {{#if hasStatusRow}}
+  <div class="ap-status">
+    {{#if showAction}}
+    <div class="ap-row action">
+      <div class="ap-label">ACT</div>
+      <div class="ap-action-state {{#if actionSpent}}spent{{else}}ready{{/if}}"
+        title="{{localize "DEDREL.Hud.ActionHint"}}">
+        {{#if actionSpent}}{{localize "DEDREL.Hud.ActionSpent"}}{{else}}{{localize "DEDREL.Hud.ActionReady"}}{{/if}}
+      </div>
+    </div>
+    {{/if}}
+
     {{#if hasSpeed}}
     <div class="ap-row speed">
       <div class="ap-label">SPD</div>
@@ -45,6 +59,7 @@
     </div>
     {{/if}}
   </div>
+  {{/if}}
 
   <div class="ap-menus">
     <div class="ap-menu">
