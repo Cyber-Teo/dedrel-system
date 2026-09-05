@@ -1240,6 +1240,8 @@
         "Color": "Color",
         "AddRow": "Add Currency",
         "Reset": "Reset to Defaults",
+        "NamePlaceholder": "Gold",
+        "AbbrPlaceholder": "gp",
         "Saved": "Currencies saved.",
         "DuplicateKey": "Duplicate currency key: {key}"
       }
@@ -1364,6 +1366,20 @@
       "medium": "Medium",
       "heavy": "Heavy",
       "overloaded": "Overloaded"
+    },
+    "Units": {
+      "Kg": "kg",
+      "M": "m"
+    },
+    "Currency": {
+      "Copper": "Copper",
+      "CopperAbbr": "cp",
+      "Silver": "Silver",
+      "SilverAbbr": "sp",
+      "Gold": "Gold",
+      "GoldAbbr": "gp",
+      "Platinum": "Platinum",
+      "PlatinumAbbr": "pp"
     },
     "Loot": {
       "Mode": "Mode",

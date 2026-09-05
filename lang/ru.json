@@ -1240,6 +1240,8 @@
         "Color": "Цвет",
         "AddRow": "Добавить валюту",
         "Reset": "Сбросить к стандартным",
+        "NamePlaceholder": "Золото",
+        "AbbrPlaceholder": "зл",
         "Saved": "Валюты сохранены.",
         "DuplicateKey": "Дублирующийся ключ валюты: {key}"
       }
@@ -1364,6 +1366,20 @@
       "medium": "Средний",
       "heavy": "Тяжёлый",
       "overloaded": "Перегружен"
+    },
+    "Units": {
+      "Kg": "кг",
+      "M": "м"
+    },
+    "Currency": {
+      "Copper": "Медь",
+      "CopperAbbr": "мд",
+      "Silver": "Серебро",
+      "SilverAbbr": "ср",
+      "Gold": "Золото",
+      "GoldAbbr": "зл",
+      "Platinum": "Платина",
+      "PlatinumAbbr": "пл"
     },
     "Loot": {
       "Mode": "Режим",

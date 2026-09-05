@@ -5,6 +5,7 @@
  */
 import { getBonusesSchema } from "./bonuses-schema.mjs";
 import { buildAttributes, buildSkills, buildDefenses, buildDR, buildEquipmentSlots, buildDoctrines, buildMagic } from "./shared-schema.mjs";
+import { DedrelCurrency } from "../../utils/currency.mjs";
 
 export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   /**
@@ -181,7 +182,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // (ранняя инициализация) кошелёк считается нулевым и пересчитается позже.
     this.wallet = { total_base: 0, weight: 0 };
     try {
-      const defs = game.settings.get("dedrel", "currencies") || [];
+      const defs = DedrelCurrency.defs();
       const counts = this.currency || {};
       for (const def of defs) {
         const n = Number(counts[def.key]) || 0;

@@ -4,6 +4,7 @@ import { placeTemplatePreview } from "../canvas/template.mjs";
 import { DR_KEY_LABELS, DR_TIERS, ITEM_RARITY_ENUM, CRAFT_DISCIPLINE_ENUM, MATERIAL_CLASS_ENUM, SLOT_TIER_ENUM, AMMO_TYPE_ENUM, AMMO_TYPE_LABELS } from "../constants.mjs";
 import { buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, stripTokenLightChanges } from "../config/effect-library.mjs";
 import { getRangedClass, ammoMatchesWeapon } from "../utils/ranged.mjs";
+import { DedrelCurrency } from "../utils/currency.mjs";
 
 // Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
 // Для них рендерится общий блок details-physical.hbs.
@@ -294,7 +295,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     if (itemData.type === "currency") {
       context.currencyOptions = { "": "—" };
       try {
-        const defs = game.settings.get("dedrel", "currencies") || [];
+        const defs = DedrelCurrency.defs();
         for (const def of defs) context.currencyOptions[def.key] = `${def.name} (${def.key})`;
       } catch (e) {}
     }

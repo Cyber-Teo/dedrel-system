@@ -16,8 +16,8 @@
             {{#each rows as |row i|}}
             <tr class="currency-row">
                 <td><input type="text" class="c-key" value="{{row.key}}" placeholder="gold"/></td>
-                <td><input type="text" class="c-name" value="{{row.name}}" placeholder="Золото"/></td>
-                <td><input type="text" class="c-abbr" value="{{row.abbr}}" placeholder="зл" style="width: 60px;"/></td>
+                <td><input type="text" class="c-name" value="{{row.name}}" placeholder="{{localize 'DEDREL.Settings.Currencies.NamePlaceholder'}}"/></td>
+                <td><input type="text" class="c-abbr" value="{{row.abbr}}" placeholder="{{localize 'DEDREL.Settings.Currencies.AbbrPlaceholder'}}" style="width: 60px;"/></td>
                 <td><input type="number" step="any" class="c-base" value="{{row.base_value}}" style="width: 90px;"/></td>
                 <td><input type="number" step="any" class="c-weight" value="{{row.weight}}" style="width: 80px;"/></td>
                 <td><input type="text" class="c-color" value="{{row.color}}" style="width: 80px;"/></td>

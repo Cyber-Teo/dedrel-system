@@ -7,10 +7,22 @@
  * base_value = 1 для точной сдачи; по умолчанию — медь).
  */
 export class DedrelCurrency {
-  /** Список валют мира (безопасно). */
+  /** Список валют мира (безопасно), name/abbr уже локализованы. */
   static defs() {
-    try { return game.settings.get("dedrel", "currencies") || []; }
+    try { return this.localizeDefs(game.settings.get("dedrel", "currencies") || []); }
     catch (e) { return []; }
+  }
+
+  /**
+   * Резолвит i18n-ключи в name/abbr дефолтных валют (DEFAULT_CURRENCIES хранит
+   * ключи DEDREL.Currency.*, потому что константы грузятся до словарей).
+   * Пользовательские валюты с литеральным текстом проходят без изменений.
+   * Возвращает новые объекты, исходный массив не мутирует.
+   */
+  static localizeDefs(defs) {
+    // До инициализации i18n (ранний prepareDerivedData) ключ остаётся как есть.
+    const loc = v => (typeof v === "string" && v.startsWith("DEDREL.")) ? (game.i18n?.localize(v) ?? v) : v;
+    return (defs || []).map(d => ({ ...d, name: loc(d.name), abbr: loc(d.abbr) }));
   }
 
   /** Суммарная ценность кошелька актора в базовых единицах. */

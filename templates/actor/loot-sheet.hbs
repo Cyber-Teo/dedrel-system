@@ -81,7 +81,7 @@
         <div class="loot-capacity-row">
             <span class="loot-load {{#if overCapacity}}over{{/if}}">
                 {{localize "DEDREL.Loot.Load"}}: {{numberFormat load decimals=1}} /
-                {{#if capacity}}{{numberFormat capacity decimals=0}} кг{{else}}{{localize "DEDREL.Loot.Unlimited"}}{{/if}}
+                {{#if capacity}}{{numberFormat capacity decimals=0}} {{localize "DEDREL.Units.Kg"}}{{else}}{{localize "DEDREL.Loot.Unlimited"}}{{/if}}
             </span>
             {{#if isGM}}
             <label class="loot-maxload">{{localize "DEDREL.Loot.MaxLoad"}}

@@ -17,7 +17,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--color-border-light-highlight);">
             <span style="font-size: 0.85em;">
                 {{localize "DEDREL.ActorSheet.WalletTotal"}}: <b>{{walletTotal}}</b>
-                <span style="color: var(--color-text-dark-secondary); margin-left: 8px;">{{localize "DEDREL.ItemSheet.Weight"}}: {{numberFormat walletWeight decimals=2}} кг</span>
+                <span style="color: var(--color-text-dark-secondary); margin-left: 8px;">{{localize "DEDREL.ItemSheet.Weight"}}: {{numberFormat walletWeight decimals=2}} {{localize "DEDREL.Units.Kg"}}</span>
             </span>
             <span style="display: flex; gap: 12px; align-items: center;">
                 <label class="checkbox" style="font-size: 0.8em; color: var(--color-text-dark-secondary);" title="{{localize "DEDREL.ActorSheet.CanReceiveCurrencyHint"}}">
@@ -52,7 +52,7 @@
             <span><b>{{encumbrance.label}}</b>
                 {{#if encumbrance.immune}}<i class="fas fa-shield-heart" title="{{localize "DEDREL.ActorSheet.EncumbranceImmune"}}" style="color: var(--color-text-hyperlink); margin-left: 4px;"></i>{{/if}}
             </span>
-            <span>{{numberFormat encumbrance.total decimals=2}} / {{numberFormat encumbrance.thresholds.heavy decimals=0}} кг</span>
+            <span>{{numberFormat encumbrance.total decimals=2}} / {{numberFormat encumbrance.thresholds.heavy decimals=0}} {{localize "DEDREL.Units.Kg"}}</span>
         </div>
         <div class="enc-bar-track" style="position: relative; height: 14px; background: rgba(0,0,0,0.25); border-radius: 7px; overflow: hidden; border: 1px solid var(--color-border-dark);">
             <div class="enc-bar-fill" style="height: 100%; width: {{encumbrance.pct}}%; background: {{encumbrance.color}}; transition: width 0.2s;"></div>
@@ -258,7 +258,7 @@
             <div class="item-image rollable" data-action="openContainer"><img src="{{c.item.img}}" title="{{c.item.name}}" width="24" height="24"/></div>
             <div class="item-name rollable" data-action="openContainer">
                 <h4><i class="fas fa-box" style="margin-right: 4px; color: var(--color-text-dark-secondary);"></i>{{c.item.name}}
-                    <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">({{numberFormat c.item.system.weight decimals=1}} кг)</span>
+                    <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">({{numberFormat c.item.system.weight decimals=1}} {{localize "DEDREL.Units.Kg"}})</span>
                 </h4>
             </div>
             <div class="item-controls">

@@ -3,6 +3,7 @@ import { ActorDataModels } from "../data/actors/index.mjs";
 import { showRollDialog } from "../dice/roll.mjs";
 import { confirmPrerequisites } from "../utils/prerequisites.mjs";
 import { DedrelSocket } from "../socket.mjs";
+import { DedrelCurrency } from "../utils/currency.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -604,7 +605,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const walletCurrencies = [];
     let walletTotal = 0;
     try {
-      const defs = game.settings.get("dedrel", "currencies") || [];
+      const defs = DedrelCurrency.defs();
       const counts = actorData.system.currency || {};
       for (const def of defs) {
         const count = Number(counts[def.key]) || 0;
@@ -888,7 +889,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const v = Number(value);
     if (!denomination || !(v > 0)) return false; // только положительное зачисление
     let defs = [];
-    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    try { defs = DedrelCurrency.defs(); } catch (e) {}
     if (!defs.some(d => d.key === denomination)) return false;
     const current = Number(actor.system.currency?.[denomination]) || 0;
     await actor.update({ [`system.currency.${denomination}`]: current + v });
@@ -918,7 +919,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
    */
   static async #onCollapseCurrency(event, target) {
     let defs = [];
-    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    try { defs = DedrelCurrency.defs(); } catch (e) {}
     const valued = defs.filter(d => Number(d.base_value) > 0).sort((a, b) => b.base_value - a.base_value);
     if (!valued.length) return;
 
@@ -952,7 +953,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onPayCurrency(event, target) {
     const actor = this.document;
     let defs = [];
-    try { defs = game.settings.get("dedrel", "currencies") || []; } catch (e) {}
+    try { defs = DedrelCurrency.defs(); } catch (e) {}
     if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
 
     // Получатели: другие акторы с кошельком, которым разрешён приём денег

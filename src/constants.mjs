@@ -21,17 +21,18 @@ export const CURRENCY_DENOMINATION_ENUM = ["copper", "silver", "gold", "platinum
 
 // Дефолтный список валют мира (настройка "currencies"). Каждая валюта:
 //   key        — машинный ключ (латиница), ключ в кошельке актора system.currency.<key>
-//   name       — отображаемое название (можно кириллицей)
-//   abbr       — короткая аббревиатура для UI кошелька
+//   name       — отображаемое название; у дефолтов это ключ i18n (DEDREL.Currency.*),
+//                который резолвится в DedrelCurrency.defs() — константы грузятся до словарей
+//   abbr       — короткая аббревиатура для UI кошелька (у дефолтов тоже ключ i18n)
 //   base_value — ценность в общих «базовых единицах» (механизм конвертации:
 //                медь=1, серебро=10, золото=100, платина=1000)
 //   weight     — вес одной монеты (кг), влияет на перегрузку
 //   color      — цвет-акцент в UI
 export const DEFAULT_CURRENCIES = [
-  { key: "copper",   name: "Медь",     abbr: "мд", base_value: 1,    weight: 0.01, color: "#b87333" },
-  { key: "silver",   name: "Серебро",  abbr: "ср", base_value: 10,   weight: 0.01, color: "#c0c0c0" },
-  { key: "gold",     name: "Золото",   abbr: "зл", base_value: 100,  weight: 0.01, color: "#ffd700" },
-  { key: "platinum", name: "Платина",  abbr: "пл", base_value: 1000, weight: 0.01, color: "#e5e4e2" }
+  { key: "copper",   name: "DEDREL.Currency.Copper",   abbr: "DEDREL.Currency.CopperAbbr",   base_value: 1,    weight: 0.01, color: "#b87333" },
+  { key: "silver",   name: "DEDREL.Currency.Silver",   abbr: "DEDREL.Currency.SilverAbbr",   base_value: 10,   weight: 0.01, color: "#c0c0c0" },
+  { key: "gold",     name: "DEDREL.Currency.Gold",     abbr: "DEDREL.Currency.GoldAbbr",     base_value: 100,  weight: 0.01, color: "#ffd700" },
+  { key: "platinum", name: "DEDREL.Currency.Platinum", abbr: "DEDREL.Currency.PlatinumAbbr", base_value: 1000, weight: 0.01, color: "#e5e4e2" }
 ];
 
 // Функциональные ремёсла системы крафта (craft/New Craft.md): значения поля

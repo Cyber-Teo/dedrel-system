@@ -1,4 +1,5 @@
 import { DEFAULT_CURRENCIES } from "../constants.mjs";
+import { DedrelCurrency } from "../utils/currency.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -38,9 +39,11 @@ export default class CurrencyConfigApp extends HandlebarsApplicationMixin(Applic
   async _prepareContext(options) {
     if (!this._rows) {
       const saved = game.settings.get("dedrel", "currencies");
+      // Дефолты хранят i18n-ключи в name/abbr; в форму отдаём уже текст,
+      // чтобы при сохранении в мир ушли литеральные названия.
       this._rows = Array.isArray(saved) && saved.length
-        ? foundry.utils.deepClone(saved)
-        : foundry.utils.deepClone(DEFAULT_CURRENCIES);
+        ? DedrelCurrency.localizeDefs(saved)
+        : DedrelCurrency.localizeDefs(DEFAULT_CURRENCIES);
     }
     return { rows: this._rows };
   }
@@ -75,7 +78,7 @@ export default class CurrencyConfigApp extends HandlebarsApplicationMixin(Applic
   }
 
   static #onReset(event, target) {
-    this._rows = foundry.utils.deepClone(DEFAULT_CURRENCIES);
+    this._rows = DedrelCurrency.localizeDefs(DEFAULT_CURRENCIES);
     this.render();
   }
 

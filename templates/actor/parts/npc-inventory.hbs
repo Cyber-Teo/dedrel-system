@@ -189,7 +189,7 @@
             <div class="item-image rollable" data-action="openContainer"><img src="{{c.item.img}}" title="{{c.item.name}}" width="24" height="24"/></div>
             <div class="item-name rollable" data-action="openContainer">
                 <h4><i class="fas fa-box" style="margin-right: 4px; color: var(--color-text-dark-secondary);"></i>{{c.item.name}}
-                    <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">({{numberFormat c.item.system.weight decimals=1}} кг)</span>
+                    <span style="color: var(--color-text-dark-secondary); font-size: 0.8em; margin-left: 5px;">({{numberFormat c.item.system.weight decimals=1}} {{localize "DEDREL.Units.Kg"}})</span>
                 </h4>
             </div>
             <div class="item-controls">
