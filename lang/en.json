@@ -1012,6 +1012,8 @@
       "NotEnoughXPOrMaxRank": "Not enough XP or maximum rank reached.",
       "SkillUpgraded": "Skill {key} upgraded to rank {nextRank} for {cost} XP.",
       "NotEnoughXPForSkill": "Not enough XP to upgrade skill.",
+      "NotEnoughXPForItem": "Not enough XP for \"{name}\": {cost} XP required, {xp} available.",
+      "ItemBought": "Acquired: \"{name}\" for {cost} XP.",
       "DoctrineLocked": "Doctrine is locked: the corresponding talent is required.",
       "DoctrineUpgraded": "Doctrine \"{name}\" upgraded to rank {rank} for {cost} XP.",
       "SelectTargetTokens": "Select target tokens to apply the condition.",

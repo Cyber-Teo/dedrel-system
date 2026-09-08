@@ -1684,8 +1684,30 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     // («Выстрел с упора», «Добивание»). Невыполненные требования не блокируют
     // жёстко: Мастер подтверждает через диалог.
     if (["talent", "mutation", "maneuver"].includes(item.type) && !this.document.items.get(item.id)) {
+      // Покупка за опыт (10. Progression): талант и мутация стоят свой xp_cost.
+      // Не тратят опыт: стартовые мутации (оплачиваются очками создания в зоне ниже),
+      // манёвры (приходят талантами) и любые способности NPC — у типа npc нет
+      // details.xp, его лист наполняет ГМ вручную.
+      const inCreationZone = !!event.target?.closest?.(".drop-zone");
+      const costsXp = this.document.type === "character"
+        && (item.type === "talent" || (item.type === "mutation" && !inCreationZone));
+      const xpCost = costsXp ? (item.system.xp_cost || 0) : 0;
+      const currentXp = this.document.system.details.xp || 0;
+      if (xpCost > currentXp) {
+        ui.notifications.warn(game.i18n.format("DEDREL.Notifications.NotEnoughXPForItem", {
+          name: item.name, cost: xpCost, xp: currentXp
+        }));
+        return false;
+      }
+
       const proceed = await confirmPrerequisites(this.document, item);
       if (!proceed) return false;
+      if (xpCost > 0) {
+        await this.document.update({ "system.details.xp": currentXp - xpCost });
+        ui.notifications.info(game.i18n.format("DEDREL.Notifications.ItemBought", {
+          name: item.name, cost: xpCost
+        }));
+      }
       // ВАЖНО: confirmPrerequisites делает await (диалог). event.dataTransfer живёт
       // только во время синхронной обработки drop — после await он протухает, и
       // super._onDrop (который читает его повторно) молча ничего не создаёт.

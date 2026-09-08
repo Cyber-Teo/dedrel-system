@@ -1012,6 +1012,8 @@
       "NotEnoughXPOrMaxRank": "Недостаточно опыта или достигнут максимальный ранг.",
       "SkillUpgraded": "Улучшен навык {key} до ранга {nextRank} за {cost} XP.",
       "NotEnoughXPForSkill": "Недостаточно очков опыта для улучшения навыка.",
+      "NotEnoughXPForItem": "Не хватает опыта на «{name}»: нужно {cost} XP, доступно {xp}.",
+      "ItemBought": "Приобретено: «{name}» за {cost} XP.",
       "DoctrineLocked": "Доктрина не открыта: требуется соответствующий талант.",
       "DoctrineUpgraded": "Доктрина «{name}» повышена до ранга {rank} за {cost} XP.",
       "SelectTargetTokens": "Выделите токены-цели для наложения состояния.",
