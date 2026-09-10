@@ -69,6 +69,13 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
       // Справочники ключей: CONFIG.DEDREL.magic (src/config/magic.mjs).
       doctrine: new fields.StringField({ required: true, blank: true, initial: "", label: "Doctrine Key" }),
       doctrine_rank_req: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
+      // Фиксированное заклинание доктрины: сборки Конструктора у него нет, но
+      // доктрину указать надо ради гейта по Рангу. Без этого флага ре-валидация
+      // при касте прогнала бы пустую сборку через калькулятор и завалила каст на
+      // no_techniques — но только у доктрин, ОПИСАННЫХ в конфиге Конструктора
+      // (Тенемантия, Биомантия). Линейные доктрины (Эфиромантия и пр.) флага не
+      // требуют: их в конфиге нет, и валидация обрывается сама. Гайд §5.
+      is_fixed: new fields.BooleanField({ initial: false, label: "Fixed Doctrine Spell" }),
       doctrine_path: new fields.StringField({ required: true, blank: true, initial: "" }),
       source_scale: new fields.StringField({ required: true, blank: true, initial: "none" }), // none | any | abundant
       chosen_techniques: new fields.ArrayField(new fields.StringField()),

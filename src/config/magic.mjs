@@ -222,9 +222,12 @@ export const DEDREL_MAGIC = {
     // Сила: каталог подавления. Тенемантия — полностью; Путь Эха — ранги 1–3
     // (Психоакустика). Бонусных ветвей больше нет: только штраф ИЛИ состояние.
     // durationMode: "instant" (следующий бросок) | "rounds:1" | "doctrineRank".
-    // Список состояний в селекте — из компендиума magic_conditions
-    // (conditionsFromPack; кураторский пул, см. dedrel.mjs CONDITION_PACKS);
-    // массивы conditions в рангах — канон правил и фолбэк при пустом паке.
+    // Состав списка на каждом ранге задают ТОЛЬКО массивы conditions ниже —
+    // это канон правил (16. Magic.md §4). Компендиум magic_conditions
+    // (conditionsFromPack; кураторский пул, см. dedrel.mjs CONDITION_PACKS)
+    // лишь подменяет имена/версии уже перечисленных состояний: селект
+    // пересекает пак с массивом ранга, поэтому наполнение пака не может
+    // ни расширить список, ни снести ранговый гейт.
     power: {
       category: "intensity",
       doctrinal: true,
@@ -236,10 +239,14 @@ export const DEDREL_MAGIC = {
         2: { saveDc: 12, penalty: 2, durationMode: "rounds:1" },
         3: { saveDc: 14, penalty: 2, durationMode: "doctrineRank",
              conditions: ["disoriented", "blind", "fear"] },
+        // Правка 2026-09-10: изъяты ключи без предметов-состояний — `rage`
+        // (состояние талантов/мутаций, см. 17. Conditions) и `poisoned`
+        // (общего «Отравления» не будет: каждый яд — своя кондиция,
+        // craft/Armor Rework Plan.md §8). Место в списке 4 занял `withering`.
         4: { saveDc: 16, penalty: 3, durationMode: "doctrineRank",
-             conditions: ["suffocating", "pain", "partial_paralysis", "burning", "poisoned", "bleeding"] },
+             conditions: ["suffocating", "pain", "partial_paralysis", "burning", "bleeding", "withering"] },
         5: { saveDc: 18, durationMode: "rounds:1",
-             conditions: ["fatigued", "stunned", "knockout", "terror", "full_paralysis", "rage"] }
+             conditions: ["fatigued", "stunned", "knockout", "terror", "full_paralysis"] }
       }
     },
     // Воодушевление (Путь Эха): позитивное зеркало "Силы" — бонус согласной цели,
@@ -311,15 +318,20 @@ export const DEDREL_MAGIC = {
         5: { heal: "3d8" }
       }
     },
-    // Адаптация (Биомантия): временная черта из базы мутаций (ранг модификатора =
-    // ранг мутации; мутации 6 ранга залочены). Список доступных адаптаций —
-    // компендиум biomancy_adaptations (optionsFromPack; автор наполняет предметами,
-    // селект в UI показывает их имена). Механика применения — v1 текстом в карточке.
+    // Адаптация (Биомантия): временная телесная черта. Два списка (решение
+    // 2026-09-10): согласной цели — адаптация из `biomancy_adaptations`,
+    // несогласной — увечье из `mutilations` со спасброском. Оба пака содержат
+    // предметы типа condition, поэтому черта умеет длительность, попадает
+    // в реестр статусов (dedrel.mjs CONDITION_PACKS) и накладывается кнопкой
+    // карточки — тем же механизмом, что состояния «Силы».
+    // Ранг предмета — `flags.dedrel.rank`; селект показывает только предметы
+    // ранга, равного рангу Модификатора. Копий мутаций тут нет: биоманту линии
+    // крови безразличны, он лепит плоть, а не наследует её.
     adapt: {
       category: "intensity",
       doctrinal: true,
       label: "DEDREL.Magic.Modifiers.adapt",
-      optionsFromPack: "dedrel.biomancy_adaptations",
+      optionsFromPack: ["dedrel.biomancy_adaptations", "dedrel.mutilations"],
       ranks: {
         1: { saveDc: 10, durationMode: "doctrineRank", hintFact: true },
         2: { saveDc: 12, durationMode: "doctrineRank", hintFact: true },

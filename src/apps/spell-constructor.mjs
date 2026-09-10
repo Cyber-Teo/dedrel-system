@@ -126,14 +126,21 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
    * записи без ключа отбрасываются); иначе value = имя предмета.
    * Индекс пака кэшируется ядром — повторные вызовы дёшевы.
    */
-  async #packOptions(packId, keyField = "") {
-    const pack = game.packs.get(packId);
-    if (!pack) return [];
-    const index = keyField ? await pack.getIndex({ fields: [keyField] }) : await pack.getIndex();
-    return [...index]
-      .map(e => ({ value: keyField ? (foundry.utils.getProperty(e, keyField) || "") : e.name, label: e.name }))
-      .filter(o => o.value)
-      .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+  async #packOptions(packIds, keyField = "", rankField = "") {
+    const ids = Array.isArray(packIds) ? packIds : [packIds];
+    const fields = [keyField, rankField].filter(Boolean);
+    const out = [];
+    for (const packId of ids) {
+      const pack = game.packs.get(packId);
+      if (!pack) continue;
+      const index = fields.length ? await pack.getIndex({ fields }) : await pack.getIndex();
+      for (const e of index) {
+        const value = keyField ? (foundry.utils.getProperty(e, keyField) || "") : e.name;
+        if (!value) continue;
+        out.push({ value, label: e.name, rank: rankField ? Number(foundry.utils.getProperty(e, rankField)) || 0 : 0 });
+      }
+    }
+    return out.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
   /** build → плоский формат SpellCalculator + context текущего режима. */
@@ -339,9 +346,10 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       };
 
       // Модификатор "Сила": выбор "табличный штраф ИЛИ состояние" (бонусных
-      // ветвей больше нет — бафы уехали в "Воодушевление" Эха). Список состояний —
-      // кураторский компендиум magic_conditions (conditionsFromPack); при пустом
-      // паке — канонические массивы conditions ранга (имена из реестра статусов).
+      // ветвей больше нет — бафы уехали в "Воодушевление" Эха). Состав списка
+      // всегда задаёт канон конфига (rankCfg.conditions); кураторский компендиум
+      // magic_conditions (conditionsFromPack) лишь подменяет имена/версии тех
+      // состояний, что в этом списке уже есть.
       if (k === "power" && chosen) {
         const rankCfg = cfg.ranks[chosen.rank];
         const options = [];
@@ -349,13 +357,15 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
           options.push({ value: "penalty", label: i18n.format("DEDREL.Magic.UI.PowerPenalty", { n: rankCfg.penalty }) });
         }
         if (rankCfg?.conditions?.length) {
+          // Пак — источник ИМЁН и кураторских версий состояний, но НЕ списка:
+          // какие состояния доступны на ранге, решает только канон конфига.
+          // Поэтому опции пака пересекаются с rankCfg.conditions, иначе
+          // непустой пак снёс бы ранговый гейт «Силы» целиком.
           const packOpts = cfg.conditionsFromPack ? await this.#packOptions(cfg.conditionsFromPack, "system.key") : [];
-          if (packOpts.length) {
-            options.push(...packOpts);
-          } else {
-            for (const condKey of rankCfg.conditions) {
-              options.push({ value: condKey, label: CONFIG.statusEffects[condKey]?.name || condKey });
-            }
+          const byKey = new Map(packOpts.map(o => [o.value, o]));
+          for (const condKey of rankCfg.conditions) {
+            options.push(byKey.get(condKey)
+              ?? { value: condKey, label: CONFIG.statusEffects[condKey]?.name || condKey });
           }
         }
         if (options.length > 0) {
@@ -364,10 +374,15 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }
       }
 
-      // Модификаторы с выбором из пака (Адаптация ← biomancy_adaptations):
-      // селект показывает имена предметов компендиума; пуст — остаётся подсказка ранга
+      // Модификаторы с выбором из пака (Адаптация ← biomancy_adaptations + mutilations).
+      // Значение опции — system.key предмета, а НЕ его имя: переименование адаптации
+      // не должно осиротить сохранённые заклинания (правило идентификации по key).
+      // Ранг предмета лежит в flags.dedrel.rank и обязан совпадать с рангом
+      // Модификатора: иначе Адаптация 1 предлагала бы крылья 4-го ранга.
+      // Пак пуст или на этом ранге ничего нет — остаётся подсказка ранга.
       if (cfg.optionsFromPack && chosen) {
-        const packOpts = await this.#packOptions(cfg.optionsFromPack);
+        const packOpts = (await this.#packOptions(cfg.optionsFromPack, "system.key", "flags.dedrel.rank"))
+          .filter(o => o.rank === chosen.rank);
         if (packOpts.length > 0) {
           if (!packOpts.some(o => o.value === chosen.option)) chosen.option = packOpts[0].value;
           row.powerOptions = packOpts.map(o => ({ ...o, selected: o.value === chosen.option }));

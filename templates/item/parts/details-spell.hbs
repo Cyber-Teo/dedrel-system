@@ -18,6 +18,12 @@
         <label>{{localize "DEDREL.ItemSheet.SpellBreakdown"}}</label>
         <input type="text" value="{{system.total_cost_breakdown}}" disabled/>
     </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+        <label class="checkbox">
+            <input type="checkbox" name="system.is_fixed" {{checked system.is_fixed}}/> {{localize "DEDREL.ItemSheet.SpellIsFixed"}}
+        </label>
+        <p class="hint" style="margin: 0;">{{localize "DEDREL.ItemSheet.SpellIsFixedHint"}}</p>
+    </div>
     {{/if}}
 
     <div class="form-group stacked" style="grid-column: 1 / -1;">

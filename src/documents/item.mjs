@@ -847,13 +847,21 @@ export default class DedrelItem extends Item {
     const doctrineCfg = config?.doctrines?.[sys.doctrine];
     if (!doctrineCfg) return true;
 
-    // Путь сборки должен быть известен магу (куплен талантом); "без пути" легален всегда
+    // Путь сборки должен быть известен магу (куплен талантом); "без пути" легален всегда.
+    // Проверяется и у фиксированных заклинаний: фикс-заклинание, привязанное к пути,
+    // остаётся заклинанием этого пути и требует его таланта.
     if (sys.doctrine_path && !doctrineState?.paths?.[sys.doctrine_path]) {
       ui.notifications.error(game.i18n.format("DEDREL.Magic.UI.CastPathNotKnown", {
         path: game.i18n.localize(`DEDREL.Magic.Paths.${sys.doctrine_path}`)
       }));
       return false;
     }
+
+    // Фиксированное заклинание доктрины, которая ЕСТЬ в Конструкторе (длинные
+    // касты Тенемантии/Биомантии): сборки у него нет, а гейты по Рангу и Пути
+    // уже отработали. Без этого выхода калькулятор получил бы пустой build
+    // и завалил каст на no_techniques.
+    if (sys.is_fixed) return true;
 
     const build = {
       doctrine: sys.doctrine,
@@ -1103,6 +1111,12 @@ export default class DedrelItem extends Item {
       const powerMod = (this.system.chosen_modifiers || []).find(m => m.key === "power");
       if (powerMod?.option && powerMod.option !== "bonus" && powerMod.option !== "penalty") {
         conditionKeys.push(powerMod.option);
+      }
+      // Модификатор "Адаптация" (Биомантия): выбранная черта — тоже condition-предмет
+      // (паки biomancy_adaptations / mutilations), поэтому накладывается той же кнопкой
+      const adaptMod = (this.system.chosen_modifiers || []).find(m => m.key === "adapt");
+      if (adaptMod?.option && !conditionKeys.includes(adaptMod.option)) {
+        conditionKeys.push(adaptMod.option);
       }
       // Уникальное свойство доктрины "Поджигание" (Пиромантия): уронное заклинание
       // может оставить состояние "Горение"

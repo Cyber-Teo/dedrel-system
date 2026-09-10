@@ -514,7 +514,11 @@ Hooks.once("ready", async function () {
  * работало), и в селект Магического Конструктора. Идёт ПОСЛЕ conditions:
  * при совпадении ключей версия из magic_conditions выигрывает.
  */
-const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions"];
+// biomancy_adaptations и mutilations — предметы-состояния Модификатора
+// «Адаптация» Биомантии (плюсовые черты и увечья). В реестре они нужны,
+// чтобы наложение по ключу работало кнопкой карточки и через HUD токена.
+const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions",
+  "dedrel.biomancy_adaptations", "dedrel.mutilations"];
 
 /**
  * Собирает CONFIG.statusEffects из Condition-предметов компендиумов.

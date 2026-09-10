@@ -817,7 +817,9 @@
       "ServiceType": "Service Type",
       "ServiceHint": "A service is intangible: it has no weight and is not added to inventory. On purchase, money is deducted and the item's Active Effects (if any) are applied.",
       "EquipSlot": "Accessory Slot",
-      "NewEffect": "New Effect"
+      "NewEffect": "New Effect",
+      "SpellIsFixed": "Fixed doctrine spell",
+      "SpellIsFixedHint": "No Constructor build: only the Doctrine Rank is checked on cast. For long casts and linear spells."
     },
     "ActorSheet": {
       "Tabs": {
