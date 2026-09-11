@@ -568,11 +568,56 @@ export const DEDREL_MAGIC = {
         { target: "mod:damage", forbidden: true },
         { target: "mod:area_cone", forbidden: true },
         { target: "mod:area_circle", forbidden: true },
-        { target: "mod:area_line", forbidden: true }
+        { target: "mod:area_line", forbidden: true },
+        // Биомантия не творит плоть из ниоткуда — она перелепливает уже живое
+        // (то же основание, что у ignoresSource: тело и есть источник).
+        // Остаются: Переместить, Преобразовать, Почуять (искать следы ваяния),
+        // Внедрить. Форма и так недоступна — у доктрины пустой список forms.
+        { target: "tech:create", forbidden: true }
       ],
       forms: [],
       // Лечение — единственное прямое в системе; Адаптация — временные мутации
-      modifiers: ["heal", "adapt"]
+      modifiers: ["heal", "adapt"],
+      // Биомантия контактна: работает руками, вблизи (правила §7.1 "Касание").
+      // Без Пути палитра урезана: Лечение и Адаптация только рангов 1-3 —
+      // Путь снимает свой потолок (caps пути мержатся ПОВЕРХ caps доктрины).
+      caps: [
+        { target: "mod:range", maxRank: 2 },
+        { target: "mod:heal", maxRank: 3 },
+        { target: "mod:adapt", maxRank: 3 }
+      ],
+      // Пути (правила 2026-09-11): Врачевание работает С образцом тела, Ваяние — ПРОТИВ
+      // него. Отсюда вся разница: Врачевание мгновенно и дотягивается через строй,
+      // Ваяние требует касания, часов и ткани донора (ступень расхождения 2,
+      // `flags.dedrel.divergence` на предметах адаптаций).
+      paths: {
+        mending: {
+          label: "DEDREL.Magic.Paths.mending",
+          affinity: [
+            { target: "mod:heal", delta: -1 },
+            { target: "mod:targets", delta: -1 }
+          ],
+          // Снимает потолок Лечения; Адаптация и дальность остаются доктринными
+          caps: [{ target: "mod:heal", maxRank: 5 }]
+          // TODO (роадмап §3.3 п.5): доктринный модификатор `mend` — снятие
+          // физических состояний. Требует нового выхлопа в compile().
+        },
+        sculpting: {
+          label: "DEDREL.Magic.Paths.sculpting",
+          affinity: [
+            { target: "mod:adapt", delta: -1 },
+            { target: "mod:duration", delta: -1 }
+          ],
+          // Снимает потолок Адаптации, но ужимает дальность до касания
+          caps: [
+            { target: "mod:adapt", maxRank: 5 },
+            { target: "mod:range", maxRank: 1 }
+          ],
+          // Монополия на длинные касты Ваяния (`_rules/16.1 Rituals.md`);
+          // сами длинные касты — фикс-заклинания с is_fixed, не сборка
+          special: { longCast: true }
+        }
+      }
     }
   }
 };

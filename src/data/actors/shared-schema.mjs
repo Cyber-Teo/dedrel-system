@@ -149,7 +149,7 @@ export function buildDoctrines() {
     pyromancy: doctrineField(),
     ventomancy: doctrineField(["squall", "echo"]),
     // Доктрины Сущности
-    biomancy: doctrineField(),
+    biomancy: doctrineField(["mending", "sculpting"]),
     shadowmancy: doctrineField(),
     aetheromancy: doctrineField(),
     // Доктрины Беспредельного

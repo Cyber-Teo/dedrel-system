@@ -207,7 +207,9 @@
         "flow": "Path of the Flow",
         "ice": "Path of Ice",
         "squall": "Path of the Squall",
-        "echo": "Path of the Echo"
+        "echo": "Path of the Echo",
+        "mending": "Path of Mending",
+        "sculpting": "Path of Sculpting"
       },
       "Categories": {
         "scale": "Scale",
@@ -1528,6 +1530,7 @@
       "Doctrines": "Doctrines",
       "Techniques": "Techniques",
       "Unlocked": "Access",
+      "PathKnown": "Path known (1 = yes, 0 = no)",
       "Rank": "Rank",
       "CreatureType": "Creature type",
       "DrBase": "base",

@@ -521,6 +521,23 @@ const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions",
   "dedrel.biomancy_adaptations", "dedrel.mutilations"];
 
 /**
+ * Паки, чьи состояния НЕ показываются в выпадающем меню статусов токена
+ * (решение 2026-09-11). В реестре они остаются — иначе перестанут работать
+ * кнопки наложения на карточках заклинаний и наложение по ключу вообще;
+ * скрывается только палитра HUD, где место ограничено.
+ *
+ * Критерий простой: меню токена — для базовых состояний, которые ГМ вешает
+ * рукой (`conditions`: лежит, ослеплён, кровотечение). Всё, что накладывает
+ * магия или будущая панель редких кондиций (роадмап, блок E), в меню не нужно.
+ *
+ * Механизм — поле `hud: false`, которое ядро V14 понимает штатно:
+ * TokenHUD#_getStatusEffectChoices пропускает такие записи
+ * (client/applications/hud/token-hud.mjs).
+ */
+const HUD_HIDDEN_PACKS = new Set(["dedrel.magic_conditions",
+  "dedrel.biomancy_adaptations", "dedrel.mutilations"]);
+
+/**
  * Собирает CONFIG.statusEffects из Condition-предметов компендиумов.
  * ВАЖНО (V14): CONFIG.statusEffects — это Proxy (массив с индексом по id).
  * Его НЕЛЬЗЯ заменять обычным массивом, иначе ActiveEffect.fromStatusEffect
@@ -529,14 +546,17 @@ const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions",
  */
 async function rebuildStatusEffects() {
   const conditionItems = [];
+  // Пак запоминается вместе с документом: от него зависит, попадёт ли состояние
+  // в палитру HUD (см. HUD_HIDDEN_PACKS).
   for (const packId of CONDITION_PACKS) {
     const pack = game.packs.get(packId);
-    if (pack) conditionItems.push(...await pack.getDocuments());
+    if (pack) for (const doc of await pack.getDocuments()) conditionItems.push({ doc, packId });
   }
   if (conditionItems.length === 0) return;
 
+  let hidden = 0;
   CONFIG.statusEffects.length = 0;
-  for (const c of conditionItems) {
+  for (const { doc: c, packId } of conditionItems) {
     const entry = {
       // Приоритет — системный ключ условия (стабильный, латиницей);
       // слаг имени остаётся как fallback для условий без ключа.
@@ -593,8 +613,15 @@ async function rebuildStatusEffects() {
       else if (dur.units === "days") entry.duration = { seconds: dur.value * 86400 };
     }
 
+    // Скрытие из палитры HUD: состояние остаётся в реестре и накладывается
+    // по ключу, но не занимает место в выпадающем меню статусов токена.
+    if (HUD_HIDDEN_PACKS.has(packId)) {
+      entry.hud = false;
+      hidden++;
+    }
+
     CONFIG.statusEffects[entry.id] = entry;
   }
 
-  console.log(`Dedrel | Status effects rebuilt: ${conditionItems.length} conditions [${CONFIG.statusEffects.map(s => s.id).join(", ")}]`);
+  console.log(`Dedrel | Status effects rebuilt: ${conditionItems.length} conditions (${hidden} скрыто из меню токена) [${CONFIG.statusEffects.map(s => s.id).join(", ")}]`);
 }

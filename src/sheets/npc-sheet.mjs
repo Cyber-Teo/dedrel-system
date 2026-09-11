@@ -90,10 +90,17 @@ export default class DedrelNpcSheet extends DedrelCharacterSheet {
     }));
 
     // Доктрины и техники — из source (таланты могут давать +1 через AE).
+    // Пути доктрин идут сюда же: у персонажа их выдают таланты, а статблок NPC
+    // собирается руками — без полей в «Настройке» выставить путь боссу нечем.
     const doctrines = Object.keys(sys.doctrines).map(key => ({
       key, label: `DEDREL.Magic.Doctrines.${key}`,
       rank: src.doctrines[key].rank,
-      unlocked: src.doctrines[key].unlocked
+      unlocked: src.doctrines[key].unlocked,
+      paths: Object.entries(CONFIG.DEDREL?.magic?.doctrines?.[key]?.paths ?? {}).map(([pk, pcfg]) => ({
+        key: pk,
+        label: game.i18n.localize(pcfg.label),
+        value: src.doctrines[key].paths?.[pk] ?? 0
+      }))
     }));
     const srcTechniques = Object.keys(sys.magic.techniques).map(key => ({
       key, label: `DEDREL.Magic.Techniques.${key}`,

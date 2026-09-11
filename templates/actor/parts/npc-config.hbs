@@ -94,6 +94,14 @@
             <input type="number" name="system.doctrines.{{doc.key}}.rank" value="{{doc.rank}}" title="{{localize "DEDREL.Npc.Rank"}}" style="width: 38px;"/>
             <input type="number" name="system.doctrines.{{doc.key}}.unlocked" value="{{doc.unlocked}}" title="{{localize "DEDREL.Npc.Unlocked"}}" style="width: 38px;"/>
         </div>
+        {{#if doc.paths.length}}
+        {{#each doc.paths as |p|}}
+        <div style="display: flex; align-items: center; gap: 6px; padding-left: 14px;">
+            <label style="flex: 1; font-size: 10px; opacity: 0.8;">{{p.label}}</label>
+            <input type="number" name="system.doctrines.{{doc.key}}.paths.{{p.key}}" value="{{p.value}}" title="{{localize "DEDREL.Npc.PathKnown"}}" style="width: 38px;"/>
+        </div>
+        {{/each}}
+        {{/if}}
         {{/each}}
     </div>
 </div>
