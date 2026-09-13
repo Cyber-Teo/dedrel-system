@@ -71,13 +71,26 @@ export const DEDREL_MAGIC = {
    *   до 5-го ранга любому магу; ограничитель — пул ОД) + поднимает урон
    *   заклинания на одну ступень Лестницы (damageStepBonus, кап VII).
    * Уровень источника по доктринам задаётся ГМом флагом сцены
-   * scene.flags.dedrel.sourceScale. Доктрины с ignoresSource (Биомантия,
-   * позже Электромантия) концепцию Источника игнорируют целиком.
+   * scene.flags.dedrel.sourceScale (виджет «Источники сцены» в левой колонке).
+   * Доктрины с ignoresSource (Биомантия, позже Электромантия) концепцию
+   * Источника игнорируют целиком.
    */
   sourceScales: {
     none:     { label: "DEDREL.Magic.SourceScales.none" },
     any:      { label: "DEDREL.Magic.SourceScales.any" },
     abundant: { label: "DEDREL.Magic.SourceScales.abundant", unlocksRank5: true, ignoresMaxModCost: true, damageStepBonus: 1 }
+  },
+
+  /**
+   * Уровень Источника на сцене, которую ГМ не настраивал.
+   * Воздух и земля есть почти везде — их отсутствие это редкое исключение
+   * (подземелье без воздуха, помост над пропастью), поэтому дефолт "any".
+   * Доктрины без записи считаются "none": огонь, вода и тьма в кадре должны
+   * появиться осознанно. Ключ читается ТОЛЬКО через utils/magic-source.mjs.
+   */
+  defaultSourceScales: {
+    ventomancy: "any",
+    geomancy:   "any"
   },
 
   /**

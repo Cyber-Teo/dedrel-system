@@ -203,6 +203,10 @@
         "any": "Source Available",
         "abundant": "Abundant Source"
       },
+      "SourceHUD": {
+        "Title": "Scene Sources",
+        "CycleHint": "<em>Click to raise, Shift+Click to lower</em>"
+      },
       "Paths": {
         "flow": "Path of the Flow",
         "ice": "Path of Ice",

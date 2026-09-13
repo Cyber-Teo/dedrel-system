@@ -31,6 +31,7 @@ import SpellConstructorApp from "./src/apps/spell-constructor.mjs";
 import EffectKeyBrowserApp from "./src/apps/effect-key-browser.mjs";
 import DedrelTokenHUD from "./src/apps/token-hud.mjs";
 import TimeHUD from "./src/apps/time-hud.mjs";
+import MagicSourceHUD from "./src/apps/source-hud.mjs";
 import { DEDREL_CALENDAR_CONFIG } from "./src/config/calendar.mjs";
 import { DedrelSocket } from "./src/socket.mjs";
 
@@ -163,6 +164,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/apps/spell-constructor.hbs",
     "systems/dedrel/templates/apps/currency-config.hbs",
     "systems/dedrel/templates/apps/effect-key-browser.hbs",
+    "systems/dedrel/templates/apps/source-hud.hbs",
     "systems/dedrel/templates/item/parts/item-header.hbs",
     "systems/dedrel/templates/item/parts/item-navigation.hbs",
     "systems/dedrel/templates/item/parts/item-description.hbs",
@@ -250,6 +252,7 @@ Hooks.once("init", function() {
     chainHUD: new ChainManeuversHUD(),
     apHUD: new ActionPointsHUD(),
     timeHUD: new TimeHUD(),
+    sourceHUD: new MagicSourceHUD(),
     // Движок Магического Конструктора — доступен макросам (смоук-тест "Валидация магии")
     SpellCalculator,
 
@@ -293,6 +296,7 @@ Hooks.once("init", function() {
   game.dedrel.effectsHUD.activateHooks();
   game.dedrel.apHUD.activateHooks();
   game.dedrel.timeHUD.activateHooks();
+  game.dedrel.sourceHUD.activateHooks();
 });
 
 /**
@@ -488,6 +492,9 @@ Hooks.once("ready", async function () {
 
   // Socket-брокер (переводы валют между акторами; сделки с торговцами — Блок D)
   DedrelSocket.listen();
+
+  // Виджет Источников виден всем и всегда: без тумблера, сразу после готовности UI
+  game.dedrel.sourceHUD.render({ force: true });
 
   await rebuildStatusEffects();
 

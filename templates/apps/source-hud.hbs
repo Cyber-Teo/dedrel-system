@@ -1,0 +1,10 @@
+<div class="source-hud-column {{#unless isGM}}readonly{{/unless}}">
+    {{#each doctrines as |d|}}
+    <button type="button"
+            class="ui-control source-doctrine scale-{{d.scale}}"
+            data-action="cycle"
+            data-doctrine="{{d.key}}"
+            data-tooltip="{{d.tooltip}}"
+            aria-label="{{d.label}}">{{{d.glyph}}}</button>
+    {{/each}}
+</div>

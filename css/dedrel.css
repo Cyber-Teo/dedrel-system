@@ -2634,3 +2634,67 @@ form.dedrel.sheet.item {
   padding: 2px 10px;
   line-height: 22px;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Виджет «Источники сцены» (src/apps/source-hud.mjs)                  */
+/* ------------------------------------------------------------------ */
+
+/* Позиционируется абсолютно внутри #ui-left: у него есть transform, поэтому
+   он же containing block. В поток левой колонки встраиваться нельзя —
+   #scene-controls меряет свою высоту, чтобы разложить инструменты по столбцам.
+   left и ширина совпадают с колонкой панели инструментов. */
+#dedrel-source-hud {
+  position: absolute;
+  left: 16px;
+  top: var(--dedrel-source-hud-top, 44%);
+  width: var(--control-size, 32px);
+  pointer-events: none; /* кликабельны только сами кнопки (.ui-control) */
+}
+
+#dedrel-source-hud .source-hud-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#dedrel-source-hud .source-doctrine {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Символ вставлен в DOM инлайном, а не картинкой: только у встроенного SVG
+   работает fill="currentColor", поэтому состояние Источника — одно правило
+   color, а не второй комплект файлов. */
+#dedrel-source-hud .source-doctrine > svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+/* Нет источника — символ гаснет, но остаётся читаемым: магу важно видеть,
+   ЧТО именно недоступно, а не пустое место. */
+#dedrel-source-hud .scale-none {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+#dedrel-source-hud .scale-any {
+  color: #fff;
+}
+
+/* Изобильный — тёплое свечение: маг должен замечать его, не наводя курсор. */
+#dedrel-source-hud .scale-abundant {
+  color: #ffc061;
+  border-color: #e8862a;
+  box-shadow: 0 0 6px rgba(232, 134, 42, 0.55);
+}
+
+#dedrel-source-hud .scale-abundant > svg {
+  filter: drop-shadow(0 0 3px rgba(255, 170, 60, 0.9));
+}
+
+#dedrel-source-hud .source-hud-column.readonly .source-doctrine {
+  cursor: default;
+}

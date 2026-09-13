@@ -1,5 +1,6 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 import { SpellCalculator } from "../utils/spell-calculator.mjs";
+import { SOURCE_ORDER, sceneSourceScale } from "../utils/magic-source.mjs";
 
 /**
  * Конструктор Заклинаний (Магический Конструктор).
@@ -103,21 +104,14 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     return keys.filter(k => this.actor.system.doctrines?.[k]?.unlocked);
   }
 
-  /** Порядок уровней источника для сравнения "не выше сценового". */
-  static SOURCE_ORDER = ["none", "any", "abundant"];
-
   /**
-   * Уровень источника доктрины на активной сцене (флаг ГМа, макрос "Источники сцены").
-   * null = флаг не задан → без ограничений (ГМ рулит словами).
+   * Уровень Источника доктрины на активной сцене. Резолвер общий с виджетом
+   * «Источники сцены» (utils/magic-source.mjs): сцена без флага отдаёт дефолт
+   * доктрины, а не «без ограничений», иначе селект разрешал бы больше,
+   * чем показывает виджет.
    */
   #sceneSourceScale(doctrineKey) {
-    const flag = canvas?.scene?.getFlag("dedrel", "sourceScale");
-    return flag?.[doctrineKey] ?? null;
-  }
-
-  /** Дефолт источника при выборе доктрины: сценовый уровень либо "none". */
-  #defaultSourceScale(doctrineKey) {
-    return this.#sceneSourceScale(doctrineKey) ?? "none";
+    return sceneSourceScale(doctrineKey);
   }
 
   /**
@@ -171,7 +165,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const doctrineKeys = this.#availableDoctrines(config);
     if (!this.build.doctrine && doctrineKeys.length > 0) {
       this.build.doctrine = doctrineKeys[0];
-      this.build.sourceScale = this.#defaultSourceScale(this.build.doctrine);
+      this.build.sourceScale = this.#sceneSourceScale(this.build.doctrine);
     }
     context.hasDoctrines = doctrineKeys.length > 0;
     context.doctrines = doctrineKeys.map(k => ({
@@ -217,13 +211,13 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     // --- Масштаб Источника (доктрины ignoresSource живут вне этой концепции) ---
     context.hideSource = !!doctrineCfg.ignoresSource;
     if (context.hideSource) this.build.sourceScale = "none";
-    // Флаг сцены (ГМ-макрос "Источники сцены") — потолок для игроков: можно выбрать
-    // уровень НИЖЕ сценового (осторожная магия), но не выше. ГМ не ограничен;
-    // отсутствие флага = без ограничений (уровень источника судит ГМ устно).
+    // Уровень сцены (виджет «Источники сцены») — потолок для игроков: можно выбрать
+    // уровень НИЖЕ сценового (осторожная магия), но не выше. ГМ не ограничен.
+    // Сцена без флага отдаёт дефолт доктрины — см. sceneSourceScale().
     const sceneScale = this.#sceneSourceScale(this.build.doctrine);
-    const sceneIdx = sceneScale === null ? Infinity : SpellConstructorApp.SOURCE_ORDER.indexOf(sceneScale);
+    const sceneIdx = SOURCE_ORDER.indexOf(sceneScale);
     context.sourceScales = Object.entries(config.sourceScales).map(([k, v]) => {
-      const overSceneCap = !game.user.isGM && SpellConstructorApp.SOURCE_ORDER.indexOf(k) > sceneIdx;
+      const overSceneCap = !game.user.isGM && SOURCE_ORDER.indexOf(k) > sceneIdx;
       return {
         key: k,
         label: i18n.localize(v.label),
@@ -231,9 +225,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         disabled: overSceneCap
       };
     });
-    context.sceneScaleLabel = sceneScale !== null
-      ? i18n.localize(config.sourceScales[sceneScale].label)
-      : null;
+    context.sceneScaleLabel = i18n.localize(config.sourceScales[sceneScale].label);
     const abundant = !!config.sourceScales[this.build.sourceScale]?.ignoresMaxModCost;
     // Режим изобилия (настройка мира): снимает ли изобильный источник maxModCost
     const bypassMaxCost = abundant && game.settings.get("dedrel", "abundantSourceMode") === "unlockAll";
@@ -471,7 +463,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     html.querySelector('[name="doctrine"]')?.addEventListener("change", ev => {
       this.build.doctrine = ev.currentTarget.value;
       this.build.path = "";
-      this.build.sourceScale = this.#defaultSourceScale(this.build.doctrine);
+      this.build.sourceScale = this.#sceneSourceScale(this.build.doctrine);
       this.render();
     });
     html.querySelector('[name="sourceScale"]')?.addEventListener("change", ev => {
