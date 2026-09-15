@@ -1057,6 +1057,7 @@
       "ItemNotOwned": "Item is not owned by an actor.",
       "LightOn": "{name}: light lit.",
       "LightOff": "{name}: light extinguished.",
+      "LightOnUnequipped": "{name}: light lit, but the item is not equipped — the token will glow once you hold it.",
       "NotEnoughAP": "Not enough Action Points!",
       "NotEnoughUses": "Not enough charges!",
       "NotEnoughAmmo": "Not enough ammunition: {name} ({current}/{required})",

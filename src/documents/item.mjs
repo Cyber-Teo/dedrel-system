@@ -259,17 +259,30 @@ export default class DedrelItem extends Item {
    * Светильник-тумблер: у предмета с собственным transfer-эффектом света
    * (факел, лампа) использование ПЕРЕКЛЮЧАЕТ свет (disabled эффекта), а не
    * накладывает копии на актёра. Свет — нативные change-строки token.light.*,
-   * ядро применяет/гасит их само. Оружие/броню не трогаем (их use — атака,
-   * а свет и так гейтится экипировкой); зелья и свитки — расходники.
+   * ядро применяет/гасит их само.
+   *
+   * Экипируемые типы (оружие, броня) тоже сюда попадают: факел занимает руку и
+   * потому делается оружием, а их use сам по себе — не атака (атака идёт манёвром
+   * с req_weapon), без тумблера клик по факелу просто открывал бы лист. Предмет
+   * без светового transfer-эффекта проходит мимо и ведёт себя как раньше.
+   * Зелья и свитки не трогаем — это расходники.
    * @returns {Promise<boolean>} true — предмет оказался светильником и был переключён.
    */
   async #toggleLightEffects() {
-    if (!["magic_item", "loot", "trade_good"].includes(this.type)) return false;
+    if (!["magic_item", "loot", "trade_good", "weapon", "armor"].includes(this.type)) return false;
     const lightEffects = this.effects.filter(e => e.transfer && hasTokenLightChanges(e));
     if (!lightEffects.length) return false;
 
     const enable = lightEffects.some(e => e.disabled);
     for (const effect of lightEffects) await effect.update({ disabled: !enable });
+
+    // Экипируемый светильник светит только из слота: transfer-эффект
+    // неэкипированного предмета подавлен (Actor#itemEffectsActive), поэтому
+    // «зажёг» факел в рюкзаке — честно предупреждаем, что токен не засветится.
+    if (enable && !this.actor.itemEffectsActive(this)) {
+      ui.notifications.warn(game.i18n.format("DEDREL.Notifications.LightOnUnequipped", { name: this.name }));
+      return true;
+    }
     ui.notifications.info(game.i18n.format(
       enable ? "DEDREL.Notifications.LightOn" : "DEDREL.Notifications.LightOff",
       { name: this.name }

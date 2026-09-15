@@ -670,6 +670,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
                 // Копируем встроенные эффекты записи как шаблон: сбрасываем _id.
                 const o = e.toObject();
                 delete o._id;
+                // Светильник работает ТОЛЬКО transfer-эффектом: свет живёт на
+                // токене носителя (token.light.*), а не накладывается разово.
+                // Запись в компендиуме могла быть сохранена с transfer: false —
+                // такой эффект молча не светил бы и не попадал в тумблер use().
+                // Режимы «к себе»/«аура» не трогаем: там transfer снят намеренно.
+                const mode = o.flags?.dedrel?.applyTo;
+                if (hasTokenLightChanges(o) && !mode) o.transfer = true;
                 return o;
               });
             // origin привязываем к текущему предмету. Фазу system.*-изменений

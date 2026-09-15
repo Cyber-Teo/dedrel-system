@@ -165,7 +165,9 @@ export function buildEffectData(key, opts = {}) {
     img: preset.img || ICON,
     // По умолчанию эффекты-пресеты НЕ переносятся: их накладывают вручную (кнопка
     // «Применить эффекты» в карточке чата) либо конвейером использования зелья.
-    transfer: opts.transfer ?? false,
+    // Исключение — свет: он живёт на токене носителя, пока предмет при нём, и
+    // без transfer не работает вовсе (ни на токене, ни в тумблере Item#use).
+    transfer: opts.transfer ?? hasTokenLightChanges({ system: { changes: preset.changes ?? [] } }),
     duration: opts.duration || { ...preset.duration },
     system: {
       changes: (preset.changes || []).map(c => ({ ...c }))

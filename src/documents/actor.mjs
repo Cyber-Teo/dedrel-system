@@ -87,21 +87,29 @@ export default class DedrelActor extends Actor {
    * equipment_slots (лут/контейнер) гейтится только оружие (по system.equipped).
    */
   *allApplicableEffects() {
-    const slots = this.system?.equipment_slots;
-    const inSlot = (item) => Object.values(slots).some(s => s?.item_id === item.id);
     for (const effect of this.effects) yield effect;
     for (const item of this.items) {
-      if (slots && item.system?.equip_slot) {
-        if (!inSlot(item)) continue;
-      } else if (item.type === "weapon") {
-        if (!item.system?.equipped) continue;
-      } else if (slots && item.type === "armor") {
-        if (!inSlot(item)) continue;
-      }
+      if (!this.itemEffectsActive(item)) continue;
       for (const effect of item.effects) {
         if (effect.transfer) yield effect;
       }
     }
+  }
+
+  /**
+   * Действуют ли сейчас transfer-эффекты предмета на этого актора (правила гейта
+   * описаны в allApplicableEffects). Вынесено отдельным методом, чтобы тумблер
+   * света (DedrelItem#use) судил об экипировке по тем же правилам, а не по своим.
+   * @param {Item} item
+   * @returns {boolean}
+   */
+  itemEffectsActive(item) {
+    const slots = this.system?.equipment_slots;
+    const inSlot = () => Object.values(slots).some(s => s?.item_id === item.id);
+    if (slots && item.system?.equip_slot) return inSlot();
+    if (item.type === "weapon") return !!item.system?.equipped;
+    if (slots && item.type === "armor") return inSlot();
+    return true;
   }
 
   prepareData() {
