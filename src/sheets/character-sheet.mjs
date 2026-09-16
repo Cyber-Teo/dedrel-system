@@ -134,7 +134,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       rollData: this.document.getRollData()
     });
 
-    const creationData = this.#prepareCreationData(actorData, items.mutations);
+    const creationData = this.#prepareCreationData(actorData, items.mutations, items.mutilations);
     const xpData = this.#prepareXpData(actorData);
     const doctrinePaths = this.#prepareDoctrinePaths(actorData);
     const { skillGroups, favoriteSkillsData } = this.#prepareSkillGroups(actorData);
@@ -261,7 +261,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
            talentsGroups.other.items.push(i);
         }
       }
-      else if (i.type === 'mutilation') mutilations.push(i);
+      // Искажения: легаси-тип mutilation и актуальные condition-предметы из пака
+      // mutilations (врождённые недостатки, увечья биомантии) — один список.
+      else if (i.type === 'mutilation' || i.type === 'condition') mutilations.push(i);
       else if (i.type === 'weapon') {
         weapons.push(i);
         // Естественное оружие идёт в свой блок (выпустить/спрятать); если оно
@@ -318,7 +320,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
    * Данные режима создания персонажа: потраченные очки родословных/атрибутов/
    * навыков/мутаций и проверка превышения капов создания.
    */
-  #prepareCreationData(actorData, mutations) {
+  #prepareCreationData(actorData, mutations, mutilations = []) {
     const creationData = {
       bloodlinesUsed: 0,
       attributesUsed: 0,
@@ -355,6 +357,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
           creationData.startingUsefulMutations.push(m);
           creationData.mutationsUsed += (m.system.xp_cost || 0);
         }
+      }
+    }
+
+    // Врождённые недостатки — condition-предметы из пака mutilations с флагом
+    // innate (3. Harmful Mutations: каталог задаёт искажение, источник — срок).
+    for (let c of mutilations) {
+      if (c.getFlag("dedrel", "innate")) {
+        creationData.startingHarmfulMutations.push(c);
+        creationData.harmfulMutationsCount++;
       }
     }
 
@@ -525,7 +536,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const skillCategories = {
       combat: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"],
       intellectual: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"],
-      practical: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism", "perception"],
+      practical: ["craftsmanship", "stealth", "thievery", "healing", "survival", "engineering", "atletism", "perception"],
       social: ["persuasion", "insight", "deception", "intimidation", "performance"]
     };
 
@@ -1624,6 +1635,22 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return super._onDropItemCreate(itemData);
   }
 
+  /** Списанный опыт последней покупки — переносится в блок создания мутации. */
+  #pendingXpPaid = 0;
+
+  /**
+   * Сколько врождённых недостатков уже взято: и легаси-мутации
+   * (mutation_type harmful), и искажения-состояния с флагом innate.
+   */
+  #countHarmfulStarting() {
+    let count = 0;
+    for (const i of this.document.items) {
+      if (i.type === "mutation" && i.system.starting && i.system.mutation_type === "harmful") count++;
+      else if (i.type === "condition" && i.getFlag("dedrel", "innate")) count++;
+    }
+    return count;
+  }
+
   /**
    * Кастомная обработка Drag & Drop (V2).
    * Позволяет отслеживать, в какую именно зону был брошен предмет 
@@ -1714,7 +1741,35 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       // Талант/манёвр поэтому создаём напрямую из уже разрешённого item.
       // Мутация идёт дальше — у неё своя логика стартовых зон ниже.
       if (item.type !== "mutation") {
-        return this.document.createEmbeddedDocuments("Item", [item.toObject()]);
+        const bought = item.toObject();
+        // Сколько опыта реально списано — запоминаем на предмете: при удалении
+        // актёр вернёт ровно эту сумму (DedrelActor#refundXpForDeletedItems).
+        if (xpCost > 0) foundry.utils.setProperty(bought, "flags.dedrel.xpPaid", xpCost);
+        return this.document.createEmbeddedDocuments("Item", [bought]);
+      }
+      if (xpCost > 0) this.#pendingXpPaid = xpCost;
+    }
+
+    // Врождённый недостаток: искажение из пака mutilations, брошенное в зону
+    // вредных мутаций. Каталог искажений общий с увечьями биомантии, поэтому
+    // сущность не дублируется — источник задаёт срок (3. Harmful Mutations):
+    // из зоны создания состояние ложится постоянным и с флагом innate.
+    if (item.type === "condition") {
+      const zone = event.target.closest(".drop-zone");
+      if (zone?.dataset.dropType === "mutation-harmful") {
+        if (this.document.getFlag("dedrel", "creationLocked")) {
+          ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CharacterCreationLocked"));
+          return false;
+        }
+        if (this.#countHarmfulStarting() >= 2) {
+          ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.MaxStartingHarmfulMutations"));
+          return false;
+        }
+        const itemObj = item.toObject();
+        itemObj.system.duration = { units: "permanent", value: 0 };
+        itemObj.system.expiry_events = [];
+        foundry.utils.setProperty(itemObj, "flags.dedrel.innate", true);
+        return this.document.createEmbeddedDocuments("Item", [itemObj]);
       }
     }
 
@@ -1734,27 +1789,19 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
            itemObj.system.mutation_type = "useful";
            // Re-calculate points
            let totalUsed = 0;
-           let harmfulCount = 0;
            for (let m of this.document.items) {
-             if (m.type === "mutation" && m.system.starting) {
-                if (m.system.mutation_type === "harmful") harmfulCount++;
-                else totalUsed += (m.system.xp_cost || 0);
+             if (m.type === "mutation" && m.system.starting && m.system.mutation_type !== "harmful") {
+                totalUsed += (m.system.xp_cost || 0);
              }
            }
-           const maxPoints = 3 + Math.min(harmfulCount, 2);
+           const maxPoints = 3 + Math.min(this.#countHarmfulStarting(), 2);
            if (totalUsed + (itemObj.system.xp_cost || 0) > maxPoints) {
              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughPointsForMutation"));
              return false;
            }
         } else if (dropType === "mutation-harmful") {
            itemObj.system.mutation_type = "harmful";
-           let harmfulCount = 0;
-           for (let m of this.document.items) {
-             if (m.type === "mutation" && m.system.starting && m.system.mutation_type === "harmful") {
-                harmfulCount++;
-             }
-           }
-           if (harmfulCount >= 2) {
+           if (this.#countHarmfulStarting() >= 2) {
              ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.MaxStartingHarmfulMutations"));
              return false;
            }
@@ -1767,8 +1814,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       // Уже принадлежащую актору мутацию (пересортировка, await не было) отдаём
       // стандартному super._onDrop ниже, чтобы не создать дубликат.
       if (!this.document.items.get(item.id)) {
-        return this.document.createEmbeddedDocuments("Item", [item.toObject()]);
+        const bought = item.toObject();
+        if (this.#pendingXpPaid > 0) {
+          foundry.utils.setProperty(bought, "flags.dedrel.xpPaid", this.#pendingXpPaid);
+          this.#pendingXpPaid = 0;
+        }
+        return this.document.createEmbeddedDocuments("Item", [bought]);
       }
+      this.#pendingXpPaid = 0;
     }
 
     return super._onDrop(event);

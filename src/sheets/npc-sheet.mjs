@@ -18,7 +18,7 @@ import DedrelCharacterSheet from "./character-sheet.mjs";
 const SKILL_CATEGORIES = {
   combat: { label: "DEDREL.ActorSheet.CombatSkills", keys: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"] },
   intellectual: { label: "DEDREL.ActorSheet.IntellectualSkills", keys: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"] },
-  practical: { label: "DEDREL.ActorSheet.PracticalSkills", keys: ["craftsmanship", "stealth", "healing", "survival", "engineering", "atletism", "perception"] },
+  practical: { label: "DEDREL.ActorSheet.PracticalSkills", keys: ["craftsmanship", "stealth", "thievery", "healing", "survival", "engineering", "atletism", "perception"] },
   social: { label: "DEDREL.ActorSheet.SocialSkills", keys: ["persuasion", "insight", "deception", "intimidation", "performance"] }
 };
 

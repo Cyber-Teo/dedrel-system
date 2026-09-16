@@ -69,6 +69,7 @@ export function buildSkills() {
     // Practical
     craftsmanship: skillField(),
     stealth: skillField(),
+    thievery: skillField(),
     healing: skillField(),
     survival: skillField(),
     engineering: skillField(),

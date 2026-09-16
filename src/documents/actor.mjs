@@ -167,7 +167,34 @@ export default class DedrelActor extends Actor {
     if (game.user.id === userId) {
       this._syncVisionToTokens();
       this.#clearSlotsForDeletedItems(collection, ids);
+      this.#refundXpForDeletedItems(collection, documents);
     }
+  }
+
+  /**
+   * Возвращает опыт за снятый с листа талант или мутацию (10. Progression).
+   * Сумма берётся из флага `xpPaid`, который лист ставит в момент покупки.
+   * Предметы без флага — залитые макросом или выданные Мастером мимо списания —
+   * возврата не дают: иначе на NPC-персонажах из макросов набегал бы опыт,
+   * которого им никто не выдавал.
+   */
+  #refundXpForDeletedItems(collection, documents) {
+    if (collection !== "items" || this.type !== "character") return;
+    let refund = 0;
+    const names = [];
+    for (const item of documents) {
+      if (!["talent", "mutation"].includes(item.type)) continue;
+      const paid = item.getFlag("dedrel", "xpPaid") || 0;
+      if (paid <= 0) continue;
+      refund += paid;
+      names.push(item.name);
+    }
+    if (refund <= 0) return;
+    const xp = (this.system.details?.xp || 0) + refund;
+    this.update({ "system.details.xp": xp });
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.XPRefunded", {
+      names: names.join(", "), cost: refund
+    }));
   }
 
   /**

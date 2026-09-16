@@ -197,6 +197,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         "research": game.i18n.localize("DEDREL.Skills.research"),
         "craftsmanship": game.i18n.localize("DEDREL.Skills.craftsmanship"),
         "stealth": game.i18n.localize("DEDREL.Skills.stealth"),
+        "thievery": game.i18n.localize("DEDREL.Skills.thievery"),
         "healing": game.i18n.localize("DEDREL.Skills.healing"),
         "survival": game.i18n.localize("DEDREL.Skills.survival"),
         "engineering": game.i18n.localize("DEDREL.Skills.engineering"),
