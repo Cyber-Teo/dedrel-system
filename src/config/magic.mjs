@@ -246,7 +246,6 @@ export const DEDREL_MAGIC = {
       doctrinal: true,
       label: "DEDREL.Magic.Modifiers.power",
       conditionsFromPack: "dedrel.magic_conditions",
-      exclusiveWith: ["inspire"],
       ranks: {
         1: { saveDc: 10, penalty: 1, durationMode: "instant" },
         2: { saveDc: 12, penalty: 2, durationMode: "rounds:1" },
@@ -262,19 +261,10 @@ export const DEDREL_MAGIC = {
              conditions: ["fatigued", "stunned", "knockout", "terror", "full_paralysis"] }
       }
     },
-    // Воодушевление (Путь Эха): позитивное зеркало "Силы" — бонус согласной цели,
-    // спасбросок не полагается.
-    inspire: {
-      category: "intensity",
-      doctrinal: true,
-      label: "DEDREL.Magic.Modifiers.inspire",
-      exclusiveWith: ["power"],
-      ranks: {
-        1: { bonus: 1, durationMode: "instant" },
-        2: { bonus: 2, durationMode: "rounds:1" },
-        4: { bonus: 3, durationMode: "doctrineRank" }
-      }
-    },
+    // "Воодушевление" изъято 2026-09-15: дублировало Насыщение, у которого кривая
+    // и длиннее (масштабируется Длительностью), и полнее (ранги 1-4). Командные
+    // бафы Эха теперь = Насытить + Насыщение + Длительность со скидкой Пути.
+
     // Сковывание (Путь Льда): лёд держит на месте.
     constrain: {
       category: "intensity",
@@ -512,8 +502,11 @@ export const DEDREL_MAGIC = {
     ventomancy: {
       label: "DEDREL.Magic.Doctrines.ventomancy",
       baseDamageType: "",
+      // Ветер и звук бьют по площади и по чувствам, а не остриём: прямой урон —
+      // не их работа. Налога на "Прочность" нет, потому что доктрина её не
+      // касается вовсе — воздух не держит форму и конструктов не создаёт.
       restriction: [
-        { target: "mod:durability", delta: 1 },
+        { target: "mod:damage", delta: 1 },
         { target: "mod:accuracy", delta: 1 }
       ],
       forms: ["slashing"],
@@ -531,13 +524,17 @@ export const DEDREL_MAGIC = {
           label: "DEDREL.Magic.Paths.echo",
           // Фокус Эха — концептуально музыкальный инструмент. Отдельной проверки
           // нет: фокус (weapon с типом "магическое") обязателен для ЛЮБОЙ магии.
+          // "Длительность" — ниша командных бафов Эха ("Долгая песня"): бард
+          // насыщает союзника звуком на 6-10 раундов дешевле прочих доктрин.
+          // На "Силу" скидка не влияет: её длительность задана рангом (durationMode).
           affinity: [
             { target: "mod:power", delta: -1 },
-            { target: "mod:targets", delta: -1 }
+            { target: "mod:targets", delta: -1 },
+            { target: "mod:duration", delta: -1 }
           ],
           // Психоакустика: "Сила" рангов 1–3 (полный каталог — у Тенемантии),
-          // imbue применяется к существам. Воодушевление — командные бафы барда.
-          modifiers: ["power", "inspire"],
+          // imbue применяется к существам.
+          modifiers: ["power"],
           caps: [{ target: "mod:power", allowedRanks: [1, 2, 3] }],
           // Звуковой урон: обычная Лестница II–VI, тип sonic (DR к нему крайне редок)
           special: { psychoacoustics: true, damageType: "sonic" }

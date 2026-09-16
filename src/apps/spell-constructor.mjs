@@ -338,7 +338,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       };
 
       // Модификатор "Сила": выбор "табличный штраф ИЛИ состояние" (бонусных
-      // ветвей больше нет — бафы уехали в "Воодушевление" Эха). Состав списка
+      // ветвей нет — универсального бафа "на всё" в системе нет). Состав списка
       // всегда задаёт канон конфига (rankCfg.conditions); кураторский компендиум
       // magic_conditions (conditionsFromPack) лишь подменяет имена/версии тех
       // состояний, что в этом списке уже есть.
@@ -606,8 +606,8 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
 
   /**
    * Эффекты предмета: накладываются кнопкой «Применить эффекты» карточки чата.
-   *  - штраф «Силы» / бонус «Воодушевления» → transfer:false эффект на броски
-   *    (длительность — по durationMode ранга, иначе от Длительности сборки);
+   *  - штраф «Силы» → transfer:false эффект на броски (длительность — по
+   *    durationMode ранга; «Длительность» сборки состояния не продлевает);
    *  - «Насыщение» → transfer:false эффект-маркер (v1: величина и свойство в
    *    описании, конкретный ключ навыка/DR правит ГМ; без Длительности — 1 раунд).
    * Состояния (appliedConditions) вешаются через реестр статусов при касте.
@@ -617,9 +617,8 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const effects = [];
     if (extras.powerBonus) {
       effects.push({
-        name: game.i18n.format("DEDREL.Magic.UI.PowerEffectName", {
-          n: `${extras.powerBonus > 0 ? "+" : ""}${extras.powerBonus}`
-        }),
+        // powerBonus всегда отрицательный: позитивных ветвей у "Силы" нет
+        name: game.i18n.format("DEDREL.Magic.UI.PowerEffectName", { n: extras.powerBonus }),
         img: "systems/dedrel/assets/icons/items/magic_item.svg",
         transfer: false,
         duration: { rounds: extras.powerEffectRounds || extras.durationRounds || 1 },

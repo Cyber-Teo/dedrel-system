@@ -190,7 +190,6 @@
         "actionType": "Action Type",
         "forbidDefense": "Forbid Defense",
         "imbuement": "Imbuement",
-        "inspire": "Inspiration",
         "constrain": "Constraint",
         "knockdown": "Knockdown",
         "dust_veil": "Dust Veil",
@@ -266,11 +265,6 @@
           "3": "−2 penalty for [Doctrine Rank] rounds OR a condition (DC 14)",
           "4": "−3 penalty for [Doctrine Rank] rounds OR a condition (DC 16)",
           "5": "A powerful condition for 1 round (DC 18)"
-        },
-        "inspire": {
-          "1": "+1 bonus to the target's next roll",
-          "2": "+2 bonus for 1 round",
-          "4": "+3 bonus for [Doctrine Rank] rounds"
         },
         "constrain": {
           "2": "Icing: speed −50% for [Doctrine Rank] rounds",
@@ -379,7 +373,7 @@
         "Duration_day": "One day (removed manually)",
         "DurabilityHp": "Durability: {n} HP",
         "AppliesCondition": "Applies the \"{name}\" condition (save DC {dc})",
-        "AppliesBonus": "Bonus/penalty {n} to rolls (save DC {dc})",
+        "AppliesBonus": "Penalty {n} to rolls (save DC {dc})",
         "PowerEffectName": "Spell Power: {n} to rolls",
         "ConcentrationMarker": "Concentration: {name}",
         "ConcentrationHint": "The spell lasts while you maintain concentration. Remove this effect to dismiss the spell. Falling unconscious breaks concentration.",

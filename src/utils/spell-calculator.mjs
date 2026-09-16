@@ -364,8 +364,8 @@ export class SpellCalculator {
     // --- Эффекты доктринных модификаторов: спасбросок + штраф/бонус/состояния ---
     const extras = {
       appliedConditions: [],
-      powerBonus: 0,          // штраф "Силы" (отрицательный) либо бонус "Воодушевления"
-      powerEffectRounds: 0,   // длительность эффекта бонуса/штрафа (durationMode)
+      powerBonus: 0,          // штраф "Силы" (отрицательный)
+      powerEffectRounds: 0,   // длительность эффекта штрафа (durationMode ранга)
       pushMeters: 0,          // принудительное перемещение (Принуждение/Сбивание 3)
       factNotes: [],          // { key, rank, saveDc } — строки RankHints в описание
       imbue: null,            // { rank, value, option } — Насыщение
@@ -395,9 +395,6 @@ export class SpellCalculator {
         } else if (rankCfg.conditions?.length) {
           extras.appliedConditions.push(rankCfg.conditions[0]);
         }
-      } else if (b.key === "inspire") {
-        extras.powerBonus = rankCfg.bonus || 0;
-        extras.powerEffectRounds = SpellCalculator.#modeRounds(rankCfg.durationMode, doctrineRank);
       } else if (b.key === "imbuement") {
         extras.imbue = {
           rank: b.rank,
