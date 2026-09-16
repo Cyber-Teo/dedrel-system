@@ -315,7 +315,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // Перегрузка (Encumbrance)
     // ==========================================
     // Суммарный вес: физические предметы (× количество) + вес монет кошелька.
-    // Пороги = (STR+CON)·5/10/15 кг, модифицируемые талантами
+    // Пороги = 10 + (STR+CON)·5/10/15 кг, модифицируемые талантами
     // (carry_capacity_mult / carry_capacity_flat). Категория и штрафы
     // (−1/−3 ко всем броскам, −2 м / полная остановка скорости) применяются,
     // если не выставлен иммунитет ignore_encumbrance_penalty.
@@ -342,10 +342,15 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     const capBase = attrs.str.rank + attrs.con.rank;
     const capMult = 1 + (this.bonuses?.carry_capacity_mult || 0);
     const capFlat = this.bonuses?.carry_capacity_flat || 0;
+    // База, общая для всех: минимум любой характеристики — 1, и без неё персонаж
+    // с STR 1 / CON 1 не унёс бы собственную одежду (_rules/15. Inventory §1).
+    // Множитель талантов её тоже поднимает: он масштабирует грузоподъёмность
+    // целиком, а не только вклад характеристик.
+    const CARRY_BASE = 10;
     const thresholds = {
-      light: capBase * 5 * capMult + capFlat,
-      medium: capBase * 10 * capMult + capFlat,
-      heavy: capBase * 15 * capMult + capFlat
+      light: (CARRY_BASE + capBase * 5) * capMult + capFlat,
+      medium: (CARRY_BASE + capBase * 10) * capMult + capFlat,
+      heavy: (CARRY_BASE + capBase * 15) * capMult + capFlat
     };
 
     let category = "light";

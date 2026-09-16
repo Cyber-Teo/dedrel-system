@@ -50,6 +50,11 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
       // хранится, показывается на листе, но ни на что не влияет.
       properties: new fields.SchemaField({
         exclusive_slot: new fields.BooleanField({ initial: false }),
+        // Только поверх лёгкого: доспех не уживается в стеке ни с чем тяжелее
+        // лёгкого — в обе стороны (мантию не надеть поверх кольчуги, кольчугу
+        // не надеть под уже надетой мантией). Проверка — на экипировке
+        // (character-sheet.mjs), в расчёт защиты свойство не входит.
+        light_layers_only: new fields.BooleanField({ initial: false }),
         rigid: new fields.BooleanField({ initial: false }),
         loud: new fields.BooleanField({ initial: false }),
         // Отягощающий: −2 к стрелковым (кроме огнестрела) и магическим атакам.

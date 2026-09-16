@@ -742,6 +742,40 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
   }
 
+  /**
+   * Проверка свойства «Только поверх лёгкого» (12. Armor §Свойства).
+   * Такой доспех не уживается в стеке ни с чем тяжелее лёгкого, и правило
+   * работает в ОБЕ стороны: мантию не надеть поверх кольчуги, кольчугу не
+   * надеть под уже надетой мантией — иначе запрет обходился бы порядком надевания.
+   *
+   * @param {Item} item          надеваемый доспех
+   * @param {string} targetSlot  слот назначения ("armor_upper" и т.п.) — он не мешает сам себе
+   * @returns {string|null}      готовый текст отказа либо null, если надеть можно
+   */
+  #checkLightLayers(item, targetSlot) {
+    const incomingLightOnly = !!item.system.properties?.light_layers_only;
+    const incomingHeavier = item.system.weight_class !== "light";
+    if (!incomingLightOnly && !incomingHeavier) return null;
+
+    const slots = this.document.system.equipment_slots;
+    for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
+      if (s === targetSlot) continue;
+      const cid = slots[s]?.item_id;
+      // Универсальный доспех может уже лежать в другом слое — сам себе не помеха.
+      if (!cid || cid === item.id) continue;
+      const worn = this.document.items.get(cid);
+      if (!worn) continue;
+
+      if (incomingLightOnly && worn.system.weight_class !== "light") {
+        return game.i18n.format("DEDREL.Notifications.LightLayersOnlyBlocked", { name: item.name, other: worn.name });
+      }
+      if (incomingHeavier && worn.system.properties?.light_layers_only) {
+        return game.i18n.format("DEDREL.Notifications.LightLayersOnlyWorn", { name: item.name, other: worn.name });
+      }
+    }
+    return null;
+  }
+
   static async #onEquipArmor(event, target) {
     const itemId = target.closest(".item-row").dataset.itemId;
     const item = this.document.items.get(itemId);
@@ -789,7 +823,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       if (hasExclusive) {
         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.CannotEquipExclusive"));
       }
-      
+
+      const lightLayersError = this.#checkLightLayers(item, targetSlot);
+      if (lightLayersError) return ui.notifications.warn(lightLayersError);
+
       updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
     }
 
@@ -1151,7 +1188,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       lower: ["armor_lower"],
       middle: ["armor_middle"],
       upper: ["armor_upper"],
-      universal: ["armor_lower", "armor_middle", "armor_upper"]
+      // Универсальный = Нижний ИЛИ Средний (12. Armor §Универсальные доспехи);
+      // верхний слот сюда не входит — ср. slotOptions в #onEquipArmor.
+      universal: ["armor_lower", "armor_middle"]
     };
     const allowed = allowedMap[item.system.slot] || [];
     if (!allowed.includes(slotKey)) {
@@ -1178,6 +1217,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
           }
         }
       }
+      const lightLayersError = this.#checkLightLayers(item, slotKey);
+      if (lightLayersError) return ui.notifications.warn(lightLayersError);
+
       // Снимаем предмет из других слотов, если он уже надет
       for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
         if (s !== slotKey && slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
