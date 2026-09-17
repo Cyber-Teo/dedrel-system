@@ -801,6 +801,8 @@
       "SpendCharge": "Потратить 1 заряд? (Осталось: <b>{value}/{max}</b>)",
       "OutOfCharges": "Заряды исчерпаны!",
       "Weapon": "Используемое оружие",
+      "WeaponFastTempo": "Быстрое: −1 ОД",
+      "WeaponSlowTempo": "Медленное: +1 ОД",
       "NoEquippedWeapon": "Нет подходящего экипированного оружия",
       "ScrollSelect": "Свиток",
       "NeedsReload": "«{name}»: требуется перезарядка",

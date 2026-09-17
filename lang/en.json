@@ -556,6 +556,8 @@
       "ForbiddenBlock": "Cannot be blocked — the target may only dodge",
       "ForbiddenDodge": "Cannot be dodged — the target may only block",
       "Weapon": "Used Weapon",
+      "WeaponFastTempo": "Fast: −1 AP",
+      "WeaponSlowTempo": "Slow: +1 AP",
       "NoEquippedWeapon": "No suitable equipped weapon",
       "ScrollSelect": "Scroll",
       "NeedsReload": "{name}: needs reloading",

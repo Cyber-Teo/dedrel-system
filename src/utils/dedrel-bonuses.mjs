@@ -48,6 +48,19 @@
  * совпал с манёвром, не тратится — он протухнет сам по duration.
  */
 
+/**
+ * Атакующие реакции, цену которых двигает темп оружия (13. Weapons §Свойства:
+ * «Быстрое» −1 ОД, «Медленное» +1 ОД, пока оружие экипировано).
+ * Монстровая Атака по возможности (`maneuver_monster_attack_of_opportunity`)
+ * сюда не входит: естественное оружие темпом не размечается.
+ */
+const TEMPO_MANEUVERS = new Set([
+  "maneuver_riposte",
+  "maneuver_punishing_miss",
+  "maneuver_attack_of_opportunity",
+  "maneuver_preemptive_thrust"
+]);
+
 /** Порядок стадий потребления. "never" не сгорает автоматически. */
 const CONSUME_STAGES = { use: 0, roll: 1, damage: 2, never: 3 };
 
@@ -276,6 +289,36 @@ export class DedrelBonuses {
    * @param {Item} item
    * @returns {{cost: number, modApplied: boolean}} modApplied — применился ли одноразовый мод
    */
+  /**
+   * Подпадает ли манёвр под темп оружия. Нужен ещё и диалогу использования —
+   * он подписывает темп в списке оружия.
+   * @param {Item} item
+   * @returns {boolean}
+   */
+  static isTempoManeuver(item) {
+    return item?.type === "maneuver" && TEMPO_MANEUVERS.has(item.system?.key);
+  }
+
+  /**
+   * Сдвиг цены ОД от темпа выбранного оружия: «Быстрое» −1, «Медленное» +1
+   * (13. Weapons §Свойства). Считается ПОСЛЕ DSL-модификаторов и отдельно от
+   * них: это не одноразовый бафф, а постоянное свойство железа в руках.
+   *
+   * Нулевую цену не трогаем ни в одну сторону: манёвр, сделанный бесплатным
+   * баффом (ap_set:0), Медленное оружие обратно не удорожает.
+   *
+   * @param {number} apCost — цена после DSL-модификаторов
+   * @param {Item} item — манёвр
+   * @param {Item|null} weapon — оружие, которым проводится реакция
+   * @returns {number}
+   */
+  static applyWeaponTempo(apCost, item, weapon) {
+    if (apCost <= 0 || !this.isTempoManeuver(item)) return apCost;
+    if (weapon?.type !== "weapon" || !weapon.system?.equipped) return apCost;
+    const shift = (weapon.system.is_fast ? -1 : 0) + (weapon.system.is_slow ? 1 : 0);
+    return Math.max(0, apCost + shift);
+  }
+
   static effectiveApCost(actor, item) {
     let apCost = item.system.ap_cost || 0;
     let modApplied = false;

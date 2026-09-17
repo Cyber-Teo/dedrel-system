@@ -158,6 +158,16 @@ export default class DedrelItem extends Item {
       apCost = validWeapons[0].system.reload_cost || 1;
     }
 
+    // Темп оружия («Быстрое» −1 ОД / «Медленное» +1 ОД на атакующие реакции,
+    // 13. Weapons). Как и перезарядка, зависит от конкретного оружия: для
+    // диалога считаем по первому валидному, в #confirmUse цена пересчитывается
+    // по фактически выбранному. Базу храним в контексте, иначе пересчёт
+    // применил бы сдвиг второй раз поверх уже сдвинутой цены.
+    const apCostNoTempo = apCost;
+    if (validWeapons.length > 0) {
+      apCost = DedrelBonuses.applyWeaponTempo(apCost, this, validWeapons[0]);
+    }
+
     // Чтение свитка: цену ОД диктует выбранный свиток (производная от редкости),
     // как перезарядка берёт цену с оружия. Для диалога — цена первого свитка,
     // в #confirmUse пересчитывается по фактически выбранному.
@@ -229,7 +239,7 @@ export default class DedrelItem extends Item {
       : "free";
 
     const ctx = {
-      actor, apCost, isVariable, minAp, ...pools, actionMode,
+      actor, apCost, apCostNoTempo, isVariable, minAp, ...pools, actionMode,
       hasCharges, usesValue, usesMax,
       requiresWeapon, validWeapons, isReloadAction,
       isScrollRead, validScrolls,
@@ -449,11 +459,21 @@ export default class DedrelItem extends Item {
 
     if (ctx.requiresWeapon) {
       if (ctx.validWeapons.length > 0) {
+        // Темп подписываем прямо в опциях: цена в шапке диалога посчитана по
+        // первому оружию списка, и без подписи непонятно, почему при смене
+        // оружия она поедет.
+        const isTempo = DedrelBonuses.isTempoManeuver(this);
+        const tempoLabel = (w) => {
+          if (!isTempo) return "";
+          if (w.system.is_fast) return ` — ${game.i18n.localize("DEDREL.Chat.WeaponFastTempo")}`;
+          if (w.system.is_slow) return ` — ${game.i18n.localize("DEDREL.Chat.WeaponSlowTempo")}`;
+          return "";
+        };
         content += `
           <div class="form-group" style="margin-top: 10px;">
             <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.Weapon")}</label>
             <select name="weaponId" id="use-weapon-select" style="width: 100%; padding: 4px;">
-              ${ctx.validWeapons.map(w => `<option value="${w.id}">${esc(w.name)}</option>`).join("")}
+              ${ctx.validWeapons.map(w => `<option value="${w.id}">${esc(w.name)}${tempoLabel(w)}</option>`).join("")}
             </select>
           </div>
         `;
@@ -513,6 +533,14 @@ export default class DedrelItem extends Item {
     // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
     if (isReloadAction && selWeapon) {
       finalApCost = selWeapon.system.reload_cost || 1;
+    }
+
+    // Темп фактически выбранного оружия. Считаем от базовой цены: в ctx.apCost
+    // уже сидит сдвиг по первому валидному оружию из диалога, а игрок мог
+    // выбрать в списке другое. Переменной цены это не касается — там сумму
+    // задаёт сам игрок.
+    if (!isVariable && selWeapon && DedrelBonuses.isTempoManeuver(this)) {
+      finalApCost = DedrelBonuses.applyWeaponTempo(ctx.apCostNoTempo, this, selWeapon);
     }
 
     // Чтение свитка: фактическая цена ОД — из выбранного свитка.
