@@ -1498,7 +1498,8 @@
       "herb": "Herbs/Fungi",
       "leather": "Leather",
       "cloth": "Cloth",
-      "creature_part": "Creature Part"
+      "creature_part": "Creature Part",
+      "processed": "Processed"
     },
     "EquipSlot": {
       "none": "— (not an accessory)",

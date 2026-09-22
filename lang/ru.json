@@ -1498,7 +1498,8 @@
       "herb": "Травы/грибы",
       "leather": "Кожа",
       "cloth": "Ткань",
-      "creature_part": "Часть существа"
+      "creature_part": "Часть существа",
+      "processed": "Обработанный"
     },
     "EquipSlot": {
       "none": "— (не аксессуар)",

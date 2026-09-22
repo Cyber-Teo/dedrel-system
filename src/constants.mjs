@@ -40,8 +40,12 @@ export const DEFAULT_CURRENCIES = [
 export const CRAFT_DISCIPLINE_ENUM = ["alchemy", "smithing", "inscription", "tailoring", "carpentry", "jewelry", "engineering"];
 
 // Классы ремесленных материалов (system.material_class у craft_material).
-// Семь канонических типов сырья из правил крафта.
-export const MATERIAL_CLASS_ENUM = ["metal", "mineral", "wood", "herb", "leather", "cloth", "creature_part"];
+// Семь канонических типов СЫРЬЯ из правил крафта (19. Crafting §Материалы) плюс
+// восьмой класс "processed" — ОБРАБОТАННЫЕ материалы: вторая ступень экономики,
+// то есть сами продукты крафта (чернила, бумага, склянки, слитки, порох, спирт).
+// У обработанных нет сигнатур и слотов: в оружие и доспех они не ложатся, они
+// живут только в рецептах как обычные ингредиенты.
+export const MATERIAL_CLASS_ENUM = ["metal", "mineral", "wood", "herb", "leather", "cloth", "creature_part", "processed"];
 
 // Тиры слотов улучшений оружия/брони (без legendary: очень редкий — максимум).
 export const SLOT_TIER_ENUM = ["common", "uncommon", "rare", "very_rare"];

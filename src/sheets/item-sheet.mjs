@@ -290,6 +290,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
         context.materialSlotOptions[t] = game.i18n.localize(`DEDREL.SlotTiers.${t}`);
       }
       context.materialSlot = (itemData.system.slots || [])[0] ?? "";
+      // Обработанные материалы (чернила, бумага, склянки, слитки) — продукты
+      // крафта, а не подложка изделия: грамматики четырёх осей у них нет.
+      // Прячем применимость/вес/слоты/сигнатуры, чтобы в них не копился мусор.
+      context.isProcessedMaterial = itemData.system.material_class === "processed";
     }
 
     // Валюта: деноминация выбирается из списка валют мира

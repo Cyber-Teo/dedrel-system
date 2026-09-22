@@ -19,6 +19,7 @@
         <input type="text" name="system.special_rules" value="{{system.special_rules}}" placeholder="{{localize 'DEDREL.Crafting.SpecialRulesPlaceholder'}}" style="width: 100%;"/>
     </div>
 
+    {{#unless isProcessedMaterial}}
     <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.Crafting.ApplicableTo"}}</label>
         <div class="form-fields" style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -57,4 +58,5 @@
         <input type="text" name="system.signature.magic" value="{{system.signature.magic}}" placeholder="{{localize 'DEDREL.Crafting.SignatureMagicPlaceholder'}}" style="width: 100%;"/>
     </div>
     <p class="hint" style="grid-column: 1 / -1; margin: 4px 0 0;">{{localize "DEDREL.Crafting.SignatureHint"}}</p>
+    {{/unless}}
 </div>

@@ -22,7 +22,9 @@ export default class MagicItemDataModel extends foundry.abstract.TypeDataModel {
     return {
       description: new fields.HTMLField({ label: "Description" }),
       key: new fields.StringField({ initial: "" }),
-      // Магические предметы по умолчанию как минимум необычные
+      // Дефолт редкости — необычный: это первая ступень, где магвещи разрешены
+      // числа к броскам (15. Inventory §Лестница силы по редкости). Обычный тир
+      // существует, но он про глаголы с лимитом, и его выбирают осознанно.
       ...physicalItemFields({ rarity: "uncommon" }),
       ...craftingFields(),
       // Аксессуарный слот (диадема→head, кольцо/браслет→hand, ожерелье→neck, ...)
