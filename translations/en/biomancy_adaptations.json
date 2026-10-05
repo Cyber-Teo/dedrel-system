@@ -1,0 +1,137 @@
+{
+  "adapt_air_sacs": {
+    "_src": "4625bda6ac",
+    "name": "Air Sacs",
+    "system.description": "<p>Bladders of spare air swell along the ribs; the chest becomes barrel-shaped.</p>\n<p><strong>Effect:</strong> the bearer doesn't breathe for <strong>Doctrine Rank in minutes</strong>. While not breathing, they are unaffected by gases, smoke, and choking.</p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "chest swelled",
+    "system.removal_text": "chest deflated"
+  },
+  "adapt_bone_plate": {
+    "_src": "ea950bf72b",
+    "name": "Bone Plate",
+    "system.description": "<p><em>Adaptation of rank 4. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The ribs grow outward and close into a solid box.</p><p><strong>Effect:</strong> DR 2 against slashing, piercing, and bludgeoning. The plate is restrictive: <strong>−2 to Dodge</strong>.</p>",
+    "system.application_text": "grew a bone shell",
+    "system.removal_text": "the plate crumbles",
+    "effects": {
+      "DedrelAEAdptBon1": {
+        "name": "Bone Plate"
+      }
+    }
+  },
+  "adapt_bulging_eyes": {
+    "_src": "30e496132b",
+    "name": "Bulging Eyes",
+    "system.description": "<p>The eyeballs bulge and spread toward the temples; the eyelids can't keep up, and the gaze becomes unblinking.</p>\n<p><strong>Effect:</strong> the field of vision is almost all-round: the bearer <strong>can't be targeted by Flank Attack</strong> and can't be caught off guard from behind.</p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "eyes bulged",
+    "system.removal_text": "eyes settled back"
+  },
+  "adapt_claws": {
+    "_src": "9f3c3d9614",
+    "name": "Claws",
+    "system.description": "<p><em>Adaptation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The nails blacken, lengthen, and curve; the fingers stretch out.</p><p><strong>Effect:</strong> unarmed strikes deal damage <strong>one Ladder step higher</strong>. The bearer climbs trees and similar surfaces without a check.</p>",
+    "system.application_text": "grew claws",
+    "system.removal_text": "claws retracted",
+    "effects": {
+      "DedrelAEAdptClw1": {
+        "name": "Claws"
+      }
+    }
+  },
+  "adapt_darkvision": {
+    "_src": "63cfb12967",
+    "name": "Cat's Eye",
+    "system.description": "<p><em>Adaptation of rank 1. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The pupil spreads across the whole iris, and the eye turns solid black.</p><p><strong>Effect:</strong> the bearer sees in total darkness.</p>",
+    "system.application_text": "eyes darken",
+    "system.removal_text": "pupils return",
+    "effects": {
+      "DedrelAEAdptDkV1": {
+        "name": "Cat's Eye"
+      }
+    }
+  },
+  "adapt_flexibility": {
+    "_src": "65de7f95df",
+    "name": "Flexibility",
+    "system.description": "<p><em>Adaptation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The joints soften and the ligaments lengthen: the body bends where it shouldn't.</p><p><strong>Effect:</strong> +2 to Dodge.</p>",
+    "system.application_text": "bending",
+    "system.removal_text": "joints stiffen",
+    "effects": {
+      "DedrelAEAdptFlx1": {
+        "name": "Flexibility"
+      }
+    }
+  },
+  "adapt_gills": {
+    "_src": "dfccd57418",
+    "name": "Gills",
+    "system.description": "<p><em>Adaptation of rank 3. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>Slits open on the neck, their edges moving wetly.</p><p><strong>Effect:</strong> the bearer breathes underwater. The property is binary; it has no number.</p>",
+    "system.application_text": "breathes water",
+    "system.removal_text": "gills close up"
+  },
+  "adapt_keen_senses": {
+    "_src": "afb588c904",
+    "name": "Feral Senses",
+    "system.description": "<p><em>Adaptation of rank 1. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The nostrils flare, and the ears turn toward sound.</p><p><strong>Effect:</strong> a situational bonus of <strong>+2…+5</strong> to checks that rely on smell and hearing, at the GM's discretion. The system deliberately has no numerical effect: the bonus is situational.</p>",
+    "system.application_text": "senses sharpen",
+    "system.removal_text": "senses dull"
+  },
+  "adapt_loose_joints": {
+    "_src": "df81a2c176",
+    "name": "Displaced Joints",
+    "system.description": "<p>Shoulders and hips slip out of their sockets and back again without harm; moving like this hurts, but it's possible.</p>\n<p><strong>Effect:</strong> the bearer automatically wriggles out of grapples and bonds, no roll required. They squeeze through a gap half the width of their own shoulders.</p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "joints came apart",
+    "system.removal_text": "joints settled back"
+  },
+  "adapt_nictitating": {
+    "_src": "0e113304e9",
+    "name": "Second Eyelids",
+    "system.description": "<p>A second, transparent membrane grows under the eyelid and moves across the eye.</p>\n<p><strong>Effect:</strong> the bearer can't be blinded by a flash, sand, smoke, or splashes; they can keep their eyes open underwater and in a blizzard.</p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "a film covers the eyes",
+    "system.removal_text": "the film cleared"
+  },
+  "adapt_regeneration": {
+    "_src": "882b009480",
+    "name": "Regeneration",
+    "system.description": "<p><em>Adaptation of rank 5. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The flesh closes before your eyes; the edges of the wound crawl toward each other.</p><p><strong>Effect:</strong> the bearer regains <strong>3 HP</strong> at the start of their turn.</p>",
+    "system.application_text": "closing up",
+    "system.removal_text": "regeneration faded"
+  },
+  "adapt_reverse_knees": {
+    "_src": "e86adfe12a",
+    "name": "Reverse Knees",
+    "system.description": "<p>The knee snaps backward, the heel rises, and the bearer stands on their toes: the leg of a beast standing on its hind legs.</p>\n<p><strong>Effect:</strong> a jump needs no run-up and covers twice the distance. Rough terrain costs the bearer no extra meters of Speed.</p>\n<p><em>Ordinary footwear can't be worn this way.</em></p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "legs bent backward",
+    "system.removal_text": "legs straightened"
+  },
+  "adapt_scales": {
+    "_src": "94ca0e1f62",
+    "name": "Scales",
+    "system.description": "<p><em>Adaptation of rank 3. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The skin splits into plates that overlap one another.</p><p><strong>Effect:</strong> DR 2 against slashing and piercing damage.</p>",
+    "system.application_text": "covered in scales",
+    "system.removal_text": "scales shed",
+    "effects": {
+      "DedrelAEAdptScl1": {
+        "name": "Scales"
+      }
+    }
+  },
+  "adapt_scent": {
+    "_src": "7e2f51ec16",
+    "name": "Scent",
+    "system.description": "<p>The nasal passages grow deep into the skull; the nostrils become moist and mobile.</p>\n<p><strong>Effect:</strong> the bearer follows a trail by scent, recognizes acquaintances by smell, and senses the presence of the living behind a wall or in the dark. There's no numerical bonus: it's a new ability, not a bonus to a check.</p>\n<p><em>Divergence step 2:</em> a human nose can't do this; it requires beast tissue and a long cast.</p>\n<p><em>Adaptation. Biomancy, the Adaptation Modifier. At combat tempo it lasts Doctrine Rank in rounds; with a Sculpting long cast, until a Long Rest (divergence step 1) or for a milestone (divergence step 2).</em></p>",
+    "system.application_text": "nostrils flared",
+    "system.removal_text": "smells faded"
+  },
+  "adapt_thick_skin": {
+    "_src": "29e208c1e9",
+    "name": "Thick Skin",
+    "system.description": "<p><em>Adaptation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The skin coarsens and thickens, covered with horny growths.</p><p><strong>Effect:</strong> DR 1 against slashing and piercing damage.</p>",
+    "system.application_text": "skin coarsens",
+    "system.removal_text": "skin softens",
+    "effects": {
+      "DedrelAEAdptSkn1": {
+        "name": "Thick Skin"
+      }
+    }
+  }
+}

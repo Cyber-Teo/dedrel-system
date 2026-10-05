@@ -1053,6 +1053,7 @@
       "NotEnoughPointsForMutation": "Not enough points for a starting beneficial mutation!",
       "MaxStartingHarmfulMutations": "Maximum 2 starting harmful mutations!",
       "ItemsNotFound": "Failed to find the following items to add: {names}",
+      "TranslatedCompendiumEdit": "This compendium text is shown in translation: changes to translated fields were discarded so the translation is not written into the Russian source. Switch the system language to Russian to edit it.",
       "LinkedItemsAdded": "Linked items added: {names}",
       "DependentItemsRemoved": "Dependent items removed: {names}",
       "ItemNotOwned": "Item is not owned by an actor.",
@@ -1214,7 +1215,7 @@
     "Settings": {
       "Language": {
         "Name": "System Language (Forced)",
-        "Hint": "Allows forcing the language for Dedrel system windows regardless of the core Foundry VTT settings.",
+        "Hint": "Forces the language of Dedrel system windows and of its compendium content (any language other than Russian uses the English translation), regardless of the core Foundry VTT language.",
         "Auto": "Automatic (Use core settings)"
       },
       "APRestoreTiming": {

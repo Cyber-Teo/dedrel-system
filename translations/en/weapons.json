@@ -1,0 +1,89 @@
+{
+  "bear_maw": {
+    "_src": "15cbd3de3e",
+    "name": "Bear Maw",
+    "system.description": "<p>The maw of a large predator: step III of the Damage Ladder. Natural weapon: can't be disarmed and doesn't occupy the hands.</p>"
+  },
+  "chimera_specimen_maw": {
+    "_src": "471a2f9917",
+    "name": "Specimen Maw",
+    "system.description": "<p>A dog's maw set crookedly: step II of the Damage Ladder. Natural weapon: can't be disarmed and doesn't occupy the hands.</p><p>It isn't the maw that grabs but the specimen's <strong>human hands</strong>: mechanically it's Jaw Lock, in fact it's fingers at the throat.</p>"
+  },
+  "chimera_watch_claws": {
+    "_src": "538efc9502",
+    "name": "Warden Claws",
+    "system.description": "<p>Bear claws with a horse's strength: step III. A cheap slashing strike for Claw Slash.</p><p><strong>Control Zone 1</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
+  },
+  "chimera_watch_maw": {
+    "_src": "26c2b35c33",
+    "name": "Warden Maw",
+    "system.description": "<p>The guard chimera's main weapon: step IV, one step above the rank 3 row. This is what “hits hard” means: an elite buys a half-rank up in damage.</p><p><strong>Control Zone 1</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
+  },
+  "demon_claws_weapon": {
+    "_src": "301d14f6ba",
+    "name": "Demonic Claws"
+  },
+  "dragon_claws_weapon": {
+    "_src": "bf23f52dfa",
+    "name": "Draconic Claws"
+  },
+  "fay_claws_weapon": {
+    "_src": "4f8c1b3791",
+    "name": "Fay Claws"
+  },
+  "iron_dagger": {
+    "_src": "7087a713e4",
+    "name": "Iron Dagger"
+  },
+  "iron_long_spear": {
+    "_src": "97060a8d3b",
+    "name": "Iron Long Spear"
+  },
+  "iron_short_spear": {
+    "_src": "ef7818b8e4",
+    "name": "Iron Short Spear"
+  },
+  "iron_short_sword": {
+    "_src": "da19995740",
+    "name": "Iron Short Sword"
+  },
+  "iron_war_pick": {
+    "_src": "cf310c41cb",
+    "name": "Iron War Pick"
+  },
+  "matriarch_goat_horns": {
+    "_src": "a22725cd78",
+    "name": "Goat Horns",
+    "system.description": "<p><strong>The Matriarch's second head.</strong> Step IV, bludgeoning: her only weapon that can perform Ram.</p><p><strong>Control Zone 2</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
+  },
+  "matriarch_lion_maw": {
+    "_src": "bb51ce167a",
+    "name": "Lion Maw",
+    "system.description": "<p><strong>The Matriarch's first head.</strong> Step IV. The main head: if a player doesn't declare where they're striking, the damage is recorded against it.</p><p><strong>Control Zone 2</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
+  },
+  "matriarch_serpent_head": {
+    "_src": "b559a595de",
+    "name": "Serpent Head",
+    "system.description": "<p><strong>The Matriarch's third head</strong>: a tail ending in a snake. Step III: it hits weaker than the other two but carries a venom that neither DR nor resistance reduces.</p><p><strong>Control Zone 2</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
+  },
+  "oak_magic_staff": {
+    "_src": "8d8d5ad95b",
+    "name": "Magic Staff"
+  },
+  "oak_magic_wand": {
+    "_src": "27417f88cf",
+    "name": "Oak Magic Wand"
+  },
+  "paw": {
+    "_src": "612d210bab",
+    "name": "Paw"
+  },
+  "yew_long_bow": {
+    "_src": "01f327666b",
+    "name": "Yew Long Bow"
+  },
+  "yew_short_bow": {
+    "_src": "012d15c457",
+    "name": "Yew Short Bow"
+  }
+}

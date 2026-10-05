@@ -1,0 +1,756 @@
+{
+  "braced_shot": {
+    "_src": "0deb5c0406",
+    "name": "Braced Shot",
+    "system.description": "<p>Can be used once you reach rank 3 in Crossbows or Firearms.</p><p>The character uses terrain features or special devices to take proper aim and fire a musket or crossbow. You don't provoke an Attack of Opportunity by taking a separate aim, but you do provoke under the point-blank fire rules.<br>The attack gets a +2 bonus</p>"
+  },
+  "finishing_blow": {
+    "_src": "ce13bf1425",
+    "name": "Finishing Blow",
+    "system.description": "<p>When a creature in your Control Zone gains the Prone condition (falls down), you can activate this reaction and strike it.</p>"
+  },
+  "maneuver_absolute_calm": {
+    "_src": "6046c181ee",
+    "name": "Absolute Calm",
+    "system.description": "<p>- The character is unaffected by effects that influence emotions. In particular, they are immune to Fear, Taunt, and Terror. - 10 rounds</p>",
+    "effects": {
+      "9B1sbbVGNWshcZky": {
+        "name": "Absolute Calm",
+        "description": "<p>- The character is unaffected by effects that influence emotions. In particular, they are immune to Fear, Taunt, and Terror. - 10 rounds</p>"
+      }
+    }
+  },
+  "maneuver_absolute_entropy_strike": {
+    "_src": "d8a52409f0",
+    "name": "Absolute Entropy Strike (WIP)",
+    "system.description": "A blow of monstrous force, something like a finger of death on a hit. Mechanics are WIP."
+  },
+  "maneuver_absolute_evasion": {
+    "_src": "61355a3e84",
+    "name": "Absolute Dodge",
+    "system.description": "<p>Once per Long Rest.</p><p>You dodge the first successful attack against you within the next 10 rounds. Can be used as a reaction.</p>"
+  },
+  "maneuver_armor_piersing_shot": {
+    "_src": "a6acbb5bb0",
+    "name": "Armor-Piercing Shot",
+    "system.description": "<p>Lets you use longbows at full power and make monstrously powerful shots that gain the Armor Piercing 1-3 property depending on the AP spent.</p><p>After using Armor-Piercing Shot, you can chain into @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Rapid Bow Shot} or @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Bow Shot}</p>",
+    "effects": {
+      "oWUMaPyHcy0V6MWq": {
+        "name": "Armor-Piercing Shot"
+      }
+    }
+  },
+  "maneuver_attack_of_opportunity": {
+    "_src": "1233aa3a0d",
+    "name": "Attack of Opportunity",
+    "system.description": "<p>If the character's Control Zone is 1 or more and they are not @UUID[Compendium.dedrel.conditions.Item.1Ed1ogtSr0oxJhd5]{In Clinch}, they can make a Thrust, Swing, or Bash without spending extra AP against a character crossing their Control Zone, provided they hold a weapon that allows such maneuvers. If the attack succeeds (even if it deals no damage), the opponent's movement stops there and both characters enter the In Clinch condition. If the opponent crosses several squares of the Control Zone, the character can make an Attack of Opportunity for each square crossed.<br><br><strong>Effects:</strong> The next Swing, Bash, or Thrust costs 0.</p>",
+    "system.prerequisites_text": "Control Zone >=1, not In Clinch.",
+    "effects": {
+      "3vYKn5wCeaPokRqI": {
+        "name": "Attack of Opportunity"
+      }
+    }
+  },
+  "maneuver_bash": {
+    "_src": "cc5245b743",
+    "name": "Bash",
+    "system.description": "An attack with a bludgeoning melee weapon",
+    "system.chain_trigger_text": "Attack of Opportunity, Riposte, Rage",
+    "system.prerequisites_text": "Bludgeoning melee weapon"
+  },
+  "maneuver_blind_spot": {
+    "_src": "68b7a5ba08",
+    "name": "Blind Spot",
+    "system.description": "<p>Maneuver, free action. Active for 3 rounds. While the talent is active, enemies in your Control Zone can't use reaction maneuvers against you.</p>",
+    "effects": {
+      "fRwWjJV90g80lTL4": {
+        "name": "Blind Spot",
+        "description": "<p>Maneuver, free action. Active for 3 rounds. While the talent is active, enemies in your Control Zone can't use reaction maneuvers against you.</p>"
+      }
+    }
+  },
+  "maneuver_block": {
+    "_src": "70569d3c23",
+    "name": "Block",
+    "system.description": "<p>The character spends 1 to 5 AP and gains the same number of points to Block until the start of their next turn.</p>",
+    "effects": {
+      "fdMU9e7VZ1mdQtNH": {
+        "name": "Block"
+      }
+    }
+  },
+  "maneuver_body_language": {
+    "_src": "883888d5f1",
+    "name": "Body Language",
+    "system.description": "<p>Maneuver, Action. You choose one opponent. The effect lasts 10 rounds. All attacks by the chosen opponent against you use only the base roll, with no bonuses from talents, conditions, or maneuvers. The opponent cannot use maneuvers that require stealth or surprise against you.</p>"
+  },
+  "maneuver_bow_shot": {
+    "_src": "fadc7b688f",
+    "name": "Bow Shot",
+    "system.description": "<p>A shot with a bow</p>",
+    "system.chain_trigger_text": "Take Aim",
+    "system.prerequisites_text": "Bow"
+  },
+  "maneuver_breath_weapon_acid": {
+    "_src": "0a83fe482f",
+    "name": "Breath Weapon: Acid",
+    "system.description": "<p>3 times per Long Rest.</p><p><span>The character exhales a 4 m cone of acid vapor in front of them.</span></p><p></p>"
+  },
+  "maneuver_breath_weapon_cold": {
+    "_src": "04b23daad8",
+    "name": "Breath Weapon: Cold",
+    "system.description": "<p>3 times per Long Rest.</p><p>The character exhales a 4 m cone of freezing air in front of them.</p><p></p>"
+  },
+  "maneuver_breath_weapon_electric": {
+    "_src": "a3e23f5402",
+    "name": "Breath Weapon: Lightning",
+    "system.description": "<p>3 times per Long Rest.</p><p><span>The character exhales a 4 m cone of electrical discharges in front of them.</span></p><p></p>"
+  },
+  "maneuver_breath_weapon_heat": {
+    "_src": "885a662ec7",
+    "name": "Breath Weapon: Fire",
+    "system.description": "<p>3 times per Long Rest.</p><p><span>The character exhales a 4 m cone of flame in front of them.</span></p><p></p>"
+  },
+  "maneuver_breath_weapon_poison": {
+    "_src": "15abf67087",
+    "name": "Breath Weapon: Poison",
+    "system.description": "<p>3 times per Long Rest.</p><p><strong>Can't be blocked</strong></p><p><span>The character exhales a 4 m cone of poison in front of them.</span></p><p></p>"
+  },
+  "maneuver_butterfly_effect": {
+    "_src": "91fa099c20",
+    "name": "Butterfly Effect",
+    "system.description": "<p>The target takes 1d10+LOG damage at the start of its next turn. The player describes the mechanism (“slips,” “the chain catches”), and the GM brings it to life. The player picks a damage type that is physically plausible on the battlefield; the GM may reject the impossible.</p>"
+  },
+  "maneuver_citadel_of_reason": {
+    "_src": "ca89a003ec",
+    "name": "Citadel of Reason",
+    "system.description": "<p>When a spell or ability with a mental effect targets you, spend 2 AP. The attacker rerolls and takes the worse result. If the ability has no attack roll, only a saving throw, you get a saving throw even if its terms don't allow one.</p>"
+  },
+  "maneuver_closed_eyes": {
+    "_src": "c8c59109cd",
+    "name": "Closed Eyes",
+    "system.description": "<p>Maneuver, Action. For 1 round you completely ignore the Blinded condition and all penalties from visual interference and invisibility. In addition, you get +2 to Block and Dodge this round, since you stop reacting to feints.</p>",
+    "effects": {
+      "yaoiVNLQM8xkONmr": {
+        "name": "Closed Eyes",
+        "description": "<p><span>Maneuver, Action. For 1 round you completely ignore the Blinded condition and all penalties from visual interference and invisibility. In addition, you get +2 to Block and Dodge this round, since you stop reacting to feints.</span></p>"
+      }
+    }
+  },
+  "maneuver_common_monster_bite": {
+    "_src": "5232538eee",
+    "name": "Bite",
+    "system.description": "<p>An attack with a natural weapon: fangs, mandibles, beak. Damage formula and type are taken from the weapon itself, so one maneuver serves any creature: for a wolf it's fangs, for a bear, its maw.</p>\n<p>A target that is already down or grappled is attacked not with Bite but with the Maul maneuver, which calculates the damage one step higher by itself.</p>",
+    "system.chain_trigger_text": "after Attack of Opportunity"
+  },
+  "maneuver_copying": {
+    "_src": "768e8557af",
+    "name": "Copying (WIP)",
+    "system.description": "When an opponent uses a non-basic maneuver (source: talent) against you or within your line of sight, you can immediately add it to your list of available maneuvers until the end of the scene. Weapon requirements still apply. Maneuvers that require a mutation (wings, tail, etc.) can't be copied.<br><br><b>Comments:</b> Work out the mechanics of this maneuver; it's currently unfinished"
+  },
+  "maneuver_cornering": {
+    "_src": "f80cb4f578",
+    "name": "Corner",
+    "system.description": "<p><strong>Maneuver. No weapon required.</strong></p>\n<p>You cut off the only escape route before the opponent can choose it.</p>\n<p><strong>Condition:</strong> there must be an obstacle behind the target: a wall, furniture, the edge of a cliff, another creature, or someone else's Control Zone. In the open, the maneuver doesn't work.</p>\n<p>Make an <strong>Athletics check against the target's Perception</strong>: you cut off the line, and the target has to notice in time that it's being herded. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition.</p>\n<p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash}, @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Swing}, or @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}.</p>\n<p><em>Costs 1 AP, less than the other defense breakers, because it doesn't work everywhere.</em></p>"
+  },
+  "maneuver_covering_blow": {
+    "_src": "5d91e22db8",
+    "name": "Overwhelming Strike",
+    "system.description": "<p><strong>Maneuver. Bludgeoning or two-handed melee weapon.</strong></p>\n<p>You strike not at the target but along its whole line of retreat: a swing of that mass covers both directions at once, and there's no jumping out from under it; it can only be taken on steel.</p>\n<p>Make a <strong>weapon attack against the target's opposed Athletics roll</strong>. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition: it can't Dodge against the next attack.</p>\n<p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash} or @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Swing}.</p>"
+  },
+  "maneuver_crossbow_shot": {
+    "_src": "77e6c5bdd2",
+    "name": "Crossbow Shot",
+    "system.description": "<p>A shot with a crossbow</p>",
+    "system.chain_trigger_text": "Take Aim"
+  },
+  "maneuver_crowding": {
+    "_src": "86dd7dcf5f",
+    "name": "Drive Back",
+    "system.description": "<p><strong>Maneuver. Requires a shield or a second weapon in the off hand.</strong></p>\n<p>You lean in with your body and shield (or bind both of the opponent's arms with a pair of blades) and don't let them break away: they will retreat only where you let them.</p>\n<p>Make an <strong>Athletics check against the target's Stealth</strong>: where you push with mass, the target answers with footwork and the knack of slipping free. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition.</p>\n<p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash}, @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Swing}, or @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}.</p>"
+  },
+  "maneuver_destroyers_intuition": {
+    "_src": "b2f6e67067",
+    "name": "Destroyer's Intuition",
+    "system.description": "<p>Applies a status.</p><p>Your next attack with a bludgeoning weapon, @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash} or @UUID[Compendium.dedrel.maneuvers.Item.u2MUNJ2oJeExQuzq]{Power Bash}, costs 0 AP.</p><p>On a hit, the attack deals increased damage (1 damage step higher).</p><p>The target also suffers an injury.<br>The hit location is determined by a d100 roll. Arms 1-40% Torso 41-70% Legs 71%-90% Head 91-100%</p>",
+    "effects": {
+      "ibPa8oJCRV5kbOGi": {
+        "name": "Destroyer's Intuition"
+      }
+    }
+  },
+  "maneuver_disengage": {
+    "_src": "f34a1db67c",
+    "name": "Disengage",
+    "system.description": "<p>You break the bind: you slip out from under the enemy's weapon so they can't reach you as you withdraw.</p>\n<p><strong>Effect:</strong> you leave the <strong>In Clinch</strong> condition, and your clinch partner doesn't get an Attack of Opportunity against you.</p>\n<p>The movement itself is not paid for by the maneuver: it is free and only spends meters of Speed. This maneuver buys not movement, but a safe exit.</p>"
+  },
+  "maneuver_dodge": {
+    "_src": "8300302aff",
+    "name": "Dodge",
+    "system.description": "<p>The character spends 1 to 5 AP and gains the same number of points to Dodge until the start of their next turn.</p>",
+    "effects": {
+      "Qx96tAtFyvoGA4rF": {
+        "name": "Dodge"
+      }
+    }
+  },
+  "maneuver_draconic_roar": {
+    "_src": "66cd9a588b",
+    "name": "Draconic Roar",
+    "system.description": "<p>A number of times per day equal to Charisma or Willpower (whichever is higher)</p><p>The character lets out a terrifying draconic roar. All living enemies who hear it (about 30 hexes in open terrain, at the GM's discretion) must make a Willpower check; on a failure they gain the Terror status for 3 rounds, on a success, Disoriented.</p>",
+    "effects": {
+      "3MYSRfYsTy1NofIg": {
+        "name": "Draconic Roar, cooldown"
+      }
+    }
+  },
+  "maneuver_empty_mind": {
+    "_src": "c2549a2e53",
+    "name": "Empty Mind",
+    "system.description": "<p>When a spell or ability with a mental effect targets you, spend 2 AP. The attacker must reroll and take the worse result. If the ability has no attack roll, only a saving throw, you get one reroll of the saving throw if you failed the first time.</p>"
+  },
+  "maneuver_expose_weakness": {
+    "_src": "b8c80f6317",
+    "name": "Expose Weakness",
+    "system.description": "<p>Logic and Reasoning check against a DC. On a success, reveals to the player part of the monster's data of their choice: HP, DR, or saving throws. The whole party sees the result.</p>"
+  },
+  "maneuver_feint_attack": {
+    "_src": "f390318971",
+    "name": "Feint",
+    "system.description": "<p>Maneuver, Fast melee weapon.</p><p>Make a Deception check against the target's Insight. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.CondOffGuard0001]{Off Guard} status (the status forbids using Block against the next attack)</p><p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}.</p><p></p>"
+  },
+  "maneuver_firearm_shot": {
+    "_src": "7e4e2ae26b",
+    "name": "Firearm Shot",
+    "system.description": "<p>A shot with a firearm</p>",
+    "system.chain_trigger_text": "Take Aim",
+    "system.prerequisites_text": "Firearm"
+  },
+  "maneuver_flaming_soul": {
+    "_src": "ac304e78f5",
+    "name": "Flaming Soul",
+    "system.description": "<p>Charisma or Willpower rank times per day (whichever is higher)</p><p>All Shades, Undead, and Demons within 10 meters must make a Willpower check against the character's Charisma or Willpower +12 (whichever is higher); on a failure they gain the Terror status for 3 rounds, on a success, Disoriented.</p>",
+    "effects": {
+      "QMurK0bZjojARTSo": {
+        "name": "Flaming Soul",
+        "description": "<p><span>All Shades, Undead, and Demons within 10 meters must make a Willpower check against the character's Charisma or Willpower +12 (whichever is higher); on a failure they gain the Terror status for 3 rounds, on a success, Disoriented.</span></p>"
+      }
+    }
+  },
+  "maneuver_flank_attack": {
+    "_src": "885bd25610",
+    "name": "Flank Attack",
+    "system.description": "<p>You immediately make one melee maneuver without spending extra AP against an opponent who is In Clinch. The attack gets a +3 bonus.</p>",
+    "effects": {
+      "OwKVZwNYO8PK0oCr": {
+        "name": "Flank Attack"
+      }
+    }
+  },
+  "maneuver_fly": {
+    "_src": "a7492c0040",
+    "name": "Fly",
+    "system.description": "<p>A tactical leap through the air: the character moves within their remaining Speed, ignoring difficult terrain, ground obstacles, traps, and ground-based magical effects, as well as <strong>enemy Control Zones</strong>.</p>\n<p><strong>Requirements:</strong> a run-up of at least 4 meters and a mandatory landing on a solid surface in the target square; you can't hover between turns.</p>\n<p>An Attack of Opportunity against a flying character is possible only with a weapon with reach 3.</p>\n<p>Movement spends meters of Speed as usual; 1 AP is the price of flight mode itself.</p>",
+    "system.chain_trigger_text": "any maneuver"
+  },
+  "maneuver_flying_shot": {
+    "_src": "e7d8ad1e25",
+    "name": "Flying Shot",
+    "system.description": "<p>There must be at least 4 meters of free vertical space above the character. The character makes a sharp wing-powered takeoff, rising above the battlefield for a split second. This lets them assess the tactical situation and make a @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Bow Shot}, @UUID[Compendium.dedrel.maneuvers.Item.yxZAedU3MoXYOrD1]{Crossbow Shot}, @UUID[Compendium.dedrel.maneuvers.Item.GDIxF1sFVeDcrZDK]{Firearm Shot}, @UUID[Compendium.dedrel.maneuvers.Item.g89PRL1EdFGe76OT]{Throw}, or @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Rapid Bow Shot} over obstacles without spending extra AP, after which the character lands in the same hex they started from.<br><br></p><p></p><p></p>",
+    "system.prerequisites_text": "ranged weapon",
+    "effects": {
+      "jNPnHJffRdGkHMG5": {
+        "name": "Flying Shot"
+      }
+    }
+  },
+  "maneuver_hide_behind_shield": {
+    "_src": "ed8e464042",
+    "name": "Hide Behind Shield",
+    "system.description": "<p>The character spends 1 to 5 action points and gains the same number of points to Block until the start of their next turn. In addition, the character gains Small Cover with a medium shield, or Large Cover with a tower shield.<br><br><strong>Effects:</strong> defenses: block gains a bonus equal to the AP spent until the start of this character's next turn. The character gains the Small Cover/Large Cover status</p>",
+    "system.prerequisites_text": "Equipped shield",
+    "effects": {
+      "uY9xsLNoxQ5BimbQ": {
+        "name": "Hide Behind Shield"
+      }
+    }
+  },
+  "maneuver_human_flow_state": {
+    "_src": "0d7b3b63f3",
+    "name": "Flow State",
+    "system.description": "<p>Usage: once per Short Rest</p><p>Grants the Flow State maneuver.</p><p>The character gets +2 to all skill rolls for 10 rounds or for the scene.</p>",
+    "effects": {
+      "4aANiICJEYvFbEdf": {
+        "name": "Flow State"
+      }
+    }
+  },
+  "maneuver_hypnotic_gaze": {
+    "_src": "009f01492e",
+    "name": "Hypnotic Gaze",
+    "system.description": "<p>A number of times per day equal to Charisma or Willpower (whichever is higher)</p><p>You need visual contact with the target (no more than 6 m away), and the target must have a mind. If the target fails the save, you can give it a simple command: drop your weapon, stand still, run, fall down. The target won't follow obviously suicidal commands (throw yourself off a cliff, stab yourself). If the target passes the save, it is immune to this maneuver for the next day.</p>"
+  },
+  "maneuver_incredible_grace": {
+    "_src": "8dfbba5046",
+    "name": "Incredible Grace",
+    "system.description": "<p>The character gets +2 to Dodge for 10 rounds.</p>",
+    "effects": {
+      "BMwIJ4ykxUxsPq6F": {
+        "name": "Incredible Grace"
+      }
+    }
+  },
+  "maneuver_indomitable_spirit": {
+    "_src": "ba9e50480a",
+    "name": "Indomitable Spirit (WIP)",
+    "system.description": "[🔧 placeholder: ignore the list of minor negative conditions] while the talent is active."
+  },
+  "maneuver_inspiring_presence": {
+    "_src": "f8e479e57c",
+    "name": "Inspiring Presence",
+    "system.description": "<p>When an ally within earshot makes a skill roll, spend a charge: they add +2 to the result. Declared after the roll, before the result is announced.</p>"
+  },
+  "maneuver_instant_intercept": {
+    "_src": "553e3c278f",
+    "name": "Instant Intercept",
+    "system.description": "Maneuver, reaction. If an enemy's ranged attack hits you, you can use this maneuver as a reaction to deflect the incoming projectile. Requirement: an equipped melee weapon."
+  },
+  "maneuver_interact": {
+    "_src": "ca207b7b2e",
+    "name": "Interact",
+    "system.description": "Basic interaction with the surrounding world: for example, putting out a fire on yourself or an ally, making a skill check, giving a speech (more than a couple of words in combat, but not a poem), taking an item out of a bag, and so on, at the GM's discretion."
+  },
+  "maneuver_intercepting_shot": {
+    "_src": "8e445dad12",
+    "name": "Intercepting Shot",
+    "system.description": "<p>Maneuver. Ranged weapon. If an opponent within your character's reach performs Reload or Take Aim, you can make a Shot or Throw maneuver as a reaction without spending extra AP. If your attack hits and deals damage, the opponent's action counts as disrupted, and the AP they spent are lost.</p>",
+    "effects": {
+      "STvvZxlrWXSMb5o7": {
+        "name": "Intercepting Shot"
+      }
+    }
+  },
+  "maneuver_last_stand": {
+    "_src": "c0dfbff051",
+    "name": "Last Stand",
+    "system.description": "<p>This talent triggers as soon as the character's HP would drop to zero. The character restores 30% of their HP.</p>"
+  },
+  "maneuver_leaders_gaze": {
+    "_src": "aba2f82955",
+    "name": "Leader's Gaze",
+    "system.description": "<p><strong>Maneuver. Action, 3 AP.</strong> The target must be able to see you and have a developed mind.</p>\n<p>You look at them the way a pack leader looks at someone who has forgotten their place. The target makes a <strong>Willpower saving throw</strong> against a DC of <strong>your Willpower + 8</strong>.</p>\n<p><strong>Failure:</strong> the target gains <strong>2 stacks</strong> of the @UUID[Compendium.dedrel.conditions.Item.YdoGhveZiTy3WXav]{Disoriented} condition; each stack adds <strong>+1 AP</strong> to the cost of all its maneuvers. Stacks from different sources add up, capped at three; at the third, the condition turns into @UUID[Compendium.dedrel.conditions.Item.gDIEudCXkde0bEOp]{Stunned}.</p>\n<p><strong>Success:</strong> nothing. A leader doesn't press twice in a row on someone who held firm, but nobody canceled the next round.</p>\n<p><em>The condition is applied manually: click Disoriented in the token HUD the required number of times.</em></p>"
+  },
+  "maneuver_leg_sweep": {
+    "_src": "d0bcc1378e",
+    "name": "Leg Sweep",
+    "system.description": "<p>Make an attack with a halberd against the target's opposed Athletics roll. On a success, the target gains the Prone status.</p>"
+  },
+  "maneuver_living_siege_engine": {
+    "_src": "64c3d3df64",
+    "name": "Living Siege Engine (WIP)",
+    "system.description": "You can lift and hurl huge, heavy objects with the force of a catapult.\nYou can lift and hurl a large object (a boulder, a column) up to (Strength Rank * 5) hexes. When it hits a target or a point on the ground, the object deals heavy area damage (for example, a radius of 1-2 hexes).<br><br><b>Comments:</b> rephrase/regenerate this maneuver"
+  },
+  "maneuver_mobile_marksman": {
+    "_src": "26569705a0",
+    "name": "Shot from Cover",
+    "system.description": "<p>You keep behind a parapet or a tree trunk, step into the line of fire just long enough to shoot, and duck right back. The shot is part of the maneuver itself.</p>\n<p><strong>Effect:</strong> until the start of your next turn you count as being in <strong>Small Cover</strong> (+2 to Block): you spend almost all the time behind the barrier.</p>\n<p><strong>The price of speed:</strong> the maneuver is an Action, and Take Aim, Armor-Piercing Shot, and Braced Shot are Actions too. You can't combine them with this shot: you fire from the hip.</p>\n<p>You don't need a separate maneuver to step in and out: movement is free and can be split any way you like.</p>",
+    "effects": {
+      "PeekShotCoverEf1": {
+        "name": "Shot from Cover"
+      }
+    }
+  },
+  "maneuver_monster_attack_of_opportunity": {
+    "_src": "01962ba3e5",
+    "name": "Attack of Opportunity (m)",
+    "system.description": "<p>If the character's Control Zone is 1 or more and they are not @UUID[Compendium.dedrel.conditions.Item.1Ed1ogtSr0oxJhd5]{In Clinch}, they can make a Thrust, Swing, or Bash without spending extra AP against a character crossing their Control Zone, provided they hold a weapon that allows such maneuvers. If the attack succeeds (even if it deals no damage), the opponent's movement stops there and both characters enter the In Clinch condition. If the opponent crosses several squares of the Control Zone, the character can make an Attack of Opportunity for each square crossed.<br><br><strong>Effects:</strong> The next Swing, Bash, or Thrust costs 0.</p>",
+    "system.prerequisites_text": "Control Zone >=1, not In Clinch.",
+    "effects": {
+      "3vYKn5wCeaPokRqI": {
+        "name": "Attack of Opportunity"
+      }
+    }
+  },
+  "maneuver_monster_claw_slash": {
+    "_src": "2339c88719",
+    "name": "Claw Slash",
+    "system.description": "<p>A short strike with claws or a paw within a combo already in progress. Damage formula and type come from the weapon itself, with no step shift.</p>\n<p>Requires a <strong>slashing</strong> natural weapon: you can't slash with fangs; for jaws there is @UUID[Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC]{Bite}.</p>\n<p><em>For 1 AP the beast buys one more strike for the combo. The trade-off: a third Bite for 2 AP or two short claw strikes; the latter break a peon's Toughness more often but fare worse against DR.</em></p>",
+    "system.chain_trigger_text": "after Bite, Pounce, or Attack of Opportunity"
+  },
+  "maneuver_monster_jaw_lock": {
+    "_src": "3619403077",
+    "name": "Jaw Lock",
+    "system.description": "<p>The creature clamps its jaws and hangs on to its prey. Can be made only after a <strong>successful</strong> @UUID[Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC]{Bite}.</p>\n<p><strong>Contest:</strong> the creature's Athletics against the target's Athletics (the roll button rolls Athletics). On a success, <strong>both</strong> gain @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Grappled}: the grapple binds both prey and predator.</p>\n<p><strong>While the grapple holds:</strong> the creature doesn't leave its spot; leaving its square means letting go. The target breaks free with the @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} maneuver and an opposed Athletics roll, and the condition falls off both.</p>\n<p><strong>Size:</strong> +2 to the contest per size category of difference in favor of the larger one; against a target two categories larger, a grapple is impossible.</p>",
+    "system.chain_trigger_text": "after a Bite that hits"
+  },
+  "maneuver_monster_leap": {
+    "_src": "46903901a3",
+    "name": "Leap",
+    "system.description": "<p>The creature leaps <strong>up to 5 m</strong> horizontally (up to 2 m up), passing over everything in between: barriers, pits, enemy Control Zones, and creatures no larger than itself. It lands on an empty square.</p>\n<p><strong>Leap meters don't spend the Speed pool</strong>: that is exactly what the 2 AP pay for. Normal movement is free but goes around an obstacle on the ground, while a leap flies over it.</p>\n<p>When leaving an enemy Control Zone, the leap <strong>provokes an Attack of Opportunity</strong> like any movement: it gets past what's in the way, not past whoever has already latched on.</p>\n<p><em>Who gets it: creatures with long legs and a reason to use them: guard beasts over barricades, felines onto ledges, horse hybrids across a moat.</em></p>"
+  },
+  "maneuver_monster_maul": {
+    "_src": "39aede0ca4",
+    "name": "Maul",
+    "system.description": "<p>The beast tears into prey that can no longer stay on its feet. Can be made only against a target with the @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Prone} or @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Grappled} status.</p>\n<p>An attack with a natural weapon; damage is <strong>one step higher</strong> on the Ladder (1d4 → 1d6 → 2d4 → 2d6 → 2d8 → 3d6). The system calculates the shift; the one-step rule applies, so it doesn't stack with other damage buffs beyond +1.</p>\n<p>The mirror of Leg Sweep: that one drops the target, this one reaps the harvest. It differs from the universal Finishing Blow in that Finishing Blow is a reaction at the moment of the fall, while Maul is made on your own turn against prey already on the ground.</p>",
+    "system.chain_trigger_text": "after Pounce or Jaw Lock",
+    "system.prerequisites_text": "Target with the Prone or Grappled status."
+  },
+  "maneuver_monster_pack_howl": {
+    "_src": "f7dbf46615",
+    "name": "Pack Howl",
+    "system.description": "<p>The leader breaks into a howl, and the pack surges forward more fiercely. <strong>Allies within 10 m get +2 to attacks</strong> until the start of the howler's next turn. The leader itself gets no bonus.</p>\n<p>Requires a voice: doesn't work while Stunned, in magical silence, or for voiceless creatures.</p>\n<p><em>The aura is turned on with the Aura button on the maneuver's chat card and turned off with the same button after the turn.</em></p>",
+    "effects": {
+      "PackHowlAuraEff1": {
+        "name": "Pack Howl"
+      }
+    }
+  },
+  "maneuver_monster_pin_down": {
+    "_src": "65b9ddbb47",
+    "name": "Pin Down",
+    "system.description": "<p>The bulk drops onto the downed prey with all its weight, presses it into the ground, and starts tearing. A reaction to your own @UUID[Compendium.dedrel.maneuvers.Item.MonsterPounce01x]{Pounce}: available only if the target was knocked down by it (@UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Prone}).</p>\n<p><strong>Attack</strong> with a natural weapon using the normal formula; the maneuver doesn't shift the damage step: it wins by the hold, not by damage.</p>\n<p><strong>On hit:</strong> a contest, the same <strong>attack roll against the target's Athletics</strong> as with Pounce. On a success, the target also gains @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Grappled}.</p>\n<p><strong>While the pin holds:</strong> the creature doesn't leave its spot; leaving its square means releasing the prey. The target breaks free with the @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} maneuver and an opposed Athletics roll.</p>\n<p><strong>Size:</strong> +2 to the contest per size category of difference in favor of the larger one. You can only pile onto a target <strong>no larger than yourself</strong>: to pin with weight, you need the weight.</p>\n<p>The fork with @UUID[Compendium.dedrel.maneuvers.Item.MonsterMaulBite1]{Maul}: for the same 2 AP, that one hits one step higher, while this one pins the prey to the ground. Damage or control, but not both at once.</p>\n<p><em>The contest is manual: the system rolls attack and damage; the GM rolls the target's Athletics separately and applies Grappled themselves.</em></p>",
+    "system.chain_trigger_text": "reaction after a Pounce that knocked the target down",
+    "system.prerequisites_text": "Target knocked down by your Pounce and no larger than you."
+  },
+  "maneuver_monster_pounce": {
+    "_src": "64a7393c3a",
+    "name": "Pounce",
+    "system.description": "<p>The creature builds up speed in a straight line for <strong>at least 4 m</strong> (the movement is part of the maneuver and spends Speed) and strikes on the run with a natural weapon.</p>\n<p><strong>On hit:</strong> a contest, the attack roll against the target's <strong>Athletics</strong>. On a success, the target gains @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Prone}.</p>\n<p><strong>Size:</strong> +2 to the contest per size category of difference in favor of the larger one. A target two or more categories larger can't be knocked over.</p>\n<p><em>The contest is manual: the system rolls attack and damage; the GM rolls the target's Athletics separately.</em></p>",
+    "system.prerequisites_text": "4 m of clear space in a straight line for the run-up."
+  },
+  "maneuver_monster_ram": {
+    "_src": "5360312b74",
+    "name": "Ram",
+    "system.description": "<p>A run-up in a straight line of <strong>at least 6 m</strong> (part of the maneuver, spends Speed) and a strike with the whole mass: horns, forehead, body.</p>\n<p>Requires a <strong>bludgeoning</strong> natural weapon, by the same rule by which Claw Slash requires a slashing one.</p>\n<p><strong>On hit:</strong> a contest of the attack roll against the target's Athletics. Success pushes the target back <strong>2 m</strong> (<strong>4 m</strong> if the creature is at least one category larger than the target) and knocks it down (@UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Prone}).</p>\n<p><strong>If the pushed target slams</strong> into a wall, a grate, or another creature, it takes extra damage as from a fall of the same distance (see [[9. Combat and Damage]]) and stops at the point of impact.</p>\n<p><strong>Size:</strong> +2 to the contest per size category of difference in favor of the larger one. A target two or more categories larger can't be moved.</p>\n<p><em>The economics. Ram costs a longer run-up than Pounce (6 m against 4) and doesn't open the Pin Down chain: it doesn't drag the target under itself but knocks it away. This is a space-control maneuver: break a formation, knock a shooter off a ledge, slam a caster into a wall.</em></p>",
+    "system.prerequisites_text": "6 m of clear space in a straight line for the run-up."
+  },
+  "maneuver_monster_retaliate": {
+    "_src": "e04781ece8",
+    "name": "Retaliatory Bite",
+    "system.description": "<p><strong>Reaction.</strong> After the creature <strong>is hit in melee</strong>, it immediately strikes back with a natural weapon. Damage from the weapon, with no step shift.</p>\n<p><strong>Once per attacker per round.</strong> Two different opponents mean two reactions, if there's enough AP; a single opponent who struck twice gets a response only to the first strike.</p>\n<p><em>Why it exists. The monster Attack of Opportunity catches those who leave; Retaliatory Bite catches those who stay and strike. Together they turn a large AP pool into a threat that works ON SOMEONE ELSE'S turn: a solo boss who spent its whole turn attacking is still dangerous as long as it has AP.</em></p>\n<p><em>Who gets it: loners with a bloated AP pool: bosses, elites, multi-headed creatures. Not for rank-and-file mobs: a pack of peons with reactions grinds the fight to a halt.</em></p>"
+  },
+  "maneuver_monster_venom_bite": {
+    "_src": "9358cf04e6",
+    "name": "Venomous Bite",
+    "system.description": "<p>An attack with a natural weapon that carries venom: a snake's head, mandibles, a venomous stinger. Damage formula and type come from the weapon.</p>\n<p><strong>On hit</strong>, the target makes a <strong>Constitution saving throw, DC 9 + the creature's Threat Rank</strong> (the same rule as for Gifts; see Creature Abilities). On a failure, the target gains @UUID[Compendium.dedrel.conditions.Item.ConditionPoisonC]{Poisoned (Combat)}, one stack.</p>\n<p>Repeated hits <strong>add stacks</strong> and reset the duration. Stacks add up in the tick damage, capped at 3.</p>\n<p><em>Poison is not a damage type but a save axis: neither DR nor elemental resistance reduces it. The only answers are a saving throw, an antidote, and healing.</em></p>",
+    "system.chain_trigger_text": "after Bite or the monster Attack of Opportunity"
+  },
+  "maneuver_overwatch": {
+    "_src": "6f8b2df6e3",
+    "name": "Overwatch",
+    "system.description": "<p>Maneuver. Free action. You can choose one of your available maneuvers and set a trigger: when a mage starts casting, when a guard comes into view (etc.). You must have the AP for the target maneuver; it triggers automatically when the conditions are met. After using Overwatch, you must end your turn.</p><p>If the maneuver makes it impossible for the target to complete its action, the AP it spent are not refunded.</p>"
+  },
+  "maneuver_paired_strike": {
+    "_src": "47dfc7af5f",
+    "name": "Paired Strike",
+    "system.description": "<p>If you fight with a paired weapon (katars, claws), after the first attack, if it hits, you can make a second attack (by clicking it on the chat card, at no resource cost).</p>"
+  },
+  "maneuver_penetrating_strike": {
+    "_src": "177245606b",
+    "name": "Penetrating Strike",
+    "system.description": "<p>You use two limbs and your body weight to deal extra piercing damage equal to your Strength rank.</p>"
+  },
+  "maneuver_phantom_tread": {
+    "_src": "63b93734db",
+    "name": "Phantom Tread",
+    "system.description": "<p>You read the enemy's stance and slip through right where they're waiting for you.</p>\n<p><strong>Effect:</strong> until the end of this turn, your movement <strong>through enemy Control Zones</strong> doesn't provoke Attacks of Opportunity.</p>\n<p><strong>What it doesn't do:</strong> it doesn't free you from a clinch (that's what Disengage is for). Nor does it protect you from reactions with their own trigger: Preemptive Thrust triggers on entering a Control Zone, not on an Attack of Opportunity, and will still stop you.</p>",
+    "effects": {
+      "PhantomTreadEff1": {
+        "name": "Phantom Tread"
+      }
+    }
+  },
+  "maneuver_plant_berdiche": {
+    "_src": "730ff05c83",
+    "name": "Plant the Berdiche",
+    "system.description": "<p>Applies the Berdiche Planted status.<br>While you reload a musket, you don't provoke an Attack of Opportunity in melee; the berdiche counts as equipped, and switching from the musket is a free action. If the character moves away or is knocked back two meters or more, the status is removed. The player can choose whether the character grabbed the berdiche or left it standing in place.</p><p>Lets you perform the Braced Shot maneuver.<br>As a chain, you can make @UUID[Compendium.dedrel.maneuvers.Item.YYchgwfcVR4BNpUX]{Reload} or @UUID[Compendium.dedrel.maneuvers.Item.iS2JkbQLJEEM7tO3]{Braced Shot}</p>"
+  },
+  "maneuver_power_bash": {
+    "_src": "e9985d6cad",
+    "name": "Power Bash",
+    "system.description": "<p>You take a big swing to deal extra damage equal to your Strength rank.</p>"
+  },
+  "maneuver_preemptive_thrust": {
+    "_src": "32ffb5d9eb",
+    "name": "Preemptive Thrust",
+    "system.description": "<p><span>When an opponent enters your Control Zone, you can use a reaction to make a spear attack. If the attack hits (even if it deals no damage), the enemy stops, and the maneuver that gave them the movement is disrupted. </span>As a chain, you can make a @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}</p>"
+  },
+  "maneuver_punishing_miss": {
+    "_src": "ef908eefd1",
+    "name": "Punishing Miss",
+    "system.description": "Like Riposte, but it can be activated after an opponent misses.",
+    "effects": {
+      "P1CQtTrU7HPEc4qU": {
+        "name": "Punishing Miss"
+      }
+    }
+  },
+  "maneuver_rage": {
+    "_src": "502e34d8f5",
+    "name": "Rage",
+    "system.description": "The character enters a state of rage for 10 rounds. In this state, they ignore wound penalties to rolls.<br><br><b>Effects:</b> Condition: Rage for 10 rounds",
+    "effects": {
+      "y1A9mkHlC4oQrvmI": {
+        "name": "Rage"
+      }
+    }
+  },
+  "maneuver_rally": {
+    "_src": "7d525b0d81",
+    "name": "Rally",
+    "system.description": "<p>Maneuver, Action.</p><p>All allies within 20 m shed [🔧 placeholder: minor negative conditions] and get +2 to all rolls until the start of your next turn.</p>",
+    "effects": {
+      "uCUQTYDuWEoGoRy4": {
+        "name": "Rally",
+        "description": "<p>All allies within 20 m shed [🔧 placeholder: minor negative conditions] and get +2 to all rolls until the start of your next turn, as long as they stay within range.</p>"
+      }
+    }
+  },
+  "maneuver_ranged_riposte": {
+    "_src": "dcdc52dece",
+    "name": "Ranged Riposte",
+    "system.description": "<p>When a ranged attack is made against you (successful or not), you can react by firing back (you must have a ranged weapon equipped)</p>",
+    "effects": {
+      "upUaq3rGXFRpIzKx": {
+        "name": "Ranged Riposte"
+      }
+    }
+  },
+  "maneuver_rapid_bow_shot": {
+    "_src": "14dd7769eb",
+    "name": "Rapid Bow Shot",
+    "system.description": "<p>A Bow Shot costs 1 AP less.</p><p>You have trained your arms enough to draw even the heaviest bows without much effort.</p>",
+    "system.chain_trigger_text": "Take Aim",
+    "system.prerequisites_text": "Bow"
+  },
+  "maneuver_read_scroll": {
+    "_src": "88b47e18da",
+    "name": "Read Scroll"
+  },
+  "maneuver_regeneration": {
+    "_src": "2b11e336e8",
+    "name": "Regeneration",
+    "system.description": "Restore 10% of HP"
+  },
+  "maneuver_reload": {
+    "_src": "52c3095c00",
+    "name": "Reload",
+    "system.description": "If the weapon has the Reloading property, this maneuver lets you reload it.",
+    "system.chain_trigger_text": "Plant the Berdiche, Firearm Shot, Crossbow Shot."
+  },
+  "maneuver_reserve_stamina": {
+    "_src": "4813c508f2",
+    "name": "Reserve Stamina",
+    "system.description": "<p>3 times per Short Rest.<br>Instantly restore Universal Action Points up to your Constitution rank.</p>"
+  },
+  "maneuver_rewrite_moment": {
+    "_src": "f0b54a858c",
+    "name": "Rewrite the Moment",
+    "system.description": "Reaction. When you take damage, you can activate this talent. The opponent's attack is canceled entirely, with all its consequences (damage, conditions, effects). The AP the opponent spent are not refunded."
+  },
+  "maneuver_riposte": {
+    "_src": "665f71ea4e",
+    "name": "Riposte",
+    "system.description": "<p>If a melee attack against the character succeeded (whether or not it dealt damage), they can use this maneuver to immediately make a Thrust, Swing, or Bash without spending extra AP.</p>",
+    "system.prerequisites_text": "melee weapon",
+    "effects": {
+      "AocBKvLEPiiN0ENU": {
+        "name": "Riposte"
+      }
+    }
+  },
+  "maneuver_shield_bash": {
+    "_src": "e13d7e4f1f",
+    "name": "Shield Bash",
+    "system.description": "<p>You must hold a shield.</p><p>You deliver a powerful shield blow to the opponent using the Athletics skill. If the attack succeeds, you knock the opponent back by Constitution RANK *2 meters. Damage on the card = your Constitution rank.</p>"
+  },
+  "maneuver_sniper_shot": {
+    "_src": "95392f16ab",
+    "name": "Sniper Shot",
+    "system.description": "<p>Musket or crossbow</p><p>The target must be at least 20 m away.</p><p>Attack with a +2 bonus.</p><p>You choose the hit location: <span>Arms, Torso, Legs, Head. If the attack deals at least 5 damage (after DR), the target suffers an injury.</span></p>"
+  },
+  "maneuver_sovereign_will": {
+    "_src": "1581d5aa43",
+    "name": "Sovereign Will (WIP)",
+    "system.description": "All enemies within a radius of 2+WILL hexes make a WILL check against your WILL+12. Failure: [🔧 placeholder: Terror]. Success: [🔧 placeholder: minor status].<br><br><b>Comments:</b> consider introducing an “aura” entity"
+  },
+  "maneuver_steel_barrier": {
+    "_src": "765e0cb4d5",
+    "name": "Steel Barrier",
+    "system.description": "<p>You spin your sword, creating a no-go zone around you until the start of your next turn. The first enemy to enter your Control Zone takes an automatic hit from you, after which the maneuver ends.</p>\n<p><strong>While you hold the stance, you don't move.</strong> Move even a meter and the barrier drops. Activating another maneuver before the barrier triggers also cancels it.</p>",
+    "system.prerequisites_text": "greatsword",
+    "effects": {
+      "Rr2Iy24qLAKeaYvM": {
+        "name": "Steel Barrier",
+        "description": "<p><span>The first enemy to enter your zone takes an automatic hit from you (damage is rolled but not modified by other talents); this does not count as an attacking maneuver (for abilities that avoid attacks). After that, the maneuver ends. Activating another maneuver ends Steel Barrier.</span></p>"
+      }
+    }
+  },
+  "maneuver_steel_momentum": {
+    "_src": "d622892b60",
+    "name": "Steel Momentum",
+    "system.description": "<p>If at the end of your last turn you started @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Steel Barrier} and it didn't trigger before the start of your new turn, at the start of the turn you can use Steel Momentum: move up to your Speed and make an attack; on a hit, the damage is increased by one step.</p><p>This is a free action, and you can continue your turn.</p>",
+    "system.prerequisites_text": "Steel Barrier status",
+    "effects": {
+      "xz0BMkXYoHtusqZ2": {
+        "name": "Steel Momentum"
+      }
+    }
+  },
+  "maneuver_sunder_block": {
+    "_src": "722f48bcb8",
+    "name": "Sunder Block",
+    "system.description": "<p>Make an attack with a falchion or axe against the target's opposed Athletics roll. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.CondOffGuard0001]{Off Guard} status <span>(the status forbids using Block) against the next attack.</span></p><p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Swing}.</p>"
+  },
+  "maneuver_superposition": {
+    "_src": "892e9508ff",
+    "name": "Superposition",
+    "system.description": "<p>Maneuver. You place up to 4 copies of your character on the battlefield within line of sight. Each copy has 1 HP and vanishes after taking damage. After an opponent makes an attack against one of your tokens, you choose whether it hits a copy or the real character. On your turn you also decide which token is your character.</p>"
+  },
+  "maneuver_sweeping_arc": {
+    "_src": "c993343326",
+    "name": "Sweeping Arc",
+    "system.description": "<p>Using a glaive, you make a wide swing, attacking up to 3 enemies in a 4 m cone with a single roll. Damage is also rolled once and applied to all of them.</p>"
+  },
+  "maneuver_swing": {
+    "_src": "7ed55889bd",
+    "name": "Swing",
+    "system.description": "An attack with a slashing melee weapon",
+    "system.chain_trigger_text": "Attack of Opportunity, Riposte",
+    "system.prerequisites_text": "Slashing melee weapon"
+  },
+  "maneuver_swing_on_a_move": {
+    "_src": "f6b20f147c",
+    "name": "Swing on the Move",
+    "system.description": "<p>You don't stand still: you cut on the run, breaking distance and coming in from a new side. The attack is part of the maneuver itself; you don't need a separate Swing after it.</p>\n<p><strong>Carousel.</strong> The first use spends your Action; each next one chains after the previous, and so on as long as you have AP and meters of Speed.</p>\n<p><strong>Conditions:</strong></p>\n<ul>\n<li>You must move <strong>at least 2 meters</strong> between attacks.</li>\n<li>The carousel can't be interrupted by other maneuvers: interrupt it and it's over.</li>\n<li>Each attack is <strong>against a new target</strong>: the carousel never hits the same opponent twice in one turn.</li>\n<li>If an enemy Control Zone stops you (for example, with Preemptive Thrust), the maneuver is broken off.</li>\n</ul>",
+    "system.chain_trigger_text": "after itself (carousel)"
+  },
+  "maneuver_tactical_breakdown": {
+    "_src": "653ee97c3d",
+    "name": "Tactical Breakdown",
+    "system.description": "<p>Maneuver, free action. Choose one opponent. Until the end of the round, all allies within 20 meters of you get against this target: +2 to attacks and the right to reroll one damage die (the new result must be kept).</p>"
+  },
+  "maneuver_take_ranged_aim": {
+    "_src": "edce53671c",
+    "name": "Take Aim",
+    "system.description": "<p>The character gets +2 to their next attack roll with a Firearm, Bow, or Crossbow Shot.<br><br></p>",
+    "system.prerequisites_text": "ranged weapon",
+    "effects": {
+      "EdMTxYcl8kaelB3Z": {
+        "name": "Aiming"
+      }
+    }
+  },
+  "maneuver_taunt": {
+    "_src": "3fb9058dca",
+    "name": "Taunt",
+    "system.description": "<p>The target must be able to hear you and have a developed mind. <br>Persuasion check against the target's Insight. <br>If the target fails, it takes a -3 penalty to attacks against targets other than the taunter until the start of the next turn.</p>"
+  },
+  "maneuver_through_the_pain": {
+    "_src": "2259374139",
+    "name": "Through the Pain",
+    "system.description": "<p>3 times per Long Rest</p><p>Free action. You ignore wound penalties until the end of the round.</p>",
+    "effects": {
+      "uIlQRDvsY5P09gfv": {
+        "name": "Through the Pain"
+      }
+    }
+  },
+  "maneuver_thrust": {
+    "_src": "c5c20cc526",
+    "name": "Thrust",
+    "system.description": "An attack with a piercing melee weapon.",
+    "system.prerequisites_text": "Piercing melee weapon"
+  },
+  "maneuver_trow": {
+    "_src": "a98f6be5a7",
+    "name": "Throw",
+    "system.description": "Throw a thrown weapon",
+    "system.chain_trigger_text": "Take Aim",
+    "system.prerequisites_text": "Thrown weapon"
+  },
+  "maneuver_unbreakable": {
+    "_src": "2426c7320a",
+    "name": "Unbreakable",
+    "system.description": "<p>Once per Long Rest.</p><p>You ignore any damage the first time you take it within the next 10 rounds.</p>",
+    "effects": {
+      "reX9liOrb84rETdJ": {
+        "name": "Unbreakable",
+        "description": "<p>You ignore any damage the first time you take it within the next 10 rounds.</p>"
+      }
+    }
+  },
+  "maneuver_uncanny_metabolism": {
+    "_src": "e3786a7eee",
+    "name": "Uncanny Metabolism",
+    "system.description": "<p>Maneuver, free action. You get a -1 AP discount on all maneuvers for the next three rounds (but not below 1).</p>",
+    "effects": {
+      "7ZQWl1E6FWNKxed4": {
+        "name": "Uncanny Metabolism",
+        "description": "<p><span>You get a -1 AP discount on all maneuvers for the next three rounds.</span></p><p>!Maneuvers that now cost 0 can't be used more than once per round!</p>"
+      }
+    }
+  },
+  "maneuver_unnerving_presence": {
+    "_src": "44532dd165",
+    "name": "Unnerving Presence",
+    "system.description": "<p>CHA vs the target's WILL check. On a success: [🔧 placeholder: minor debuff] for 2 rounds. Narratively: not fear, but a feeling that the opponent has already lost.</p>"
+  },
+  "maneuver_vector_glide": {
+    "_src": "50df6d0e50",
+    "name": "Vector Glide",
+    "system.description": "<p>You break into a run that gravity doesn't care about.</p>\n<p><strong>Effect:</strong> until the end of this turn you run on vertical surfaces and water. Movement is normal, in meters of Speed.</p>\n<p><strong>Risk:</strong> if your movement ends on a vertical surface or on water, the character falls (for fall damage, see the rules).</p>",
+    "system.chain_trigger_text": "any maneuver",
+    "effects": {
+      "VectorGlideEff01": {
+        "name": "Vector Glide"
+      }
+    }
+  },
+  "maneuver_volt_step": {
+    "_src": "73c6b0a4bf",
+    "name": "Volt Step",
+    "system.description": "<p>Maneuver, reaction. After an opponent's melee attack roll, but before the GM confirms the hit and rolls damage, spend up to 5 AP and add the same amount to Dodge until the end of this round.</p>",
+    "effects": {
+      "NXF1SqAT9KiZGzGY": {
+        "name": "Volt Step"
+      }
+    }
+  },
+  "maneuver_weak_spot": {
+    "_src": "fb917bb471",
+    "name": "Weak Spot",
+    "system.description": "<p>Before attacking, you declare that you are “reading” the opponent; your next attack with any weapon gains Armor Piercing 3</p>",
+    "effects": {
+      "KcKDkkzKRQQ1uoQn": {
+        "name": "Weak Spot"
+      }
+    }
+  },
+  "maneuver_will_aura": {
+    "_src": "e42d87a1b6",
+    "name": "Aura of Will",
+    "system.description": "<p>For 10 rounds, all allies within 10 meters get +2 to Willpower saving throws.</p>",
+    "effects": {
+      "xpJwQSjVbwE3T3LH": {
+        "name": "Aura of Will"
+      }
+    }
+  },
+  "maneuver_wings_dive_strike": {
+    "_src": "24d174b819",
+    "name": "Wings: Dive Strike",
+    "system.description": "<p>The character takes off and crashes down on an opponent. The target must be at least 9 meters from the character, and no farther than the character's movement. <br>Make a melee attack with +2 to attack and +2 to damage.</p>",
+    "system.prerequisites_text": "melee weapon",
+    "effects": {
+      "xal7BvtCzAJlbU0P": {
+        "name": "Wings: Dive Strike"
+      }
+    }
+  },
+  "maneuver_world_favors_me": {
+    "_src": "310288d495",
+    "name": "The World Favors Me",
+    "system.description": "<p>Free action. Until the end of the round, the surrounding objects and environment work in your favor: a mechanism jams, a rope snaps, a stone rolls away. The GM brings the effect to life based on context. It can't deal damage or apply conditions directly, only change the surroundings.</p>"
+  }
+}

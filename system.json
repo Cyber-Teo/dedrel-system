@@ -266,5 +266,28 @@
     "RegionBehavior": {
       "dedrelAura": {}
     }
+  },
+  "flags": {
+    "dedrel": {
+      "translations": {
+        "en": [
+          "active_effects",
+          "additional_conditions",
+          "armors",
+          "biomancy_adaptations",
+          "conditions",
+          "craft_materials",
+          "creature_types",
+          "magic_items",
+          "maneuvers",
+          "mutations",
+          "mutilations",
+          "potions",
+          "spells",
+          "talents",
+          "weapons"
+        ]
+      }
+    }
   }
 }

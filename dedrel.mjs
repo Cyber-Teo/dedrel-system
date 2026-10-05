@@ -34,6 +34,7 @@ import TimeHUD from "./src/apps/time-hud.mjs";
 import MagicSourceHUD from "./src/apps/source-hud.mjs";
 import { DEDREL_CALENDAR_CONFIG } from "./src/config/calendar.mjs";
 import { DedrelSocket } from "./src/socket.mjs";
+import { CompendiumTranslation } from "./src/l10n/compendium-translation.mjs";
 
 import "./src/chat.mjs";
 import "./src/macros.mjs";
@@ -53,6 +54,10 @@ Hooks.once("init", function() {
 
   // Регистрация настроек системы
   registerSystemSettings();
+
+  // Перевод компендиумов при нерусском языке системы: словарь грузится вместе
+  // с языковыми файлами ядра, до создания паков (src/l10n/compendium-translation.mjs)
+  CompendiumTranslation.init();
 
   // Конфиг магической системы (Магический Конструктор): таблицы Техник,
   // Модификаторов, лимиты Рангов Доктрин, свойства Доктрин. См. src/config/magic.mjs
@@ -479,6 +484,9 @@ Hooks.on("preUpdateActiveEffect", (effect, changes, options, userId) => {
 });
 
 
+
+// Паки созданы: перевести их индексы и папки (если перевод активен)
+Hooks.once("setup", () => CompendiumTranslation.translatePacks());
 
 Hooks.once("ready", async function () {
   const currentVersion = game.system.version;

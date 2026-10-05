@@ -1,0 +1,123 @@
+{
+  "bio_field_surgery": {
+    "_src": "046cc6b7bf",
+    "name": "Field Surgery 2d6"
+  },
+  "bio_flexibility": {
+    "_src": "0d05dc2c82",
+    "name": "Flexibility"
+  },
+  "bio_quick_heal_pair": {
+    "_src": "3bbcd90c37",
+    "name": "Quick Heal 2d6 [Two Targets]"
+  },
+  "bio_self_heal": {
+    "_src": "14db8a1add",
+    "name": "Self-Heal 2d6"
+  },
+  "bio_stunted_tail": {
+    "_src": "0a8f0b4ccd",
+    "name": "Stunted Tail"
+  },
+  "bio_thick_skin": {
+    "_src": "1501ab0746",
+    "name": "Thick Skin"
+  },
+  "nieves_body_tuning": {
+    "_src": "e7e9cab2c1",
+    "name": "Body Fitting",
+    "system.description": "<p>She adjusts her own body as calmly as anyone else's: the layers under the skin thicken, and a blow sinks into the meat without reaching the bone.</p>\n<p><strong>Effect:</strong> +2 DR to herself for 6 rounds.</p>\n<p><strong>In the scene:</strong> explains why she doesn't go down from the first blow. Cast before combat, if Nieves had time to hear footsteps.</p>"
+  },
+  "nieves_grafting": {
+    "_src": "738269f881",
+    "name": "Graft",
+    "system.description": "<p>Someone else's trait, grafted on the fly: the Matriarch's skin coarsens and sprouts horny growths right in the middle of the fight.</p>\n<p><strong>Effect:</strong> the Thick Skin adaptation: DR 1 against slashing and piercing, for Doctrine Rank rounds (3). A willing target makes no saving throw; an unwilling one rolls Willpower against DC 12.</p>\n<p><strong>In the scene:</strong> a test of the Adaptation Modifier on the GM's side. Applied with a button on the card.</p>"
+  },
+  "nieves_stitching": {
+    "_src": "87f8eaaafe",
+    "name": "Stitch-Up",
+    "system.description": "<p>Nieves doesn't heal, she <em>mends</em>. Torn flesh closes with a stitch no one put in, and the seam lies exactly where she looks.</p>\n<p><strong>In the scene:</strong> her whole turn. While she is alive and can see the Matriarch, the boss fight doesn't end: that is the answer to the question “why should the party go after the witch behind bars.”</p>"
+  },
+  "pyro_fire_bolt_nosource": {
+    "_src": "4295cf0456",
+    "name": "Fire Bolt [No Source]"
+  },
+  "pyro_fire_bolt_source": {
+    "_src": "f33a87ad46",
+    "name": "Fire Bolt [Source]"
+  },
+  "pyro_fire_fan_nosource": {
+    "_src": "bade10b01d",
+    "name": "Fan of Fire [No Source]"
+  },
+  "pyro_fire_fan_source": {
+    "_src": "193b874a50",
+    "name": "Fan of Fire [Source]"
+  },
+  "pyro_fire_spear_nosource": {
+    "_src": "2262095c0b",
+    "name": "Fire Lance [No Source]"
+  },
+  "pyro_fire_spear_source": {
+    "_src": "ed2d17f8cd",
+    "name": "Fire Lance [Source]"
+  },
+  "pyro_fireball_source": {
+    "_src": "4b9c17fe03",
+    "name": "Fireball [Source]"
+  },
+  "pyro_quench_source": {
+    "_src": "aadfe320e8",
+    "name": "Extinguish Fire [Source]"
+  },
+  "shadow_dead_tongue": {
+    "_src": "2eee3d198d",
+    "name": "Dead Tongue",
+    "system.description": "<p><em>Long cast. Doctrine Rank 1. Time: 1 hour. Component: a corpse no more than [Doctrine Rank] days old.</em></p>\n<p class=\"hint\">Out of combat only. Costs no AP. One long cast between Long Rests. Requires a magical focus.</p>\n<p>The shadowmancer pries open the dead person's mouth, cuts their own palm, and lays it on the corpse's tongue. The corpse speaks in the mage's voice, moving someone else's jaw.</p>\n<ul>\n<li>The corpse answers <strong>[Doctrine Rank] questions</strong>.</li>\n<li>It knows only what it knew in life and saw with its own eyes. Of what happened after its death it knows <strong>nothing</strong>.</li>\n<li>It doesn't guess or interpret: it answers literally.</li>\n<li>Personality remains: a liar lies, a stubborn one keeps silent, a fool gets confused.</li>\n</ul>\n<p><strong>The dead answer once and for all.</strong> This corpse won't speak a second time, not for this mage or any other. The body is a consumable.</p>\n<p><strong>The cost.</strong> For a day, the mage tastes whatever the corpse ate on the last day of its life. Until a Long Rest: <strong>−2</strong> to Persuasion and Performance.</p>"
+  },
+  "shadow_false_life": {
+    "_src": "d3b5e1fafc",
+    "name": "False Life",
+    "system.description": "<p><em>Long cast. Doctrine Rank 2. Time: 1 hour. Component: a fresh corpse no more than a day old.</em></p>\n<p class=\"hint\">Out of combat only. Costs no AP. One long cast between Long Rests. Requires a magical focus.</p>\n<p>The mage strips the flesh from a dead body and drives it into the target. The corpse is used up entirely; only skin and bones remain. The wounds close over in gray, someone else's; the seams don't match in color.</p>\n<ul>\n<li>The target gains temporary HP equal to <strong>25% of their maximum HP</strong>. They last until a Long Rest.</li>\n<li><strong>Dead flesh doesn't heal.</strong> While False Life is in effect, the target <strong>cannot regain HP by any means</strong>: not by Biomancy, potions, a Healing check, or rest.</li>\n<li>To end it early, cut open the seams: Interact with a Healing check. The temporary HP are lost entirely.</li>\n</ul>\n<p><strong>The cost.</strong> The target looks like a walking corpse: ashen skin, the smell of decay.</p>\n<p class=\"hint\">Apply the False Life condition to the target; the healing ban isn't automated and is enforced by the GM.</p>"
+  },
+  "shadow_grave_chill": {
+    "_src": "cbc24d7b32",
+    "name": "Grave Chill"
+  },
+  "shadow_severed_shade": {
+    "_src": "21777f2fe4",
+    "name": "Severed Shade",
+    "system.description": "<p><em>Long cast. Doctrine Rank 2. Time: 1 hour. Component: a corpse or a place where someone died.</em></p>\n<p class=\"hint\">Out of combat only. Costs no AP. One long cast between Long Rests. Requires a magical focus.</p>\n<p>The mage traces the outline of the body on the ground with a knife and cuts the shadow from the spot like a hide. It is voiceless and will-less, and recognizable: it is the shadow of <strong>a specific dead person</strong>, with their silhouette, hunch, and limp.</p>\n<p>It lasts <strong>[Doctrine Rank] &times; 10 minutes</strong> or until dawn, whichever comes first.</p>\n<p><strong>The mode is chosen at casting, one per cast:</strong></p>\n<ul>\n<li><strong>Scouting.</strong> The mage sees and hears through what the shadow sees. It goes up to [Doctrine Rank] &times; 20 meters and passes anywhere a person could, but doesn't open doors or touch objects. While the mage looks through its eyes, they are <strong>blind and deaf to their own body</strong> and lie where they lay down.</li>\n<li><strong>Apparition.</strong> The shadow rises before a chosen target. Willpower saving throw, DC 8 + 2 &times; Doctrine Rank. Failure: <strong>Fear</strong>; at Doctrine Rank 4 and higher, <strong>Terror</strong>.</li>\n<li><strong>Distraction.</strong> The shadow makes noise and flickers off to the side. Everything that could notice it looks that way for [Doctrine Rank] rounds: the group gets +[Doctrine Rank] to one Stealth check or slips past a post without a roll; the GM decides.</li>\n</ul>\n<p><strong>The cost.</strong> The shadow obeys imprecisely. Once per cast the GM may let it do something its own way: something the dead person did in life. And it is recognizable: if someone who knew the deceased sees the shadow, there will be consequences.</p>"
+  },
+  "shadow_spear": {
+    "_src": "52ad651881",
+    "name": "Shadow Lance"
+  },
+  "vento_echo_disorienting_wave": {
+    "_src": "48c36386dd",
+    "name": "Disorienting Wave [Path of the Echo]",
+    "system.description": "<p><em>Imbue/Infuse [1] + Area: Cone 2 [2+1=3] + Power 3 [3−1=2] = 6 AP</em></p><p>Source Scale: Source Available · Path of the Echo · Applies the \"Disoriented\" condition (save DC 14)</p>"
+  },
+  "vento_echo_dissonance": {
+    "_src": "ce2e35d2d3",
+    "name": "Dissonance [Path of the Echo]"
+  },
+  "vento_echo_gust": {
+    "_src": "8f8361a8b7",
+    "name": "Gust of Wind [Path of the Echo]",
+    "system.description": "<p><em>Direct/Move [1] + Knockdown 2 [2] + Area: Line 1 [1+1=2] = 5 AP</em></p><p>Source Scale: Source Available · Path of the Echo · Applies the \"Prone\" condition (save DC 12)</p>"
+  },
+  "vento_echo_shards": {
+    "_src": "7c80af9cec",
+    "name": "Shatter [Path of the Echo]"
+  },
+  "vento_echo_terrifying_sound": {
+    "_src": "ebc215c2fd",
+    "name": "Dreadful Sound [Path of the Echo]",
+    "system.description": "<p><em>Imbue/Infuse [1] + Range 2 [2] + Power 3 [3−1=2] + Duration 2 [2−1=1] = 6 AP</em></p><p>Source Scale: Source Available · Path of the Echo · Duration: 6 round(s) · Applies the \"Fear\" condition (save DC 14)</p>"
+  },
+  "vento_echo_warding_song": {
+    "_src": "5371ec8001",
+    "name": "Song of Protection [Path of the Echo]"
+  }
+}

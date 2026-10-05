@@ -1,0 +1,508 @@
+{
+  "demon_blood": {
+    "_src": "e7c790cbae",
+    "name": "Demon Blood",
+    "system.description": "A bloodline marker/resource for rituals and system mechanics."
+  },
+  "demon_blood_magic": {
+    "_src": "328c54940f",
+    "name": "Blood Magic",
+    "system.description": "Unlocks the Blood Magic doctrine and grants rank 1 in it.<br><br><b>On Add Macro:</b><br>@doctrines.blood_magic.rank +1"
+  },
+  "demon_claws": {
+    "_src": "39c5b0f16e",
+    "name": "Demonic Claws",
+    "system.description": "<p>Function as the Claws weapon. The character can climb trees and similar surfaces with ease (no check required).</p>"
+  },
+  "demon_darkvision": {
+    "_src": "c6223b70f0",
+    "name": "Darkvision (Demon)",
+    "system.description": "<p>Lets you see 12 meters in total darkness.</p>",
+    "effects": {
+      "sMhUZhsXS2qbIGtb": {
+        "name": "Darkvision"
+      }
+    }
+  },
+  "demon_great_ancestor": {
+    "_src": "dca61f54cf",
+    "name": "Great Ancestor",
+    "system.description": "Choice of archdemon → bonus (list WIP)"
+  },
+  "demon_huge_size": {
+    "_src": "2b995dfa9c",
+    "name": "Huge Size",
+    "system.description": "<p>The character is very tall (up to 3 meters). The character gets +1 to Strength, +1 to Constitution, +1 to the Athletics skill, and -2 to Dodge</p><p></p><p><strong>doesn't stack with @UUID[Compendium.dedrel.mutations.Item.2yCbl4BTCKdf5Ct1]{Small Size}</strong></p>",
+    "effects": {
+      "wDtHyFMsCZKUIHGw": {
+        "name": "Huge Size"
+      }
+    }
+  },
+  "demon_keen_smell": {
+    "_src": "aef23f1142",
+    "name": "Keen Smell (Demon)",
+    "system.description": "The character can tell apart a great many smells. Grants a situational bonus of +2 to +5 to skill checks, at the GM's discretion."
+  },
+  "demon_rage": {
+    "_src": "9de2839303",
+    "name": "Rage",
+    "system.description": "The character gains the Rage maneuver"
+  },
+  "demon_regeneration": {
+    "_src": "6211b72685",
+    "name": "Regeneration",
+    "system.description": "The character gains the Regeneration maneuver"
+  },
+  "demon_succubus_ancestor": {
+    "_src": "e6386e144a",
+    "name": "Succubus Ancestor",
+    "system.description": "+1 to Charisma, +1 to Reaction, +1 to the Deception skill",
+    "effects": {
+      "n26dGObCGcqnroqZ": {
+        "name": "Succubus Ancestor"
+      }
+    }
+  },
+  "demon_tail": {
+    "_src": "c8aa84ccd4",
+    "name": "Tail (Demon)",
+    "system.description": "<p>The character has a tail that can be used as an extra limb for holding items and weapons.</p>"
+  },
+  "demon_thick_skin": {
+    "_src": "614c49e0f5",
+    "name": "Thick Skin",
+    "system.description": "The character gains 10% resistance to slashing and piercing damage.<br><br><b>Comments:</b> add an armor item to the game, Thick Hide, which breaks the usual armor-wearing rules and doesn't take up the armor slot, granting DR",
+    "effects": {
+      "PKnWGSQGV608FH02": {
+        "name": "Thick Skin"
+      }
+    }
+  },
+  "demon_wings": {
+    "_src": "a384dfbaec",
+    "name": "Demonic Wings",
+    "system.description": "<p>The character has functional wings (feathered or leathery, player's choice) that let them fly.</p>"
+  },
+  "draconic_roar": {
+    "_src": "ec5f5c83fa",
+    "name": "Draconic Roar",
+    "system.description": "<p>Grants a maneuver: Draconic Roar</p><p></p><p>A number of times per day equal to Charisma or Willpower (whichever is higher).</p><p>The character lets out a terrifying draconic roar. All living enemies who hear it (about 30 hexes in open terrain, at the GM's discretion) must make a Willpower check; on a failure they gain the Terror status for 3 rounds, on a success, Disoriented.</p>"
+  },
+  "dragon_blood": {
+    "_src": "c7fb65821f",
+    "name": "Dragon Blood",
+    "system.description": "Blood as a trait/resource for rituals and mechanics"
+  },
+  "dragon_breath_weapon_acid": {
+    "_src": "fde9733b2b",
+    "name": "Breath Weapon: Acid",
+    "system.description": "<p>3 times per Long Rest.</p><p>The character exhales a 4 m cone of acid vapor in front of them.</p>"
+  },
+  "dragon_breath_weapon_cold": {
+    "_src": "b7e4e5fbe3",
+    "name": "Breath Weapon: Cold",
+    "system.description": "<p>3 times per Long Rest.</p><p>The character exhales a 4 m cone of freezing air in front of them.</p>"
+  },
+  "dragon_breath_weapon_electric": {
+    "_src": "dfa7f8b914",
+    "name": "Breath Weapon: Lightning",
+    "system.description": "<p>3 times per Long Rest.</p><p>The character exhales a 4 m cone of electrical discharges in front of them.</p>"
+  },
+  "dragon_breath_weapon_heat": {
+    "_src": "34bf8b28c1",
+    "name": "Breath Weapon: Fire",
+    "system.description": "<p>3 times per Long Rest.</p><p>The character exhales a 4 m cone of flame in front of them.</p>"
+  },
+  "dragon_breath_weapon_poison": {
+    "_src": "f78e0ae9b8",
+    "name": "Breath Weapon: Poison (WIP)",
+    "system.description": "<p>3 times per Long Rest.</p><p><strong>Can't be blocked</strong></p><p>The character exhales a 4 m cone of poison in front of them.</p>"
+  },
+  "dragon_claws": {
+    "_src": "5dff51acf1",
+    "name": "Draconic Claws",
+    "system.description": "<p>Function as the Claws weapon. The character can climb trees and similar surfaces with ease (no check required).</p>"
+  },
+  "dragon_darkvision": {
+    "_src": "c6223b70f0",
+    "name": "Darkvision (Dragon)",
+    "system.description": "<p>Lets you see 12 meters in total darkness.</p>",
+    "effects": {
+      "sMhUZhsXS2qbIGtb": {
+        "name": "Darkvision"
+      }
+    }
+  },
+  "dragon_draconic_traits": {
+    "_src": "39ed9c4a8c",
+    "name": "Draconic Traits",
+    "system.description": "<p>+1 Logic, +1 Constitution, +1 to Insight.</p>",
+    "effects": {
+      "SdIKfcGi2q5myweo": {
+        "name": "Draconic Traits"
+      }
+    }
+  },
+  "dragon_hypnotic_gaze": {
+    "_src": "fabbbb66f6",
+    "name": "Hypnotic Gaze",
+    "system.description": "<p>Grants a maneuver: Hypnotic Gaze.</p><p>A number of times per day equal to Charisma or Willpower (whichever is higher).</p><p><span>You need visual contact with the target, and the target must have a mind. If the target fails the save, you can give it a simple command: drop your weapon, stand still, run, fall down. The target won't follow obviously suicidal commands (throw yourself off a cliff, stab yourself). If the target passes the save, it is immune to this maneuver for the next day.</span></p>"
+  },
+  "dragon_lethargy": {
+    "_src": "c2269a0832",
+    "name": "Lethargy",
+    "system.description": "By an effort of will, or when the character's HP drops to 0, their body falls into a lethargic sleep for 8 hours. In this state, bleeding and the action of any poisons stop, but they don't heal either: all processes simply halt. In this state the character is outwardly almost indistinguishable from a corpse, with a very slow pulse and breathing. If they wish, the character can extend this state 2 more times, up to 24 hours. In this state the character counts as incapacitated and doesn't see or hear what is happening around them.",
+    "effects": {
+      "nc9wXfLgGOncKk7X": {
+        "name": "Lethargy"
+      }
+    }
+  },
+  "dragon_rebirth": {
+    "_src": "c3f28711cc",
+    "name": "Rebirth",
+    "system.description": "Under narrative conditions, the character can be reborn as a dragon"
+  },
+  "dragon_scales": {
+    "_src": "5209ef7eec",
+    "name": "Scales",
+    "system.description": "<p>20% resistance to slashing and piercing damage</p><p>+2 to saving throws against enchantments that affect the mind;</p><p><strong>doesn't stack with the demons' Thick Skin</strong><br></p>",
+    "effects": {
+      "51vij4sETryCLK1a": {
+        "name": "Scales"
+      }
+    }
+  },
+  "dragon_tail": {
+    "_src": "f65c03d07d",
+    "name": "Tail (Dragon)",
+    "system.description": "The character has a tail that can be used as an extra limb. To use it effectively, you need to buy the Strong Tail or Dexterous Tail talent."
+  },
+  "dragon_true_sight": {
+    "_src": "b18cc973b9",
+    "name": "True Sight",
+    "system.description": "Once per Long Rest, you see true forms and ignore invisibility (narrative bonuses possible).",
+    "effects": {
+      "FRiF9g9aFSQ3Enun": {
+        "name": "True Sight"
+      }
+    }
+  },
+  "dragon_wings": {
+    "_src": "1da9578ad6",
+    "name": "Draconic Wings",
+    "system.description": "<p>The character has functional wings (feathered or leathery, player's choice) that let them fly.</p>"
+  },
+  "elf_absolute_calm": {
+    "_src": "aeabf03afc",
+    "name": "Absolute Calm",
+    "system.description": "<p>Uses: Willpower rank per day</p><p>The character sinks their mind into a state in which they are almost entirely free of emotion. <br>They gain immunity to effects that act on emotions, including fear, for 10 rounds. </p><p></p>"
+  },
+  "elf_astral_synergy": {
+    "_src": "f2cba96b31",
+    "name": "Astralomancy",
+    "system.description": "<p>Unlocks the Astralomancy doctrine and grants rank 1 in it.</p>"
+  },
+  "elf_blood": {
+    "_src": "b92a76fc75",
+    "name": "Elven Blood",
+    "system.description": "Blood as a trait/resource for rituals and mechanics"
+  },
+  "elf_darkvision": {
+    "_src": "c6223b70f0",
+    "name": "Darkvision (Elf)",
+    "system.description": "<p>Lets you see 12 meters in total darkness.</p>",
+    "effects": {
+      "sMhUZhsXS2qbIGtb": {
+        "name": "Darkvision"
+      }
+    }
+  },
+  "elf_elven_traits": {
+    "_src": "c355655f14",
+    "name": "Elven Traits",
+    "system.description": "<p>At character creation: +1 Charisma, +1 Dexterity, +1 Persuasion<br></p>",
+    "effects": {
+      "397WpiYGvbugEjAX": {
+        "name": "Elven Traits"
+      }
+    }
+  },
+  "elf_flaming_soul": {
+    "_src": "87565399d2",
+    "name": "Flaming Soul",
+    "system.description": "<p>Grants a maneuver: Flaming Soul. May affect social interactions with Elves and other creatures.</p><p></p><p>Charisma or Willpower rank times per day (whichever is higher)</p><p>All Shades, Undead, and Demons within 10 meters must make a Willpower check against the character's Charisma or Willpower +12 (whichever is higher); on a failure they gain the Terror status for 3 rounds, on a success, Disoriented.</p>"
+  },
+  "elf_flexibility": {
+    "_src": "26ad915695",
+    "name": "Flexibility",
+    "system.description": "<p>+2 to Dodge.<br></p>",
+    "effects": {
+      "2tMCDi1xGOXa9DMX": {
+        "name": "Flexibility"
+      }
+    }
+  },
+  "elf_immunity": {
+    "_src": "177156b454",
+    "name": "Immunity",
+    "system.description": "<p>The character gains immunity to ordinary diseases and +3 to saving throws against magical diseases.<br></p>"
+  },
+  "elf_incredible_grace": {
+    "_src": "42948d1ccb",
+    "name": "Incredible Grace",
+    "system.description": "<p>Grants a maneuver: Incredible Grace<br></p><p><span>The character gets +2 to Dodge for 10 rounds.</span></p>"
+  },
+  "elf_keen_hearing": {
+    "_src": "76498ae8de",
+    "name": "Keen Hearing (Elf)",
+    "system.description": "<p>situational bonus to hearing-related checks (+2…+5 at the GM's choice)</p>"
+  },
+  "elf_longevity": {
+    "_src": "0d40b95bc2",
+    "name": "Longevity",
+    "system.description": "<p>The character matured more slowly than average; their potential lifespan is extended (200+ years).</p><p>Lifespan can be a ritual ingredient or a target for magic.</p><p>The GM will give you 4 extra experience points at the start, which you must spend before the first session.</p>"
+  },
+  "elf_trance": {
+    "_src": "cc8a7f86cd",
+    "name": "Trance",
+    "system.description": "A Long Rest takes 4 hours instead of 8."
+  },
+  "elf_whisper_of_stones": {
+    "_src": "c002437b41",
+    "name": "Whisper of Stones",
+    "system.description": "The character senses the aura of the surrounding natural terrain and can ask the GM up to three questions about the place they are in.\nThe answers come as images and sensations, for example: “the stones remember blood flowing over them,” “the rock is hollow inside,” “the trees remember a raging flame.”"
+  },
+  "fay_blood": {
+    "_src": "a5c1d53dc9",
+    "name": "Fay Blood",
+    "system.description": "Blood as a trait/resource for rituals and mechanics"
+  },
+  "fay_chaos_magic": {
+    "_src": "0a2bc62abc",
+    "name": "Chaos Magic",
+    "system.description": "Unlocks the Chaos Magic doctrine and grants rank 1 in it.<br><br><b>On Add Macro:</b><br>Doctrines.chaos_magic.rank +1"
+  },
+  "fay_claws": {
+    "_src": "74055e79eb",
+    "name": "Fay Claws",
+    "system.description": "Function as the Claws weapon. The character can climb trees and similar surfaces with ease (no check required)."
+  },
+  "fay_fairy_dust": {
+    "_src": "18db339367",
+    "name": "Fairy Dust (WIP)",
+    "system.description": "Once per day you get dust (invisibility/ingredient; balance WIP).<br><br><b>Comments:</b> Need to think this mutation through properly."
+  },
+  "fay_fay_traits": {
+    "_src": "872ae1aa77",
+    "name": "Fay Traits",
+    "system.description": "<p>At character creation: +1 Charisma, +1 Luck, +1 Performance<br></p>",
+    "effects": {
+      "8564MXOFZ725VSGp": {
+        "name": "Fay Traits"
+      }
+    }
+  },
+  "fay_feral_magic": {
+    "_src": "f6c1c5d1cf",
+    "name": "Feral Magic",
+    "system.description": "<p>Unlocks the Feral Magic doctrine and grants rank 1 in it.</p>"
+  },
+  "fay_feral_traits": {
+    "_src": "29499e47b5",
+    "name": "Feral Traits",
+    "system.description": "<p>choose two features from the list (drag them onto the character sheet from the compendium)</p><p><br></p><p>@UUID[Compendium.dedrel.mutations.Item.qjEmKmHZ5x7hS8Ip]{Keen Smell}</p><p></p><p>@UUID[Compendium.dedrel.mutations.Item.W9428oZ9ieMFGzB5]{Keen Hearing}</p><p></p><p>@UUID[Compendium.dedrel.mutations.Item.ob8nJxlnanBNxRnj]{Claws}</p>"
+  },
+  "fay_keen_hearing": {
+    "_src": "e18b6f8e45",
+    "name": "Keen Hearing (Fay)",
+    "system.description": "<p><span>situational bonus to hearing-related checks (+2…+5 at the GM's choice)</span></p>"
+  },
+  "fay_keen_smell": {
+    "_src": "aef23f1142",
+    "name": "Keen Smell (Fay)",
+    "system.description": "The character can tell apart a great many smells. Grants a situational bonus of +2 to +5 to skill checks, at the GM's discretion."
+  },
+  "fay_minor_transformation": {
+    "_src": "777e7ef28a",
+    "name": "Minor Transformation",
+    "system.description": "<p>Uses: 3 / day</p><p>Transform into a small animal (≤ cat) for a scene; non-combat; physical stats are replaced</p><p></p>"
+  },
+  "fay_shapeshifting": {
+    "_src": "5524ee9a27",
+    "name": "Shapeshifting",
+    "system.description": "<p>Unlocks the Shapeshifting doctrine and grants rank 1 in it.</p>"
+  },
+  "fay_small_size": {
+    "_src": "70dc2edc15",
+    "name": "Small Size",
+    "system.description": "<p>The character is very short (up to 1.2 m) <br>At character creation: +1 Dex, +1 Reaction, +1 Stealth, −2 Block<br></p><p><strong>doesn't stack with @UUID[Compendium.dedrel.mutations.Item.MUxh5rwGfo0VqPHW]{Huge Size}</strong></p>",
+    "effects": {
+      "twF9853yXxGjZu1a": {
+        "name": "Small Size"
+      }
+    }
+  },
+  "fay_speak_with_animals": {
+    "_src": "9b7756f7ac",
+    "name": "Speak with Animals",
+    "system.description": "<p>You can speak with animals.</p>"
+  },
+  "fay_speak_with_trees": {
+    "_src": "cf12cf07ca",
+    "name": "Speak with Trees",
+    "system.description": "<p>You can communicate with trees through images/sensations for a scene.</p>"
+  },
+  "fey_wings": {
+    "_src": "39cb4c4152",
+    "name": "Fay Wings (WIP)",
+    "system.description": "Grants a spell: shift into the Aether."
+  },
+  "first_human_blood": {
+    "_src": "7b7adf9aff",
+    "name": "First Humans' Blood",
+    "system.description": "Blood as a trait/resource for rituals and mechanics"
+  },
+  "human_adaptability": {
+    "_src": "b3888502e0",
+    "name": "Adaptability",
+    "system.description": "At character creation, get +1 to two different attributes of your choice."
+  },
+  "human_adaptability_cha": {
+    "_src": "8ad914db24",
+    "name": "Adaptability: Charisma",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Charisma"
+      }
+    }
+  },
+  "human_adaptability_con": {
+    "_src": "21c12463b0",
+    "name": "Adaptability: Constitution",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Constitution"
+      }
+    }
+  },
+  "human_adaptability_dex": {
+    "_src": "c9347c834c",
+    "name": "Adaptability: Dexterity",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Dexterity"
+      }
+    }
+  },
+  "human_adaptability_int": {
+    "_src": "521f17705a",
+    "name": "Adaptability: Intuition",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Intuition"
+      }
+    }
+  },
+  "human_adaptability_log": {
+    "_src": "4352c7a02f",
+    "name": "Adaptability: Logic",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Logic"
+      }
+    }
+  },
+  "human_adaptability_luck": {
+    "_src": "8ee173410a",
+    "name": "Adaptability: Luck",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Luck"
+      }
+    }
+  },
+  "human_adaptability_rea": {
+    "_src": "c6ccdba3d4",
+    "name": "Adaptability: Reaction",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Reaction"
+      }
+    }
+  },
+  "human_adaptability_str": {
+    "_src": "50e2585348",
+    "name": "Adaptability: Strength",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Strength"
+      }
+    }
+  },
+  "human_adaptability_will": {
+    "_src": "f0e332eab8",
+    "name": "Adaptability: Willpower",
+    "effects": {
+      "BJONsFcv6igO2K7E": {
+        "name": "Adaptability: Willpower"
+      }
+    }
+  },
+  "human_flow_state": {
+    "_src": "53eed2c19c",
+    "name": "Flow State",
+    "system.description": "<p>Usage: once per Short Rest</p><p>Grants the Flow State maneuver.</p><p>The character gets +2 to all skill rolls for 10 rounds or for the scene.</p>"
+  },
+  "human_from_stellar_abyss": {
+    "_src": "990852b42b",
+    "name": "From the Stellar Abyss",
+    "system.description": "Something from humanity's distant past knows about you."
+  },
+  "human_genetic_memory": {
+    "_src": "745ada9ced",
+    "name": "Genetic Memory",
+    "system.description": "<p>During a Long Rest, choose one non-combat skill and get +2 to its rolls until the next Long Rest. (drag it onto your character from the Conditions compendium)</p>"
+  },
+  "human_learnability": {
+    "_src": "47c1165142",
+    "name": "Learnability",
+    "system.description": "<p><span>The GM will give you 2 extra experience points at the start, which you must spend before the first session.</span><br></p>"
+  },
+  "human_pathfinders_will": {
+    "_src": "c9114c6a1b",
+    "name": "Pathfinders' Will",
+    "system.description": "<p>Usage: Willpower rank per day.</p><p>Replace any saving throw with a Willpower saving throw.</p>"
+  },
+  "human_psionics_empathy": {
+    "_src": "79cd94c713",
+    "name": "Psionics: Empathy",
+    "system.description": "<p>Usage: once per Short Rest</p><p>Lets you sense emotions; +2 to Insight/Persuasion; lasts a social scene.</p>"
+  },
+  "human_psionics_narrative_resonance": {
+    "_src": "ad809d1f31",
+    "name": "Psionics: Narrative Resonance",
+    "system.description": "Once per Long Rest, you receive a “dream answer” from an ancestor to a question you ask."
+  },
+  "human_psionics_telekinesis": {
+    "_src": "8f6c98e1e2",
+    "name": "Psionics: Telekinesis",
+    "system.description": "<p>Unlocks the Telekinesis doctrine and grants rank 1 in it.</p>"
+  },
+  "human_psionics_telepathy": {
+    "_src": "150625ed9f",
+    "name": "Psionics: Telepathy",
+    "system.description": "<p>Unlocks the Telepathy doctrine and grants rank 1 in it.</p>"
+  },
+  "human_psionics_zero": {
+    "_src": "2398c58a57",
+    "name": "Psionics: Zero",
+    "system.description": "<p>Unlocks the Zero doctrine and grants rank 1 in it.</p>"
+  },
+  "human_social_animal": {
+    "_src": "c6e5f3e977",
+    "name": "Social Animal",
+    "system.description": "<p>Out of combat: Assistance rolls +2</p>"
+  }
+}

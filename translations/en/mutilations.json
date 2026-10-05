@@ -1,0 +1,193 @@
+{
+  "mut_brittle_bones": {
+    "_src": "27c5c44b0c",
+    "name": "Brittle Bones",
+    "system.description": "<p><em>Mutilation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The bone thins from within and rings when struck.</p><p><strong>Effect:</strong> the bearer takes <strong>10% more</strong> slashing, piercing, and bludgeoning damage (negative DR = vulnerability).</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "bones crunch",
+    "system.removal_text": "the bone grew stronger",
+    "effects": {
+      "DedrelAEMutBrt10": {
+        "name": "Brittle Bones"
+      }
+    }
+  },
+  "mut_cataract": {
+    "_src": "ce61658149",
+    "name": "Cataract",
+    "system.description": "<p><em>Mutilation of rank 1. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The cornea clouds over with a milky film, and the eye waters.</p><p><strong>Effect:</strong> −2 to Perception and to all ranged attacks.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "the eye clouded over",
+    "system.removal_text": "the cataract cleared",
+    "effects": {
+      "DedrelAEMutCat10": {
+        "name": "Cataract"
+      }
+    }
+  },
+  "mut_extra_arm": {
+    "_src": "bc2077b7bd",
+    "name": "Extra Arm",
+    "system.description": "<p><em>Mutilation of rank 3. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>A third arm breaks out from under a rib. It doesn't obey and grabs at whatever the bearer is fighting with.</p><p><strong>Effect:</strong> −2 to all melee attacks.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "a third arm",
+    "system.removal_text": "the arm withered",
+    "effects": {
+      "DedrelAEMutArm10": {
+        "name": "Extra Arm"
+      }
+    }
+  },
+  "mut_flesh_rejection": {
+    "_src": "80d60b9000",
+    "name": "Flesh Rejection",
+    "system.description": "<p><em>Mutilation of rank 5. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The body stops recognizing itself and starts consuming its own tissue.</p><p><strong>Effect:</strong> 3 damage at the start of their turn. While the mutilation lasts, the bearer <strong>cannot regain HP by any means</strong>. <em>The healing ban isn't automated; the GM enforces it.</em></p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "flesh rejecting",
+    "system.removal_text": "the body made peace"
+  },
+  "mut_flooded_lungs": {
+    "_src": "ad42f35b8b",
+    "name": "Flooded Lungs",
+    "system.description": "<p><em>Mutilation of rank 4. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The lungs swell and fill with their own fluid: the bearer drowns from within.</p><p><strong>Effect:</strong> at the start of each of their turns, the bearer gains a stack of the <strong>Suffocating</strong> condition. <em>Stack accumulation isn't automated; the GM adds them through the status HUD.</em></p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "drowning",
+    "system.removal_text": "the swelling went down"
+  },
+  "mut_frailty_con": {
+    "_src": "a9b4ddcae3",
+    "name": "Weakness: Constitution",
+    "system.description": "<p>What others shrug off knocks you down: a draft, bad water, a second sleepless night.</p>\n<p><strong>Effect:</strong> <strong>−1 Constitution rank</strong>. HP, Universal AP, and carry capacity drop along with it.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "the body gives out",
+    "system.removal_text": "the body grew stronger",
+    "effects": {
+      "DedrelAEFlawFCon": {
+        "name": "Weakness: Constitution"
+      }
+    }
+  },
+  "mut_frailty_dex": {
+    "_src": "ef705d4350",
+    "name": "Weakness: Dexterity",
+    "system.description": "<p>The body lets you down in small things: fingers miss the clasp, a foot catches the threshold, balance has to be caught all over again.</p>\n<p><strong>Effect:</strong> <strong>−1 Dexterity rank</strong>. Dodge, Speed, and the Maneuver AP pool drop along with it.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "the body won't obey",
+    "system.removal_text": "movements steadied",
+    "effects": {
+      "DedrelAEFlawFDex": {
+        "name": "Weakness: Dexterity"
+      }
+    }
+  },
+  "mut_frailty_rea": {
+    "_src": "d495060e5f",
+    "name": "Weakness: Reaction",
+    "system.description": "<p>You see everything in time and understand it all correctly; your hand just gets there half a step later than it should.</p>\n<p><strong>Effect:</strong> <strong>−1 Reaction rank</strong>. Block and Dodge (Reaction counts at half in them), Initiative, and the Maneuver AP pool drop along with it.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "always half a step behind",
+    "system.removal_text": "keeps up in time",
+    "effects": {
+      "DedrelAEFlawFRea": {
+        "name": "Weakness: Reaction"
+      }
+    }
+  },
+  "mut_frailty_str": {
+    "_src": "1bd617e427",
+    "name": "Weakness: Strength",
+    "system.description": "<p>The muscle won't build however much you load it: the hilt grows heavy by mid-fight, a sack has to be dragged.</p>\n<p><strong>Effect:</strong> <strong>−1 Strength rank</strong>. Block, carry capacity, and the Maneuver AP pool drop along with it.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "the muscle won't hold",
+    "system.removal_text": "strength came into the arms",
+    "effects": {
+      "DedrelAEFlawFStr": {
+        "name": "Weakness: Strength"
+      }
+    }
+  },
+  "mut_fused_fingers": {
+    "_src": "176aba1992",
+    "name": "Fused Fingers",
+    "system.description": "<p><em>Mutilation of rank 4. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The fingers fuse with webbing into a stiff flipper.</p><p><strong>Effect:</strong> −2 to all attacks; a two-handed grip is impossible while the mutilation lasts. <em>The grip ban isn't automated; the GM enforces it.</em></p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "fingers fused",
+    "system.removal_text": "fingers separated",
+    "effects": {
+      "DedrelAEMutFng10": {
+        "name": "Fused Fingers"
+      }
+    }
+  },
+  "mut_hideous": {
+    "_src": "c145710032",
+    "name": "Disfigurement",
+    "system.description": "<p>The face is put together wrong, and it's the first thing people notice.</p>\n<p><strong>Effect:</strong> −2 to Persuasion and Performance. People remember your face: any attempt to go unrecognized in a crowded place is harder.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "people look away",
+    "system.removal_text": "the face became ordinary",
+    "effects": {
+      "DedrelAEFlawHide": {
+        "name": "Disfigurement"
+      }
+    }
+  },
+  "mut_ill_humours": {
+    "_src": "2282588484",
+    "name": "Bad Blood",
+    "system.description": "<p>Your blood takes poorly to anything foreign: a draught spreads through the body at half strength and fades fast.</p>\n<p><strong>Effect:</strong> potions work on you at <strong>half strength</strong>: healing, bonuses, and durations are halved, rounded down. Poisons work at full strength.</p>\n<p><em>Not automated:</em> the system doesn't interfere with potion calculations; the GM works out the half.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "the blood rejects it",
+    "system.removal_text": "the blood ran clean"
+  },
+  "mut_photophobia": {
+    "_src": "9c2d9f1319",
+    "name": "Light Sensitivity",
+    "system.description": "<p>The eye can't take bright light: tears, stinging, everything blurs.</p>\n<p><strong>Effect:</strong> in bright light (daytime in the open, a torch in the face) −2 to attacks and Perception.</p>\n<p><em>Not automated:</em> the system doesn't track lighting; the GM applies the penalty.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "squints at the light",
+    "system.removal_text": "the eyes adjusted"
+  },
+  "mut_restless": {
+    "_src": "becab1f710",
+    "name": "Restless Sleep",
+    "system.description": "<p>You can't drop off for half an hour: the body won't let go, the head won't switch off.</p>\n<p><strong>Effect:</strong> a Short Rest restores nothing for you. Only a Long Rest puts you back in order.</p>\n<p><em>Not automated:</em> the system calculates rest as usual; the GM enforces the skipped recovery.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "not resting",
+    "system.removal_text": "sleep returned"
+  },
+  "mut_sagging_skin": {
+    "_src": "20556a8d21",
+    "name": "Sagging Skin",
+    "system.description": "<p><em>Mutilation of rank 1. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The skin pulls away from the muscle and hangs in folds, hampering arm movement.</p><p><strong>Effect:</strong> −2 to Block.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "skin sagged",
+    "system.removal_text": "skin tightened",
+    "effects": {
+      "DedrelAEMutSag10": {
+        "name": "Sagging Skin"
+      }
+    }
+  },
+  "mut_shortness_of_breath": {
+    "_src": "af4265163a",
+    "name": "Shortness of Breath",
+    "system.description": "<p>Your chest works hard and loud; on any climb you fall behind.</p>\n<p><strong>Effect:</strong> Speed −4 m. Any sustained exertion (running, a long climb, rowing) requires a Constitution check where others pass without a roll.</p>\n<p><strong>Congenital Flaw.</strong> Taken at character creation and grants <strong>+1 Mutation Point</strong> (no more than two flaws). Permanent: it can't be healed, isn't removed by rest, can't be bought off with experience, and can't be undone by Biomancy; it is part of the body's template.</p>",
+    "system.application_text": "short of breath",
+    "system.removal_text": "breathing steadied",
+    "effects": {
+      "DedrelAEFlawBrth": {
+        "name": "Shortness of Breath"
+      }
+    }
+  },
+  "mut_stunted_tail": {
+    "_src": "ea4f346568",
+    "name": "Stunted Tail",
+    "system.description": "<p><em>Mutilation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>A short hairless stub pushes out of the tailbone. It can't hold anything, but it sways and throws off balance.</p><p><strong>Effect:</strong> −2 to Dodge and Athletics.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "grew a stub",
+    "system.removal_text": "the tail fell off",
+    "effects": {
+      "DedrelAEMutTai10": {
+        "name": "Stunted Tail"
+      }
+    }
+  },
+  "mut_swollen_joints": {
+    "_src": "44ad8ca27d",
+    "name": "Swollen Joints",
+    "system.description": "<p><em>Mutilation of rank 3. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>Knees and ankles swell up; the joint moves with crunching and pain.</p><p><strong>Effect:</strong> Speed is halved.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
+    "system.application_text": "joints swelled",
+    "system.removal_text": "the swelling went down",
+    "effects": {
+      "DedrelAEMutJnt10": {
+        "name": "Swollen Joints"
+      }
+    }
+  }
+}

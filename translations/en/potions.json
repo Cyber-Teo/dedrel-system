@@ -1,0 +1,32 @@
+{
+  "potion_acid": {
+    "_src": "03a67d381c",
+    "system.crafting.ingredients.1.name": "Vial"
+  },
+  "potion_alchemical_fire": {
+    "_src": "42e690655f",
+    "name": "Alchemist's Fire",
+    "system.crafting.ingredients.0.name": "Alcohol",
+    "system.crafting.ingredients.2.name": "Vial"
+  },
+  "potion_healing_common": {
+    "_src": "afcbf7339e",
+    "system.description": "<p>Heals 25% of HP</p>",
+    "system.crafting.ingredients.0.name": "Alcohol",
+    "system.crafting.ingredients.2.name": "Vial"
+  },
+  "potion_healing_rare": {
+    "_src": "3c7575de40",
+    "system.description": "<p>Heals 75% of HP</p>"
+  },
+  "potion_healing_uncommon": {
+    "_src": "f136108d66",
+    "system.description": "<p>Heals 50% of HP</p>",
+    "system.crafting.ingredients.2.name": "Alcohol",
+    "system.crafting.ingredients.3.name": "Vial"
+  },
+  "potion_healing_very_rare": {
+    "_src": "3200d88f33",
+    "system.description": "<p>Heals 100% of HP</p>"
+  }
+}

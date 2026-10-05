@@ -1,0 +1,847 @@
+{
+  "absolute_entropy_strike": {
+    "_src": "e1cb6258ca",
+    "name": "Absolute Entropy Strike",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.AEqHJTt4cWj6ATXb]{Absolute Entropy Strike (WIP)}</p>"
+  },
+  "absolute_evasion": {
+    "_src": "3a70755c89",
+    "name": "Absolute Dodge",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.PhDkTU9tfpUq6TMX]{Absolute Dodge} </p><p>Once per Long Rest. You dodge the first successful attack against you within the next 10 rounds. Can be used as a reaction.</p>"
+  },
+  "adaptive_physique_acid": {
+    "_src": "27e117d9c4",
+    "name": "Adaptive Body [Acid]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Acid]"
+      }
+    }
+  },
+  "adaptive_physique_bludgeoning": {
+    "_src": "dd707eec5a",
+    "name": "Adaptive Body [Bludgeoning]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Bludgeoning]"
+      }
+    }
+  },
+  "adaptive_physique_cold": {
+    "_src": "d4b491189e",
+    "name": "Adaptive Body [Cold]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Cold]"
+      }
+    }
+  },
+  "adaptive_physique_electric": {
+    "_src": "7ab3ba3b7c",
+    "name": "Adaptive Body [Lightning]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Lightning]"
+      }
+    }
+  },
+  "adaptive_physique_heat": {
+    "_src": "3584cb5ee5",
+    "name": "Adaptive Body [Fire]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Fire]"
+      }
+    }
+  },
+  "adaptive_physique_necrotic": {
+    "_src": "79e81e7ab7",
+    "name": "Adaptive Body [Necrotic]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Necrotic]"
+      }
+    }
+  },
+  "adaptive_physique_piercing": {
+    "_src": "48463849bb",
+    "name": "Adaptive Body [Piercing]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Piercing]"
+      }
+    }
+  },
+  "adaptive_physique_radiant": {
+    "_src": "0a7c1bcf85",
+    "name": "Adaptive Body [Radiant]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Radiant]"
+      }
+    }
+  },
+  "adaptive_physique_slashing": {
+    "_src": "63121b3b40",
+    "name": "Adaptive Body [Slashing]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Slashing]"
+      }
+    }
+  },
+  "adaptive_physique_sonic": {
+    "_src": "7499ad19b7",
+    "name": "Adaptive Body [Sonic]",
+    "system.description": "<p>This talent can be taken up to 3 times. Each time, choose 1 damage type; damage of that type is reduced to 1.</p>",
+    "effects": {
+      "6znZIzVxp7kISxTK": {
+        "name": "Adaptive Body [Sonic]"
+      }
+    }
+  },
+  "anomalous_luck": {
+    "_src": "5318739fe3",
+    "name": "Anomalous Luck",
+    "system.description": "<p>+2 to Luck saving throws.</p>",
+    "effects": {
+      "YjcIAyi9sv5XKkVB": {
+        "name": "Anomalous Luck"
+      }
+    }
+  },
+  "armor_piersing_shot": {
+    "_src": "35db720ae5",
+    "name": "Armor-Piercing Shot",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.cg1KVcHXHPeHCAsR]{Armor-Piercing Shot}</p><p>Lets you use longbows at full power and make monstrously powerful shots that gain the Armor Piercing 1-3 property depending on the AP spent.</p><p>After using Armor-Piercing Shot, you can chain into @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Rapid Bow Shot} or @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Bow Shot}</p>"
+  },
+  "bad_feeling": {
+    "_src": "85db1d014e",
+    "name": "Bad Feeling",
+    "system.description": "The GM must warn the character about a trap or hidden threat before it triggers (“you have a bad feeling about this”). In addition: if the character falls exactly 1 short of success on any check, the result counts as a success."
+  },
+  "biomancy": {
+    "_src": "ac24e6f14c",
+    "name": "Biomancy",
+    "system.description": "<p><em>The magic of living flesh. The only direct healing in the system.</em></p>\n<ul>\n<li><strong>Damage is forbidden entirely</strong>: it is the doctrine's constitution.</li>\n<li><strong>Targeted only:</strong> Areas (cone, radius, line) are forbidden.</li>\n<li><strong>No Source needed:</strong> the living body is the source, so the Source selector is hidden.</li>\n<li><strong>Healing Modifier:</strong> a mirror of the Ladder: 2d4 / 2d6 / 2d8 / 3d6 / 3d8 for 1–5 AP.</li>\n<li><strong>Adaptation Modifier:</strong> a temporary bodily mutation with a rank equal to the Modifier's rank. On an ally it is beneficial; on an enemy it is negative, with a saving throw (DC 8 + 2 × rank).</li>\n</ul>\n<p><em>The doctrine is in draft form; its mechanics may change after playtests.</em></p>",
+    "effects": {
+      "DedrelAEDoctBio1": {
+        "name": "Biomancy"
+      }
+    }
+  },
+  "blind_spot": {
+    "_src": "79c8f35f1d",
+    "name": "Blind Spot",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.wjry4sQMbqLtpGkX]{Blind Spot}</p><p><span>Maneuver, free action. Active for 3 rounds. While the talent is active, enemies in your Control Zone can't use reaction maneuvers against you.</span></p>"
+  },
+  "blood_scent": {
+    "_src": "aedf9a3cfc",
+    "name": "Blood Scent",
+    "system.description": "<p>The predator smells wounded prey and finishes it off first.</p>\n<p><strong>+2 to attacks</strong> against targets that are wounded (wound track 2 or higher) or have the Bleeding condition.</p>\n<p><em>A situational bonus: the system suggests it in the roll dialog, the GM applies it.</em></p>"
+  },
+  "body_language": {
+    "_src": "4e47fd97af",
+    "name": "Body Language",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.vX0hT3zoWWGp99j1]{Body Language}</p><p>Maneuver, Action. You choose one opponent. The effect lasts 10 rounds. All attacks by the chosen opponent against you use only the base roll, with no bonuses from talents, conditions, or maneuvers. The opponent cannot use maneuvers that require stealth or surprise against you.</p>"
+  },
+  "burden_bearer": {
+    "_src": "c4bd240ae0",
+    "name": "Burden Bearer (WIP)",
+    "system.description": "When calculating your maximum carry capacity, your Constitution modifier (CON) counts as doubled.<br><br><b>On Add Macro:</b><br>Base encumbrance(STR + (CON * 2))"
+  },
+  "but_no": {
+    "_src": "266cf52990",
+    "name": "Oh No You Don't!",
+    "system.description": "<p>Free action.</p><p>If your firearm misfires. Three times per day you can say “Oh no you don't!” and cancel that misfire (got lucky, must have imagined it)</p>"
+  },
+  "butterfly_effect": {
+    "_src": "e822e4f688",
+    "name": "Butterfly Effect",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.RISWPLLdPkWF7LTE]{Butterfly Effect}</p><p>The target takes 1d10+LOG damage at the start of its next turn. The player describes the mechanism (“slips,” “the chain catches”), and the GM brings it to life. The player picks a damage type that is physically plausible on the battlefield; the GM may reject the impossible.</p>"
+  },
+  "chain_reaction": {
+    "_src": "ba9a47b69f",
+    "name": "Chain Reaction",
+    "system.description": "Damage dice explode: if a damage die rolls its maximum, roll it again and add the result. Works once per die.",
+    "effects": {
+      "eXqipY91OwZj1uCE": {
+        "name": "Chain Reaction"
+      }
+    }
+  },
+  "citadel_of_reason": {
+    "_src": "485d4bacbe",
+    "name": "Citadel of Reason",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.chKJ0NrZJUQ8kCGQ]{Citadel of Reason}</p><p>When a spell or ability with a mental effect targets you, spend 2 AP. The attacker rerolls and takes the worse result. If the ability has no attack roll, only a saving throw, you get a saving throw even if its terms don't allow one.</p>"
+  },
+  "closed_eyes": {
+    "_src": "3a3183a144",
+    "name": "Closed Eyes",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.Ya5hWVlm7tdozbJQ]{Closed Eyes}</p><p>Maneuver, Action. For 1 round you completely ignore the Blinded condition and all penalties from visual interference and invisibility. In addition, you get +2 to Block and Dodge this round, since you stop reacting to feints.</p>"
+  },
+  "combat_readiness": {
+    "_src": "2855fcae81",
+    "name": "Combat Readiness",
+    "system.description": "+2 to initiative rolls<br><br><b>On Add Macro:</b><br>@initiative.bonus +2",
+    "effects": {
+      "mej6RsuFMjd7TOAt": {
+        "name": "Combat Readiness"
+      }
+    }
+  },
+  "copying": {
+    "_src": "635329a744",
+    "name": "Copying",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.ZEAi0Vilyv6oe45K]{Copying (WIP)}</p><p></p>"
+  },
+  "cornering": {
+    "_src": "957f08df45",
+    "name": "Corner",
+    "system.description": "<p>Grants the Corner maneuver: 1 AP, Athletics against the target's Perception; on a success, the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition (no Dodge against one attack). Works only if there is an obstacle behind the target.</p>\n<p>A cheap, versatile breaker that reads the battlefield: useless in an open field, decisive in a corridor, against a wall, or in a cramped room.</p>",
+    "system.prerequisites_text": "Reaction 3"
+  },
+  "covering_blow": {
+    "_src": "57a806e714",
+    "name": "Overwhelming Strike",
+    "system.description": "<p>Grants the Overwhelming Strike maneuver: an attack with a bludgeoning or two-handed weapon against the target's Athletics; on a success, the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition (no Dodge against one attack).</p>\n<p>A heavy fighter's answer to an opponent they can't catch: whoever can't land a hit on a dodger takes away not their speed, but their room.</p>",
+    "system.prerequisites_text": "Constitution 3 AND Strength 3"
+  },
+  "crowding": {
+    "_src": "f0d885caac",
+    "name": "Drive Back",
+    "system.description": "<p>Grants the Drive Back maneuver: Athletics against the target's Stealth; on a success, the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition (no Dodge against one attack). Requires a shield or a second weapon in the off hand.</p>\n<p>The niche of the shield-bearer and the fighter with a pair of blades: you aren't faster than your opponent, you just don't let them go.</p>",
+    "system.prerequisites_text": "Constitution 3"
+  },
+  "destroyers_intuition": {
+    "_src": "cd4bffa69a",
+    "name": "Destroyer's Intuition",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.wFINBDNa0ghpigJ8]{Destroyer's Intuition} maneuver</p><p>Your next attack with a bludgeoning weapon, @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash} or @UUID[Compendium.dedrel.maneuvers.Item.u2MUNJ2oJeExQuzq]{Power Bash}, costs 0 AP.</p><p>On a hit, the attack deals increased damage (1 damage step higher).</p><p>The target also suffers an injury. <br>The hit location is determined by a d100 roll. Arms 1-40% Torso 41-70% Legs 71%-90% Head 91-100%</p>"
+  },
+  "dexterous_tail": {
+    "_src": "b305304b0d",
+    "name": "Dexterous Tail",
+    "system.description": "<p>Grants +1 to Dexterity saving throws.</p>",
+    "effects": {
+      "UkJJXWO5h2b7IavO": {
+        "name": "Dexterous Tail"
+      }
+    }
+  },
+  "empty_mind": {
+    "_src": "c3e92c3c3e",
+    "name": "Empty Mind",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.wROxYdMieHag5spy]{Empty Mind}</p><p>When a spell or ability with a mental effect targets you, spend 2 AP. The attacker must reroll and take the worse result. If the ability has no attack roll, only a saving throw, you get one reroll of the saving throw if you failed the first time.</p>"
+  },
+  "expert": {
+    "_src": "cbc0f4b024",
+    "name": "Expert",
+    "system.description": "<p>+2 to Knowledge and Research checks.</p>",
+    "effects": {
+      "fjkSNgBpaEXYl5Tf": {
+        "name": "Expert"
+      }
+    }
+  },
+  "explosive_personality": {
+    "_src": "dfdd78ea67",
+    "name": "Explosive Personality",
+    "system.description": "<p>An exploding die can explode infinitely.</p>",
+    "effects": {
+      "NYP6FRmNMgl6Btx4": {
+        "name": "Explosive Personality"
+      }
+    }
+  },
+  "expose_weakness": {
+    "_src": "d901378021",
+    "name": "Expose Weakness",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.cZcRjwEzQw9VKky0]{Expose Weakness}</p><p>Logic and Reasoning check against a DC. On a success, reveals to the player part of the monster's data of their choice: HP, DR, or saving throws. The whole party sees the result.</p>"
+  },
+  "feint_attack": {
+    "_src": "d467bf9623",
+    "name": "Feint",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.8mgcq7OFtffV34Jw]{Feint}</p><p>Maneuver, Fast melee weapon.</p><p>Make a Deception check against the target's Insight. On a success, the target gains the Off Guard status (the status forbids using Block against the next attack)</p><p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}.</p><p></p><p></p>",
+    "system.prerequisites_text": "Dexterity AND Charisma 3"
+  },
+  "flank_attack": {
+    "_src": "32231f2ef1",
+    "name": "Flank Attack",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.Y8Eh46LmqB2MOoCl]{Flank Attack} </p><p>You immediately make one melee maneuver without spending extra AP against an opponent who is In Clinch. The attack gets a +3 bonus.</p>"
+  },
+  "fluid_motion": {
+    "_src": "4fcbc0cbc8",
+    "name": "Fluid Motion",
+    "system.description": "+2 to Dexterity saving throws<br><br><b>On Add Macro:</b><br>@saves.dex.bonus +2",
+    "effects": {
+      "3ly2q1bIM6KH1QX4": {
+        "name": "Fluid Motion"
+      }
+    }
+  },
+  "gamblers_intuition": {
+    "_src": "f770208d7c",
+    "name": "Gambler's Intuition",
+    "system.description": "You add your Luck rank to checks related to gambling and betting."
+  },
+  "geomancy": {
+    "_src": "25dcee3786",
+    "name": "Geomancy",
+    "system.description": "<p><em>Power over stone and soil. The architect of the battlefield.</em></p>\n<ul>\n<li><strong>Damage:</strong> untyped, steps II–VI.</li>\n<li><strong>Affinity:</strong> −1 AP on Duration, Durability, and the Imbue/Infuse Technique.</li>\n<li><strong>Restriction:</strong> +1 AP on Range, Area: Cone, and Area: Radius.</li>\n<li><strong>Form:</strong> bludgeoning (boulder, stone fist).</li>\n<li><strong>Territory Control:</strong> walls and pits you create raise the Source Scale for geomancy.</li>\n</ul>\n<p>Niche: walls, cover, pits, creating items and weapons, pure physical damage. Geomancy creates and builds; forced movement of targets is the niche of Telekinesis.</p>",
+    "effects": {
+      "DedrelAEDoctGeo1": {
+        "name": "Geomancy"
+      }
+    }
+  },
+  "heightened_reflexes": {
+    "_src": "812bd2f77f",
+    "name": "Heightened Reflexes",
+    "system.description": "+2 to Reaction saving throws<br><br><b>On Add Macro:</b><br>@saves.rea.bonus +2",
+    "effects": {
+      "0yZfz3EGaOgeQKmQ": {
+        "name": "Heightened Reflexes"
+      }
+    }
+  },
+  "hydromancy": {
+    "_src": "603a0908c8",
+    "name": "Hydromancy",
+    "system.description": "<p><em>Control over liquids, from a drop of dew to the sea tide. Flow and control.</em></p>\n<ul>\n<li><strong>Damage:</strong> untyped, steps II–VI.</li>\n<li><strong>Forms:</strong> bludgeoning (ram of a wave) and slashing (pressurized jet).</li>\n<li><strong>Without a Path</strong> there are no affinities or Doctrinal Modifiers.</li>\n</ul>\n<p>Specializations are unlocked by separate talents: <strong>Path of the Flow</strong> (−1 AP on Area: Radius and Direct/Move, access to Knockdown, Durability no higher than rank 2) and <strong>Path of Ice</strong> (−1 AP on Durability and Form, piercing form, access to Constraint).</p>",
+    "effects": {
+      "DedrelAEDoctHyd1": {
+        "name": "Hydromancy"
+      }
+    }
+  },
+  "impenetrable_flesh": {
+    "_src": "532fc79e7f",
+    "name": "Impenetrable Flesh",
+    "system.description": "Increases your chance to resist effects that require a Constitution saving throw. N+2 to Constitution saving throws (CON saves).<br><br><b>On Add Macro:</b><br>@saves.con bonus +2",
+    "effects": {
+      "pylT3tf0ZMTCc425": {
+        "name": "Impenetrable Flesh"
+      }
+    }
+  },
+  "indomitable_spirit": {
+    "_src": "aa5e4713e3",
+    "name": "Indomitable Spirit",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.GyPPn6MM3uLCK6EF]{Indomitable Spirit}</p><p><span>[🔧 placeholder: ignore the list of minor negative conditions] while the talent is active.</span></p>"
+  },
+  "inspiring_presence": {
+    "_src": "5893385826",
+    "name": "Inspiring Presence",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.f9CJzcGtdvYHevzM]{Inspiring Presence}</p><p></p><p>When an ally within earshot makes a skill roll, spend a charge: they add +2 to the result. Declared after the roll, before the result is announced.</p>"
+  },
+  "instant_intercept": {
+    "_src": "e60d8861c2",
+    "name": "Instant Intercept",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.q5Goksq4bCkK9YMY]{Instant Intercept}</p><p><span>Maneuver, reaction. If an enemy's ranged attack hits you, you can use this maneuver as a reaction to deflect the incoming projectile. Requirement: an equipped melee weapon.</span></p>"
+  },
+  "intercepting_shot": {
+    "_src": "4609c37d5e",
+    "name": "Intercepting Shot",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.lKtVDXTjwQOUh0x1]{Intercepting Shot}</p><p><span>Maneuver. Ranged weapon. If an opponent within your character's reach performs Reload or Take Aim, you can make a Shot or Throw maneuver as a reaction without spending extra AP. If your attack hits and deals damage, the opponent's action counts as disrupted, and the AP they spent are lost.</span></p>"
+  },
+  "intuitive_magic": {
+    "_src": "ff5707facd",
+    "name": "Intuitive Magic (WIP)",
+    "system.description": "[Placeholder: requires the magic section to be finalized]. When creating a spell, you can exceed one of your Doctrine Rank limits by 1: take a Modifier 1 more expensive than your rank allows, or add one extra Technique. Narratively: you simply don't know that it's “impossible.”"
+  },
+  "last_stand": {
+    "_src": "23ff55a8f5",
+    "name": "Last Stand",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.JtTYJ7SiLRjQnuwu]{Last Stand}</p><p>This talent triggers as soon as the character's HP would drop to zero. The character restores 30% of their HP.</p><p></p>"
+  },
+  "leaders_gaze": {
+    "_src": "8bfedf1d82",
+    "name": "Leader's Gaze",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.ma5tv1gidvMVjson]{Leader's Gaze} maneuver: 3 AP, the target's Willpower saving throw against a DC of “your Willpower + 8”; on a failure, 2 stacks of @UUID[Compendium.dedrel.conditions.Item.YdoGhveZiTy3WXav]{Disoriented}.</p>\n<p>A commander's tool, not a fighter's: it deals no damage, it makes someone else's turn more expensive. Two uses in a row on the same target push it to @UUID[Compendium.dedrel.conditions.Item.gDIEudCXkde0bEOp]{Stunned}.</p>"
+  },
+  "leg_sweep": {
+    "_src": "4e06f9ec40",
+    "name": "Leg Sweep",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.tcDrbrlgnHGObrzf]{Leg Sweep} maneuver<br><br>Make an attack with a halberd against the target's opposed Athletics roll. On a success, the target gains the Prone status.</p><p>Triggers @UUID[Compendium.dedrel.maneuvers.Item.WXAudjnk26RUhhma]{Finishing Blow}</p><p></p>"
+  },
+  "leverage_point": {
+    "_src": "01f3609bdd",
+    "name": "Leverage Point",
+    "system.description": "Ask the GM a question strictly in the form: “What single action will set off the cascade needed to [X]?” The GM must give an honest and specific answer. Works on large-scale events: markets, elections, political processes. Carrying out the action is up to the player."
+  },
+  "linguist": {
+    "_src": "947c8b0ad5",
+    "name": "Linguist (WIP)",
+    "system.description": "<p>You learn one additional language of your choice. This talent can be taken multiple times.</p>"
+  },
+  "living_lie_detector": {
+    "_src": "969af56b50",
+    "name": "Living Lie Detector",
+    "system.description": "<p>+2 to Insight checks and to Deception checks to detect lies. You don't read minds; you sense when “the picture doesn't add up.”</p>",
+    "effects": {
+      "qNfqXJ78NF2bOeFs": {
+        "name": "Living Lie Detector"
+      }
+    }
+  },
+  "living_siege_engine": {
+    "_src": "b9e6b5a3a0",
+    "name": "Living Siege Engine",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.XhMoleyZsEkQPkFm]{Living Siege Engine (WIP)}</p>"
+  },
+  "logical_magic": {
+    "_src": "e422d4ff07",
+    "name": "Logical Magic (WIP)",
+    "system.description": "This talent grants [[maneuver_|the Logical Magic maneuver]]"
+  },
+  "mobile_marksman": {
+    "_src": "c37093cf12",
+    "name": "Mobile Marksman",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.cdqQapGR8nIyhgvZ]{Mobile Marksman}</p><p>Maneuver in a chain after movement: you can use any Shot without spending extra AP.</p>"
+  },
+  "overwatch": {
+    "_src": "f882f5d51d",
+    "name": "Overwatch",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.tzVmsNDNjcSBfj9I]{Overwatch}</p><p>Maneuver. Free action. You can choose one of your available maneuvers and set a trigger: when a mage starts casting, when a guard comes into view (etc.). You must have the AP for the target maneuver; it triggers automatically when the conditions are met. After using Overwatch, you must end your turn.</p><p>If the maneuver makes it impossible for the target to complete its action, the AP it spent are not refunded.</p>"
+  },
+  "pack_alpha": {
+    "_src": "948379c7f9",
+    "name": "Pack Alpha",
+    "system.description": "<p>The creature leads a pack: a wolf alpha, a bandit captain, a goblin boss; only the description changes.</p>\n<p>Grants the Pack Howl maneuver.</p>\n<p><strong>While the alpha is alive and conscious</strong>, its pack doesn't check morale. When the alpha falls, morale is checked by the creature's usual trigger.</p>"
+  },
+  "paired_strike": {
+    "_src": "88de40bb68",
+    "name": "Paired Strike",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.9EreRef9viUKfqaC]{Paired Strike} maneuver<br><br>If you fight with a paired weapon (katars, fists, claws), after the first attack, if it hits, you can make a second attack (by clicking it on the chat card, at no resource cost). <br></p>"
+  },
+  "path_echo": {
+    "_src": "51cb1d5dbf",
+    "name": "Path of the Echo",
+    "system.description": "<p><em>A Ventomancy specialization: wind as sound. The niche of wind bards: team buffs and psychoacoustics.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Power, Targets, and Duration.</li>\n<li><strong>Sonic damage:</strong> Damage gains the <code>sonic</code> type, Ladder steps II–VI; resistance (DR) to sound is extremely rare. This is exactly why the doctrine pays the +1 AP tax on Damage.</li>\n<li><strong>Psychoacoustics:</strong> access to the Power Modifier at ranks 1–3 (the full catalog belongs to Shadowmancy); the Imbue/Infuse Technique applies to creatures.</li>\n<li><strong>Long Song:</strong> the Duration discount is the niche of team buffs. A bard imbues an ally with sound (Imbue + Imbuement + Duration) for 6–10 rounds more cheaply than other doctrines; the property must derive from sound. The discount doesn't apply to Power: its duration is set by rank.</li>\n<li><strong>Focus:</strong> conceptually a musical instrument (there's no separate check; a focus is required for any magic).</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Ventomancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathEcho": {
+        "name": "Path of the Echo"
+      }
+    }
+  },
+  "path_flow": {
+    "_src": "b131ff368c",
+    "name": "Path of the Flow",
+    "system.description": "<p><em>A Hydromancy specialization: water as a current that carries, knocks down, and spreads.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Area: Radius and the Direct/Move Technique.</li>\n<li><strong>Restriction:</strong> the Durability Modifier no higher than rank 2 (water holds no shape).</li>\n<li><strong>Doctrinal Modifier Knockdown:</strong> 2 AP: knock prone (<code>prone</code>, DC 12); 3 AP: push the target 4 m and knock it prone (DC 14).</li>\n<li><strong>Forms:</strong> as for the doctrine: bludgeoning (ram of a wave) and slashing (pressurized jet).</li>\n<li><strong>Water utility</strong> (via Imbue/Infuse + Duration): water walking, water breathing, faster swimming.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Hydromancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathFlow": {
+        "name": "Path of the Flow"
+      }
+    }
+  },
+  "path_ice": {
+    "_src": "9a18707716",
+    "name": "Path of Ice",
+    "system.description": "<p><em>A Hydromancy specialization: water frozen into shape that holds, cuts, and binds.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Durability and Form.</li>\n<li><strong>Form:</strong> piercing: icicles, ice blades (overrides the water forms).</li>\n<li><strong>Doctrinal Modifier Constraint:</strong> 2 AP: icing, speed −50% for Doctrine Rank rounds (DC 12); 3 AP: Entangled (<code>entangled</code>) for 1 round (DC 14); 5 AP: deep freeze, <code>full_paralysis</code> for 1 round (DC 18).</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Hydromancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathIce0": {
+        "name": "Path of Ice"
+      }
+    }
+  },
+  "path_mending": {
+    "_src": "bebd5ab915",
+    "name": "Path of Mending",
+    "system.description": "<p><em>A Biomancy specialization: working <strong>with</strong> the body's template; the mender drives flesh back to what it used to be.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Healing and Targets.</li>\n<li><strong>Lifts the Healing cap:</strong> all ranks 1–5 are available (without the Path, only 1–3).</li>\n<li><strong>Restrictions:</strong> Adaptation no higher than rank 3; Range no higher than rank 2 (up to 10 m, to reach through the line).</li>\n<li><strong>Tempo:</strong> combat. No saving throw is called for, since the body consents; Mending has no long casts.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Biomancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathMend": {
+        "name": "Path of Mending"
+      }
+    }
+  },
+  "path_sculpting": {
+    "_src": "2bab897eac",
+    "name": "Path of Sculpting",
+    "system.description": "<p><em>A Biomancy specialization: working <strong>against</strong> the body's template; the sculptor holds flesh in a foreign shape until it slides back.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Adaptation and Duration.</li>\n<li><strong>Lifts the Adaptation cap:</strong> all ranks 1–5 are available (without the Path, only 1–3).</li>\n<li><strong>Restrictions:</strong> Healing no higher than rank 3; <strong>Range is touch only</strong>: sculpting is done by hand.</li>\n<li><strong>Long casts:</strong> a monopoly of this Path. The same trait from the catalog, sculpted over hours, lasts until a Long Rest instead of rounds.</li>\n<li><strong>Divergence step 2</strong> (a trait of another Bloodline) requires donor tissue of that Bloodline with a rank no lower than the trait's rank.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Biomancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathScul": {
+        "name": "Path of Sculpting"
+      }
+    }
+  },
+  "path_squall": {
+    "_src": "2e28bf773e",
+    "name": "Path of the Squall",
+    "system.description": "<p><em>A Ventomancy specialization: wind as an element of scale, a squall that sweeps over a formation.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Area: Cone and Area: Radius.</li>\n<li><strong>Damage, forms, and Modifiers</strong> as for the doctrine: untyped, steps II–VI, slashing form, Knockdown, Dust Veil, Choke.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.prerequisites_text": "The Ventomancy talent (doctrine access).",
+    "effects": {
+      "DedrelAEPathSqua": {
+        "name": "Path of the Squall"
+      }
+    }
+  },
+  "pattern_recognition": {
+    "_src": "b3dec7e674",
+    "name": "Pattern Recognition",
+    "system.description": "If the character falls exactly 1 short of success on a check related to investigation or searching for clues, the result counts as a success. The GM must signal when “something doesn't add up” during an investigation, even if the character hasn't asked directly."
+  },
+  "penetrating_strike": {
+    "_src": "076f2b2877",
+    "name": "Penetrating Strike",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.EAb2rrgB0ew8Cnmr]{Penetrating Strike}</p><p>You use two limbs and your body weight to deal extra piercing damage equal to your Strength rank.</p>"
+  },
+  "phantom_tread": {
+    "_src": "55fe9f26b3",
+    "name": "Phantom Tread",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.OzLWpsHxnDHRrBdg]{Phantom Tread}</p><p><span>Maneuver: your next movement doesn't provoke Attacks of Opportunity.</span></p>"
+  },
+  "plant_berdiche": {
+    "_src": "39135fef98",
+    "name": "Plant the Berdiche",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.bB8yF8TDgjBrnmWz]{Plant the Berdiche} maneuver</p><p>Applies the Berdiche Planted status.<br>While you reload a musket, you don't provoke an Attack of Opportunity in melee; the berdiche counts as equipped, and switching from the musket is a free action. If the character moves away or is knocked back two meters or more, the status is removed. The player can choose whether the character grabbed the berdiche or left it standing in place.</p><p>Lets you perform the Braced Shot maneuver.<br>As a chain, you can make @UUID[Compendium.dedrel.maneuvers.Item.YYchgwfcVR4BNpUX]{Reload}</p>"
+  },
+  "portent": {
+    "_src": "80c7f894c8",
+    "name": "Portent",
+    "system.description": "At the start of each combat, before the first turn, roll 2d10 and remember the results. At any time before the end of combat, you can replace any d10 roll, yours or an opponent's, with one of the remembered values. Each value can be used only once."
+  },
+  "power_bash": {
+    "_src": "f11e974700",
+    "name": "Power Bash",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.u2MUNJ2oJeExQuzq]{Power Bash}</p><p>You take a big swing to deal extra damage equal to your Strength rank.</p>"
+  },
+  "preemptive_thrust": {
+    "_src": "aa6e4ee688",
+    "name": "Preemptive Strike",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.Pp79Pln9JPEb7ZCb]{Preemptive Thrust} maneuver</p><p>When an opponent enters your Control Zone, you can use a reaction to make a spear attack. If the attack hits (even if it deals no damage), the enemy stops, and the maneuver that gave them the movement is disrupted. As a chain, you can make a @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}</p>"
+  },
+  "punishing_miss": {
+    "_src": "3faa81bf34",
+    "name": "Punishing Miss",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.AB0Q2InegZxKsBu3]{Punishing Miss}</p><p><span>Like @UUID[Compendium.dedrel.maneuvers.Item.vMmgn6eWaoidERxE]{Riposte}, but it can be activated after an opponent misses.</span></p>"
+  },
+  "pyromancy": {
+    "_src": "33eb484070",
+    "name": "Pyromancy",
+    "system.description": "<p><em>Control over heat, flame, and light. The king of direct damage.</em></p>\n<ul>\n<li><strong>Damage:</strong> fire (heat), Ladder steps III–VII.</li>\n<li><strong>Incineration:</strong> ranks of the Damage Modifier sit one step higher than for every other doctrine.</li>\n<li><strong>Affinity:</strong> −1 AP on Damage.</li>\n<li><strong>Restriction:</strong> +1 AP on Accuracy.</li>\n<li><strong>Forms:</strong> unavailable; Pyromancy burns with pure heat.</li>\n<li><strong>Ignite:</strong> a spell that deals damage to a target sets it on fire (the Burning condition, if the target can burn).</li>\n</ul>",
+    "effects": {
+      "DedrelAEDoctPyr1": {
+        "name": "Pyromancy"
+      }
+    }
+  },
+  "rally": {
+    "_src": "3dfed7191b",
+    "name": "Rally",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.y4ZAVThQ4kkxM5C4]{Rally}</p><p>All allies within 20 m shed [🔧 placeholder: minor negative conditions] and get +2 to all rolls until the start of your next turn.</p>"
+  },
+  "ranged_riposte": {
+    "_src": "ab462c0728",
+    "name": "Ranged Riposte",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.VPXOjhExSbvL2VvW]{Ranged Riposte} </p><p><span>When a ranged attack is made against you (successful or not), you can react by firing back (you must have a ranged weapon equipped)</span></p>"
+  },
+  "rapid_bow_shot": {
+    "_src": "39b400c48e",
+    "name": "Rapid Bow Shot",
+    "system.description": "This talent grants [[maneuver_rapid_bow_shot|the Rapid Bow Shot maneuver]]"
+  },
+  "reserve_stamina": {
+    "_src": "f9f8562e37",
+    "name": "Reserve Stamina",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.6tvGOWHSL6vm2pw2]{Reserve Stamina}</p><p>3 times per Short Rest. <br>Instantly restore Universal Action Points up to your Constitution rank.</p>"
+  },
+  "rewrite_moment": {
+    "_src": "eaf7fa0c91",
+    "name": "Rewrite the Moment",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.1uCcDGj4HXoWcZ0i]{Rewrite the Moment}</p><p><span>Reaction. When you take damage, you can activate this talent. The opponent's attack is canceled entirely, with all its consequences (damage, conditions, effects). The AP the opponent spent are not refunded.</span></p>"
+  },
+  "shadowmancy": {
+    "_src": "e91fa73e28",
+    "name": "Shadowmancy",
+    "system.description": "<p><em>Power over darkness, withering, and dead flesh. A debuffer: “Shadow weakens.”</em></p>\n<ul>\n<li><strong>Damage:</strong> necrotic, steps II–VI.</li>\n<li><strong>Targeted only:</strong> Areas (cone, radius, line) are forbidden.</li>\n<li><strong>Affinity:</strong> −1 AP on Duration: curses linger.</li>\n<li><strong>Restriction:</strong> +1 AP on Damage.</li>\n<li><strong>Doctrinal Modifier:</strong> the full Power catalog, the doctrine's signature tool.</li>\n<li><strong>Source:</strong> corpses and darkness. A cemetery or catacombs are an abundant source; a battlefield with fresh corpses counts as “source available.”</li>\n</ul>\n<p><em>The doctrine is in draft form; its mechanics may change after playtests.</em></p>",
+    "effects": {
+      "DedrelAEDoctSha1": {
+        "name": "Shadowmancy"
+      }
+    }
+  },
+  "sharp_mind": {
+    "_src": "f8276077d9",
+    "name": "Sharp Mind",
+    "system.description": "+2 to Logic saving throws.<br><br><b>On Add Macro:</b><br>@saves.log.bonus +2",
+    "effects": {
+      "mGQsHIgHJCzfXA2S": {
+        "name": "Sharp Mind"
+      }
+    }
+  },
+  "shield_bash": {
+    "_src": "deb08687f3",
+    "name": "Shield Bash",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.RqvEocSQqKFVXtbj]{Shield Bash}</p><p>You must hold a shield. You deliver a powerful shield blow to the opponent using the Athletics skill. If the attack succeeds, you knock the opponent back by Constitution RANK *2 meters. Damage on the card = your Constitution rank.</p>"
+  },
+  "silver_tongue": {
+    "_src": "cb77eff0ab",
+    "name": "Silver Tongue",
+    "system.description": "<p>+2 to Persuasion and Deception checks.</p>",
+    "effects": {
+      "WDON1W4yZCXk5V2p": {
+        "name": "Silver Tongue"
+      }
+    }
+  },
+  "sixth_sense": {
+    "_src": "49a7ab3d88",
+    "name": "Sixth Sense",
+    "system.description": "<p>+2 to Intuition saving throws.</p>",
+    "effects": {
+      "02Df6V9Np6Pczhiu": {
+        "name": "Sixth Sense"
+      }
+    }
+  },
+  "sliding_step": {
+    "_src": "f0629aec7f",
+    "name": "Sliding Step",
+    "system.description": "<p>After an attack against your Dodge misses, you can make @UUID[Compendium.dedrel.maneuvers.Item.COx23vBpriCHVVLO]{Disengage} as a reaction.</p>"
+  },
+  "sniper_shot": {
+    "_src": "66cb69201c",
+    "name": "Sniper Shot",
+    "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.zdHgW5kc1fzEGuVL]{Sniper Shot} maneuver</p><p>Musket or crossbow</p><p>The target must be at least 20 m away.</p><p>Attack with a +2 bonus.</p><p>You choose the hit location: <span>Arms, Torso, Legs, Head. If the attack deals at least 5 damage (after DR), the target suffers an injury.</span></p>"
+  },
+  "soul_of_the_crowd": {
+    "_src": "34279a4d2a",
+    "name": "Soul of the Crowd",
+    "system.description": "<p>Address a group of people (from a dozen to a thousand). Make a Persuasion, Intimidation, or Deception check against a DC set by the GM. On a success, the group of NPCs adopts your point of view or takes the action you need. The scale of the effect is proportional to the DC.</p>"
+  },
+  "sovereign_will": {
+    "_src": "038baf164d",
+    "name": "Sovereign Will",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.0lbAvOq416OQzRkh]{Sovereign Will (WIP)}</p>"
+  },
+  "steel_barrier": {
+    "_src": "c3698ec98d",
+    "name": "Steel Barrier",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Steel Barrier}</p><p>You spin your sword, creating a no-go zone around you until the start of your next turn. The first enemy to enter your Control Zone takes an automatic hit from you. After that, the maneuver ends. Activating another maneuver before Steel Barrier triggers cancels it.</p>"
+  },
+  "steel_momentum": {
+    "_src": "a485807324",
+    "name": "Steel Momentum",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.tqM7tetp1p2BCh2u]{Steel Momentum}</p><p>If at the end of your last turn you started @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Steel Barrier} and it didn't trigger before the start of your new turn, at the start of the turn you can use Steel Momentum: move up to your Speed and make an attack; on a hit, the damage is increased by one step.</p><p>This is a free action, and you can continue your turn.</p><p></p>"
+  },
+  "strong_tail": {
+    "_src": "cf04e037c7",
+    "name": "Strong Tail",
+    "system.description": "<p>Grants +1 to Strength saving throws<br></p>",
+    "effects": {
+      "cpAtugQDpPsFrXcn": {
+        "name": "Strong Tail"
+      }
+    }
+  },
+  "sunder_block": {
+    "_src": "18f4af1cd5",
+    "name": "Sunder Block",
+    "system.description": "<p>Grants a maneuver.<br><br>Make an attack with a falchion or axe against the target's opposed Athletics roll. On a success, the target gains the Off Guard status <span>(the status forbids using Block) against the next attack.</span></p><p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Swing}.</p><p></p>"
+  },
+  "superposition": {
+    "_src": "95ca8f40cd",
+    "name": "Superposition",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.2Ow7yTA7lTa9T3Wq]{Superposition}</p><p>Maneuver. You place up to 4 copies of your character on the battlefield within line of sight. Each copy has 1 HP and vanishes after taking damage. After an opponent makes an attack against one of your tokens, you choose whether it hits a copy or the real character. On your turn you also decide which token is your character.</p>"
+  },
+  "supreme_athleticism": {
+    "_src": "ff4779d170",
+    "name": "Supreme Athleticism",
+    "system.description": "<p>You add your full Strength rank to Athletics checks.</p>",
+    "effects": {
+      "ndgPBA2j09TqtIvn": {
+        "name": "Supreme Athleticism"
+      }
+    }
+  },
+  "sweeping_arc": {
+    "_src": "69fcc4b358",
+    "name": "Sweeping Arc",
+    "system.description": "<p>Grants a maneuver</p><p>Using a glaive, you make a wide swing, attacking up to 3 enemies in a 4 m cone with a single roll. Damage is also rolled once and applied to all of them.</p>"
+  },
+  "swing_on_a_move": {
+    "_src": "bca191d6da",
+    "name": "Swing on the Move",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.hrkYLX9Zy60dKn2C]{Swing on the Move}</p><p>Maneuver in a chain after movement, slashing. +2 damage.</p>"
+  },
+  "tactical_breakdown": {
+    "_src": "2b45d5ae9b",
+    "name": "Tactical Breakdown",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.xaw6eSKFwFXitkzJ]{Tactical Breakdown}</p><p>Maneuver, free action. Choose one opponent. Until the end of the round, all allies within 20 meters of you get against this target: +2 to attacks and the right to reroll one damage die (the new result must be kept).</p>"
+  },
+  "taunt": {
+    "_src": "fbf386dbc5",
+    "name": "Taunt",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.YVl6pkv3tAM5k5YD]{Taunt}</p><p>The target must be able to hear you and have a developed mind. <br>Persuasion check against the target's Insight. <br>If the target fails, it takes a -3 penalty to attacks against targets other than the taunter until the start of the next turn.</p><p></p>"
+  },
+  "technique_create": {
+    "_src": "f540145fe0",
+    "name": "Technique: Create",
+    "system.description": "<p>Conjures energy/matter from the Astral where there is none. For example, lights a torch.</p>",
+    "effects": {
+      "wbAmoBxtDCtN4c3M": {
+        "name": "Technique: Create"
+      }
+    }
+  },
+  "technique_imbue": {
+    "_src": "be73e1cb86",
+    "name": "Technique: Infuse",
+    "system.description": "<p>Infuses a magical property of the Doctrine into a target (object/creature).</p>",
+    "effects": {
+      "Dg29qElfAnb7fwPX": {
+        "name": "Technique: Infuse"
+      }
+    }
+  },
+  "technique_move": {
+    "_src": "fb5440af26",
+    "name": "Technique: Move",
+    "system.description": "<p>Controls the movement and position of an <strong>already existing</strong> source. For example: hurl fire.</p>",
+    "effects": {
+      "AYvNCeQJAftCfPtL": {
+        "name": "Technique: Move"
+      }
+    }
+  },
+  "technique_sense": {
+    "_src": "f2da3f32c0",
+    "name": "Technique: Sense",
+    "system.description": "<p>Gathers information about the Doctrine without making physical changes.</p>",
+    "effects": {
+      "3zMwjLFHzNm16FuQ": {
+        "name": "Technique: Sense"
+      }
+    }
+  },
+  "technique_transform": {
+    "_src": "86b4c555a2",
+    "name": "Technique: Transform",
+    "system.description": "<p>Changes the inner properties of matter/energy, but not its position.</p>",
+    "effects": {
+      "8kUsDWMabQxXHhYN": {
+        "name": "Technique: Transform"
+      }
+    }
+  },
+  "thread_of_fate": {
+    "_src": "2dc0677b29",
+    "name": "Thread of Fate",
+    "system.description": "You ask the GM one question strictly in the form: “What do I need to do to [X]?” The GM must give an honest and specific answer about an existing path to the goal. The GM doesn't have to make that path easy or safe. The intuitive sees the direction, not the outcome."
+  },
+  "through_the_pain": {
+    "_src": "5e91e49cf5",
+    "name": "Through the Pain",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.oV4BXCAQLoBVjnWM]{Through the Pain}</p><p>3 times per Long Rest</p><p>Free action. You ignore wound penalties until the end of the round.</p>"
+  },
+  "true_fortitude": {
+    "_src": "ce4ac098f5",
+    "name": "True Fortitude",
+    "system.description": "Permanently increases your HP pool.<br><br><b>On Add Macro:</b><br>resources.hp.max +25%",
+    "effects": {
+      "2MMXT46IFt5alUJY": {
+        "name": "True Fortitude"
+      }
+    }
+  },
+  "unbending_spirit": {
+    "_src": "7a34f1beef",
+    "name": "Unbending Spirit",
+    "system.description": "<p>+2 to Willpower saving throws.</p>",
+    "effects": {
+      "NHWHXKiQaojZtdCZ": {
+        "name": "Unbending Spirit"
+      }
+    }
+  },
+  "unbreakable": {
+    "_src": "8ae9f5eeec",
+    "name": "Unbreakable",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.t7fPr5KCAThyxKvQ]{Unbreakable} </p><p>Once per Long Rest.</p><p>You ignore any damage the first time you take it within the next 10 rounds.</p>"
+  },
+  "uncanny_metabolism": {
+    "_src": "b90f616bd3",
+    "name": "Uncanny Metabolism",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.Sj8P3gF3cgbs4hxY]{Uncanny Metabolism}</p><p>Maneuver, free action. You get a -1 AP discount on all maneuvers for the next three rounds (but not below 1).</p><p></p>"
+  },
+  "unnerving_presence": {
+    "_src": "0db3ee40ff",
+    "name": "Unnerving Presence",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.wnWWCQ1EdneoDSPN]{Unnerving Presence}</p><p>CHA vs the target's WILL check. On a success: [🔧 placeholder: minor debuff] for 2 rounds. Narratively: not fear, but a feeling that the opponent has already lost.</p>"
+  },
+  "untamed_might": {
+    "_src": "e5e9416a7b",
+    "name": "Untamed Might",
+    "system.description": "Increases your chance to resist effects that require a Strength saving throw. +2 to STR saving throws.<br><br><b>On Add Macro:</b><br>@saves.str.bonus +2",
+    "effects": {
+      "iQf06xfXZRpLiCBz": {
+        "name": "Untamed Might"
+      }
+    }
+  },
+  "unwavering_confidence": {
+    "_src": "4bafa3a745",
+    "name": "Unwavering Confidence",
+    "system.description": "<p>+2 to Charisma saving throws.</p>",
+    "effects": {
+      "tte7xjiPEcEXaZ5F": {
+        "name": "Unwavering Confidence"
+      }
+    }
+  },
+  "vector_glide": {
+    "_src": "d5bc1dde1f",
+    "name": "Vector Glide",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.gMEjIkxkE8XmSv1w]{Vector Glide}</p><p><span>Maneuver, in a chain. Lets the character run on vertical surfaces and water. If the character ends their movement on a vertical surface or water, they fall.</span></p>"
+  },
+  "ventomancy": {
+    "_src": "c8b1a76827",
+    "name": "Ventomancy",
+    "system.description": "<p><em>Command over winds and sounds.</em></p>\n<ul>\n<li><strong>Damage:</strong> untyped, steps II–VI.</li>\n<li><strong>Restriction:</strong> +1 AP on Damage and Accuracy. Wind and sound strike an area and the senses, not with a point. The doctrine doesn't touch Durability at all: air holds no shape and creates no constructs.</li>\n<li><strong>Form:</strong> slashing (wind blade).</li>\n<li><strong>Doctrinal Modifiers:</strong> Knockdown, Dust Veil, Choke, available to any ventomancer.</li>\n</ul>\n<p>Specializations are unlocked by separate talents: <strong>Path of the Squall</strong> (−1 AP on cone and radius) and <strong>Path of the Echo</strong> (−1 AP on Power, Targets, and Duration, sonic damage, Power ranks 1–3).</p>",
+    "effects": {
+      "DedrelAEDoctVen1": {
+        "name": "Ventomancy"
+      }
+    }
+  },
+  "volt_step": {
+    "_src": "d1660818ff",
+    "name": "Volt Step",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.lMsbHM4XnCRLxefs]{Volt Step}</p><p><span>Maneuver, reaction. After an opponent's melee attack roll, but before the GM confirms the hit and rolls damage, spend up to 5 AP and add the same amount to Dodge until the end of this round.</span></p>"
+  },
+  "weak_morale": {
+    "_src": "b4f86f2eda",
+    "name": "Low Morale",
+    "system.description": "<p>The creature fights for money or out of fear, not for a cause. It <strong>checks morale</strong>.</p>\n<p><strong>Trigger (once per combat).</strong> Damage has brought it to its last threshold:</p>\n<ul>\n<li><strong>peon</strong>: <strong>one Hit</strong> left;</li>\n<li><strong>regular / elite / boss</strong>: the wound track has reached <strong>level 4</strong> (25% HP or less).</li>\n</ul>\n<p><strong>The roll.</strong> A <strong>Willpower saving throw, DC 9</strong>. If it holds, it fights to the end and doesn't check again.</p>\n<p><strong>Failure.</strong> From its next turn it doesn't attack: it <strong>flees</strong> (all movement away from the nearest enemy; leaving a Control Zone provokes an Attack of Opportunity) or <strong>surrenders</strong>; the GM decides which fits better.</p>\n<p><strong>Cancellation.</strong> While a bearer of the Pack Alpha talent is alive and conscious nearby, the check isn't made at all.</p>\n<p><em>No automation: clicking the talent posts this reminder to chat; the saving throw is a click on Willpower in the sheet header.</em></p>"
+  },
+  "weak_spot": {
+    "_src": "9fd6979f23",
+    "name": "Weak Spot",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.KRGHho0GBoNiiHGB]{Weak Spot}</p><p>Before attacking, you declare that you are “reading” the opponent; your next attack with any weapon gains Armor Piercing 3</p><p></p>"
+  },
+  "will_aura": {
+    "_src": "67767ad608",
+    "name": "Aura of Will",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.gXMDw2cok8GFwXbM]{Aura of Will}</p><p><span>For 10 rounds, all allies within 10 meters get +2 to Willpower saving throws.</span></p>"
+  },
+  "world_favors_me": {
+    "_src": "bc6cc1282e",
+    "name": "The World Favors Me",
+    "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.Gkn4UxC4PlG46Fal]{The World Favors Me} </p><p>Free action. Until the end of the round, the surrounding objects and environment work in your favor: a mechanism jams, a rope snaps, a stone rolls away. The GM brings the effect to life based on context. It can't deal damage or apply conditions directly, only change the surroundings.</p>"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "effectlib_incorporeal": {
+    "_src": "b751d0b79d",
+    "name": "Incorporeal",
+    "effects": {
+      "tZBnNC5UEe0SGB59": {
+        "name": "Incorporeal",
+        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>"
+      }
+    }
+  },
+  "effectlib_monolith": {
+    "_src": "dc0a35b7d2",
+    "name": "Monolith"
+  }
+}

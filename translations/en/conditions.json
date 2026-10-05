@@ -1,0 +1,217 @@
+{
+  "big_cover": {
+    "_src": "7017c7d923",
+    "name": "Large Cover",
+    "system.description": "<p>+4 to Block</p>",
+    "effects": {
+      "4enzln0i47khwBNP": {
+        "name": "Large Cover"
+      }
+    }
+  },
+  "bleeding": {
+    "_src": "9a78eafb62",
+    "name": "Bleeding",
+    "system.description": "<p>Take 3 pure damage at the start of your turn for each stack of Bleeding. Stacks up to 5 times. Removed by the @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} maneuver with a Healing check, or by any healing effect.</p>"
+  },
+  "blind": {
+    "_src": "602c7dce40",
+    "name": "Blinded",
+    "system.description": "<p>The creature is blinded: −4 to melee attacks; −8 to ranged and magical attacks; −4 to Block and Dodge.</p>",
+    "effects": {
+      "Hu1i7t3cyZ18Q3vn": {
+        "name": "Blinded"
+      }
+    }
+  },
+  "burning": {
+    "_src": "4bed812223",
+    "name": "Burning",
+    "system.description": "<p>Take 3 fire damage at the start of your turn for each stack of Burning. Stacks up to 5 times. Lasts 3 rounds; new stacks reset the timer.<br>Removed by @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact}</p>",
+    "system.application_text": "on fire",
+    "system.removal_text": "no longer burning"
+  },
+  "clinch": {
+    "_src": "11d29c2fe9",
+    "name": "In Clinch",
+    "system.description": "<div><p>1. If you try to move away from an opponent you are in a clinch with, they can make an Attack of Opportunity reaction.</p></div><div><p>2. Shooting into a clinch is difficult: the condition gives shooters a -2 penalty (on a critical fumble, the shot hits an ally).</p></div><div><p>3. If you choose to make an Attack of Opportunity against a character crossing your Control Zone, you are considered to leave the Clinch with your current opponent, and they can make an Attack of Opportunity against you.</p></div><div><p>4. Characters In Clinch can be targeted by the @UUID[Compendium.dedrel.maneuvers.Item.Y8Eh46LmqB2MOoCl]{Flank Attack} maneuver.</p></div>",
+    "system.removal_text": "no longer in a clinch"
+  },
+  "curse": {
+    "_src": "913f500e83",
+    "name": "Curse"
+  },
+  "disoriented": {
+    "_src": "fad0570aac",
+    "name": "Disoriented",
+    "system.description": "<p>Lasts 1 round. Stacks. At three stacks it turns into Stunned.</p><p>Penalty: all maneuvers cost +1 AP per stack.</p>",
+    "effects": {
+      "F7g3Fn1QHWplpqfw": {
+        "name": "Disoriented"
+      }
+    }
+  },
+  "dying": {
+    "_src": "5ec060b8ed",
+    "name": "Dying",
+    "system.description": "<p>You can spend 1 Luck Point to remove this condition.<br>Another character can use @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} and a Healing check to remove this condition.<br>A Potion of Healing or any ability that restores HP removes this condition.<br>After the first Dying condition in a session, the character gains the @UUID[Compendium.dedrel.conditions.Item.jDf1KR27t0mPAAlj]{Fatigued} condition; after the second, the @UUID[Compendium.dedrel.conditions.Item.gvltC2kWle3yTOyx]{Exhausted} condition.</p>"
+  },
+  "entangled": {
+    "_src": "cd82313563",
+    "name": "Entangled",
+    "system.description": "<p><strong>Effect:</strong> the target <strong>cannot Dodge</strong> at all, only Block, and its <strong>Speed drops to 0</strong>. Lasts <strong>1 round</strong>, not a single attack.</p>\n<p><strong>Sources:</strong> magic (Hydromancy, Path of Ice: the Constraint modifier at rank 3, DC 14; the Forbid Defense modifier at rank 4 with Dodge chosen), web grenades, entangling exotic weapons: net, bola, sasumata (WIP).</p>\n<p><strong>Difference from @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed}:</strong> Pressed is applied by ordinary weapons, lasts for one attack against the target, and doesn't affect Speed. Entangled is the hard version: a whole round with no Dodge and no movement, which is why only magic and special gear can apply it.</p>\n<p><em>Not automated: the GM enforces the Dodge ban and zero Speed manually (on NPCs, a manual speed override beats effects).</em></p>",
+    "system.application_text": "entangled, can't dodge",
+    "system.removal_text": "broke free"
+  },
+  "exhausted": {
+    "_src": "733b1c8f42",
+    "name": "Exhausted",
+    "system.description": "<p>Cannot take an active part in combat: the only maneuver available is @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact}. Movement is still allowed: it is not a maneuver and costs no AP.</p>\n<p>NOT AUTOMATED</p>"
+  },
+  "false_life": {
+    "_src": "e5cc250ed4",
+    "name": "False Life",
+    "system.description": "<p>Someone else's dead flesh is in the body: the wounds have closed over in gray, and the seams don't match in color.</p>\n<p><strong>Effect:</strong> the bearer <strong>cannot regain HP by any means</strong>: not by Biomancy, potions, a Healing check, or rest. They look like a walking corpse: ashen skin, the smell of decay.</p>\n<p><strong>Removal:</strong> cut open the seams (Interact with a Healing check), which removes the temporary HP entirely; or when the temporary HP run out; or on a Long Rest.</p>\n<p><strong>Source:</strong> Shadowmancy, the False Life Long Cast.</p>\n<p><em>Not automated: the GM enforces the healing ban.</em></p>",
+    "system.application_text": "flesh not their own",
+    "system.removal_text": "foreign flesh rejected"
+  },
+  "fatigued": {
+    "_src": "f4233d5017",
+    "name": "Fatigued",
+    "system.description": "<p>The character takes a -5 penalty to all rolls.</p><p>Removed by rest, potions, or spells.</p>",
+    "effects": {
+      "TfreT0JtVtEwETED": {
+        "name": "Fatigued"
+      }
+    }
+  },
+  "fear": {
+    "_src": "35185bf28a",
+    "name": "Fear",
+    "system.description": "<p>The condition lasts two turns and does not stack.</p><p>The character takes -2 to skill checks.</p>",
+    "effects": {
+      "tS6Brk8e5Gdebe5B": {
+        "name": "Fear"
+      }
+    }
+  },
+  "frenzy": {
+    "_src": "b01b842844",
+    "name": "Frenzy",
+    "system.description": "<p><strong>Effect:</strong> the creature <strong>ignores wound penalties to rolls</strong>: the wound track is still kept, but it doesn't hinder rolls.</p>\n<p><strong>The cost.</strong> A frenzied creature doesn't tell friend from foe: the GM may turn its attack against an ally if the ally is closer or struck last. Tactics vanish; all that remains is the nearest living thing.</p>\n<p><strong>Removal:</strong> by the specific creature's trigger (for the Matriarch, acid damage), or at the GM's discretion. It does not wear off on its own.</p>\n<p><em>The condition is neutral rather than negative: it both empowers and takes away control. Applied manually from the token HUD.</em></p>",
+    "system.removal_text": "came to its senses",
+    "effects": {
+      "FrenzyIgnWounds1": {
+        "name": "Frenzy"
+      }
+    }
+  },
+  "full_paralysis": {
+    "_src": "c17455868b",
+    "name": "Full Paralysis",
+    "system.description": "<p>Duration depends on the source; 3 rounds by default.</p><p>Completely unable to act: falls prone or stands frozen in place.</p><p>Removed when the duration ends, or by potions or spells.</p><p>NOT AUTOMATED</p>"
+  },
+  "grappled": {
+    "_src": "0ab7106979",
+    "name": "Grappled",
+    "system.description": "<p><strong>Effect:</strong> Speed 0, −2 to Dodge. Unlike the Entangled condition, you can still Dodge, just worse.</p>\n<p><strong>The condition is mutual:</strong> the grappler is bound just as much and takes the same penalty, so apply Grappled to <strong>both</strong> participants.</p>\n<p><strong>The grapple holds</strong> as long as both are alive and conscious: leaving your square means letting go.</p>\n<p><strong>Removal:</strong> @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} with an Athletics contest against the opponent's Athletics (+2 per size category of difference in favor of the larger one). Success removes the condition from both.</p>\n<p><em>The Dodge penalty is automated. The GM enforces zero Speed manually: on NPCs, a manual speed override beats effects.</em></p>",
+    "system.removal_text": "broke free of the grapple",
+    "effects": {
+      "GrappledDodgeEf1": {
+        "name": "Grappled"
+      }
+    }
+  },
+  "knockout": {
+    "_src": "778cc564a0",
+    "name": "Knockout",
+    "system.description": "<p>The character can no longer act and falls prone.<br>Removal: a Constitution saving throw at the start of the turn to come to (DC 12), potions, or @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} (healing).</p><p>NOT AUTOMATED</p>"
+  },
+  "off_guard": {
+    "_src": "6b2045ebb1",
+    "name": "Off Guard",
+    "system.description": "<p><strong>Effect:</strong> the target <strong>cannot Block</strong> against the next attack and defends with Dodge only. Anyone can make that attack, not just whoever applied the condition.</p>\n<p><strong>Applied by:</strong> @UUID[Compendium.dedrel.maneuvers.Item.8mgcq7OFtffV34Jw]{Feint} (Deception against Insight, Fast weapon) and @UUID[Compendium.dedrel.maneuvers.Item.kHwErvUQ3caABupP]{Sunder Block} (an axe or falchion attack against Athletics).</p>\n<p><strong>Removal:</strong> by the very first attack against the target, hit or miss, or at the end of the round.</p>\n<p><strong>Why it matters.</strong> A target defends with the highest applicable value, so the ban drops a blocker onto their secondary Dodge and zeroes out everything they invested in Block: shield, stances, bonuses. It pairs with the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition, which breaks a dodger in exactly the same way.</p>\n<p><em>Not automated: enforced at the table; the maneuver card shows a Forbidden Defense badge.</em></p>",
+    "system.application_text": "thrown off balance",
+    "system.removal_text": "back in stance"
+  },
+  "pain": {
+    "_src": "99fa09c325",
+    "name": "Pain",
+    "system.description": "<p>Penalty: all actions cost 1 AP more per stack of Pain.</p>",
+    "effects": {
+      "iCxiOYutZ3SMCOiT": {
+        "name": "Pain"
+      }
+    }
+  },
+  "partial_paralysis": {
+    "_src": "ca2918fd82",
+    "name": "Partial Paralysis",
+    "system.description": "<ul><li><p><strong>Effect:</strong> The affected limbs don't function (arms, legs, wings).</p></li><li><p><strong>Removal:</strong> Depends on the source.</p></li><li><p><strong>Duration:</strong> Depends on the source; 3 rounds by default.</p></li></ul><p>Penalties are situational, at the GM's discretion.</p>"
+  },
+  "poison_combat": {
+    "_src": "3f59214a65",
+    "name": "Poisoned (Combat)",
+    "system.description": "<p><strong>Effect:</strong> at the end of its turn the bearer takes <strong>(stacks)d4</strong> damage. The damage <strong>can't be resisted</strong>: poison is not a damage type but a save axis, so neither DR nor elemental resistance reduces it.</p>\n<p><strong>Stacks.</strong> Stacks like Bleeding, capped at <strong>3</strong>. A new stack resets the full duration.</p>\n<p><strong>Duration:</strong> 3 rounds from the last stack.</p>\n<p><strong>Removal:</strong> an antidote, Biomancy healing magic, or expiry. The saving throw is made on hit, not every turn: a creature that resists isn't poisoned at all.</p>\n<p><em>This is a chassis, not a named poison. Specific poisons are consumable items that apply this condition; the save DC comes from the source (for creatures, 9 + Threat Rank; for crafted poisons, by rarity).</em></p>",
+    "system.removal_text": "the poison wore off"
+  },
+  "pressed": {
+    "_src": "7a39ed60f7",
+    "name": "Pressed",
+    "system.description": "<p><strong>Effect:</strong> the target <strong>cannot Dodge</strong> against the next attack and defends with Block only. Anyone can make that attack, not just whoever applied the condition.</p>\n<p><strong>Speed is unaffected:</strong> the target hasn't been hurt; it has just been left no room to step off the line. That is what sets Pressed apart from @UUID[Compendium.dedrel.conditions.Item.4SJa3sjExOBaK6g1]{Entangled}, the hard version from magic and entangling gear (a full-round ban plus Speed 0).</p>\n<p><strong>Applied by:</strong> Overwhelming Strike (bludgeoning and two-handed weapons), Drive Back (shield or a second weapon), Corner (target with its back to an obstacle).</p>\n<p><strong>Removal:</strong> by the very first attack against the target, hit or miss, or at the end of the round.</p>\n<p><strong>Why it matters.</strong> A target defends with the highest applicable value, so the ban drops a dodger onto their secondary Block and zeroes out everything they invested in Dodge, including reaction bonuses such as Volt Step. It pairs with the Off Guard condition, which breaks a blocker in exactly the same way.</p>\n<p><em>Not automated: enforced at the table; the maneuver card shows a Forbidden Defense badge.</em></p>",
+    "system.application_text": "pressed, nowhere to go",
+    "system.removal_text": "regained room to maneuver"
+  },
+  "prone": {
+    "_src": "d1a1180eb5",
+    "name": "Prone",
+    "system.description": "<p><strong>Effect:</strong> +2 to Dodge against ranged attacks, -2 to Block and Dodge against melee attacks.</p><p><strong>Removal:</strong> @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} (stand up)</p><p>NOT AUTOMATED.</p>"
+  },
+  "small_cover": {
+    "_src": "863717a8a2",
+    "name": "Small Cover",
+    "system.description": "<p>+2 to Block</p>",
+    "effects": {
+      "Gmu3ALF2gmCH9Ri2": {
+        "name": "Small Cover"
+      }
+    }
+  },
+  "stunned": {
+    "_src": "b8c4c3caa9",
+    "name": "Stunned",
+    "system.description": "<p><strong>Effect:</strong> At most one maneuver per round, and maneuvers cost 3 AP more.</p><p><strong>Removal:</strong> When the duration ends, potions, spells</p><p><strong>Duration:</strong> until the start of the next turn.</p><p>NOT AUTOMATED</p>",
+    "effects": {
+      "J1ZzKWiswm1LAwU5": {
+        "name": "Stunned"
+      }
+    }
+  },
+  "suffocating": {
+    "_src": "3b0196cb51",
+    "name": "Suffocating",
+    "system.description": "<p><strong>Effect:</strong> A cumulative -1 penalty to all rolls for each round spent in this condition. At ten stacks: <strong>@UUID[Compendium.dedrel.conditions.Item.krX0myh7VFC4yKvJ]{Knockout}</strong><br><strong>Removal:</strong> When the duration ends (surfaced from the water, left the spell's area).</p>",
+    "effects": {
+      "RQHuKmcY1d57nZR8": {
+        "name": "Suffocating"
+      }
+    }
+  },
+  "terror": {
+    "_src": "38ff4680cc",
+    "name": "Terror",
+    "system.description": "<p><strong>Effect:</strong> the only maneuver available is @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact}. Movement is allowed (it is not a maneuver), but each turn the bearer must move away from the source of the Terror.</p>\n<p><strong>Removal:</strong> When the duration ends, potions, spells.</p>\n<p><strong>Duration:</strong> 2 turns</p>"
+  },
+  "withering": {
+    "_src": "43d52ef5d3",
+    "name": "Withering",
+    "system.description": "<p>The flesh wastes away before your eyes: the muscle can't hold the swing, and the blow lands limp.</p>\n<p><strong>Effect:</strong> all of the bearer's damage drops by <strong>one step on the Damage Ladder</strong>\n(3d6 → 2d8 → 2d6 → 2d4 → 1d6 → 1d4; never below 1d4). The base formula of the weapon\nor maneuver shifts; additive bonuses to it are left alone.</p>\n<p><strong>Source:</strong> Shadowmancy, the Power Modifier (list 4, DC 16).</p>\n<p><strong>Duration:</strong> Doctrine Rank in rounds; 3 by default. The GM adjusts it to the caster's rank.</p>",
+    "system.application_text": "flesh withering",
+    "system.removal_text": "the withering receded",
+    "effects": {
+      "DedrelAEWither01": {
+        "name": "Withering"
+      }
+    }
+  }
+}

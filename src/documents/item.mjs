@@ -4,6 +4,7 @@ import { heldTwoHanded } from "../utils/grip.mjs";
 import { SpellCalculator } from "../utils/spell-calculator.mjs";
 import { hasTokenLightChanges } from "../config/effect-library.mjs";
 import { ActionEconomy } from "../utils/action-economy.mjs";
+import { CompendiumTranslation } from "../l10n/compendium-translation.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -12,7 +13,25 @@ const { DialogV2 } = foundry.applications.api;
  * такую как использование предметов (списание ОД) и отправку в чат с кнопками атаки/урона.
  */
 export default class DedrelItem extends Item {
-  
+
+  /**
+   * Перевод документов из паков системы (src/l10n/compendium-translation.mjs).
+   * Вложенные предметы акторов из паков узнают пак через родителя.
+   * @override
+   */
+  _initializeSource(data, options = {}) {
+    const source = super._initializeSource(data, options);
+    return CompendiumTranslation.translateSource(source, options.pack ?? this.parent?.pack,
+      { creation: options.creation });
+  }
+
+  /** Не даём записать английский текст в русский источник пака. @override */
+  async _preUpdate(changes, options, user) {
+    const allowed = await super._preUpdate(changes, options, user);
+    if (allowed === false) return false;
+    CompendiumTranslation.stripTranslatedChanges(this, changes);
+  }
+
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     

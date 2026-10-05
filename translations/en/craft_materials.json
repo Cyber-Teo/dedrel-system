@@ -1,0 +1,303 @@
+{
+  "2yiWpQFNacDEjcIw": {
+    "_src": "9f107c6a05",
+    "system.description": "<div><p>This wood is excellent for making musical instruments. Besides that, thanks to its magical properties, rosewood is deadly to the undead.</p></div>"
+  },
+  "adamantine": {
+    "_src": "df2b53e2d6",
+    "system.description": "<div><p>A unique metal long used by Dragons and Elves. It was they who in their time showed humans how to find and work adamantine. Because adamantine is by nature full of magic, other enchantments take to it very poorly.</p></div>"
+  },
+  "alchemical_silver": {
+    "_src": "11ea15a081",
+    "system.description": "<div><p>A product of alchemists' research at the start of the current era. Silver is not a very good material for weapons, yet some monsters are vulnerable only to it. Scholars found a way to create an alloy combining some of the advantages of Alloy Steel and silver</p></div>"
+  },
+  "alloy_steel": {
+    "_src": "d7c942e3c8",
+    "system.description": "<div><p>High-quality steel created in the Imperial Era, when not all the technologies of the First Humans had yet been forgotten. When properly worked, it readily absorbs magic, improving weapons and shields made from it. It can also carry a magical charge if armor is made from this steel.</p></div>"
+  },
+  "angel_flowers": {
+    "_src": "f3e55b10ee",
+    "system.description": "<div><p>- arctic. </p><p>These purple-and-blue flowers can usually be found in snowy mountains.</p></div>"
+  },
+  "animal_hide": {
+    "_src": "012bdd8c55",
+    "system.description": "<div><p>Roughly dressed hide, possibly with fur. Used mainly to make the simplest, cheapest armor.</p></div>"
+  },
+  "beardweed": {
+    "_src": "42d3c216c3",
+    "system.description": "<div><p>- forests. </p><p>A special kind of moss that grows on trees and resembles a beard.</p></div>"
+  },
+  "black_cactus": {
+    "_src": "10f4b1b643",
+    "system.description": "<div><p>- desert. </p><p>These toxic cacti with a black core and sap can't quench thirst but are widely used in alchemy</p></div>"
+  },
+  "bluebloom": {
+    "_src": "c77f0585d5",
+    "system.description": "<div><p>- arctic, rivers, lakes, swamps.</p><p>A plant with blue flowers; when processed, it gives a potion a red color.</p></div>"
+  },
+  "breakweed": {
+    "_src": "0268f3c55d",
+    "system.description": "<div><p>- plains. </p><p>An inconspicuous herb that is very hard to tell from weeds; it holds enormous magical power</p></div>"
+  },
+  "bronze": {
+    "_src": "337c805113",
+    "system.description": "<p>Hardly used nowadays. They say the Fay, who dislike iron, used bronze weapons. Bronze weapons and armor are very heavy and awkward, and not every kind of armor can be made from this material, but it is still receptive to magic.</p><p></p>"
+  },
+  "carnelian_rose": {
+    "_src": "d9fbce422b",
+    "system.description": "<div><p>- plains, rivers. </p><p>These caramel-colored roses with white veins look very much like the stone they are named after. </p></div>"
+  },
+  "chalice_of_seven_stars": {
+    "_src": "1b070f5b79",
+    "system.description": "<div><p>- lakes, rivers. </p><p>These huge white flowers prefer to grow in water and bloom at night, when the stars are shining.</p></div>"
+  },
+  "chevreau": {
+    "_src": "66039c5aba",
+    "system.description": "<div><p>Strong but flexible and soft leather</p></div>"
+  },
+  "coal_eucalyptus": {
+    "_src": "c8803c6aa6",
+    "system.description": "<div><p>- coast, plains. </p><p>The long, dark green leaves of this shrub are used to make the drug Bards' Dust, as well as in some alchemical recipes.</p></div>"
+  },
+  "cold_iron": {
+    "_src": "3c68ce2e8d",
+    "system.description": "<div><p>No one knows when the recipe for this metal was developed, but for many centuries it has been widely used by those who live next door to the fay. After all, fay are almost never the cute winged creatures of fairy tales, but dangerous beings able to kill an ordinary person in seconds. Ordinary iron is unpleasant to fay but not deadly, while cold iron can cause them serious harm.</p></div>"
+  },
+  "common_elvenweed": {
+    "_src": "7d6a329160",
+    "system.description": "<div><p>forests, plains. </p><p>Small white flowers; besides potions, wine is often made from them.</p></div>"
+  },
+  "common_ink": {
+    "_src": "1194f318e9",
+    "system.crafting.ingredients.2.name": "Vial"
+  },
+  "common_shieldbearer": {
+    "_src": "ad07923b1c",
+    "system.description": "<div><p>plains. </p><p>A yellow flower whose leaves resemble knights' shields; in their veins one can endlessly make out heraldic symbols.</p></div>"
+  },
+  "copper": {
+    "_src": "e7c40e6200",
+    "system.description": "<div><p>The main material for producing cheap jewelry and inlays.</p></div>"
+  },
+  "croupon": {
+    "_src": "c7884aa3ab",
+    "system.description": "<div><p>Strong, stiff leather from both monsters and animals. One of the most popular materials for making armor.</p></div>"
+  },
+  "desertwort": {
+    "_src": "c18fc3f5f5",
+    "system.description": "<div><p>- deserts. </p><p>A thorny plant with bright green leaves and caustic sap.</p></div>"
+  },
+  "dragon_tears": {
+    "_src": "bee0dde941",
+    "system.description": "<div><p>- arctic, mountains. </p><p>Small bright blue flowers that glow in the Shadow Plane.  </p></div>"
+  },
+  "dryadwort": {
+    "_src": "f9a5c0e386",
+    "system.description": "<div><p>- swamps, forests, rivers, lakes. </p><p>Large round leaves with a strong pleasant scent, loved by many animals.</p></div>"
+  },
+  "ebony": {
+    "_src": "8f9f322a8b",
+    "system.description": "<div><p>This tree grows in the Changeling Forest and is one of the Kingdom of Gross's main exports. Able to carry magic and beautiful besides, it is widely used for decoration and for creating magic items. Because of its weight, it is poorly suited to weapons. </p></div>"
+  },
+  "false_stinkweed": {
+    "_src": "6d71bf8984",
+    "system.description": "<div><p>- desert. </p><p>Yellow, seemingly dead tufts of grass growing among the sands. Unlike true stinkweed, a herb useless for alchemy, this pungent plant holds great power.</p></div>"
+  },
+  "fey_pine": {
+    "_src": "cf1354cdd7",
+    "name": "Fay Pine"
+  },
+  "first_men_glass": {
+    "_src": "48ee93e1a5",
+    "name": "First Humans' Glass"
+  },
+  "gold": {
+    "_src": "cbb067e67b",
+    "system.description": "<div><p>The basis of the world's monetary system, a precious metal many crave to get their hands on. Not only for its price or looks: it is excellent for creating powerful magic items.</p></div>"
+  },
+  "goldenfleece_vine": {
+    "_src": "8600905bcb",
+    "system.description": "<div><p>- forests (jungle). </p><p>The hairy bark of this vine really does gleam gold or bronze from certain angles. </p></div>"
+  },
+  "grey_mold": {
+    "_src": "350aad0cf0",
+    "system.description": "<div><p>- underground, swamps. </p><p>Lives up to its name entirely; gives off an unpleasant rotten smell.</p></div>"
+  },
+  "gunpowder": {
+    "_src": "5e7edab408",
+    "name": "Gunpowder"
+  },
+  "hellroot": {
+    "_src": "afc6e6d0ef",
+    "system.description": "<div><p>- deserts, underground, mountains. </p><p>Unremarkable bushes with powerful black-and-red roots.</p></div>"
+  },
+  "imp_root": {
+    "_src": "c23311e034",
+    "system.description": "<div><p>- plains, deserts. </p><p>This pale plant is often found along roadsides. The root is used to make the drug of the same name.</p></div>"
+  },
+  "imperial_bloom": {
+    "_src": "4ebbf40fe2",
+    "system.description": "<div><p>- plains, mountains. </p><p>Large yellow flowers; some engravings show the first emperor of the Illior Empire wearing a wreath of these flowers. </p></div>"
+  },
+  "ink_stone": {
+    "_src": "b89d805949",
+    "name": "Inkstone"
+  },
+  "iron": {
+    "_src": "ef60121fd3",
+    "system.description": "<div><p>Widely used to make simple weapons and armor. It has roughly the same properties as steel but holds no magic at all. A necessary resource for producing steel and Cold Iron.</p></div>"
+  },
+  "mahogany": {
+    "_src": "f35b68e379",
+    "system.description": "<div><p>A beautiful wood, excellent for making musical instruments, furniture, and inlays.</p></div>"
+  },
+  "mercury": {
+    "_src": "4a6055a33b",
+    "system.description": "<div><p>A metal whose mysterious properties constantly draw scholars' attention. Widely used in alchemy; some alloys are made with it.</p></div>"
+  },
+  "mermaid_s_cauldron": {
+    "_src": "617b9bcb59",
+    "system.description": "<div><p>- coast, water. </p><p>A seaweed shaped like a cauldron or a basket.  </p></div>"
+  },
+  "mithral": {
+    "_src": "49a82c5345",
+    "system.description": "<div><p>Elves are very fond of this metal. They taught humans to work it. The elves themselves make not only marvelous armor from it but also jewelry. And although, having magic of its own, it can't take additional enchantments, its silvery sheen never fails to draw attention. Unfortunately, mithral is too light and flexible to make weapons.</p></div>"
+  },
+  "moon_pepper": {
+    "_src": "0a24273170",
+    "system.description": "<div><p>- underground, forests. </p><p>Considered one of the hottest spices in the world; also used in alchemy.</p></div>"
+  },
+  "necromancer_s_eye": {
+    "_src": "7c31cf87d7",
+    "system.description": "<div><p>- swamps, underground. </p><p>Toxic black berries with a red sheen.</p></div>"
+  },
+  "netted_datura": {
+    "_src": "842120527a",
+    "system.description": "<div><p>- swamps, forests. </p><p>A bizarre white-and-red mushroom. </p></div>"
+  },
+  "oak": {
+    "_src": "e1bb8e6d88",
+    "system.description": "<div><p>Widespread throughout the world, cultivated mainly in the Kingdom of Gross, the Illior Empire, and the Kingdom of Zanra. Used for making weapons, ships, and furniture, and in construction. </p></div>"
+  },
+  "orichalcum_cornflower": {
+    "_src": "318859dc6d",
+    "system.description": "<div><p>- mountains, arctic. </p><p>These amazing flowers grow near veins of orichalcum and have an iridescent metallic color, as if made of metal.</p></div>"
+  },
+  "padauk": {
+    "_src": "3edfebd94a",
+    "system.description": "<div><p>A strong and resilient wood that can also carry a magical charge. Widely used in weapon making. </p></div>"
+  },
+  "paper_parchment": {
+    "_src": "d9d1770a43",
+    "name": "Parchment"
+  },
+  "paper_rag": {
+    "_src": "2ceed7d473",
+    "name": "Rag Paper"
+  },
+  "phase_mushroom": {
+    "_src": "a0679bdf7f",
+    "system.description": "<div><p>- underground, forests. </p><p>Strange, half-extraplanar mushrooms that periodically phase between the Material Plane, the Aether, and the Shadow Plane.</p><p></p></div>"
+  },
+  "pine": {
+    "_src": "14170265df",
+    "system.description": "<div><p>Grows mainly in the Silent Forest in Dragons' Country, in the foothills of the Whitehead Mountains in the Principality of Zalessk, and in the Prefecture of the Dead. Some varieties of pine are grown in the Galley Forest of Drinrog and on the Golden Coast of Rojo. Used mainly for shipbuilding.</p></div>"
+  },
+  "rojian_ivy": {
+    "_src": "1f5b875e9c",
+    "system.description": "<div><p>plains, rivers, lakes, coast. </p><p>An ivy whose leaves redden toward the edges, like flame. </p></div>"
+  },
+  "saffian": {
+    "_src": "a06de9bb29",
+    "system.description": "<div><p>Very thin, light leather, traditionally dyed in bright colors.</p></div>"
+  },
+  "saint_sam_s_holly": {
+    "_src": "9b34634be4",
+    "system.description": "<div><p>- rivers, lakes. </p><p>The stems of this plant look like arrows; its purple flowers open only at night.</p></div>"
+  },
+  "sarati_s_sevenbloom": {
+    "_src": "7355b27805",
+    "system.description": "<div><p>- rivers. </p><p>A beautiful seven-colored flower growing along riverbanks, but mostly near the Sarati River.</p></div>"
+  },
+  "sea_scarlet_waterlily": {
+    "_src": "6977a1ca7b",
+    "system.description": "<div><p>coast. </p><p>Red flowers that grow on the Sunny Islands: the main ingredient of the drug Yaton.</p></div>"
+  },
+  "shadow_creeper": {
+    "_src": "32535a1c05",
+    "system.description": "<div><p>- underground, plains. </p><p>Flexible and strong as wire, this thorny shrub sometimes fills whole caves; because of its natural magic it is very hard to notice.</p></div>"
+  },
+  "shagreen": {
+    "_src": "1061b9ccb0",
+    "system.description": "<div><p>High-quality leather with embossed patterns, usually dyed in various colors.</p></div>"
+  },
+  "silver": {
+    "_src": "e90cb538e3",
+    "system.description": "<div><p>One of the most common materials for jewelry, inlays, and expensive household items such as cutlery.</p></div>"
+  },
+  "spark_moss": {
+    "_src": "2659e411ba",
+    "system.description": "<div><p>- underground, forests. </p><p>At night this moss glows faintly at the tips, which can give the impression that it is smoldering.</p></div>"
+  },
+  "spirit_cherry": {
+    "_src": "2775e211dd",
+    "system.description": "<div><p>This unusual tree is poorly suited to weapons, but it makes excellent magic wands and staves.  </p></div>"
+  },
+  "spiritus": {
+    "_src": "26203941af",
+    "name": "Alcohol",
+    "system.crafting.ingredients.1.name": "Vial"
+  },
+  "spongy_drowner": {
+    "_src": "bfba8fecad",
+    "system.description": "<div><p>coast. </p><p>Seaweed whose leaves, seen from the surface, resemble a drowned person.</p></div>"
+  },
+  "steel": {
+    "_src": "425b956b1a",
+    "system.description": "<div><p>Excellent for making any simple weapons and armor; it can carry magic.</p></div>"
+  },
+  "tarsk_s_death": {
+    "_src": "d582e2d47a",
+    "system.description": "<div><p>- plains. </p><p>No one has tried feeding these blue leaves to the legendary beast, but they certainly hold great magical potential.</p></div>"
+  },
+  "teak": {
+    "_src": "8a2687803b",
+    "system.description": "<div><p>Trees of this species grow mainly on the Sunny Islands and along the banks of the Sarati River in the Principality of Igni. This wood can carry magic while being strong and resistant to the elements. It is widely used to produce magic weapons. </p></div>"
+  },
+  "thunderleaf": {
+    "_src": "44a7247961",
+    "system.description": "<div><p>- mountains, forests, plains. </p><p>When carelessly touched, the leaves of this plant snap shut with a loud crack and sparks</p></div>"
+  },
+  "twilight_tree_fungus": {
+    "_src": "deb533b5c6",
+    "system.description": "<div><p>- forests, mountains, arctic. </p><p>These mushrooms prefer a cool climate and most often grow on conifers, in the shade of their branches</p></div>"
+  },
+  "uncle_s_bitterbloom": {
+    "_src": "4a8da4fff3",
+    "system.description": "<div><p>forests, mountains.</p><p>A plant with dark flowers; it usually grows on burned ground.</p></div>"
+  },
+  "vial": {
+    "_src": "9f6754c9c8",
+    "name": "Vial"
+  },
+  "volcanic_dragonwort": {
+    "_src": "d0dadfb4dc",
+    "system.description": "<div><p>- mountains (volcanoes). </p><p>A bright green plant whose stems are usually found on the slopes of volcanoes</p></div>"
+  },
+  "webbed_ethereal_vine": {
+    "_src": "0bd8c5fa44",
+    "system.description": "<div><p>- cities. </p><p>An extraplanar plant that entwines building facades in the Aether; it is thought to feed on strong human emotions, and alchemists gather good harvests near brothels and other places of entertainment.</p></div>"
+  },
+  "whispering_stalk": {
+    "_src": "0075ea14b1",
+    "system.description": "<div><p>- plains, rivers and lakes. </p><p>This plant usually grows near reeds. When the stems rub against each other they make a strange sound in which voices can be made out. They say the plant attracts ghosts.</p></div>"
+  },
+  "yew": {
+    "_src": "49d7b1a0bb",
+    "system.description": "<div><p>Common in the northeastern part of the continent, in the lands of Zanra, Vishnevodsk, and the Run Prefecture of the Illior Empire. Used mainly to make weapons.</p></div>"
+  },
+  "yuft": {
+    "_src": "ad3e66e6ef",
+    "system.description": "<div><p>Very strong leather, made mostly from monster hides; excellent for making armor.</p></div>"
+  }
+}

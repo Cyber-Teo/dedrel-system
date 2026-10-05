@@ -1,0 +1,186 @@
+{
+  "body_language": {
+    "_src": "328ffadbb0",
+    "name": "Body Language",
+    "system.description": "<p>All attacks by the chosen opponent against you use only the base roll, with no bonuses from talents, conditions, or maneuvers. The opponent cannot use maneuvers that require stealth or surprise against you.</p>"
+  },
+  "genetic_memory_atletism": {
+    "_src": "ccc5f4959a",
+    "name": "Genetic Memory: Athletics",
+    "system.description": "<p>You gain a +2 bonus to <strong>Athletics</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "Y9MbRNGmZTyY92yJ": {
+        "name": "Skill Bonus: Athletics"
+      }
+    }
+  },
+  "genetic_memory_craftsmanship": {
+    "_src": "b183e7fc07",
+    "name": "Genetic Memory: Craftsmanship",
+    "system.description": "<p>You gain a +2 bonus to <strong>Craftsmanship</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "QKYYywaQAijKVJlk": {
+        "name": "Skill Bonus: Craftsmanship"
+      }
+    }
+  },
+  "genetic_memory_cultural_awareness": {
+    "_src": "315d058735",
+    "name": "Genetic Memory: Cultural Awareness",
+    "system.description": "<p>You gain a +2 bonus to <strong>Cultural Awareness</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "3eHtt1xCnN7jr0Wn": {
+        "name": "Skill Bonus: Cultural Awareness"
+      }
+    }
+  },
+  "genetic_memory_deception": {
+    "_src": "bca70b7a2b",
+    "name": "Genetic Memory: Deception",
+    "system.description": "<p>You gain a +2 bonus to <strong>Deception</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "uCqmG3RIFESPAHUJ": {
+        "name": "Skill Bonus: Deception"
+      }
+    }
+  },
+  "genetic_memory_engineering": {
+    "_src": "ab51e60404",
+    "name": "Genetic Memory: Engineering",
+    "system.description": "<p>You gain a +2 bonus to <strong>Engineering</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "6bGb9G0E58MyJtO4": {
+        "name": "Skill Bonus: Engineering"
+      }
+    }
+  },
+  "genetic_memory_healing": {
+    "_src": "15b6f4c49a",
+    "name": "Genetic Memory: Healing",
+    "system.description": "<p>You gain a +2 bonus to <strong>Healing</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "pXaDDvdyPAqLPKTj": {
+        "name": "Skill Bonus: Healing"
+      }
+    }
+  },
+  "genetic_memory_insight": {
+    "_src": "0c49c03344",
+    "name": "Genetic Memory: Insight",
+    "system.description": "<p>You gain a +2 bonus to <strong>Insight</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "4byvC48wm3L9azbu": {
+        "name": "Skill Bonus: Insight"
+      }
+    }
+  },
+  "genetic_memory_interpretation": {
+    "_src": "3710210ede",
+    "name": "Genetic Memory: Interpretation",
+    "system.description": "<p>You gain a +2 bonus to <strong>Interpretation</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "iycFyoGz6s4AxhGo": {
+        "name": "Skill Bonus: Interpretation"
+      }
+    }
+  },
+  "genetic_memory_intimidation": {
+    "_src": "47eae7e108",
+    "name": "Genetic Memory: Intimidation",
+    "system.description": "<p>You gain a +2 bonus to <strong>Intimidation</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "cSYNkgbiDjPazGtB": {
+        "name": "Skill Bonus: Intimidation"
+      }
+    }
+  },
+  "genetic_memory_knowledge": {
+    "_src": "566d959745",
+    "name": "Genetic Memory: Knowledge",
+    "system.description": "<p>You gain a +2 bonus to <strong>Knowledge</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "R0Yn3eEbhj2mCnhB": {
+        "name": "Skill Bonus: Knowledge"
+      }
+    }
+  },
+  "genetic_memory_logic_reasoning": {
+    "_src": "8c2a4d6bcd",
+    "name": "Genetic Memory: Logic and Reasoning",
+    "system.description": "<p>You gain a +2 bonus to <strong>Logic and Reasoning</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "VIO5UTvhz3s8GK1J": {
+        "name": "Skill Bonus: Logic and Reasoning"
+      }
+    }
+  },
+  "genetic_memory_perception": {
+    "_src": "ff7e7c6815",
+    "name": "Genetic Memory: Perception",
+    "effects": {
+      "70bQaXuyQxkhRJUs": {
+        "name": "Genetic Memory: Perception"
+      }
+    }
+  },
+  "genetic_memory_performance": {
+    "_src": "a19aca32dc",
+    "name": "Genetic Memory: Performance",
+    "system.description": "<p>You gain a +2 bonus to <strong>Performance</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "AXQ3b77IGNuNigVr": {
+        "name": "Skill Bonus: Performance"
+      }
+    }
+  },
+  "genetic_memory_persuasion": {
+    "_src": "4a35e4fdb0",
+    "name": "Genetic Memory: Persuasion",
+    "system.description": "<p>You gain a +2 bonus to <strong>Persuasion</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "1in3Ez8EqlheT75M": {
+        "name": "Skill Bonus: Persuasion"
+      }
+    }
+  },
+  "genetic_memory_research": {
+    "_src": "788226cf58",
+    "name": "Genetic Memory: Research",
+    "system.description": "<p>You gain a +2 bonus to <strong>Research</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "EEXuylLzFCNyjISF": {
+        "name": "Skill Bonus: Research"
+      }
+    }
+  },
+  "genetic_memory_stealth": {
+    "_src": "a7caadec14",
+    "name": "Genetic Memory: Stealth",
+    "system.description": "<p>You gain a +2 bonus to <strong>Stealth</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "k8K6CaS4sso3S8xR": {
+        "name": "Skill Bonus: Stealth"
+      }
+    }
+  },
+  "genetic_memory_survival": {
+    "_src": "ffd32b8d86",
+    "name": "Genetic Memory: Survival",
+    "system.description": "<p>You gain a +2 bonus to <strong>Survival</strong> checks. The effect ends automatically after a Long Rest.</p>",
+    "effects": {
+      "t01wrwvFJL81f9U4": {
+        "name": "Skill Bonus: Survival"
+      }
+    }
+  },
+  "tactical_breakdown": {
+    "_src": "deaa671cd2",
+    "name": "Tactical Breakdown",
+    "system.description": "<p>+2 to attacks against this target and the right to reroll one damage die (the new result must be kept).</p>"
+  },
+  "taunt": {
+    "_src": "f465b74271",
+    "name": "Taunt",
+    "system.description": "<p>-3 to attacks against targets other than the taunter.</p>"
+  }
+}
