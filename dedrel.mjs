@@ -387,7 +387,7 @@ function dedrelBuildItemTypeGrid(app, element) {
   if (!options.length || !options.every(o => itemTypes.has(o.value))) return;
   if (root.querySelector(".dedrel-type-grid")) return; // already built
 
-  console.debug("[Dedrel] Строю сетку типов предметов:", options.map(o => o.value));
+  console.debug("[Dedrel] Building the item type grid:", options.map(o => o.value));
 
   const grid = document.createElement("div");
   grid.className = "dedrel-type-grid";
@@ -638,5 +638,5 @@ async function rebuildStatusEffects() {
     CONFIG.statusEffects[entry.id] = entry;
   }
 
-  console.log(`Dedrel | Status effects rebuilt: ${conditionItems.length} conditions (${hidden} скрыто из меню токена) [${CONFIG.statusEffects.map(s => s.id).join(", ")}]`);
+  console.log(`Dedrel | Status effects rebuilt: ${conditionItems.length} conditions (${hidden} hidden from the token menu) [${CONFIG.statusEffects.map(s => s.id).join(", ")}]`);
 }

@@ -16,11 +16,11 @@ export class DedrelMigration {
       try {
         const updateData = this.migrateActorData(actor.toObject());
         if (!foundry.utils.isEmpty(updateData)) {
-          console.log(`Dedrel | Миграция актера ${actor.name}`);
+          console.log(`Dedrel | Migrating actor ${actor.name}`);
           await actor.update(updateData);
         }
       } catch (err) {
-        console.error(`Dedrel | Ошибка при миграции актера ${actor.name}:`, err);
+        console.error(`Dedrel | Error migrating actor ${actor.name}:`, err);
       }
     }
     
@@ -29,11 +29,11 @@ export class DedrelMigration {
       try {
         const updateData = this.migrateItemData(item.toObject());
         if (!foundry.utils.isEmpty(updateData)) {
-          console.log(`Dedrel | Миграция предмета ${item.name}`);
+          console.log(`Dedrel | Migrating item ${item.name}`);
           await item.update(updateData);
         }
       } catch (err) {
-        console.error(`Dedrel | Ошибка при миграции предмета ${item.name}:`, err);
+        console.error(`Dedrel | Error migrating item ${item.name}:`, err);
       }
     }
 
@@ -52,11 +52,11 @@ export class DedrelMigration {
           }
         }
         if (tokenUpdates.length) {
-          console.log(`Dedrel | Миграция токенов сцены ${scene.name}`);
+          console.log(`Dedrel | Migrating scene tokens ${scene.name}`);
           await scene.updateEmbeddedDocuments("Token", tokenUpdates);
         }
       } catch (err) {
-        console.error(`Dedrel | Ошибка при миграции сцены ${scene.name}:`, err);
+        console.error(`Dedrel | Error migrating scene ${scene.name}:`, err);
       }
     }
 
@@ -171,7 +171,7 @@ export class DedrelMigration {
     for (const effect of targets) {
       const effectUpdate = this.migrateEffectData(effect.toObject());
       if (!foundry.utils.isEmpty(effectUpdate)) {
-        console.log(`Dedrel | Миграция эффекта ${effect.name} (${actor.name})`);
+        console.log(`Dedrel | Migrating effect ${effect.name} (${actor.name})`);
         await effect.update(effectUpdate);
       }
     }

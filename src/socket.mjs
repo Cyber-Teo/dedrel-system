@@ -43,7 +43,7 @@ export class DedrelSocket {
       case "take":             return this._applyTake(data);
       case "buyService":       return this._applyBuyService(data);
       case "distributeCoins":  return this._applyDistribute(data);
-      default: console.warn("Dedrel | Неизвестное socket-действие:", data?.action);
+      default: console.warn("Dedrel | Unknown socket action:", data?.action);
     }
   }
 

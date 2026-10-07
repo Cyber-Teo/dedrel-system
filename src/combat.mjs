@@ -32,7 +32,7 @@ async function applyConditionTicks(actor, trigger) {
       roll = new Roll(tick.formula, { stacks });
       await roll.evaluate();
     } catch (err) {
-      console.error(`Dedrel | Ошибка формулы тика кондиции "${effect.name}": ${tick.formula}`, err);
+      console.error(`Dedrel | Condition tick formula error "${effect.name}": ${tick.formula}`, err);
       continue;
     }
 

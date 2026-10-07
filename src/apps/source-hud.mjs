@@ -63,9 +63,9 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
     try {
       const response = await fetch(foundry.utils.getRoute(path));
       if (response.ok) markup = await response.text();
-      else console.error(`Dedrel | Символ доктрины не найден: ${path}`);
+      else console.error(`Dedrel | Doctrine symbol not found: ${path}`);
     } catch (error) {
-      console.error(`Dedrel | Не удалось загрузить символ доктрины «${key}»`, error);
+      console.error(`Dedrel | Failed to load doctrine symbol "${key}"`, error);
     }
     MagicSourceHUD.#glyphs.set(key, markup);
     return markup;

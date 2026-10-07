@@ -170,11 +170,11 @@ export class DedrelBonuses {
     const opValue = opValueParts.join(":").trim();
 
     if (!(op in DEFAULT_CONSUME)) {
-      console.warn(`Dedrel | Неизвестная операция DSL-модификатора: "${op}" в строке "${str}"`);
+      console.warn(`Dedrel | Unknown DSL modifier operation "${op}" in "${str}"`);
       return null;
     }
     if (opValue === "") {
-      console.warn(`Dedrel | Пустое значение операции "${op}" в строке "${str}"`);
+      console.warn(`Dedrel | Empty value for operation "${op}" in "${str}"`);
       return null;
     }
 
@@ -188,7 +188,7 @@ export class DedrelBonuses {
     for (const segment of segments.slice(1)) {
       const idx = segment.indexOf(":");
       if (idx === -1) {
-        console.warn(`Dedrel | Некорректный сегмент "${segment}" в строке модификатора "${str}"`);
+        console.warn(`Dedrel | Malformed segment "${segment}" in modifier string "${str}"`);
         return null;
       }
       const name = segment.slice(0, idx).trim();
@@ -201,18 +201,18 @@ export class DedrelBonuses {
           if (["any", "ranged", "melee", "shield"].includes(token)) continue;
           if (token.startsWith("skill:") || token.startsWith("key:") || token.startsWith("dtype:")) continue;
           if (token.startsWith("doctrine:") || token.startsWith("tech:") || token.startsWith("mod:")) continue;
-          console.warn(`Dedrel | Неизвестный токен фильтра "${token}" в строке "${str}". Для ключей манёвров используйте префикс "key:", например "key:${token}".`);
+          console.warn(`Dedrel | Unknown filter token "${token}" in "${str}". For maneuver keys use the "key:" prefix, e.g. "key:${token}".`);
           return null;
         }
         mod.filter = value || "any";
       } else if (name === "consume") {
         if (!(value in CONSUME_STAGES)) {
-          console.warn(`Dedrel | Неизвестный момент сгорания "consume:${value}" в строке "${str}"`);
+          console.warn(`Dedrel | Unknown burn moment "consume:${value}" in "${str}"`);
           return null;
         }
         mod.consume = value;
       } else {
-        console.warn(`Dedrel | Неизвестный параметр "${name}" в строке модификатора "${str}"`);
+        console.warn(`Dedrel | Unknown parameter "${name}" in modifier string "${str}"`);
         return null;
       }
     }
@@ -392,7 +392,7 @@ export class DedrelBonuses {
       } else if (parent instanceof Item && parent.type === "condition") {
         conditionItemIds.add(parent.id);
       } else {
-        console.warn(`Dedrel | Расходуемый DSL-модификатор находится на постоянном предмете "${parent?.name}" и не будет сожжён. Используйте consume:never или носитель-состояние.`);
+        console.warn(`Dedrel | A consumable DSL modifier sits on the permanent item "${parent?.name}" and will not be burned. Use consume:never or a condition carrier.`);
       }
     }
 

@@ -144,7 +144,7 @@ export const DEDREL_EFFECT_LIBRARY = {
 export function buildEffectData(key, opts = {}) {
   const preset = DEDREL_EFFECT_LIBRARY[key];
   if (!preset) {
-    console.warn(`Dedrel | Неизвестный пресет эффекта: "${key}"`);
+    console.warn(`Dedrel | Unknown effect preset: "${key}"`);
     return null;
   }
 

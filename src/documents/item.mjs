@@ -1027,7 +1027,7 @@ export default class DedrelItem extends Item {
           try {
             value = String(Roll.safeEval(value));
           } catch (err) {
-            console.warn(`Dedrel | Не удалось вычислить значение эффекта "${value}"`, err);
+            console.warn(`Dedrel | Failed to evaluate effect value "${value}"`, err);
           }
         }
         return { ...c, value };
