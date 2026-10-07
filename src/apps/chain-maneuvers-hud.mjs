@@ -14,7 +14,7 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     position: {
       width: 320,
       height: "auto",
-      left: 100, // Сдвигаем влево, чтобы не перекрывало центр
+      left: 100, // Shift to the left so as not to cover the center
       top: 100
     },
     actions: {
@@ -59,7 +59,7 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     context.usedManeuverName = this._usedManeuver ? this._usedManeuver.name : "";
 
     if (this._actor && this._usedManeuver) {
-      // Заклинания с Типом действия "В цепи" участвуют наравне с манёврами
+      // Spells with the "Chain" Action Type take part alongside maneuvers
       const allManeuvers = this._actor.items.filter(i => i.type === "maneuver" || i.type === "spell");
       const usedKey = this._usedManeuver.system.key || this._usedManeuver.name || this._usedManeuver.id;
 
@@ -84,10 +84,10 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
       });
 
       context.chainManeuvers = chains.map(i => {
-        // Стоимость с учётом DSL-модификаторов (та же логика, что и в Item#use()),
-        // иначе бесплатные по баффу манёвры отображались бы серыми и некликабельными.
+        // Cost including DSL modifiers (the same logic as in Item#use()),
+        // otherwise maneuvers made free by a buff would show up gray and unclickable.
         const { cost } = DedrelBonuses.effectiveApCost(this._actor, i);
-        // Пул зависит от типа: манёвры добирают из боевых ОД, заклинания — из ОД Магии
+        // The pool depends on the type: maneuvers draw from combat AP, spells from Magic AP
         const specificAp = i.type === "spell" ? apMagic : apManeuver;
         const canAfford = cost <= (apUniversal + specificAp);
 
@@ -110,8 +110,8 @@ export default class ChainManeuversHUD extends HandlebarsApplicationMixin(Applic
     
     const item = this.actor.items.get(itemId);
     if (item) {
-      // Запуск ИМЕННО цепью: манёвр, помеченный и Действием, и Цепью, не должен
-      // съедать Действие за ход, если его вызвали из этого HUD (см. action-economy.mjs).
+      // Launching SPECIFICALLY as a chain: a maneuver marked as both Action and Chain must not
+      // use up the turn's Action if it was invoked from this HUD (see action-economy.mjs).
       // Use the maneuver. The `use` method inside Item will trigger a new HUD if it's an action/chain
       await item.use({ mode: "chain" });
     }

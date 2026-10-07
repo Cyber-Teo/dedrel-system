@@ -3,22 +3,22 @@ import { SpellCalculator } from "../utils/spell-calculator.mjs";
 import { SOURCE_ORDER, sceneSourceScale } from "../utils/magic-source.mjs";
 
 /**
- * Конструктор Заклинаний (Магический Конструктор).
+ * Spell Constructor.
  *
- * Игрок собирает заклинание из Доктрины + Техник + Модификаторов с живым
- * пересчётом стоимости и лимитов (движок: SpellCalculator), после чего
- * сохраняет его как Item типа "spell" (и опционально сразу кастует через
- * штатный DedrelItem.use()).
+ * The player builds a spell from a Doctrine + Techniques + Modifiers with live
+ * recalculation of cost and limits (engine: SpellCalculator), then
+ * saves it as an Item of type "spell" (and optionally casts it right away via
+ * the standard DedrelItem.use()).
  *
- * Режимы:
- *  - Актор: доступны только разблокированные доктрины и изученные техники,
- *    лимиты от ранга доктрины актора.
- *  - ГМ-standalone (без актора): все доктрины из конфига, ранг задаётся
- *    вручную, изученность техник не проверяется; результат — мировой предмет
- *    (пресозданные заклинания, затем перетаскиваются в компендиум).
+ * Modes:
+ *  - Actor: only unlocked doctrines and learned techniques are available,
+ *    limits come from the actor's doctrine rank.
+ *  - GM standalone (no actor): all doctrines from the config, the rank is set
+ *    by hand, technique knowledge isn't checked; the result is a world item
+ *    (pre-made spells, later dragged into a compendium).
  *
- * Состояние сборки живёт в this.build (НЕ в форме документа) — это сознательный
- * обход FormDataExtended (см. FOUNDRY V14 QUIRKS.md, раздел 7).
+ * The build state lives in this.build (NOT in the document form) — a deliberate
+ * workaround for FormDataExtended (see FOUNDRY V14 QUIRKS.md, section 7).
  */
 export default class SpellConstructorApp extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -53,13 +53,13 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
 
   /**
    * @param {object} options
-   * @param {Actor|null} options.actor - актор-заклинатель; null = ГМ-standalone
-   * @param {Item|null} options.spellItem - существующее заклинание для префилла
+   * @param {Actor|null} options.actor - the caster actor; null = GM standalone
+   * @param {Item|null} options.spellItem - an existing spell to prefill from
    */
   constructor(options = {}) {
     super(options);
     this.actor = options.actor || null;
-    this.gmRank = 3; // ранг доктрины в standalone-режиме (селект в шапке)
+    this.gmRank = 3; // doctrine rank in standalone mode (the selector in the header)
 
     this.build = {
       name: "",
@@ -67,7 +67,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       path: "",
       sourceScale: "none",
       techniques: [],
-      // Выбранные модификаторы: { <key>: { rank, option } }
+      // Selected modifiers: { <key>: { rank, option } }
       modifiers: {}
     };
 
@@ -83,7 +83,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     return this.actor ? `${base}: ${this.actor.name}` : `${base} ${game.i18n.localize("DEDREL.Magic.UI.GMSuffix")}`;
   }
 
-  /** Префилл сборки из сохранённого spell-Item (кнопка "Открыть в конструкторе"). */
+  /** Prefilling the build from a saved spell Item (the "Open in Constructor" button). */
   #prefillFrom(item) {
     const sys = item.system;
     this.build.name = item.name;
@@ -97,7 +97,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     }
   }
 
-  /** Доктрины, доступные в текущем режиме (только описанные в конфиге Конструктора). */
+  /** Doctrines available in the current mode (only those described in the Constructor config). */
   #availableDoctrines(config) {
     const keys = Object.keys(config.doctrines);
     if (this.isStandalone) return keys;
@@ -105,20 +105,20 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
   }
 
   /**
-   * Уровень Источника доктрины на активной сцене. Резолвер общий с виджетом
-   * «Источники сцены» (utils/magic-source.mjs): сцена без флага отдаёт дефолт
-   * доктрины, а не «без ограничений», иначе селект разрешал бы больше,
-   * чем показывает виджет.
+   * The doctrine's Source level on the active scene. The resolver is shared with the
+   * Scene Sources widget (utils/magic-source.mjs): a scene without the flag returns the doctrine's
+   * default, not "unrestricted", otherwise the selector would allow more
+   * than the widget shows.
    */
   #sceneSourceScale(doctrineKey) {
     return sceneSourceScale(doctrineKey);
   }
 
   /**
-   * Опции селекта из компендиума: [{ value, label }], label = имя предмета.
-   * keyField задан ("system.key") — value берётся из него (ключ состояния,
-   * записи без ключа отбрасываются); иначе value = имя предмета.
-   * Индекс пака кэшируется ядром — повторные вызовы дёшевы.
+   * Selector options from a compendium: [{ value, label }], label = the item's name.
+   * keyField is set ("system.key") — value is taken from it (the condition key,
+   * entries without a key are dropped); otherwise value = the item's name.
+   * The pack index is cached by core — repeated calls are cheap.
    */
   async #packOptions(packIds, keyField = "", rankField = "") {
     const ids = Array.isArray(packIds) ? packIds : [packIds];
@@ -137,7 +137,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     return out.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
   }
 
-  /** build → плоский формат SpellCalculator + context текущего режима. */
+  /** build → the flat SpellCalculator format + the context of the current mode. */
   #compute(config) {
     const build = {
       doctrine: this.build.doctrine,
@@ -161,7 +161,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     context.gmRank = this.gmRank;
     context.buildName = this.build.name;
 
-    // --- Доктрины ---
+    // --- Doctrines ---
     const doctrineKeys = this.#availableDoctrines(config);
     if (!this.build.doctrine && doctrineKeys.length > 0) {
       this.build.doctrine = doctrineKeys[0];
@@ -176,7 +176,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     }));
 
     const doctrineCfg = config.doctrines[this.build.doctrine];
-    if (!doctrineCfg) return context; // нет доступных доктрин — шаблон покажет заглушку
+    if (!doctrineCfg) return context; // no doctrines available — the template will show a placeholder
 
     const doctrineRank = this.isStandalone
       ? this.gmRank
@@ -185,7 +185,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const limits = config.rankLimits[Math.min(Math.max(doctrineRank, 1), 6)];
     context.limits = limits;
 
-    // --- Путь: купленная талантом специализация (гайд §1); "без пути" легален всегда ---
+    // --- Path: a specialization purchased with a talent (guide §1); "no path" is always legal ---
     context.paths = null;
     let pathCfg = null;
     if (doctrineCfg.paths) {
@@ -208,12 +208,12 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       this.build.path = "";
     }
 
-    // --- Масштаб Источника (доктрины ignoresSource живут вне этой концепции) ---
+    // --- Source Scale (ignoresSource doctrines live outside this concept) ---
     context.hideSource = !!doctrineCfg.ignoresSource;
     if (context.hideSource) this.build.sourceScale = "none";
-    // Уровень сцены (виджет «Источники сцены») — потолок для игроков: можно выбрать
-    // уровень НИЖЕ сценового (осторожная магия), но не выше. ГМ не ограничен.
-    // Сцена без флага отдаёт дефолт доктрины — см. sceneSourceScale().
+    // The scene level (the Scene Sources widget) is the ceiling for players: they can choose
+    // a level BELOW the scene's (cautious magic), but not above. The GM isn't limited.
+    // A scene without the flag returns the doctrine's default — see sceneSourceScale().
     const sceneScale = this.#sceneSourceScale(this.build.doctrine);
     const sceneIdx = SOURCE_ORDER.indexOf(sceneScale);
     context.sourceScales = Object.entries(config.sourceScales).map(([k, v]) => {
@@ -227,17 +227,17 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     });
     context.sceneScaleLabel = i18n.localize(config.sourceScales[sceneScale].label);
     const abundant = !!config.sourceScales[this.build.sourceScale]?.ignoresMaxModCost;
-    // Режим изобилия (настройка мира): снимает ли изобильный источник maxModCost
+    // Abundance mode (world setting): whether an abundant source lifts maxModCost
     const bypassMaxCost = abundant && game.settings.get("dedrel", "abundantSourceMode") === "unlockAll";
 
-    // --- Правила цен/запретов для подсветки (та же логика, что в calculate) ---
+    // --- Price/ban rules for highlighting (the same logic as in calculate) ---
     const { deltas, forbidden, caps } = SpellCalculator.rulesFor(doctrineCfg, pathCfg);
     const priceOf = (target, base) => Math.max(0, base + (deltas[target] || 0));
-    // Доктринные модификаторы и формы (путь переопределяет формы, добавляет модификаторы)
+    // Doctrinal modifiers and forms (the path overrides the forms, adds modifiers)
     const ownedDoctrinal = new Set([...(doctrineCfg.modifiers || []), ...(pathCfg?.modifiers || [])]);
     const forms = pathCfg?.forms ?? doctrineCfg.forms ?? [];
 
-    // --- Анонс особенностей доктрины/пути: сродства, ограничения, запреты, капы ---
+    // --- Announcing the doctrine's/path's features: affinities, restrictions, bans, caps ---
     const nameOf = (target) => {
       const [kind, key] = target.split(":");
       return i18n.localize(kind === "tech" ? `DEDREL.Magic.Techniques.${key}` : `DEDREL.Magic.Modifiers.${key}`);
@@ -265,7 +265,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       : i18n.localize("DEDREL.Magic.UI.RuleNoForms"));
     context.doctrineRules = rules;
 
-    // --- Техники ---
+    // --- Techniques ---
     const apShort = i18n.localize("DEDREL.Magic.APShort");
     const knownTechniques = this.isStandalone ? null : (this.actor.system.magic?.techniques || {});
     context.techniques = Object.entries(config.techniques).map(([k, cfg]) => {
@@ -286,9 +286,9 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       };
     });
 
-    // --- Модификаторы по категориям ---
-    // Доктринные модификаторы рендерятся только владельцу (доктрине/пути из
-    // конфига), Форма — только при непустом списке форм: чужие строки скрыты.
+    // --- Modifiers by category ---
+    // Doctrinal modifiers are rendered only for their owner (the doctrine/path from
+    // the config), Form — only with a non-empty forms list: other rows are hidden.
     const categories = { scale: [], intensity: [], complexity: [] };
     for (const [k, cfg] of Object.entries(config.modifiers)) {
       if (cfg.doctrinal && !ownedDoctrinal.has(k)) continue;
@@ -309,18 +309,18 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         else if (!abundant && !doctrineCfg.ignoresSource && r === 5) reason = i18n.localize("DEDREL.Magic.UI.ReasonNeedsAbundant");
         else if (!bypassMaxCost && r > limits.maxModCost) reason = i18n.localize("DEDREL.Magic.UI.ReasonOverMaxCost");
 
-        // Подсказка "что даёт этот ранг": для урона — динамически по Лестнице
-        // (сдвиг доктрины + бонус Изобильного Источника), для остальных — RankHints
+        // Hint "what this rank gives": for damage — dynamically along the Ladder
+        // (doctrine shift + Abundant Source bonus), for the rest — RankHints
         const hint = k === "damage"
           ? SpellCalculator.damageFormulaFor(config, doctrineCfg, r, this.build.sourceScale)
           : (i18n.has(`DEDREL.Magic.RankHints.${k}.${r}`) ? i18n.localize(`DEDREL.Magic.RankHints.${k}.${r}`) : "");
 
-        // priceDelta — собственная надбавка модификатора (Области: +1 ОД)
+        // priceDelta — the modifier's own surcharge (Areas: +1 AP)
         const price = Math.max(0, r + (deltas[target] || 0) + (cfg.priceDelta || 0));
         ranks.push({
           rank: r,
           price,
-          // Форма/Тип действия показывают в ячейке текст, остальные — цену
+          // Form/Action Type show text in the cell, the rest show the price
           cellLabel: cfg.textRanks ? (hint || String(r)) : String(price),
           isText: !!cfg.textRanks,
           selected: chosen?.rank === r,
@@ -337,11 +337,11 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         ranks
       };
 
-      // Модификатор "Сила": выбор "табличный штраф ИЛИ состояние" (бонусных
-      // ветвей нет — универсального бафа "на всё" в системе нет). Состав списка
-      // всегда задаёт канон конфига (rankCfg.conditions); кураторский компендиум
-      // magic_conditions (conditionsFromPack) лишь подменяет имена/версии тех
-      // состояний, что в этом списке уже есть.
+      // The Power modifier: a choice of "table penalty OR condition" (there are no bonus
+      // branches — the system has no universal "to everything" buff). The list contents
+      // are always set by the config canon (rankCfg.conditions); the curated compendium
+      // magic_conditions (conditionsFromPack) only substitutes the names/versions of those
+      // conditions that are already in this list.
       if (k === "power" && chosen) {
         const rankCfg = cfg.ranks[chosen.rank];
         const options = [];
@@ -349,10 +349,10 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
           options.push({ value: "penalty", label: i18n.format("DEDREL.Magic.UI.PowerPenalty", { n: rankCfg.penalty }) });
         }
         if (rankCfg?.conditions?.length) {
-          // Пак — источник ИМЁН и кураторских версий состояний, но НЕ списка:
-          // какие состояния доступны на ранге, решает только канон конфига.
-          // Поэтому опции пака пересекаются с rankCfg.conditions, иначе
-          // непустой пак снёс бы ранговый гейт «Силы» целиком.
+          // The pack is the source of NAMES and curated versions of conditions, but NOT of the list:
+          // which conditions are available at a rank is decided only by the config canon.
+          // So the pack options are intersected with rankCfg.conditions, otherwise
+          // a non-empty pack would remove the Power rank gate entirely.
           const packOpts = cfg.conditionsFromPack ? await this.#packOptions(cfg.conditionsFromPack, "system.key") : [];
           const byKey = new Map(packOpts.map(o => [o.value, o]));
           for (const condKey of rankCfg.conditions) {
@@ -366,12 +366,12 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }
       }
 
-      // Модификаторы с выбором из пака (Адаптация ← biomancy_adaptations + mutilations).
-      // Значение опции — system.key предмета, а НЕ его имя: переименование адаптации
-      // не должно осиротить сохранённые заклинания (правило идентификации по key).
-      // Ранг предмета лежит в flags.dedrel.rank и обязан совпадать с рангом
-      // Модификатора: иначе Адаптация 1 предлагала бы крылья 4-го ранга.
-      // Пак пуст или на этом ранге ничего нет — остаётся подсказка ранга.
+      // Modifiers with a choice from a pack (Adaptation ← biomancy_adaptations + mutilations).
+      // The option value is the item's system.key, NOT its name: renaming an adaptation
+      // must not orphan saved spells (the identify-by-key rule).
+      // The item's rank lies in flags.dedrel.rank and must match the Modifier's
+      // rank: otherwise Adaptation 1 would offer rank 4 wings.
+      // The pack is empty or has nothing at this rank — the rank hint remains.
       if (cfg.optionsFromPack && chosen) {
         const packOpts = (await this.#packOptions(cfg.optionsFromPack, "system.key", "flags.dedrel.rank"))
           .filter(o => o.rank === chosen.rank);
@@ -381,7 +381,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }
       }
 
-      // Форма: выбор конкретного физического типа из списка форм доктрины/пути
+      // Form: choosing a specific physical type from the doctrine's/path's forms list
       if (k === "form" && chosen) {
         if (!forms.includes(chosen.option)) chosen.option = forms[0];
         row.powerOptions = forms.map(f => ({
@@ -391,7 +391,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }));
       }
 
-      // Насыщение (ранги 1–3): выбор свойства — навык/защита, урон оружию или DR
+      // Imbuement (ranks 1–3): choosing the property — skill/defense, weapon damage or DR
       if (k === "imbuement" && chosen) {
         const rankCfg = cfg.ranks[chosen.rank];
         const choices = rankCfg?.imbueChoice || [];
@@ -405,7 +405,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
         }
       }
 
-      // Запрет защиты: выбор "блок или уклонение" тем же селектом опций
+      // Forbid Defense: choosing "block or dodge" with the same options selector
       if (k === "forbidDefense" && chosen) {
         const choices = cfg.ranks[chosen.rank]?.forbidDefenseChoice || [];
         if (choices.length > 0) {
@@ -426,7 +426,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       { key: "complexity", label: i18n.localize("DEDREL.Magic.Categories.complexity"), modifiers: categories.complexity }
     ];
 
-    // --- Итог ---
+    // --- Total ---
     const { result } = this.#compute(config);
     context.result = result;
     context.errors = SpellCalculator.localizeErrors(result.errors);
@@ -442,7 +442,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Слушатели инпутов (селекты/текст не покрываются actions-кликами)    */
+  /*  Input listeners (selects/text aren't covered by the actions clicks)    */
   /* ------------------------------------------------------------------ */
 
   async _preRender(context, options) {
@@ -474,8 +474,8 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       this.gmRank = Math.min(Math.max(parseInt(ev.currentTarget.value) || 1, 1), 6);
       this.render();
     });
-    // Селекты опций модификаторов ("Сила", "Запрет защиты"): какому модификатору
-    // принадлежит селект, определяет data-mod-key строки
+    // Modifier option selectors (Power, Forbid Defense): which modifier
+    // a selector belongs to is determined by the row's data-mod-key
     html.querySelectorAll('[name="powerOption"]').forEach(el => el.addEventListener("change", ev => {
       const key = ev.currentTarget.dataset.modKey || "power";
       const chosen = this.build.modifiers[key];
@@ -502,7 +502,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     const key = target.dataset.key;
     const rank = parseInt(target.dataset.rank);
     const current = this.build.modifiers[key];
-    if (current?.rank === rank) delete this.build.modifiers[key]; // повторный клик снимает выбор
+    if (current?.rank === rank) delete this.build.modifiers[key]; // a repeated click clears the selection
     else this.build.modifiers[key] = { rank, option: "" };
     this.render();
   }
@@ -525,7 +525,7 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Сохранение                                                         */
+  /*  Saving                                                         */
   /* ------------------------------------------------------------------ */
 
   async #save({ cast, ephemeral = false }) {
@@ -545,9 +545,9 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
       },
       effects: this.#buildEffects(result)
     };
-    // Каст "на лету": реальный embedded Item (кнопки карточки чата ищут предмет
-    // по id на акторе), помеченный флагом; удаляется в конце боя (deleteCombat)
-    // или вручную. Кнопка "закрепить" на чаршите снимает флаг.
+    // An "on the fly" cast: a real embedded Item (the chat card buttons look up the item
+    // by id on the actor), marked with a flag; deleted at the end of combat (deleteCombat)
+    // or by hand. The "pin" button on the character sheet clears the flag.
     if (ephemeral) {
       foundry.utils.setProperty(itemData, "flags.dedrel.ephemeral", true);
     }
@@ -565,8 +565,8 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
   }
 
   /**
-   * Автоописание заклинания для карточки чата: расшифровка стоимости и
-   * человекочитаемые следствия (длительность, состояние, прочность).
+   * Auto-description of the spell for the chat card: the cost breakdown and
+   * human-readable consequences (duration, condition, durability).
    */
   #buildDescription(result) {
     const i18n = game.i18n;
@@ -589,14 +589,14 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
     if (extras.powerBonus) {
       facts.push(i18n.format("DEDREL.Magic.UI.AppliesBonus", { n: extras.powerBonus, dc: result.compiled.system.save_dc_formula }));
     }
-    // Текстовые эффекты доктринных модификаторов (замедление Сковывания, Пыльная
-    // завеса, форс-мув Принуждения, Адаптация...) — строка таблицы из RankHints
+    // Text effects of doctrinal modifiers (Constraint's slow, Dust
+    // Veil, Compulsion's forced move, Adaptation...) — a table row from RankHints
     for (const note of extras.factNotes || []) {
       const label = i18n.localize(`DEDREL.Magic.Modifiers.${note.key}`);
       const hintKey = `DEDREL.Magic.RankHints.${note.key}.${note.rank}`;
       const hint = i18n.has(hintKey) ? i18n.localize(hintKey) : "";
       const dc = note.saveDc ? ` (${i18n.format("DEDREL.Magic.UI.SaveDcShort", { dc: note.saveDc })})` : "";
-      // Выбор из пака (Адаптация: имя предмета-адаптации) — дописываем к строке
+      // A choice from a pack (Adaptation: the adaptation item's name) — appended to the line
       const opt = note.option ? ` — ${note.option}` : "";
       facts.push(`${label} ${note.rank}: ${hint}${opt}${dc}`);
     }
@@ -605,19 +605,19 @@ export default class SpellConstructorApp extends HandlebarsApplicationMixin(Appl
   }
 
   /**
-   * Эффекты предмета: накладываются кнопкой «Применить эффекты» карточки чата.
-   *  - штраф «Силы» → transfer:false эффект на броски (длительность — по
-   *    durationMode ранга; «Длительность» сборки состояния не продлевает);
-   *  - «Насыщение» → transfer:false эффект-маркер (v1: величина и свойство в
-   *    описании, конкретный ключ навыка/DR правит ГМ; без Длительности — 1 раунд).
-   * Состояния (appliedConditions) вешаются через реестр статусов при касте.
+   * Item effects: applied with the "Apply Effects" button of the chat card.
+   *  - the Power penalty → a transfer:false effect on rolls (duration — by
+   *    the rank's durationMode; the build's Duration doesn't extend the condition);
+   *  - Imbuement → a transfer:false marker effect (v1: the amount and property in
+   *    the description, the specific skill/DR key is edited by the GM; without Duration — 1 round).
+   * Conditions (appliedConditions) are applied through the status registry on cast.
    */
   #buildEffects(result) {
     const extras = result.compiled.extras;
     const effects = [];
     if (extras.powerBonus) {
       effects.push({
-        // powerBonus всегда отрицательный: позитивных ветвей у "Силы" нет
+        // powerBonus is always negative: Power has no positive branches
         name: game.i18n.format("DEDREL.Magic.UI.PowerEffectName", { n: extras.powerBonus }),
         img: "systems/dedrel/assets/icons/items/magic_item.svg",
         transfer: false,

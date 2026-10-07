@@ -3,12 +3,12 @@ import DedrelCharacterSheet from "../sheets/character-sheet.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 
 /**
- * HUD управления мировым временем (только для ГМа).
- * Открывается кнопкой на панели инструментов сцены (группа «Токены»).
+ * World time control HUD (GM only).
+ * Opened by a button on the scene controls (the Tokens group).
  *
- * Все сдвиги идут через game.time.advance() → ядро само гасит истёкшие
- * Active Effects (CONFIG.ActiveEffect.expiryAction = "delete", см. dedrel.mjs).
- * Shift+клик по кнопке сдвига двигает время НАЗАД.
+ * All shifts go through game.time.advance() → core itself clears expired
+ * Active Effects (CONFIG.ActiveEffect.expiryAction = "delete", see dedrel.mjs).
+ * Shift+click on a shift button moves time BACKWARD.
  */
 export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -40,7 +40,7 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
     }
   };
 
-  /** Время суток по часу: [отКоторогоЧаса, ключ локализации, иконка] */
+  /** Time of day by hour: [fromWhichHour, localization key, icon] */
   static TIME_OF_DAY = [
     [5, "Morning", "fa-solid fa-cloud-sun"],
     [11, "Day", "fa-solid fa-sun"],
@@ -59,20 +59,20 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
       weekday: game.i18n.localize(weekday.name),
       day: c.dayOfMonth + 1,
       month: game.i18n.localize(month.name),
-      // components.year — прошедшие годы от worldTime 0; смещение yearZero ядро
-      // само НИГДЕ не применяет (квирк §21), добавляем при отображении
+      // components.year — years elapsed since worldTime 0; core NEVER applies
+      // the yearZero offset itself (quirk §21), we add it on display
       year: c.year + (calendar.years.yearZero ?? 0)
     });
     context.timeLine = `${String(c.hour).padStart(2, "0")}:${String(c.minute).padStart(2, "0")}`;
 
-    // Сезон: границы в ordinal месяцев, зима (12–2) заворачивается через новый год
+    // Season: boundaries in month ordinals, winter (12–2) wraps around the new year
     const season = (calendar.seasons?.values ?? []).find(s => {
       if (s.monthStart <= s.monthEnd) return month.ordinal >= s.monthStart && month.ordinal <= s.monthEnd;
       return month.ordinal >= s.monthStart || month.ordinal <= s.monthEnd;
     });
     context.season = season ? game.i18n.localize(season.name) : "";
 
-    // Время суток (утро/день/вечер/ночь)
+    // Time of day (morning/day/evening/night)
     let tod = TimeHUD.TIME_OF_DAY.at(-1);
     for (const entry of TimeHUD.TIME_OF_DAY) {
       if (c.hour >= entry[0] && c.hour < entry[0] + 6) tod = entry;
@@ -83,7 +83,7 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
     return context;
   }
 
-  /** Кнопки-пресеты: сдвиг в секундах из data-атрибутов (Shift — назад). */
+  /** Preset buttons: shift in seconds from the data attributes (Shift — backward). */
   static async #onAdvance(event, target) {
     const hours = Number(target.dataset.hours || 0);
     const days = Number(target.dataset.days || 0);
@@ -92,7 +92,7 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
     await game.time.advance(seconds);
   }
 
-  /** Произвольный сдвиг: запрос числа часов (отрицательное — назад). */
+  /** Arbitrary shift: prompt for the number of hours (negative — backward). */
   static async #onAdvanceCustom(event, target) {
     const result = await DialogV2.prompt({
       window: { title: game.i18n.localize("DEDREL.Time.CustomTitle") },
@@ -109,9 +109,9 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   }
 
   /**
-   * Короткий/долгий отдых для группы. Цели: актёры выделенных токенов,
-   * без выделения — все персонажи игроков. Время двигается ОДИН раз,
-   * поэтому performRest вызывается с advanceTime: false.
+   * Short/long rest for the group. Targets: the actors of the selected tokens,
+   * with nothing selected — all player characters. Time moves ONCE,
+   * so performRest is called with advanceTime: false.
    */
   static async #onRest(event, target) {
     const restType = target.dataset.restType;
@@ -144,7 +144,7 @@ export default class TimeHUD extends HandlebarsApplicationMixin(ApplicationV2) {
     });
   }
 
-  /** Открыть/закрыть по кнопке на панели сцены. */
+  /** Open/close via the button on the scene controls. */
   toggle() {
     if (this.rendered) return this.close();
     return this.render({ force: true });

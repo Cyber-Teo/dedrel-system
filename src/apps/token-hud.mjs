@@ -1,14 +1,14 @@
 /**
- * HUD токена с поддержкой стакающихся кондиций (system.stackable у Item типа condition).
+ * Token HUD with support for stacking conditions (system.stackable on Items of type condition).
  *
- * Поведение кликов по иконке статуса в выпадающей палитре:
- * - Нестакающиеся статусы — стандартное поведение ядра (toggle, ПКМ — оверлей).
- * - Стакающиеся, статус ещё не висит — накладывается первый стак (как обычно).
- * - Стакающиеся, статус уже активен: ЛКМ добавляет стак (до max_stacks),
- *   ПКМ снимает один стак (последний стак удаляет эффект). Оверлей для
- *   стакающихся кондиций недоступен — ПКМ занят декрементом.
+ * Click behavior on a status icon in the dropdown palette:
+ * - Non-stacking statuses — standard core behavior (toggle, right-click — overlay).
+ * - Stacking, the status isn't present yet — the first stack is applied (as usual).
+ * - Stacking, the status is already active: left-click adds a stack (up to max_stacks),
+ *   right-click removes one stack (the last stack deletes the effect). The overlay isn't
+ *   available for stacking conditions — right-click is taken by the decrement.
  *
- * Регистрируется через CONFIG.Token.hudClass (официальная точка замены, V14).
+ * Registered via CONFIG.Token.hudClass (the official replacement point, V14).
  */
 export default class DedrelTokenHUD extends foundry.applications.hud.TokenHUD {
   static DEFAULT_OPTIONS = {
@@ -38,7 +38,7 @@ export default class DedrelTokenHUD extends foundry.applications.hud.TokenHUD {
       return;
     }
 
-    // Поведение ядра (TokenHUD.#onToggleEffect): toggle по текущему состоянию иконки
+    // Core behavior (TokenHUD.#onToggleEffect): toggle by the icon's current state
     await actor.toggleStatusEffect(statusId, {
       active: !isActive,
       overlay: event.button === 2

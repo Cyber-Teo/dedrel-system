@@ -4,12 +4,12 @@ import { DedrelCurrency } from "../utils/currency.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * Меню настройки валют мира (game.settings.registerMenu → "currencies").
- * Табличный редактор: строки валют с ключом/названием/аббревиатурой/базовой
- * ценностью/весом/цветом. Сохраняет массив в настройку "currencies".
+ * World currency settings menu (game.settings.registerMenu → "currencies").
+ * A table editor: currency rows with key/name/abbreviation/base
+ * value/weight/color. Saves the array into the "currencies" setting.
  *
- * Рабочая копия строк живёт в this._rows; add/remove читают текущие значения
- * из DOM перед мутацией, чтобы не терять несохранённый ввод при ре-рендере.
+ * The working copy of the rows lives in this._rows; add/remove read the current values
+ * from the DOM before mutating, so as not to lose unsaved input on re-render.
  */
 export default class CurrencyConfigApp extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -33,14 +33,14 @@ export default class CurrencyConfigApp extends HandlebarsApplicationMixin(Applic
     form: { template: "systems/dedrel/templates/apps/currency-config.hbs" }
   };
 
-  /** @type {Array|null} рабочая копия строк валют */
+  /** @type {Array|null} working copy of the currency rows */
   _rows = null;
 
   async _prepareContext(options) {
     if (!this._rows) {
       const saved = game.settings.get("dedrel", "currencies");
-      // Дефолты хранят i18n-ключи в name/abbr; в форму отдаём уже текст,
-      // чтобы при сохранении в мир ушли литеральные названия.
+      // The defaults store i18n keys in name/abbr; the form gets already resolved text,
+      // so that literal names go into the world on save.
       this._rows = Array.isArray(saved) && saved.length
         ? DedrelCurrency.localizeDefs(saved)
         : DedrelCurrency.localizeDefs(DEFAULT_CURRENCIES);
@@ -48,7 +48,7 @@ export default class CurrencyConfigApp extends HandlebarsApplicationMixin(Applic
     return { rows: this._rows };
   }
 
-  /** Считывает текущие значения строк из DOM в массив объектов. */
+  /** Reads the current row values from the DOM into an array of objects. */
   #readRowsFromDom() {
     const rows = [];
     for (const tr of this.element.querySelectorAll(".currency-row")) {
@@ -84,10 +84,10 @@ export default class CurrencyConfigApp extends HandlebarsApplicationMixin(Applic
 
   static async #onSubmit(event, form, formData) {
     const rows = this.#readRowsFromDom()
-      // Пустые/безымянные строки игнорируем
+      // Empty/nameless rows are ignored
       .filter(r => r.key && r.name);
 
-    // Проверка уникальности ключей
+    // Key uniqueness check
     const keys = rows.map(r => r.key);
     const dup = keys.find((k, i) => keys.indexOf(k) !== i);
     if (dup) {

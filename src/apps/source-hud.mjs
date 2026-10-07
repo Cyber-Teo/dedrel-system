@@ -8,27 +8,27 @@ import {
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * Виджет «Источники сцены»: полоса алхимических символов в левой колонке
- * интерфейса, видимая всем и всегда.
+ * The Scene Sources widget: a strip of alchemical symbols in the left column
+ * of the interface, visible to everyone at all times.
  *
- * Зачем: Масштаб Источника решает, нужна ли магу техника «Создать» (2 ОД) или
- * хватит «Направить» (1 ОД), и открыты ли Модификаторы 5-го ранга. До виджета
- * это знание жило во флаге сцены и всплывало только внутри Конструктора —
- * игрок за столом не видел, на что рассчитывать.
+ * Why: the Source Scale decides whether a caster needs the Create technique (2 AP) or
+ * whether Direct (1 AP) is enough, and whether rank 5 Modifiers are open. Before the widget
+ * this knowledge lived in a scene flag and surfaced only inside the Constructor —
+ * a player at the table couldn't see what to count on.
  *
- * ГМ: ЛКМ по символу поднимает уровень (нет → есть → изобильный → нет),
- * Shift+ЛКМ опускает. Игрок видит те же символы только на чтение.
+ * GM: left-click on a symbol raises the level (none → present → abundant → none),
+ * Shift+left-click lowers it. A player sees the same symbols read-only.
  *
- * Вёрстка: элемент вставляется в #ui-left и позиционируется абсолютно
- * (у #ui-left есть transform, поэтому он же — containing block). В поток
- * колонки лезть нельзя: #scene-controls меряет свою высоту в setPosition(),
- * чтобы разложить инструменты по столбцам, и лишний flex-сосед ломает расчёт.
+ * Layout: the element is inserted into #ui-left and positioned absolutely
+ * (#ui-left has a transform, so it is also the containing block). Getting into the column's
+ * flow is not allowed: #scene-controls measures its height in setPosition()
+ * to lay its tools out in columns, and an extra flex sibling breaks the calculation.
  */
 export default class MagicSourceHUD extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "dedrel-source-hud",
-    // Без faded-ui: ядро гасит такие элементы до opacity 0.4, а виджет должен
-    // читаться без наведения — приглушение здесь несёт смысл «нет Источника».
+    // No faded-ui: core dims such elements to opacity 0.4, while the widget must
+    // read without hovering — dimming here carries the meaning "no Source".
     classes: ["dedrel", "dedrel-source-hud"],
     tag: "aside",
     window: {
@@ -47,15 +47,15 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
   };
 
   /**
-   * Разметка символов доктрин, вычитанная из assets/icons/doctrines/<ключ>.svg.
-   * Инлайн, а не <img> и не CSS-маска: только у встроенного в DOM SVG работает
-   * fill="currentColor", то есть цвет состояния задаётся одним правилом CSS.
-   * Файлы читаются один раз на клиента.
+   * Doctrine symbol markup, read from assets/icons/doctrines/<key>.svg.
+   * Inline, not an <img> or a CSS mask: only an SVG embedded in the DOM supports
+   * fill="currentColor", i.e. the state color is set by a single CSS rule.
+   * The files are read once per client.
    * @type {Map<string, string>}
    */
   static #glyphs = new Map();
 
-  /** Разметка символа доктрины; пустая строка, если файл не отдался. */
+  /** A doctrine symbol's markup; an empty string if the file wasn't served. */
   static async #glyph(key) {
     if (MagicSourceHUD.#glyphs.has(key)) return MagicSourceHUD.#glyphs.get(key);
     const path = `systems/dedrel/assets/icons/doctrines/${key}.svg`;
@@ -72,7 +72,7 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Рендер                                                             */
+  /*  Rendering                                                             */
   /* ------------------------------------------------------------------ */
 
   async _prepareContext(options) {
@@ -82,7 +82,7 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
     const scene = canvas?.scene ?? null;
 
     context.isGM = game.user.isGM;
-    // Нет сцены — пустая колонка: виджет схлопывается сам, прятать нечего
+    // No scene — an empty column: the widget collapses on its own, nothing to hide
     if (!scene) {
       context.doctrines = [];
       return context;
@@ -105,9 +105,9 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
   }
 
   /**
-   * Вставка в левую колонку интерфейса вместо document.body.
-   * Ядро ищет элемент с тем же id и заменяет его — при ре-рендере это
-   * сохраняет позицию в DOM, поэтому ветку existing оставляем первой.
+   * Inserting into the left interface column instead of document.body.
+   * Core looks for an element with the same id and replaces it — on re-render this
+   * keeps the DOM position, so the existing branch stays first.
    * @override
    */
   async _insertElement(element, options = {}) {
@@ -118,13 +118,13 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Действия                                                           */
+  /*  Actions                                                           */
   /* ------------------------------------------------------------------ */
 
   /**
-   * Клик по символу доктрины (только ГМ): следующий уровень Источника,
-   * с Shift — предыдущий. Запись во флаг сцены разошлётся всем клиентам
-   * хуком updateScene, отдельная синхронизация не нужна.
+   * Click on a doctrine symbol (GM only): the next Source level,
+   * with Shift — the previous one. The write to the scene flag is broadcast to all clients
+   * by the updateScene hook, no separate sync needed.
    */
   static async #onCycle(event, target) {
     if (!game.user.isGM) return;
@@ -136,13 +136,13 @@ export default class MagicSourceHUD extends HandlebarsApplicationMixin(Applicati
   }
 
   /* ------------------------------------------------------------------ */
-  /*  Хуки                                                               */
+  /*  Hooks                                                               */
   /* ------------------------------------------------------------------ */
 
   /**
-   * Перерисовка по смене сцены и по чужой правке флага. updateScene ловим
-   * только для активной сцены и только когда менялся именно наш флаг —
-   * иначе виджет дёргается на каждом сдвиге освещения.
+   * Redraw on scene change and on someone else's flag edit. updateScene is caught
+   * only for the active scene and only when our flag specifically changed —
+   * otherwise the widget twitches on every lighting shift.
    */
   activateHooks() {
     Hooks.on("canvasReady", () => this.render({ force: true }));

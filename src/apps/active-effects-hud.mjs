@@ -46,8 +46,8 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
-    // Согласно архитектуре V14, сайдбар всегда свернут по умолчанию.
-    // Официальный источник истины — геттер ui.sidebar.expanded
+    // Per the V14 architecture, the sidebar is always collapsed by default.
+    // The official source of truth is the ui.sidebar.expanded getter
     let isCollapsed = true;
     if (ui.sidebar && ui.sidebar.expanded !== undefined) {
       isCollapsed = !ui.sidebar.expanded;
@@ -57,8 +57,8 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
     context.effects = [];
     
     if (this._actor) {
-      // Маркеры собственных аур носителя: они transfer: false и не входят
-      // в appliedEffects, но игроку нужен быстрый тумблер (ПКМ выключает ауру)
+      // Markers of the bearer's own auras: they are transfer: false and aren't part
+      // of appliedEffects, but the player needs a quick toggle (right-click turns the aura off)
       const ownMarkers = [];
       for (const item of this._actor.items) {
         for (const e of item.effects) {
@@ -74,13 +74,13 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
         // Show effects that are not disabled and either have a status ID, are a condition, or have an icon/img
         const isCondition = e.flags?.dedrel?.condition === true;
         const hasStatus = e.statuses?.size > 0;
-        // Бафы/дебафы, навешенные аурой (см. src/canvas/aura-regions.mjs) —
-        // пассивные, без статуса, но игроку важно видеть, что он под аурой.
-        // Копию СОБСТВЕННОЙ ауры не показываем: её представляет иконка маркера.
+        // Buffs/debuffs applied by an aura (see src/canvas/aura-regions.mjs) —
+        // passive, without a status, but it matters to the player to see they're under an aura.
+        // A copy of one's OWN aura isn't shown: the marker icon represents it.
         const auraMarker = e.flags?.dedrel?.auraApplied;
         const isAuraApplied = !!auraMarker && !ownMarkerUuids.has(auraMarker);
-        // Световые эффекты (token.light.*) показываем всегда: игроку нужен
-        // быстрый доступ к тумблеру (ПКМ гасит), без костыля с длительностью
+        // Light effects (token.light.*) are always shown: the player needs
+        // quick access to the toggle (right-click turns it off), without a duration hack
         return !e.disabled && !(auraMarker && ownMarkerUuids.has(auraMarker))
           && (isCondition || hasStatus || isAuraApplied || e.isTemporary || hasTokenLightChanges(e));
       });
@@ -92,7 +92,7 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
 
         let durationText = "";
 
-        // Foundry предоставляет готовый e.duration.label, который показывает *оставшееся* время на текущем языке.
+        // Foundry provides a ready e.duration.label that shows the *remaining* time in the current language.
         if (e.duration && e.duration.label) {
           tooltip += `<br><em><i class="fas fa-clock"></i> ${e.duration.label}</em>`;
           const match = e.duration.label.match(/\d+/);
@@ -119,7 +119,7 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           description: e.description || "",
           tooltip: tooltip,
           durationText: durationText,
-          // Счётчик стаков показываем от двух: один стак — обычное состояние
+          // The stack counter is shown from two up: a single stack is a regular condition
           stacks: (e.flags?.dedrel?.stacks ?? 1) > 1 ? e.flags.dedrel.stacks : null,
           isAuraMarker: isAuraMarker,
           isTechnical: e.flags?.dedrel?.is_technical || false
@@ -160,15 +160,15 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       el.addEventListener("contextmenu", async (event) => {
         event.preventDefault();
         if (!this.actor) return;
-        // uuid нужен для эффектов, вложенных в предметы (маркеры аур):
-        // их нет в actor.effects
+        // uuid is needed for effects embedded in items (aura markers):
+        // they aren't in actor.effects
         const effect = el.dataset.effectUuid
           ? foundry.utils.fromUuidSync(el.dataset.effectUuid, { strict: false })
           : this.actor.effects.get(el.dataset.effectId);
         if (!effect) return;
 
-        // Маркер ауры не удаляем, а выключаем: настройки (радиус, цели)
-        // сохраняются, включить обратно можно кнопкой на карточке предмета в чате
+        // An aura marker isn't deleted but disabled: the settings (radius, targets)
+        // are kept, and it can be turned back on with the button on the item's chat card
         if (effect.getFlag("dedrel", "aura")) {
           const confirmed = await foundry.applications.api.DialogV2.confirm({
             window: { title: game.i18n.localize("DEDREL.Notifications.DisableAuraTitle") },
@@ -181,10 +181,10 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
           return;
         }
 
-        // Transfer-эффект живёт НА ПРЕДМЕТЕ (фонарь, зачарованная вещь) и виден
-        // в HUD как эффект актёра: delete() снёс бы его с самого предмета вместе
-        // с настройками. Вместо удаления выключаем (disabled) — включить обратно
-        // можно использованием предмета (тумблер света) или с его листа.
+        // A transfer effect lives ON THE ITEM (a lantern, an enchanted item) and is shown
+        // in the HUD as an actor effect: delete() would remove it from the item itself along
+        // with its settings. Instead of deleting we disable it — it can be turned back on
+        // by using the item (the light toggle) or from its sheet.
         if (effect.transfer && effect.parent instanceof Item) {
           const confirmed = await foundry.applications.api.DialogV2.confirm({
             window: { title: game.i18n.localize("DEDREL.Notifications.DisableItemEffectTitle") },
@@ -215,14 +215,14 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
       Hooks.on("createActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("updateActiveEffect", this._onEffectChange.bind(this)),
       Hooks.on("deleteActiveEffect", this._onEffectChange.bind(this)),
-      // Правки предметов меняют набор transfer-эффектов актёра (например,
-      // удаление таланта уносит его эффекты БЕЗ хуков deleteActiveEffect)
+      // Item edits change the actor's set of transfer effects (e.g.
+      // deleting a talent takes its effects away WITHOUT deleteActiveEffect hooks)
       Hooks.on("createItem", this._onEffectChange.bind(this)),
       Hooks.on("updateItem", this._onEffectChange.bind(this)),
       Hooks.on("deleteItem", this._onEffectChange.bind(this)),
       Hooks.on("updateToken", this._onEffectChange.bind(this)),
-      // Время/бой не несут актёра — идут отдельным обработчиком, который
-      // переподготавливает длительности и перерисовывает счётчик раундов.
+      // Time/combat don't carry an actor — they go through a separate handler that
+      // re-prepares the durations and redraws the round counter.
       Hooks.on("updateWorldTime", this._onTimeChange.bind(this)),
       Hooks.on("updateCombat", this._onTimeChange.bind(this)),
       Hooks.on("updateCombatant", this._onTimeChange.bind(this)),
@@ -257,30 +257,30 @@ export default class ActiveEffectsHUD extends HandlebarsApplicationMixin(Applica
   _onEffectChange(doc, ...args) {
     const current = this._actor;
     if (!current) return;
-    // Эффект может быть вложен в предмет (transfer-эффекты талантов и т.п.) —
-    // тогда актёр находится на уровень выше (effect.parent.parent).
+    // The effect may be embedded in an item (transfer effects of talents, etc.) —
+    // then the actor is one level up (effect.parent.parent).
     let parent = doc?.parent;
     if (parent?.documentName === "Item") parent = parent.parent;
     if (parent?.documentName !== "Actor") return;
-    // Сравниваем по id/uuid, а НЕ по ссылке: у несвязанного токена синтетический
-    // актёр пересоздаётся при апдейтах, из-за чего сохранённый this._actor
-    // устаревает и строгое сравнение (parent === this.actor) молча не срабатывало —
-    // панель не обновлялась (напр. счётчик стаков «залипал» до перевыделения).
-    // Заодно переустанавливаем актёра на свежий экземпляр (сеттер перерисует),
-    // чтобы _prepareContext читал актуальные appliedEffects.
+    // Compare by id/uuid, NOT by reference: for an unlinked token the synthetic
+    // actor is recreated on updates, so the saved this._actor
+    // goes stale and the strict comparison (parent === this.actor) silently failed —
+    // the panel didn't update (e.g. the stack counter "stuck" until reselection).
+    // At the same time we reset the actor to the fresh instance (the setter redraws),
+    // so that _prepareContext reads the current appliedEffects.
     if (parent.id === current.id || parent.uuid === current.uuid) {
       this.actor = parent;
     }
   }
 
   /**
-   * Продвижение времени мира или раунда/хода боя. Эти хуки не несут актёра,
-   * поэтому фильтровать по нему нельзя. Длительности эффектов (duration.label,
-   * оставшиеся раунды) — ПОДГОТАВЛИВАЕМЫЕ значения (ActiveEffect#_prepareDuration
-   * в prepareDerivedData), а не живые геттеры: ядро на updateWorldTime лишь
-   * прогоняет реестр истечения, но label не пересчитывает. Поэтому вручную
-   * переподготавливаем актёра и перерисовываем — иначе счётчик раундов застывал
-   * до перевыделения токена.
+   * Advancing world time or a combat round/turn. These hooks don't carry an actor,
+   * so they can't be filtered by it. Effect durations (duration.label,
+   * remaining rounds) are PREPARED values (ActiveEffect#_prepareDuration
+   * in prepareDerivedData), not live getters: core on updateWorldTime only
+   * runs the expiry registry, but doesn't recompute the label. So we manually
+   * re-prepare the actor and redraw — otherwise the round counter froze
+   * until the token was reselected.
    */
   _onTimeChange() {
     if (!this._actor || !this.rendered) return;

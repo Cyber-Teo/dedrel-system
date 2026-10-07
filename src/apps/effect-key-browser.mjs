@@ -4,18 +4,18 @@ import { DedrelBonuses, MOD_CHANGE_KEY } from "../utils/dedrel-bonuses.mjs";
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * «Справочник ключей» — мастерский инструмент подбора ключей Active Effects.
+ * The Effect Key Browser — a GM tool for picking Active Effect keys.
  *
- * Две зоны:
- *  1. Каталог ключей system.* с живым поиском и кнопкой копирования у каждой
- *     строки (источник — buildEffectKeyCatalog, интроспекция схемы персонажа).
- *  2. Конструктор DSL-строк flags.dedrel.mod: операция + условия фильтра (OR)
- *     + момент сгорания; собранная строка валидируется настоящим парсером
- *     движка (DedrelBonuses.parseMod) и копируется в буфер.
+ * Two zones:
+ *  1. A catalog of system.* keys with live search and a copy button on each
+ *     row (source — buildEffectKeyCatalog, introspection of the character schema).
+ *  2. A builder for flags.dedrel.mod DSL strings: operation + filter conditions (OR)
+ *     + burn moment; the assembled string is validated by the engine's real
+ *     parser (DedrelBonuses.parseMod) and copied to the clipboard.
  *
- * Открытие: game.dedrel.openEffectKeyBrowser() или кнопка на панели сцены (ГМ).
- * Поиск фильтрует строки без ре-рендера (скрытие по data-search), чтобы не
- * терять фокус в поле ввода.
+ * Opening: game.dedrel.openEffectKeyBrowser() or a button on the scene controls (GM).
+ * Search filters rows without a re-render (hiding by data-search), so as not to
+ * lose focus in the input field.
  */
 export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -34,18 +34,18 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
   static PARTS = {
     main: {
       template: "systems/dedrel/templates/apps/effect-key-browser.hbs",
-      // Сохраняет позицию скролла каталога при ре-рендере (смена операции/фильтра DSL)
+      // Keeps the catalog's scroll position on re-render (change of DSL operation/filter)
       scrollable: [".ekb-list"]
     }
   };
 
-  /** Текущий поисковый запрос (переживает ре-рендер). */
+  /** The current search query (survives re-render). */
   _search = "";
 
-  /** Состояние конструктора DSL. filters — условия OR. */
+  /** DSL builder state. filters — OR conditions. */
   _dsl = { op: "attack", value: "", filters: [{ type: "any", value: "" }], consume: "" };
 
-  /** Раскрытые категории каталога (переживают ре-рендер). */
+  /** Expanded catalog categories (survive re-render). */
   _openCategories = new Set(["attributes"]);
 
   async _prepareContext(options) {
@@ -84,7 +84,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     };
   }
 
-  /** Контекст одной строки условия фильтра (тип + значение нужного вида). */
+  /** Context of one filter condition row (type + a value of the needed kind). */
   #prepareFilterRow(filter, index) {
     const typeDef = DSL_FILTER_TYPES.find(t => t.key === filter.type) ?? DSL_FILTER_TYPES[0];
     const row = {
@@ -104,7 +104,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     return row;
   }
 
-  /** Собирает DSL-строку из состояния конструктора. */
+  /** Assembles the DSL string from the builder state. */
   #buildDslString() {
     const { op, value, filters, consume } = this._dsl;
     const opDef = DSL_OPS.find(o => o.key === op) ?? DSL_OPS[0];
@@ -115,7 +115,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
       if (!typeDef || typeDef.valueKind === "none") return f.type;
       return f.value.trim() ? `${f.type}:${f.value.trim()}` : "";
     }).filter(t => t.length > 0);
-    // "any" в OR-цепочке поглощает остальные условия — не засоряем строку
+    // "any" in an OR chain absorbs the other conditions — don't clutter the string
     const meaningful = tokens.filter(t => t !== "any");
     if (meaningful.length > 0) segments.push(`filter:${meaningful.join("|")}`);
 
@@ -123,12 +123,12 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     return segments.join("; ");
   }
 
-  /** Валидация собранной строки настоящим парсером движка. */
+  /** Validating the assembled string with the engine's real parser. */
   #isDslValid(str) {
     return DedrelBonuses.parseMod(str) !== null;
   }
 
-  /** Считывает состояние конструктора из DOM (перед ре-рендером/копированием). */
+  /** Reads the builder state from the DOM (before re-render/copying). */
   #readDslFromDom() {
     const el = this.element;
     if (!el) return;
@@ -146,7 +146,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     if (filters.length) this._dsl.filters = filters;
   }
 
-  /** Обновляет строку-превью и индикатор валидности без ре-рендера. */
+  /** Updates the preview string and the validity indicator without a re-render. */
   #refreshPreview() {
     const preview = this.element?.querySelector(".ekb-dsl-preview");
     if (!preview) return;
@@ -159,7 +159,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     super._onRender?.(context, options);
     const el = this.element;
 
-    // Живой поиск: скрываем несовпавшие строки, категории с совпадениями раскрываем
+    // Live search: hide non-matching rows, expand categories with matches
     const searchInput = el.querySelector(".ekb-search-input");
     searchInput?.addEventListener("input", ev => {
       this._search = ev.currentTarget.value;
@@ -167,9 +167,9 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     });
     if (this._search) this.#applySearch();
 
-    // Запоминаем раскрытые категории. Во время активного поиска раскрытие
-    // программное (показ совпадений) — не записываем его в пользовательское
-    // состояние; toggle у <details> асинхронный, синхронным флагом не отсечь.
+    // Remember the expanded categories. During an active search, expansion
+    // is programmatic (showing matches) — we don't record it in the user's
+    // state; the toggle on <details> is asynchronous, a synchronous flag can't filter it out.
     for (const details of el.querySelectorAll(".ekb-category")) {
       details.addEventListener("toggle", () => {
         if (this._search.trim()) return;
@@ -178,12 +178,12 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
       });
     }
 
-    // Конструктор DSL: смена операции/типа фильтра меняет набор контролов — ре-рендер;
-    // остальные изменения обновляют только превью
+    // DSL builder: changing the operation/filter type changes the set of controls — a re-render;
+    // other changes update only the preview
     for (const control of el.querySelectorAll(".ekb-dsl-op, .ekb-f-type")) {
       control.addEventListener("change", () => {
         this.#readDslFromDom();
-        // Сброс значения при смене типа условия: старое значение не из этого словаря
+        // Reset the value when the condition type changes: the old value isn't from this dictionary
         if (control.classList.contains("ekb-f-type")) {
           const idx = Number(control.closest(".ekb-filter-row")?.dataset.index);
           if (!Number.isNaN(idx) && this._dsl.filters[idx]) this._dsl.filters[idx].value = "";
@@ -203,7 +203,7 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
     }
   }
 
-  /** Фильтрация каталога по поисковой строке (без ре-рендера). */
+  /** Filtering the catalog by the search string (without a re-render). */
   #applySearch() {
     const query = this._search.trim().toLowerCase();
     for (const category of this.element.querySelectorAll(".ekb-category")) {
@@ -214,16 +214,16 @@ export default class EffectKeyBrowserApp extends HandlebarsApplicationMixin(Appl
         if (match) visible++;
       }
       category.classList.toggle("hidden", visible === 0);
-      // При поиске раскрываем совпавшие; при пустом запросе возвращаем
-      // раскрытие, выбранное пользователем (записи в _openCategories при
-      // этом идемпотентны — состояние не портится)
+      // While searching we expand the matching ones; with an empty query we restore
+      // the expansion chosen by the user (writes to _openCategories here
+      // are idempotent — the state isn't corrupted)
       category.open = query
         ? visible > 0
         : this._openCategories.has(category.dataset.category);
     }
   }
 
-  /** Кладёт текст в буфер обмена с уведомлением. */
+  /** Puts text on the clipboard with a notification. */
   static #copy(text) {
     game.clipboard.copyPlainText(text);
     ui.notifications.info(game.i18n.format("DEDREL.KeyBrowser.Copied", { text }));

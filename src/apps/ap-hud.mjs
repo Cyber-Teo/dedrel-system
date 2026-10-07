@@ -43,17 +43,17 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     return this.rendered;
   }
 
-  /** Имя выбранного токена в заголовке: ГМ переключается между бойцами и теряет,
-   *  чей HUD перед ним. */
+  /** The selected token's name in the title: the GM switches between fighters and loses track
+   *  of whose HUD is in front of them. */
   get title() {
     const base = game.i18n.localize("DEDREL.Hud.BattleHud");
     const name = this.token?.name || this.actor?.name;
     return name ? `${base}: ${name}` : base;
   }
 
-  /** Ядро подставляет заголовок только на ПЕРВОМ рендере
-   *  (Application#_configureRenderOptions), а HUD переезжает с токена на токен —
-   *  поэтому обновляем имя на каждом. */
+  /** Core sets the title only on the FIRST render
+   *  (Application#_configureRenderOptions), while the HUD moves from token to token —
+   *  so we update the name on every render. */
   _configureRenderOptions(options) {
     super._configureRenderOptions(options);
     if (this.hasFrame) {
@@ -97,7 +97,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
       active: i < magVal
     }));
 
-    // Скорость в метрах — дробная, поэтому полоска (а не кубики как у ОД).
+    // Speed in meters is fractional, hence a bar (rather than pips like AP).
     const speedMax = res.movement?.max || 0;
     const speedVal = res.movement?.value || 0;
     const round1 = (x) => Math.round(x * 10) / 10;
@@ -106,21 +106,21 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     context.speedMax = round1(speedMax);
     context.speedPercent = speedMax > 0 ? Math.min(100, Math.round((speedVal / speedMax) * 100)) : 0;
 
-    // Индикатор «одно Действие за ход»: показываем только в бою, иначе он
-    // висел бы вечно потраченным между стычками (сброс идёт по началу хода).
+    // The "one Action per turn" indicator: shown only in combat, otherwise it
+    // would hang as spent forever between fights (the reset happens at turn start).
     context.showAction = !!game.combat?.started;
     context.actionSpent = ActionEconomy.isActionSpent(this.actor);
     context.hasStatusRow = context.showAction || context.hasSpeed;
 
-    // Избранное для выпадающих меню (те же источники, что и на листе персонажа)
+    // Favorites for the dropdown menus (the same sources as on the character sheet)
     this.#prepareFavorites(context);
 
     return context;
   }
 
   /**
-   * Собирает избранные навыки, манёвры/заклинания и быстрые слоты
-   * (флаг `dedrel.isFavorite` на предметах, флаг `dedrel.favoriteSkills` на актёре).
+   * Collects the favorite skills, maneuvers/spells and quick slots
+   * (the `dedrel.isFavorite` flag on items, the `dedrel.favoriteSkills` flag on the actor).
    */
   #prepareFavorites(context) {
     const favSkillsFlag = this.actor.getFlag("dedrel", "favoriteSkills") || [];
@@ -148,7 +148,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
       };
       if (i.type === "maneuver" || i.type === "spell") favAbilities.push(entry);
       else if (i.type === "magic_item") quickSlots.push(entry);
-      // Прочий «расходный» инвентарь (зелья/свитки и т.п.), кроме экипировки
+      // Other "consumable" inventory (potions/scrolls, etc.), except equipment
       else if (!["weapon", "armor", "currency"].includes(i.type)) quickSlots.push(entry);
     }
     context.favAbilities = favAbilities;
@@ -157,7 +157,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
 
   _onRender(context, options) {
     super._onRender(context, options);
-    // Закрытие открытых меню по клику вне HUD
+    // Closing open menus on a click outside the HUD
     if (this.#outsideClickHandler) {
       document.removeEventListener("click", this.#outsideClickHandler);
     }
@@ -177,14 +177,14 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
 
   #outsideClickHandler = null;
 
-  /** Свернуть все раскрытые панели меню и снять подсветку с кнопок. */
+  /** Collapse all expanded menu panels and remove the highlight from the buttons. */
   #closeMenus() {
     if (!this.element) return;
     this.element.querySelectorAll(".ap-menu-panel.open").forEach(p => p.classList.remove("open"));
     this.element.querySelectorAll(".ap-menu-btn.active").forEach(b => b.classList.remove("active"));
   }
 
-  /** Клик по кнопке меню — раскрыть/свернуть панель (одновременно открыта одна). */
+  /** Click on a menu button — expand/collapse the panel (one is open at a time). */
   static #onToggleMenu(event, target) {
     const menuId = target.dataset.menu;
     const panel = this.element.querySelector(`.ap-menu-panel[data-menu="${menuId}"]`);
@@ -197,7 +197,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     }
   }
 
-  /** Клик по избранному навыку в меню — бросок проверки. */
+  /** Click on a favorite skill in the menu — roll the check. */
   static async #onRollCheck(event, target) {
     if (!this.actor) return;
     await showRollDialog({
@@ -208,7 +208,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     });
   }
 
-  /** Клик по избранному манёвру/заклинанию/слоту — использование предмета. */
+  /** Click on a favorite maneuver/spell/slot — use the item. */
   static async #onUseItem(event, target) {
     if (!this.actor) return;
     const item = this.actor.items.get(target.dataset.itemId);
@@ -254,31 +254,31 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     Hooks.on("updateActor", (actor, changes, options, userId) => {
       const isOurActor = this.actor && this.actor.id === actor.id;
 
-      // Смена избранных навыков (флаг актёра) — перерисовать меню HUD.
+      // Change of favorite skills (an actor flag) — redraw the HUD menu.
       if (isOurActor && foundry.utils.hasProperty(changes, "flags.dedrel.favoriteSkills")) {
         this.render({ force: true });
       }
 
-      // Индикатор Действия живёт во флаге, а не в system.resources —
-      // без отдельной ветки он бы залипал до ближайшей траты ОД.
+      // The Action indicator lives in a flag, not in system.resources —
+      // without a separate branch it would stick until the next AP spend.
       if (isOurActor && foundry.utils.hasProperty(changes, "flags.dedrel.actionSpent")) {
         this.render({ force: true });
       }
 
       if (foundry.utils.hasProperty(changes, "system.resources")) {
-        // Обновляем наш HUD
+        // Update our HUD
         if (isOurActor) {
           this.render({ force: true });
         }
 
-        // Заставляем Foundry перерисовать наши кастомные бары на токенах
+        // Force Foundry to redraw our custom bars on the tokens
         actor.getActiveTokens().forEach(token => {
           token.renderFlags.set({ refreshBars: true });
         });
       }
     });
 
-    // Изменение состава/избранности предметов — обновить выпадающие меню.
+    // Change in the set/favorite status of items — refresh the dropdown menus.
     const refreshOnItem = (item) => {
       if (this.actor && item.parent?.id === this.actor.id && this.rendered) {
         this.render({ force: true });
@@ -287,7 +287,7 @@ export default class ActionPointsHUD extends HandlebarsApplicationMixin(Applicat
     Hooks.on("createItem", refreshOnItem);
     Hooks.on("deleteItem", refreshOnItem);
     Hooks.on("updateItem", (item, changes) => {
-      // Реагируем на смену флага избранного или расход зарядов.
+      // React to a change of the favorite flag or spent charges.
       if (foundry.utils.hasProperty(changes, "flags.dedrel.isFavorite") ||
           foundry.utils.hasProperty(changes, "system.uses_value")) {
         refreshOnItem(item);
