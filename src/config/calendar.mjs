@@ -1,15 +1,15 @@
 /**
- * Календарь мира Дедрел — конфиг для нативного календаря Foundry V14.
- * Подключается в init-хуке: CONFIG.time.worldCalendarConfig = DEDREL_CALENDAR_CONFIG.
- * Схема — foundry.data.CalendarData (см. NOTES.md, раздел «Календарь»).
+ * The Dedrel world calendar — config for the native Foundry V14 calendar.
+ * Hooked up in the init hook: CONFIG.time.worldCalendarConfig = DEDREL_CALENDAR_CONFIG.
+ * Schema — foundry.data.CalendarData (see NOTES.md, the "Calendar" section).
  *
- * Особенности мира:
- *  - 12 месяцев СТРОГО по 30 дней (год = 360 дней), без високосных лет;
- *  - названия месяцев григорианские, чтобы не путать игроков;
- *  - yearZero = 1005: свежий мир (worldTime = 0) начинается в текущем году сеттинга.
+ * World specifics:
+ *  - 12 months of EXACTLY 30 days (year = 360 days), no leap years;
+ *  - month names are Gregorian so as not to confuse the players;
+ *  - yearZero = 1005: a fresh world (worldTime = 0) starts in the setting's current year.
  *
- * ВАЖНО: длительности Active Effects с units "days"/"hours" ядро конвертирует
- * в секунды именно через этот календарь (game.time.calendar.componentsToTime).
+ * IMPORTANT: core converts Active Effect durations with units "days"/"hours"
+ * into seconds precisely through this calendar (game.time.calendar.componentsToTime).
  */
 export const DEDREL_CALENDAR_CONFIG = {
   name: "DEDREL.Calendar.Name",

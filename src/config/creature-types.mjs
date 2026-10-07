@@ -1,28 +1,28 @@
 /**
- * Канонический список типов существ (à la D&D creature types).
- * Ключи — стабильные англ. идентификаторы для сопоставления «оружие/эффект
- * против типа»; отображаемые названия — через i18n DEDREL.CreatureTypes.<key>.
+ * Canonical list of creature types (à la D&D creature types).
+ * Keys are stable English identifiers for matching "weapon/effect
+ * vs type"; display names go through i18n DEDREL.CreatureTypes.<key>.
  *
- * Список расширяемый: тип существа хранится как обычный Item (creature_type)
- * с полем system.key. Значения ниже — лишь подсказки-пресеты для выбора на
- * листе; мастер может задать произвольный ключ для нового типа.
+ * The list is extensible: a creature type is stored as a regular Item (creature_type)
+ * with a system.key field. The values below are just preset hints for picking on
+ * the sheet; the GM can set an arbitrary key for a new type.
  */
 export const CREATURE_TYPES = [
-  "beast",         // Животные
-  "magical_beast", // Магические твари (мутанты, порождённые магией)
-  "plant",         // Растения (хищная флора, лесные стражи)
-  "ooze",          // Слизи (аморфные пожиратели)
-  "elemental",     // Элементали (стихии)
-  "ethereal",      // Эфирные (существа эфира; часто парный тип: ethereal + shade и т.п.)
-  "astral",        // Астральные (существа астрала; часто парный тип: astral + beast и т.п.)
-  "spirit",        // Духи (нейтрально-позитивная «нежить», духи мест/предков)
-  "shade",         // Тени (нежить без физической оболочки)
-  "fey",           // Феи
-  "demon",         // Демоны (пропитанные скверной)
-  "dragon",        // Драконы (NPC)
-  "elf",           // Эльфы (NPC)
-  "human",         // Люди (NPC: стражники, бандиты и т.п.; на персонажей игроков тип не вешается)
-  "undead",        // Нежить (зомби, скелеты, вампиры)
-  "cosmic",        // Космические (пришельцы)
-  "construct"      // Конструкты (големы, автоматоны, оживлённые механизмы)
+  "beast",         // Beasts
+  "magical_beast", // Magical beasts (mutants, spawned by magic)
+  "plant",         // Plants (carnivorous flora, forest guardians)
+  "ooze",          // Oozes (amorphous devourers)
+  "elemental",     // Elementals (the elements)
+  "ethereal",      // Ethereal (creatures of the aether; often a paired type: ethereal + shade, etc.)
+  "astral",        // Astral (creatures of the astral; often a paired type: astral + beast, etc.)
+  "spirit",        // Spirits (neutral-to-positive "undead", spirits of places/ancestors)
+  "shade",         // Shades (undead without a physical shell)
+  "fey",           // Fey
+  "demon",         // Demons (steeped in corruption)
+  "dragon",        // Dragons (NPC)
+  "elf",           // Elves (NPC)
+  "human",         // Humans (NPC: guards, bandits, etc.; the type isn't put on player characters)
+  "undead",        // Undead (zombies, skeletons, vampires)
+  "cosmic",        // Cosmic (aliens)
+  "construct"      // Constructs (golems, automatons, animated mechanisms)
 ];

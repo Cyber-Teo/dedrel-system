@@ -1,29 +1,29 @@
 /**
- * Каталог ключей Active Effects для «Справочника ключей» (EffectKeyBrowserApp)
- * и словари конструктора DSL-модификаторов flags.dedrel.mod.
+ * Catalog of Active Effect keys for the Effect Key Browser (EffectKeyBrowserApp)
+ * and the dictionaries of the flags.dedrel.mod DSL modifier builder.
  *
- * Человекочитаемая версия — EFFECT_KEYS_CHEAT_SHEET.md; этот файл — её
- * машинный аналог для UI. Чтобы каталог не приходилось поддерживать руками,
- * списки атрибутов/навыков/DR/бонусов/доктрин строятся ИНТРОСПЕКЦИЕЙ схемы
- * персонажа (CONFIG.Actor.dataModels.character.schema): новый навык или бонус
- * в shared-schema.mjs / bonuses-schema.mjs появится в справочнике сам.
- * Руками описаны только derived-параметры без схемных ярлыков (защиты,
- * ресурсы) и подсказки.
+ * The human-readable version is EFFECT_KEYS_CHEAT_SHEET.md; this file is its
+ * machine counterpart for the UI. So that the catalog doesn't have to be maintained by hand,
+ * the lists of attributes/skills/DR/bonuses/doctrines are built by INTROSPECTING the character
+ * schema (CONFIG.Actor.dataModels.character.schema): a new skill or bonus
+ * in shared-schema.mjs / bonuses-schema.mjs will appear in the browser on its own.
+ * Only derived parameters without schema labels (defenses,
+ * resources) and the hints are described by hand.
  *
- * Всё строится в рантайме (после i18n init) — вызывать функции, не константы.
+ * Everything is built at runtime (after i18n init) — call the functions, not constants.
  */
 
 import { DR_KEY_LABELS } from "../constants.mjs";
 
-/** Локализация с фолбэком: если ключа нет в словаре — вернуть fallback. */
+/** Localization with a fallback: if the key isn't in the dictionary, return fallback. */
 function loc(key, fallback = null) {
   const s = game.i18n.localize(key);
   return s === key ? (fallback ?? key) : s;
 }
 
 /**
- * Ключи вложенного SchemaField схемы персонажа по пути ("attributes",
- * "magic.techniques"...). Пустой массив, если путь не существует.
+ * Keys of a nested SchemaField of the character schema by path ("attributes",
+ * "magic.techniques"...). An empty array if the path doesn't exist.
  */
 function schemaFieldKeys(path) {
   let field = CONFIG.Actor?.dataModels?.character?.schema;
@@ -31,14 +31,14 @@ function schemaFieldKeys(path) {
   return field?.fields ? Object.keys(field.fields) : [];
 }
 
-/** Как выше, но возвращает сам SchemaField (для доступа к подполям). */
+/** Same as above, but returns the SchemaField itself (for access to subfields). */
 function schemaField(path) {
   let field = CONFIG.Actor?.dataModels?.character?.schema;
   for (const part of path.split(".")) field = field?.fields?.[part];
   return field ?? null;
 }
 
-/** Подписи полей бонусов (bonuses-schema.mjs). Новые поля падают в фолбэк-ключ. */
+/** Labels for the bonus fields (bonuses-schema.mjs). New fields fall back to the fallback key. */
 const BONUS_HINTS = {
   hp_multiplier: "0.25 = +25%",
   carry_capacity_mult: "0.5 = +50%",
@@ -49,7 +49,7 @@ const BONUS_HINTS = {
 };
 
 /**
- * Собирает каталог категорий ключей для справочника.
+ * Assembles the catalog of key categories for the browser.
  * @returns {Array<{id: string, label: string, note?: string, entries: Array}>}
  *   entry: { key, label, mode, hint?, searchText }
  */
@@ -62,7 +62,7 @@ export function buildEffectKeyCatalog() {
     searchText: `${label} ${key} ${hint}`.toLowerCase()
   });
 
-  // 1. Атрибуты: ранг + бонус спасброска
+  // 1. Attributes: rank + saving throw bonus
   const attrEntries = [];
   for (const a of schemaFieldKeys("attributes")) {
     const name = loc(`DEDREL.Attributes.${a}`, a);
@@ -71,7 +71,7 @@ export function buildEffectKeyCatalog() {
   }
   categories.push({ id: "attributes", label: kb("Cat.Attributes"), entries: attrEntries });
 
-  // 2. Навыки: бонус к броску (рекомендуется) + ранг (перманентное обучение)
+  // 2. Skills: roll bonus (recommended) + rank (permanent training)
   const skillEntries = [];
   for (const s of schemaFieldKeys("skills")) {
     const name = loc(`DEDREL.Skills.${s}`, s);
@@ -82,7 +82,7 @@ export function buildEffectKeyCatalog() {
     id: "skills", label: kb("Cat.Skills"), note: kb("Note.Skills"), entries: skillEntries
   });
 
-  // 3. Защиты и производные параметры
+  // 3. Defenses and derived parameters
   categories.push({
     id: "derived", label: kb("Cat.Derived"), entries: [
       entry("system.defenses.dodge", kb("Entry.Dodge")),
@@ -96,7 +96,7 @@ export function buildEffectKeyCatalog() {
     ]
   });
 
-  // 4. Системные бонусы (bonuses-schema.mjs) — штраф = отрицательное значение
+  // 4. System bonuses (bonuses-schema.mjs) — a penalty = a negative value
   const bonusEntries = schemaFieldKeys("bonuses").map(b =>
     entry(`system.bonuses.${b}`, loc(`DEDREL.KeyBrowser.Bonus.${b}`, b), "Add", BONUS_HINTS[b] ?? "")
   );
@@ -104,13 +104,13 @@ export function buildEffectKeyCatalog() {
     id: "bonuses", label: kb("Cat.Bonuses"), note: kb("Note.Bonuses"), entries: bonusEntries
   });
 
-  // 5. Сопротивление урону (DR)
+  // 5. Damage Reduction (DR)
   const drEntries = schemaFieldKeys("dr").map(d =>
     entry(`system.dr.${d}`, loc(DR_KEY_LABELS[d] ?? d, d))
   );
   categories.push({ id: "dr", label: kb("Cat.DR"), entries: drEntries });
 
-  // 6. Очки Действий (максимумы пулов)
+  // 6. Action Points (pool maximums)
   categories.push({
     id: "ap", label: kb("Cat.AP"), entries: [
       entry("system.resources.ap_universal.max", loc("DEDREL.ActorSheet.UniversalAP")),
@@ -119,7 +119,7 @@ export function buildEffectKeyCatalog() {
     ]
   });
 
-  // 7. Магия: доктрины (доступ Override 1 / ранг Add), Пути, Техники
+  // 7. Magic: doctrines (access Override 1 / rank Add), Paths, Techniques
   const magicEntries = [];
   for (const d of schemaFieldKeys("doctrines")) {
     const name = loc(`DEDREL.Magic.Doctrines.${d}`, d);
@@ -139,10 +139,10 @@ export function buildEffectKeyCatalog() {
 }
 
 /* ========================================================================== */
-/* Словари конструктора DSL flags.dedrel.mod (движок: dedrel-bonuses.mjs)     */
+/* Dictionaries of the flags.dedrel.mod DSL builder (engine: dedrel-bonuses.mjs)     */
 /* ========================================================================== */
 
-/** Операции DSL: значение-плейсхолдер и дефолтный момент сгорания (для подсказок). */
+/** DSL operations: placeholder value and default burn moment (for hints). */
 export const DSL_OPS = [
   { key: "attack", placeholder: "2", defaultConsume: "roll" },
   { key: "damage", placeholder: "1d6", defaultConsume: "damage" },
@@ -153,9 +153,9 @@ export const DSL_OPS = [
 ];
 
 /**
- * Типы условий фильтра. valueKind:
- *   "none" — токен без значения; "select" — выпадашка (options строится в
- *   buildDslFilterOptions); "text" — свободный ввод (key:<system.key>).
+ * Filter condition types. valueKind:
+ *   "none" — a token without a value; "select" — a dropdown (options are built in
+ *   buildDslFilterOptions); "text" — free input (key:<system.key>).
  */
 export const DSL_FILTER_TYPES = [
   { key: "any", valueKind: "none" },
@@ -170,12 +170,12 @@ export const DSL_FILTER_TYPES = [
   { key: "mod", valueKind: "select" }
 ];
 
-/** Моменты сгорания ("" = авто по операции). */
+/** Burn moments ("" = automatic by operation). */
 export const DSL_CONSUME = ["", "use", "roll", "damage", "never"];
 
 /**
- * Опции значений для select-фильтров DSL, {value: label}.
- * @param {string} type — ключ из DSL_FILTER_TYPES
+ * Value options for the DSL select filters, {value: label}.
+ * @param {string} type — a key from DSL_FILTER_TYPES
  */
 export function buildDslFilterOptions(type) {
   const options = {};
@@ -184,7 +184,7 @@ export function buildDslFilterOptions(type) {
       for (const s of schemaFieldKeys("skills")) options[s] = loc(`DEDREL.Skills.${s}`, s);
       break;
     case "dtype":
-      // Физические типы урона оружия (weapon.mjs → damage_type)
+      // Physical weapon damage types (weapon.mjs → damage_type)
       for (const d of ["slashing", "piercing", "bludgeoning"]) options[d] = loc(DR_KEY_LABELS[d], d);
       break;
     case "doctrine":

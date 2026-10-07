@@ -1,40 +1,40 @@
 /**
- * Библиотека переиспользуемых Active Effects (Фаза 3 — зелья/свитки/магические вещи).
+ * Library of reusable Active Effects (Phase 3 — potions/scrolls/magic items).
  *
- * Единственный источник истины для «шаблонных» эффектов, которые накладываются на
- * актёров (баффы/дебаффы/яд/сопротивления). Один раз описанный здесь пресет
- * переиспользуется где угодно: зелье, свиток, факел, ловушка, макрос ГМа —
- * вместо ручной сборки Active Effect с нуля.
+ * The single source of truth for "template" effects that are applied to
+ * actors (buffs/debuffs/poison/resistances). A preset described here once
+ * is reused anywhere: a potion, a scroll, a torch, a trap, a GM macro —
+ * instead of assembling an Active Effect from scratch by hand.
  *
- * Регистрируется как CONFIG.DEDREL.effectLibrary в dedrel.mjs. Билдер
- * buildEffectData(key, opts) собирает из пресета данные ActiveEffect, готовые для
- * createEmbeddedDocuments("ActiveEffect", [data]) (на актёре или на предмете).
+ * Registered as CONFIG.DEDREL.effectLibrary in dedrel.mjs. The builder
+ * buildEffectData(key, opts) assembles ActiveEffect data from a preset, ready for
+ * createEmbeddedDocuments("ActiveEffect", [data]) (on an actor or an item).
  *
- * СООТВЕТСТВИЕ V14 (см. FOUNDRY V14 QUIRKS.md):
- *  - Изменения живут в `system.changes`, тип операции — строковое `change.type`
- *    ("add"/"override"/…), НЕ числовое `mode` (§11, §13).
- *  - Фазу "apply" всем system.*-изменениям проставляет хук preCreateActiveEffect —
- *    здесь её задавать не нужно (§12).
- *  - Периодический урон/лечение — флаг `flags.dedrel.tick` = { formula, trigger,
- *    damage_type, is_heal }; тикает в DedrelCombat._onStartTurn/_onEndTurn (combat.mjs).
+ * V14 COMPLIANCE (see FOUNDRY V14 QUIRKS.md):
+ *  - Changes live in `system.changes`, the operation type is the string `change.type`
+ *    ("add"/"override"/…), NOT the numeric `mode` (§11, §13).
+ *  - The "apply" phase is set for all system.* changes by the preCreateActiveEffect hook —
+ *    no need to set it here (§12).
+ *  - Periodic damage/healing — the flag `flags.dedrel.tick` = { formula, trigger,
+ *    damage_type, is_heal }; ticks in DedrelCombat._onStartTurn/_onEndTurn (combat.mjs).
  *
- * Все label — ключи локализации (ru.json / en.json). Пути DR — из buildDR()
+ * All labels are localization keys (ru.json / en.json). DR paths come from buildDR()
  * (shared-schema.mjs): slashing/piercing/bludgeoning/heat/cold/necrotic/radiant/
- * electric/sonic/acid. Бонусы — из bonuses-schema.mjs (global_roll и т.п.).
+ * electric/sonic/acid. Bonuses come from bonuses-schema.mjs (global_roll, etc.).
  */
 
 const ICON = "systems/dedrel/assets/icons/items/magic_item.svg";
 
 export const DEDREL_EFFECT_LIBRARY = {
-  // ── Дебаффы ──────────────────────────────────────────────────────────────
+  // ── Debuffs ──────────────────────────────────────────────────────────────
   poison: {
     label: "DEDREL.EffectLib.Poison",
     img: "icons/magic/death/skull-poison-green.webp",
     category: "debuff",
     duration: { rounds: 3 },
     changes: [],
-    // Урон яда по умолчанию нетипизирован (игнорирует DR брони). damage_type можно
-    // переопределить в opts (например, "acid"). Формула масштабируется @stacks.
+    // Poison damage is untyped by default (ignores armor DR). damage_type can be
+    // overridden in opts (e.g. "acid"). The formula scales with @stacks.
     tick: { formula: "1d4", trigger: "turnStart", damage_type: "", is_heal: false }
   },
   poison_strong: {
@@ -55,7 +55,7 @@ export const DEDREL_EFFECT_LIBRARY = {
     ]
   },
 
-  // ── Баффы ────────────────────────────────────────────────────────────────
+  // ── Buffs ────────────────────────────────────────────────────────────────
   regeneration: {
     label: "DEDREL.EffectLib.Regeneration",
     img: "icons/magic/life/heart-cross-strong-green.webp",
@@ -77,7 +77,7 @@ export const DEDREL_EFFECT_LIBRARY = {
     label: "DEDREL.EffectLib.Invulnerability",
     img: "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     category: "buff",
-    // Короткий, очень сильный бафф: почти иммунитет к физическому урону на 1 раунд.
+    // A short, very strong buff: near-immunity to physical damage for 1 round.
     duration: { rounds: 1 },
     changes: [
       { key: "system.dr.slashing", type: "add", value: "99" },
@@ -104,12 +104,12 @@ export const DEDREL_EFFECT_LIBRARY = {
     ]
   },
 
-  // ── Утилита ──────────────────────────────────────────────────────────────
-  // Свет токена: нативные change-ключи `token.light.*` (V14). Ядро применяет их
-  // эфемерно на каждом клиенте (TokenDocument#applyActiveEffects), ничего не
-  // записывая в документ токена: снятие/подавление эффекта гасит свет само.
-  // Значения dim/bright — в единицах сцены (метры; сетка гексов = 2 м).
-  // Источник пресета: факел ~ 8/4 м.
+  // ── Utility ──────────────────────────────────────────────────────────────
+  // Token light: native `token.light.*` change keys (V14). Core applies them
+  // ephemerally on every client (TokenDocument#applyActiveEffects), without
+  // writing anything to the token document: removing/suppressing the effect turns off the light by itself.
+  // dim/bright values are in scene units (meters; a hex grid = 2 m).
+  // Preset source: a torch ~ 8/4 m.
   light: {
     label: "DEDREL.EffectLib.Light",
     img: "icons/magic/light/torch-fire-orange.webp",
@@ -128,18 +128,18 @@ export const DEDREL_EFFECT_LIBRARY = {
 };
 
 /**
- * Собирает данные ActiveEffect из пресета библиотеки.
+ * Assembles ActiveEffect data from a library preset.
  *
- * @param {string} key                    Ключ пресета в DEDREL_EFFECT_LIBRARY.
+ * @param {string} key                    Preset key in DEDREL_EFFECT_LIBRARY.
  * @param {object} [opts]
- * @param {string} [opts.name]            Переопределить отображаемое имя (иначе — из label).
- * @param {object} [opts.duration]        Переопределить длительность ({rounds} | {seconds}).
- * @param {number} [opts.stacks]          Стаки для масштабирования тика (@stacks в формуле).
- * @param {string} [opts.formula]         Переопределить формулу тика.
- * @param {string} [opts.damageType]      Переопределить тип урона тика (DR-ключ или "").
- * @param {boolean} [opts.transfer=false] Переносится ли эффект на носителя автоматически.
- * @param {string} [opts.origin]          UUID источника (предмет/актёр).
- * @returns {object|null} Данные для createEmbeddedDocuments("ActiveEffect", [data]).
+ * @param {string} [opts.name]            Override the display name (otherwise taken from label).
+ * @param {object} [opts.duration]        Override the duration ({rounds} | {seconds}).
+ * @param {number} [opts.stacks]          Stacks for scaling the tick (@stacks in the formula).
+ * @param {string} [opts.formula]         Override the tick formula.
+ * @param {string} [opts.damageType]      Override the tick damage type (a DR key or "").
+ * @param {boolean} [opts.transfer=false] Whether the effect transfers to the bearer automatically.
+ * @param {string} [opts.origin]          Source UUID (item/actor).
+ * @returns {object|null} Data for createEmbeddedDocuments("ActiveEffect", [data]).
  */
 export function buildEffectData(key, opts = {}) {
   const preset = DEDREL_EFFECT_LIBRARY[key];
@@ -163,10 +163,10 @@ export function buildEffectData(key, opts = {}) {
   const data = {
     name,
     img: preset.img || ICON,
-    // По умолчанию эффекты-пресеты НЕ переносятся: их накладывают вручную (кнопка
-    // «Применить эффекты» в карточке чата) либо конвейером использования зелья.
-    // Исключение — свет: он живёт на токене носителя, пока предмет при нём, и
-    // без transfer не работает вовсе (ни на токене, ни в тумблере Item#use).
+    // By default preset effects do NOT transfer: they are applied by hand (the "Apply
+    // Effects" button on the chat card) or by the potion use pipeline.
+    // The exception is light: it lives on the bearer's token while the item is on them, and
+    // doesn't work at all without transfer (neither on the token nor in the Item#use toggle).
     transfer: opts.transfer ?? hasTokenLightChanges({ system: { changes: preset.changes ?? [] } }),
     duration: opts.duration || { ...preset.duration },
     system: {
@@ -179,18 +179,18 @@ export function buildEffectData(key, opts = {}) {
   return data;
 }
 
-/* ── Свет токена (нативные change-ключи `token.light.*`, V14) ─────────────── */
+/* ── Token light (native `token.light.*` change keys, V14) ───────────────── */
 
 const TOKEN_LIGHT_PREFIX = "token.light.";
 
-/** Есть ли у эффекта (документа или сырых данных) световые change-строки. */
+/** Whether the effect (a document or raw data) has light change rows. */
 export function hasTokenLightChanges(effectData) {
   return (effectData.system?.changes ?? []).some(c => c.key?.startsWith(TOKEN_LIGHT_PREFIX));
 }
 
 /**
- * Читает change-строки `token.light.*` в плоский объект настроек света.
- * Принимает и документ ActiveEffect, и сырые данные (toObject).
+ * Reads the `token.light.*` change rows into a flat light settings object.
+ * Accepts both an ActiveEffect document and raw data (toObject).
  * @returns {{dim, bright, color, alpha, animation: {type, speed, intensity}}|null}
  */
 export function readTokenLightChanges(effectData) {
@@ -203,9 +203,9 @@ export function readTokenLightChanges(effectData) {
 }
 
 /**
- * Собирает change-строки `token.light.*` из плоского объекта настроек света.
- * Значения changes — всегда строки (так хранит схема ядра); касты к типам полей
- * LightData ядро выполняет само при применении.
+ * Assembles `token.light.*` change rows from a flat light settings object.
+ * Change values are always strings (that's how the core schema stores them); casting to the
+ * LightData field types is done by core itself on application.
  */
 export function buildTokenLightChanges({ dim = 0, bright = 0, color = null, alpha = 0.5, animation = {} } = {}) {
   const changes = [
@@ -222,7 +222,7 @@ export function buildTokenLightChanges({ dim = 0, bright = 0, color = null, alph
   return changes;
 }
 
-/** Change-строки эффекта без световых (для замены/удаления света). */
+/** The effect's change rows without the light ones (for replacing/removing light). */
 export function stripTokenLightChanges(effectData) {
   return (effectData.system?.changes ?? [])
     .filter(c => !c.key?.startsWith(TOKEN_LIGHT_PREFIX))

@@ -1,23 +1,23 @@
 /**
- * Декларативный конфиг магической системы Dedrel (Магический Конструктор).
- * Единственный источник истины для таблиц правил: Техники, Модификаторы,
- * лимиты Рангов Доктрин и свойства Доктрин (сродства/ограничения/пути).
+ * Declarative config of the Dedrel magic system (the Spell Constructor).
+ * The single source of truth for the rule tables: Techniques, Modifiers,
+ * Doctrine Rank limits and Doctrine properties (affinities/restrictions/paths).
  *
- * Канон правил: "_rules/16. Magic.md". Регистрируется как CONFIG.DEDREL.magic
- * в dedrel.mjs. Балансовые правки делаются здесь и в компендиуме Conditions
- * (состояния доктринных Модификаторов подтягиваются по ключу при касте).
+ * Rules canon: "_rules/16. Magic.md". Registered as CONFIG.DEDREL.magic
+ * in dedrel.mjs. Balance edits are made here and in the Conditions compendium
+ * (the conditions of doctrinal Modifiers are pulled by key at cast time).
  *
- * Все label/text-поля — ключи локализации (ru.json / en.json).
- * Все дистанции — СРАЗУ в метрах сцены (правила переведены на метры, 2026-07).
+ * All label/text fields are localization keys (ru.json / en.json).
+ * All distances are DIRECTLY in scene meters (the rules were converted to meters, 2026-07).
  */
 export const DEDREL_MAGIC = {
 
   /**
-   * Лестница урона (расширенная, ступени II–VII; канон — "_rules/13. Weapons.md").
-   * Оружие ограничено ступенью V; ступени VI–VII — только магия.
-   * Ранг Модификатора "damage" задаёт ступень (ranks[N].step), доктрина может
-   * сдвигать её (ladderShift Пиромантии), Изобильный Источник добавляет +1.
-   * Выше VII сдвиг не идёт (кламп в компиляторе).
+   * Damage Ladder (extended, steps II–VII; canon — "_rules/13. Weapons.md").
+   * Weapons are limited to step V; steps VI–VII are magic only.
+   * The rank of the "damage" Modifier sets the step (ranks[N].step), a doctrine can
+   * shift it (Pyromancy's ladderShift), an Abundant Source adds +1.
+   * The shift doesn't go above VII (clamped in the compiler).
    */
   damageLadder: {
     2: "2d4",
@@ -29,9 +29,9 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Лимиты по Рангу Доктрины.
-   * maxModCost — максимальная стоимость одного Модификатора в ОД.
-   * Ранг 6 — заглушка на будущее для ультимативной магии (контента 6 ОД пока нет).
+   * Limits by Doctrine Rank.
+   * maxModCost — the maximum cost of a single Modifier in AP.
+   * Rank 6 is a placeholder for future ultimate magic (there's no 6 AP content yet).
    */
   rankLimits: {
     1: { techniques: 1, modifiers: 2, maxModCost: 1 },
@@ -43,17 +43,17 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Стоимость покупки Ранга Доктрины за XP (страница опыта, экшн upgradeDoctrine).
-   * Индекс = текущий ПРОИЗВОДНЫЙ ранг (0→1 стоит rankXpCosts[0] и т.д.).
-   * Шаг 0→1 обычно не используется: таланты доступа сразу дают ранг 1.
+   * Cost of buying a Doctrine Rank with XP (the experience page, the upgradeDoctrine action).
+   * Index = the current DERIVED rank (0→1 costs rankXpCosts[0], etc.).
+   * The 0→1 step is usually unused: access talents give rank 1 right away.
    */
   rankXpCosts: [2, 2, 4, 8, 16, 32],
 
   /**
-   * Магические Техники. Покупаются один раз за XP как таланты
-   * (талант несёт AE: system.magic.techniques.<key> | Override | 1).
-   * requiresSource — техника доступна только при Масштабе Источника "any"/"abundant"
-   * (для доктрин с ignoresSource проверка снимается).
+   * Magic Techniques. Bought once with XP like talents
+   * (the talent carries an AE: system.magic.techniques.<key> | Override | 1).
+   * requiresSource — the technique is available only at Source Scale "any"/"abundant"
+   * (for doctrines with ignoresSource the check is lifted).
    */
   techniques: {
     create:    { ap: 2, label: "DEDREL.Magic.Techniques.create" },
@@ -64,16 +64,16 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Масштабы Источника.
-   * - none: обязательна техника create.
-   * - any: доступна техника move (вместо create).
-   * - abundant: как any + СНИМАЕТ лимит maxModCost (открывает модификаторы
-   *   до 5-го ранга любому магу; ограничитель — пул ОД) + поднимает урон
-   *   заклинания на одну ступень Лестницы (damageStepBonus, кап VII).
-   * Уровень источника по доктринам задаётся ГМом флагом сцены
-   * scene.flags.dedrel.sourceScale (виджет «Источники сцены» в левой колонке).
-   * Доктрины с ignoresSource (Биомантия, позже Электромантия) концепцию
-   * Источника игнорируют целиком.
+   * Source Scales.
+   * - none: the create technique is mandatory.
+   * - any: the move technique is available (instead of create).
+   * - abundant: like any + LIFTS the maxModCost limit (opens modifiers
+   *   up to rank 5 to any caster; the AP pool is the limiter) + raises the spell's
+   *   damage one Ladder step (damageStepBonus, cap VII).
+   * The source level per doctrine is set by the GM with a scene flag
+   * scene.flags.dedrel.sourceScale (the Scene Sources widget in the left column).
+   * Doctrines with ignoresSource (Biomancy, later Electromancy) ignore the Source
+   * concept entirely.
    */
   sourceScales: {
     none:     { label: "DEDREL.Magic.SourceScales.none" },
@@ -82,11 +82,11 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Уровень Источника на сцене, которую ГМ не настраивал.
-   * Воздух и земля есть почти везде — их отсутствие это редкое исключение
-   * (подземелье без воздуха, помост над пропастью), поэтому дефолт "any".
-   * Доктрины без записи считаются "none": огонь, вода и тьма в кадре должны
-   * появиться осознанно. Ключ читается ТОЛЬКО через utils/magic-source.mjs.
+   * Source level on a scene the GM hasn't configured.
+   * Air and earth are almost everywhere — their absence is a rare exception
+   * (an airless dungeon, a platform over an abyss), hence the default "any".
+   * Doctrines without an entry count as "none": fire, water and darkness in the scene must
+   * appear deliberately. The key is read ONLY through utils/magic-source.mjs.
    */
   defaultSourceScales: {
     ventomancy: "any",
@@ -94,33 +94,33 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Магические Модификаторы.
+   * Magic Modifiers.
    * category: scale | intensity | complexity.
-   * ranks: 1..5; отсутствие ранга = недоступен (например, у областей нет ранга 1).
-   * exclusiveWith: взаимоисключающие модификаторы (Области ↔ Цели, Области между собой).
+   * ranks: 1..5; a missing rank = unavailable (e.g. areas have no rank 1).
+   * exclusiveWith: mutually exclusive modifiers (Areas ↔ Targets, Areas among themselves).
    *
-   * doctrinal: true — ДОКТРИННЫЙ модификатор: не входит в общий каталог, доступен
-   *   только доктрине/пути, объявившим его в своём списке modifiers: [...].
-   *   Сложность спасброска доктринных модификаторов = 8 + 2 × ранг.
-   * requiresTechnique: "<ключ>" — модификатор легален только вместе с техникой.
-   * requiresArea: true — требует Модификатора Области в сборке.
-   * requiresForms: true — доступен только доктрине/пути с непустым списком forms.
+   * doctrinal: true — a DOCTRINAL modifier: not part of the shared catalog, available
+   *   only to the doctrine/path that declared it in its modifiers: [...] list.
+   *   Save DC of doctrinal modifiers = 8 + 2 × rank.
+   * requiresTechnique: "<key>" — the modifier is legal only together with the technique.
+   * requiresArea: true — requires an Area Modifier in the build.
+   * requiresForms: true — available only to a doctrine/path with a non-empty forms list.
    *
-   * Поля внутри ranks — "выхлоп" компиляции (spell-calculator):
+   * Fields inside ranks are the compilation "output" (spell-calculator):
    *   meters/lengthMeters/radiusMeters/targets → target_range / target_value / template_size
-   *   step                → ступень Лестницы урона → formula_damage
+   *   step                → Damage Ladder step → formula_damage
    *   heal                → formula_heal
-   *   hp                  → прочность создаваемого объекта
-   *   rounds/special      → длительность эффектов
+   *   hp                  → durability of the created object
+   *   rounds/special      → effect duration
    *   attackBonus         → system.attack_bonus
    *   forbidDefense       → system.forbidden_defense ("block"/"dodge")
-   *   saveDc/penalty/bonus/conditions → эффект доктринного модификатора
-   *   pushMeters          → принудительное перемещение (текстовый факт карточки)
-   *   imbueValue          → величина Насыщения (эффект под кнопку «Применить»)
-   *   hintFact: true      → строка RankHints попадает в описание заклинания
+   *   saveDc/penalty/bonus/conditions → the doctrinal modifier's effect
+   *   pushMeters          → forced movement (a text fact on the card)
+   *   imbueValue          → the Imbuement amount (an effect under the "Apply" button)
+   *   hintFact: true      → the RankHints line goes into the spell description
    */
   modifiers: {
-    // --- Масштаб ---
+    // --- Scale ---
     range: {
       category: "scale",
       label: "DEDREL.Magic.Modifiers.range",
@@ -132,7 +132,7 @@ export const DEDREL_MAGIC = {
         5: { meters: 60 }
       }
     },
-    // Без Модификатора — одна цель (дефолт, ранг 1 удалён из правил).
+    // Without the Modifier — a single target (the default, rank 1 was removed from the rules).
     targets: {
       category: "scale",
       label: "DEDREL.Magic.Modifiers.targets",
@@ -144,9 +144,9 @@ export const DEDREL_MAGIC = {
         5: { targets: 5 }
       }
     },
-    // Конус всегда кастуется от клетки заклинателя; Дальность неприменима.
-    // priceDelta: Области стоят Ранг+1 ОД (баланс 2026-07-16: чтобы «Цели» имели
-    // нишу); лимит maxModCost и гейт 5-го ранга считаются по РАНГУ, не по цене.
+    // A cone is always cast from the caster's square; Range doesn't apply.
+    // priceDelta: Areas cost Rank+1 AP (balance 2026-07-16: so that Targets have
+    // a niche); the maxModCost limit and the rank 5 gate are computed by RANK, not by price.
     area_cone: {
       category: "scale",
       label: "DEDREL.Magic.Modifiers.area_cone",
@@ -189,9 +189,9 @@ export const DEDREL_MAGIC = {
       }
     },
 
-    // --- Интенсивность ---
-    // Урон по Лестнице: ранг = ступень II–VI; Пиромантия сдвигает на +1 (III–VII),
-    // Изобильный Источник даёт ещё +1 (кап VII). Формула — damageLadder[step].
+    // --- Intensity ---
+    // Damage on the Ladder: rank = step II–VI; Pyromancy shifts it by +1 (III–VII),
+    // an Abundant Source gives another +1 (cap VII). Formula — damageLadder[step].
     damage: {
       category: "intensity",
       label: "DEDREL.Magic.Modifiers.damage",
@@ -214,11 +214,11 @@ export const DEDREL_MAGIC = {
         5: { hp: 25 }
       }
     },
-    // Насыщение: числовая мощность свойства, внедряемого техникой imbue
-    // (само свойство обязано выводиться из стихии — "Рамка свободных эффектов",
-    // 16. Magic.md §5). Ранги 1–3: выбор опцией (навык/защита, урон оружию, DR);
-    // ранг 4: +1 ступень Лестницы оружию (v1 — текстом). Без Длительности — 1 раунд.
-    // Правило "без стаков" в v1 социальное.
+    // Imbuement: the numeric power of the property infused by the imbue technique
+    // (the property itself must derive from the element — "Free-effect frame",
+    // 16. Magic.md §5). Ranks 1–3: choice by option (skill/defense, weapon damage, DR);
+    // rank 4: +1 Ladder step to the weapon (v1 — as text). Without Duration — 1 round.
+    // The "no stacking" rule is social in v1.
     imbuement: {
       category: "intensity",
       label: "DEDREL.Magic.Modifiers.imbuement",
@@ -231,16 +231,16 @@ export const DEDREL_MAGIC = {
       }
     },
 
-    // --- Доктринные модификаторы (интенсивность; владельцы — см. doctrines.*.modifiers) ---
-    // Сила: каталог подавления. Тенемантия — полностью; Путь Эха — ранги 1–3
-    // (Психоакустика). Бонусных ветвей больше нет: только штраф ИЛИ состояние.
-    // durationMode: "instant" (следующий бросок) | "rounds:1" | "doctrineRank".
-    // Состав списка на каждом ранге задают ТОЛЬКО массивы conditions ниже —
-    // это канон правил (16. Magic.md §4). Компендиум magic_conditions
-    // (conditionsFromPack; кураторский пул, см. dedrel.mjs CONDITION_PACKS)
-    // лишь подменяет имена/версии уже перечисленных состояний: селект
-    // пересекает пак с массивом ранга, поэтому наполнение пака не может
-    // ни расширить список, ни снести ранговый гейт.
+    // --- Doctrinal modifiers (intensity; owners — see doctrines.*.modifiers) ---
+    // Power: a suppression catalog. Shadowmancy — in full; the Path of the Echo — ranks 1–3
+    // (Psychoacoustics). There are no bonus branches anymore: only a penalty OR a condition.
+    // durationMode: "instant" (the next roll) | "rounds:1" | "doctrineRank".
+    // The list contents at each rank are set ONLY by the conditions arrays below —
+    // this is the rules canon (16. Magic.md §4). The magic_conditions compendium
+    // (conditionsFromPack; a curated pool, see dedrel.mjs CONDITION_PACKS)
+    // only substitutes the names/versions of conditions already listed: the selector
+    // intersects the pack with the rank's array, so the pack's contents can
+    // neither extend the list nor remove the rank gate.
     power: {
       category: "intensity",
       doctrinal: true,
@@ -251,32 +251,32 @@ export const DEDREL_MAGIC = {
         2: { saveDc: 12, penalty: 2, durationMode: "rounds:1" },
         3: { saveDc: 14, penalty: 2, durationMode: "doctrineRank",
              conditions: ["disoriented", "blind", "fear"] },
-        // Правка 2026-09-10: изъяты ключи без предметов-состояний — `rage`
-        // (состояние талантов/мутаций, см. 17. Conditions) и `poisoned`
-        // (общего «Отравления» не будет: каждый яд — своя кондиция,
-        // craft/Armor Rework Plan.md §8). Место в списке 4 занял `withering`.
+        // Edit 2026-09-10: removed keys without condition items — `rage`
+        // (a talent/mutation condition, see 17. Conditions) and `poisoned`
+        // (there will be no general "Poisoned": each poison is its own condition,
+        // craft/Armor Rework Plan.md §8). Slot 4 in the list was taken by `withering`.
         4: { saveDc: 16, penalty: 3, durationMode: "doctrineRank",
              conditions: ["suffocating", "pain", "partial_paralysis", "burning", "bleeding", "withering"] },
         5: { saveDc: 18, durationMode: "rounds:1",
              conditions: ["fatigued", "stunned", "knockout", "terror", "full_paralysis"] }
       }
     },
-    // "Воодушевление" изъято 2026-09-15: дублировало Насыщение, у которого кривая
-    // и длиннее (масштабируется Длительностью), и полнее (ранги 1-4). Командные
-    // бафы Эха теперь = Насытить + Насыщение + Длительность со скидкой Пути.
+    // "Inspiration" was removed 2026-09-15: it duplicated Imbuement, whose curve
+    // is both longer (scales with Duration) and fuller (ranks 1-4). The Echo's party
+    // buffs are now = Imbue + Imbuement + Duration with the Path discount.
 
-    // Сковывание (Путь Льда): лёд держит на месте.
+    // Constraint (Path of Ice): the ice holds in place.
     constrain: {
       category: "intensity",
       doctrinal: true,
       label: "DEDREL.Magic.Modifiers.constrain",
       ranks: {
-        2: { saveDc: 12, durationMode: "doctrineRank", hintFact: true }, // замедление −50%
+        2: { saveDc: 12, durationMode: "doctrineRank", hintFact: true }, // slow −50%
         3: { saveDc: 14, durationMode: "rounds:1", conditions: ["entangled"] },
         5: { saveDc: 18, durationMode: "rounds:1", conditions: ["full_paralysis"] }
       }
     },
-    // Сбивание (Вентомантия и Путь Потока): порыв ветра/волна сносят с ног.
+    // Knockdown (Ventomancy and the Path of the Flow): a gust of wind/a wave knocks off the feet.
     knockdown: {
       category: "intensity",
       doctrinal: true,
@@ -286,8 +286,8 @@ export const DEDREL_MAGIC = {
         3: { saveDc: 14, durationMode: "instant", conditions: ["prone"], pushMeters: 4, hintFact: true }
       }
     },
-    // Пыльная завеса (Вентомантия): зона помех зрению. Требует Области;
-    // v1 — текст в карточке, механизация зоны через регион отложена (NOTES).
+    // Dust Veil (Ventomancy): a zone of vision interference. Requires an Area;
+    // v1 — text on the card, mechanizing the zone through a region is postponed (NOTES).
     dust_veil: {
       category: "intensity",
       doctrinal: true,
@@ -297,7 +297,7 @@ export const DEDREL_MAGIC = {
         2: { hintFact: true }
       }
     },
-    // Удушение (Вентомантия): вакуум — воздух покидает лёгкие цели.
+    // Choke (Ventomancy): a vacuum — the air leaves the target's lungs.
     choke: {
       category: "intensity",
       doctrinal: true,
@@ -306,8 +306,8 @@ export const DEDREL_MAGIC = {
         4: { saveDc: 16, durationMode: "doctrineRank", conditions: ["suffocating"] }
       }
     },
-    // Лечение (Биомантия): зеркало Лестницы урона, конвейер formula_heal готов
-    // (кнопка "Исцелить" в карточке чата).
+    // Healing (Biomancy): a mirror of the Damage Ladder, the formula_heal pipeline is ready
+    // (the "Heal" button on the chat card).
     heal: {
       category: "intensity",
       doctrinal: true,
@@ -321,15 +321,15 @@ export const DEDREL_MAGIC = {
         5: { heal: "3d8" }
       }
     },
-    // Адаптация (Биомантия): временная телесная черта. Два списка (решение
-    // 2026-09-10): согласной цели — адаптация из `biomancy_adaptations`,
-    // несогласной — увечье из `mutilations` со спасброском. Оба пака содержат
-    // предметы типа condition, поэтому черта умеет длительность, попадает
-    // в реестр статусов (dedrel.mjs CONDITION_PACKS) и накладывается кнопкой
-    // карточки — тем же механизмом, что состояния «Силы».
-    // Ранг предмета — `flags.dedrel.rank`; селект показывает только предметы
-    // ранга, равного рангу Модификатора. Копий мутаций тут нет: биоманту линии
-    // крови безразличны, он лепит плоть, а не наследует её.
+    // Adaptation (Biomancy): a temporary bodily trait. Two lists (decision
+    // 2026-09-10): for a willing target — an adaptation from `biomancy_adaptations`,
+    // for an unwilling one — a mutilation from `mutilations` with a saving throw. Both packs contain
+    // items of type condition, so the trait supports duration, enters
+    // the status registry (dedrel.mjs CONDITION_PACKS) and is applied by the card's
+    // button — the same mechanism as the Power conditions.
+    // The item's rank is `flags.dedrel.rank`; the selector shows only items
+    // of a rank equal to the Modifier's rank. There are no mutation copies here: bloodlines
+    // don't matter to the biomancer, they sculpt flesh rather than inherit it.
     adapt: {
       category: "intensity",
       doctrinal: true,
@@ -344,16 +344,16 @@ export const DEDREL_MAGIC = {
       }
     },
 
-    // --- Сложность ---
-    // Без Модификатора — эффект мгновенный (дефолт, ранг 1 удалён из правил).
+    // --- Complexity ---
+    // Without the Modifier the effect is instant (the default, rank 1 was removed from the rules).
     duration: {
       category: "complexity",
       label: "DEDREL.Magic.Modifiers.duration",
       ranks: {
         2: { rounds: 6 },
         3: { rounds: 10 },
-        4: { special: "concentration" }, // пока игрок не отменит; потеря сознания обрывает
-        5: { special: "day" }            // до календаря — напоминалка, снимается вручную
+        4: { special: "concentration" }, // until the player cancels it; losing consciousness breaks it
+        5: { special: "day" }            // until there's a calendar — a reminder, removed by hand
       }
     },
     accuracy: {
@@ -367,9 +367,9 @@ export const DEDREL_MAGIC = {
         5: { attackBonus: 5 }
       }
     },
-    // Форма: доктринная привязка (реворк 2026-07-13). Плоская цена 2 ОД,
-    // список доступных физических типов — forms доктрины/пути (путь переопределяет).
-    // Выбор конкретной формы — опцией (селект в UI). "Сложная форма" удалена.
+    // Form: doctrinal binding (rework 2026-07-13). A flat cost of 2 AP,
+    // the list of available physical types is the doctrine's/path's forms (the path overrides).
+    // The specific form is chosen by option (a selector in the UI). "Complex form" was removed.
     form: {
       category: "complexity",
       label: "DEDREL.Magic.Modifiers.form",
@@ -379,20 +379,20 @@ export const DEDREL_MAGIC = {
         2: { formChoice: true }
       }
     },
-    // Если не выбран — обычное действие (action).
+    // If not selected — a regular action (action).
     actionType: {
       category: "complexity",
       label: "DEDREL.Magic.Modifiers.actionType",
       textRanks: true,
       ranks: {
-        1: { chain: true },    // В цепи: можно действовать сразу после этого заклинания
-        2: { reaction: true }  // Реакция: кастуется вне хода за ОД, сбережённые в прошлый ход
+        1: { chain: true },    // Chain: you can act right after this spell
+        2: { reaction: true }  // Reaction: cast outside your turn with AP saved from the previous turn
       }
     },
-    // Запрет защиты: цель лишается выбранного способа защиты против этого
-    // заклинания (компилируется в system.forbidden_defense, как у манёвра "Финт").
-    // Единственный ранг 4 (канон: _rules/16. Magic.md) — гейт по рангу доктрины
-    // через maxModCost; блок/уклонение выбирается опцией.
+    // Forbid Defense: the target loses the chosen means of defense against this
+    // spell (compiled into system.forbidden_defense, like the Feint maneuver).
+    // A single rank 4 (canon: _rules/16. Magic.md) — gated by doctrine rank
+    // via maxModCost; block/dodge is chosen by option.
     forbidDefense: {
       category: "complexity",
       label: "DEDREL.Magic.Modifiers.forbidDefense",
@@ -404,8 +404,8 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Группы доктрин (для страницы опыта и заголовков UI).
-   * Полный список из 18 ключей — канон в "_rules/16. Magic.md".
+   * Doctrine groups (for the experience page and UI headings).
+   * The full list of 18 keys — canon in "_rules/16. Magic.md".
    */
   doctrineGroups: {
     matter:    ["geomancy", "hydromancy", "pyromancy", "ventomancy"],
@@ -416,40 +416,40 @@ export const DEDREL_MAGIC = {
   },
 
   /**
-   * Конфиг доктрин для Конструктора. Доктрина без записи здесь видна на странице
-   * опыта, но НЕ появляется в Конструкторе (линейные доктрины — Эфиромантия,
-   * Телепатия, Магия крови — живут на фикс-заклинаниях, гайд §5).
+   * Doctrine config for the Constructor. A doctrine without an entry here is visible on the
+   * experience page but does NOT appear in the Constructor (linear doctrines — Aetheromancy,
+   * Telepathy, Blood Magic — live on fixed spells, guide §5).
    *
-   * Формат сродств/ограничений: { target, delta } — дельта к цене в ОД.
-   *   target: "mod:<ключ модификатора>" | "tech:<ключ техники>"
-   * Итоговая цена компонента клампится снизу нулём (Math.max(0, ...)).
-   * forbidden: true — компонент недоступен; maxRank/allowedRanks — потолок ранга.
+   * Affinity/restriction format: { target, delta } — a delta to the cost in AP.
+   *   target: "mod:<modifier key>" | "tech:<technique key>"
+   * The component's final cost is clamped from below at zero (Math.max(0, ...)).
+   * forbidden: true — the component is unavailable; maxRank/allowedRanks — the rank cap.
    *
-   * Прочие поля доктрины:
-   *   ladderShift: N        — сдвиг ступени Лестницы урона (Пиромантия: +1).
-   *   ignoresSource: true   — концепция Источника неприменима (Биомантия):
-   *                           селект скрыт, move доступна всегда, 5-й ранг модификаторов
-   *                           открывается Рангом Доктрины 5 (через обычный maxModCost).
-   *   forms: [...]          — доступные физические формы урона (Модификатор form);
-   *                           путь переопределяет список целиком.
-   *   modifiers: [...]      — доктринные Модификаторы, которыми доктрина владеет;
-   *                           у пути список ДОБАВЛЯЕТСЯ к списку доктрины.
-   *   paths: {...}          — специализации; доступ покупается талантом
+   * Other doctrine fields:
+   *   ladderShift: N        — Damage Ladder step shift (Pyromancy: +1).
+   *   ignoresSource: true   — the Source concept doesn't apply (Biomancy):
+   *                           the selector is hidden, move is always available, rank 5 of the modifiers
+   *                           is unlocked by Doctrine Rank 5 (via the regular maxModCost).
+   *   forms: [...]          — available physical damage forms (the form Modifier);
+   *                           a path overrides the list entirely.
+   *   modifiers: [...]      — doctrinal Modifiers the doctrine owns;
+   *                           a path's list is ADDED to the doctrine's list.
+   *   paths: {...}          — specializations; access is bought with a talent
    *                           (AE: system.doctrines.<key>.paths.<path> | Override | 1),
-   *                           сборка без пути легальна всегда.
+   *                           a build without a path is always legal.
    */
   doctrines: {
     pyromancy: {
       label: "DEDREL.Magic.Doctrines.pyromancy",
       baseDamageType: "heat",
-      // Испепеление: ступени Лестницы III–VII — на ступень выше всех прочих доктрин
+      // Incineration: Ladder steps III–VII — one step above all other doctrines
       ladderShift: 1,
       affinity:    [{ target: "mod:damage", delta: -1 }],
       restriction: [{ target: "mod:accuracy", delta: 1 }],
-      // Форм нет: Пиромантия жжёт чистым теплом (модификатор form недоступен)
+      // No forms: Pyromancy burns with pure heat (the form modifier is unavailable)
       forms: [],
-      // Поджигание — умолчание: уронное заклинание поджигает цель (состояние burning);
-      // v1 — кнопка "Наложить: Горение" в карточке (авто-наложение — вопрос BALANCE.md)
+      // Ignite is the default: a damaging spell sets the target on fire (the burning condition);
+      // v1 — an "Apply: Burning" button on the card (auto-application is an open BALANCE.md question)
       unique: { ignite: "burning" }
     },
 
@@ -467,8 +467,8 @@ export const DEDREL_MAGIC = {
         { target: "mod:area_circle", delta: 1 }
       ],
       forms: ["bludgeoning"],
-      // Контроль Территории: созданные эффекты (стены, ямы) повышают Масштаб
-      // Источника для геомантии. v1 — ГМ поднимает уровень источника вручную.
+      // Territory Control: created effects (walls, pits) raise the Source
+      // Scale for geomancy. v1 — the GM raises the source level by hand.
       unique: { territoryControl: true }
     },
 
@@ -476,7 +476,7 @@ export const DEDREL_MAGIC = {
       label: "DEDREL.Magic.Doctrines.hydromancy",
       baseDamageType: "",
       forms: ["bludgeoning", "slashing"],
-      // Сродства/ограничения по умолчанию отсутствуют — всё в путях
+      // No affinities/restrictions by default — everything is in the paths
       paths: {
         flow: {
           label: "DEDREL.Magic.Paths.flow",
@@ -484,7 +484,7 @@ export const DEDREL_MAGIC = {
             { target: "mod:area_circle", delta: -1 },
             { target: "tech:move", delta: -1 }
           ],
-          caps: [{ target: "mod:durability", maxRank: 2 }], // вода не держит форму
+          caps: [{ target: "mod:durability", maxRank: 2 }], // water doesn't hold a shape
           modifiers: ["knockdown"]
         },
         ice: {
@@ -493,7 +493,7 @@ export const DEDREL_MAGIC = {
             { target: "mod:durability", delta: -1 },
             { target: "mod:form", delta: -1 }
           ],
-          forms: ["piercing"], // сосульки, ледяные клинки (переопределяет формы воды)
+          forms: ["piercing"], // icicles, ice blades (overrides the water forms)
           modifiers: ["constrain"]
         }
       }
@@ -502,15 +502,15 @@ export const DEDREL_MAGIC = {
     ventomancy: {
       label: "DEDREL.Magic.Doctrines.ventomancy",
       baseDamageType: "",
-      // Ветер и звук бьют по площади и по чувствам, а не остриём: прямой урон —
-      // не их работа. Налога на "Прочность" нет, потому что доктрина её не
-      // касается вовсе — воздух не держит форму и конструктов не создаёт.
+      // Wind and sound strike an area and the senses, not with a point: direct damage
+      // isn't their job. There's no tax on Durability because the doctrine doesn't
+      // touch it at all — air doesn't hold a shape and doesn't create constructs.
       restriction: [
         { target: "mod:damage", delta: 1 },
         { target: "mod:accuracy", delta: 1 }
       ],
       forms: ["slashing"],
-      // Доктринные модификаторы доступны любому вентоманту (пути наследуют)
+      // Doctrinal modifiers are available to any ventomancer (the paths inherit them)
       modifiers: ["knockdown", "dust_veil", "choke"],
       paths: {
         squall: {
@@ -522,35 +522,35 @@ export const DEDREL_MAGIC = {
         },
         echo: {
           label: "DEDREL.Magic.Paths.echo",
-          // Фокус Эха — концептуально музыкальный инструмент. Отдельной проверки
-          // нет: фокус (weapon с типом "магическое") обязателен для ЛЮБОЙ магии.
-          // "Длительность" — ниша командных бафов Эха ("Долгая песня"): бард
-          // насыщает союзника звуком на 6-10 раундов дешевле прочих доктрин.
-          // На "Силу" скидка не влияет: её длительность задана рангом (durationMode).
+          // The Echo's focus is conceptually a musical instrument. There's no separate
+          // check: a focus (a weapon of type "magic") is mandatory for ANY magic.
+          // Duration is the niche of the Echo's party buffs (the Long Song): the bard
+          // imbues an ally with sound for 6-10 rounds cheaper than other doctrines.
+          // The discount doesn't affect Power: its duration is set by the rank (durationMode).
           affinity: [
             { target: "mod:power", delta: -1 },
             { target: "mod:targets", delta: -1 },
             { target: "mod:duration", delta: -1 }
           ],
-          // Психоакустика: "Сила" рангов 1–3 (полный каталог — у Тенемантии),
-          // imbue применяется к существам.
+          // Psychoacoustics: Power at ranks 1–3 (the full catalog belongs to Shadowmancy),
+          // imbue applies to creatures.
           modifiers: ["power"],
           caps: [{ target: "mod:power", allowedRanks: [1, 2, 3] }],
-          // Звуковой урон: обычная Лестница II–VI, тип sonic (DR к нему крайне редок)
+          // Sonic damage: the regular Ladder II–VI, type sonic (DR against it is extremely rare)
           special: { psychoacoustics: true, damageType: "sonic" }
         }
       }
     },
 
-    // Телекинез ИЗЪЯТ из Конструктора (решение 2026-07-16): доктрина будет
-    // разложена фиксированными заклинаниями/манёврами (роадмап §3.1).
+    // Telekinesis was REMOVED from the Constructor (decision 2026-07-16): the doctrine will be
+    // broken down into fixed spells/maneuvers (roadmap §3.1).
 
-    // --- Сущность ---
+    // --- Essence ---
     shadowmancy: {
       label: "DEDREL.Magic.Doctrines.shadowmancy",
       baseDamageType: "necrotic",
-      // Проклятия висят: скидка на Длительность; урон — со штрафом (ниша дебафера).
-      // Области закрыты целиком (хотфикс 2026-07-16): Тень бьёт таргетно.
+      // Curses linger: a discount on Duration; damage comes with a penalty (the debuffer niche).
+      // Areas are closed entirely (hotfix 2026-07-16): Shadow strikes targeted.
       affinity:    [{ target: "mod:duration", delta: -1 }],
       restriction: [
         { target: "mod:damage", delta: 1 },
@@ -559,47 +559,47 @@ export const DEDREL_MAGIC = {
         { target: "mod:area_line", forbidden: true }
       ],
       forms: [],
-      // Полный каталог "Силы" принадлежит Тенемантии (Эхо — только ранги 1–3)
+      // The full Power catalog belongs to Shadowmancy (the Echo — ranks 1–3 only)
       modifiers: ["power"],
-      // TODO (роадмап §3.2): modifierOverrides — Прочность → ХП нежити,
-      // Форма → тип/облик нежити ("Поднятие"); ждёт механику спавна (NOTES.md).
-      // Источник (трупы и тьма) поднимает ГМ макросом "Источники сцены".
+      // TODO (roadmap §3.2): modifierOverrides — Durability → undead HP,
+      // Form → undead type/guise ("Raising"); waits for the spawn mechanics (NOTES.md).
+      // The Source (corpses and darkness) is raised by the GM with the Scene Sources macro.
       unique: {}
     },
 
     biomancy: {
       label: "DEDREL.Magic.Doctrines.biomancy",
       baseDamageType: "",
-      // Живое тело и есть источник
+      // The living body is the source
       ignoresSource: true,
-      // Конституция доктрины: прямой урон запрещён целиком (утверждено 2026-07-13).
-      // Области закрыты целиком (хотфикс 2026-07-16): Био работает таргетно.
+      // The doctrine's constitution: direct damage is forbidden entirely (approved 2026-07-13).
+      // Areas are closed entirely (hotfix 2026-07-16): Bio works targeted.
       restriction: [
         { target: "mod:damage", forbidden: true },
         { target: "mod:area_cone", forbidden: true },
         { target: "mod:area_circle", forbidden: true },
         { target: "mod:area_line", forbidden: true },
-        // Биомантия не творит плоть из ниоткуда — она перелепливает уже живое
-        // (то же основание, что у ignoresSource: тело и есть источник).
-        // Остаются: Переместить, Преобразовать, Почуять (искать следы ваяния),
-        // Внедрить. Форма и так недоступна — у доктрины пустой список forms.
+        // Biomancy doesn't create flesh out of nothing — it reshapes what is already alive
+        // (the same reasoning as ignoresSource: the body is the source).
+        // What remains: Move, Transform, Sense (looking for traces of sculpting),
+        // Infuse. Form is unavailable anyway — the doctrine has an empty forms list.
         { target: "tech:create", forbidden: true }
       ],
       forms: [],
-      // Лечение — единственное прямое в системе; Адаптация — временные мутации
+      // Healing is the only direct one in the system; Adaptation — temporary mutations
       modifiers: ["heal", "adapt"],
-      // Биомантия контактна: работает руками, вблизи (правила §7.1 "Касание").
-      // Без Пути палитра урезана: Лечение и Адаптация только рангов 1-3 —
-      // Путь снимает свой потолок (caps пути мержатся ПОВЕРХ caps доктрины).
+      // Biomancy is contact-based: it works by hand, up close (rules §7.1 "Touch").
+      // Without a Path the palette is trimmed: Healing and Adaptation only at ranks 1-3 —
+      // a Path lifts its cap (the path's caps are merged ON TOP of the doctrine's caps).
       caps: [
         { target: "mod:range", maxRank: 2 },
         { target: "mod:heal", maxRank: 3 },
         { target: "mod:adapt", maxRank: 3 }
       ],
-      // Пути (правила 2026-09-11): Врачевание работает С образцом тела, Ваяние — ПРОТИВ
-      // него. Отсюда вся разница: Врачевание мгновенно и дотягивается через строй,
-      // Ваяние требует касания, часов и ткани донора (ступень расхождения 2,
-      // `flags.dedrel.divergence` на предметах адаптаций).
+      // Paths (rules 2026-09-11): Mending works WITH the body template, Sculpting AGAINST
+      // it. Hence the whole difference: Mending is instant and reaches through the ranks,
+      // Sculpting requires touch, hours and donor tissue (divergence step 2,
+      // `flags.dedrel.divergence` on the adaptation items).
       paths: {
         mending: {
           label: "DEDREL.Magic.Paths.mending",
@@ -607,10 +607,10 @@ export const DEDREL_MAGIC = {
             { target: "mod:heal", delta: -1 },
             { target: "mod:targets", delta: -1 }
           ],
-          // Снимает потолок Лечения; Адаптация и дальность остаются доктринными
+          // Lifts the Healing cap; Adaptation and range remain doctrinal
           caps: [{ target: "mod:heal", maxRank: 5 }]
-          // TODO (роадмап §3.3 п.5): доктринный модификатор `mend` — снятие
-          // физических состояний. Требует нового выхлопа в compile().
+          // TODO (roadmap §3.3 item 5): the doctrinal modifier `mend` — removing
+          // physical conditions. Requires a new output in compile().
         },
         sculpting: {
           label: "DEDREL.Magic.Paths.sculpting",
@@ -618,13 +618,13 @@ export const DEDREL_MAGIC = {
             { target: "mod:adapt", delta: -1 },
             { target: "mod:duration", delta: -1 }
           ],
-          // Снимает потолок Адаптации, но ужимает дальность до касания
+          // Lifts the Adaptation cap, but shrinks the range to touch
           caps: [
             { target: "mod:adapt", maxRank: 5 },
             { target: "mod:range", maxRank: 1 }
           ],
-          // Монополия на длинные касты Ваяния (`_rules/16.1 Rituals.md`);
-          // сами длинные касты — фикс-заклинания с is_fixed, не сборка
+          // A monopoly on Sculpting long casts (`_rules/16.1 Rituals.md`);
+          // the long casts themselves are fixed spells with is_fixed, not a build
           special: { longCast: true }
         }
       }
