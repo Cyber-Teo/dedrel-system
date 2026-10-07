@@ -8,8 +8,8 @@
             <label class="checkbox"><input type="checkbox" name="system.weapon_type.magic" {{checked system.weapon_type.magic}}/> {{localize "DEDREL.ItemSheet.Magic"}}</label>
         </div>
     </div>
-    {{!-- Урон по типам: чекбокс включает тип (по нему гейтятся манёвры),
-          формула справа — урон ИМЕННО этого типа. Пустая формула = базовая. --}}
+    {{!-- Damage by type: the checkbox enables the type (maneuvers are gated by it),
+          the formula on the right is the damage of THIS type specifically. An empty formula = the base one. --}}
     <div class="form-group stacked" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemSheet.DamageType"}}</label>
         <div class="damage-types-grid">
@@ -65,7 +65,7 @@
     </div>
     <p class="hint" style="grid-column: 1 / -1; margin: 0;">{{localize "DEDREL.ItemSheet.CleavingHint"}}</p>
 
-    {{!-- Пререквизиты владения: требования по рангам атрибутов/навыков --}}
+    {{!-- Proficiency prerequisites: attribute/skill rank requirements --}}
     <div class="section-header" style="grid-column: 1 / -1;">
         {{localize "DEDREL.ItemSheet.Prerequisites"}}
     </div>
@@ -114,8 +114,8 @@
         <label class="checkbox"><input type="checkbox" name="system.is_variable_grip" {{checked system.is_variable_grip}}/> {{localize "DEDREL.ItemSheet.IsVariableGrip"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.is_paired" {{checked system.is_paired}}/> {{localize "DEDREL.ItemSheet.IsPaired"}}</label>
         <label class="checkbox"><input type="checkbox" name="system.properties.natural" {{checked system.properties.natural}}/> {{localize "DEDREL.ItemSheet.IsNatural"}}</label>
-        {{!-- Экипировано: у персонажа выставляется листом (слоты рук), у NPC — вручную здесь.
-              От этого флага зависят transfer-эффекты оружия и фильтр оружия в Item#use. --}}
+        {{!-- Equipped: for a character it's set by the sheet (hand slots), for an NPC — by hand here.
+              The weapon's transfer effects and the weapon filter in Item#use depend on this flag. --}}
         <label class="checkbox"><input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{localize "DEDREL.ItemSheet.Equipped"}}</label>
     </div>
     {{#if system.is_reloading}}
@@ -131,7 +131,7 @@
     {{/if}}
 </div>
 
-{{!-- Бонусы против типов существ: сила 0-10 = +N·10% урона до DR цели --}}
+{{!-- Bonuses vs creature types: potency 0-10 = +N·10% damage before the target's DR --}}
 <div class="form-group stacked">
     <label>{{localize "DEDREL.Weapon.VsCreatures"}}</label>
     <p class="hint-text">{{localize "DEDREL.Weapon.VsCreaturesHint"}}</p>
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-{{!-- Вскрыватель типа: чекбокс = игнорировать DR, дарованный этим типом (зачарование/материал) --}}
+{{!-- Type breaker: checkbox = ignore the DR granted by this type (enchantment/material) --}}
 <div class="form-group stacked">
     <label>{{localize "DEDREL.Weapon.BypassCreatures"}}</label>
     <p class="hint-text">{{localize "DEDREL.Weapon.BypassCreaturesHint"}}</p>

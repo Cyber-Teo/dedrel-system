@@ -1,14 +1,14 @@
-{{!-- Вкладка «Настройка» NPC: все ручные (source) параметры, которые у персонажа
-      растут через опыт/создание, здесь выставляются напрямую. Инпуты берут
-      значения из _source (не из производных), иначе submit «запёк» бы вклад
-      эффектов/талантов/брони в базу. --}}
+{{!-- The NPC Tuning tab: all the manual (source) parameters that for a character
+      grow through XP/creation are set directly here. The inputs take
+      their values from _source (not from derived values), otherwise submit would "bake" the contribution
+      of effects/talents/armor into the base. --}}
 <div class="tab config {{tabs.config.cssClass}}" data-group="primary" data-tab="config">
 
     <h2 class="tab-title">{{localize "DEDREL.Npc.ConfigResources"}}</h2>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 20px; margin-bottom: 15px;">
         {{#if isPeon}}
-        {{!-- Порог прочности редактируется в шапке (npc-header.hbs): второй инпут
-              с тем же name сломал бы submit всей формы. --}}
+        {{!-- The toughness threshold is edited in the header (npc-header.hbs): a second input
+              with the same name would break the submit of the whole form. --}}
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
             <label style="font-size: 12px;">{{localize "DEDREL.Npc.HitsMax"}}</label>
             <input type="number" name="system.resources.hits.max" value="{{srcHitsMax}}" style="width: 60px;"/>

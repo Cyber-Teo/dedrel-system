@@ -1,6 +1,6 @@
 <div class="ekb-content">
 
-    {{!-- Поиск по каталогу --}}
+    {{!-- Catalog search --}}
     <div class="ekb-search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="search" class="ekb-search-input" value="{{search}}"
@@ -8,7 +8,7 @@
     </div>
     <p class="ekb-modes-hint">{{localize "DEDREL.KeyBrowser.ModesHint"}}</p>
 
-    {{!-- Каталог ключей system.* --}}
+    {{!-- Catalog of system.* keys --}}
     <div class="ekb-list">
         {{#each catalog}}
         <details class="ekb-category" data-category="{{id}}" {{#if open}}open{{/if}}>
@@ -32,7 +32,7 @@
         {{/each}}
     </div>
 
-    {{!-- Конструктор DSL flags.dedrel.mod --}}
+    {{!-- flags.dedrel.mod DSL builder --}}
     <section class="ekb-dsl">
         <header class="ekb-dsl-header">
             <span class="ekb-cat-label">{{localize "DEDREL.KeyBrowser.DslTitle"}}</span>

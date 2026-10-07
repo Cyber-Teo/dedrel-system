@@ -2,7 +2,7 @@
     <div class="header-top flexrow">
         <div class="header-left">
             {{#if isPeon}}
-            {{!-- Пеон: здоровье в «попаданиях» + порог прочности --}}
+            {{!-- Peon: health in "hits" + toughness threshold --}}
             <div class="stat-block hp-block">
                 <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
                     <label>{{localize "DEDREL.Npc.Hits"}}</label>
@@ -32,7 +32,7 @@
                 <input type="text" name="system.toughness" value="{{srcToughness}}" data-dtype="Number" />
             </div>
             {{else}}
-            {{!-- Босс: обычное HP (max — производное, переопределяется на вкладке «Настройка») --}}
+            {{!-- Boss: regular HP (max is derived, overridden on the Tuning tab) --}}
             <div class="stat-block hp-block">
                 <div class="stat-row" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
                     <label>HP</label>
@@ -73,7 +73,7 @@
         </div>
 
         <div class="header-right">
-            <!-- Row 1: Имя, тир и угроза -->
+            <!-- Row 1: Name, tier and threat -->
             <div class="header-row top-row">
                 <div class="name-wrapper">
                     <h1 class="dedrel-charname">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <!-- Row 2: Единый пул ОД -->
+            <!-- Row 2: Single AP pool -->
             <div class="ap-bars">
                 <div class="ap-bar universal">
                     <input type="text" name="system.resources.ap_universal.value"
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <!-- Row 3: Блок атрибутов со спасбросками -->
+            <!-- Row 3: Attribute block with saving throws -->
             <div class="attributes-grid">
                 <div class="attributes-header">
                     <span>ATTR</span>
@@ -131,7 +131,7 @@
                 {{/each}}
             </div>
 
-            <!-- Row 4: Защиты и Скорость -->
+            <!-- Row 4: Defenses and Speed -->
             <div class="defenses-box">
                 <div class="defense-item">
                     <label>BLOCK</label>
@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <!-- Row 5: Типы существа (Item creature_type — влияют на «оружие против типа») -->
+            <!-- Row 5: Creature types (Item creature_type — they affect "weapon vs type") -->
             <div class="npc-creature-types" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 6px;">
                 <label style="font-size: 12px; opacity: .8;">{{localize "DEDREL.Npc.CreatureType"}}:</label>
                 {{#each creatureTypes as |ct|}}

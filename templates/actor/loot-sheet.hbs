@@ -15,7 +15,7 @@
         </div>
     </header>
 
-    {{!-- Экономика торговца (GM) --}}
+    {{!-- Merchant economy (GM) --}}
     {{#if isMerchant}}
     {{#if isGM}}
     <fieldset class="loot-section">
@@ -50,7 +50,7 @@
     {{/if}}
     {{/if}}
 
-    {{!-- Кошелёк --}}
+    {{!-- Wallet --}}
     <fieldset class="loot-section">
         <legend>{{localize "DEDREL.ActorSheet.Wallet"}} ({{walletTotal}})</legend>
         <div class="loot-wallet-row">
@@ -74,7 +74,7 @@
         {{/if}}
     </fieldset>
 
-    {{!-- Вместимость контейнера --}}
+    {{!-- Container capacity --}}
     {{#if isContainer}}
     <fieldset class="loot-section">
         <legend>{{localize "DEDREL.Loot.Capacity"}}</legend>
@@ -97,7 +97,7 @@
     </fieldset>
     {{/if}}
 
-    {{!-- Сток предметов --}}
+    {{!-- Item stock --}}
     <fieldset class="loot-section loot-section--grow">
         <legend>{{localize "DEDREL.Loot.Stock"}}
             {{#if isGM}}<a data-action="createItem" data-type="loot" title="{{localize "DEDREL.ActorSheet.Add"}}"><i class="fas fa-plus"></i></a>{{/if}}

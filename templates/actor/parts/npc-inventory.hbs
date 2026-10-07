@@ -30,8 +30,8 @@
         </div>
     </div>
 
-    {{!-- Естественное оружие (когти/укус) — не занимает слот руки. Блок появляется,
-          только если у актёра есть оружие с флагом natural. --}}
+    {{!-- Natural weapons (claws/bite) — don't occupy a hand slot. The block appears
+          only if the actor has a weapon with the natural flag. --}}
     {{#if hasNaturalWeapon}}
     <div class="equipment-slots" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
         {{#each naturalWeapons as |weapon|}}

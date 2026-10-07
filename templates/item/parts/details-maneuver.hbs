@@ -102,8 +102,8 @@
             {{selectOptions allSkills selected=system.skill}}
         </select>
     </div>
-    {{!-- Формулы — на всю ширину: в полях живут длинные выражения
-          вроде "@weapon.damage_formula + 4", в пол-колонки их не видно. --}}
+    {{!-- Formulas are full width: the fields hold long expressions
+          like "@weapon.damage_formula + 4", which can't be seen in half a column. --}}
     <div class="form-group" style="grid-column: 1 / -1;">
         <label>{{localize "DEDREL.ItemFields.FormulaAttack"}}</label>
         <input type="text" name="system.formula_attack" value="{{system.formula_attack}}"/>

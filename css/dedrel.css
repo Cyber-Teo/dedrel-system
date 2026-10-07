@@ -668,7 +668,7 @@ form.dedrel.sheet.item {
   margin: 0;
 }
 
-/* Урон по типам: чекбокс типа слева, формула этого типа справа */
+/* Damage by type: the type checkbox on the left, that type's formula on the right */
 .dedrel.sheet.item .damage-types-grid {
   display: grid;
   grid-template-columns: minmax(110px, auto) 1fr;
@@ -697,7 +697,7 @@ form.dedrel.sheet.item {
   width: 100%;
 }
 
-/* Бонусы против типов существ: аккуратная сетка «название — сила» */
+/* Bonuses vs creature types: a neat "name — potency" grid */
 .dedrel.sheet.item .vs-creature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -736,7 +736,7 @@ form.dedrel.sheet.item {
   margin: 2px 0 4px;
 }
 
-/* Вкладка «Боеприпасы» на листе дальнобойного оружия */
+/* The Ammunition tab on a ranged weapon's sheet */
 .dedrel.sheet.item ul.ammo-list {
   list-style: none;
   margin: 6px 0 0;
@@ -969,7 +969,7 @@ form.dedrel.sheet.item {
   color: var(--color-text-light);
 }
 
-/* Заголовок группы доктрин на странице опыта (Прокачка Доктрин) */
+/* Doctrine group heading on the experience page (Doctrine Upgrade) */
 .dedrel .experience-section .doctrine-group-title {
   margin: 10px 0 5px 0;
   color: var(--color-text-light);
@@ -1205,14 +1205,14 @@ form.dedrel.sheet.item {
  * Active Effects HUD
  * ================================================== */
 #dedrel-active-effects-hud {
-  display: contents !important; /* Делает обертку полностью прозрачной для лейаута */
+  display: contents !important; /* Makes the wrapper fully transparent to the layout */
   /* pointer-events: none; */
 }
 
 #dedrel-active-effects-hud .active-effects-list {
   position: absolute !important;
   top: 15px !important;
-  right: 360px !important; /* Открытый сайдбар (левее вкладок) */
+  right: 360px !important; /* Sidebar open (left of the tabs) */
   left: auto !important;
   bottom: auto !important;
   margin: 0 !important;
@@ -1227,7 +1227,7 @@ form.dedrel.sheet.item {
 }
 
 #dedrel-active-effects-hud .active-effects-list.sidebar-collapsed {
-  right: 60px !important; /* Свернутый сайдбар (левее вкладок) */
+  right: 60px !important; /* Sidebar collapsed (left of the tabs) */
 }
 
 #dedrel-active-effects-hud .effect-icon {
@@ -1275,8 +1275,8 @@ form.dedrel.sheet.item {
   white-space: nowrap;
 }
 
-/* Счётчик стаков кондиции (flags.dedrel.stacks): верхний правый угол,
- * чтобы не пересекаться с длительностью в нижнем правом */
+/* Condition stack counter (flags.dedrel.stacks): top right corner,
+ * so as not to overlap with the duration in the bottom right */
 #dedrel-active-effects-hud .effect-stacks {
   position: absolute;
   top: -6px;
@@ -1292,14 +1292,14 @@ form.dedrel.sheet.item {
 }
 
 /* ==================================================
- * Token HUD: счётчики стаков в палитре статусов
+ * Token HUD: stack counters in the status palette
  * ================================================== */
 
 /* ==================================================
  * Chain Maneuvers HUD
  * ================================================== */
 .dedrel.chain-hud {
-  /* Нативная рамка V14 сама позиционирует окно, нам не нужен абсолют */
+  /* The native V14 frame positions the window itself, we don't need absolute positioning */
 }
 
 .chain-maneuvers-container {
@@ -1421,7 +1421,7 @@ form.dedrel.sheet.item {
   /* top: auto !important; */
 }
 
-/* Окно HUD не должно обрезать раскрытые дропдаун-панели меню */
+/* The HUD window mustn't clip the expanded dropdown menu panels */
 #dedrel-ap-hud,
 #dedrel-ap-hud .window-content {
   overflow: visible;
@@ -1454,8 +1454,8 @@ form.dedrel.sheet.item {
   gap: 10px;
 }
 
-/* Второй ряд HUD: Действие и Скорость. Отдельной строкой, потому что в бою
-   ряд с кубиками ОД вместе с ними уезжал за край экрана. */
+/* Second HUD row: Action and Speed. A separate line, because in combat
+   the row with the AP pips went off the edge of the screen together with them. */
 .ap-status {
   display: flex;
   flex-direction: row;
@@ -1513,9 +1513,9 @@ form.dedrel.sheet.item {
   box-shadow: 0 0 8px #4B0082, inset 0 0 5px rgba(255,255,255,0.2);
 }
 
-/* Speed (Sky Blue) — полоска с заполнением (метры, дробные) */
+/* Speed (Sky Blue) — a filled bar (meters, fractional) */
 .ap-row.speed .ap-label { color: #85c1e9; }
-/* Индикатор «одно Действие за ход» (см. src/utils/action-economy.mjs) */
+/* The "one Action per turn" indicator (see src/utils/action-economy.mjs) */
 .ap-action-state {
   width: 90px;
   height: 20px;
@@ -1570,7 +1570,7 @@ form.dedrel.sheet.item {
 }
 
 /* ==========================================================================
-   Выпадающие меню HUD (избранные навыки / манёвры-заклинания / быстрые слоты)
+   HUD dropdown menus (favorite skills / maneuvers-spells / quick slots)
    ========================================================================== */
 .ap-menus {
   display: flex;
@@ -1695,8 +1695,8 @@ form.dedrel.sheet.item {
 }
 
 /* ==========================================================================
-   Конструктор Заклинаний (SpellConstructorApp)
-   Свои flex-классы вместо токсичных .flexrow/.flexcol (QUIRKS #1)
+   Spell Constructor (SpellConstructorApp)
+   Our own flex classes instead of the toxic .flexrow/.flexcol (QUIRKS #1)
    ========================================================================== */
 
 .dedrel.spell-constructor .spell-constructor-content {
@@ -1731,7 +1731,7 @@ form.dedrel.sheet.item {
   justify-content: space-between;
 }
 
-/* Анонс особенностей доктрины/пути: сродства, ограничения, запреты, формы */
+/* Announcing the doctrine's/path's features: affinities, restrictions, bans, forms */
 .dedrel.spell-constructor .sc-doctrine-rules {
   display: flex;
   flex-wrap: wrap;
@@ -1886,7 +1886,7 @@ form.dedrel.sheet.item {
   display: flex;
   gap: 3px;
   row-gap: 3px;
-  flex-wrap: wrap; /* текстовые ячейки (Форма, Тип действия) переносятся, а не слипаются */
+  flex-wrap: wrap; /* text cells (Form, Action Type) wrap instead of running together */
 }
 
 .dedrel.spell-constructor .sc-rank {
@@ -1968,12 +1968,12 @@ form.dedrel.sheet.item {
   cursor: not-allowed;
 }
 
-/* Тулбар вкладки Заклинания (кнопка Конструктора) */
+/* Spells tab toolbar (the Constructor button) */
 .dedrel .spells-toolbar {
   margin-bottom: 8px;
 }
 
-/* Текстовые ячейки рангов (Форма, Тип действия) и подсказка сценового источника */
+/* Rank text cells (Form, Action Type) and the scene source hint */
 .dedrel.spell-constructor .sc-rank.text {
   width: auto;
   min-width: 24px;
@@ -1986,7 +1986,7 @@ form.dedrel.sheet.item {
   cursor: help;
 }
 
-/* Тумблеры Путей доктрин на вкладке Заклинания */
+/* Doctrine Path toggles on the Spells tab */
 .dedrel .spells-toolbar {
   display: flex;
   align-items: center;
@@ -2020,9 +2020,9 @@ form.dedrel.sheet.item {
 }
 
 /* =========================================================================
-   Лист Лут/Торговец/Контейнер (актор loot). Базовый scope — .dedrel.loot;
-   режимы уточняются классами .loot-mode-{loot|merchant|container} на корне
-   окна (ставятся в DedrelLootSheet#_onRender).
+   Loot/Merchant/Container sheet (loot actor). The base scope is .dedrel.loot;
+   modes are refined by the .loot-mode-{loot|merchant|container} classes on the window
+   root (set in DedrelLootSheet#_onRender).
    ========================================================================= */
 .dedrel.loot .loot-sheet {
   padding: 8px;
@@ -2211,14 +2211,14 @@ form.dedrel.sheet.item {
   margin-top: 6px;
 }
 
-/* Подсветка слота экипировки при перетаскивании предмета (drag-n-drop) */
+/* Highlighting an equipment slot while an item is dragged over it (drag-n-drop) */
 .dedrel .equip-slot.drag-over {
   outline: 2px dashed var(--color-text-hyperlink, #4a9eff);
   outline-offset: -2px;
   box-shadow: inset 0 0 10px rgba(74, 158, 255, 0.35);
 }
 
-/* Слоты аксессуаров (вкладка Инвентарь) */
+/* Accessory slots (Inventory tab) */
 .dedrel .acc-slots-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2258,17 +2258,17 @@ form.dedrel.sheet.item {
   color: var(--color-text-dark-secondary);
 }
 
-/* Заблокированный слот аксессуара (напр. хвост без мутации) */
+/* A locked accessory slot (e.g. a tail without the mutation) */
 .dedrel .acc-slot-locked {
   opacity: 0.5;
   pointer-events: none;
 }
 
 /* ==========================================================================
-   Лист NPC / Монстра (актор npc).
-   Квирк ApplicationV2: .window-content обрезан (overflow:hidden), поэтому
-   скроллит внутренний корень листа. Ему нужны flex-заполнение, min-height:0
-   и overflow-y:auto (см. FOUNDRY V14 QUIRKS.md, тот же приём, что у .loot-sheet).
+   NPC / Monster sheet (npc actor).
+   ApplicationV2 quirk: .window-content is clipped (overflow:hidden), so
+   the sheet's inner root scrolls. It needs a flex fill, min-height:0
+   and overflow-y:auto (see FOUNDRY V14 QUIRKS.md, the same trick as .loot-sheet).
    ========================================================================== */
 .dedrel.npc .npc-sheet-body {
   flex: 1 1 auto;
@@ -2279,10 +2279,10 @@ form.dedrel.sheet.item {
 }
 
 /* ==========================================================================
-   Сетка выбора типа в диалоге создания предмета (замена <select>).
-   Компактные карточки «иконка + подпись», см. хук renderApplicationV2 в dedrel.mjs.
-   Селекторы усилены (.dedrel-type-grid ...) + сброс стилей кнопки Foundry,
-   иначе ядро навязывает кнопке ширину/padding/line-height и текст наезжает.
+   Type selection grid in the item creation dialog (replaces <select>).
+   Compact "icon + label" cards, see the renderApplicationV2 hook in dedrel.mjs.
+   The selectors are strengthened (.dedrel-type-grid ...) + Foundry's button styles are reset,
+   otherwise core imposes width/padding/line-height on the button and the text overlaps.
    ========================================================================== */
 .dedrel-type-grid {
   display: grid;
@@ -2294,7 +2294,7 @@ form.dedrel.sheet.item {
   padding: 2px;
 }
 .dedrel-type-grid .dedrel-type-card {
-  all: unset;                 /* сброс дефолтных стилей <button> из ядра */
+  all: unset;                 /* reset core's default <button> styles */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -2324,7 +2324,7 @@ form.dedrel.sheet.item {
   outline: 2px solid #7c3aed;
   outline-offset: 1px;
 }
-/* тёмная плитка под иконкой — чтобы белые силуэты читались в любой теме */
+/* a dark tile under the icon — so that white silhouettes read in any theme */
 .dedrel-type-grid .dedrel-type-tile {
   flex: 0 0 auto;
   box-sizing: border-box;
@@ -2356,7 +2356,7 @@ form.dedrel.sheet.item {
 }
 
 /* ============================================
-   HUD управления временем (TimeHUD)
+   Time control HUD (TimeHUD)
    ============================================ */
 .dedrel-time-hud .time-hud-content {
   display: flex;
@@ -2419,8 +2419,8 @@ form.dedrel.sheet.item {
 }
 
 /* ==========================================================================
-   Справочник ключей эффектов (EffectKeyBrowserApp)
-   Свои flex-классы вместо токсичных .flexrow/.flexcol (QUIRKS #1)
+   Effect Key Browser (EffectKeyBrowserApp)
+   Our own flex classes instead of the toxic .flexrow/.flexcol (QUIRKS #1)
    ========================================================================== */
 
 .dedrel.effect-key-browser .ekb-content {
@@ -2451,7 +2451,7 @@ form.dedrel.sheet.item {
   opacity: 0.75;
 }
 
-/* Каталог: скроллится независимо от конструктора DSL (QUIRKS #2: min-height 0) */
+/* Catalog: scrolls independently of the DSL builder (QUIRKS #2: min-height 0) */
 .dedrel.effect-key-browser .ekb-list {
   flex: 1 1 auto;
   min-height: 0;
@@ -2523,7 +2523,7 @@ form.dedrel.sheet.item {
   padding: 0;
 }
 
-/* Конструктор DSL */
+/* DSL builder */
 .dedrel.effect-key-browser .ekb-dsl {
   flex: 0 0 auto;
   border: 1px solid var(--color-border, #444);
@@ -2636,19 +2636,19 @@ form.dedrel.sheet.item {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Виджет «Источники сцены» (src/apps/source-hud.mjs)                  */
+/*  The Scene Sources widget (src/apps/source-hud.mjs)                  */
 /* ------------------------------------------------------------------ */
 
-/* Позиционируется абсолютно внутри #ui-left: у него есть transform, поэтому
-   он же containing block. В поток левой колонки встраиваться нельзя —
-   #scene-controls меряет свою высоту, чтобы разложить инструменты по столбцам.
-   left и ширина совпадают с колонкой панели инструментов. */
+/* Positioned absolutely inside #ui-left: it has a transform, so
+   it is also the containing block. Embedding into the left column's flow is not allowed —
+   #scene-controls measures its own height to lay its tools out in columns.
+   left and width match the scene controls column. */
 #dedrel-source-hud {
   position: absolute;
   left: 16px;
   top: var(--dedrel-source-hud-top, 44%);
   width: var(--control-size, 32px);
-  pointer-events: none; /* кликабельны только сами кнопки (.ui-control) */
+  pointer-events: none; /* only the buttons themselves are clickable (.ui-control) */
 }
 
 #dedrel-source-hud .source-hud-column {
@@ -2664,9 +2664,9 @@ form.dedrel.sheet.item {
   justify-content: center;
 }
 
-/* Символ вставлен в DOM инлайном, а не картинкой: только у встроенного SVG
-   работает fill="currentColor", поэтому состояние Источника — одно правило
-   color, а не второй комплект файлов. */
+/* The symbol is inserted into the DOM inline, not as an image: only an embedded SVG
+   supports fill="currentColor", so the Source state is a single color
+   rule, not a second set of files. */
 #dedrel-source-hud .source-doctrine > svg {
   display: block;
   width: 22px;
@@ -2674,8 +2674,8 @@ form.dedrel.sheet.item {
   pointer-events: none;
 }
 
-/* Нет источника — символ гаснет, но остаётся читаемым: магу важно видеть,
-   ЧТО именно недоступно, а не пустое место. */
+/* No source — the symbol dims but stays readable: the caster needs to see
+   WHAT exactly is unavailable, not an empty spot. */
 #dedrel-source-hud .scale-none {
   color: rgba(255, 255, 255, 0.35);
 }
@@ -2684,7 +2684,7 @@ form.dedrel.sheet.item {
   color: #fff;
 }
 
-/* Изобильный — тёплое свечение: маг должен замечать его, не наводя курсор. */
+/* Abundant — a warm glow: the caster should notice it without hovering. */
 #dedrel-source-hud .scale-abundant {
   color: #ffc061;
   border-color: #e8862a;
