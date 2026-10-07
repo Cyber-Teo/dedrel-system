@@ -24,7 +24,7 @@ export default class TalentDataModel extends foundry.abstract.TypeDataModel {
       adds_items: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
-      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      // Grants temporary HP on use (a number, dice or "N%" of the target's max HP)
       formula_temp_hp: new fields.StringField({ initial: "" }),
       
       on_add_macro: new fields.StringField({ initial: "", label: "On Add Macro" }),

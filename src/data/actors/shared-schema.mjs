@@ -1,14 +1,14 @@
 /**
- * Общие построители полей схемы для актёров (character и npc).
- * Каждая функция возвращает СВЕЖИЙ экземпляр поля при каждом вызове —
- * один и тот же экземпляр DataField нельзя переиспользовать в двух схемах.
+ * Shared schema field builders for actors (character and npc).
+ * Each function returns a FRESH field instance on every call —
+ * the same DataField instance can't be reused in two schemas.
  *
- * Цель — единый источник правды для боевых структур (атрибуты, навыки,
- * защиты, DR, слоты экипировки), чтобы NPC и персонаж не расходились.
- * Логика расчётов (prepareDerivedData) остаётся в конкретных моделях.
+ * The goal is a single source of truth for combat structures (attributes, skills,
+ * defenses, DR, equipment slots), so that the NPC and the character don't diverge.
+ * Calculation logic (prepareDerivedData) stays in the concrete models.
  */
 
-/** Один атрибут: source-ранг + плоский бонус к сейву. */
+/** One attribute: source rank + flat save bonus. */
 export function attributeField() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -17,7 +17,7 @@ export function attributeField() {
   });
 }
 
-/** Массив из 9 атрибутов системы. */
+/** Array of the system's 9 attributes. */
 export function buildAttributes() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -33,7 +33,7 @@ export function buildAttributes() {
   });
 }
 
-/** Один навык: ранг, специализация, плоский бонус. */
+/** One skill: rank, specialization, flat bonus. */
 export function skillField() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -43,7 +43,7 @@ export function skillField() {
   });
 }
 
-/** Полный плоский список навыков (боевые, интеллект, практика, социалка). */
+/** Full flat skill list (combat, intellectual, practical, social). */
 export function buildSkills() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -84,7 +84,7 @@ export function buildSkills() {
   });
 }
 
-/** Три производные защиты (значения дописываются в prepareDerivedData). */
+/** Three derived defenses (values are filled in by prepareDerivedData). */
 export function buildDefenses() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -94,7 +94,7 @@ export function buildDefenses() {
   });
 }
 
-/** Снижение урона по 10 типам (модифицируется Active Effects и бронёй). */
+/** Damage reduction for 10 types (modified by Active Effects and armor). */
 export function buildDR() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -112,13 +112,13 @@ export function buildDR() {
 }
 
 /**
- * Доктрина Магического Конструктора.
- * rank — source-значение (покупается за XP; таланты доступа дают +1 через AE).
- * unlocked — доступ к доктрине (выдаётся талантом через AE Override 1).
- * paths.<key> — купленные Пути-специализации (талант пути:
+ * A Spell Constructor doctrine.
+ * rank — source value (bought with XP; access talents give +1 via AE).
+ * unlocked — access to the doctrine (granted by a talent via AE Override 1).
+ * paths.<key> — purchased specialization Paths (path talent:
  *   AE system.doctrines.<doctrine>.paths.<path> | Override | 1).
- *   Переключаемой "стойки" active_path больше нет: сборка сама несёт путь,
- *   при касте проверяется лишь то, что путь известен магу.
+ *   The switchable active_path "stance" is gone: the build carries its own path,
+ *   casting only checks that the caster knows the path.
  */
 function doctrineField(pathKeys = []) {
   const fields = foundry.data.fields;
@@ -137,33 +137,33 @@ function doctrineField(pathKeys = []) {
 }
 
 /**
- * Полный набор из 18 канонических доктрин (см. "_rules/16. Magic.md";
- * правила — CONFIG.DEDREL.magic). Используется и персонажем, и NPC-боссом,
- * чтобы каст шёл по одним и тем же правилам Магического Конструктора.
+ * Full set of the 18 canonical doctrines (see "_rules/16. Magic.md";
+ * rules — CONFIG.DEDREL.magic). Used by both the character and the NPC boss,
+ * so that casting follows the same Spell Constructor rules.
  */
 export function buildDoctrines() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
-    // Доктрины Материи
+    // Doctrines of Matter
     geomancy: doctrineField(),
     hydromancy: doctrineField(["flow", "ice"]),
     pyromancy: doctrineField(),
     ventomancy: doctrineField(["squall", "echo"]),
-    // Доктрины Сущности
+    // Doctrines of Essence
     biomancy: doctrineField(["mending", "sculpting"]),
     shadowmancy: doctrineField(),
     aetheromancy: doctrineField(),
-    // Доктрины Беспредельного
+    // Doctrines of the Boundless
     electromancy: doctrineField(),
     temporalmancy: doctrineField(),
     astralomancy: doctrineField(),
     aether_song: doctrineField(),
-    // Врождённая магия
+    // Innate Magic
     blood_magic: doctrineField(),
     chaos_magic: doctrineField(),
     shapeshifting: doctrineField(),
     feral_magic: doctrineField(),
-    // Псионика
+    // Psionics
     telekinesis: doctrineField(),
     telepathy: doctrineField(),
     zero: doctrineField()
@@ -171,7 +171,7 @@ export function buildDoctrines() {
 }
 
 /**
- * Известные Магические Техники (выдаются талантами через AE; читает конструктор).
+ * Known Magic Techniques (granted by talents via AE; read by the constructor).
  */
 export function buildMagic() {
   const fields = foundry.data.fields;
@@ -186,7 +186,7 @@ export function buildMagic() {
   });
 }
 
-/** Один слот экипировки: ссылка на предмет + ожидаемый тип. */
+/** One equipment slot: item reference + expected type. */
 function slot(type = "") {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -195,7 +195,7 @@ function slot(type = "") {
   });
 }
 
-/** Слоты экипировки: руки, броня послойно, магпредметы, боеприпас, аксессуары. */
+/** Equipment slots: hands, armor by layer, magic items, ammunition, accessories. */
 export function buildEquipmentSlots() {
   const fields = foundry.data.fields;
   return new fields.SchemaField({
@@ -209,7 +209,7 @@ export function buildEquipmentSlots() {
     magic_item_2: slot("magic_item"),
     ammo: slot("loot"),
 
-    // Слоты аксессуаров (см. character.mjs): голова/шея/торс + кольца/браслеты.
+    // Accessory slots (see character.mjs): head/neck/torso + rings/bracelets.
     head: slot("head"),
     neck: slot("neck"),
     torso: slot("torso"),

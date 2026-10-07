@@ -2,13 +2,13 @@ import { physicalItemFields } from "./_physical.mjs";
 import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
- * Зелье — расходуемый предмет с мгновенным эффектом (лечение/бафф/дебафф).
- * Механические эффекты реализуются через Active Effects на самом предмете
- * (шаблоны, применяемые в Item#use), поэтому отдельного поля changes нет.
+ * Potion — a consumable item with an instant effect (healing/buff/debuff).
+ * Mechanical effects are implemented via Active Effects on the item itself
+ * (templates applied in Item#use), so there is no separate changes field.
  *
- * Заряды/расход намеренно используют те же плоские поля, что и остальная
- * система (uses_value/uses_max/uses_per, consumable, quantity), чтобы поток
- * Item#use() работал без специальной ветки для зелий.
+ * Charges/consumption deliberately use the same flat fields as the rest of the
+ * system (uses_value/uses_max/uses_per, consumable, quantity), so that the
+ * Item#use() flow works without a special branch for potions.
  */
 export default class PotionDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -20,16 +20,16 @@ export default class PotionDataModel extends foundry.abstract.TypeDataModel {
       ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: true }),
-      // Краткое описание эффекта для игрока (в дополнение к description)
+      // Short effect description for the player (in addition to description)
       effect_description: new StringField({ required: false, initial: "" }),
-      // Расход при использовании (списывается quantity в Item#use)
+      // Consumed on use (quantity is decremented in Item#use)
       consumable: new BooleanField({ required: true, initial: true }),
-      // Заряды (для многодозовых склянок); пусто/0 = без зарядов
+      // Charges (for multi-dose vials); empty/0 = no charges
       uses_value: new NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       uses_max: new StringField({ required: false, initial: "" }),
       uses_per: new StringField({ required: false, initial: "" }),
       formula_heal: new StringField({ required: false, initial: "", label: "Healing Formula" }),
-      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      // Grants temporary HP on use (a number, dice or "N%" of the target's max HP)
       formula_temp_hp: new StringField({ required: false, initial: "" }),
       on_use_macro: new StringField({ required: false, initial: "" }),
       requirements: new SchemaField({

@@ -1,17 +1,17 @@
 /**
- * Item «Тип существа» (creature_type). Тег принадлежности существа к
- * категории (à la D&D creature types) + носитель врождённых бонусов.
+ * "Creature Type" Item (creature_type). A tag marking a creature's membership in a
+ * category (à la D&D creature types) + a bearer of innate bonuses.
  *
- * Как работать/балансить:
- *  - system.key — стабильный ключ типа (см. CONFIG.DEDREL.creatureTypes),
- *    по нему оружие/эффекты будут бить «против типа»;
- *  - бонусы всего вида (DR, защиты, скорость, иммунитеты) вешаются через
- *    штатную вкладку Active Effects этого Item'а — они переносятся на актёра,
- *    когда предмет лежит в его инвентаре (как у талантов/состояний);
- *  - описание — вкладка «Описание».
+ * How to use/balance:
+ *  - system.key — the type's stable key (see CONFIG.DEDREL.creatureTypes),
+ *    weapons/effects will strike "against the type" by it;
+ *  - bonuses for the whole kind (DR, defenses, speed, immunities) are attached via
+ *    this Item's standard Active Effects tab — they transfer to the actor
+ *    while the item is in its inventory (as with talents/conditions);
+ *  - the description goes in the "Description" tab.
  *
- * Предмет кладётся в инвентарь NPC (или персонажа); лист NPC показывает тип
- * в шапке. Один актёр может нести несколько типов.
+ * The item goes into an NPC's (or character's) inventory; the NPC sheet shows the type
+ * in the header. One actor can carry several types.
  */
 export default class CreatureTypeData extends foundry.abstract.TypeDataModel {
   static defineSchema() {

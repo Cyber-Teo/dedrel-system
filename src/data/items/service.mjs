@@ -1,11 +1,11 @@
 import { ITEM_RARITY_ENUM } from "../../constants.mjs";
 
 /**
- * Услуга — нематериальный покупаемый предмет (аренда, телепорт, еда, ночлег).
- * НЕ физический: без веса, не попадает в инвентарь-перегрузку и не «носится».
- * При покупке у торговца списываются деньги, в чат падает квитанция, и, если на
- * предмете есть переносимые Active Effects, — они применяются покупателю
- * (напр. бафф от сытной еды). В инвентарь ничего не кладётся.
+ * Service — an intangible purchasable item (rental, teleport, food, lodging).
+ * NOT physical: no weight, doesn't count toward inventory encumbrance and isn't "carried".
+ * When bought from a merchant the money is deducted, a receipt drops into chat, and if the
+ * item has transferable Active Effects, they are applied to the buyer
+ * (e.g. a buff from a hearty meal). Nothing goes into the inventory.
  */
 export default class ServiceDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -15,7 +15,7 @@ export default class ServiceDataModel extends foundry.abstract.TypeDataModel {
       key: new StringField({ required: false, initial: "" }),
       rarity: new StringField({ required: true, initial: "common", choices: ITEM_RARITY_ENUM }),
       base_price: new NumberField({ required: true, nullable: false, initial: 0, min: 0 }),
-      // Свободный тег типа услуги: rental, teleport, meal, lodging, toll, ...
+      // Free-form service type tag: rental, teleport, meal, lodging, toll, ...
       service_type: new StringField({ required: false, initial: "" })
     };
   }

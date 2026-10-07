@@ -1,19 +1,19 @@
 import { ITEM_RARITY_ENUM } from "../../constants.mjs";
 
 /**
- * Общий набор «физических» полей предмета: редкость, вес, базовая цена.
- * Спредится в defineSchema() конкретных типов предметов, чтобы экономика
- * (кошелёк, торговцы) и расчёт перегрузки работали единообразно.
+ * Shared set of "physical" item fields: rarity, weight, base price.
+ * Spread into defineSchema() of the concrete item types so that the economy
+ * (wallet, merchants) and the encumbrance calculation work uniformly.
  *
- * Количество (quantity) и «стакаемость» (stackable) не входят сюда намеренно:
- * у разных типов свои дефолты (оружие — 1, боеприпасы — 20), поэтому они
- * объявляются в схеме самого типа.
+ * Quantity and stackable are deliberately not included here:
+ * different types have their own defaults (weapon — 1, ammunition — 20), so they
+ * are declared in the type's own schema.
  *
  * @param {object} [defaults]
- * @param {number} [defaults.weight]     Начальный вес одной единицы (кг).
- * @param {number} [defaults.base_price] Начальная базовая цена (в базовых единицах валюты).
- * @param {string} [defaults.rarity]     Начальная редкость.
- * @returns {object} Объект полей для спреда в defineSchema().
+ * @param {number} [defaults.weight]     Initial weight of one unit (kg).
+ * @param {number} [defaults.base_price] Initial base price (in base currency units).
+ * @param {string} [defaults.rarity]     Initial rarity.
+ * @returns {object} Field object to spread into defineSchema().
  */
 export function physicalItemFields({ weight = 0, base_price = 0, rarity = "common" } = {}) {
   const { StringField, NumberField } = foundry.data.fields;

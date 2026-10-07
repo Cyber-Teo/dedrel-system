@@ -9,31 +9,31 @@ export default class AmmunitionDataModel extends foundry.abstract.TypeDataModel 
     return {
       description: new fields.HTMLField({ required: false, blank: true, initial: "" }),
       key: new fields.StringField({ required: false, initial: "" }),
-      // Общие физические поля (редкость/вес/цена)
+      // Shared physical fields (rarity/weight/price)
       ...physicalItemFields({ weight: 0.05 }),
       ...craftingFields(),
-      // Тип боеприпаса → класс совместимого оружия (arrow=лук, bolt=арбалет, shot=огнестрел)
+      // Ammunition type → compatible weapon class (arrow=bow, bolt=crossbow, shot=firearm)
       ammo_type: new fields.StringField({ initial: "arrow", choices: AMMO_TYPE_ENUM, label: "Ammo Type" }),
       quantity: new fields.NumberField({ initial: 20, integer: true, min: 0, label: "Quantity" }),
       stackable: new fields.BooleanField({ initial: true }),
-      // Бронебойность боеприпаса: каждая единица снимает 10% DR цели. Без cap
-      // (легендарные боеприпасы могут иметь высокую пробивную способность).
+      // Ammunition Armor Piercing: each point removes 10% of the target's DR. No cap
+      // (legendary ammunition may have high piercing power).
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, label: "Armor Piercing" }),
-      // Доп. урон боеприпаса поверх оружейного: формула + тип по Лестнице
-      // (любой DR-ключ, включая энергетические — «магический» урон особых стрел).
+      // Extra ammunition damage on top of the weapon's: formula + type on the Ladder
+      // (any DR key, including energy ones — the "magical" damage of special arrows).
       damage_bonus: new fields.StringField({ initial: "", label: "Damage Bonus Formula" }),
       damage_bonus_type: new fields.StringField({ initial: "", label: "Damage Bonus Type" }),
-      // Бонус против типов существ (сила 0-10 на тип), зеркало оружейного vs_creature.
+      // Bonus vs creature types (potency 0-10 per type), mirrors the weapon's vs_creature.
       vs_creature: new fields.ObjectField({ initial: {} }),
-      // Шанс (%) сохранить боеприпас после выстрела для последующего сбора.
-      // Для shot (огнестрел) игнорируется — порох не подбирается.
+      // Chance (%) to keep the ammunition after a shot for later recovery.
+      // Ignored for shot (firearms) — powder can't be picked up.
       recovery_chance: new fields.NumberField({ initial: 50, integer: true, min: 0, max: 100, label: "Recovery Chance" })
     };
   }
 
   static migrateData(source) {
-    // ammo_type стал enum (arrow|bolt|shot). Легаси-значение "bullet" (огнестрел)
-    // переименовано в "shot" — иначе choices-валидация отвергла бы его.
+    // ammo_type became an enum (arrow|bolt|shot). The legacy value "bullet" (firearms)
+    // was renamed to "shot" — otherwise choices validation would reject it.
     if (source.ammo_type === "bullet") source.ammo_type = "shot";
     migrateCraftingData(source);
     return super.migrateData(source);

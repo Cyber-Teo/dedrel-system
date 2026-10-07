@@ -9,19 +9,19 @@ export default class ConditionDataModel extends foundry.abstract.TypeDataModel {
       is_technical: new fields.BooleanField({ initial: false, label: "Is Technical" }),
       stackable: new fields.BooleanField({ initial: false, label: "Stackable" }),
       max_stacks: new fields.NumberField({ initial: 1, integer: true, min: 1, label: "Max Stacks" }),
-      // Сбрасывать таймер длительности при добавлении нового стака. По умолчанию
-      // false — длительность отсчитывается от ПЕРВОГО наложения (стаки её не
-      // продлевают). true — каждый новый стак обновляет таймер (см.
+      // Reset the duration timer when a new stack is added. Default
+      // false — the duration counts from the FIRST application (stacks don't
+      // extend it). true — every new stack refreshes the timer (see
       // DedrelActor#addConditionStack).
       refresh_on_stack: new fields.BooleanField({ initial: false, label: "Refresh Duration On Stack" }),
       
-      // Периодический эффект (тик): урон или лечение раз в ход. Формула
-      // поддерживает @stacks — текущее число стаков эффекта. Исполняется
-      // в бою через DedrelCombat#_onStartTurn/_onEndTurn (src/combat.mjs).
+      // Periodic effect (tick): damage or healing once per turn. The formula
+      // supports @stacks — the effect's current stack count. Executed
+      // in combat via DedrelCombat#_onStartTurn/_onEndTurn (src/combat.mjs).
       tick: new fields.SchemaField({
         formula: new fields.StringField({ initial: "", label: "Tick Formula" }),
-        is_heal: new fields.BooleanField({ initial: false, label: "Tick Heals" }), // лечение вместо урона (DR не применяется)
-        damage_type: new fields.StringField({ initial: "", label: "Tick Damage Type" }), // ключ system.dr ("heat", "acid"...) или "" — без снижения
+        is_heal: new fields.BooleanField({ initial: false, label: "Tick Heals" }), // healing instead of damage (DR doesn't apply)
+        damage_type: new fields.StringField({ initial: "", label: "Tick Damage Type" }), // system.dr key ("heat", "acid"...) or "" — no reduction
         trigger: new fields.StringField({ initial: "turnStart", label: "Tick Trigger" }) // "turnStart" | "turnEnd"
       }),
 

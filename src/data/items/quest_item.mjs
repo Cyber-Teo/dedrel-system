@@ -2,9 +2,9 @@ import { physicalItemFields } from "./_physical.mjs";
 import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
- * Квестовый предмет — привязан к заданию. По умолчанию не продаётся и не
- * выбрасывается (can_be_sold / can_be_dropped = false); торговцы и логика
- * сброса лута обязаны уважать эти флаги.
+ * Quest item — tied to a quest. By default it can't be sold or
+ * dropped (can_be_sold / can_be_dropped = false); merchants and the
+ * loot-dropping logic must respect these flags.
  */
 export default class QuestItemDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -16,7 +16,7 @@ export default class QuestItemDataModel extends foundry.abstract.TypeDataModel {
       ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: false }),
-      // Задание, к которому относится предмет (id или название)
+      // The quest the item belongs to (id or name)
       quest_id: new StringField({ required: false, initial: "" }),
       can_be_sold: new BooleanField({ required: true, initial: false }),
       can_be_dropped: new BooleanField({ required: true, initial: false })

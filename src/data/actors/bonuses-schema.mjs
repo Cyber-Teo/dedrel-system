@@ -1,51 +1,51 @@
 /**
- * Выделенная схема для постоянных системных бонусов персонажа.
- * Возвращает объект SchemaField, который затем внедряется в основную DataModel.
+ * Dedicated schema for the character's permanent system bonuses.
+ * Returns a SchemaField object that is then embedded in the main DataModel.
  *
- * Здесь живут ТОЛЬКО безусловные постоянные бонусы, которые применяются
- * к любым броскам (в том числе без предмета: проверки навыков, спасброски).
+ * ONLY unconditional permanent bonuses live here — the ones that apply
+ * to any roll (including rolls without an item: skill checks, saving throws).
  *
- * Одноразовые и условные бонусы «на следующий манёвр» (бывшие next_*)
- * реализованы через DSL-модификаторы на ключе Active Effect
- * "flags.dedrel.mod" — см. EFFECT_KEYS_CHEAT_SHEET.md и
+ * One-shot and conditional "next maneuver" bonuses (formerly next_*)
+ * are implemented as DSL modifiers on the Active Effect key
+ * "flags.dedrel.mod" — see EFFECT_KEYS_CHEAT_SHEET.md and
  * src/utils/dedrel-bonuses.mjs.
  */
 export function getBonusesSchema() {
   const fields = foundry.data.fields;
 
   return new fields.SchemaField({
-    // Глобальные бонусы.
-    // ШТРАФЫ реализуются как отрицательные значения этих же полей (формула броска
-    // умеет вычитать: см. src/dice/roll.mjs). Отдельной сущности «штрафов» нет.
+    // Global bonuses.
+    // PENALTIES are negative values of these same fields (the roll formula
+    // can subtract: see src/dice/roll.mjs). There is no separate "penalty" entity.
     global_roll: new fields.NumberField({ initial: 0, integer: true }),
     global_skill: new fields.NumberField({ initial: 0, integer: true }),
     global_save: new fields.NumberField({ initial: 0, integer: true }),
     global_ap_discount: new fields.NumberField({ initial: 0, integer: true }),
 
-    // Наценка на ОД («штраф на ОД»): манёвры/заклинания стоят ДОРОЖЕ на N.
-    // Положительное значение увеличивает стоимость; складывается с DSL-скидками
-    // (скидка и наценка взаимозачитываются). global_ap_penalty — на манёвры И
-    // заклинания; maneuver_ap_penalty — только манёвры; spell_ap_penalty — только
-    // заклинания. Применяется в DedrelBonuses.effectiveApCost.
+    // AP surcharge ("AP penalty"): maneuvers/spells cost N MORE.
+    // A positive value raises the cost; it adds up with DSL discounts
+    // (discount and surcharge offset each other). global_ap_penalty — maneuvers AND
+    // spells; maneuver_ap_penalty — maneuvers only; spell_ap_penalty — spells
+    // only. Applied in DedrelBonuses.effectiveApCost.
     global_ap_penalty: new fields.NumberField({ initial: 0, integer: true }),
     maneuver_ap_penalty: new fields.NumberField({ initial: 0, integer: true }),
     spell_ap_penalty: new fields.NumberField({ initial: 0, integer: true }),
 
-    // Флаги-переключатели: эффекты добавляют 1 (режим Add), любое значение > 0 = включено.
-    // Числовое поле вместо булевого, чтобы несколько одновременных источников
-    // (манёвр + талант) складывались и не затирали друг друга при снятии одного.
+    // Toggle flags: effects add 1 (Add mode), any value > 0 = on.
+    // A number field rather than a boolean so that several simultaneous sources
+    // (maneuver + talent) add up and don't overwrite each other when one is removed.
     ignore_wound_penalty: new fields.NumberField({ initial: 0, integer: true }),
     infinite_explode: new fields.NumberField({ initial: 0, integer: true }),
     damage_explode: new fields.NumberField({ initial: 0, integer: true }),
 
-    // Множитель Максимального Здоровья. Значение 0.25 увеличит ХП на 25%.
+    // Maximum HP multiplier. A value of 0.25 raises HP by 25%.
     hp_multiplier: new fields.NumberField({ initial: 0 }),
 
-    // === Грузоподъёмность и перегрузка (таланты/эффекты) ===
-    // carry_capacity_mult — множитель к порогам переноса (0.5 = +50% ко всем порогам).
-    // carry_capacity_flat — плоская прибавка к порогам в кг (складывается со всеми).
-    // ignore_encumbrance_penalty — флаг-переключатель (>0 = иммунитет к штрафам
-    //   перегрузки: не снижает броски и скорость, но категория/вес всё равно считаются).
+    // === Carry capacity and encumbrance (talents/effects) ===
+    // carry_capacity_mult — multiplier on the carry thresholds (0.5 = +50% to all thresholds).
+    // carry_capacity_flat — flat bonus to the thresholds in kg (adds up with everything).
+    // ignore_encumbrance_penalty — toggle flag (>0 = immune to encumbrance
+    //   penalties: rolls and speed aren't reduced, but category/weight are still computed).
     carry_capacity_mult: new fields.NumberField({ initial: 0 }),
     carry_capacity_flat: new fields.NumberField({ initial: 0 }),
     ignore_encumbrance_penalty: new fields.NumberField({ initial: 0, integer: true })

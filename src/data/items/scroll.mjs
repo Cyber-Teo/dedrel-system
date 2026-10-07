@@ -2,12 +2,12 @@ import { physicalItemFields } from "./_physical.mjs";
 import { craftingFields, migrateCraftingData } from "./_crafting.mjs";
 
 /**
- * Свиток — одноразовый носитель заклинания. Хранит ссылку на предмет-заклинание
- * (spell_id / spell_key), который «откастовывается» со свитка; после использования
- * обычно уничтожается (consumable + quantity 1).
+ * Scroll — a single-use spell carrier. Stores a reference to a spell item
+ * (spell_id / spell_key) that is "cast off" the scroll; after use it is
+ * usually destroyed (consumable + quantity 1).
  *
- * Как и зелья, использует плоские поля зарядов/расхода для совместимости
- * с Item#use().
+ * Like potions, it uses the flat charge/consumption fields for compatibility
+ * with Item#use().
  */
 export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -19,8 +19,8 @@ export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
       ...craftingFields(),
       quantity: new NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       stackable: new BooleanField({ required: true, initial: true }),
-      // Заклинание, заключённое в свитке: ссылка на Item типа spell.
-      // spell_id — id встроенного предмета; spell_key — system.key для поиска в компендиуме.
+      // The spell contained in the scroll: a reference to an Item of type spell.
+      // spell_id — id of the embedded item; spell_key — system.key for lookup in the compendium.
       spell_id: new StringField({ required: false, initial: "" }),
       spell_key: new StringField({ required: false, initial: "" }),
       consumable: new BooleanField({ required: true, initial: true }),
@@ -44,10 +44,10 @@ export default class ScrollDataModel extends foundry.abstract.TypeDataModel {
   }
 
   /**
-   * Цена чтения свитка (16. Magic §10) — производная от редкости, не хранится.
-   * Оплачивается только универсальными ОД: свиток не попадает в ветки
-   * специальных пулов Item##resolveApPools. Legendary — сюжетные уникумы вне
-   * лестницы записи.
+   * Scroll read cost (16. Magic §10) — derived from rarity, not stored.
+   * Paid with universal AP only: a scroll doesn't fall into the
+   * special-pool branches of Item##resolveApPools. Legendary — plot uniques outside
+   * the scribing ladder.
    */
   static READ_COST_BY_RARITY = { common: 2, uncommon: 3, rare: 4, very_rare: 5, legendary: 6 };
 

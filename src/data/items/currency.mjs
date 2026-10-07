@@ -16,7 +16,7 @@ export default class CurrencyData extends foundry.abstract.TypeDataModel {
 
   prepareDerivedData() {
     super.prepareDerivedData();
-    // Вычисляем финальный вес пачки монет на основании количества и веса за единицу
+    // Compute the final weight of the coin stack from the quantity and per-unit weight
     this.weight = this.value * this.weight_per_unit;
   }
 }

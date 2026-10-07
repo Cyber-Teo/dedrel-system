@@ -1,13 +1,13 @@
 /**
- * Поведение региона "Аура" (dedrelAura).
- * Вешается на регион-эманацию, привязанный к токену (см. src/canvas/aura-regions.mjs).
- * При входе токена в регион применяет к его актёру эффекты-payload ауры
- * (с фильтром по disposition), при выходе — снимает их.
+ * "Aura" region behavior (dedrelAura).
+ * Attached to an emanation region bound to a token (see src/canvas/aura-regions.mjs).
+ * When a token enters the region it applies the aura's payload effects to its actor
+ * (filtered by disposition), and removes them on exit.
  *
- * ВАЖНО: события регионов рассылаются сокетом ВСЕМ клиентам, поэтому обработчики
- * гейтятся на game.users.activeGM?.isSelf — логика исполняется ровно один раз
- * и с правами ГМа. Без подключённого ГМа автоматика не работает; рассинхрон
- * лечится сверкой на canvasReady (см. aura-regions.mjs).
+ * IMPORTANT: region events are broadcast via socket to ALL clients, so the handlers
+ * are gated on game.users.activeGM?.isSelf — the logic runs exactly once
+ * and with GM permissions. Without a connected GM the automation doesn't work; desync
+ * is fixed by reconciliation on canvasReady (see aura-regions.mjs).
  */
 
 const fields = foundry.data.fields;
@@ -17,9 +17,9 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
   static LOCALIZATION_PREFIXES = ["DEDREL.RegionBehaviors.Aura"];
 
   /**
-   * disposition/includeSelf дублируются из flags.dedrel.aura эффекта-маркера,
-   * чтобы обработка событий не зависела от резолва маркера. Слой синхронизации
-   * пересоздаёт регион при изменении флага, поэтому значения не расходятся.
+   * disposition/includeSelf are duplicated from the marker effect's flags.dedrel.aura
+   * so that event handling doesn't depend on resolving the marker. The sync layer
+   * recreates the region when the flag changes, so the values don't diverge.
    */
   static defineSchema() {
     return {
@@ -55,10 +55,10 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
   }
 
   /**
-   * Применяет payload-эффекты ауры к актёру токена. Идемпотентно: повторный
-   * вызов для токена, уже получившего эффекты этой ауры, ничего не делает.
-   * Публичный метод: вызывается и из обработчика tokenEnter, и из сверки
-   * состояния на canvasReady.
+   * Applies the aura's payload effects to the token's actor. Idempotent: a repeated
+   * call for a token that has already received this aura's effects does nothing.
+   * Public method: called both from the tokenEnter handler and from the state
+   * reconciliation on canvasReady.
    * @param {TokenDocument} token
    */
   async applyAuraToToken(token) {
@@ -74,10 +74,10 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
       return;
     }
 
-    // Идемпотентность по маркеру, а не по uuid behavior'а: при пересоздании
-    // региона (toggle, правка параметров) uuid меняется, и проверка по origin
-    // приводила бы к накоплению дублей, если exit-событие не успело снять
-    // старую копию. Один маркер — максимум одна копия на актёре.
+    // Idempotency by marker, not by the behavior's uuid: when the
+    // region is recreated (toggle, parameter edits) the uuid changes, and an origin check
+    // would accumulate duplicates if the exit event hadn't managed to remove
+    // the old copy. One marker — at most one copy on the actor.
     if (actor.effects.some(e => e.getFlag("dedrel", "auraApplied") === this.sourceEffectUuid)) return;
 
     const payload = await this.#getPayloadEffects();
@@ -88,9 +88,9 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
   }
 
   /**
-   * Снимает с актёра токена все эффекты, навешенные этой аурой.
-   * Без повторной проверки disposition — так снятие устойчиво к смене
-   * disposition, пока токен находился внутри зоны.
+   * Removes all effects applied by this aura from the token's actor.
+   * No repeated disposition check — this way removal is robust to a change of
+   * disposition while the token was inside the zone.
    * @param {TokenDocument} token
    */
   async removeAuraFromToken(token) {
@@ -101,10 +101,10 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
   }
 
   /**
-   * Проверка disposition цели относительно токена-источника:
-   * friendly — совпадает с источником; hostile — противоположен
-   * (осмысленно только для FRIENDLY/HOSTILE; NEUTRAL/SECRET-источник
-   * в режиме hostile не матчит никого); all — любой.
+   * Checks the target's disposition relative to the source token:
+   * friendly — matches the source; hostile — opposite to it
+   * (meaningful only for FRIENDLY/HOSTILE; a NEUTRAL/SECRET source
+   * in hostile mode matches no one); all — anyone.
    */
   #matchesDisposition(sourceToken, targetToken) {
     const D = CONST.TOKEN_DISPOSITIONS;
@@ -120,10 +120,10 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
   }
 
   /**
-   * Собирает список эффектов-payload:
-   * 1) явный список uuid из flags.dedrel.aura.effects маркера (если задан);
-   * 2) иначе — sibling-эффекты того же предмета с flags.dedrel.applyTo = "aura".
-   * Возвращает [] если маркер удалён или отключён.
+   * Collects the list of payload effects:
+   * 1) the explicit uuid list from the marker's flags.dedrel.aura.effects (if set);
+   * 2) otherwise — sibling effects of the same item with flags.dedrel.applyTo = "aura".
+   * Returns [] if the marker is deleted or disabled.
    */
   async #getPayloadEffects() {
     const marker = await foundry.utils.fromUuid(this.sourceEffectUuid);
@@ -145,21 +145,21 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
       : [];
     if (siblings.length) return siblings;
 
-    // Одноэффектный авторинг: если отдельных payload-эффектов нет, аура раздаёт
-    // изменения самого маркера. Флаг aura зачищается при клонировании, чтобы
-    // получатель не стал носителем ауры. Маркер держится с transfer: false и
-    // сам ни на кого не действует — носитель получает payload только через
-    // includeSelf (тем же region-путём, что и остальные получатели).
+    // Single-effect authoring: if there are no separate payload effects, the aura hands out
+    // the marker's own changes. The aura flag is cleared on cloning so that the
+    // recipient doesn't become an aura bearer. The marker is kept with transfer: false and
+    // affects no one itself — the bearer gets the payload only via
+    // includeSelf (through the same region path as the other recipients).
     const markerChanges = marker._source.system?.changes ?? marker._source.changes ?? [];
     return markerChanges.length ? [marker] : [];
   }
 
   /**
-   * Клонирует данные эффекта для наложения на получателя.
-   * ВАЖНО (V14, QUIRKS §11): changes живут в system.changes; легаси
-   * data.changes удаляем, чтобы не сработал deprecated-шим.
-   * Фаза "apply" для system.*-изменений проставится автоматически
-   * хуком preCreateActiveEffect (см. dedrel.mjs).
+   * Clones effect data for applying to a recipient.
+   * IMPORTANT (V14, QUIRKS §11): changes live in system.changes; the legacy
+   * data.changes is removed so that the deprecated shim doesn't fire.
+   * The "apply" phase for system.* changes will be set automatically
+   * by the preCreateActiveEffect hook (see dedrel.mjs).
    */
   #cloneEffectData(effect) {
     const data = effect.toObject();
@@ -172,7 +172,7 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
     data.origin = this.behavior.uuid;
     data.transfer = false;
     data.disabled = false;
-    // applyTo: "aura" и маркер-флаг aura имеют смысл только на предмете-источнике
+    // applyTo: "aura" and the aura marker flag only make sense on the source item
     if (data.flags?.dedrel?.applyTo) delete data.flags.dedrel.applyTo;
     if (data.flags?.dedrel?.aura) delete data.flags.dedrel.aura;
     foundry.utils.setProperty(data, "flags.dedrel.auraApplied", this.sourceEffectUuid);

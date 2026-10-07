@@ -35,9 +35,9 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
         slashing: new fields.BooleanField()
       }),
       req_weapon_skill_group: new fields.StringField({ required: true, blank: true, initial: "any" }),
-      // Гейт по конкретному оружию (подстроки key/имени, OR) — как у манёвров.
+      // Gate on a specific weapon (key/name substrings, OR) — same as maneuvers.
       req_weapon_keys: new fields.ArrayField(new fields.StringField(), { initial: [] }),
-      // Собственный сдвиг урона по Лестнице кубов — как у манёвров.
+      // Own damage shift on the dice Ladder — same as maneuvers.
       weapon_dice_step: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       req_weapon_property: new fields.SchemaField({
         is_auxiliary: new fields.BooleanField(),
@@ -63,40 +63,40 @@ export default class SpellDataModel extends foundry.abstract.TypeDataModel {
       template_shape: new fields.StringField({ required: true, blank: true }),
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
 
-      // === Магический Конструктор: исходник сборки ===
-      // Заполняется Конструктором (SpellConstructorApp); используется для
-      // пере-открытия сборки в конструкторе и ре-валидации при касте.
-      // Справочники ключей: CONFIG.DEDREL.magic (src/config/magic.mjs).
+      // === Spell Constructor: build source ===
+      // Filled in by the Constructor (SpellConstructorApp); used to
+      // re-open the build in the constructor and to re-validate on cast.
+      // Key references: CONFIG.DEDREL.magic (src/config/magic.mjs).
       doctrine: new fields.StringField({ required: true, blank: true, initial: "", label: "Doctrine Key" }),
       doctrine_rank_req: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0, max: 6 }),
-      // Фиксированное заклинание доктрины: сборки Конструктора у него нет, но
-      // доктрину указать надо ради гейта по Рангу. Без этого флага ре-валидация
-      // при касте прогнала бы пустую сборку через калькулятор и завалила каст на
-      // no_techniques — но только у доктрин, ОПИСАННЫХ в конфиге Конструктора
-      // (Тенемантия, Биомантия). Линейные доктрины (Эфиромантия и пр.) флага не
-      // требуют: их в конфиге нет, и валидация обрывается сама. Гайд §5.
+      // A fixed doctrine spell: it has no Constructor build, but
+      // the doctrine must be specified for the Rank gate. Without this flag, re-validation
+      // on cast would run the empty build through the calculator and fail the cast with
+      // no_techniques — but only for doctrines DESCRIBED in the Constructor config
+      // (Shadowmancy, Biomancy). Linear doctrines (Aetheromancy etc.) don't need the
+      // flag: they aren't in the config, and validation stops on its own. Guide §5.
       is_fixed: new fields.BooleanField({ initial: false, label: "Fixed Doctrine Spell" }),
       doctrine_path: new fields.StringField({ required: true, blank: true, initial: "" }),
       source_scale: new fields.StringField({ required: true, blank: true, initial: "none" }), // none | any | abundant
       chosen_techniques: new fields.ArrayField(new fields.StringField()),
       chosen_modifiers: new fields.ArrayField(new fields.SchemaField({
-        key: new fields.StringField({ required: true, blank: false }),   // ключ модификатора
+        key: new fields.StringField({ required: true, blank: false }),   // modifier key
         rank: new fields.NumberField({ required: true, integer: true, initial: 1, min: 1, max: 5 }),
-        ap: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }), // цена ПОСЛЕ сродств
-        option: new fields.StringField({ required: false, blank: true, initial: "" })      // выбор внутри ранга: "bonus"/"penalty"/ключ состояния
+        ap: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }), // cost AFTER affinities
+        option: new fields.StringField({ required: false, blank: true, initial: "" })      // choice within the rank: "bonus"/"penalty"/condition key
       })),
       total_cost_breakdown: new fields.StringField({ required: true, blank: true, initial: "" }),
 
-      // === Магический Конструктор: скомпилированные исполняемые поля ===
-      // skill — навык броска атаки (конструктор ставит "magical_attacks");
-      // attack_bonus — Модификатор "Точность", добавляется к броску атаки в chat.mjs.
+      // === Spell Constructor: compiled executable fields ===
+      // skill — attack roll skill (the constructor sets "magical_attacks");
+      // attack_bonus — the "Accuracy" Modifier, added to the attack roll in chat.mjs.
       skill: new fields.StringField({ initial: "", label: "Override Skill" }),
       attack_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
 
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_heal: new fields.StringField({ required: true, blank: true }),
-      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      // Grants temporary HP on use (a number, dice or "N%" of the target's max HP)
       formula_temp_hp: new fields.StringField({ required: true, blank: true }),
       formula_custom: new fields.StringField({ required: true, blank: true }),
       

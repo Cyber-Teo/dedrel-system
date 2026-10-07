@@ -18,13 +18,13 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       ap_cost: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       is_variable_cost: new fields.BooleanField({ initial: false }),
       variable_cost_max: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
-      // Манёвр-перезарядка: заряжает выбранное перезаряжаемое оружие (loaded=true),
-      // а цену ОД берёт из оружия (system.reload_cost 1-3), игнорируя ap_cost.
-      // Такой манёвр не расходует боеприпас и не блокируется состоянием заряда.
+      // Reload maneuver: loads the selected reloadable weapon (loaded=true),
+      // and takes its AP cost from the weapon (system.reload_cost 1-3), ignoring ap_cost.
+      // Such a maneuver doesn't consume ammunition and isn't blocked by the load state.
       is_reload_action: new fields.BooleanField({ initial: false }),
-      // Манёвр чтения свитка (16. Magic §10): цена ОД берётся с выбранного
-      // свитка (производная от редкости), оплата только универсальными ОД,
-      // каст и расход — на предмете-свитке. Зеркало паттерна is_reload_action.
+      // Scroll-reading maneuver (16. Magic §10): the AP cost is taken from the selected
+      // scroll (derived from rarity), paid with universal AP only,
+      // casting and consumption happen on the scroll item. Mirrors the is_reload_action pattern.
       is_scroll_read: new fields.BooleanField({ initial: false }),
 
       uses_value: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
@@ -43,13 +43,13 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
         slashing: new fields.BooleanField()
       }),
       req_weapon_skill_group: new fields.StringField({ required: true, blank: true, initial: "any" }),
-      // Гейт по конкретному оружию: подстроки, ищутся в system.key И в имени
-      // оружия без учёта регистра (OR по списку). Пример: ["greatsword"] пускает
-      // «Адамантиновый двуручный меч» с key "adamantine_greatsword".
+      // Gate on a specific weapon: substrings, searched in system.key AND in the weapon's
+      // name, case-insensitive (OR across the list). Example: ["greatsword"] lets through
+      // an "Adamantine Greatsword" with key "adamantine_greatsword".
       req_weapon_keys: new fields.ArrayField(new fields.StringField(), { initial: [] }),
-      // Собственный сдвиг урона манёвра по Лестнице (1d4→1d6→2d4→2d6→2d8→3d6):
-      // бросок урона с карточки манёвра двигает кубы оружия на N ступеней.
-      // Складывается с DSL-модами dice_step. Отрицательное значение — нерф.
+      // The maneuver's own damage shift on the Ladder (1d4→1d6→2d4→2d6→2d8→3d6):
+      // a damage roll from the maneuver card moves the weapon's dice by N steps.
+      // Adds up with dice_step DSL mods. A negative value is a nerf.
       weapon_dice_step: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       req_weapon_property: new fields.SchemaField({
         is_auxiliary: new fields.BooleanField(),
@@ -76,14 +76,14 @@ export default class ManeuverDataModel extends foundry.abstract.TypeDataModel {
       template_size: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       
       skill: new fields.StringField({ initial: "", label: "Override Skill" }),
-      // Вшитый бонус к броску атаки манёвра (читается в src/dice/roll.mjs наравне
-      // с «Точностью» заклинаний). Для манёвров со встроенным прицеливанием
-      // («Выстрел с упора») — чтобы бонус не висел статусом и не плодил сущности.
+      // Built-in bonus to the maneuver's attack roll (read in src/dice/roll.mjs on par
+      // with the spells' Accuracy). For maneuvers with built-in aiming
+      // (Braced Shot) — so that the bonus doesn't hang around as a status and spawn extra entities.
       attack_bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       formula_attack: new fields.StringField({ required: true, blank: true }),
       formula_damage: new fields.StringField({ required: true, blank: true }),
       formula_heal: new fields.StringField({ required: true, blank: true }),
-      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      // Grants temporary HP on use (a number, dice or "N%" of the target's max HP)
       formula_temp_hp: new fields.StringField({ required: true, blank: true }),
       formula_custom: new fields.StringField({ required: true, blank: true }),
       

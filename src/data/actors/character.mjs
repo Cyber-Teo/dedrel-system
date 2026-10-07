@@ -1,7 +1,7 @@
 /**
- * Модель данных (Data Model) для главного героя (персонажа) в системе Dedrel.
- * Определяет структуру всех базовых параметров (Атрибуты, Навыки, Ресурсы)
- * и содержит логику для расчета производных (Derived) характеристик.
+ * Data Model for the player character in the Dedrel system.
+ * Defines the structure of all base parameters (Attributes, Skills, Resources)
+ * and holds the logic for computing derived attributes.
  */
 import { getBonusesSchema } from "./bonuses-schema.mjs";
 import { buildAttributes, buildSkills, buildDefenses, buildDR, buildEquipmentSlots, buildDoctrines, buildMagic } from "./shared-schema.mjs";
@@ -9,8 +9,8 @@ import { DedrelCurrency } from "../../utils/currency.mjs";
 
 export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   /**
-   * Определяет схему данных (Data Schema) для сущности "character".
-   * Возвращает объект с полями, которые будут сохранены в базе данных Foundry.
+   * Defines the Data Schema for the "character" entity.
+   * Returns an object with the fields that will be stored in the Foundry database.
    */
   static defineSchema() {
     const fields = foundry.data.fields;
@@ -31,8 +31,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
       skills: buildSkills(),
 
-      // Доктрины Магического Конструктора (18 канонических ключей) и известные
-      // техники — общий источник в shared-schema.mjs (тот же набор у NPC-босса).
+      // Spell Constructor doctrines (18 canonical keys) and known
+      // techniques — shared source in shared-schema.mjs (the NPC boss has the same set).
       doctrines: buildDoctrines(),
 
       magic: buildMagic(),
@@ -64,8 +64,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           value: new fields.NumberField({ required: true, integer: true, initial: 0 })
         }),
         movement: new fields.SchemaField({
-          // Скорость измеряется в МЕТРАХ (см. _rules/5). Не integer: на безсеточных
-          // картах и при дробном расходе значение может быть нецелым (напр. 6.5 м).
+          // Speed is measured in METERS (see _rules/5). Not integer: on gridless
+          // maps and with fractional spending the value can be non-integer (e.g. 6.5 m).
           max: new fields.NumberField({ required: false, initial: 0 }), // Derived
           value: new fields.NumberField({ required: true, initial: 0 })
         })
@@ -83,14 +83,14 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
       bonuses: getBonusesSchema(),
 
-      // Кошелёк: счётчики монет по ключам валют из настройки мира "currencies".
-      // Свободные ключи (ObjectField), т.к. список валют динамический.
-      // Производные wallet.total_base и wallet.weight считаются в prepareDerivedData.
+      // Wallet: coin counters keyed by the currency keys from the "currencies" world setting.
+      // Free-form keys (ObjectField), since the currency list is dynamic.
+      // Derived wallet.total_base and wallet.weight are computed in prepareDerivedData.
       currency: new fields.ObjectField({ required: false, initial: {} }),
 
-      // Может ли актор быть получателем перевода денег. Фильтрует список
-      // получателей в диалогах перевода, чтобы на большой сцене не всплывали
-      // все сундуки/лут. По умолчанию персонажи — принимают.
+      // Whether the actor can receive money transfers. Filters the recipient
+      // list in transfer dialogs so that a large scene doesn't surface
+      // every chest/loot pile. Characters accept by default.
       can_receive_currency: new fields.BooleanField({ required: true, initial: true }),
 
       initiative: new fields.NumberField({ required: false, integer: true, initial: 0 }), // Derived
@@ -104,25 +104,25 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
   }
 
   /**
-   * Метод жизненного цикла DataModel (Foundry VTT).
-   * Вызывается каждый раз при инициализации документа (при загрузке или обновлении данных).
-   * Здесь мы рассчитываем все вторичные (производные) характеристики,
-   * такие как Максимум ХП, Блок, Уворот, Инициатива, исходя из базовых атрибутов.
+   * DataModel lifecycle method (Foundry VTT).
+   * Called every time the document is initialized (on load or data update).
+   * Here we compute all secondary (derived) attributes,
+   * such as Maximum HP, Block, Dodge, Initiative, from the base attributes.
    */
   /**
-   * Обнуляем производные значения-аккумуляторы (те, что ниже считаются через `+=`)
-   * в НАЧАЛЕ каждого цикла подготовки. Иначе повторный вызов prepareData() без
-   * предшествующего reset() (например, ядро/модуль по хуку updateWorldTime —
-   * см. active-effects-hud `_onTimeChange`) накапливает значения поверх уже
-   * посчитанных и удваивает максимумы. Симптом: короткий отдых продвигает время
-   * мира -> HUD эффектов вызывает actor.prepareData() -> max ОД становится 2×,
-   * а performRest сохраняет value = (удвоенный) max -> на листе «2 / 1».
-   * prepareBaseData идёт ДО применения Active Effects, поэтому вклад эффектов
-   * не теряется (эффекты добавляются после обнуления, затем += домешивает атрибуты).
+   * Reset the derived accumulator values (the ones computed below via `+=`)
+   * at the START of every preparation cycle. Otherwise a repeated prepareData() call without
+   * a preceding reset() (e.g. core/a module on the updateWorldTime hook —
+   * see active-effects-hud `_onTimeChange`) accumulates on top of values already
+   * computed and doubles the maximums. Symptom: a short rest advances world
+   * time -> the effects HUD calls actor.prepareData() -> max AP becomes 2×,
+   * and performRest saves value = (doubled) max -> the sheet shows "2 / 1".
+   * prepareBaseData runs BEFORE Active Effects are applied, so the effects'
+   * contribution isn't lost (effects are added after the reset, then += mixes in the attributes).
    */
   prepareBaseData() {
     super.prepareBaseData();
-    // Фолбэки соответствуют initial соответствующих полей схемы (hp.max = 10).
+    // Fallbacks match the initial values of the corresponding schema fields (hp.max = 10).
     const getSrc = (path, dflt = 0) => foundry.utils.getProperty(this._source, path) ?? dflt;
     const res = this.resources;
     res.hp.max = getSrc("resources.hp.max", 10);
@@ -170,16 +170,16 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       res.wounds.penalty = -5;
     }
 
-    // Ярость и подобные эффекты (system.bonuses.ignore_wound_penalty > 0):
-    // штраф за ранения обнуляется, но уровень ранения сохраняется —
-    // трек ран на листе и логика лечения продолжают работать.
+    // Rage and similar effects (system.bonuses.ignore_wound_penalty > 0):
+    // the wound penalty is zeroed, but the wound level is kept —
+    // the wound track on the sheet and the healing logic keep working.
     if ((this.bonuses?.ignore_wound_penalty || 0) > 0) {
       res.wounds.penalty = 0;
     }
 
-    // Кошелёк: суммарная ценность (в базовых единицах) и вес монет.
-    // Список валют берётся из настройки мира; при недоступности настройки
-    // (ранняя инициализация) кошелёк считается нулевым и пересчитается позже.
+    // Wallet: total value (in base units) and coin weight.
+    // The currency list comes from the world setting; if the setting is unavailable
+    // (early initialization) the wallet counts as zero and is recomputed later.
     this.wallet = { total_base: 0, weight: 0 };
     try {
       const defs = DedrelCurrency.defs();
@@ -190,7 +190,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         this.wallet.weight += n * (Number(def.weight) || 0);
       }
     } catch (e) {
-      // Настройка валют ещё не готова — оставляем нулевой кошелёк
+      // The currency setting isn't ready yet — keep the wallet at zero
     }
 
     // Luck Points Max
@@ -220,8 +220,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     // Initiative
     this.initiative += Math.max(attrs.int.rank, attrs.rea.rank);
 
-    // Movement — запас в МЕТРАХ за раунд: (2 + Ловкость) × 2 (см. _rules/5).
-    // Множитель ×2 = «метры на клетку» (1 клетка сетки Foundry = 2 м).
+    // Movement — budget in METERS per round: (2 + Dexterity) × 2 (see _rules/5).
+    // The ×2 multiplier = "meters per square" (1 Foundry grid square = 2 m).
     res.movement.max += (2 + attrs.dex.rank) * 2;
 
     // DR and Armor calculation
@@ -238,7 +238,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         }
       }
 
-      let maxArmorWeight = 0; // 0 = лёгкая, 1 = средняя, 2 = тяжёлая (см. гейт ниже)
+      let maxArmorWeight = 0; // 0 = light, 1 = medium, 2 = heavy (see the gate below)
 
       for (const armor of equippedArmors) {
         for (const [key, value] of Object.entries(armor.system.dr || {})) {
@@ -246,8 +246,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
             this.dr[key] += (value || 0);
           }
         }
-        // modifiers.* — ручная «щель» под материальные/магические добавки сверх
-        // лекала. Механику свойств сюда дублировать не нужно: она выводится ниже.
+        // modifiers.* — a manual "slot" for material/magical additions on top of
+        // the pattern. The property mechanics don't need to be duplicated here: they are derived below.
         if (armor.system.modifiers) {
           def.dodge += (armor.system.modifiers.dodge || 0);
           def.block += (armor.system.modifiers.block || 0);
@@ -255,11 +255,11 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
           if (this.skills?.stealth) this.skills.stealth.bonus += (armor.system.modifiers.stealth || 0);
         }
 
-        // Свойства лекала (12. Armor §Свойства). Штрафы принадлежат предмету,
-        // поэтому считаются с каждого надетого слоя и складываются — правила
-        // явно разрешают это для «Жесткого» («складывается со штрафами от типа»).
-        // props.encumbering здесь СОЗНАТЕЛЬНО не обрабатывается: канала для
-        // штрафа к стрелковым/магическим атакам у актора нет (см. NOTES.md).
+        // Pattern properties (12. Armor §Properties). Penalties belong to the item,
+        // so they are taken from every worn layer and add up — the rules
+        // explicitly allow this for Rigid ("stacks with the penalties from the type").
+        // props.encumbering is DELIBERATELY not handled here: the actor has no channel
+        // for a penalty to ranged/magical attacks (see NOTES.md).
         const props = armor.system.properties || {};
         if (props.rigid) def.dodge -= 1;
         if (props.loud && this.skills?.stealth) this.skills.stealth.bonus -= 2;
@@ -270,16 +270,16 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         else if (weightClass === "medium") maxArmorWeight = Math.max(maxArmorWeight, 1);
       }
 
-      // Бонусы/штрафы ТИПА доспеха: определяются самым тяжёлым надетым слоем и
-      // берутся только с него — не суммируются по слоям (12. Armor §Типы доспехов).
-      // Без доспеха типа нет вовсе, поэтому голый персонаж не получает бонус лёгкого.
+      // Armor TYPE bonuses/penalties: determined by the heaviest worn layer and
+      // taken from it alone — not summed across layers (12. Armor §Armor types).
+      // Without armor there is no type at all, so a naked character doesn't get the light bonus.
       if (equippedArmors.length) {
-        if (maxArmorWeight === 0) { def.dodge += 1; def.block -= 1; }   // лёгкий
-        else if (maxArmorWeight === 2) { def.dodge -= 1; def.block += 1; } // тяжёлый
-        // средний (1) — без бонусов и штрафов
+        if (maxArmorWeight === 0) { def.dodge += 1; def.block -= 1; }   // light
+        else if (maxArmorWeight === 2) { def.dodge -= 1; def.block += 1; } // heavy
+        // medium (1) — no bonuses or penalties
       }
 
-      // Щит и «Вспомогательное» оружие в свободной руке дают Блок, пока в руке.
+      // A shield and an Auxiliary weapon in the free hand grant Block while held.
       const offHandId = slots.off_hand?.item_id;
       const offHand = offHandId ? this.parent.items.get(offHandId) : null;
       if (offHand && offHand.type === "weapon") {
@@ -288,39 +288,39 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       }
 
       // ==========================================
-      // Расчет штрафов от навыка ношения доспехов
+      // Penalties from the Armor Use skill
       // ==========================================
-      // Навыки хранятся единым плоским списком (flat schema), поэтому обращаемся напрямую.
+      // Skills are stored as a single flat list (flat schema), so we access them directly.
       const armorUseRank = this.skills?.armor_use?.rank || 0;
       let hasArmorPenalty = false;
 
-      // Тяжелая броня требует 4+ ранг навыка "Ношение доспехов"
+      // Heavy armor requires rank 4+ in the "Armor Use" skill
       if (maxArmorWeight === 2 && armorUseRank < 4) hasArmorPenalty = true;
-      // Средняя броня требует 2+ ранг навыка "Ношение доспехов"
+      // Medium armor requires rank 2+ in the "Armor Use" skill
       if (maxArmorWeight === 1 && armorUseRank < 2) hasArmorPenalty = true;
 
       this.armor_penalty = hasArmorPenalty;
       if (hasArmorPenalty) {
-        // Штраф за несоответствие ранга (12. Armor §Навык): −2 ко ВСЕМ проверкам
-        // навыков, −2 к Инициативе, −4 м к Скорости. global_skill бьёт только
-        // не-спасброски (src/dice/roll.mjs) — это и есть «проверки навыков».
+        // Rank mismatch penalty (12. Armor §Skill): −2 to ALL skill
+        // checks, −2 to Initiative, −4 m to Speed. global_skill hits only
+        // non-save rolls (src/dice/roll.mjs) — which is exactly "skill checks".
         this.bonuses.global_skill -= 2;
         this.initiative -= 2;
-        // −4 метра к Скорости (значение в метрах, как в правилах).
+        // −4 meters to Speed (value in meters, as in the rules).
         res.movement.max = Math.max(0, res.movement.max - 4);
       }
     }
 
     // ==========================================
-    // Перегрузка (Encumbrance)
+    // Encumbrance
     // ==========================================
-    // Суммарный вес: физические предметы (× количество) + вес монет кошелька.
-    // Пороги = 10 + (STR+CON)·5/10/15 кг, модифицируемые талантами
-    // (carry_capacity_mult / carry_capacity_flat). Категория и штрафы
-    // (−1/−3 ко всем броскам, −2 м / полная остановка скорости) применяются,
-    // если не выставлен иммунитет ignore_encumbrance_penalty.
-    // Хранится ад-хок в this.resources.encumbrance (как this.wallet) — производное,
-    // в _source не пишется, миграция не нужна.
+    // Total weight: physical items (× quantity) + weight of the wallet's coins.
+    // Thresholds = 10 + (STR+CON)·5/10/15 kg, modified by talents
+    // (carry_capacity_mult / carry_capacity_flat). The category and penalties
+    // (−1/−3 to all rolls, −2 m / full stop of speed) apply
+    // unless the ignore_encumbrance_penalty immunity is set.
+    // Stored ad hoc in this.resources.encumbrance (like this.wallet) — derived,
+    // not written to _source, no migration needed.
     const NON_PHYSICAL = new Set([
       "maneuver", "talent", "mutation", "condition", "spell", "exp", "countryoforigin", "mutilation", "creature_type"
     ]);
@@ -330,10 +330,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         if (NON_PHYSICAL.has(item.type)) continue;
         const w = Number(item.system?.weight) || 0;
         if (w <= 0) continue;
-        // Вес монет-предметов (currency) уже посчитан за всю пачку (value·weight_per_unit),
-        // поэтому их количество не домножаем. У типов без поля quantity (броня,
-        // торговые товары) количество считается равным 1 — ?? внутри Number(),
-        // иначе Number(undefined) даёт NaN и рушит весь подсчёт веса.
+        // The weight of coin items (currency) is already computed for the whole stack (value·weight_per_unit),
+        // so their quantity isn't multiplied in. Types without a quantity field (armor,
+        // trade goods) count as quantity 1 — the ?? goes inside Number(),
+        // otherwise Number(undefined) gives NaN and breaks the whole weight calculation.
         const qty = item.type === "currency" ? 1 : Number(item.system?.quantity ?? 1);
         carriedWeight += w * qty;
       }
@@ -342,10 +342,10 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     const capBase = attrs.str.rank + attrs.con.rank;
     const capMult = 1 + (this.bonuses?.carry_capacity_mult || 0);
     const capFlat = this.bonuses?.carry_capacity_flat || 0;
-    // База, общая для всех: минимум любой характеристики — 1, и без неё персонаж
-    // с STR 1 / CON 1 не унёс бы собственную одежду (_rules/15. Inventory §1).
-    // Множитель талантов её тоже поднимает: он масштабирует грузоподъёмность
-    // целиком, а не только вклад характеристик.
+    // A base shared by everyone: the minimum of any attribute is 1, and without it a character
+    // with STR 1 / CON 1 couldn't carry their own clothes (_rules/15. Inventory §1).
+    // The talent multiplier raises it too: it scales the carry capacity
+    // as a whole, not just the attributes' contribution.
     const CARRY_BASE = 10;
     const thresholds = {
       light: (CARRY_BASE + capBase * 5) * capMult + capFlat,
@@ -360,7 +360,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
     if (carriedWeight > thresholds.heavy) {
       category = "overloaded"; rollPenalty = 3; stopMovement = true;
     } else if (carriedWeight > thresholds.medium) {
-      category = "heavy"; rollPenalty = 3; movePenalty = 2; // −2 м (см. _rules/15)
+      category = "heavy"; rollPenalty = 3; movePenalty = 2; // −2 m (see _rules/15)
     } else if (carriedWeight > thresholds.light) {
       category = "medium"; rollPenalty = 1;
     }

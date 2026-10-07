@@ -8,9 +8,9 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
     return {
       description: new fields.HTMLField({ label: "Description" }),
       key: new fields.StringField({ initial: "" }),
-      // Общие физические поля (редкость/вес/цена) для экономики и перегрузки
+      // Shared physical fields (rarity/weight/price) for the economy and encumbrance
       ...physicalItemFields(),
-      // Встроенный «чертёж» (состав/наценка) — см. _crafting.mjs
+      // Embedded "blueprint" (ingredients/markup) — see _crafting.mjs
       ...craftingFields(),
 
       // Basic Stats
@@ -26,18 +26,18 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         slashing: new fields.BooleanField()
       }),
       skill: new fields.StringField({ initial: "" }),
-      // Базовая формула урона — фолбэк, если для типа не задана своя (damage_formulas)
+      // Base damage formula — fallback if a type has no formula of its own (damage_formulas)
       damage_formula: new fields.StringField({ initial: "" }),
-      // Формулы урона ПО ТИПАМ: манёвр с req_weapon_damage_type берёт формулу
-      // своего типа; пустая строка = использовать damage_formula. Так глефа может
-      // бить slashing 1d8 и piercing 1d4 — выбор режима делается выбором манёвра.
+      // Damage formulas BY TYPE: a maneuver with req_weapon_damage_type takes the formula
+      // of its type; an empty string = use damage_formula. This way a glaive can
+      // deal slashing 1d8 and piercing 1d4 — the mode is chosen by choosing the maneuver.
       damage_formulas: new fields.SchemaField({
         slashing: new fields.StringField({ initial: "" }),
         piercing: new fields.StringField({ initial: "" }),
         bludgeoning: new fields.StringField({ initial: "" })
       }),
       formula_heal: new fields.StringField({ initial: "", label: "Healing Formula" }),
-      // Выдача временных хитов при использовании (число, дайсы или "N%" от макс. ХП цели)
+      // Grants temporary HP on use (a number, dice or "N%" of the target's max HP)
       formula_temp_hp: new fields.StringField({ initial: "" }),
       equipped: new fields.BooleanField({ initial: false }),
       range: new fields.StringField({ initial: "" }),
@@ -50,11 +50,11 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
         can_be_sold: new fields.BooleanField({ initial: false }),
         can_be_dropped: new fields.BooleanField({ initial: false })
       }),
-      // Потребление и количество
+      // Consumption and quantity
       quantity: new fields.NumberField({ initial: 1, integer: true, min: 0 }),
-      consume_target: new fields.StringField({ initial: "" }), // ID предмета-боеприпаса
+      consume_target: new fields.StringField({ initial: "" }), // ID of the ammunition item
       consume_amount: new fields.NumberField({ initial: 1, integer: true, min: 0 }),
-      // Заряды и макросы (добавлено для поддержки магических свойств, особенностей и эффектов)
+      // Charges and macros (added to support magical properties, features and effects)
       uses_value: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       uses_max: new fields.StringField({ initial: "" }),
       uses_per: new fields.StringField({ initial: "" }),
@@ -64,59 +64,59 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       prerequisites_skills: new fields.ArrayField(new fields.StringField(), { initial: [] }),
       
       control_zone: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 3 }),
-      // Бронебойность 0-10: каждая единица гасит 10% DR цели (10 = игнорирует DR полностью)
+      // Armor Piercing 0-10: each point cancels 10% of the target's DR (10 = ignores DR completely)
       armor_piercing: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
-      // Рассекание N (Cleaving) — отменяет N Твёрдости (cohesion) брони цели, то есть
-      // возвращает Бронебойности её работу (craft/Armor Rework Plan.md §5).
-      // ПОКА ДЕКОРАТИВНО: в расчёт урона не входит, в правилах не зафиксировано.
+      // Cleaving N — negates N Cohesion of the target's armor, i.e.
+      // gives Armor Piercing its job back (craft/Armor Rework Plan.md §5).
+      // DECORATIVE FOR NOW: not part of the damage calculation, not recorded in the rules.
       cleaving: new fields.NumberField({ initial: 0, integer: true, min: 0, max: 10 }),
-      // Отражающий N — +N к Блоку, пока оружие в руке. Валюта щита
-      // (_rules/12. Armor.md §Базовые щиты: средний 1, ростовой 2).
+      // Deflecting N — +N to Block while the weapon is in hand. The shield's currency
+      // (_rules/12. Armor.md §Basic shields: medium 1, tower 2).
       deflecting: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
-      // Качество/редкость НЕ дублируем: у оружия уже есть rarity (physicalItemFields,
-      // common→legendary) — тяжесть осечек огнестрела читается из него (src/dice/roll.mjs).
+      // Quality/rarity is NOT duplicated: the weapon already has rarity (physicalItemFields,
+      // common→legendary) — firearm misfire severity is read from it (src/dice/roll.mjs).
 
-      // Бонусы против типов существ. Карта { <ключ типа>: potency(0-10) }.
-      // Если цель несёт тип (Item creature_type), урон умножается на
-      // (1 + potency·0.1) ДО вычета DR цели. Ключи — из CONFIG.DEDREL.creatureTypes
-      // (расширяемо через конфиг). Свободный объект → новые типы не требуют миграции.
+      // Bonuses vs creature types. Map { <type key>: potency(0-10) }.
+      // If the target carries the type (Item creature_type), damage is multiplied by
+      // (1 + potency·0.1) BEFORE the target's DR is subtracted. Keys come from CONFIG.DEDREL.creatureTypes
+      // (extensible via config). Free-form object → new types need no migration.
       vs_creature: new fields.ObjectField({ initial: {} }),
 
-      // «Вскрыватель типа»: карта { <ключ типа>: true } — оружие настроено против
-      // этих типов (зачарование/особый материал). Против цели такого типа система
-      // ВЫЧИТАЕТ из её DR ровно вклад этого типа (сумма его эффектов), оставляя
-      // броню/природный базовый DR (см. applyDamage, _rules/18. Enemies.md §Вскрыватель типа).
-      // Сейчас выставляется вручную на листе; при вводе крафта переедет на
-      // зачарования/материалы (серебро→shade, адамантин→construct). См. NOTES.md.
+      // "Type breaker": map { <type key>: true } — the weapon is attuned against
+      // these types (enchantment/special material). Against a target of such a type the system
+      // SUBTRACTS from its DR exactly that type's contribution (the sum of its effects), leaving
+      // the armor/natural base DR (see applyDamage, _rules/18. Enemies.md §Type breaker).
+      // Currently set by hand on the sheet; when crafting is introduced it will move to
+      // enchantments/materials (silver→shade, adamantine→construct). See NOTES.md.
       bypass_creature: new fields.ObjectField({ initial: {} }),
 
-      // Properties — плоские флаги свойств; по ним гейтятся манёвры (req_weapon_property)
+      // Properties — flat property flags; maneuvers are gated by them (req_weapon_property)
       is_auxiliary: new fields.BooleanField({ initial: false }),
       is_fast: new fields.BooleanField({ initial: false }),
       is_slow: new fields.BooleanField({ initial: false }),
       is_twohanded: new fields.BooleanField({ initial: false }),
       is_thrown: new fields.BooleanField({ initial: false }),
       is_reloading: new fields.BooleanField({ initial: false }),
-      // Цена перезарядки в ОД (1-3): один манёвр «Перезарядка» стоит столько ОД,
-      // тяжёлый огнестрел дороже (мушкет 2, аркебуза 3). Стоимость диктует оружие,
-      // а не манёвр — игрок не может перезарядиться дёшево (см. item.mjs use()).
+      // Reload cost in AP (1-3): one Reload maneuver costs that many AP,
+      // heavy firearms cost more (musket 2, arquebus 3). The weapon dictates the cost,
+      // not the maneuver — the player can't reload cheaply (see item.mjs use()).
       reload_cost: new fields.NumberField({ initial: 1, integer: true, min: 1, max: 3 }),
-      // Заряжено ли перезаряжаемое оружие. Выстрел (расход боеприпаса) разряжает,
-      // манёвр «Перезарядка» заряжает. Из разряженного стрелять нельзя.
+      // Whether a reloadable weapon is loaded. A shot (ammunition consumption) unloads it,
+      // the Reload maneuver loads it. An unloaded weapon can't fire.
       loaded: new fields.BooleanField({ initial: true }),
-      // В упор: выстрел не провоцирует атаку по возможности (флаг без автоматики)
+      // Point-blank: the shot doesn't provoke an attack of opportunity (flag without automation)
       is_point_blank: new fields.BooleanField({ initial: false }),
-      // Картечь: выстрел бьёт по площади (конус) вместо одиночной цели — один
-      // бросок атаки/урона на всех накрытых. Оружие стреляет ТЕМ ЖЕ манёвром-
-      // выстрелом, что и обычный огнестрел; при is_scatter карточка чата добавляет
-      // кнопку конуса (длина = range оружия, см. item.mjs postToChat). Отдельный
-      // манёвр/талант не нужен — Атака/Урон те же, применяются к нескольким токенам.
+      // Scatter: the shot hits an area (cone) instead of a single target — one
+      // attack/damage roll against everyone covered. The weapon fires with THE SAME shot
+      // maneuver as a regular firearm; with is_scatter the chat card adds
+      // a cone button (length = the weapon's range, see item.mjs postToChat). No separate
+      // maneuver/talent is needed — Attack/Damage are the same, applied to several tokens.
       is_scatter: new fields.BooleanField({ initial: false }),
-      // Вариативный хват: можно держать одной или двумя руками; при двуручном
-      // хвате урон поднимается на ступень Лестницы (кнопка на карточке чата)
+      // Variable grip: can be held in one or two hands; with a two-handed
+      // grip the damage rises one Ladder step (a button on the chat card)
       is_variable_grip: new fields.BooleanField({ initial: false }),
-      // Парное: одна сущность-«пара» (катары, когти) занимает ОБА слота рук при
-      // экипировке, как двуручное, но двуручным ХВАТОМ не считается
+      // Paired: a single "pair" entity (katars, claws) occupies BOTH hand slots when
+      // equipped, like a two-handed weapon, but doesn't count as a two-handed GRIP
       is_paired: new fields.BooleanField({ initial: false })
     };
   }
