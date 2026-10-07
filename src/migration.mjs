@@ -9,7 +9,7 @@ export class DedrelMigration {
    * @param {string} currentVersion The current system version
    */
   static async migrateWorld(currentVersion) {
-    ui.notifications.info(`Dedrel | Начинаем миграцию данных системы до версии ${currentVersion}...`, { permanent: true });
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.MigrationStart", { version: currentVersion }), { permanent: true });
     
     // Migrating Actors
     for (const actor of game.actors) {
@@ -62,7 +62,7 @@ export class DedrelMigration {
 
     // Save the new migration version
     await game.settings.set("dedrel", "systemMigrationVersion", currentVersion);
-    ui.notifications.info(`Dedrel | Миграция системы до версии ${currentVersion} завершена!`, { permanent: true });
+    ui.notifications.info(game.i18n.format("DEDREL.Notifications.MigrationComplete", { version: currentVersion }), { permanent: true });
   }
 
   /**

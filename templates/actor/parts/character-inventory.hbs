@@ -63,7 +63,7 @@
             <span>{{localize "DEDREL.Encumbrance.heavy"}}: {{numberFormat encumbrance.thresholds.heavy decimals=0}}</span>
         </div>
         {{#if encumbrance.rollPenalty}}
-        <div style="font-size: 0.78em; color: #c0392b; margin-top: 5px;"><i class="fas fa-triangle-exclamation"></i> {{localize "DEDREL.ActorSheet.EncumbrancePenalty"}}: −{{encumbrance.rollPenalty}} {{#if (eq encumbrance.category "overloaded")}}· {{localize "DEDREL.ActorSheet.EncumbranceNoMove"}}{{else if (eq encumbrance.category "heavy")}}· −1м{{/if}}</div>
+        <div style="font-size: 0.78em; color: #c0392b; margin-top: 5px;"><i class="fas fa-triangle-exclamation"></i> {{localize "DEDREL.ActorSheet.EncumbrancePenalty"}}: −{{encumbrance.rollPenalty}} {{#if (eq encumbrance.category "overloaded")}}· {{localize "DEDREL.ActorSheet.EncumbranceNoMove"}}{{else if encumbrance.movePenalty}}· {{localize "DEDREL.ActorSheet.EncumbranceSpeed" n=encumbrance.movePenalty}}{{/if}}</div>
         {{/if}}
     </div>
     {{/if}}

@@ -204,6 +204,7 @@
       },
       "SourceHUD": {
         "Title": "Scene Sources",
+        "UnknownScale": "Unknown Source Scale: {scale}",
         "CycleHint": "<em>Click to raise, Shift+Click to lower</em>"
       },
       "Paths": {
@@ -768,6 +769,7 @@
       "IsNatural": "Natural",
       "WeaponSkill": "Weapon Skill",
       "WeaponKeys": "Specific Weapons (key/name substrings, ;-separated)",
+      "WeaponKeysPlaceholder": "greatsword; war pick",
       "WeaponDiceStep": "Weapon Dice Step (damage ladder, ±N)",
       "Skill": "Skill",
       "NoSkill": "No Skill",
@@ -980,6 +982,7 @@
       "EncumbranceImmune": "Immune to encumbrance penalties",
       "EncumbrancePenalty": "Penalty to all rolls",
       "EncumbranceNoMove": "Cannot move",
+      "EncumbranceSpeed": "−{n} m Speed",
       "Containers": "Containers",
       "AccessorySlots": "Accessory Slots",
       "CanReceiveCurrency": "Accepts transfers",
@@ -989,6 +992,8 @@
       "EquipArmorHint": "For armor, use the 'Equip' buttons (slots).",
       "UnknownArmorSlot": "Unknown armor slot.",
       "RoundAPRestored": "Action Points of all combatants restored (Start of a new round).",
+      "MigrationStart": "Dedrel | Starting system data migration to version {version}...",
+      "MigrationComplete": "Dedrel | System migration to version {version} complete!",
       "ExclusiveArmorEquipped": "Exclusive armor equipped: {name}. Other slots cleared.",
       "CannotEquipExclusive": "Cannot equip this armor: an exclusive slot armor is already equipped.",
       "LightLayersOnlyBlocked": "{name} is worn over light layers only — {other} is already equipped and gets in the way.",
@@ -1406,6 +1411,7 @@
       "InfiniteFunds": "Infinite funds",
       "PersonalDiscounts": "Personal Discounts",
       "LootTables": "Loot Tables (semicolon-separated)",
+      "LootTablesPlaceholder": "Table name; another table",
       "RollStock": "Generate Stock",
       "DrawsCount": "Draws per table",
       "TableNotFound": "Table not found: {ref}",

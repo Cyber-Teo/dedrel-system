@@ -377,7 +377,8 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
       category,
       thresholds,
       immune,
-      rollPenalty: immune ? 0 : rollPenalty
+      rollPenalty: immune ? 0 : rollPenalty,
+      movePenalty: immune ? 0 : movePenalty
     };
   }
 }

@@ -204,6 +204,7 @@
       },
       "SourceHUD": {
         "Title": "Источники сцены",
+        "UnknownScale": "Неизвестный масштаб Источника: {scale}",
         "CycleHint": "<em>ЛКМ — усилить, Shift+ЛКМ — ослабить</em>"
       },
       "Paths": {
@@ -699,6 +700,7 @@
       "IsNatural": "Естественное",
       "WeaponSkill": "Навык оружия",
       "WeaponKeys": "Конкретное оружие (подстроки key/имени через ;)",
+      "WeaponKeysPlaceholder": "greatsword; двуручный меч",
       "WeaponDiceStep": "Сдвиг кубов оружия (Лестница урона, ±N)",
       "Skill": "Навык",
       "NoSkill": "Нет навыка",
@@ -980,6 +982,7 @@
       "EncumbranceImmune": "Иммунитет к штрафам перегрузки",
       "EncumbrancePenalty": "Штраф ко всем броскам",
       "EncumbranceNoMove": "Невозможно двигаться",
+      "EncumbranceSpeed": "−{n} м к Скорости",
       "Containers": "Контейнеры",
       "AccessorySlots": "Слоты аксессуаров",
       "CanReceiveCurrency": "Принимает переводы",
@@ -990,6 +993,8 @@
       "UnknownArmorSlot": "Неизвестный слот брони.",
       "ExclusiveArmorEquipped": "Надета эксклюзивная броня: {name}. Остальные слоты очищены.",
       "RoundAPRestored": "Очки Действия всех участников боя восстановлены (Начало нового раунда).",
+      "MigrationStart": "Dedrel | Начинаем миграцию данных системы до версии {version}...",
+      "MigrationComplete": "Dedrel | Миграция системы до версии {version} завершена!",
       "CannotEquipExclusive": "Нельзя надеть эту броню: уже надета броня с эксклюзивным слотом.",
       "LightLayersOnlyBlocked": "«{name}» носится только поверх лёгких слоёв — мешает надетый доспех «{other}».",
       "LightLayersOnlyWorn": "Нельзя надеть «{name}»: надет доспех «{other}», который носится только поверх лёгких слоёв.",
@@ -1406,6 +1411,7 @@
       "InfiniteFunds": "Бесконечная казна",
       "PersonalDiscounts": "Персональные скидки",
       "LootTables": "Таблицы лута (через ;)",
+      "LootTablesPlaceholder": "Имя таблицы; другая таблица",
       "RollStock": "Сгенерировать сток",
       "DrawsCount": "Число бросков на таблицу",
       "TableNotFound": "Таблица не найдена: {ref}",

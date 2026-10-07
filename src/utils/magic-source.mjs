@@ -55,7 +55,7 @@ export function sceneSourceScale(doctrineKey, scene = canvas?.scene) {
  */
 export async function setSceneSourceScale(doctrineKey, scale, scene = canvas?.scene) {
   if (!scene) return;
-  if (!SOURCE_ORDER.includes(scale)) throw new Error(`Неизвестный масштаб Источника: ${scale}`);
+  if (!SOURCE_ORDER.includes(scale)) throw new Error(game.i18n.format("DEDREL.Magic.SourceHUD.UnknownScale", { scale }));
   await scene.setFlag("dedrel", "sourceScale", { [doctrineKey]: scale });
 }
 
