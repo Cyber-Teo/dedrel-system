@@ -5,17 +5,17 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
- * Лимит нагрузки контейнера: не даём добавить предмет, если его вес превысит
- * capacity актора-контейнера (mode === "container", capacity > 0). Ловит все
- * пути создания вложенного предмета (drag-drop, сокет, макросы).
+ * Container load limit: we don't allow adding an item if its weight would exceed
+ * the container actor's capacity (mode === "container", capacity > 0). Catches all
+ * paths of creating an embedded item (drag-drop, socket, macros).
  */
 Hooks.on("preCreateItem", (item, data, options, userId) => {
   const actor = item.parent;
   if (!(actor instanceof Actor) || actor.type !== "loot") return true;
   if (actor.system.mode !== "container") return true;
   const cap = Number(actor.system.capacity) || 0;
-  if (cap <= 0) return true; // без лимита
-  // ?? внутри Number(): у типов без quantity Number(undefined) дал бы NaN
+  if (cap <= 0) return true; // no limit
+  // ?? inside Number(): for types without quantity Number(undefined) would give NaN
   const qty = item.type === "currency" ? 1 : Number(item.system?.quantity ?? 1);
   const incoming = (Number(item.system?.weight) || 0) * qty;
   const current = Number(actor.system.load) || 0;
@@ -27,17 +27,17 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
 });
 
 /**
- * Лимит нагрузки контейнера для МОНЕТ: блокируем зачисление новых монет в
- * кошелёк контейнера (mode container, capacity > 0), если их вес перевесит
- * capacity. Ловит все пути изменения system.currency (правка на листе, перевод
- * через сокет, депозит currency-предмета).
+ * Container load limit for COINS: we block depositing new coins into
+ * the container's wallet (mode container, capacity > 0) if their weight would exceed
+ * capacity. Catches all paths of changing system.currency (editing on the sheet, a transfer
+ * via socket, depositing a currency item).
  */
 Hooks.on("preUpdateActor", (actor, changes) => {
   if (actor.type !== "loot" || actor.system.mode !== "container") return true;
   const cap = Number(actor.system.capacity) || 0;
   if (cap <= 0) return true;
-  // changes могут прийти как плоскими ключами ("system.currency.copper"), так и
-  // вложенным объектом ("system.currency": {...}) → нормализуем через expandObject.
+  // changes may come either as flat keys ("system.currency.copper") or
+  // as a nested object ("system.currency": {...}) → normalize via expandObject.
   const expanded = foundry.utils.expandObject(foundry.utils.deepClone(changes));
   const curChanges = foundry.utils.getProperty(expanded, "system.currency");
   if (!curChanges || typeof curChanges !== "object") return true;
@@ -51,7 +51,7 @@ Hooks.on("preUpdateActor", (actor, changes) => {
     if (w <= 0) continue;
     delta += ((Number(newCur[d.key]) || 0) - (Number(oldCur[d.key]) || 0)) * w;
   }
-  // actor.system.load уже включает вес текущих монет → новая нагрузка = load + delta
+  // actor.system.load already includes the weight of the current coins → new load = load + delta
   if (delta > 0 && (Number(actor.system.load) || 0) + delta > cap) {
     ui.notifications.warn(game.i18n.format("DEDREL.Loot.CapacityExceeded", { cap }));
     return false;
@@ -60,10 +60,10 @@ Hooks.on("preUpdateActor", (actor, changes) => {
 });
 
 /**
- * Лист актора «Лут/Торговец/Контейнер» (тип loot).
- * Функциональный минимум (дизайн — вторично): режимы, экономика торговца,
- * сток предметов с ценами и кнопками сделок, кошелёк, «разделить деньги»,
- * генерация стока из RollTable. Сделки идут через DedrelSocket (ГМ-исполнение).
+ * Sheet for the "Loot/Merchant/Container" actor (type loot).
+ * A functional minimum (design is secondary): modes, merchant economy,
+ * item stock with prices and trade buttons, wallet, "divide coins",
+ * stock generation from a RollTable. Trades go through DedrelSocket (executed by the GM).
  */
 export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   static DEFAULT_OPTIONS = {
@@ -93,7 +93,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
 
   get title() { return this.document.name; }
 
-  /** Актор-покупатель для текущего пользователя. */
+  /** The buyer actor for the current user. */
   get buyerActor() {
     return game.user.character || canvas.tokens?.controlled?.[0]?.actor || null;
   }
@@ -105,7 +105,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     const isGM = game.user.isGM;
     const userId = game.user.id;
 
-    // Сток предметов с ценами
+    // Item stock with prices
     const items = [];
     for (const i of actor.items) {
       const isService = i.type === "service";
@@ -120,13 +120,13 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
       });
     }
 
-    // Кошелёк
+    // Wallet
     const walletCurrencies = [];
     for (const d of DedrelCurrency.defs()) {
       walletCurrencies.push({ ...d, count: Number(sys.currency?.[d.key]) || 0 });
     }
 
-    // Персональные скидки: строка на каждого не-ГМ игрока
+    // Personal discounts: a row for each non-GM player
     const discountRows = game.users.filter(u => !u.isGM).map(u => ({
       userId: u.id, name: u.name, pct: Number(sys.personal_discounts?.[u.id]) || 0
     }));
@@ -155,7 +155,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     return context;
   }
 
-  /** Конвертация текстового поля loot_tables (через ;) в массив. */
+  /** Converting the loot_tables text field (separated by ;) into an array. */
   _prepareSubmitData(event, form, formData) {
     const data = super._prepareSubmitData(event, form, formData);
     let val = data["system.loot_tables"];
@@ -169,7 +169,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
   _onRender(context, options) {
     super._onRender(context, options);
 
-    // Класс режима на корне окна для отдельной стилизации каждого режима:
+    // Mode class on the window root for styling each mode separately:
     // .application.loot.loot-mode-{loot|merchant|container}
     this.element.classList.remove("loot-mode-loot", "loot-mode-merchant", "loot-mode-container");
     this.element.classList.add(`loot-mode-${this.document.system.mode}`);
@@ -186,7 +186,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     if (item) event.dataTransfer.setData("text/plain", JSON.stringify({ type: "Item", uuid: item.uuid }));
   }
 
-  /** Игрок бросает свой предмет на торговца → продажа; ГМ → пополнение стока. */
+  /** A player drops their item onto a merchant → a sale; the GM → restocking. */
   async _onDrop(event) {
     let data;
     try { data = JSON.parse(event.dataTransfer.getData("text/plain")); }
@@ -196,8 +196,8 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
     const item = await Item.implementation.fromDropData(data);
     if (!item) return super._onDrop(event);
 
-    // Монеты (currency-предмет), брошенные на лист, зачисляем в кошелёк актора,
-    // а не кладём как предмет. Лимит веса монет проверит хук preUpdateActor.
+    // Coins (a currency item) dropped onto the sheet are deposited into the actor's wallet
+    // rather than placed as an item. The coin weight limit is checked by the preUpdateActor hook.
     if (item.type === "currency" && this.isEditable) {
       const ok = await this.#depositCurrencyItem(item);
       if (ok) return false;
@@ -215,24 +215,24 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
   }
 
   /**
-   * Зачисляет currency-предмет в кошелёк актора-контейнера (без создания
-   * предмета). Проверяет известность деноминации и лимит веса контейнера.
-   * @returns {Promise<boolean>} true, если зачислено (дроп-предмет создавать не нужно)
+   * Deposits a currency item into the container actor's wallet (without creating
+   * an item). Checks that the denomination is known and the container's weight limit.
+   * @returns {Promise<boolean>} true if deposited (no need to create the dropped item)
    */
   async #depositCurrencyItem(item) {
     const denom = item.system?.denomination;
     const value = Number(item.system?.value) || 0;
     const defs = DedrelCurrency.defs();
     const def = defs.find(d => d.key === denom);
-    if (!def || value <= 0) return false; // неизвестная валюта → обычное создание предмета
+    if (!def || value <= 0) return false; // unknown currency → regular item creation
 
-    // Пред-проверка лимита веса (для контейнера с capacity): вес добавляемых монет.
+    // Pre-check of the weight limit (for a container with capacity): the weight of the coins being added.
     if (this.document.system.mode === "container") {
       const cap = Number(this.document.system.capacity) || 0;
       const added = value * (Number(def.weight) || 0);
       if (cap > 0 && added > 0 && (Number(this.document.system.load) || 0) + added > cap) {
         ui.notifications.warn(game.i18n.format("DEDREL.Loot.CapacityExceeded", { cap }));
-        return true; // предмет не создаём, но и не зачисляем
+        return true; // we don't create the item, but we don't deposit it either
       }
     }
 
@@ -291,7 +291,7 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
   }
 
   static async #onDivideCoins(event, target) {
-    // Персонажи активных не-ГМ игроков
+    // Characters of active non-GM players
     const targets = [];
     for (const u of game.users) {
       if (u.isGM || !u.active) continue;
@@ -302,19 +302,19 @@ export default class DedrelLootSheet extends HandlebarsApplicationMixin(ActorShe
   }
 
   /**
-   * Перевод денег из контейнера актору-получателю. Игрок переводит своему
-   * привязанному персонажу (game.user.character / контролируемый токен) либо
-   * любому владеемому актору-кошельку; ГМ — любому актору с флагом
-   * can_receive_currency. Исполнение — через DedrelSocket.transferCurrency
-   * (напрямую при наличии прав, иначе через активного ГМа).
+   * Transferring money from a container to a recipient actor. A player transfers to their
+   * linked character (game.user.character / a controlled token) or
+   * to any owned wallet actor; the GM — to any actor with the
+   * can_receive_currency flag. Execution goes through DedrelSocket.transferCurrency
+   * (directly if permissions suffice, otherwise through the active GM).
    */
   static async #onTransferMoney(event, target) {
     const source = this.document;
     const defs = DedrelCurrency.defs();
     if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
 
-    // Получатели: акторы с кошельком, которым разрешён приём денег.
-    // Игроку показываем только владеемых им акторов (обычно его персонаж).
+    // Recipients: actors with a wallet that are allowed to receive money.
+    // A player is shown only the actors they own (usually their character).
     const targets = game.actors.filter(a =>
       a.id !== source.id
       && a.system?.currency !== undefined

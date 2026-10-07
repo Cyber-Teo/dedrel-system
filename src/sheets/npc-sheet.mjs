@@ -1,20 +1,20 @@
 import DedrelCharacterSheet from "./character-sheet.mjs";
 
 /**
- * Лист актёра «NPC / Монстр» (тип npc) — подкласс листа персонажа.
- * Наследует всю функциональность (вкладки, экипировка со слотами, спасброски,
- * избранные навыки, drag-n-drop, сохранение скролла), заменяя два места:
- *   - main: шапка NPC (тир/угроза, хиты пеона или HP босса, типы существа)
- *     вместо шапки персонажа (удача/опыт/три пула ОД);
- *   - config (вместо вкладки «Опыт»): все ручные настройки — базовые ранги
- *     атрибутов/навыков, override производных, DR, техники/доктрины. У NPC
- *     нет прокачки за XP, значения выставляются ГМом напрямую.
+ * Sheet for the "NPC / Monster" actor (type npc) — a subclass of the character sheet.
+ * Inherits all the functionality (tabs, slot-based equipment, saving throws,
+ * favorite skills, drag-n-drop, scroll preservation), replacing two places:
+ *   - main: the NPC header (tier/threat, peon hits or boss HP, creature types)
+ *     instead of the character header (luck/XP/three AP pools);
+ *   - config (instead of the Experience tab): all manual settings — base ranks
+ *     of attributes/skills, overrides of derived values, DR, techniques/doctrines. NPCs
+ *     have no XP advancement, the values are set directly by the GM.
  *
- * ВАЖНО: инпуты вкладки «Настройка» берут значения из _source (не из
- * производного system), иначе submit «запекает» вклад эффектов/брони в базу.
+ * IMPORTANT: the inputs of the Tuning tab take their values from _source (not from
+ * the derived system), otherwise submit "bakes" the contribution of effects/armor into the base.
  */
 
-// Категории навыков для UI (тот же порядок, что на листе персонажа).
+// Skill categories for the UI (the same order as on the character sheet).
 const SKILL_CATEGORIES = {
   combat: { label: "DEDREL.ActorSheet.CombatSkills", keys: ["crossbows", "unarmed_combat", "pole_weapons", "blunt_weapons", "artillery", "firearms", "throwing", "exotic_weapons", "magical_attacks", "bows", "bladed_weapons", "armor_use"] },
   intellectual: { label: "DEDREL.ActorSheet.IntellectualSkills", keys: ["cultural_awareness", "knowledge", "logic_reasoning", "interpretation", "research"] },
@@ -64,7 +64,7 @@ export default class DedrelNpcSheet extends DedrelCharacterSheet {
     const sys = this.document.system;
     const src = this.document._source.system;
 
-    // Типы существа показываются чипами в шапке — из общего инвентаря убираем.
+    // Creature types are shown as chips in the header — removed from the general inventory.
     const creatureTypes = [];
     context.inventory = context.inventory.filter(i => {
       if (i.type !== "creature_type") return true;
@@ -73,7 +73,7 @@ export default class DedrelNpcSheet extends DedrelCharacterSheet {
       return false;
     });
 
-    // Базовые (source) значения для вкладки «Настройка».
+    // Base (source) values for the Tuning tab.
     const srcAttributes = Object.keys(sys.attributes).map(key => ({
       key, label: `DEDREL.Attributes.${key}`,
       rank: src.attributes[key].rank,
@@ -89,9 +89,9 @@ export default class DedrelNpcSheet extends DedrelCharacterSheet {
       }))
     }));
 
-    // Доктрины и техники — из source (таланты могут давать +1 через AE).
-    // Пути доктрин идут сюда же: у персонажа их выдают таланты, а статблок NPC
-    // собирается руками — без полей в «Настройке» выставить путь боссу нечем.
+    // Doctrines and techniques — from source (talents can give +1 via AE).
+    // Doctrine paths go here too: for a character they're granted by talents, but an NPC statblock
+    // is assembled by hand — without fields in Tuning there's no way to give a boss a path.
     const doctrines = Object.keys(sys.doctrines).map(key => ({
       key, label: `DEDREL.Magic.Doctrines.${key}`,
       rank: src.doctrines[key].rank,

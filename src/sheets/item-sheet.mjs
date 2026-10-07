@@ -6,13 +6,13 @@ import { buildTokenLightChanges, hasTokenLightChanges, readTokenLightChanges, st
 import { getRangedClass, ammoMatchesWeapon } from "../utils/ranged.mjs";
 import { DedrelCurrency } from "../utils/currency.mjs";
 
-// Типы предметов с общими «физическими» полями (редкость/вес/цена/количество).
-// Для них рендерится общий блок details-physical.hbs.
+// Item types with the shared "physical" fields (rarity/weight/price/quantity).
+// The shared details-physical.hbs block is rendered for them.
 const PHYSICAL_ITEM_TYPES = ["weapon", "armor", "ammunition", "magic_item", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item"];
 /**
- * Основной класс Листа Предмета для системы Dedrel.
- * Наследуется от нового Foundry V2 Application Framework (ItemSheetV2).
- * Обрабатывает логику отображения и сохранения данных предмета.
+ * Main Item Sheet class for the Dedrel system.
+ * Inherits from the new Foundry V2 Application Framework (ItemSheetV2).
+ * Handles the display and saving logic for item data.
  */
 export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   
@@ -50,7 +50,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
   };
 
-  /** Кнопка заголовка "Открыть в конструкторе" — только для собранных заклинаний. */
+  /** The "Open in Constructor" header button — only for built spells. */
   _getHeaderControls() {
     const controls = super._getHeaderControls();
     if (this.document.type === "spell" && this.document.system.doctrine) {
@@ -64,13 +64,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   static #onOpenInConstructor() {
-    // Актор-владелец (embedded) или standalone для мировых предметов (ГМ)
+    // Owner actor (embedded) or standalone for world items (GM)
     game.dedrel.openSpellConstructor(this.document.actor || null, this.document);
   }
 
   /**
-   * Кнопка «Использовать» на вкладке боеприпасов оружия: назначает боеприпас
-   * активным (system.consume_target). Повторный клик по активному — снимает выбор.
+   * The "Use" button on the weapon's ammunition tab: makes the ammunition
+   * active (system.consume_target). Clicking the active one again clears the selection.
    */
   static async #onUseAmmo(event, target) {
     const ammoId = target.dataset.ammoId;
@@ -108,14 +108,14 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
   };
   /**
-   * Подготовка данных для передачи в Handlebars шаблоны.
-   * Формирует списки выбора (select) и подготавливает массивы в строки для инпутов.
+   * Preparing data to pass into the Handlebars templates.
+   * Builds the select option lists and turns arrays into strings for the inputs.
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const itemData = this.document;
     
-    // Обогащаем HTML описание, чтобы работали секретные блоки и броски кубиков в тексте
+    // Enrich the description HTML so that secret blocks and dice rolls in the text work
     context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(itemData.system.description || "", {
       async: true,
       secrets: this.document.isOwner,
@@ -127,35 +127,35 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.tabs = this._prepareTabs("primary");
     context.editable = this.isEditable;
 
-    // Вкладка «Эффекты»: строки с вычисленными признаками для подсветки кнопок
-    // (свет хранится change-строками token.light.*, из шаблона его не увидеть)
+    // Effects tab: rows with computed flags for highlighting buttons
+    // (light is stored as token.light.* change rows, the template can't see it)
     context.effectRows = itemData.effects.map(e => ({
       effect: e,
       hasLight: hasTokenLightChanges(e)
     }));
 
-    // Тип существа: пресеты ключей для дружелюбного выбора (список расширяемый).
+    // Creature type: key presets for friendly selection (the list is extensible).
     if (itemData.type === "creature_type") {
       const keys = CONFIG.DEDREL?.creatureTypes || [];
       context.creatureTypeOptions = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}` }));
       context.creatureTypeIsPreset = keys.includes(itemData.system.key);
     }
 
-    // Оружие и боеприпас: строки «бонус против типа существа» (сила 0-10 на тип).
+    // Weapon and ammunition: "bonus vs creature type" rows (potency 0-10 per type).
     if (itemData.type === "weapon" || itemData.type === "ammunition") {
       const keys = CONFIG.DEDREL?.creatureTypes || [];
       const vs = itemData.system.vs_creature || {};
       context.vsCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: Number(vs[k]) || 0 }));
     }
 
-    // Оружие: строки «вскрыватель типа» (чекбокс на тип) — игнорирует DR этого типа.
+    // Weapon: "type breaker" rows (a checkbox per type) — ignores that type's DR.
     if (itemData.type === "weapon") {
       const keys = CONFIG.DEDREL?.creatureTypes || [];
       const bypass = itemData.system.bypass_creature || {};
       context.bypassCreatureRows = keys.map(k => ({ key: k, label: `DEDREL.CreatureTypes.${k}`, value: !!bypass[k] }));
     }
 
-    // Боеприпас: селекты типа боеприпаса и типа доп. урона (любой ключ Лестницы).
+    // Ammunition: selects for the ammunition type and the extra damage type (any Ladder key).
     if (itemData.type === "ammunition") {
       context.ammoTypeOptions = {};
       for (const t of AMMO_TYPE_ENUM) context.ammoTypeOptions[t] = game.i18n.localize(AMMO_TYPE_LABELS[t]);
@@ -221,7 +221,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     
     context.hasQuantity = itemData.system.quantity !== undefined;
 
-    // Общий блок физических полей (редкость/вес/цена/стакаемость)
+    // Shared block of physical fields (rarity/weight/price/stackable)
     context.isPhysical = PHYSICAL_ITEM_TYPES.includes(itemData.type);
     if (context.isPhysical || itemData.type === "service") {
       context.rarityOptions = {};
@@ -231,8 +231,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       context.hasStackable = itemData.system.stackable !== undefined;
     }
 
-    // Вкладка встроенного чертежа (system.crafting): только для ГМа, чтобы
-    // игрок не видел рецепт предмета из своего инвентаря
+    // The embedded blueprint tab (system.crafting): GM only, so that
+    // a player doesn't see the recipe of an item from their inventory
     context.showCrafting = context.isPhysical && game.user.isGM && itemData.system.crafting !== undefined;
     if (context.showCrafting) {
       context.craftDisciplineOptions = { "": "—" };
@@ -243,9 +243,9 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       delete context.tabs.crafting;
     }
 
-    // Вкладка «Боеприпасы»: только на оружии, распознанном как лук/арбалет/огнестрел
-    // (getRangedClass отсекает метательное и ближнее). Список — совместимые боеприпасы
-    // с актёра-владельца; активный отмечен (== consume_target).
+    // The Ammunition tab: only on a weapon recognized as a bow/crossbow/firearm
+    // (getRangedClass filters out thrown and melee). The list is the compatible ammunition
+    // from the owner actor; the active one is marked (== consume_target).
     const rangedClass = itemData.type === "weapon" ? getRangedClass(itemData) : null;
     context.showAmmoTab = !!rangedClass;
     if (context.showAmmoTab) {
@@ -265,7 +265,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       delete context.tabs.ammunition;
     }
 
-    // Аксессуарный слот (для типов, поддерживающих system.equip_slot)
+    // Accessory slot (for types that support system.equip_slot)
     context.hasEquipSlot = ["armor", "magic_item", "loot"].includes(itemData.type);
     if (context.hasEquipSlot) {
       context.equipSlotOptions = {
@@ -277,26 +277,26 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       };
     }
 
-    // Ремесленный материал: класс, применимость, магоёмкость (слоты)
+    // Crafting material: class, applicability, magical capacity (slots)
     if (itemData.type === "craft_material") {
       context.materialClassOptions = {};
       for (const c of MATERIAL_CLASS_ENUM) {
         context.materialClassOptions[c] = game.i18n.localize(`DEDREL.MaterialClass.${c}`);
       }
-      // Магоёмкость: материал даёт 0 или 1 слот (колонка Slots в materials.csv —
-      // всегда «no» либо «<цвет> 1»), поэтому редактор — простой выбор тира.
+      // Magical capacity: a material gives 0 or 1 slot (the Slots column in materials.csv
+      // is always "no" or "<color> 1"), so the editor is a simple tier choice.
       context.materialSlotOptions = { "": game.i18n.localize("DEDREL.SlotTiers.none") };
       for (const t of SLOT_TIER_ENUM) {
         context.materialSlotOptions[t] = game.i18n.localize(`DEDREL.SlotTiers.${t}`);
       }
       context.materialSlot = (itemData.system.slots || [])[0] ?? "";
-      // Обработанные материалы (чернила, бумага, склянки, слитки) — продукты
-      // крафта, а не подложка изделия: грамматики четырёх осей у них нет.
-      // Прячем применимость/вес/слоты/сигнатуры, чтобы в них не копился мусор.
+      // Processed materials (ink, paper, vials, ingots) are crafting
+      // products, not a product's base: they don't have the four-axis grammar.
+      // Hide applicability/weight/slots/signatures so that junk doesn't accumulate in them.
       context.isProcessedMaterial = itemData.system.material_class === "processed";
     }
 
-    // Валюта: деноминация выбирается из списка валют мира
+    // Currency: the denomination is chosen from the world's currency list
     if (itemData.type === "currency") {
       context.currencyOptions = { "": "—" };
       try {
@@ -439,10 +439,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Слушатели блока «Крафт»: дроп предмета-ингредиента и правка количества.
-   * Инпуты количеств и слотов материала НАМЕРЕННО без name: массивы нельзя
-   * доверять FormDataExtended (см. FOUNDRY V14 QUIRKS §7) — обновляем массив
-   * целиком через document.update.
+   * Listeners for the Crafting block: dropping an ingredient item and editing quantities.
+   * The quantity and material slot inputs DELIBERATELY have no name: arrays can't
+   * be trusted to FormDataExtended (see FOUNDRY V14 QUIRKS §7) — we update the array
+   * as a whole via document.update.
    */
   #bindCraftingListeners() {
     const root = this.element;
@@ -465,8 +465,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       });
     }
 
-    // Магоёмкость материала: выбор тира. Поле в схеме — массив (счётчик слотов
-    // выражается повтором тира), поэтому пишем [] или [тир].
+    // Material magical capacity: tier selection. The schema field is an array (the slot count
+    // is expressed by repeating the tier), so we write [] or [tier].
     const slotsInput = root.querySelector(".material-slots-field");
     if (slotsInput) {
       slotsInput.addEventListener("change", ev => {
@@ -477,7 +477,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
   }
 
-  /** Дроп предмета в состав чертежа: добавляет ингредиент (или +1 меру). */
+  /** Dropping an item into the blueprint's ingredients: adds an ingredient (or +1 measure). */
   async #onDropCraftIngredient(event) {
     event.preventDefault();
     if (!game.user.isGM || !this.isEditable) return;
@@ -516,8 +516,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Обработчик перед сохранением формы.
-   * Конвертирует строковые значения с запятыми (введённые пользователем) обратно в массивы для DataModel.
+   * Handler before the form is saved.
+   * Converts comma-separated string values (entered by the user) back into arrays for the DataModel.
    */
   _prepareSubmitData(event, form, formData) {
     const data = super._prepareSubmitData(event, form, formData);
@@ -588,26 +588,26 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Пикер библиотеки эффектов. Два режима:
-   *  - «Библиотека» — выбор записи из компендиума `active_effects` (источник истины)
-   *    и копирование её встроенных Active Effect(ов). Чтобы эффект появился в списке,
-   *    достаточно добавить его в компендиум, правка кода не нужна.
-   *  - «Сопротивление/уязвимость» — генератор: DR-эффект собирается на лету из типа
-   *    урона и ступени (DR_TIERS). Комбинаторику (6 × 10) держим генератором, иначе
-   *    она забивает список компендиума и выбирать в нём становится нечем.
+   * Effect library picker. Two modes:
+   *  - "Library" — picking an entry from the `active_effects` compendium (the source of truth)
+   *    and copying its embedded Active Effect(s). For an effect to appear in the list,
+   *    it's enough to add it to the compendium, no code change needed.
+   *  - "Resistance / vulnerability" — a generator: the DR effect is assembled on the fly from the damage
+   *    type and the tier (DR_TIERS). The combinatorics (6 × 10) are kept as a generator, otherwise
+   *    they clog the compendium list and it becomes impossible to pick anything there.
    */
   static async #onAddEffectFromLibrary(event, target) {
     const item = this.document;
     const pack = game.packs.get(`${game.system.id}.active_effects`);
 
-    // Полные документы нужны ради встроенных эффектов (индекс их не содержит).
-    // В список идут только записи, реально несущие Active Effect(ы).
+    // Full documents are needed for the embedded effects (the index doesn't contain them).
+    // Only entries that actually carry Active Effect(s) go into the list.
     const docs = pack ? await pack.getDocuments() : [];
     const entries = docs
       .filter(d => d.effects.size > 0)
       .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
-    // Пак может отсутствовать или быть пустым — генератор работает и без него.
+    // The pack may be missing or empty — the generator works without it.
     const hasLibrary = entries.length > 0;
     if (!pack) ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.PackMissing"));
     else if (!hasLibrary) ui.notifications.warn(game.i18n.localize("DEDREL.EffectLib.Empty"));
@@ -672,20 +672,20 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
             const data = mode === "dr"
               ? DedrelItemSheet.#buildDrEffectData(html.querySelector('[name="drType"]')?.value, html.querySelector('[name="drTier"]')?.value)
               : (entries.find(d => d.id === html.querySelector('[name="entry"]')?.value)?.effects ?? []).map(e => {
-                // Копируем встроенные эффекты записи как шаблон: сбрасываем _id.
+                // Copy the entry's embedded effects as a template: reset the _id.
                 const o = e.toObject();
                 delete o._id;
-                // Светильник работает ТОЛЬКО transfer-эффектом: свет живёт на
-                // токене носителя (token.light.*), а не накладывается разово.
-                // Запись в компендиуме могла быть сохранена с transfer: false —
-                // такой эффект молча не светил бы и не попадал в тумблер use().
-                // Режимы «к себе»/«аура» не трогаем: там transfer снят намеренно.
+                // A light source works ONLY via a transfer effect: the light lives on
+                // the bearer's token (token.light.*), and isn't applied as a one-off.
+                // The compendium entry might have been saved with transfer: false —
+                // such an effect would silently not shine and wouldn't get into the use() toggle.
+                // The "self"/"aura" modes are left alone: there transfer is cleared on purpose.
                 const mode = o.flags?.dedrel?.applyTo;
                 if (hasTokenLightChanges(o) && !mode) o.transfer = true;
                 return o;
               });
-            // origin привязываем к текущему предмету. Фазу system.*-изменений
-            // проставит хук preCreateActiveEffect (QUIRKS §12).
+            // origin is bound to the current item. The phase of system.* changes
+            // will be set by the preCreateActiveEffect hook (QUIRKS §12).
             for (const d of data) d.origin = item.uuid;
             if (data.length) await item.createEmbeddedDocuments("ActiveEffect", data);
           }
@@ -700,10 +700,10 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Собирает данные Active Effect для ступени сопротивления/уязвимости.
-   * @param {string} drKey - тип урона (ключ system.dr)
-   * @param {string} tierKey - ступень из DR_TIERS
-   * @returns {object[]} массив данных эффекта (пустой, если аргументы неизвестны)
+   * Assembles Active Effect data for a resistance/vulnerability tier.
+   * @param {string} drKey - damage type (system.dr key)
+   * @param {string} tierKey - tier from DR_TIERS
+   * @returns {object[]} array of effect data (empty if the arguments are unknown)
    */
   static #buildDrEffectData(drKey, tierKey) {
     const tier = DR_TIERS[tierKey];
@@ -731,7 +731,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
     if (!effect) return;
-    // Подтверждение против мискликов: удаление эффекта с предмета необратимо
+    // Confirmation against misclicks: deleting an effect from an item is irreversible
     const confirmed = await foundry.applications.api.DialogV2.confirm({
       window: { title: game.i18n.localize("DEDREL.Notifications.DeleteEffectTitle") },
       content: `<p>${game.i18n.format("DEDREL.Notifications.DeleteItemEffectConfirm", { name: effect.name, item: this.document.name })}</p>`,
@@ -741,28 +741,28 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Переключает режим self-эффекта (flags.dedrel.applyTo = "self").
-   * Такой эффект применяется к владельцу в момент использования предмета,
-   * с подстановкой @spentAp / @apCost / @overspent (см. Item#_applySelfEffects).
+   * Toggles the self-effect mode (flags.dedrel.applyTo = "self").
+   * Such an effect is applied to the owner at the moment the item is used,
+   * with @spentAp / @apCost / @overspent substituted (see Item#_applySelfEffects).
    */
   static async #onToggleEffectSelf(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
     const effect = this.document.effects.get(effectId);
     if (!effect) return;
     if (effect.getFlag("dedrel", "applyTo") === "self") {
-      // V14: удаление ключа — через ForcedDeletion (_del), легаси "-=key" deprecated
+      // V14: removing a key — via ForcedDeletion (_del), the legacy "-=key" is deprecated
       await effect.update({ "flags.dedrel.applyTo": _del, transfer: true });
     } else {
-      // transfer: false обязателен: иначе шаблон с сырыми плейсхолдерами (@spentAp)
-      // пассивно применялся бы к владельцу постоянно, давая NaN в параметрах.
+      // transfer: false is mandatory: otherwise the template with raw placeholders (@spentAp)
+      // would passively apply to the owner all the time, giving NaN in the parameters.
       await effect.update({ "flags.dedrel.applyTo": "self", transfer: false });
     }
   }
 
   /**
-   * Переключает режим payload-эффекта ауры (flags.dedrel.applyTo = "aura").
-   * Такой эффект не применяется к владельцу и не попадает в кнопку чата:
-   * его вешает регион-аура на токены в зоне (см. src/canvas/aura-regions.mjs).
+   * Toggles the aura payload effect mode (flags.dedrel.applyTo = "aura").
+   * Such an effect isn't applied to the owner and doesn't go into the chat button:
+   * the aura region puts it on the tokens in the zone (see src/canvas/aura-regions.mjs).
    */
   static async #onToggleEffectAuraPayload(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
@@ -771,15 +771,15 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     if (effect.getFlag("dedrel", "applyTo") === "aura") {
       await effect.update({ "flags.dedrel.applyTo": _del, transfer: true });
     } else {
-      // transfer: false обязателен: payload не должен пассивно висеть на владельце
+      // transfer: false is mandatory: the payload mustn't passively hang on the owner
       await effect.update({ "flags.dedrel.applyTo": "aura", transfer: false });
     }
   }
 
   /**
-   * Диалог настройки эффекта-маркера ауры (flags.dedrel.aura).
-   * Радиус > 0 включает ауру: вокруг токена владельца появится регион-эманация,
-   * который вешает payload-эффекты этого предмета на токены в зоне.
+   * Configuration dialog for the aura marker effect (flags.dedrel.aura).
+   * A radius > 0 turns the aura on: an emanation region appears around the owner's token,
+   * which puts this item's payload effects on the tokens in the zone.
    */
   static async #onConfigureEffectAura(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
@@ -796,8 +796,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       `<option value="${key}" ${key === (aura.disposition ?? "all") ? "selected" : ""}>${label}</option>`
     ).join("");
 
-    // Для свежей ауры (флага ещё нет) чекбокс включён независимо от disabled:
-    // иначе ранее выключенный эффект молча сохранит disabled и аура "не заработает"
+    // For a fresh aura (no flag yet) the checkbox is on regardless of disabled:
+    // otherwise a previously disabled effect would silently keep disabled and the aura "wouldn't work"
     const enabledChecked = !(Number(aura.radius) > 0) || !effect.disabled;
     const content = `
       <div class="form-group">
@@ -849,9 +849,9 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
                 includeSelf: html.querySelector('[name="includeSelf"]')?.checked ?? false,
                 color
               },
-              // Маркер "чистый": transfer: false — сам он ни на кого не действует
-              // (носитель получает payload через includeSelf тем же путём, что и
-              // остальные), поэтому не оставляет статус-иконку на актёре.
+              // The marker is "clean": transfer: false — it affects no one itself
+              // (the bearer gets the payload via includeSelf the same way as
+              // everyone else), so it doesn't leave a status icon on the actor.
               "flags.dedrel.applyTo": _del,
               transfer: false,
               disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
@@ -863,8 +863,8 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Пресеты для быстрого заполнения диалога света (радиусы — в метрах сцены).
-   * Ключи анимации — из CONFIG.Canvas.lightAnimations ядра.
+   * Presets for quickly filling in the light dialog (radii in scene meters).
+   * Animation keys come from core's CONFIG.Canvas.lightAnimations.
    */
   static #LIGHT_PRESETS = {
     torch:   { dim: 8,  bright: 4,   color: "#ff9329", alpha: 0.5,  animation: { type: "torch", speed: 3, intensity: 4 } },
@@ -874,11 +874,11 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   };
 
   /**
-   * Диалог настройки света токена. Свет хранится стандартными change-строками
-   * эффекта с ключами `token.light.*` — ядро V14 применяет их к токену носителя
-   * эфемерно (TokenDocument#applyActiveEffects), поэтому снятие/подавление
-   * эффекта гасит свет само, без записи в документ токена и без участия ГМа.
-   * Галка «Включён» служит тумблером: снятие ставит disabled.
+   * Token light configuration dialog. Light is stored as standard change rows
+   * of the effect with `token.light.*` keys — V14 core applies them to the bearer's token
+   * ephemerally (TokenDocument#applyActiveEffects), so removing/suppressing the
+   * effect turns off the light by itself, without writing to the token document and without the GM.
+   * The Enabled checkbox serves as a toggle: unchecking sets disabled.
    */
   static async #onConfigureEffectLight(event, target) {
     const effectId = target.closest(".effect-item").dataset.effectId;
@@ -888,14 +888,14 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     const light = readTokenLightChanges(effect) ?? {};
     const anim = light.animation ?? {};
 
-    // Типы анимации света берём из ядра Foundry (те же, что в стандартном меню света)
+    // Light animation types are taken from Foundry core (the same as in the standard light menu)
     const animOptions = [`<option value="" ${!anim.type ? "selected" : ""}>${game.i18n.localize("DEDREL.ItemSheet.LightAnimNone")}</option>`];
     for (const [key, cfg] of Object.entries(CONFIG.Canvas.lightAnimations ?? {})) {
       const label = game.i18n.localize(cfg.label);
       animOptions.push(`<option value="${key}" ${key === anim.type ? "selected" : ""}>${foundry.utils.escapeHTML(label)}</option>`);
     }
 
-    // Кнопки-пресеты: заполняют поля формы, сохранение — по общей кнопке
+    // Preset buttons: they fill in the form fields, saving happens via the shared button
     const presetButtons = Object.keys(DedrelItemSheet.#LIGHT_PRESETS).map(key =>
       `<button type="button" data-light-preset="${key}">${game.i18n.localize(`DEDREL.ItemSheet.LightPreset${key.capitalize()}`)}</button>`
     ).join("");
@@ -972,7 +972,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
             const dim = parseFloat(html.querySelector('[name="dim"]')?.value) || 0;
             const bright = parseFloat(html.querySelector('[name="bright"]')?.value) || 0;
             const otherChanges = stripTokenLightChanges(effect);
-            // Оба радиуса 0 — убираем световые changes (эффект перестаёт светиться)
+            // Both radii 0 — remove the light changes (the effect stops shining)
             if (dim <= 0 && bright <= 0) {
               await effect.update({ "system.changes": otherChanges });
               return;
@@ -992,7 +992,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
             });
             await effect.update({
               "system.changes": [...otherChanges, ...lightChanges],
-              // Источник света светит носителю, пока эффект перенесён на владельца
+              // A light source shines for the bearer while the effect is transferred to the owner
               transfer: true,
               disabled: !(html.querySelector('[name="enabled"]')?.checked ?? true)
             });
@@ -1011,13 +1011,13 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   }
 
   /**
-   * Пересчёт цены предмета из состава (план крафта §1):
-   *   cost_price = Σ(base_price ингредиента × amount) / output_quantity
+   * Recalculating the item's price from its ingredients (crafting plan §1):
+   *   cost_price = Σ(ingredient base_price × amount) / output_quantity
    *   base_price = cost_price × (1 + markup_pct/100)
-   * Деление на output_quantity: состав задаётся на ОДИН цикл крафта, а цена —
-   * за единицу продукта (цикл может давать несколько склянок).
-   * Одноуровневый: берёт ТЕКУЩИЕ base_price ингредиентов. Каскадный пересчёт
-   * всей экономики (продукт-в-продукте) — макрос «Пересчёт экономики» (итерация 3).
+   * Division by output_quantity: the ingredients are set per ONE crafting cycle, while the price
+   * is per unit of product (a cycle can yield several vials).
+   * Single-level: takes the CURRENT base_price of the ingredients. A cascading recalculation
+   * of the whole economy (product within product) — the economy recalculation macro (iteration 3).
    */
   static async #onRecomputeCraftPrice(event, target) {
     const crafting = this.document.system.crafting;
@@ -1034,7 +1034,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     }
     cost = cost / Math.max(1, crafting.output_quantity || 1);
     cost = Math.round(cost * 100) / 100;
-    // base_price округляем до целого: у части типов (armor) поле integer
+    // base_price is rounded to an integer: for some types (armor) the field is integer
     const price = Math.round(cost * (1 + (crafting.markup_pct || 0) / 100));
     await this.document.update({
       "system.crafting.cost_price": cost,

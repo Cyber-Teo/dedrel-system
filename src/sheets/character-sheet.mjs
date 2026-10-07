@@ -9,9 +9,9 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
- * Основной класс Листа Персонажа для системы Dedrel.
- * Наследуется от нового Foundry V2 Application Framework (ActorSheetV2).
- * Обрабатывает рендеринг, логику прокачки, драг-н-дроп и клики по кнопкам.
+ * Main Character Sheet class for the Dedrel system.
+ * Inherits from the new Foundry V2 Application Framework (ActorSheetV2).
+ * Handles rendering, advancement logic, drag-and-drop and button clicks.
  */
 export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   
@@ -112,16 +112,16 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   };
 
   /**
-   * Подготовка данных для передачи в Handlebars шаблоны.
-   * Оркестратор: каждая секция контекста собирается своим #prepare*-хелпером
-   * (предметы, слоты, создание персонажа, цены прокачки, навыки, эффекты,
-   * кошелёк, перегрузка), здесь — только сборка в context.
+   * Preparing data to pass into the Handlebars templates.
+   * Orchestrator: each context section is assembled by its own #prepare* helper
+   * (items, slots, character creation, advancement prices, skills, effects,
+   * wallet, encumbrance); here they are only assembled into context.
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const actorData = this.document;
 
-    // Блокировка удаления предметов
+    // Item deletion lock
     context.itemsLocked = this.document.getFlag("dedrel", "itemsLocked") ?? true;
 
     const items = this.#prepareItems(actorData);
@@ -170,9 +170,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Категоризация предметов актёра по типам и группам для вкладок листа,
-   * плюс избранное (манёвры/заклинания и быстрые слоты) и признак хвоста.
-   * @returns {object} Пакет массивов и групп для спреда в контекст рендера.
+   * Categorizes the actor's items by type and group for the sheet tabs,
+   * plus favorites (maneuvers/spells and quick slots) and the tail flag.
+   * @returns {object} A bundle of arrays and groups to spread into the render context.
    */
   #prepareItems(actorData) {
     const maneuvers = [];
@@ -199,8 +199,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     };
     const mutilations = [];
     const inventory = [];
-    const currencyItems = []; // «Рыхлые» монеты-предметы (тип currency) для зачисления в кошелёк
-    const containers = [];    // Предметы-ссылки на акторов-контейнеры (сумки/сундуки)
+    const currencyItems = []; // "Loose" coin items (type currency) to deposit into the wallet
+    const containers = [];    // Items referencing container actors (bags/chests)
 
     const weapons = [];
     const armors = [];
@@ -214,9 +214,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     for (let i of actorData.items) {
       const isFav = i.getFlag("dedrel", "isFavorite");
 
-      // Предмет-ссылка на контейнер: любой предмет с флагом linkedActorUuid.
-      // Показывается отдельной секцией; его system.weight — вклад в перегрузку
-      // (для «сумки удержания» — фиксированный, независимо от содержимого).
+      // A container reference item: any item with the linkedActorUuid flag.
+      // Shown as a separate section; its system.weight is its contribution to encumbrance
+      // (for a "bag of holding" — fixed, regardless of contents).
       const linkedUuid = i.getFlag("dedrel", "linkedActorUuid");
       if (linkedUuid) {
         containers.push({ item: i, uuid: linkedUuid });
@@ -261,13 +261,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
            talentsGroups.other.items.push(i);
         }
       }
-      // Искажения: легаси-тип mutilation и актуальные condition-предметы из пака
-      // mutilations (врождённые недостатки, увечья биомантии) — один список.
+      // Disfigurations: the legacy mutilation type and current condition items from the
+      // mutilations pack (congenital flaws, biomancy mutilations) — one list.
       else if (i.type === 'mutilation' || i.type === 'condition') mutilations.push(i);
       else if (i.type === 'weapon') {
         weapons.push(i);
-        // Естественное оружие идёт в свой блок (выпустить/спрятать); если оно
-        // «выпущено» (equipped) — попадает и в панель быстрых атак наравне с обычным.
+        // Natural weapons go into their own block (extend/retract); if one is
+        // "extended" (equipped), it also lands in the quick attacks panel alongside regular ones.
         if (i.system.properties?.natural) naturalWeapons.push(i);
         if (i.system.equipped) equippedWeapons.push(i);
       }
@@ -277,7 +277,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         if (isFav) quickSlots.push(i);
       }
       else if (i.type === 'currency') {
-        // Монеты-предметы не идут в общий инвентарь: их зачисляют в кошелёк
+        // Coin items don't go into the general inventory: they are deposited into the wallet
         currencyItems.push(i);
       }
       else {
@@ -298,8 +298,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Резолв слотов экипировки: item_id каждого слота → живой предмет актёра
-   * (или null, если слот пуст либо ссылка мёртвая).
+   * Resolving equipment slots: each slot's item_id → a live item of the actor
+   * (or null if the slot is empty or the reference is dead).
    */
   #prepareEquipmentSlots(actorData) {
     const slotItem = (key) => {
@@ -317,8 +317,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Данные режима создания персонажа: потраченные очки родословных/атрибутов/
-   * навыков/мутаций и проверка превышения капов создания.
+   * Character creation mode data: points spent on bloodlines/attributes/
+   * skills/mutations and the check for exceeding the creation caps.
    */
   #prepareCreationData(actorData, mutations, mutilations = []) {
     const creationData = {
@@ -360,8 +360,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    // Врождённые недостатки — condition-предметы из пака mutilations с флагом
-    // innate (3. Harmful Mutations: каталог задаёт искажение, источник — срок).
+    // Congenital flaws are condition items from the mutilations pack with the
+    // innate flag (3. Harmful Mutations: the catalog sets the disfiguration, the source sets the term).
     for (let c of mutilations) {
       if (c.getFlag("dedrel", "innate")) {
         creationData.startingHarmfulMutations.push(c);
@@ -372,9 +372,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     creationData.mutationsMax += Math.min(creationData.harmfulMutationsCount, 2);
 
     // Check for attributes over cap during creation.
-    // ВАЖНО: не мутируем живую системную модель (actorData.system.*), а формируем
-    // отдельные объекты для контекста рендера. Иначе флаги isOverCap попадают
-    // в подготовленные данные актёра и могут «протечь» в другие места.
+    // IMPORTANT: we don't mutate the live system model (actorData.system.*), but build
+    // separate objects for the render context. Otherwise the isOverCap flags end up
+    // in the actor's prepared data and can "leak" elsewhere.
     let hasOverCapAttributes = false;
     let hasOverCapSkills = false;
     const creationAttributes = {};
@@ -400,8 +400,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Цены прокачки за опыт: атрибуты (со скидками от родословных), навыки
-   * и доктрины Магического Конструктора.
+   * XP advancement prices: attributes (with bloodline discounts), skills
+   * and Spell Constructor doctrines.
    */
   #prepareXpData(actorData) {
     const xpData = {
@@ -467,10 +467,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    // Прокачка Доктрин (Магический Конструктор): показываем только разблокированные
-    // талантами доктрины (unlocked через AE), сгруппированные по группам из конфига.
-    // Цена считается от ПРОИЗВОДНОГО ранга (source + эффекты талантов), т.к. таланты
-    // доступа обычно дарят ранг 1; покупка же пишет +1 в source (см. #onUpgradeDoctrine).
+    // Doctrine Upgrade (Spell Constructor): we show only doctrines unlocked
+    // by talents (unlocked via AE), grouped by the groups from the config.
+    // The price is computed from the DERIVED rank (source + talent effects), since access
+    // talents usually grant rank 1; a purchase, however, writes +1 into source (see #onUpgradeDoctrine).
     xpData.doctrineGroups = [];
     const magicCfg = CONFIG.DEDREL?.magic;
     if (magicCfg && actorData.system.doctrines) {
@@ -502,8 +502,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Изученные Пути доктрин (куплены талантами) — плашка на вкладке Заклинания.
-   * Переключаемой "стойки" больше нет: путь выбирается в сборке Конструктора.
+   * Learned doctrine Paths (purchased via talents) — a badge on the Spells tab.
+   * The switchable "stance" is gone: the path is chosen in the Constructor build.
    */
   #prepareDoctrinePaths(actorData) {
     const doctrinePaths = [];
@@ -529,8 +529,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Группировка навыков по категориям и сборка избранных.
-   * Навыки в DataModel хранятся плоским списком, но в UI разбиты по категориям.
+   * Grouping skills by category and assembling the favorites.
+   * Skills are stored in the DataModel as a flat list, but split into categories in the UI.
    */
   #prepareSkillGroups(actorData) {
     const skillCategories = {
@@ -546,7 +546,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     if (actorData.system.skills) {
       for (const [key, skillData] of Object.entries(actorData.system.skills)) {
-        // Определяем категорию навыка для правильного отображения в UI
+        // Determine the skill's category for correct display in the UI
         let category = "combat";
         if (skillCategories.intellectual.includes(key)) category = "intellectual";
         else if (skillCategories.practical.includes(key)) category = "practical";
@@ -565,8 +565,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Эффекты для вкладки «Статусы»: собственные эффекты актёра (временные)
-   * и эффекты с предметов (постоянные), с подбором иконки для отображения.
+   * Effects for the Statuses tab: the actor's own effects (temporary)
+   * and effects from items (permanent), with an icon picked for display.
    */
   #prepareEffects(actorData) {
     const permanentEffects = [];
@@ -596,8 +596,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Копия атрибутов с итоговым спасброском (ранг + бонус атрибута + глобальный
-   * бонус). Копия — чтобы не мутировать живую системную модель.
+   * A copy of the attributes with the final saving throw (rank + attribute bonus + global
+   * bonus). A copy — so as not to mutate the live system model.
    */
   #prepareAttributesData(actorData) {
     const attributesData = foundry.utils.deepClone(actorData.system.attributes);
@@ -609,8 +609,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Кошелёк (мультивалютность): список валют — из настройки мира,
-   * счётчики — из system.currency актора.
+   * Wallet (multi-currency): the currency list comes from the world setting,
+   * the counters from the actor's system.currency.
    */
   #prepareWallet(actorData) {
     const walletCurrencies = [];
@@ -624,14 +624,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         walletTotal += count * (Number(def.base_value) || 0);
       }
     } catch (e) {
-      // Настройка валют недоступна
+      // The currency setting is unavailable
     }
     return { walletCurrencies, walletTotal };
   }
 
   /**
-   * Перегрузка для индикатора-бара: процент заполнения до порога «тяжело»,
-   * цвет и локализованная подпись категории.
+   * Encumbrance for the indicator bar: fill percentage up to the "heavy" threshold,
+   * color and the localized category label.
    */
   #prepareEncumbrance(actorData) {
     const enc = actorData.system.resources?.encumbrance;
@@ -667,7 +667,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       el.addEventListener("dragstart", this.#onDragStart.bind(this));
     }
 
-    // Подсветка слотов экипировки при перетаскивании (сам дроп обрабатывает _onDrop)
+    // Highlighting equipment slots while dragging (the drop itself is handled by _onDrop)
     for (const slot of this.element.querySelectorAll(".equip-slot")) {
       slot.addEventListener("dragover", (ev) => { ev.preventDefault(); slot.classList.add("drag-over"); });
       slot.addEventListener("dragleave", () => slot.classList.remove("drag-over"));
@@ -743,14 +743,14 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Проверка свойства «Только поверх лёгкого» (12. Armor §Свойства).
-   * Такой доспех не уживается в стеке ни с чем тяжелее лёгкого, и правило
-   * работает в ОБЕ стороны: мантию не надеть поверх кольчуги, кольчугу не
-   * надеть под уже надетой мантией — иначе запрет обходился бы порядком надевания.
+   * Check for the "Light only" property (12. Armor §Properties).
+   * Such armor doesn't share the stack with anything heavier than light, and the rule
+   * works in BOTH directions: a mantle can't go over chainmail, chainmail can't
+   * go under a mantle already worn — otherwise the ban could be bypassed by the order of putting things on.
    *
-   * @param {Item} item          надеваемый доспех
-   * @param {string} targetSlot  слот назначения ("armor_upper" и т.п.) — он не мешает сам себе
-   * @returns {string|null}      готовый текст отказа либо null, если надеть можно
+   * @param {Item} item          the armor being put on
+   * @param {string} targetSlot  the target slot ("armor_upper", etc.) — it doesn't get in its own way
+   * @returns {string|null}      a ready refusal text, or null if it can be worn
    */
   #checkLightLayers(item, targetSlot) {
     const incomingLightOnly = !!item.system.properties?.light_layers_only;
@@ -761,7 +761,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
       if (s === targetSlot) continue;
       const cid = slots[s]?.item_id;
-      // Универсальный доспех может уже лежать в другом слое — сам себе не помеха.
+      // Universal armor may already sit in another layer — it doesn't get in its own way.
       if (!cid || cid === item.id) continue;
       const worn = this.document.items.get(cid);
       if (!worn) continue;
@@ -793,13 +793,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
     const equipment_slots = this.document.system.equipment_slots;
     
-    // Если это эксклюзивная броня, нужно снять всё остальное
+    // If this is exclusive armor, everything else has to come off
     const isExclusive = item.system.properties?.exclusive_slot;
     const updates = {};
     
-    // Пытаемся найти первый свободный слот
+    // Try to find the first free slot
     let targetSlot = allowedSlots.find(s => !equipment_slots[s]?.item_id);
-    if (!targetSlot) targetSlot = allowedSlots[0]; // Если всё занято, заменяем первый доступный
+    if (!targetSlot) targetSlot = allowedSlots[0]; // If everything is occupied, replace the first available one
 
     if (isExclusive) {
       updates["system.equipment_slots.armor_upper.item_id"] = "";
@@ -808,7 +808,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       updates[`system.equipment_slots.${targetSlot}.item_id`] = item.id;
       ui.notifications.info(game.i18n.format("DEDREL.Notifications.ExclusiveArmorEquipped", {name: item.name}));
     } else {
-      // Проверяем, нет ли уже надетой эксклюзивной брони
+      // Check whether exclusive armor is already worn
       let hasExclusive = false;
       for (const s of ['armor_upper', 'armor_middle', 'armor_lower']) {
         const currentId = equipment_slots[s]?.item_id;
@@ -841,8 +841,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   static async #onEquipWeapon(event, target) {
-    // Кнопка живёт либо в строке инвентаря (.item-row), либо в блоке
-    // естественного оружия (data-item-id прямо на кнопке «Выпустить»).
+    // The button lives either in an inventory row (.item-row) or in the
+    // natural weapons block (data-item-id right on the Extend button).
     const itemId = target.closest(".item-row")?.dataset.itemId || target.dataset.itemId;
     const item = this.document.items.get(itemId);
     if (!item || item.type !== "weapon") return;
@@ -851,24 +851,24 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WeaponAlreadyEquipped"));
     }
 
-    // Естественное оружие (когти/укус с мутации): «экипировано», но НЕ занимает
-    // слот руки — руки остаются свободны. Живёт в отдельном блоке листа, а вся
-    // слотовая логика (хват, Блок от щита) читает слоты рук и его не видит.
+    // A natural weapon (claws/bite from a mutation): "equipped" but does NOT occupy
+    // a hand slot — the hands stay free. It lives in a separate sheet block, and all
+    // the slot logic (grip, Block from a shield) reads the hand slots and doesn't see it.
     if (item.system.properties?.natural) {
       await item.update({ "system.equipped": true });
       return;
     }
 
     const equipment_slots = this.document.system.equipment_slots;
-    // Слот занят только если его item_id резолвится в СУЩЕСТВУЮЩИЙ предмет.
-    // Мёртвая ссылка (id удалённого оружия) в UI рисуется пустым слотом
-    // (slotItem() → null), поэтому проверка по сырой строке ложно блокировала
-    // экипировку («нужны обе руки», хотя руки визуально свободны).
+    // A slot is occupied only if its item_id resolves to an EXISTING item.
+    // A dead reference (the id of a deleted weapon) is drawn as an empty slot in the UI
+    // (slotItem() → null), so a check on the raw string falsely blocked
+    // equipping ("needs both hands" while the hands are visibly free).
     const slotFree = (key) => {
       const id = equipment_slots[key]?.item_id;
       return !id || !this.document.items.get(id);
     };
-    // Парное (is_paired) занимает обе руки так же, как двуручное
+    // Paired (is_paired) occupies both hands just like two-handed
     const isTwoHanded = item.system.is_twohanded || item.system.is_paired;
     const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
 
@@ -900,8 +900,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   static async #onUnequipWeapon(event, target) {
-    // Естественное оружие не лежит в слоте руки — «спрятать» = снять флаг equipped
-    // по item-id прямо из его блока на листе (data-item-id, без data-slot).
+    // A natural weapon doesn't sit in a hand slot — "retract" = clear the equipped flag
+    // by item-id right from its block on the sheet (data-item-id, without data-slot).
     if (target.dataset.itemId && !target.dataset.slot) {
       const natural = this.document.items.get(target.dataset.itemId);
       if (natural) await natural.update({ "system.equipped": false });
@@ -930,12 +930,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Зачисляет монеты в кошелёк актора: прибавляет value к счётчику валюты
-   * с ключом denomination. Возвращает true, если валюта известна миру.
+   * Deposits coins into the actor's wallet: adds value to the counter of the currency
+   * with key denomination. Returns true if the currency is known to the world.
    */
   static async depositToWallet(actor, denomination, value) {
     const v = Number(value);
-    if (!denomination || !(v > 0)) return false; // только положительное зачисление
+    if (!denomination || !(v > 0)) return false; // only a positive deposit
     let defs = [];
     try { defs = DedrelCurrency.defs(); } catch (e) {}
     if (!defs.some(d => d.key === denomination)) return false;
@@ -944,7 +944,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return true;
   }
 
-  /** Зачисляет «рыхлую» монету-предмет в кошелёк и удаляет предмет. */
+  /** Deposits a "loose" coin item into the wallet and deletes the item. */
   static async #onDepositCurrency(event, target) {
     const itemId = target.closest(".item-row")?.dataset.itemId;
     const item = itemId ? this.document.items.get(itemId) : null;
@@ -960,10 +960,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * «Свернуть номинал»: перераспределяет весь кошелёк по деноминациям сверху вниз
-   * (жадный алгоритм по base_value), минимизируя число монет. Общая ценность не
-   * меняется при наличии базовой валюты (base_value = 1); иначе возможен остаток,
-   * который остаётся в наименьшей деноминации.
+   * "Collapse": redistributes the whole wallet across denominations from the top down
+   * (greedy algorithm by base_value), minimizing the number of coins. The total value doesn't
+   * change if a base currency exists (base_value = 1); otherwise a remainder is possible,
+   * which stays in the smallest denomination.
    */
   static async #onCollapseCurrency(event, target) {
     let defs = [];
@@ -980,7 +980,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     valued.forEach((d, idx) => {
       const bv = Number(d.base_value);
       if (idx === valued.length - 1) {
-        // Наименьшая деноминация забирает остаток целиком (сохранение ценности)
+        // The smallest denomination takes the whole remainder (preserving value)
         update[`system.currency.${d.key}`] = Math.round(remainder / bv);
       } else {
         const n = Math.floor(remainder / bv);
@@ -993,10 +993,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Перевод денег другому актору. Открывает диалог выбора получателя и сумм
-   * по валютам; исполнение — через DedrelSocket (напрямую, если хватает прав,
-   * иначе через активного ГМа). Позволяет игрокам расплачиваться, не владея
-   * кошельком получателя.
+   * Transferring money to another actor. Opens a dialog for choosing the recipient and the amounts
+   * per currency; execution goes through DedrelSocket (directly if permissions suffice,
+   * otherwise through the active GM). Lets players pay without owning
+   * the recipient's wallet.
    */
   static async #onPayCurrency(event, target) {
     const actor = this.document;
@@ -1004,8 +1004,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     try { defs = DedrelCurrency.defs(); } catch (e) {}
     if (!defs.length) return ui.notifications.warn(game.i18n.localize("DEDREL.ActorSheet.NoCurrenciesConfigured"));
 
-    // Получатели: другие акторы с кошельком, которым разрешён приём денег
-    // (флаг can_receive_currency) — чтобы список не забивался сундуками/лутом.
+    // Recipients: other actors with a wallet that are allowed to receive money
+    // (the can_receive_currency flag) — so the list doesn't get clogged with chests/loot.
     const targets = game.actors.filter(a =>
       a.id !== actor.id && a.system?.currency !== undefined && a.system?.can_receive_currency);
     if (!targets.length) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoTransferTargets"));
@@ -1055,7 +1055,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     });
   }
 
-  /** Открывает лист привязанного актора-контейнера (сумки/сундука). */
+  /** Opens the sheet of the linked container actor (bag/chest). */
   static async #onOpenContainer(event, target) {
     const uuid = target.closest("[data-container-uuid]")?.dataset.containerUuid;
     const actor = uuid ? await fromUuid(uuid) : null;
@@ -1063,7 +1063,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     else ui.notifications.warn(game.i18n.localize("DEDREL.Container.NotFound"));
   }
 
-  /** Создаёт новый актор-контейнер и предмет-ссылку на него на этом персонаже. */
+  /** Creates a new container actor and a reference item to it on this character. */
   static async #onCreateContainer(event, target) {
     if (!Actor.canUserCreate(game.user)) {
       return ui.notifications.warn(game.i18n.localize("DEDREL.Container.CannotCreate"));
@@ -1076,7 +1076,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (containerActor) await this._linkContainer(containerActor);
   }
 
-  /** Отвязывает контейнер: удаляет только предмет-ссылку, актор-контейнер остаётся. */
+  /** Unlinks a container: deletes only the reference item, the container actor remains. */
   static async #onUnlinkContainer(event, target) {
     const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     const item = itemId ? this.document.items.get(itemId) : null;
@@ -1089,7 +1089,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     if (confirm) await item.delete();
   }
 
-  /** Создаёт на персонаже предмет-ссылку (тип loot) на актор-контейнер. */
+  /** Creates a reference item (type loot) to a container actor on the character. */
   async _linkContainer(containerActor) {
     const itemData = {
       name: containerActor.name,
@@ -1102,7 +1102,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     ui.notifications.info(game.i18n.format("DEDREL.Container.Linked", { name: containerActor.name }));
   }
 
-  /** Экипирует предмет в КОНКРЕТНЫЙ слот (drag-n-drop в слот экипировки). */
+  /** Equips an item into a SPECIFIC slot (drag-n-drop onto an equipment slot). */
   async #equipToSlot(item, slotKey, kind, accept) {
     if (kind === "accessory") return this.#equipAccessoryToSlot(item, slotKey, accept);
     if (kind === "weapon" && item.type === "weapon") return this.#equipWeaponToSlot(item, slotKey);
@@ -1110,13 +1110,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongSlotKind"));
   }
 
-  /** Экипирует аксессуар (по совпадению system.equip_slot с типом слота). */
+  /** Equips an accessory (by matching system.equip_slot against the slot type). */
   async #equipAccessoryToSlot(item, slotKey, accept) {
     const es = item.system.equip_slot;
     if (!es || es !== accept) {
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongSlotKind"));
     }
-    // Слот хвоста требует соответствующую мутацию
+    // The tail slot requires the corresponding mutation
     if (slotKey === "acc_tail") {
       const hasTail = this.document.items.some(i => i.type === "mutation" && i.system.key && i.system.key.includes("tail"));
       if (!hasTail) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.TailSlotLocked"));
@@ -1124,7 +1124,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const ACC = ["head", "neck", "torso", "acc_left_1", "acc_left_2", "acc_right_1", "acc_right_2", "acc_tail"];
     const slots = this.document.system.equipment_slots;
     const updates = {};
-    // Снимаем предмет из других аксессуарных слотов, если он там уже стоит
+    // Remove the item from other accessory slots if it is already there
     for (const s of ACC) {
       if (s !== slotKey && slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
     }
@@ -1133,8 +1133,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   async #equipWeaponToSlot(item, slotKey) {
-    // Естественное оружие руку не занимает даже при перетаскивании на слот —
-    // просто помечаем экипированным (появится в своём блоке).
+    // A natural weapon doesn't occupy a hand even when dragged onto a slot —
+    // we just mark it equipped (it will appear in its own block).
     if (item.system.properties?.natural) {
       return item.update({ "system.equipped": true });
     }
@@ -1145,13 +1145,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     }
 
     const updates = {};
-    // Освобождаем слоты, где этот предмет уже стоит
+    // Free the slots where this item already sits
     for (const s of ["main_hand", "off_hand", "tail"]) {
       if (slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
     }
 
     if (item.system.is_twohanded || item.system.is_paired) {
-      // Двуручное/парное занимает обе руки — снимаем текущих владельцев main/off
+      // Two-handed/paired occupies both hands — remove the current main/off occupants
       for (const s of ["main_hand", "off_hand"]) {
         const cid = slots[s]?.item_id;
         if (cid && cid !== item.id) {
@@ -1162,7 +1162,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       updates["system.equipment_slots.main_hand.item_id"] = item.id;
       updates["system.equipment_slots.off_hand.item_id"] = item.id;
     } else {
-      // Снимаем то, что было в целевом слоте (если 2H/парное — освобождаем оба)
+      // Remove whatever was in the target slot (if 2H/paired — free both)
       const cid = slots[slotKey]?.item_id;
       if (cid && cid !== item.id) {
         const cur = this.document.items.get(cid);
@@ -1180,7 +1180,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   async #equipArmorToSlot(item, slotKey) {
-    // Броня-аксессуар (шлем и т.п.) не идёт в слои тела — только в свой слот аксессуара
+    // Accessory armor (a helmet, etc.) doesn't go into the body layers — only into its accessory slot
     if (item.system.equip_slot) {
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.WrongArmorSlot"));
     }
@@ -1188,8 +1188,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       lower: ["armor_lower"],
       middle: ["armor_middle"],
       upper: ["armor_upper"],
-      // Универсальный = Нижний ИЛИ Средний (12. Armor §Универсальные доспехи);
-      // верхний слот сюда не входит — ср. slotOptions в #onEquipArmor.
+      // Universal = Lower OR Middle (12. Armor §Universal armor);
+      // the upper slot isn't included — cf. slotOptions in #onEquipArmor.
       universal: ["armor_lower", "armor_middle"]
     };
     const allowed = allowedMap[item.system.slot] || [];
@@ -1207,7 +1207,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       updates["system.equipment_slots.armor_lower.item_id"] = "";
       updates[`system.equipment_slots.${slotKey}.item_id`] = item.id;
     } else {
-      // Нельзя надеть поверх эксклюзивной брони
+      // Can't be worn over exclusive armor
       for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
         const cid = slots[s]?.item_id;
         if (cid) {
@@ -1220,7 +1220,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       const lightLayersError = this.#checkLightLayers(item, slotKey);
       if (lightLayersError) return ui.notifications.warn(lightLayersError);
 
-      // Снимаем предмет из других слотов, если он уже надет
+      // Remove the item from other slots if it is already worn
       for (const s of ["armor_upper", "armor_middle", "armor_lower"]) {
         if (s !== slotKey && slots[s]?.item_id === item.id) updates[`system.equipment_slots.${s}.item_id`] = "";
       }
@@ -1230,7 +1230,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     await this.document.update(updates);
   }
 
-  /** Снимает предмет из произвольного слота экипировки (аксессуары). */
+  /** Removes an item from an arbitrary equipment slot (accessories). */
   static async #onUnequipSlot(event, target) {
     const slot = target.dataset.slot;
     if (slot) await this.document.update({ [`system.equipment_slots.${slot}.item_id`]: "" });
@@ -1255,7 +1255,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   static async #onCreateItem(event, target) {
     const type = target.dataset.type;
     const itemData = {
-      // Локализованное имя типа из TYPES.Item.<type> (те же ключи, что в диалоге создания)
+      // Localized type name from TYPES.Item.<type> (the same keys as in the creation dialog)
       name: game.i18n.format("DEDREL.Notifications.NewItemName", {
         type: game.i18n.localize(`TYPES.Item.${type}`)
       }),
@@ -1366,8 +1366,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
 
 
   static async performRest(actor, restType, { advanceTime = true, notify = true } = {}) {
-    // advanceTime: false — время уже сдвинуто снаружи (групповой отдых из TimeHUD),
-    // иначе каждый актёр группы двигал бы мировое время повторно.
+    // advanceTime: false — time has already been advanced outside (a group rest from TimeHUD),
+    // otherwise each actor of the group would advance world time again.
     if (advanceTime) {
       if (game.user.isGM) {
         await game.time.advance(restType === "long" ? 28800 : 3600);
@@ -1378,13 +1378,13 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     
     const updateData = {};
     const res = actor.system.resources;
-    // По правилам отдых ОД не восстанавливает (они и так откатываются каждый раунд).
-    // Сброс оставлен намеренно — для тестирования манёвров вне боя: важно видеть,
-    // сколько ОД что стоит, проверять комбо-цепочки и т.д.
+    // By the rules a rest doesn't restore AP (they reset every round anyway).
+    // The reset is kept deliberately — for testing maneuvers outside combat: it's important to see
+    // how much AP things cost, to check combo chains, etc.
     if (res.ap_universal) updateData["system.resources.ap_universal.value"] = res.ap_universal.max;
     if (res.ap_magic) updateData["system.resources.ap_magic.value"] = res.ap_magic.max;
     if (res.ap_maneuver) updateData["system.resources.ap_maneuver.value"] = res.ap_maneuver.max;
-    // Временные хиты сгорают на любом отдыхе (правила: "9. Combat and Damage" §4)
+    // Temporary HP burns off on any rest (rules: "9. Combat and Damage" §4)
     if (res.hp?.temp) updateData["system.resources.hp.temp"] = 0;
     
     await actor.update(updateData);
@@ -1552,7 +1552,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
 
-  /** Снимает флаг эфемерности — временное заклинание становится постоянным. */
+  /** Clears the ephemeral flag — the temporary spell becomes permanent. */
   static async #onPinSpell(event, target) {
     const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     const item = itemId ? this.document.items.get(itemId) : null;
@@ -1572,8 +1572,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.DoctrineLocked"));
     }
 
-    // Производный ранг (source + подаренный талантом) определяет цену шага,
-    // но +1 пишем в SOURCE: иначе повторно запечём бонус эффекта в базу.
+    // The derived rank (source + granted by a talent) determines the step price,
+    // but +1 is written into SOURCE: otherwise we would bake the effect's bonus into the base again.
     const derivedRank = doctrine.rank || 0;
     if (derivedRank >= 6) {
       return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughXPOrMaxRank"));
@@ -1643,12 +1643,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Обработчик создания документа после его дропа на лист.
-   * Используется для специальной логики предметов (например, EXP).
+   * Handler for creating a document after it is dropped onto the sheet.
+   * Used for special item logic (e.g. EXP).
    */
   async _onDropItemCreate(itemData) {
-    // Если игрок бросает на лист предмет "Опыт", мы не создаем предмет,
-    // а просто начислям опыт персонажу.
+    // If the player drops an "Experience" item onto the sheet, we don't create an item
+    // but simply award the XP to the character.
     if (itemData.type === "exp") {
       const expValue = itemData.system.value || 0;
       const currentExp = this.document.system.details.xp || 0;
@@ -1677,12 +1677,12 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     return super._onDropItemCreate(itemData);
   }
 
-  /** Списанный опыт последней покупки — переносится в блок создания мутации. */
+  /** XP spent on the last purchase — carried over into the mutation creation block. */
   #pendingXpPaid = 0;
 
   /**
-   * Сколько врождённых недостатков уже взято: и легаси-мутации
-   * (mutation_type harmful), и искажения-состояния с флагом innate.
+   * How many congenital flaws are already taken: both legacy mutations
+   * (mutation_type harmful) and disfiguration conditions with the innate flag.
    */
   #countHarmfulStarting() {
     let count = 0;
@@ -1694,9 +1694,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
   }
 
   /**
-   * Кастомная обработка Drag & Drop (V2).
-   * Позволяет отслеживать, в какую именно зону был брошен предмет 
-   * (например, стартовые мутации при создании персонажа).
+   * Custom Drag & Drop handling (V2).
+   * Lets us track exactly which zone the item was dropped into 
+   * (e.g. starting mutations during character creation).
    */
   async _onDrop(event) {
     let data;
@@ -1705,7 +1705,7 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     } catch(err) {
       return super._onDrop(event);
     }
-    // Дроп актора-контейнера (тип loot) → создаём предмет-ссылку в инвентаре.
+    // Dropping a container actor (type loot) → create a reference item in the inventory.
     if (data.type === "Actor") {
       const droppedActor = await Actor.implementation.fromDropData(data);
       if (droppedActor && droppedActor.type === "loot") {
@@ -1720,9 +1720,9 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
     const item = await Item.implementation.fromDropData(data);
     if (!item) return super._onDrop(event);
 
-    // Экипировка перетаскиванием: дроп оружия/брони на конкретный слот.
-    // Работает для предметов, уже принадлежащих этому актору; внешние предметы
-    // сначала падают в инвентарь (стандартное поведение), затем их можно надеть.
+    // Equipping by dragging: dropping a weapon/armor onto a specific slot.
+    // Works for items already owned by this actor; external items
+    // first land in the inventory (standard behavior), then they can be equipped.
     const slotEl = event.target?.closest?.(".equip-slot");
     if (slotEl) {
       const ownItem = this.document.items.get(item.id);
@@ -1736,8 +1736,8 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       return this._onDropItemCreate(item.toObject());
     }
 
-    // Монеты, брошенные на лист: зачисляем в кошелёк, если валюта известна миру.
-    // Иначе (неизвестная деноминация) — падаем в обычное создание предмета.
+    // Coins dropped onto the sheet: deposit them into the wallet if the currency is known to the world.
+    // Otherwise (an unknown denomination) — fall back to regular item creation.
     if (item.type === "currency") {
       const ok = await DedrelCharacterSheet.depositToWallet(this.document, item.system.denomination, item.system.value);
       if (ok) {
@@ -1748,15 +1748,15 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
       }
     }
 
-    // Проверка пререквизитов при добавлении таланта/мутации/манёвра извне.
-    // Манёвры тоже гейтятся: есть базовые манёвры с требованиями рангов навыков
-    // («Выстрел с упора», «Добивание»). Невыполненные требования не блокируют
-    // жёстко: Мастер подтверждает через диалог.
+    // Prerequisite check when adding a talent/mutation/maneuver from outside.
+    // Maneuvers are gated too: there are basic maneuvers with skill rank requirements
+    // (Braced Shot, Finishing Blow). Unmet requirements don't block
+    // hard: the GM confirms through a dialog.
     if (["talent", "mutation", "maneuver"].includes(item.type) && !this.document.items.get(item.id)) {
-      // Покупка за опыт (10. Progression): талант и мутация стоят свой xp_cost.
-      // Не тратят опыт: стартовые мутации (оплачиваются очками создания в зоне ниже),
-      // манёвры (приходят талантами) и любые способности NPC — у типа npc нет
-      // details.xp, его лист наполняет ГМ вручную.
+      // Purchase with XP (10. Progression): a talent and a mutation cost their xp_cost.
+      // These don't spend XP: starting mutations (paid with creation points in the zone below),
+      // maneuvers (they come with talents) and any NPC abilities — the npc type has no
+      // details.xp, the GM fills its sheet by hand.
       const inCreationZone = !!event.target?.closest?.(".drop-zone");
       const costsXp = this.document.type === "character"
         && (item.type === "talent" || (item.type === "mutation" && !inCreationZone));
@@ -1777,25 +1777,25 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
           name: item.name, cost: xpCost
         }));
       }
-      // ВАЖНО: confirmPrerequisites делает await (диалог). event.dataTransfer живёт
-      // только во время синхронной обработки drop — после await он протухает, и
-      // super._onDrop (который читает его повторно) молча ничего не создаёт.
-      // Талант/манёвр поэтому создаём напрямую из уже разрешённого item.
-      // Мутация идёт дальше — у неё своя логика стартовых зон ниже.
+      // IMPORTANT: confirmPrerequisites does an await (dialog). event.dataTransfer lives
+      // only during synchronous drop handling — after the await it goes stale, and
+      // super._onDrop (which reads it again) silently creates nothing.
+      // So a talent/maneuver is created directly from the already resolved item.
+      // A mutation goes further — it has its own starting zone logic below.
       if (item.type !== "mutation") {
         const bought = item.toObject();
-        // Сколько опыта реально списано — запоминаем на предмете: при удалении
-        // актёр вернёт ровно эту сумму (DedrelActor#refundXpForDeletedItems).
+        // How much XP was actually spent — remember it on the item: on deletion
+        // the actor will refund exactly this amount (DedrelActor#refundXpForDeletedItems).
         if (xpCost > 0) foundry.utils.setProperty(bought, "flags.dedrel.xpPaid", xpCost);
         return this.document.createEmbeddedDocuments("Item", [bought]);
       }
       if (xpCost > 0) this.#pendingXpPaid = xpCost;
     }
 
-    // Врождённый недостаток: искажение из пака mutilations, брошенное в зону
-    // вредных мутаций. Каталог искажений общий с увечьями биомантии, поэтому
-    // сущность не дублируется — источник задаёт срок (3. Harmful Mutations):
-    // из зоны создания состояние ложится постоянным и с флагом innate.
+    // Congenital flaw: a disfiguration from the mutilations pack dropped into the
+    // harmful mutations zone. The disfiguration catalog is shared with biomancy mutilations, so
+    // the entity isn't duplicated — the source sets the term (3. Harmful Mutations):
+    // from the creation zone the condition is applied as permanent and with the innate flag.
     if (item.type === "condition") {
       const zone = event.target.closest(".drop-zone");
       if (zone?.dataset.dropType === "mutation-harmful") {
@@ -1851,10 +1851,10 @@ export default class DedrelCharacterSheet extends HandlebarsApplicationMixin(Act
         
         return this.document.createEmbeddedDocuments("Item", [itemObj]);
       }
-      // Внешняя мутация вне стартовой зоны (приобретена после создания): создаём
-      // напрямую — super._onDrop полагался бы на протухший после await dataTransfer.
-      // Уже принадлежащую актору мутацию (пересортировка, await не было) отдаём
-      // стандартному super._onDrop ниже, чтобы не создать дубликат.
+      // An external mutation outside the starting zone (acquired after creation): created
+      // directly — super._onDrop would rely on the dataTransfer gone stale after the await.
+      // A mutation already owned by the actor (re-sorting, there was no await) is handed to
+      // the standard super._onDrop below, so as not to create a duplicate.
       if (!this.document.items.get(item.id)) {
         const bought = item.toObject();
         if (this.#pendingXpPaid > 0) {
