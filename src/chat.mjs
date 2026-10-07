@@ -6,8 +6,8 @@ import { stepFormula, formulaAverage } from "./utils/dice-ladder.mjs";
 import { heldTwoHanded } from "./utils/grip.mjs";
 
 /**
- * Хук "renderChatMessageHTML" вызывается при рендеринге сообщения в чат.
- * Обрабатывает клики по интерактивным кнопкам в чате (например, бросок урона или атаки).
+ * The "renderChatMessageHTML" hook is called when a message is rendered in chat.
+ * Handles clicks on interactive buttons in chat (e.g. a damage or attack roll).
  */
 Hooks.on("renderChatMessageHTML", (message, html, data) => {
   html.addEventListener("click", async (event) => {
@@ -25,13 +25,13 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     const item = itemId ? actor.items.get(itemId) : null;
     const weapon = weaponId ? actor.items.get(weaponId) : null;
     
-    // Бросок атаки
+    // Attack roll
     if (action === "rollAttack") {
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       let baseRank = 0;
       let title = game.i18n.format("DEDREL.Chat.AttackCardTitle", {name: item.name});
       
-      // Определяем навык: сначала ищем у самого манёвра/предмета, если нет - у оружия
+      // Determine the skill: first look at the maneuver/item itself, if not there — at the weapon
       let skillKey = item.system.skill;
       if (!skillKey && weapon && weapon.system.skill) {
         skillKey = weapon.system.skill;
@@ -51,26 +51,26 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         baseRank: baseRank,
         itemId: item?.id,
         isSave: false,
-        // Передаём навык, чтобы к атаке применялся его bonus (system.skills.<key>.bonus).
-        // Это un-clamped канал модификатора — в отличие от rank (min: 0), он может
-        // уводить бросок в минус (нужно для штрафов вроде «Ослепления»).
+        // Pass the skill so that its bonus (system.skills.<key>.bonus) applies to the attack.
+        // This is an un-clamped modifier channel — unlike rank (min: 0), it can
+        // push the roll below zero (needed for penalties such as Blinded).
         skillId: skillKey,
-        // Оружие нужно броску для осечек пороха (натуральная 1 + редкость оружия)
+        // The roll needs the weapon for powder misfires (natural 1 + the weapon's rarity)
         weaponId: weapon?.id
       });
     }
     
-    // Бросок урона
+    // Damage roll
     if (action === "rollDamage") {
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       let formula = item.system.formula_damage;
       let drKey = "";
       const dmgOrder = ["piercing", "bludgeoning", "slashing"];
 
-      // Среди типов-кандидатов, которыми РЕАЛЬНО обладает оружие, выбираем тот,
-      // чья формула урона больше по среднему (Лестница урона) — чтобы, например,
-      // Добивание мечом било сильным рубящим (2d6), а не слабым колющим (1d6).
-      // Ничья (равные средние) — по приоритету dmgOrder.
+      // Among the candidate types the weapon ACTUALLY has, pick the one
+      // whose damage formula is larger on average (Damage Ladder) — so that, e.g.,
+      // a Finishing Blow with a sword strikes with the strong slashing (2d6) rather than the weak piercing (1d6).
+      // A tie (equal averages) — by the dmgOrder priority.
       const bestDamageType = (candidates) => {
         const perType = weapon?.system?.damage_formulas || {};
         const base = weapon?.system?.damage_formula || "";
@@ -83,8 +83,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         return best;
       };
 
-      // Тип урона из требований манёвра. Если манёвр допускает несколько типов,
-      // берём тот, что оружие реально имеет И который бьёт сильнее.
+      // Damage type from the maneuver's requirements. If the maneuver allows several types,
+      // take the one the weapon actually has AND that hits harder.
       if (item.type === "maneuver" && item.system.req_weapon_damage_type) {
         const reqDmg = item.system.req_weapon_damage_type;
         const wDmg = weapon?.system?.damage_type || {};
@@ -92,8 +92,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         drKey = bestDamageType(shared) || dmgOrder.find(k => reqDmg[k]) || "";
       }
 
-      // Если у манёвра нет своей формулы, берём формулу и тип урона от оружия:
-      // сначала формула конкретного типа (damage_formulas), потом базовая.
+      // If the maneuver has no formula of its own, take the weapon's formula and damage type:
+      // first the formula of the specific type (damage_formulas), then the base one.
       if (!formula && weapon) {
         if (!drKey) {
           const wDmg = weapon.system.damage_type || {};
@@ -105,11 +105,11 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NoDamageFormula"));
       
-      // DSL-модификаторы урона (flags.dedrel.mod), например "damage:1d6; filter:melee".
+      // Damage DSL modifiers (flags.dedrel.mod), e.g. "damage:1d6; filter:melee".
       const damageMods = DedrelBonuses.collect(actor, item);
 
-      // Двуручный хват (кнопка «Урон (двуручный хват)» у вариативного оружия):
-      // +1 ступень Лестницы. Свободна ли вторая рука — проверяем в момент клика.
+      // Two-handed grip (the "Damage (Two-Handed Grip)" button on a variable-grip weapon):
+      // +1 Ladder step. Whether the second hand is free is checked at click time.
       let gripStep = 0;
       if (button.dataset.grip === "2h") {
         if (!heldTwoHanded(actor, weapon)) {
@@ -118,20 +118,20 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         gripStep = 1;
       }
 
-      // Сдвиг по лестнице кубов двигает ТОЛЬКО базовую формулу
-      // (1d4→1d6→2d4→2d6→2d8→3d6), поэтому применяется до аддитивных частей.
-      // Источники складываются: собственный сдвиг манёвра (weapon_dice_step) +
-      // DSL-моды dice_step + двуручный хват. ПРАВИЛО ЛЕСТНИЦЫ: суммарный подъём
-      // не может превысить +1 ступень (никаких 3d6 из ржавого кинжала стопкой
-      // бафов); сдвиг вниз (нерфы) не ограничен.
+      // A shift along the dice ladder moves ONLY the base formula
+      // (1d4→1d6→2d4→2d6→2d8→3d6), so it applies before the additive parts.
+      // The sources add up: the maneuver's own shift (weapon_dice_step) +
+      // dice_step DSL mods + the two-handed grip. THE LADDER RULE: the total raise
+      // can't exceed +1 step (no 3d6 from a rusty dagger through a stack
+      // of buffs); a shift downward (nerfs) isn't limited.
       const totalDiceStep = Math.min(
         (item.system.weapon_dice_step || 0) + damageMods.diceStep + gripStep,
         1
       );
       if (totalDiceStep) {
-        // Ссылки на урон оружия (@weapon.damage_formula, @weapon.damage_formulas.<тип>)
-        // — подстановки rollData, а не литеральные кубы: разворачиваем их до сдвига,
-        // иначе лестнице нечего двигать (например, "@weapon.damage_formula + 4").
+        // References to the weapon's damage (@weapon.damage_formula, @weapon.damage_formulas.<type>)
+        // are rollData substitutions, not literal dice: we expand them before the shift,
+        // otherwise the ladder has nothing to move (e.g. "@weapon.damage_formula + 4").
         if (weapon) {
           const perType = weapon.system.damage_formulas || {};
           formula = formula
@@ -141,19 +141,19 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         formula = stepFormula(formula, totalDiceStep);
       }
 
-      // Аддитивные части могут быть числами или дайсами — добавляем как есть.
+      // Additive parts can be numbers or dice — add them as is.
       for (const part of damageMods.damageParts) {
         formula += ` + ${part}`;
       }
 
       if ((actor?.system?.bonuses?.damage_explode || 0) > 0) {
-        // Находим все кубики (например 1d6, 2d10) и добавляем модификатор xo (взрыв один раз).
-        // Используем отрицательный просмотр вперед (?!x), чтобы не дублировать модификатор,
-        // если он уже есть (например от оружия, которое изначально взрывается).
+        // Find all dice (e.g. 1d6, 2d10) and add the xo modifier (explode once).
+        // We use a negative lookahead (?!x) so as not to duplicate the modifier
+        // if it's already there (e.g. from a weapon that explodes natively).
         formula = formula.replace(/(\d+d\d+)(?!x)/ig, "$1xo");
       }
 
-      // Попробуем извлечь тип урона прямо из формулы, если он указан в скобках, например 1d6[acid] или 1d6[кислота]
+      // Let's try to extract the damage type straight from the formula if it's given in brackets, e.g. 1d6[acid] or the localized label, 1d6[Acid]
       const match = formula.match(/\[(.*?)\]/);
       if (match) {
           const flavorText = match[1].toLowerCase().trim();
@@ -169,16 +169,16 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
                   }
               }
           }
-          // Удаляем квадратные скобки из формулы, чтобы избежать ошибок синтаксиса Roll
+          // Remove the square brackets from the formula to avoid Roll syntax errors
           formula = formula.replace(/\[.*?\]/g, '').trim();
       }
       
-      // Снапшот боеприпаса с карты атаки (flags.dedrel.ammo): AP/доп. урон/vs_creature.
-      // Сам боеприпас к этому моменту мог быть уже списан — данные берём из флага.
+      // Ammunition snapshot from the attack card (flags.dedrel.ammo): Armor Piercing/extra damage/vs_creature.
+      // The ammunition itself may already have been spent by now — the data is taken from the flag.
       const ammo = message.getFlag("dedrel", "ammo") || null;
 
-      // Доп. урон боеприпаса ТОГО ЖЕ типа (или без явного типа) вливается в основную
-      // формулу; урон другого типа роллится отдельным пакетом ниже (свой DR цели).
+      // Extra ammunition damage of THE SAME type (or without an explicit type) merges into the main
+      // formula; damage of another type is rolled as a separate packet below (with its own target DR).
       const ammoSameType = ammo?.dmg && (!ammo.dmgType || ammo.dmgType === drKey);
       if (ammoSameType) formula += ` + ${ammo.dmg}`;
 
@@ -188,7 +188,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
       let roll = new Roll(formula, rollData);
 
-      // Возвращаем flavor обратно в кубики для поддержки Dice So Nice
+      // Put the flavor back onto the dice for Dice So Nice support
       if (drKey) {
           for (let term of roll.terms) {
               if (term.faces !== undefined) {
@@ -199,16 +199,16 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 
       await roll.evaluate();
 
-      // Бронебойность: числовое поле оружия (0-3, редактируется на листе) + DSL-моды
-      // pierce:N от манёвров/эффектов + AP боеприпаса. Легаси-галочка
-      // properties.armor_piercing (булево у старых предметов) даёт 1. Каждая
-      // единица снимает 10% DR цели.
+      // Armor Piercing: the weapon's numeric field (0-3, edited on the sheet) + DSL mods
+      // pierce:N from maneuvers/effects + the ammunition's Armor Piercing. The legacy checkbox
+      // properties.armor_piercing (a boolean on old items) gives 1. Each
+      // point removes 10% of the target's DR.
       const weaponAp = weapon?.system?.armor_piercing
         || (weapon?.system?.properties?.armor_piercing ? 1 : 0);
       const apLevel = weaponAp + damageMods.pierce + (ammo?.ap || 0);
 
-      // Бонусы «против типов существ»: оружие + боеприпас (силы складываются по типу).
-      // Сериализуем ненулевые пары "тип:сила" в data-атрибут кнопки урона.
+      // "Vs creature type" bonuses: weapon + ammunition (potencies add up per type).
+      // Serialize the nonzero "type:potency" pairs into the damage button's data attribute.
       const vsWeapon = weapon || (item.type === "weapon" ? item : null);
       const vsMapSrc = { ...(vsWeapon?.system?.vs_creature || {}) };
       if (ammo?.vs) {
@@ -220,18 +220,18 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         .map(([t, p]) => `${t}:${p}`)
         .join(",");
 
-      // Вскрыватель типа: ключи типов, против которых оружие настроено (bypass_creature=true).
-      // При применении DR, дарованный этим типом цели, игнорируется (см. applyDamage).
+      // Type breaker: the keys of the types the weapon is attuned against (bypass_creature=true).
+      // When DR is applied, the DR granted by this target type is ignored (see applyDamage).
       const bypassStr = Object.entries(vsWeapon?.system?.bypass_creature || {})
         .filter(([t, v]) => t && v)
         .map(([t]) => t)
         .join(",");
 
-      // Рендер одного пакета урона (основной + опциональный от боеприпаса другого типа).
+      // Rendering one damage packet (the main one + an optional one from ammunition of another type).
       const damageBlock = (r, dk, ap, vsStr, tooltip, bypass = "") => {
         const label = dk ? game.i18n.localize(DR_KEY_LABELS[dk]) : "";
-        // Строка «против существ»: перечисляем типы и потенциальный бонус (+сила·10%).
-        // Фактический бонус зависит от типа цели — считается при применении урона.
+        // The "vs creatures" line: list the types and the potential bonus (+potency·10%).
+        // The actual bonus depends on the target's type — computed when damage is applied.
         const vsParts = (vsStr || "").split(",").filter(Boolean).map(pair => {
           const [t, p] = pair.split(":");
           return `${game.i18n.localize(`DEDREL.CreatureTypes.${t}`)} +${(Number(p) || 0) * 10}%`;
@@ -256,7 +256,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       let chatContent = damageBlock(roll, drKey, apLevel, vsTypesStr, await roll.getTooltip(), bypassStr);
       const rolls = [roll];
 
-      // Отдельный пакет: доп. урон боеприпаса ДРУГОГО типа (своё AP=0, свой DR).
+      // A separate packet: extra ammunition damage of ANOTHER type (its own Armor Piercing=0, its own DR).
       if (ammo?.dmg && ammo.dmgType && ammo.dmgType !== drKey) {
         let ammoRoll = new Roll(ammo.dmg, rollData);
         for (let term of ammoRoll.terms) {
@@ -275,15 +275,15 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         rolls
       });
 
-      // Сжигаем DSL-модификаторы стадии "damage" (бонусы к урону)
+      // Burn the DSL modifiers of the "damage" stage (damage bonuses)
       await DedrelBonuses.consumeStage(actor, item, "damage");
     }
 
-    // Применение исцеления
+    // Applying healing
     if (action === "applyHeal") {
-      // Расходуемое зелье к этому моменту уже удалено из инвентаря (quantity 0),
-      // поэтому формулу берём из data-атрибута кнопки, а живой предмет — лишь
-      // запасной источник для старых карточек без атрибута.
+      // A consumed potion has already been removed from the inventory by now (quantity 0),
+      // so the formula is taken from the button's data attribute, and the live item is only
+      // a fallback source for old cards without the attribute.
       const formula = button.dataset.healFormula || item?.system.formula_heal;
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       
@@ -315,13 +315,13 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 
         if (healAmount <= 0) continue;
 
-        // Прибавка к ХП с капом по максимуму — общая с тиками кондиций
+        // Adding HP capped at the maximum — shared with condition ticks
         const actualHealed = await targetActor.applyHealing(healAmount);
 
         if (actualHealed > 0) {
             let chatMsg = game.i18n.format("DEDREL.Chat.HealApplied", {name: targetActor.name, amount: actualHealed});
-            // Дайсовое лечение показываем как настоящий бросок (разбивка + анимация
-            // Dice So Nice через rolls), процент — просто числом.
+            // Dice-based healing is shown as a real roll (breakdown + Dice So Nice
+            // animation via rolls), a percentage — simply as a number.
             const rollBlock = roll
               ? `<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${roll.formula}</div>${await roll.getTooltip()}<h4 class="dice-total">${roll.total}</h4></div></div>`
               : "";
@@ -335,9 +335,9 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
     }
 
     if (action === "applyTempHp") {
-      // Зеркало applyHeal: формула из data-атрибута (расходуемый носитель к этому
-      // моменту мог быть удалён), поддержка "N%" от максимума ХП цели.
-      // Выдачи СКЛАДЫВАЮТСЯ с текущими временными хитами (правила: "9. Combat and Damage" §4).
+      // Mirror of applyHeal: the formula comes from the data attribute (a consumable carrier may
+      // have been deleted by now), "N%" of the target's max HP is supported.
+      // Grants STACK with the current temporary HP (rules: "9. Combat and Damage" §4).
       const formula = button.dataset.temphpFormula || item?.system.formula_temp_hp;
       if (!formula) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
 
@@ -383,7 +383,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
     }
 
-    // Тумблер ауры предмета: включает маркеры, если все выключены, иначе выключает
+    // The item's aura toggle: turns the markers on if all are off, otherwise turns them off
     if (action === "toggleAura") {
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
       const markers = item.effects.filter(e => e.getFlag("dedrel", "aura"));
@@ -398,10 +398,10 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       ));
     }
 
-    // Применение эффектов предмета
+    // Applying the item's effects
     if (action === "applyItemEffects") {
-      // Используем актёра/предмет, разрешённых через getSpeakerActor выше:
-      // это корректно работает и для несвязанных (synthetic) токенов.
+      // We use the actor/item resolved through getSpeakerActor above:
+      // this works correctly for unlinked (synthetic) tokens too.
       if (!item) return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ItemNotFound"));
 
       let targets = canvas.tokens.controlled;
@@ -411,9 +411,9 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         return ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.SelectTargetForEffect"));
       }
 
-      // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в item.use().
-      // Аура-эффекты тоже: payload (applyTo: "aura") накладывается регионом-аурой,
-      // а маркеры (flags.dedrel.aura) работают только на носителе.
+      // Self effects (applyTo: "self") are excluded — they are applied to the owner in item.use().
+      // Aura effects too: the payload (applyTo: "aura") is applied by the aura region,
+      // and the markers (flags.dedrel.aura) work only on the bearer.
       const effectsToApply = item.effects.filter(e =>
         !e.transfer
         && !["self", "aura"].includes(e.getFlag("dedrel", "applyTo"))
@@ -434,21 +434,21 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       ui.notifications.info(game.i18n.format("DEDREL.Notifications.EffectsApplied", {count: targets.length}));
     }
 
-    // Применение урона
+    // Applying damage
     if (action === "applyDamage") {
       const damage = parseInt(button.dataset.damage) || 0;
       const drKey = button.dataset.type || "";
       const apLevel = parseInt(button.dataset.ap) || 0;
-      // Карта бонусов против типов: "undead:5,shade:3" → { undead:5, shade:3 }.
+      // Map of bonuses vs types: "undead:5,shade:3" → { undead:5, shade:3 }.
       const vsMap = {};
       for (const pair of (button.dataset.vsTypes || "").split(",").filter(Boolean)) {
         const [t, p] = pair.split(":");
         vsMap[t] = Number(p) || 0;
       }
-      // Вскрыватель типа: список ключей типов, чей DR оружие игнорирует.
+      // Type breaker: list of type keys whose DR the weapon ignores.
       const bypassTypes = (button.dataset.bypassTypes || "").split(",").filter(Boolean);
 
-      // Сначала берем выделенные токены (controlled), если их нет - берем таргеты (targets)
+      // First take the selected tokens (controlled), if there are none — take the targets (targets)
       let targets = canvas.tokens.controlled;
       if (targets.length === 0) targets = Array.from(game.user.targets);
 
@@ -458,8 +458,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         const targetActor = token.actor;
         if (!targetActor) continue;
 
-        // Бонус «против типа»: берём максимальную силу среди типов, которые
-        // несёт цель, и усиливаем урон на potency·10% ДО вычета DR.
+        // "Vs type" bonus: take the maximum potency among the types the target
+        // carries and raise the damage by potency·10% BEFORE DR is subtracted.
         let dmg = damage;
         let vsPotency = 0;
         for (const key of (targetActor.creatureTypeKeys || [])) {
@@ -469,8 +469,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
           dmg = Math.round(damage * (1 + vsPotency * 0.1) * 10) / 10;
         }
 
-        // Математика DR/временных ХП живёт в DedrelActor#applyDamage
-        // (общая с тиками кондиций в src/combat.mjs)
+        // The DR/temporary HP math lives in DedrelActor#applyDamage
+        // (shared with condition ticks in src/combat.mjs)
         const { applied, blocked, tempHpDamage } = await targetActor.applyDamage(dmg, { drKey, apLevel, bypassTypes });
 
         let damageTypeStr = drKey ? `[${game.i18n.localize(DR_KEY_LABELS[drKey])}] ` : "";
@@ -487,7 +487,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
         if (blocked > 0) {
           chatMsg += ` <span style="color: var(--color-text-dark-secondary); font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageBlocked", {dr: blocked})}</span>`;
         } else if (blocked < 0) {
-          // Отрицательный DR = уязвимость: урон усилен на -blocked.
+          // Negative DR = vulnerability: the damage is increased by -blocked.
           chatMsg += ` <span style="color: var(--color-warning, #c0392b); font-weight: bold; font-size: 0.9em;">${game.i18n.format("DEDREL.Chat.DamageAmplified", {dr: -blocked})}</span>`;
         }
         
@@ -498,12 +498,12 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       }
     }
 
-    // Бросок спасброска
+    // Saving throw roll
     if (action === "rollSave") {
       const saveAttr = button.dataset.save;
       const saveDc = button.dataset.dc;
       
-      // Ищем актора: сначала выделенный токен, иначе персонаж игрока
+      // Find the actor: first the selected token, otherwise the player's character
       let targetActor = null;
       if (canvas.tokens.controlled.length > 0) {
         targetActor = canvas.tokens.controlled[0].actor;
@@ -526,8 +526,8 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       });
     }
 
-    // Наложение состояния заклинания (Модификатор "Сила") на выделенные токены.
-    // Правами обычно обладает ГМ; игрок может наложить на собственный токен.
+    // Applying a spell's condition (the Power Modifier) to the selected tokens.
+    // Usually the GM has the permissions; a player can apply it to their own token.
     if (action === "applySpellCondition") {
       const statusId = button.dataset.statusId;
       if (!statusId) return;
@@ -540,7 +540,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
       ui.notifications.info(game.i18n.format("DEDREL.Notifications.ConditionApplied", { name: condName, count: targets.length }));
     }
 
-    // Размещение шаблона
+    // Placing a template
     if (action === "placeTemplate") {
       let shape = button.dataset.shape;
       const size = parseFloat(button.dataset.size) || 0;

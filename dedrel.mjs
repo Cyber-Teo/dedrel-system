@@ -1,7 +1,7 @@
 /**
- * Основной файл инициализации игровой системы Dedrel для Foundry VTT.
- * Загружается при старте системы, регистрирует модели данных (Data Models),
- * шаблоны (Templates) и логику работы с документами (Sheets).
+ * Main initialization file of the Dedrel game system for Foundry VTT.
+ * Loaded at system startup, it registers the Data Models,
+ * Templates and the document logic (Sheets).
  */
 import { ItemDataModels } from "./src/data/items/index.mjs";
 import { ActorDataModels } from "./src/data/actors/index.mjs";
@@ -44,40 +44,40 @@ import "./src/canvas/aura-regions.mjs";
 import "./src/canvas/movement.mjs";
 
 /**
- * Хук "init" вызывается Foundry один раз при загрузке.
- * Используется для конфигурации ядра системы до того, как загружен мир.
+ * The "init" hook is called by Foundry once on load.
+ * Used to configure the system core before the world is loaded.
  */
 Hooks.once("init", function() {
   console.log("Dedrel | Initializing Dedrel System");
 
   // Suppress V14 template deprecation warnings to keep console clean (removed because we migrated to RegionDocument)
 
-  // Регистрация настроек системы
+  // Registering the system settings
   registerSystemSettings();
 
-  // Перевод компендиумов при нерусском языке системы: словарь грузится вместе
-  // с языковыми файлами ядра, до создания паков (src/l10n/compendium-translation.mjs)
+  // Compendium translation when the system language isn't Russian: the dictionary loads together
+  // with core's language files, before the packs are created (src/l10n/compendium-translation.mjs)
   CompendiumTranslation.init();
 
-  // Конфиг магической системы (Магический Конструктор): таблицы Техник,
-  // Модификаторов, лимиты Рангов Доктрин, свойства Доктрин. См. src/config/magic.mjs
+  // Magic system config (the Spell Constructor): tables of Techniques,
+  // Modifiers, Doctrine Rank limits, Doctrine properties. See src/config/magic.mjs
   CONFIG.DEDREL = CONFIG.DEDREL || {};
   CONFIG.DEDREL.magic = DEDREL_MAGIC;
   CONFIG.DEDREL.creatureTypes = CREATURE_TYPES;
-  // Библиотека переиспользуемых Active Effects (зелья/свитки/баффы). См.
-  // src/config/effect-library.mjs; хелперы — game.dedrel.effects (ready-хук ниже).
+  // Library of reusable Active Effects (potions/scrolls/buffs). See
+  // src/config/effect-library.mjs; helpers — game.dedrel.effects (ready hook below).
   CONFIG.DEDREL.effectLibrary = DEDREL_EFFECT_LIBRARY;
-  // Лестница урона (1d4→1d6→2d4→2d6→2d8→3d6) — глобальный инструмент сдвига
-  // кубов для бафов/нерфов (DSL-операция dice_step). См. src/utils/dice-ladder.mjs.
+  // Damage Ladder (1d4→1d6→2d4→2d6→2d8→3d6) — a global tool for shifting
+  // dice for buffs/nerfs (the dice_step DSL operation). See src/utils/dice-ladder.mjs.
   CONFIG.DEDREL.diceLadder = DICE_LADDER;
 
-  // Инициатива (стандартный расчет Foundry для системы)
+  // Initiative (Foundry's standard calculation for the system)
   let initDirection = -1;
   try {
     const sortSetting = game.settings.get("dedrel", "initiativeSort");
     if (sortSetting === "ascending") initDirection = 1;
   } catch (e) {
-    // Настройка может быть еще не готова, используем дефолт
+    // The setting may not be ready yet, use the default
   }
 
   CONFIG.Combat.initiative = {
@@ -86,10 +86,10 @@ Hooks.once("init", function() {
     direction: initDirection
   };
 
-  // Кастомный документ боя: тики кондиций в _onStartTurn/_onEndTurn (src/combat.mjs)
+  // Custom combat document: condition ticks in _onStartTurn/_onEndTurn (src/combat.mjs)
   CONFIG.Combat.documentClass = DedrelCombat;
 
-  // Регистрация кастомного класса предмета и моделей данных для предметов (Item)
+  // Registering the custom item class and the item data models (Item)
   CONFIG.Actor.documentClass = DedrelActor;
   CONFIG.Item.documentClass = DedrelItem;
   CONFIG.Item.dataModels = {
@@ -97,54 +97,54 @@ Hooks.once("init", function() {
     ...ItemDataModels
   };
 
-  // Кастомный класс для Токена (чтобы отрисовывать дополнительные бары)
+  // Custom Token class (to draw extra bars)
   CONFIG.Token.objectClass = DedrelToken;
 
-  // Кастомный HUD токена: клики по стакающимся кондициям добавляют/снимают стаки
+  // Custom token HUD: clicks on stacking conditions add/remove stacks
   CONFIG.Token.hudClass = DedrelTokenHUD;
 
-  // Поведение региона "Аура" (подтип объявлен в system.json → documentTypes.RegionBehavior)
+  // The "Aura" region behavior (the subtype is declared in system.json → documentTypes.RegionBehavior)
   CONFIG.RegionBehavior.dataModels.dedrelAura = DedrelAuraRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons.dedrelAura = "fa-solid fa-circle-dot";
 
-  // Регистрация Active Effects для системы
+  // Registering Active Effects for the system
   CONFIG.ActiveEffect.legacyTransferral = false;
 
-  // Календарь мира Дедрел (12 месяцев × 30 дней, год 1005 при worldTime = 0).
-  // GameTime конструируется ядром ПОСЛЕ init (в setupGame), поэтому простое
-  // присваивание конфига здесь подхватывается без ручного initializeCalendar().
-  // Длительности эффектов в units "hours"/"days" конвертируются через него же.
+  // The Dedrel world calendar (12 months × 30 days, year 1005 at worldTime = 0).
+  // GameTime is constructed by core AFTER init (in setupGame), so a simple
+  // config assignment here is picked up without a manual initializeCalendar().
+  // Effect durations in units "hours"/"days" are converted through it as well.
   CONFIG.time.worldCalendarConfig = DEDREL_CALENDAR_CONFIG;
 
-  // Истёкшие эффекты УДАЛЯЮТСЯ, а не помечаются expired (дефолт "update").
-  // Иначе истёкшая кондиция остаётся на актёре подавленным «зомби»: иконка
-  // пропадает, но toggleStatusEffect/addConditionStack находят её и считают,
-  // что состояние всё ещё висит (например, с максимумом стаков).
+  // Expired effects are DELETED rather than marked expired (the default is "update").
+  // Otherwise an expired condition stays on the actor as a suppressed "zombie": the icon
+  // disappears, but toggleStatusEffect/addConditionStack find it and assume
+  // the condition is still present (e.g. at max stacks).
   CONFIG.ActiveEffect.expiryAction = "delete";
 
-  // Регистрация кастомной фазы "apply" для изменений системных полей (system.*).
-  // ВАЖНО: ядро исполняет только фазы "initial"/"final" и те, что зарегистрированы
-  // здесь И вызваны системой вручную (см. DedrelActor#prepareEmbeddedDocuments).
-  // Без регистрации+вызова изменения с этой фазой молча не применяются.
+  // Registering the custom "apply" phase for changes to system fields (system.*).
+  // IMPORTANT: core runs only the "initial"/"final" phases and those registered
+  // here AND invoked by the system manually (see DedrelActor#prepareEmbeddedDocuments).
+  // Without registration+invocation, changes with this phase are silently not applied.
   CONFIG.ActiveEffect.phases.apply = {
     label: "DEDREL.EffectPhases.Apply",
     hint: "DEDREL.EffectPhases.ApplyHint"
   };
 
-  // Слепота — только визуальная маркировка + механические штрафы (через эффекты
-  // кондиции), БЕЗ авто-отключения зрения токена. Ядро по умолчанию считает статус
-  // с id "blind" (CONFIG.specialStatusEffects.BLIND) особым и гасит зрение носителя
-  // в «глухую черноту» — это путает игроков. Отвязываем спец-статус, чтобы кондиция
-  // "blind" была обычной. Управлять зрением при необходимости — вручную (Vision у токена).
+  // Blinded is only a visual marker + mechanical penalties (via the condition's
+  // effects), WITHOUT automatically disabling the token's vision. By default core treats the status
+  // with id "blind" (CONFIG.specialStatusEffects.BLIND) as special and turns the bearer's vision
+  // into "pitch black" — this confuses players. We unbind the special status so that the
+  // "blind" condition is a regular one. Vision can be managed by hand if needed (the token's Vision).
   CONFIG.specialStatusEffects.BLIND = "";
 
-  // Регистрация моделей данных для актёров (Actor)
+  // Registering the data models for actors (Actor)
   CONFIG.Actor.dataModels = {
     ...CONFIG.Actor.dataModels,
     ...ActorDataModels
   };
 
-  // Предзагрузка частичных шаблонов Handlebars, чтобы их можно было переиспользовать через {{> "путь"}}
+  // Preloading partial Handlebars templates so they can be reused via {{> "path"}}
   foundry.applications.handlebars.loadTemplates([
     "systems/dedrel/templates/actor/parts/character-header.hbs",
     "systems/dedrel/templates/actor/parts/character-navigation.hbs",
@@ -195,7 +195,7 @@ Hooks.once("init", function() {
     "systems/dedrel/templates/item/parts/details-creature_type.hbs"
   ]);
 
-  // Отключаем стандартные листы и регистрируем кастомные V2 листы для актёров и предметов
+  // Disable the standard sheets and register the custom V2 sheets for actors and items
   foundry.applications.apps.DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelCharacterSheet, { types: ["character"], makeDefault: true, label: "DEDREL.Sheets.CharacterSheet" });
   foundry.applications.apps.DocumentSheetConfig.registerSheet(Actor, "dedrel", DedrelLootSheet, { types: ["loot"], makeDefault: true, label: "DEDREL.Sheets.LootSheet" });
@@ -211,10 +211,10 @@ Hooks.once("init", function() {
   console.log("Dedrel | Item Data Models Registered:", Object.keys(ItemDataModels));
   console.log("Dedrel | Actor Data Models Registered:", Object.keys(ActorDataModels));
 
-  // Экспортируем глобальные методы для макросов
+  // Exporting global methods for macros
   game.dedrel = {
-    // Лестница урона: сдвиг кубов для макросов/валидации.
-    // Пример: game.dedrel.dice.stepFormula("2d6", 1) → "2d8"
+    // Damage Ladder: dice shifting for macros/validation.
+    // Example: game.dedrel.dice.stepFormula("2d6", 1) → "2d8"
     dice: { LADDER: DICE_LADDER, stepDice, stepFormula },
 
     rollItemMacro: async (itemName) => {
@@ -258,14 +258,14 @@ Hooks.once("init", function() {
     apHUD: new ActionPointsHUD(),
     timeHUD: new TimeHUD(),
     sourceHUD: new MagicSourceHUD(),
-    // Движок Магического Конструктора — доступен макросам (смоук-тест "Валидация магии")
+    // The Spell Constructor engine — available to macros (the "Magic Validation" smoke test)
     SpellCalculator,
 
     /**
-     * Открывает Конструктор Заклинаний.
-     * @param {Actor|null} actor - заклинатель; без актора доступен только ГМу
-     *   (standalone-режим для пресозданных заклинаний).
-     * @param {Item|null} spellItem - существующее заклинание для префилла.
+     * Opens the Spell Constructor.
+     * @param {Actor|null} actor - the caster; without an actor it's available to the GM only
+     *   (standalone mode for pre-made spells).
+     * @param {Item|null} spellItem - an existing spell to prefill from.
      */
     openSpellConstructor: (actor = null, spellItem = null) => {
       if (!actor && !game.user.isGM) {
@@ -275,8 +275,8 @@ Hooks.once("init", function() {
     },
 
     /**
-     * Открывает «Справочник ключей» — каталог ключей Active Effects с поиском
-     * и конструктор DSL-строк flags.dedrel.mod (см. src/apps/effect-key-browser.mjs).
+     * Opens the Effect Key Browser — a catalog of Active Effect keys with search
+     * and a builder for flags.dedrel.mod DSL strings (see src/apps/effect-key-browser.mjs).
      */
     openEffectKeyBrowser: () => {
       game.dedrel._effectKeyBrowser ??= new EffectKeyBrowserApp();
@@ -284,20 +284,20 @@ Hooks.once("init", function() {
     },
 
     /**
-     * Пресеты Active Effects из кода (src/config/effect-library.mjs) — легаси.
-     * Источник истины рантайма — компендиум active_effects: авторские эффекты
-     * копирует пикер «Из библиотеки» на листе предмета и макрос copy_active_effect,
-     * а комбинаторные (сопротивления/уязвимости) собирает генератор того же пикера.
-     * Сид-макрос, ради которого жил build(), удалён; API оставлен для ручных вызовов
-     * из макросов до чистки конфига (см. NOTES.md).
+     * Active Effect presets from code (src/config/effect-library.mjs) — legacy.
+     * The runtime source of truth is the active_effects compendium: authored effects
+     * are copied by the "From library" picker on the item sheet and by the copy_active_effect macro,
+     * and the combinatorial ones (resistances/vulnerabilities) are assembled by the same picker's generator.
+     * The seed macro that build() lived for has been deleted; the API is kept for manual calls
+     * from macros until the config is cleaned up (see NOTES.md).
      */
     effects: {
-      /** @returns {object|null} Данные ActiveEffect из пресета. */
+      /** @returns {object|null} ActiveEffect data from the preset. */
       build: (key, opts = {}) => buildEffectData(key, opts)
     }
   };
   
-  // Инициализация хуков для глобальных виджетов
+  // Initializing hooks for the global widgets
   game.dedrel.effectsHUD.activateHooks();
   game.dedrel.apHUD.activateHooks();
   game.dedrel.timeHUD.activateHooks();
@@ -305,8 +305,8 @@ Hooks.once("init", function() {
 });
 
 /**
- * Кнопка HUD управления временем на панели инструментов сцены
- * (группа «Токены», видна только ГМу — время двигает game.settings ядра).
+ * The time control HUD button on the scene controls
+ * (the Tokens group, visible to the GM only — time is advanced by core's game.settings).
  */
 Hooks.on("getSceneControlButtons", controls => {
   if (!game.user?.isGM) return;
@@ -331,13 +331,13 @@ Hooks.on("getSceneControlButtons", controls => {
 });
 
 /**
- * Хук "preCreateItem" вызывается перед созданием нового предмета в базе данных.
- * Мы используем его для назначения красивых иконок по умолчанию, вместо стандартного рюкзака.
+ * The "preCreateItem" hook is called before a new item is created in the database.
+ * We use it to assign nice default icons instead of the standard backpack.
  */
 Hooks.on("preCreateItem", (item, data, options, userId) => {
   if (item.img === "icons/svg/item-bag.svg") {
-    // Иконка по умолчанию по типу предмета. Файл: assets/icons/items/<тип>.svg.
-    // Картинки добавляются вручную; типы без файла временно покажут битую иконку.
+    // Default icon by item type. File: assets/icons/items/<type>.svg.
+    // Images are added by hand; types without a file will show a broken icon for now.
     const defaultIcons = {
       currency: "systems/dedrel/assets/icons/items/currency.svg",
       loot: "systems/dedrel/assets/icons/items/loot.svg",
@@ -368,12 +368,12 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
 });
 
 /**
- * Диалог создания предмета: заменяем выпадающий список типов на компактную
- * сетку карточек «иконка + подпись». Исходный <select> остаётся в форме
- * (скрытым) и синхронизируется — сохранение через FormDataExtended не ломается.
+ * Item creation dialog: we replace the type dropdown with a compact
+ * grid of "icon + label" cards. The original <select> stays in the form
+ * (hidden) and is kept in sync — saving through FormDataExtended doesn't break.
  *
- * Вешаем на renderApplicationV2 (родитель в цепочке DialogV2) — он гарантированно
- * вызывается для окна создания документа; фильтр по типам ниже отсекает всё лишнее.
+ * Attached to renderApplicationV2 (the parent in the DialogV2 chain) — it is guaranteed
+ * to be called for the document creation window; the type filter below cuts off everything else.
  */
 function dedrelBuildItemTypeGrid(app, element) {
   const root = element instanceof HTMLElement ? element : app?.element;
@@ -381,11 +381,11 @@ function dedrelBuildItemTypeGrid(app, element) {
   const select = root.querySelector('select[name="type"]');
   if (!select) return;
 
-  // Только диалог создания Item: все опции должны быть типами предметов.
+  // Only the Item creation dialog: all options must be item types.
   const itemTypes = new Set(CONFIG.Item.documentClass.TYPES);
   const options = Array.from(select.options);
   if (!options.length || !options.every(o => itemTypes.has(o.value))) return;
-  if (root.querySelector(".dedrel-type-grid")) return; // уже построено
+  if (root.querySelector(".dedrel-type-grid")) return; // already built
 
   console.debug("[Dedrel] Строю сетку типов предметов:", options.map(o => o.value));
 
@@ -404,7 +404,7 @@ function dedrelBuildItemTypeGrid(app, element) {
     const img = document.createElement("img");
     img.src = `systems/dedrel/assets/icons/items/${opt.value}.svg`;
     img.alt = "";
-    // Пока для типа нет своей картинки — показываем стандартный «рюкзак».
+    // Until a type has its own image, show the standard "backpack".
     img.addEventListener("error", () => { img.src = "icons/svg/item-bag.svg"; }, { once: true });
     tile.append(img);
 
@@ -415,31 +415,31 @@ function dedrelBuildItemTypeGrid(app, element) {
     card.append(tile, label);
     card.addEventListener("click", () => {
       select.value = opt.value;
-      select.dispatchEvent(new Event("change", { bubbles: true })); // обновит подсказку и placeholder имени
+      select.dispatchEvent(new Event("change", { bubbles: true })); // will update the hint and the name placeholder
       grid.querySelectorAll(".dedrel-type-card.selected").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
     });
     grid.append(card);
   }
 
-  // Прячем оригинальный select, вставляем сетку в ту же группу формы.
+  // Hide the original select, insert the grid into the same form group.
   const formFields = select.closest(".form-fields");
   if (formFields) formFields.style.display = "none";
   (formFields ?? select).after(grid);
 
-  // Немного шире окно, чтобы в ряд помещалось больше карточек.
+  // A slightly wider window so that more cards fit in a row.
   app?.setPosition?.({ width: 460 });
 }
 Hooks.on("renderApplicationV2", dedrelBuildItemTypeGrid);
 
 /**
- * Хуки "preCreateActiveEffect" и "preUpdateActiveEffect"
- * Автоматически добавляют phase: "apply" ко всем изменениям системных переменных (system.),
- * так как интерфейс Foundry V14 не всегда позволяет задать фазу вручную, а без нее TypeDataModel игнорирует эффекты.
+ * The "preCreateActiveEffect" and "preUpdateActiveEffect" hooks
+ * Automatically add phase: "apply" to all changes of system variables (system.),
+ * since the Foundry V14 UI doesn't always allow setting the phase by hand, and without it TypeDataModel ignores the effects.
  */
 Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
-  // V14: changes живут в system.changes (у ActiveEffect появилась system-модель).
-  // Читаем из нового места с fallback на легаси top-level.
+  // V14: changes live in system.changes (ActiveEffect got a system model).
+  // Read from the new location with a fallback to the legacy top level.
   const sourceChanges = effect._source.system?.changes ?? effect._source.changes;
   if (!Array.isArray(sourceChanges) || sourceChanges.length === 0) return;
 
@@ -456,8 +456,8 @@ Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
     effect.updateSource({ "system.changes": newChanges });
   }
 
-  // Валидация DSL-модификаторов (flags.dedrel.mod): ловим опечатки при авторинге.
-  // Эффект не блокируем — только предупреждаем, parseMod уже залогировал причину.
+  // Validating DSL modifiers (flags.dedrel.mod): catching typos while authoring.
+  // The effect isn't blocked — we only warn, parseMod has already logged the reason.
   for (const c of sourceChanges) {
     if (c.key === MOD_CHANGE_KEY && DedrelBonuses.parseMod(c.value) === null) {
       ui.notifications.warn(game.i18n.format("DEDREL.Notifications.InvalidModString", {
@@ -468,7 +468,7 @@ Hooks.on("preCreateActiveEffect", (effect, data, options, userId) => {
 });
 
 Hooks.on("preUpdateActiveEffect", (effect, changes, options, userId) => {
-  // Диф может прийти в system.changes (V14) или changes (легаси). Правим то, что пришло.
+  // The diff can come in system.changes (V14) or changes (legacy). Fix whatever came.
   const incoming = changes.system?.changes ?? changes.changes;
   if (!Array.isArray(incoming)) return;
 
@@ -485,7 +485,7 @@ Hooks.on("preUpdateActiveEffect", (effect, changes, options, userId) => {
 
 
 
-// Паки созданы: перевести их индексы и папки (если перевод активен)
+// The packs are created: translate their indexes and folders (if translation is active)
 Hooks.once("setup", () => CompendiumTranslation.translatePacks());
 
 Hooks.once("ready", async function () {
@@ -498,16 +498,16 @@ Hooks.once("ready", async function () {
     }
   }
 
-  // Socket-брокер (переводы валют между акторами; сделки с торговцами — Блок D)
+  // Socket broker (currency transfers between actors; trades with merchants — Block D)
   DedrelSocket.listen();
 
-  // Виджет Источников виден всем и всегда: без тумблера, сразу после готовности UI
+  // The Sources widget is visible to everyone at all times: no toggle, right after the UI is ready
   game.dedrel.sourceHUD.render({ force: true });
 
   await rebuildStatusEffects();
 
-  // Пересобираем реестр статусов при любом изменении кондиций в компендиумах,
-  // чтобы не требовать перезагрузку мира после правки ключей/эффектов/длительности.
+  // Rebuild the status registry on any change of conditions in the compendiums,
+  // so as not to require a world reload after editing keys/effects/duration.
   const debouncedRebuild = foundry.utils.debounce(rebuildStatusEffects, 250);
   const onConditionChange = (doc) => {
     if (doc.documentName === "Item" && doc.type === "condition" && CONDITION_PACKS.includes(doc.pack)) {
@@ -520,49 +520,49 @@ Hooks.once("ready", async function () {
 });
 
 /**
- * Компендиумы, из которых собирается реестр статусов (CONFIG.statusEffects).
- * Пак additional_conditions сюда НЕ входит намеренно: это технические состояния,
- * которые добавляются талантами как предметы и не должны появляться
- * в выпадающем меню статусов токена.
- * magic_conditions — кураторский пул состояний доктринных Модификаторов
- * («Сила» и т.п.): его предметы попадают и в реестр (чтобы наложение по ключу
- * работало), и в селект Магического Конструктора. Идёт ПОСЛЕ conditions:
- * при совпадении ключей версия из magic_conditions выигрывает.
+ * Compendiums the status registry (CONFIG.statusEffects) is assembled from.
+ * The additional_conditions pack is deliberately NOT included: these are technical conditions
+ * that talents add as items and that mustn't appear
+ * in the token's status dropdown menu.
+ * magic_conditions is the curated pool of conditions for doctrinal Modifiers
+ * (Power, etc.): its items go both into the registry (so that applying by key
+ * works) and into the Spell Constructor's selector. It comes AFTER conditions:
+ * when keys match, the version from magic_conditions wins.
  */
-// biomancy_adaptations и mutilations — предметы-состояния Модификатора
-// «Адаптация» Биомантии (плюсовые черты и увечья). В реестре они нужны,
-// чтобы наложение по ключу работало кнопкой карточки и через HUD токена.
+// biomancy_adaptations and mutilations are the condition items of Biomancy's
+// Adaptation Modifier (beneficial traits and mutilations). They're needed in the registry
+// so that applying by key works via the card button and the token HUD.
 const CONDITION_PACKS = ["dedrel.conditions", "dedrel.magic_conditions",
   "dedrel.biomancy_adaptations", "dedrel.mutilations"];
 
 /**
- * Паки, чьи состояния НЕ показываются в выпадающем меню статусов токена
- * (решение 2026-09-11). В реестре они остаются — иначе перестанут работать
- * кнопки наложения на карточках заклинаний и наложение по ключу вообще;
- * скрывается только палитра HUD, где место ограничено.
+ * Packs whose conditions are NOT shown in the token's status dropdown menu
+ * (decision 2026-09-11). They stay in the registry — otherwise the application
+ * buttons on spell cards and applying by key in general would stop working;
+ * only the HUD palette, where space is limited, is hidden.
  *
- * Критерий простой: меню токена — для базовых состояний, которые ГМ вешает
- * рукой (`conditions`: лежит, ослеплён, кровотечение). Всё, что накладывает
- * магия или будущая панель редких кондиций (роадмап, блок E), в меню не нужно.
+ * The criterion is simple: the token menu is for the basic conditions the GM applies
+ * by hand (`conditions`: prone, blinded, bleeding). Anything applied by
+ * magic or the future rare conditions panel (roadmap, block E) isn't needed in the menu.
  *
- * Механизм — поле `hud: false`, которое ядро V14 понимает штатно:
- * TokenHUD#_getStatusEffectChoices пропускает такие записи
+ * The mechanism is the `hud: false` field, which V14 core understands natively:
+ * TokenHUD#_getStatusEffectChoices skips such entries
  * (client/applications/hud/token-hud.mjs).
  */
 const HUD_HIDDEN_PACKS = new Set(["dedrel.magic_conditions",
   "dedrel.biomancy_adaptations", "dedrel.mutilations"]);
 
 /**
- * Собирает CONFIG.statusEffects из Condition-предметов компендиумов.
- * ВАЖНО (V14): CONFIG.statusEffects — это Proxy (массив с индексом по id).
- * Его НЕЛЬЗЯ заменять обычным массивом, иначе ActiveEffect.fromStatusEffect
- * (строковый доступ CONFIG.statusEffects[statusId]) перестаёт находить статусы.
- * Поэтому очищаем и наполняем его на месте.
+ * Assembles CONFIG.statusEffects from the compendiums' Condition items.
+ * IMPORTANT (V14): CONFIG.statusEffects is a Proxy (an array indexed by id).
+ * It MUST NOT be replaced with a plain array, otherwise ActiveEffect.fromStatusEffect
+ * (string access CONFIG.statusEffects[statusId]) stops finding statuses.
+ * So we clear and refill it in place.
  */
 async function rebuildStatusEffects() {
   const conditionItems = [];
-  // Пак запоминается вместе с документом: от него зависит, попадёт ли состояние
-  // в палитру HUD (см. HUD_HIDDEN_PACKS).
+  // The pack is remembered together with the document: it determines whether the condition
+  // gets into the HUD palette (see HUD_HIDDEN_PACKS).
   for (const packId of CONDITION_PACKS) {
     const pack = game.packs.get(packId);
     if (pack) for (const doc of await pack.getDocuments()) conditionItems.push({ doc, packId });
@@ -573,8 +573,8 @@ async function rebuildStatusEffects() {
   CONFIG.statusEffects.length = 0;
   for (const { doc: c, packId } of conditionItems) {
     const entry = {
-      // Приоритет — системный ключ условия (стабильный, латиницей);
-      // слаг имени остаётся как fallback для условий без ключа.
+      // The condition's system key takes priority (stable, Latin characters);
+      // the name slug remains as a fallback for conditions without a key.
       id: c.system.key || c.name.toLowerCase().replace(/[^a-z0-9а-яё]/gi, '_'),
       name: c.name,
       icon: c.img,
@@ -585,17 +585,17 @@ async function rebuildStatusEffects() {
           condition: true,
           is_technical: c.system.is_technical || false,
           category: c.system.category || "negative",
-          // Стакающиеся кондиции: HUD и DedrelActor#addConditionStack читают
-          // эти флаги, чтобы повторные клики наращивали счётчик стаков.
+          // Stacking conditions: the HUD and DedrelActor#addConditionStack read
+          // these flags so that repeated clicks increment the stack counter.
           stackable: c.system.stackable || false,
           max_stacks: Math.max(1, c.system.max_stacks || 1),
-          // Обновлять таймер длительности при добавлении стака (см. addConditionStack).
+          // Refresh the duration timer when a stack is added (see addConditionStack).
           refresh_on_stack: c.system.refresh_on_stack || false
         }
       }
     };
 
-    // Периодический урон/лечение: тик исполняет DedrelCombat (src/combat.mjs)
+    // Periodic damage/healing: the tick is executed by DedrelCombat (src/combat.mjs)
     const tick = c.system.tick || {};
     if (tick.formula) {
       entry.flags.dedrel.tick = {
@@ -606,18 +606,18 @@ async function rebuildStatusEffects() {
       };
     }
 
-    // Переносим механику состояния: change-строки со всех его эффектов.
-    // Без этого статус, наложенный через HUD, приходит на актёра «пустым».
-    // ВАЖНО (V14): changes живут в effect.system.changes (у ActiveEffect
-    // появилась system-модель); e.changes и e._source.changes — deprecated-шимы,
-    // которые могут вернуть undefined. См. FOUNDRY V14 QUIRKS.md, раздел 11.
+    // Carry over the condition's mechanics: the change rows from all of its effects.
+    // Without this, a status applied through the HUD arrives on the actor "empty".
+    // IMPORTANT (V14): changes live in effect.system.changes (ActiveEffect
+    // got a system model); e.changes and e._source.changes are deprecated shims
+    // that may return undefined. See FOUNDRY V14 QUIRKS.md, section 11.
     const changes = [];
     for (const e of c.effects) {
       changes.push(...foundry.utils.deepClone(e.system?.changes ?? e._source.changes ?? []));
     }
     if (changes.length > 0) entry.changes = changes;
 
-    // Длительность состояния из его системных данных
+    // The condition's duration from its system data
     const dur = c.system.duration || {};
     if (dur.value && dur.units && dur.units !== "permanent") {
       if (dur.units === "rounds") entry.duration = { rounds: dur.value };
@@ -628,8 +628,8 @@ async function rebuildStatusEffects() {
       else if (dur.units === "days") entry.duration = { seconds: dur.value * 86400 };
     }
 
-    // Скрытие из палитры HUD: состояние остаётся в реестре и накладывается
-    // по ключу, но не занимает место в выпадающем меню статусов токена.
+    // Hiding from the HUD palette: the condition stays in the registry and is applied
+    // by key, but doesn't take up space in the token's status dropdown menu.
     if (HUD_HIDDEN_PACKS.has(packId)) {
       entry.hud = false;
       hidden++;
