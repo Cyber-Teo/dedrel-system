@@ -1,33 +1,33 @@
 /**
- * Проверка пререквизитов предмета (талант, мутация, манёвр и т.д.) против актора.
+ * Checks an item's prerequisites (talent, mutation, maneuver, etc.) against an actor.
  *
- * Синтаксис элементов массивов prerequisites_*:
- *  - Элементы одного массива объединяются по И (все должны выполняться).
- *  - Внутри элемента символ `|` задаёт альтернативы по ИЛИ:
- *      "@attributes.log.rank 3 | @attributes.int.rank 3" — достаточно одного.
- *  - Атрибуты/навыки: "@attributes.str.rank 2", "str 2", "@skills.athletics.rank 3",
- *    "athletics 3" — префикс "@attributes." / "@skills." и суффикс ".rank" опциональны;
- *    тип определяется массивом, из которого пришёл элемент.
- *  - Таланты/мутации: ключ (system.key) или отображаемое имя предмета.
- *  - Линии крови: "human 3", "Human" (ранг по умолчанию 1); поддерживается легаси-пара
- *    ["Human", "3"] — числовой элемент уточняет ранг предыдущего.
+ * Syntax of the prerequisites_* array elements:
+ *  - Elements of one array combine with AND (all must be met).
+ *  - Within an element the `|` character sets OR alternatives:
+ *      "@attributes.log.rank 3 | @attributes.int.rank 3" — one is enough.
+ *  - Attributes/skills: "@attributes.str.rank 2", "str 2", "@skills.athletics.rank 3",
+ *    "athletics 3" — the "@attributes." / "@skills." prefix and the ".rank" suffix are optional;
+ *    the type is determined by the array the element came from.
+ *  - Talents/mutations: a key (system.key) or the item's display name.
+ *  - Bloodlines: "human 3", "Human" (default rank 1); the legacy pair is supported
+ *    ["Human", "3"] — a numeric element refines the rank of the previous one.
  */
 
-/** Разбирает "префикс.key.rank N" | "key N" → { key, rank }. */
+/** Parses "prefix.key.rank N" | "key N" → { key, rank }. */
 function parseRankRequirement(token) {
   const m = token.trim().match(/^(?:@?\w+\.)?([a-zA-Z_]+)(?:\.rank)?\s+(\d+)$/);
   if (!m) return null;
   return { key: m[1].toLowerCase(), rank: Number(m[2]) };
 }
 
-/** Одна альтернатива требования по рангу против коллекции {key: {rank}}. */
+/** One alternative of a rank requirement against a {key: {rank}} collection. */
 function rankAltMet(collection, token) {
   const req = parseRankRequirement(token);
   if (!req) return false;
   return (collection?.[req.key]?.rank ?? 0) >= req.rank;
 }
 
-/** Одна альтернатива требования «есть предмет типа type с таким ключом/именем». */
+/** One alternative of the requirement "has an item of type type with this key/name". */
 function itemAltMet(actor, type, token) {
   const needle = token.trim().toLowerCase();
   if (!needle) return false;
@@ -37,24 +37,24 @@ function itemAltMet(actor, type, token) {
   );
 }
 
-/** Элемент массива: альтернативы через `|`, истина если выполнена хотя бы одна. */
+/** Array element: alternatives via `|`, true if at least one is met. */
 function entryMet(entry, altMet) {
   return String(entry).split("|").some(alt => altMet(alt.trim()));
 }
 
 /**
- * Проверяет все пререквизиты system-данных предмета против актора.
+ * Checks all prerequisites in the item's system data against the actor.
  * @param {Actor} actor
- * @param {object} system - данные предмета (item.system или itemObj.system)
- * @returns {{ ok: boolean, failed: string[] }} failed — невыполненные требования как есть
+ * @param {object} system - item data (item.system or itemObj.system)
+ * @returns {{ ok: boolean, failed: string[] }} failed — unmet requirements as is
  */
 export function checkPrerequisites(actor, system) {
   const failed = [];
   const sys = actor.system;
 
-  // Пустые/пробельные элементы массивов — это НЕ требования, а артефакт импорта
-  // (пустая ячейка CSV → [""] вместо []). Их нужно отбрасывать, иначе «пустой»
-  // пререк ошибочно считается невыполненным и диалог всплывает без причины.
+  // Empty/blank array elements are NOT requirements but an import artifact
+  // (an empty CSV cell → [""] instead of []). They must be dropped, otherwise an "empty"
+  // prerequisite is wrongly considered unmet and the dialog pops up for no reason.
   const clean = arr => (arr || []).filter(e => String(e).trim().length > 0);
 
   for (const entry of clean(system.prerequisites_attributes)) {
@@ -73,7 +73,7 @@ export function checkPrerequisites(actor, system) {
     if (!entryMet(entry, alt => itemAltMet(actor, "mutation", alt))) failed.push(entry);
   }
 
-  // Линии крови: числовой элемент — легаси-уточнение ранга предыдущего имени.
+  // Bloodlines: a numeric element is a legacy refinement of the previous name's rank.
   const bloodlineEntries = [];
   for (const entry of clean(system.prerequisites_bloodlines)) {
     const str = String(entry).trim();
@@ -96,9 +96,9 @@ export function checkPrerequisites(actor, system) {
 }
 
 /**
- * Проверяет пререквизиты и, если они не выполнены, спрашивает подтверждение
- * (Мастер может добавить предмет вопреки требованиям).
- * @returns {Promise<boolean>} true — добавлять предмет.
+ * Checks the prerequisites and, if they aren't met, asks for confirmation
+ * (the GM can add the item despite the requirements).
+ * @returns {Promise<boolean>} true — add the item.
  */
 export async function confirmPrerequisites(actor, item) {
   const { ok, failed } = checkPrerequisites(actor, item.system);

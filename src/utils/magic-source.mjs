@@ -1,22 +1,22 @@
 /**
- * Масштаб Источника на сцене — единый резолвер.
+ * Source Scale on the scene — a single resolver.
  *
- * Источник живёт во флаге сцены `scene.flags.dedrel.sourceScale` как карта
- * `{ <ключ доктрины>: "none" | "any" | "abundant" }`. Флаг пишет ГМ виджетом
- * «Источники сцены» (src/apps/source-hud.mjs).
+ * The Source lives in the scene flag `scene.flags.dedrel.sourceScale` as a map
+ * `{ <doctrine key>: "none" | "any" | "abundant" }`. The GM writes the flag with the
+ * Scene Sources widget (src/apps/source-hud.mjs).
  *
- * Единственная точка чтения: и виджет, и Конструктор заклинаний ходят сюда,
- * иначе они разъезжаются — виджет показывает одно, селект Конструктора
- * разрешает другое. Доктрина без записи во флаге получает дефолт из конфига
- * (`CONFIG.DEDREL.magic.defaultSourceScales`), а НЕ «без ограничений».
+ * The only reading point: both the widget and the Spell Constructor come here,
+ * otherwise they drift apart — the widget shows one thing, the Constructor's selector
+ * allows another. A doctrine without an entry in the flag gets the default from the config
+ * (`CONFIG.DEDREL.magic.defaultSourceScales`), NOT "unrestricted".
  */
 
-/** Порядок уровней по возрастанию: индекс = сила Источника. */
+/** Order of levels, ascending: index = Source strength. */
 export const SOURCE_ORDER = ["none", "any", "abundant"];
 
 /**
- * Доктрины, к которым концепция Источника применима: описанные в Конструкторе
- * и не помеченные `ignoresSource` (Биомантия: живое тело и есть источник).
+ * Doctrines the Source concept applies to: described in the Constructor
+ * and not marked `ignoresSource` (Biomancy: the living body is the source).
  * @returns {string[]}
  */
 export function doctrinesWithSource() {
@@ -25,9 +25,9 @@ export function doctrinesWithSource() {
 }
 
 /**
- * Уровень по умолчанию для сцены, которую ГМ не настраивал.
+ * Default level for a scene the GM hasn't configured.
  * @param {string} doctrineKey
- * @returns {string} ключ sourceScales
+ * @returns {string} sourceScales key
  */
 export function defaultSourceScale(doctrineKey) {
   const config = CONFIG.DEDREL?.magic;
@@ -36,10 +36,10 @@ export function defaultSourceScale(doctrineKey) {
 }
 
 /**
- * Фактический уровень Источника доктрины на сцене.
+ * The doctrine's actual Source level on the scene.
  * @param {string} doctrineKey
- * @param {Scene|null} [scene] сцена; по умолчанию — активная
- * @returns {string} ключ sourceScales
+ * @param {Scene|null} [scene] scene; the active one by default
+ * @returns {string} sourceScales key
  */
 export function sceneSourceScale(doctrineKey, scene = canvas?.scene) {
   const flag = scene?.getFlag("dedrel", "sourceScale")?.[doctrineKey];
@@ -47,10 +47,10 @@ export function sceneSourceScale(doctrineKey, scene = canvas?.scene) {
 }
 
 /**
- * Записывает уровень Источника доктрины на сцену (ГМ).
- * setFlag мержит карту — соседние доктрины не затрагиваются.
+ * Writes the doctrine's Source level to the scene (GM).
+ * setFlag merges the map — neighboring doctrines aren't affected.
  * @param {string} doctrineKey
- * @param {string} scale ключ sourceScales
+ * @param {string} scale sourceScales key
  * @param {Scene|null} [scene]
  */
 export async function setSceneSourceScale(doctrineKey, scale, scene = canvas?.scene) {
@@ -60,9 +60,9 @@ export async function setSceneSourceScale(doctrineKey, scale, scene = canvas?.sc
 }
 
 /**
- * Следующий уровень по кругу: none → any → abundant → none.
- * @param {string} scale текущий уровень
- * @param {boolean} [backwards] шаг назад (Shift+клик)
+ * Next level in a cycle: none → any → abundant → none.
+ * @param {string} scale current level
+ * @param {boolean} [backwards] step back (Shift+click)
  * @returns {string}
  */
 export function nextSourceScale(scale, backwards = false) {

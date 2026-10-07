@@ -1,35 +1,35 @@
 /**
- * Движок расчёта Магического Конструктора: валидация сборки заклинания и
- * компиляция в исполняемые поля Item типа "spell".
+ * Spell Constructor calculation engine: validating a spell build and
+ * compiling it into the executable fields of an Item of type "spell".
  *
- * Единственный источник истины для стоимости/лимитов. Используется:
- *  - Конструктором (SpellConstructorApp) для живого пересчёта;
- *  - ре-валидацией при касте (DedrelItem.use);
- *  - смоук-тестом (макрос "Валидация магии").
+ * The single source of truth for cost/limits. Used by:
+ *  - the Constructor (SpellConstructorApp) for live recalculation;
+ *  - re-validation on cast (DedrelItem.use);
+ *  - the smoke test (the "Magic Validation" macro).
  *
- * Модуль не трогает документы и DOM: чистые функции над plain-объектами.
- * game.i18n используется ТОЛЬКО в хелперах локализации (localizeErrors,
- * buildBreakdownText) — сам calculate() от i18n не зависит.
+ * The module doesn't touch documents or the DOM: pure functions over plain objects.
+ * game.i18n is used ONLY in the localization helpers (localizeErrors,
+ * buildBreakdownText) — calculate() itself doesn't depend on i18n.
  *
- * Термины:
- *  build   — сборка: { doctrine, path, sourceScale, techniques: ["create"],
- *            modifiers: [{ key, rank, option }] }. path: "" = без пути (база).
- *  context — окружение: { doctrineRank, knownTechniques: {create:1,...},
- *            knownPaths: {ice:1,...}, ignoreKnown } (ignoreKnown — ГМ-режим:
- *            не проверять изученность техник и путей; ранг доктрины ГМ задаёт
- *            вручную через doctrineRank)
+ * Terms:
+ *  build   — the build: { doctrine, path, sourceScale, techniques: ["create"],
+ *            modifiers: [{ key, rank, option }] }. path: "" = no path (base).
+ *  context — the environment: { doctrineRank, knownTechniques: {create:1,...},
+ *            knownPaths: {ice:1,...}, ignoreKnown } (ignoreKnown — GM mode:
+ *            don't check whether techniques and paths are learned; the GM sets the doctrine rank
+ *            by hand via doctrineRank)
  */
 export class SpellCalculator {
 
   /**
-   * Полный расчёт сборки.
+   * Full calculation of a build.
    * @returns {{
    *   valid: boolean,
    *   errors: Array<{code: string, data?: object}>,
    *   totalAp: number,
    *   requiredRank: number,
    *   breakdown: Array<{kind: string, key: string, rank?: number, option?: string, base: number, delta: number, final: number}>,
-   *   compiled: object|null  // патч для item.system + служебные поля (см. compile)
+   *   compiled: object|null  // patch for item.system + service fields (see compile)
    * }}
    */
   static calculate(build, context, config = CONFIG.DEDREL?.magic) {
@@ -48,7 +48,7 @@ export class SpellCalculator {
     if (doctrineRank < 1) errors.push({ code: "no_doctrine_rank" });
     const limits = config.rankLimits[Math.min(Math.max(doctrineRank, 1), 6)];
 
-    // Путь — купленная талантом специализация; сборка без пути легальна всегда
+    // A path is a specialization purchased with a talent; a build without a path is always legal
     let pathKey = "";
     let pathCfg = null;
     if (build.path) {
@@ -64,27 +64,27 @@ export class SpellCalculator {
     }
 
     const { deltas, forbidden, caps } = this.rulesFor(doctrineCfg, pathCfg);
-    // Доктринные модификаторы, которыми владеет доктрина (+ путь добавляет свои)
+    // Doctrinal modifiers owned by the doctrine (+ the path adds its own)
     const ownedDoctrinal = new Set([...(doctrineCfg.modifiers || []), ...(pathCfg?.modifiers || [])]);
-    // Формы урона: список пути переопределяет список доктрины целиком
+    // Damage forms: the path's list overrides the doctrine's list entirely
     const forms = pathCfg?.forms ?? doctrineCfg.forms ?? [];
 
-    // Доктрины с ignoresSource (Телекинез, Биомантия): концепция Источника
-    // неприменима — масштаб принудительно "none", move доступна всегда,
-    // 5-й ранг модификаторов открывается Рангом Доктрины 5 (обычный maxModCost).
+    // Doctrines with ignoresSource (Telekinesis, Biomancy): the Source concept
+    // doesn't apply — the scale is forced to "none", move is always available,
+    // rank 5 of the modifiers is unlocked by Doctrine Rank 5 (the regular maxModCost).
     const ignoresSource = !!doctrineCfg.ignoresSource;
     const sourceScale = ignoresSource ? "none" : (build.sourceScale || "none");
     const sourceCfg = config.sourceScales[sourceScale];
     const abundant = !!sourceCfg?.ignoresMaxModCost;
-    // Режим Изобильного Источника (настройка мира abundantSourceMode):
-    //   unlockAll   — снимает maxModCost целиком (все ранги доступны);
-    //   requireRank — только открывает 5-й ранг, maxModCost продолжает действовать.
-    // context.abundantMode — явный override для тестов вне Foundry.
+    // Abundant Source mode (the abundantSourceMode world setting):
+    //   unlockAll   — lifts maxModCost entirely (all ranks available);
+    //   requireRank — only unlocks rank 5, maxModCost stays in force.
+    // context.abundantMode — explicit override for tests outside Foundry.
     const abundantMode = context.abundantMode
       ?? ((typeof game !== "undefined" && game.settings) ? game.settings.get("dedrel", "abundantSourceMode") : "unlockAll");
     const bypassMaxCost = abundant && abundantMode === "unlockAll";
 
-    // --- Техники ---
+    // --- Techniques ---
     const techniques = build.techniques || [];
     const seenTech = new Set();
     for (const t of techniques) {
@@ -111,7 +111,7 @@ export class SpellCalculator {
       errors.push({ code: "too_many_techniques", data: { count: seenTech.size, max: limits.techniques } });
     }
 
-    // --- Модификаторы ---
+    // --- Modifiers ---
     const modifiers = build.modifiers || [];
     const chosenModKeys = new Set(modifiers.map(m => m.key));
     const hasArea = ["area_cone", "area_circle", "area_line"].some(k => chosenModKeys.has(k));
@@ -133,12 +133,12 @@ export class SpellCalculator {
       }
 
       const target = `mod:${m.key}`;
-      // Доктринный модификатор доступен только владельцу (доктрине/пути из конфига)
+      // A doctrinal modifier is available only to its owner (doctrine/path from the config)
       if (cfg.doctrinal && !ownedDoctrinal.has(m.key)) {
         errors.push({ code: "modifier_not_owned", data: { key: m.key } });
         continue;
       }
-      // Форма доступна только доктрине/пути с непустым списком форм
+      // A form is available only to a doctrine/path with a non-empty form list
       if (cfg.requiresForms && forms.length === 0) {
         errors.push({ code: "modifier_forbidden", data: { key: m.key } });
         continue;
@@ -147,8 +147,8 @@ export class SpellCalculator {
         errors.push({ code: "modifier_forbidden", data: { key: m.key } });
         continue;
       }
-      // Зависимости: "модификатор требует технику" (Насыщение → imbue),
-      // "модификатор требует Область" (Пыльная завеса)
+      // Dependencies: "the modifier requires a technique" (Imbuement → imbue),
+      // "the modifier requires an Area" (Dust Veil)
       if (cfg.requiresTechnique && !seenTech.has(cfg.requiresTechnique)) {
         errors.push({ code: "modifier_needs_technique", data: { key: m.key, tech: cfg.requiresTechnique } });
       }
@@ -165,7 +165,7 @@ export class SpellCalculator {
         }
       }
 
-      // Взаимоисключения (Цели ↔ Области, Области между собой) — пара репортится один раз
+      // Mutual exclusions (Targets ↔ Areas, Areas among themselves) — a pair is reported once
       for (const other of cfg.exclusiveWith || []) {
         if (chosenModKeys.has(other)) {
           const pairId = [m.key, other].sort().join("+");
@@ -175,13 +175,13 @@ export class SpellCalculator {
           }
         }
       }
-      // Конус кастуется от клетки заклинателя — Дальность неприменима
+      // A cone is cast from the caster's square — Range doesn't apply
       if (cfg.noRange && chosenModKeys.has("range")) {
         errors.push({ code: "cone_no_range", data: { key: m.key } });
       }
 
-      // Ранговые лимиты. 5-й ранг требует Изобильного Источника — кроме доктрин
-      // ignoresSource, где его гейтит Ранг Доктрины 5 через обычный maxModCost.
+      // Rank limits. Rank 5 requires an Abundant Source — except for ignoresSource
+      // doctrines, where it is gated by Doctrine Rank 5 via the regular maxModCost.
       if (!abundant && !ignoresSource && rank === 5) {
         errors.push({ code: "rank5_needs_abundant", data: { key: m.key } });
       } else if (!bypassMaxCost && rank > limits.maxModCost) {
@@ -189,9 +189,9 @@ export class SpellCalculator {
       }
 
       maxModRank = Math.max(maxModRank, rank);
-      const base = rank; // базовая цена модификатора в ОД равна его рангу
-      // priceDelta — собственная надбавка модификатора (Области: +1 ОД),
-      // складывается со сродствами/ограничениями доктрины и пути
+      const base = rank; // a modifier's base AP cost equals its rank
+      // priceDelta — the modifier's own surcharge (Areas: +1 AP),
+      // adds up with the doctrine's and path's affinities/restrictions
       const delta = (deltas[target] || 0) + (cfg.priceDelta || 0);
       breakdown.push({ kind: "modifier", key: m.key, rank, option: m.option || "", base, delta, final: Math.max(0, base + delta) });
     }
@@ -201,8 +201,8 @@ export class SpellCalculator {
 
     const totalAp = breakdown.reduce((sum, b) => sum + b.final, 0);
 
-    // Минимальный ранг доктрины, при котором сборка легальна (для doctrine_rank_req).
-    // В режиме unlockAll изобильный источник исключает maxModCost из требования.
+    // The minimum doctrine rank at which the build is legal (for doctrine_rank_req).
+    // In unlockAll mode an abundant source excludes maxModCost from the requirement.
     let requiredRank = 6;
     for (let r = 1; r <= 6; r++) {
       const lim = config.rankLimits[r];
@@ -222,9 +222,9 @@ export class SpellCalculator {
   }
 
   /**
-   * Сводит ценовые дельты и капы доктрины и активного пути в единые карты.
-   * target: "tech:<key>" | "mod:<key>". Дельты складываются.
-   * Используется и в calculate(), и в UI Конструктора (подсветка цен/запретов).
+   * Merges the price deltas and caps of the doctrine and the active path into single maps.
+   * target: "tech:<key>" | "mod:<key>". Deltas add up.
+   * Used both in calculate() and in the Constructor UI (highlighting prices/bans).
    */
   static rulesFor(doctrineCfg, pathCfg) {
     const deltas = {};
@@ -251,9 +251,9 @@ export class SpellCalculator {
   }
 
   /**
-   * Формула урона по Лестнице: ступень ранга + сдвиг доктрины (Пиро: +1)
-   * + бонус Изобильного Источника, кламп ступенью VII.
-   * Используется и компилятором, и подсказками UI.
+   * Damage formula on the Ladder: the rank's step + the doctrine's shift (Pyro: +1)
+   * + the Abundant Source bonus, clamped at step VII.
+   * Used both by the compiler and by the UI hints.
    */
   static damageFormulaFor(config, doctrineCfg, rank, sourceScale) {
     const rankCfg = config.modifiers.damage.ranks[rank];
@@ -265,16 +265,16 @@ export class SpellCalculator {
     return config.damageLadder[step] || "";
   }
 
-  /** Длительность эффекта доктринного модификатора по durationMode. */
+  /** Effect duration of a doctrinal modifier by durationMode. */
   static #modeRounds(mode, doctrineRank) {
     if (mode === "doctrineRank") return Math.max(1, doctrineRank | 0);
     if (typeof mode === "string" && mode.startsWith("rounds:")) return parseInt(mode.slice(7)) || 1;
-    return 1; // instant: "следующий бросок" — эффект на 1 раунд
+    return 1; // instant: "the next roll" — an effect for 1 round
   }
 
   /**
-   * Компиляция валидной сборки в патч item.system (+ служебные поля caster-side).
-   * Возвращаемый объект содержит ТОЛЬКО поля схемы SpellDataModel и блок extras.
+   * Compiles a valid build into an item.system patch (+ caster-side service fields).
+   * The returned object contains ONLY SpellDataModel schema fields and the extras block.
    */
   static compile(build, { config, doctrineCfg, pathKey, pathCfg, forms, breakdown, totalAp, requiredRank, sourceScale, doctrineRank }) {
     const mods = {};
@@ -323,17 +323,17 @@ export class SpellCalculator {
       })()
     };
 
-    // ЛЮБОЕ сотворение магии требует фокуса: экипированного оружия с типом
-    // "магическое" (посох, жезл; у Пути Эха — концептуально музыкальный инструмент,
-    // отдельной проверки нет). Диалог использования предложит выбрать фокус;
-    // его бонусы к навыку "Магические атаки" вешаются transfer-эффектами оружия
-    // и активны только пока фокус экипирован (гейт по system.equipped —
-    // DedrelActor#allApplicableEffects; ядро само такого подавления НЕ делает).
+    // ANY spellcasting requires a focus: an equipped weapon of type
+    // "magic" (staff, wand; for the Path of the Echo — conceptually a musical instrument,
+    // there's no separate check). The use dialog will offer to pick the focus;
+    // its bonuses to the "Magical Attacks" skill are attached as the weapon's transfer effects
+    // and are active only while the focus is equipped (gate on system.equipped —
+    // DedrelActor#allApplicableEffects; core does NOT do such suppression itself).
     sys.req_weapon_type = { melee: false, ranged: false, shield: false, magic: true };
 
-    // --- Масштаб: дальность / цели / области ---
-    // Правила и движок шаблонов (chat.mjs placeTemplate) оперируют метрами сцены;
-    // значения рангов хранятся сразу в метрах. Без Масштаба — заклинание на себя.
+    // --- Scale: range / targets / areas ---
+    // The rules and the template engine (chat.mjs placeTemplate) work in scene meters;
+    // rank values are stored directly in meters. Without Scale — a self-targeted spell.
     const range = rankData("range");
     if (range) sys.target_range = String(range.meters);
     const targets = rankData("targets");
@@ -345,7 +345,7 @@ export class SpellCalculator {
     const line = rankData("area_line");
     if (line) { sys.template_shape = "ray"; sys.template_size = line.lengthMeters; sys.target_type = "area"; }
 
-    // --- Урон по Лестнице; тип — Форма (опция) > спец-путь > базовый тип доктрины ---
+    // --- Damage on the Ladder; type — Form (option) > special path > the doctrine's base type ---
     const damage = rankData("damage");
     if (damage) {
       const formula = this.damageFormulaFor(config, doctrineCfg, mods.damage.rank, sourceScale);
@@ -357,18 +357,18 @@ export class SpellCalculator {
       sys.formula_damage = formula + (damageType ? `[${damageType}]` : "");
     }
 
-    // --- Лечение (Биомантия): конвейер formula_heal → кнопка "Исцелить" в карточке ---
+    // --- Healing (Biomancy): pipeline formula_heal → the "Heal" button on the card ---
     const heal = rankData("heal");
     if (heal) sys.formula_heal = heal.heal;
 
-    // --- Эффекты доктринных модификаторов: спасбросок + штраф/бонус/состояния ---
+    // --- Effects of doctrinal modifiers: saving throw + penalty/bonus/conditions ---
     const extras = {
       appliedConditions: [],
-      powerBonus: 0,          // штраф "Силы" (отрицательный)
-      powerEffectRounds: 0,   // длительность эффекта штрафа (durationMode ранга)
-      pushMeters: 0,          // принудительное перемещение (Принуждение/Сбивание 3)
-      factNotes: [],          // { key, rank, saveDc } — строки RankHints в описание
-      imbue: null,            // { rank, value, option } — Насыщение
+      powerBonus: 0,          // the Power penalty (negative)
+      powerEffectRounds: 0,   // duration of the penalty effect (the rank's durationMode)
+      pushMeters: 0,          // forced movement (Compulsion/Knockdown 3)
+      factNotes: [],          // { key, rank, saveDc } — RankHints lines in the description
+      imbue: null,            // { rank, value, option } — Imbuement
       durationRounds: 0,
       durationSpecial: "",
       durabilityHp: rankData("durability")?.hp || 0
@@ -383,11 +383,11 @@ export class SpellCalculator {
       if (rankCfg.saveDc) maxSaveDc = Math.max(maxSaveDc, rankCfg.saveDc);
 
       if (b.key === "power") {
-        // Выбор игрока: табличный штраф ИЛИ состояние из списка ранга
+        // Player's choice: the table penalty OR a condition from the rank's list
         const option = b.option;
         if (option && option !== "penalty") {
-          // option = ключ condition-предмета: актуальная версия подтягивается из
-          // компендиума Conditions при применении (toggleStatusEffect)
+          // option = condition item key: the current version is pulled from
+          // the Conditions compendium on application (toggleStatusEffect)
           extras.appliedConditions.push(option);
         } else if (rankCfg.penalty) {
           extras.powerBonus = -rankCfg.penalty;
@@ -402,18 +402,18 @@ export class SpellCalculator {
           option: rankCfg.imbueChoice?.includes(b.option) ? b.option : (rankCfg.imbueChoice?.[0] || "")
         };
       } else if (rankCfg.conditions?.length) {
-        // Прочие доктринные модификаторы (Сковывание, Сбивание, Удушение):
-        // состояния фиксированы рангом, выбора нет
+        // Other doctrinal modifiers (Constraint, Knockdown, Choke):
+        // conditions are fixed by the rank, there's no choice
         extras.appliedConditions.push(...rankCfg.conditions);
       }
 
       if (rankCfg.pushMeters) extras.pushMeters = Math.max(extras.pushMeters, rankCfg.pushMeters);
-      // option — для модификаторов с выбором из пака (Адаптация): попадает в описание
+      // option — for modifiers with a choice from a pack (Adaptation): goes into the description
       if (rankCfg.hintFact) extras.factNotes.push({ key: b.key, rank: b.rank, saveDc: rankCfg.saveDc || 0, option: b.option || "" });
     }
     if (maxSaveDc) {
       sys.save_dc_formula = String(maxSaveDc);
-      // Атрибут спасброска правилами не зафиксирован; Воля — дефолт, ГМ меняет на листе
+      // The saving throw attribute isn't fixed by the rules; Willpower is the default, the GM changes it on the sheet
       sys.save_attribute = "will";
     }
 
@@ -427,8 +427,8 @@ export class SpellCalculator {
   }
 
   /**
-   * Человекочитаемая расшифровка стоимости: "Создать 2 + Урон 3−1=2 = 4 ОД".
-   * Вне Foundry (нет game) вместо названий используются ключи.
+   * Human-readable cost breakdown: "Create 2 + Damage 3−1=2 = 4 AP".
+   * Outside Foundry (no game) keys are used instead of names.
    */
   static buildBreakdownText(breakdown, totalAp) {
     const hasI18n = typeof game !== "undefined" && game.i18n;
@@ -445,11 +445,11 @@ export class SpellCalculator {
     return `${parts.join(" + ")} = ${totalAp} ${apLabel}`;
   }
 
-  /** Локализует массив ошибок calculate() в строки для UI/чата. */
+  /** Localizes the calculate() error array into strings for the UI/chat. */
   static localizeErrors(errors) {
     return errors.map(e => {
       const data = { ...(e.data || {}) };
-      // Подставляем локализованные названия компонентов вместо сырых ключей
+      // Substitute localized component names instead of raw keys
       if (data.key && game.i18n.has(`DEDREL.Magic.Modifiers.${data.key}`)) {
         data.key = game.i18n.localize(`DEDREL.Magic.Modifiers.${data.key}`);
       } else if (data.key && game.i18n.has(`DEDREL.Magic.Techniques.${data.key}`)) {
@@ -466,8 +466,8 @@ export class SpellCalculator {
   }
 
   /**
-   * Собирает context для calculate() из актора.
-   * Отдельный хелпер, чтобы Конструктор/ре-валидация не дублировали чтение полей.
+   * Assembles the context for calculate() from the actor.
+   * A separate helper so that the Constructor/re-validation don't duplicate field reads.
    */
   static contextFromActor(actor, doctrineKey) {
     return {

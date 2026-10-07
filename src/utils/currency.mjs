@@ -1,31 +1,31 @@
 /**
- * Утилиты кошелька и ценообразования (мультивалютность).
+ * Wallet and pricing utilities (multi-currency).
  *
- * Модель работы: кошелёк рассматривается как единый пул «базовых единиц»
- * (base_value каждой валюты). Операции считают в базовых единицах и затем
- * раскладывают итог по деноминациям жадным алгоритмом (нужна валюта с
- * base_value = 1 для точной сдачи; по умолчанию — медь).
+ * Working model: the wallet is treated as a single pool of "base units"
+ * (each currency's base_value). Operations compute in base units and then
+ * break the total down into denominations with a greedy algorithm (a currency with
+ * base_value = 1 is needed for exact change; copper by default).
  */
 export class DedrelCurrency {
-  /** Список валют мира (безопасно), name/abbr уже локализованы. */
+  /** The world's currency list (safely), name/abbr already localized. */
   static defs() {
     try { return this.localizeDefs(game.settings.get("dedrel", "currencies") || []); }
     catch (e) { return []; }
   }
 
   /**
-   * Резолвит i18n-ключи в name/abbr дефолтных валют (DEFAULT_CURRENCIES хранит
-   * ключи DEDREL.Currency.*, потому что константы грузятся до словарей).
-   * Пользовательские валюты с литеральным текстом проходят без изменений.
-   * Возвращает новые объекты, исходный массив не мутирует.
+   * Resolves i18n keys into the name/abbr of the default currencies (DEFAULT_CURRENCIES stores
+   * DEDREL.Currency.* keys, because the constants load before the dictionaries).
+   * User currencies with literal text pass through unchanged.
+   * Returns new objects, doesn't mutate the source array.
    */
   static localizeDefs(defs) {
-    // До инициализации i18n (ранний prepareDerivedData) ключ остаётся как есть.
+    // Before i18n is initialized (early prepareDerivedData) the key stays as is.
     const loc = v => (typeof v === "string" && v.startsWith("DEDREL.")) ? (game.i18n?.localize(v) ?? v) : v;
     return (defs || []).map(d => ({ ...d, name: loc(d.name), abbr: loc(d.abbr) }));
   }
 
-  /** Суммарная ценность кошелька актора в базовых единицах. */
+  /** Total value of the actor's wallet in base units. */
   static walletBase(actor) {
     let total = 0;
     const cur = actor?.system?.currency || {};
@@ -33,7 +33,7 @@ export class DedrelCurrency {
     return total;
   }
 
-  /** Раскладывает сумму в базовых единицах по деноминациям (жадно, сверху вниз). */
+  /** Breaks an amount in base units down into denominations (greedily, top-down). */
   static collapse(baseAmount) {
     const valued = this.defs().filter(d => Number(d.base_value) > 0).sort((a, b) => b.base_value - a.base_value);
     const out = {};
@@ -46,14 +46,14 @@ export class DedrelCurrency {
     return out;
   }
 
-  /** Устанавливает кошелёк актора равным baseAmount (через раскладку). */
+  /** Sets the actor's wallet equal to baseAmount (via the breakdown). */
   static async setWalletBase(actor, baseAmount) {
     return actor.update({ "system.currency": this.collapse(Math.max(0, baseAmount)) });
   }
 
   /**
-   * Цена ПОКУПКИ единицы у торговца (в базовых единицах), с учётом глобальной
-   * наценки/скидки и персональной скидки игрока (по userId).
+   * The PURCHASE price of one unit from a merchant (in base units), including the global
+   * markup/discount and the player's personal discount (by userId).
    */
   static buyUnitPrice(merchant, item, userId) {
     const base = Number(item.system?.base_price) || 0;
@@ -64,8 +64,8 @@ export class DedrelCurrency {
   }
 
   /**
-   * Цена СКУПКИ единицы торговцем у игрока (в базовых единицах): доля от базовой
-   * цены (sell_price_pct). Персональная скидка на скупку не влияет.
+   * The BUYBACK price of one unit the merchant pays the player (in base units): a share of the base
+   * price (sell_price_pct). The personal discount doesn't affect buyback.
    */
   static sellUnitPrice(merchant, item) {
     const base = Number(item.system?.base_price) || 0;
@@ -73,7 +73,7 @@ export class DedrelCurrency {
     return Math.max(0, Math.round(base * pct / 100));
   }
 
-  /** Человекочитаемая строка цены (напр. "1 зл 20 мд") из базовой суммы. */
+  /** Human-readable price string (e.g. "1 gp 20 cp") from a base amount. */
   static format(baseAmount) {
     const parts = [];
     const coins = this.collapse(baseAmount);

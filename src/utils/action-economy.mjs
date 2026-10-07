@@ -1,16 +1,16 @@
 /**
- * Экономика действий: «одно Действие за ход» (_rules/14. Combat Maneuvers).
+ * Action economy: "one Action per turn" (_rules/14. Combat Maneuvers).
  *
- * Тип манёвра нельзя прочитать с карточки: большинство помечено сразу как
- * Действие + Цепь (или Действие + Реакция), и чем манёвр окажется, решает
- * СПОСОБ применения. Поэтому режим вычисляется в момент использования:
- * запуск из чейн-HUD — Цепь, не ваш ход — Реакция, всё остальное съедает
- * Действие за ход.
+ * A maneuver's type can't be read from its card: most are marked as both
+ * Action + Chain (or Action + Reaction), and what the maneuver turns out to be is decided
+ * by HOW it is used. So the mode is computed at the moment of use:
+ * launched from the chain HUD — Chain, not your turn — Reaction, everything else uses up
+ * the turn's Action.
  *
- * Счётчик намеренно предупреждающий, а не запрещающий: реакция может
- * сработать и в свой ход (уронил цель Подсечкой — сработало Добивание),
- * автоматика такой случай не отличит, а блокировка сорвала бы легальный
- * ход. Та же логика, что у перерасхода Скорости в src/canvas/movement.mjs.
+ * The counter deliberately warns rather than forbids: a reaction can
+ * fire on your own turn too (you knocked the target down with a Leg Sweep — Finishing Blow fired),
+ * the automation can't tell such a case apart, and blocking would break a legal
+ * turn. Same logic as Speed overspending in src/canvas/movement.mjs.
  */
 
 const FLAG_SCOPE = "dedrel";
@@ -18,10 +18,10 @@ const FLAG_KEY = "actionSpent";
 
 export const ActionEconomy = {
   /**
-   * Чем оказался манёвр в этот раз.
+   * What the maneuver turned out to be this time.
    * @param {Actor} actor
    * @param {Item} item
-   * @param {"chain"|"reaction"|undefined} requested — режим, заявленный вызывающим
+   * @param {"chain"|"reaction"|undefined} requested — the mode declared by the caller
    * @returns {"action"|"chain"|"reaction"|"free"}
    */
   resolveMode(actor, item, requested) {
@@ -30,7 +30,7 @@ export const ActionEconomy = {
     if (requested === "chain" && types.chain) return "chain";
     if (requested === "reaction" && types.reaction) return "reaction";
 
-    // Вне своего хода Действие потратить нельзя — значит это Реакция.
+    // Outside your own turn an Action can't be spent — so it's a Reaction.
     if (types.reaction && !this.isOwnTurn(actor)) return "reaction";
 
     if (types.action) return "action";
@@ -40,23 +40,23 @@ export const ActionEconomy = {
   },
 
   /**
-   * Идёт ли сейчас ход этого актёра. Сравнение по uuid, а не по id: у
-   * несвязанных токенов синтетический актёр наследует id базового, поэтому
-   * по id вся стая волков с одного прототипа считалась бы одним существом.
+   * Whether it's currently this actor's turn. Compared by uuid, not by id: for
+   * unlinked tokens the synthetic actor inherits the base actor's id, so
+   * by id a whole wolf pack from one prototype would count as one creature.
    */
   isOwnTurn(actor) {
     if (!game.combat?.started || !actor) return false;
     return game.combat.combatant?.actor?.uuid === actor.uuid;
   },
 
-  /** Потрачено ли Действие в текущем ходу. */
+  /** Whether the Action has been spent this turn. */
   isActionSpent(actor) {
     return !!actor?.getFlag(FLAG_SCOPE, FLAG_KEY);
   },
 
   /**
-   * Отмечает Действие потраченным. Возвращает true, если оно уже было
-   * потрачено, — вызывающий решает, предупреждать ли игрока.
+   * Marks the Action as spent. Returns true if it had already been
+   * spent — the caller decides whether to warn the player.
    */
   async spendAction(actor) {
     if (!actor || !game.combat?.started) return false;
@@ -65,7 +65,7 @@ export const ActionEconomy = {
     return already;
   },
 
-  /** Сброс на начало хода — зовётся оттуда же, откуда восстанавливаются ОД. */
+  /** Reset at turn start — called from the same place where AP is restored. */
   async resetAction(actor) {
     if (!actor) return;
     if (this.isActionSpent(actor)) await actor.setFlag(FLAG_SCOPE, FLAG_KEY, false);

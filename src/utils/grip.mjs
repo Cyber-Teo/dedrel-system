@@ -1,19 +1,19 @@
 /**
- * Двуручный хват (Variable grip).
+ * Two-handed grip (Variable grip).
  *
- * Полноценного состояния «в скольких руках оружие» в системе нет (отложено,
- * см. NOTES.md «Weapon Versatility / Grips»). Рабочая эвристика: оружие с
- * вариативным хватом удерживается двуручно, если ВТОРОЙ слот руки пуст.
- * Истинно двуручное (is_twohanded) занимает оба слота и двуручно всегда.
+ * The system has no full "how many hands hold the weapon" state (postponed,
+ * see NOTES.md "Weapon Versatility / Grips"). Working heuristic: a weapon with
+ * a variable grip is held two-handed if the SECOND hand slot is empty.
+ * A true two-handed weapon (is_twohanded) occupies both slots and is always two-handed.
  *
- * Используется:
- *  - в Item#use(): требование манёвра is_twohanded трактуется как «двуручный ХВАТ»
- *    (двуручное ИЛИ вариативное со свободной рукой), а не как флаг оружия;
- *  - в кнопке «Урон (двуручный хват)» на карточке чата: +1 ступень Лестницы урона.
+ * Used:
+ *  - in Item#use(): a maneuver's is_twohanded requirement is read as "two-handed GRIP"
+ *    (two-handed OR variable grip with a free hand), not as a weapon flag;
+ *  - in the "Damage (two-handed grip)" button on the chat card: +1 Damage Ladder step.
  */
 
 /**
- * Удерживается ли оружие двуручным хватом (или может удерживаться прямо сейчас).
+ * Whether the weapon is held with a two-handed grip (or can be held so right now).
  * @param {Actor} actor
  * @param {Item} weapon
  * @returns {boolean}

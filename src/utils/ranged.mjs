@@ -1,14 +1,14 @@
 import { RANGED_CLASS_KEYS } from "../constants.mjs";
 
 /**
- * Класс дальнобойного оружия по его ключу/названию.
- * Возвращает элемент RANGED_CLASS_KEYS ({ class, ammo, recoverable }) или null.
+ * A ranged weapon's class by its key/name.
+ * Returns an element of RANGED_CLASS_KEYS ({ class, ammo, recoverable }) or null.
  *
- * null означает «не боеприпасное дальнобойное»: метательное (is_thrown),
- * оружие без weapon_type.ranged, либо ключ без совпадений с известными классами.
+ * null means "not an ammunition-using ranged weapon": thrown (is_thrown),
+ * a weapon without weapon_type.ranged, or a key matching none of the known classes.
  *
- * ВАЖНО: порядок проверки firearm → crossbow → bow. Матчинг подстрокой (как в
- * гейте манёвров, item.mjs), поэтому "crossbow" обязан проверяться раньше "bow".
+ * IMPORTANT: check order firearm → crossbow → bow. Matching is by substring (as in
+ * the maneuver gate, item.mjs), so "crossbow" must be checked before "bow".
  */
 export function getRangedClass(weapon) {
   if (!weapon || weapon.type !== "weapon") return null;
@@ -21,7 +21,7 @@ export function getRangedClass(weapon) {
   return null;
 }
 
-/** Подходит ли боеприпас (item типа ammunition) данному оружию по ammo_type ↔ классу. */
+/** Whether the ammunition (an item of type ammunition) suits this weapon by ammo_type ↔ class. */
 export function ammoMatchesWeapon(ammo, weapon) {
   const rc = getRangedClass(weapon);
   if (!rc || ammo?.type !== "ammunition") return false;

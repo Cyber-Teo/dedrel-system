@@ -1,58 +1,58 @@
 /**
  * ==========================================================================
- * DSL-модификаторы Dedrel (flags.dedrel.mod)
+ * Dedrel DSL modifiers (flags.dedrel.mod)
  * ==========================================================================
  *
- * Единый механизм одноразовых и условных бонусов «на следующий манёвр».
- * Носитель — Active Effect (обычно от технического Condition-предмета),
- * содержащий одну или несколько change-строк с ключом "flags.dedrel.mod".
+ * A single mechanism for one-shot and conditional "next maneuver" bonuses.
+ * The carrier is an Active Effect (usually from a technical Condition item)
+ * holding one or more change rows with the key "flags.dedrel.mod".
  *
- * Формат значения: сегменты через ";", каждый сегмент — "имя:значение".
- * Первый сегмент — операция:
- *   ap_set:N       — установить стоимость ОД = N (из нескольких берётся минимум)
- *   ap_discount:N  — скидка ОД (складываются, стоимость не ниже 0)
- *   attack:N       — бонус к броску атаки (складываются)
- *   damage:X       — добавка к формуле урона; число или дайсы, например "1d6"
- *   dice_step:N    — сдвиг БАЗОВОЙ формулы урона по лестнице кубов
- *                    1d4→1d6→2d4→2d6→2d8→3d6 (складываются; N может быть
- *                    отрицательным — нерф; см. src/utils/dice-ladder.mjs)
- *   pierce:N       — бронебойность урона (складываются между собой и с
- *                    бронебойностью оружия; каждая единица снимает 10% DR цели)
+ * Value format: segments separated by ";", each segment is "name:value".
+ * The first segment is the operation:
+ *   ap_set:N       — set the AP cost = N (the minimum of several is taken)
+ *   ap_discount:N  — AP discount (they add up, the cost doesn't go below 0)
+ *   attack:N       — attack roll bonus (they add up)
+ *   damage:X       — addition to the damage formula; a number or dice, e.g. "1d6"
+ *   dice_step:N    — shift of the BASE damage formula along the dice ladder
+ *                    1d4→1d6→2d4→2d6→2d8→3d6 (they add up; N can be
+ *                    negative — a nerf; see src/utils/dice-ladder.mjs)
+ *   pierce:N       — damage Armor Piercing (adds up with each other and with
+ *                    the weapon's Armor Piercing; each point removes 10% of the target's DR)
  *
- * Опциональные параметры:
- *   filter:<expr>  — к каким манёврам применяется (см. matchesFilter);
- *                    по умолчанию "any"
- *   consume:<когда> — момент сгорания эффекта-носителя:
- *                    use (при трате ОД) | roll (после броска атаки) |
- *                    damage (после броска урона) | never (не сгорает).
- *                    Дефолт по операции: ap_* → use, attack → roll, damage → damage.
+ * Optional parameters:
+ *   filter:<expr>  — which maneuvers it applies to (see matchesFilter);
+ *                    "any" by default
+ *   consume:<when> — the moment the carrier effect burns:
+ *                    use (on spending AP) | roll (after the attack roll) |
+ *                    damage (after the damage roll) | never (doesn't burn).
+ *                    Default by operation: ap_* → use, attack → roll, damage → damage.
  *
- * Примеры:
- *   "ap_set:0; filter:ranged"                        — следующий выстрел бесплатно
- *   "attack:2; filter:ranged; consume:roll"          — Прицеливание
- *   "damage:1d6; filter:melee"                       — +1d6 к следующему удару
- *   "attack:1; filter:skill:bows; consume:never"     — постоянный +1 к атакам из лука
- *   "dice_step:1; filter:dtype:bludgeoning"          — следующий дробящий удар на ступень выше
- *   "dice_step:-1; filter:melee; consume:never"      — постоянный нерф: урон на ступень ниже
- *   "ap_discount:1; filter:tech:imbue; consume:never" — материал фокуса: заклинания
- *                    с Насыщением дешевле на 1 ОД (пока предмет экипирован)
+ * Examples:
+ *   "ap_set:0; filter:ranged"                        — next shot is free
+ *   "attack:2; filter:ranged; consume:roll"          — Take Aim
+ *   "damage:1d6; filter:melee"                       — +1d6 to the next strike
+ *   "attack:1; filter:skill:bows; consume:never"     — permanent +1 to bow attacks
+ *   "dice_step:1; filter:dtype:bludgeoning"          — next bludgeoning strike one step higher
+ *   "dice_step:-1; filter:melee; consume:never"      — permanent nerf: damage one step lower
+ *   "ap_discount:1; filter:tech:imbue; consume:never" — focus material: spells
+ *                    with Imbuement cost 1 AP less (while the item is equipped)
  *
- * ВАЖНО: движок читает change-строки КАЖДОГО эффекта отдельно
- * (actor.appliedEffects → effect.changes) — включая эффекты, перенесённые
- * с предметов (transfer: true). Слитое значение флага на актёре не используется,
- * поэтому режим change-строки (Add/Override) значения НЕ имеет, а несколько
- * одновременных баффов не затирают друг друга — каждый живёт и сгорает независимо.
+ * IMPORTANT: the engine reads the change rows of EACH effect separately
+ * (actor.appliedEffects → effect.changes) — including effects transferred
+ * from items (transfer: true). The merged flag value on the actor isn't used,
+ * so the change row's mode (Add/Override) does NOT matter, and several
+ * simultaneous buffs don't overwrite each other — each lives and burns independently.
  *
- * Правило сгорания: на стадии S удаляется эффект, у которого максимальная
- * стадия среди СОВПАВШИХ по фильтру модов равна S. Эффект, чей фильтр не
- * совпал с манёвром, не тратится — он протухнет сам по duration.
+ * Burn rule: at stage S, an effect is deleted if the maximum
+ * stage among its mods MATCHED by the filter equals S. An effect whose filter didn't
+ * match the maneuver isn't spent — it will expire on its own by duration.
  */
 
 /**
- * Атакующие реакции, цену которых двигает темп оружия (13. Weapons §Свойства:
- * «Быстрое» −1 ОД, «Медленное» +1 ОД, пока оружие экипировано).
- * Монстровая Атака по возможности (`maneuver_monster_attack_of_opportunity`)
- * сюда не входит: естественное оружие темпом не размечается.
+ * Attacking reactions whose cost is shifted by weapon tempo (13. Weapons §Properties:
+ * Fast −1 AP, Slow +1 AP, while the weapon is equipped).
+ * The monster Attack of Opportunity (`maneuver_monster_attack_of_opportunity`)
+ * isn't included: natural weapons aren't marked with tempo.
  */
 const TEMPO_MANEUVERS = new Set([
   "maneuver_riposte",
@@ -61,10 +61,10 @@ const TEMPO_MANEUVERS = new Set([
   "maneuver_preemptive_thrust"
 ]);
 
-/** Порядок стадий потребления. "never" не сгорает автоматически. */
+/** Order of consumption stages. "never" doesn't burn automatically. */
 const CONSUME_STAGES = { use: 0, roll: 1, damage: 2, never: 3 };
 
-/** Дефолтный момент сгорания для каждой операции. */
+/** Default burn moment for each operation. */
 const DEFAULT_CONSUME = {
   ap_set: "use",
   ap_discount: "use",
@@ -77,22 +77,22 @@ const DEFAULT_CONSUME = {
 export const MOD_CHANGE_KEY = "flags.dedrel.mod";
 
 /**
- * Проверяет, соответствует ли манёвр фильтру модификатора.
- * Поддерживает несколько условий через "|" (логика OR).
+ * Checks whether the maneuver matches the modifier's filter.
+ * Supports several conditions via "|" (OR logic).
  *
- * Поддерживаемые токены фильтра:
- *   "any"          — любой манёвр (всегда true)
- *   "ranged"       — манёвр требует дальнобойного оружия (req_weapon_type.ranged)
- *   "melee"        — манёвр требует оружия ближнего боя (req_weapon_type.melee)
- *   "shield"       — манёвр требует щита
- *   "skill:<key>"  — манёвр привязан к конкретной группе навыков (req_weapon_skill_group)
- *   "key:<key>"    — манёвр имеет конкретный system.key или name
- *   "dtype:<type>" — предмет наносит урон определённого типа (piercing, slashing, bludgeoning)
+ * Supported filter tokens:
+ *   "any"          — any maneuver (always true)
+ *   "ranged"       — the maneuver requires a ranged weapon (req_weapon_type.ranged)
+ *   "melee"        — the maneuver requires a melee weapon (req_weapon_type.melee)
+ *   "shield"       — the maneuver requires a shield
+ *   "skill:<key>"  — the maneuver is bound to a specific skill group (req_weapon_skill_group)
+ *   "key:<key>"    — the maneuver has a specific system.key or name
+ *   "dtype:<type>" — the item deals damage of a certain type (piercing, slashing, bludgeoning)
  *
- * Токены для заклинаний Конструктора (синтаксис ключей как в CONFIG.DEDREL.magic):
- *   "doctrine:<key>" — заклинание доктрины (system.doctrine; работает и для линейных)
- *   "tech:<key>"     — в сборке есть Техника (chosen_techniques)
- *   "mod:<key>"      — в сборке есть Модификатор (chosen_modifiers)
+ * Tokens for Constructor spells (key syntax as in CONFIG.DEDREL.magic):
+ *   "doctrine:<key>" — a spell of the doctrine (system.doctrine; works for linear ones too)
+ *   "tech:<key>"     — the build has the Technique (chosen_techniques)
+ *   "mod:<key>"      — the build has the Modifier (chosen_modifiers)
  *
  * @param {Item} item
  * @param {string} filter
@@ -110,13 +110,13 @@ function matchesFilter(item, filter) {
     if (token === "any") return true;
     if (token === "ranged") {
       if (wType.ranged) return true;
-      // Также проверяем по группе навыка (луки, арбалеты и т.д.)
+      // Also check by skill group (bows, crossbows, etc.)
       if (["bows", "crossbows", "firearms", "throwing", "artillery"].includes(skillGroup)) return true;
     }
     if (token === "melee") {
       if (wType.melee) return true;
-      // Также проверяем по группе навыка для оружия ближнего боя.
-      // Примечание: некоторые манёвры используют "bladed" вместо "bladed_weapons".
+      // Also check by skill group for melee weapons.
+      // Note: some maneuvers use "bladed" instead of "bladed_weapons".
       if (["bladed_weapons", "bladed", "blunt_weapons", "pole_weapons", "unarmed_combat", "exotic_weapons"].includes(skillGroup)) return true;
     }
     if (token === "shield") {
@@ -153,10 +153,10 @@ function matchesFilter(item, filter) {
 export class DedrelBonuses {
 
   /**
-   * Разбирает одну DSL-строку модификатора.
-   * @param {string} str — например "ap_set:0; filter:ranged; consume:use"
+   * Parses one DSL modifier string.
+   * @param {string} str — e.g. "ap_set:0; filter:ranged; consume:use"
    * @returns {{op: string, value: string, filter: string, consume: string}|null}
-   *          null, если строка не является валидным модификатором.
+   *          null if the string isn't a valid modifier.
    */
   static parseMod(str) {
     if (typeof str !== "string" || !str.trim()) return null;
@@ -164,7 +164,7 @@ export class DedrelBonuses {
     const segments = str.split(";").map(s => s.trim()).filter(s => s.length > 0);
     if (segments.length === 0) return null;
 
-    // Первый сегмент — операция
+    // The first segment is the operation
     const [opRaw, ...opValueParts] = segments[0].split(":");
     const op = opRaw.trim();
     const opValue = opValueParts.join(":").trim();
@@ -195,8 +195,8 @@ export class DedrelBonuses {
       const value = segment.slice(idx + 1).trim();
 
       if (name === "filter") {
-        // Валидация токенов фильтра: частая ошибка — ключ манёвра без префикса "key:".
-        // Такой фильтр никогда не совпадёт, и мод молча не будет работать.
+        // Filter token validation: a common mistake is a maneuver key without the "key:" prefix.
+        // Such a filter never matches, and the mod silently won't work.
         for (const token of value.split("|").map(s => s.trim()).filter(s => s.length > 0)) {
           if (["any", "ranged", "melee", "shield"].includes(token)) continue;
           if (token.startsWith("skill:") || token.startsWith("key:") || token.startsWith("dtype:")) continue;
@@ -221,18 +221,18 @@ export class DedrelBonuses {
   }
 
   /**
-   * Собирает все применимые к предмету модификаторы со всех активных эффектов актёра.
+   * Collects all modifiers applicable to the item from all of the actor's active effects.
    *
    * @param {Actor} actor
-   * @param {Item} item — манёвр/заклинание, к которому применяем фильтры
+   * @param {Item} item — the maneuver/spell the filters are applied to
    * @returns {{
-   *   apSet: number|null,        — минимальный ap_set среди совпавших (null, если нет)
-   *   apDiscount: number,        — суммарная скидка ОД
-   *   attack: number,            — суммарный бонус к атаке
-   *   damageParts: string[],     — добавки к формуле урона (числа или дайсы)
-   *   diceStep: number,          — суммарный сдвиг базовой формулы по лестнице кубов
-   *   pierce: number,            — суммарная бронебойность урона
-   *   hasMatches: boolean        — есть ли хоть один совпавший мод
+   *   apSet: number|null,        — minimum ap_set among the matches (null if none)
+   *   apDiscount: number,        — total AP discount
+   *   attack: number,            — total attack bonus
+   *   damageParts: string[],     — additions to the damage formula (numbers or dice)
+   *   diceStep: number,          — total shift of the base formula along the dice ladder
+   *   pierce: number,            — total damage Armor Piercing
+   *   hasMatches: boolean        — whether there's at least one matched mod
    * }}
    */
   static collect(actor, item) {
@@ -280,18 +280,18 @@ export class DedrelBonuses {
   }
 
   /**
-   * Эффективная стоимость ОД предмета с учётом DSL-модификаторов, глобальной скидки
-   * и наценки на ОД (system.bonuses.*_ap_penalty).
-   * Единая точка расчёта: используется и в Item#use(), и в HUD цепных манёвров,
-   * чтобы отображаемая и фактическая стоимость никогда не расходились.
+   * The item's effective AP cost, including DSL modifiers, the global discount
+   * and the AP surcharge (system.bonuses.*_ap_penalty).
+   * A single point of calculation: used both in Item#use() and in the chain maneuver HUD,
+   * so that the displayed and actual cost never diverge.
    *
    * @param {Actor} actor
    * @param {Item} item
-   * @returns {{cost: number, modApplied: boolean}} modApplied — применился ли одноразовый мод
+   * @returns {{cost: number, modApplied: boolean}} modApplied — whether a one-shot mod was applied
    */
   /**
-   * Подпадает ли манёвр под темп оружия. Нужен ещё и диалогу использования —
-   * он подписывает темп в списке оружия.
+   * Whether the maneuver is subject to weapon tempo. Also needed by the use dialog —
+   * it labels the tempo in the weapon list.
    * @param {Item} item
    * @returns {boolean}
    */
@@ -300,16 +300,16 @@ export class DedrelBonuses {
   }
 
   /**
-   * Сдвиг цены ОД от темпа выбранного оружия: «Быстрое» −1, «Медленное» +1
-   * (13. Weapons §Свойства). Считается ПОСЛЕ DSL-модификаторов и отдельно от
-   * них: это не одноразовый бафф, а постоянное свойство железа в руках.
+   * AP cost shift from the selected weapon's tempo: Fast −1, Slow +1
+   * (13. Weapons §Properties). Computed AFTER the DSL modifiers and separately from
+   * them: it isn't a one-shot buff but a permanent property of the steel in hand.
    *
-   * Нулевую цену не трогаем ни в одну сторону: манёвр, сделанный бесплатным
-   * баффом (ap_set:0), Медленное оружие обратно не удорожает.
+   * A zero cost isn't touched in either direction: a maneuver made free by
+   * a buff (ap_set:0) isn't made pricier again by a Slow weapon.
    *
-   * @param {number} apCost — цена после DSL-модификаторов
-   * @param {Item} item — манёвр
-   * @param {Item|null} weapon — оружие, которым проводится реакция
+   * @param {number} apCost — cost after DSL modifiers
+   * @param {Item} item — the maneuver
+   * @param {Item|null} weapon — the weapon the reaction is performed with
    * @returns {number}
    */
   static applyWeaponTempo(apCost, item, weapon) {
@@ -327,22 +327,22 @@ export class DedrelBonuses {
       const mods = this.collect(actor, item);
       const bonuses = actor.system.bonuses || {};
 
-      // Наценка на ОД («штраф на ОД»): глобальная + адресная по типу предмета.
-      // Взаимозачитывается со скидками (скидка − наценка). Применяется только к
-      // предметам с ненулевой базовой стоимостью — бесплатные не облагаются.
+      // AP surcharge ("AP penalty"): global + targeted by item type.
+      // Offsets the discounts (discount − surcharge). Applies only to
+      // items with a nonzero base cost — free ones aren't charged.
       const apPenalty = (bonuses.global_ap_penalty || 0)
         + (item.type === "maneuver" ? (bonuses.maneuver_ap_penalty || 0) : 0)
         + (item.type === "spell" ? (bonuses.spell_ap_penalty || 0) : 0);
 
       const globalDiscount = bonuses.global_ap_discount || 0;
-      // Чистый модификатор стоимости: скидка увеличивает, наценка уменьшает пул скидки.
+      // Net cost modifier: a discount increases the discount pool, a surcharge decreases it.
       const netDiscount = mods.apDiscount + globalDiscount - apPenalty;
       if (netDiscount !== 0 && apCost > 0) {
         apCost = Math.max(0, apCost - netDiscount);
         if (mods.apDiscount > 0) modApplied = true;
       }
       if (mods.apSet !== null) {
-        // ap_set применяется всегда при совпадении фильтра (даже если apCost уже 0)
+        // ap_set always applies when the filter matches (even if apCost is already 0)
         apCost = mods.apSet;
         modApplied = true;
       }
@@ -352,15 +352,15 @@ export class DedrelBonuses {
   }
 
   /**
-   * Сжигает эффекты-носители, чей момент сгорания наступил.
-   * Эффект «сгорает» на стадии S, если максимальная стадия среди его
-   * СОВПАВШИХ модов равна S (моды с consume:never не учитываются и не сгорают).
+   * Burns the carrier effects whose burn moment has come.
+   * An effect "burns" at stage S if the maximum stage among its
+   * MATCHED mods equals S (mods with consume:never aren't counted and don't burn).
    *
-   * Что именно удаляется, зависит от носителя:
-   *  - эффект, встроенный в актёра (наложенный статус) — удаляется сам эффект;
-   *  - эффект на Condition-предмете актёра — удаляется весь предмет-состояние;
-   *  - эффект на постоянном предмете (талант, мутация, оружие) — НЕ удаляется,
-   *    в консоль пишется предупреждение: на таких носителях используйте consume:never.
+   * What exactly is deleted depends on the carrier:
+   *  - an effect embedded in the actor (an applied status) — the effect itself is deleted;
+   *  - an effect on the actor's Condition item — the whole condition item is deleted;
+   *  - an effect on a permanent item (talent, mutation, weapon) — NOT deleted,
+   *    a warning is written to the console: on such carriers use consume:never.
    *
    * @param {Actor} actor
    * @param {Item} item
@@ -405,18 +405,18 @@ export class DedrelBonuses {
   }
 
   /**
-   * Все действующие на актёра эффекты: встроенные в актёра (наложенные статусы)
-   * ПЛЮС перенесённые с предметов (transfer: true). Обычный actor.effects
-   * содержит только первую группу — из-за этого моды на Condition-предметах
-   * были бы невидимы для движка.
+   * All effects acting on the actor: those embedded in the actor (applied statuses)
+   * PLUS those transferred from items (transfer: true). The plain actor.effects
+   * contains only the first group — because of this, mods on Condition items
+   * would be invisible to the engine.
    */
   static #activeEffects(actor) {
     return actor.appliedEffects ?? actor.effects.filter(e => !e.disabled);
   }
 
   /**
-   * Генератор: обходит активные эффекты актёра и выдаёт разобранные моды,
-   * прошедшие фильтр по предмету.
+   * Generator: walks the actor's active effects and yields the parsed mods
+   * that passed the item filter.
    */
   static *#iterateMatchedMods(actor, item) {
     for (const effect of this.#activeEffects(actor)) {
