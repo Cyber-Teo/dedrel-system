@@ -8,15 +8,15 @@ import { CompendiumTranslation } from "../l10n/compendium-translation.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
- * Расширенный класс Item для системы Dedrel.
- * Переопределяет стандартные методы предмета и добавляет кастомную логику,
- * такую как использование предметов (списание ОД) и отправку в чат с кнопками атаки/урона.
+ * Extended Item class for the Dedrel system.
+ * Overrides the item's standard methods and adds custom logic,
+ * such as using items (spending AP) and posting to chat with attack/damage buttons.
  */
 export default class DedrelItem extends Item {
 
   /**
-   * Перевод документов из паков системы (src/l10n/compendium-translation.mjs).
-   * Вложенные предметы акторов из паков узнают пак через родителя.
+   * Translation of documents from the system's packs (src/l10n/compendium-translation.mjs).
+   * Embedded actor items from packs learn their pack through the parent.
    * @override
    */
   _initializeSource(data, options = {}) {
@@ -25,7 +25,7 @@ export default class DedrelItem extends Item {
       { creation: options.creation });
   }
 
-  /** Не даём записать английский текст в русский источник пака. @override */
+  /** Don't let English text be written into the pack's Russian source. @override */
   async _preUpdate(changes, options, user) {
     const allowed = await super._preUpdate(changes, options, user);
     if (allowed === false) return false;
@@ -102,10 +102,10 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Метод активации/использования предмета (вызывается при клике по предмету или броске).
-   * Оркестратор потока: гейты по типу → эффективная стоимость → требования к оружию
-   * и ресурсам → early-return для пассивок → диалог подтверждения.
-   * Сборка диалога — #buildUseDialogContent, исполнение — #confirmUse.
+   * Item activation/use method (called on clicking the item or on a roll).
+   * Flow orchestrator: gates by type → effective cost → weapon and resource
+   * requirements → early return for passives → confirmation dialog.
+   * Dialog assembly — #buildUseDialogContent, execution — #confirmUse.
    */
   async use(options = {}) {
     const actor = this.actor;
@@ -117,17 +117,17 @@ export default class DedrelItem extends Item {
 
     if (await this.#toggleLightEffects()) return;
 
-    // Свиток без привязанного заклинания использовать нельзя — открываем лист,
-    // чтобы ГМ указал spell_id/spell_key (не тратим свиток впустую).
+    // A scroll without a bound spell can't be used — open the sheet
+    // so the GM can set spell_id/spell_key (don't waste the scroll).
     if (this.type === "scroll" && !this.system.spell_id && !this.system.spell_key) {
       ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.ScrollNoSpell"));
       return this.sheet.render(true);
     }
 
-    // Чтение свитка (16. Magic §10): свиток держат свободной конечностью.
-    // Слоты рук резолвим в живые предметы (мёртвая ссылка руку не занимает);
-    // истинно двуручное оружие занимает обе руки независимо от слотов.
-    // Проверка общая для прямого клика по свитку и манёвра чтения.
+    // Reading a scroll (16. Magic §10): the scroll is held in a free limb.
+    // Hand slots are resolved to live items (a dead reference doesn't occupy a hand);
+    // a true two-handed weapon occupies both hands regardless of the slots.
+    // The check is shared by a direct click on the scroll and the reading maneuver.
     if (this.type === "scroll" || (this.type === "maneuver" && this.system.is_scroll_read)) {
       const slots = actor.system.equipment_slots || {};
       const handItem = (s) => actor.items.get(slots[s]?.item_id);
@@ -139,57 +139,57 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Ре-валидация собранного заклинания (Магический Конструктор): ранг доктрины
-    // мог измениться после сохранения, путь сборки должен быть известен магу,
-    // а поля предмета могли быть отредактированы руками. Для линейных доктрин
-    // (доктрина указана, но в конфиге Конструктора её нет — Эфиромантия, Телепатия
-    // и т.п.) проверяется только гейт ранга. Заклинания без доктрины — без проверки.
+    // Re-validation of a built spell (Spell Constructor): the doctrine rank
+    // may have changed since saving, the build's path must be known to the caster,
+    // and the item fields may have been edited by hand. For linear doctrines
+    // (a doctrine is set but it isn't in the Constructor config — Aetheromancy, Telepathy,
+    // etc.) only the rank gate is checked. Spells without a doctrine — no check.
     if (this.type === "spell" && this.system.doctrine) {
       const proceed = await this.#validateSpellCast(actor);
       if (!proceed) return;
     }
 
-    // Эффективная стоимость с учётом DSL-модификаторов и глобальной скидки.
-    // apModApplied важен ниже: если бафф сделал манёвр бесплатным, нельзя
-    // делать early-return — нужно пройти поток, чтобы сжечь бафф и отправить карточку.
+    // Effective cost with DSL modifiers and the global discount applied.
+    // apModApplied matters below: if a buff made the maneuver free, we must not
+    // return early — we have to go through the flow to burn the buff and post the card.
     let { cost: apCost, modApplied: apModApplied } = DedrelBonuses.effectiveApCost(actor, this);
 
-    // Точка расширения: макросы и модули могут скорректировать стоимость до диалога
+    // Extension point: macros and modules can adjust the cost before the dialog
     const hookCtx = { actor, item: this, apCost };
     Hooks.callAll("dedrelPreUseItem", hookCtx);
     apCost = hookCtx.apCost;
 
-    // Проверка зарядов
+    // Charges check
     const usesMaxStr = this.system.uses_max || "0";
     const usesMax = parseInt(usesMaxStr, 10) || 0;
     const usesValue = this.system.uses_value || 0;
     const hasCharges = usesMax > 0;
 
-    // Проверка на потребность в оружии
+    // Weapon requirement check
     const { requiresWeapon, validWeapons } = this.#collectWeaponRequirements(actor);
 
-    // Перезарядка: стоимость ОД диктует само оружие (system.reload_cost 1-3), а не
-    // манёвр. Для отображения в диалоге берём первое валидное оружие; в #confirmUse
-    // цена пересчитывается по фактически выбранному стволу (у актёра может быть
-    // несколько перезаряжаемых). Так игрок не перезарядит аркебузу дёшево.
+    // Reload: the AP cost is dictated by the weapon itself (system.reload_cost 1-3), not
+    // the maneuver. For display in the dialog we take the first valid weapon; in #confirmUse
+    // the cost is recomputed for the weapon actually selected (the actor may have
+    // several reloadable ones). This way the player can't reload an arquebus cheaply.
     const isReloadAction = this.type === "maneuver" && this.system.is_reload_action;
     if (isReloadAction && validWeapons.length > 0) {
       apCost = validWeapons[0].system.reload_cost || 1;
     }
 
-    // Темп оружия («Быстрое» −1 ОД / «Медленное» +1 ОД на атакующие реакции,
-    // 13. Weapons). Как и перезарядка, зависит от конкретного оружия: для
-    // диалога считаем по первому валидному, в #confirmUse цена пересчитывается
-    // по фактически выбранному. Базу храним в контексте, иначе пересчёт
-    // применил бы сдвиг второй раз поверх уже сдвинутой цены.
+    // Weapon tempo (Fast −1 AP / Slow +1 AP on attacking reactions,
+    // 13. Weapons). Like reloading, it depends on the specific weapon: for
+    // the dialog we compute it from the first valid one, in #confirmUse the cost is recomputed
+    // for the one actually selected. We keep the base in the context, otherwise the recomputation
+    // would apply the shift a second time on top of the already shifted cost.
     const apCostNoTempo = apCost;
     if (validWeapons.length > 0) {
       apCost = DedrelBonuses.applyWeaponTempo(apCost, this, validWeapons[0]);
     }
 
-    // Чтение свитка: цену ОД диктует выбранный свиток (производная от редкости),
-    // как перезарядка берёт цену с оружия. Для диалога — цена первого свитка,
-    // в #confirmUse пересчитывается по фактически выбранному.
+    // Reading a scroll: the AP cost is dictated by the selected scroll (derived from rarity),
+    // just as reloading takes its cost from the weapon. For the dialog — the first scroll's cost,
+    // in #confirmUse it is recomputed for the one actually selected.
     const isScrollRead = this.type === "maneuver" && this.system.is_scroll_read;
     let validScrolls = [];
     if (isScrollRead) {
@@ -203,11 +203,11 @@ export default class DedrelItem extends Item {
       apCost = validScrolls[0].system.ap_cost || 0;
     }
 
-    // Проверка расходуемых предметов.
-    // ВАЖНО: боеприпас оружия (consume_target) здесь НЕ трогаем — оружие само по
-    // себе не «стреляет». Выстрел = манёвр с req_weapon; боеприпас выбранного
-    // оружия списывается в #confirmUse. Иначе клик по оружию в инвентаре
-    // (item.use → лист) превращался бы в диалог расхода боеприпаса.
+    // Consumable items check.
+    // IMPORTANT: the weapon's ammunition (consume_target) is NOT touched here — a weapon by
+    // itself doesn't "fire". A shot = a maneuver with req_weapon; the selected weapon's
+    // ammunition is spent in #confirmUse. Otherwise clicking a weapon in the inventory
+    // (item.use → sheet) would turn into an ammunition consumption dialog.
     let consumeAmount = this.system.consume_amount || 1;
     let isSelfConsume = false;
     let hasEnoughAmmo = true;
@@ -221,38 +221,38 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Наличие self-эффектов тоже блокирует early-return:
-    // их нужно применить через полный поток использования.
+    // Having self effects also blocks the early return:
+    // they have to be applied through the full use flow.
     const hasSelfEffects = this.effects.some(e => e.getFlag("dedrel", "applyTo") === "self");
 
-    // Активная нагрузка (вшитое заклинание / лечение) тоже требует полного потока,
-    // иначе жезл/амулет без зарядов и ОД просто открыл бы лист вместо срабатывания.
+    // An active payload (bound spell / healing) also requires the full flow,
+    // otherwise a wand/amulet without charges and AP would just open the sheet instead of firing.
     const hasBoundSpell = (this.type === "scroll" || this.type === "magic_item")
       && (this.system.spell_id || this.system.spell_key);
     const hasActivePayload = hasBoundSpell || !!this.system.formula_heal || !!this.system.formula_temp_hp;
 
-    // Если предмет полностью пассивный, просто открываем его окно (чтобы не спамить в чат)
+    // If the item is fully passive, just open its window (so as not to spam the chat)
     const isPassiveSubtype = (this.type === "talent" || this.type === "mutation") && this.system.subtype === "passive";
     if (apCost === 0 && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && !hasActivePayload && (isPassiveSubtype || this.type === "weapon" || this.type === "magic_item" || this.type === "armor" || this.type === "loot" || this.type === "trade_good" || this.type === "ammunition")) {
       return this.sheet.render(true);
     }
 
-    // ВАЖНО: если бонус сделал манёвр бесплатным (apModApplied), НЕ делаем early-return.
-    // Нужно продолжить поток, чтобы: 1) сжечь бафф, 2) отправить карточку в чат.
+    // IMPORTANT: if a bonus made the maneuver free (apModApplied), we do NOT return early.
+    // The flow has to continue in order to: 1) burn the buff, 2) post the card to chat.
     if (apCost === 0 && !apModApplied && !hasCharges && !requiresWeapon && !consumesResources && !hasSelfEffects && !hasActivePayload) {
       return this.sheet.render(true);
     }
 
-    // Пулы ОД считаем один раз: они нужны и диалогу (доступно ОД, потолок
-    // переменной цены), и #confirmUse (списание из специального/универсального).
+    // AP pools are computed once: they're needed both by the dialog (available AP, the cap
+    // on a variable cost) and by #confirmUse (spending from the special/universal pool).
     const isVariable = this.system.is_variable_cost;
     const minAp = apCost;
     const pools = (apCost > 0 || isVariable)
       ? this.#resolveApPools()
       : { currentAp: 0, apSpecific: 0, specificApKey: "" };
 
-    // Режим применения (Действие / Цепь / Реакция) решается здесь, а не флагами
-    // карточки: манёвр может быть помечен сразу несколькими типами.
+    // The usage mode (Action / Chain / Reaction) is decided here, not by the card's
+    // flags: a maneuver can be marked with several types at once.
     const actionMode = (this.type === "maneuver" || this.type === "spell")
       ? ActionEconomy.resolveMode(actor, this, options.mode)
       : "free";
@@ -285,17 +285,17 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Светильник-тумблер: у предмета с собственным transfer-эффектом света
-   * (факел, лампа) использование ПЕРЕКЛЮЧАЕТ свет (disabled эффекта), а не
-   * накладывает копии на актёра. Свет — нативные change-строки token.light.*,
-   * ядро применяет/гасит их само.
+   * Light-source toggle: for an item with its own light transfer effect
+   * (torch, lamp), using it TOGGLES the light (the effect's disabled), rather than
+   * stacking copies onto the actor. Light is native token.light.* change rows,
+   * core applies/clears them itself.
    *
-   * Экипируемые типы (оружие, броня) тоже сюда попадают: факел занимает руку и
-   * потому делается оружием, а их use сам по себе — не атака (атака идёт манёвром
-   * с req_weapon), без тумблера клик по факелу просто открывал бы лист. Предмет
-   * без светового transfer-эффекта проходит мимо и ведёт себя как раньше.
-   * Зелья и свитки не трогаем — это расходники.
-   * @returns {Promise<boolean>} true — предмет оказался светильником и был переключён.
+   * Equippable types (weapons, armor) also end up here: a torch occupies a hand and
+   * so is made a weapon, and their use by itself isn't an attack (attacks go through a maneuver
+   * with req_weapon); without the toggle clicking a torch would just open the sheet. An item
+   * without a light transfer effect passes by and behaves as before.
+   * Potions and scrolls are left alone — they're consumables.
+   * @returns {Promise<boolean>} true — the item turned out to be a light source and was toggled.
    */
   async #toggleLightEffects() {
     if (!["magic_item", "loot", "trade_good", "weapon", "armor"].includes(this.type)) return false;
@@ -305,9 +305,9 @@ export default class DedrelItem extends Item {
     const enable = lightEffects.some(e => e.disabled);
     for (const effect of lightEffects) await effect.update({ disabled: !enable });
 
-    // Экипируемый светильник светит только из слота: transfer-эффект
-    // неэкипированного предмета подавлен (Actor#itemEffectsActive), поэтому
-    // «зажёг» факел в рюкзаке — честно предупреждаем, что токен не засветится.
+    // An equippable light source only shines from a slot: the transfer effect
+    // of an unequipped item is suppressed (Actor#itemEffectsActive), so
+    // when a torch is "lit" in the backpack, we honestly warn that the token won't light up.
     if (enable && !this.actor.itemEffectsActive(this)) {
       ui.notifications.warn(game.i18n.format("DEDREL.Notifications.LightOnUnequipped", { name: this.name }));
       return true;
@@ -320,14 +320,14 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Определяет, требует ли манёвр/заклинание оружие, и отбирает подходящие
-   * экипированные стволы. Между категориями требований действует «И», внутри
-   * категории достаточно ЛЮБОГО из отмеченных («ИЛИ»).
+   * Determines whether the maneuver/spell requires a weapon and picks the suitable
+   * equipped weapons. Requirement categories combine with "AND"; within a
+   * category ANY of the marked ones is enough ("OR").
    * @returns {{requiresWeapon: boolean, validWeapons: Item[]}}
    */
   #collectWeaponRequirements(actor) {
-    // Чтение свитка (16. Magic §10): всегда требует экипированный магический
-    // фокус — как сотворение магии. Свобода второй руки проверяется в use().
+    // Reading a scroll (16. Magic §10): always requires an equipped magic
+    // focus — like casting magic. A free second hand is checked in use().
     if (this.type === "scroll") {
       const validWeapons = actor.items.filter(i =>
         i.type === "weapon" && i.system.equipped && i.system.weapon_type?.magic
@@ -343,10 +343,10 @@ export default class DedrelItem extends Item {
     const wDmg = this.system.req_weapon_damage_type || {};
     const wProp = this.system.req_weapon_property || {};
     const reqSkill = this.system.req_weapon_skill_group || "";
-    // Гейт по конкретному оружию: подстроки ищутся в system.key И в имени
-    // (без регистра), совпадение любой подстроки достаточно. Магические и
-    // материальные варианты проходят, пока наследуют базовый key/имя
-    // ("adamantine_greatsword", «Адамантиновый двуручный меч»).
+    // Gate on a specific weapon: substrings are searched in system.key AND in the name
+    // (case-insensitive), a match on any substring is enough. Magical and
+    // material variants pass as long as they inherit the base key/name
+    // ("adamantine_greatsword", "Adamantine Greatsword").
     const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
 
     const requiresWeapon = !!(
@@ -389,10 +389,10 @@ export default class DedrelItem extends Item {
         if (!matchDmg) return false;
       }
 
-      // Требуемые свойства оружия (двуручное, быстрое, метательное и т.п.):
-      // флаги свойств у оружия лежат плоско в system (is_twohanded, is_fast, ...).
-      // is_twohanded — требование двуручного ХВАТА: истинно двуручное проходит
-      // всегда, вариативный хват (is_variable_grip) — со свободной второй рукой.
+      // Required weapon properties (two-handed, fast, thrown, etc.):
+      // weapon property flags lie flat in system (is_twohanded, is_fast, ...).
+      // is_twohanded — a two-handed GRIP requirement: a true two-handed weapon always
+      // passes, a variable grip (is_variable_grip) — with a free second hand.
       const requiredProps = Object.entries(wProp).filter(([, req]) => req).map(([p]) => p);
       if (requiredProps.length > 0) {
         const matchProp = requiredProps.some(p =>
@@ -407,9 +407,9 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Доступные пулы ОД для оплаты предмета. Специальный пул задействуем ТОЛЬКО
-   * если он есть в схеме актёра. У NPC его нет (единый универсальный пул) →
-   * стоимость идёт с ap_universal, и мы не пишем фантомный ключ в actor.update.
+   * Available AP pools for paying for the item. The special pool is used ONLY
+   * if it exists in the actor's schema. NPCs don't have it (a single universal pool) →
+   * the cost comes from ap_universal, and we don't write a phantom key into actor.update.
    * @returns {{currentAp: number, apSpecific: number, specificApKey: string}}
    */
   #resolveApPools() {
@@ -418,8 +418,8 @@ export default class DedrelItem extends Item {
     let apSpecific = 0;
     let specificApKey = "";
 
-    // Чтение свитка платится ТОЛЬКО универсальными ОД (16. Magic §10):
-    // чужая магия с листа — не тренированная моторика и не своё сотворение.
+    // Reading a scroll is paid ONLY with universal AP (16. Magic §10):
+    // someone else's magic from a page is neither trained motor skill nor one's own casting.
     if (this.type === "maneuver" && !this.system.is_scroll_read && actor.system.resources?.ap_maneuver) {
       apSpecific = actor.system.resources.ap_maneuver.value || 0;
       specificApKey = "system.resources.ap_maneuver.value";
@@ -432,13 +432,13 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * HTML диалога подтверждения использования: стоимость ОД (фиксированная или
-   * переменная с инпутом), заряды, расход самого предмета и выбор оружия.
-   * @param {object} ctx - контекст использования, собранный в use()
+   * HTML of the use confirmation dialog: AP cost (fixed or
+   * variable with an input), charges, consumption of the item itself and weapon selection.
+   * @param {object} ctx - the use context assembled in use()
    */
   #buildUseDialogContent(ctx) {
-    // Экранирование имён предметов/оружия перед вставкой в HTML диалога
-    // (имена задаются пользователем и потенциально содержат разметку).
+    // Escape item/weapon names before inserting them into the dialog HTML
+    // (names are set by users and may contain markup).
     const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
     let content = `<div style="margin-bottom: 15px;">`;
 
@@ -478,9 +478,9 @@ export default class DedrelItem extends Item {
 
     if (ctx.requiresWeapon) {
       if (ctx.validWeapons.length > 0) {
-        // Темп подписываем прямо в опциях: цена в шапке диалога посчитана по
-        // первому оружию списка, и без подписи непонятно, почему при смене
-        // оружия она поедет.
+        // Tempo is labeled right in the options: the cost in the dialog header is computed from
+        // the first weapon in the list, and without the label it's unclear why it shifts
+        // when the weapon is changed.
         const isTempo = DedrelBonuses.isTempoManeuver(this);
         const tempoLabel = (w) => {
           if (!isTempo) return "";
@@ -517,12 +517,12 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Исполнение подтверждённого использования: резолв выбранного оружия и
-   * фактической стоимости → валидация ресурсов → списание (ОД, DSL-моды,
-   * заряды, боеприпас, сам предмет) → последствия (self-эффекты, макрос,
-   * карточка или каст вшитого заклинания, концентрация, цепные манёвры).
-   * @param {DialogV2} dialog - открытый диалог (для чтения инпутов)
-   * @param {object} ctx - контекст использования, собранный в use()
+   * Execution of a confirmed use: resolve the selected weapon and
+   * the actual cost → validate resources → spend (AP, DSL mods,
+   * charges, ammunition, the item itself) → consequences (self effects, macro,
+   * card or casting the bound spell, concentration, chain maneuvers).
+   * @param {DialogV2} dialog - the open dialog (for reading inputs)
+   * @param {object} ctx - the use context assembled in use()
    */
   async #confirmUse(dialog, ctx) {
     const { actor, apCost, isVariable, minAp, currentAp,
@@ -530,14 +530,14 @@ export default class DedrelItem extends Item {
             isScrollRead, isSelfConsume, consumeAmount, hasEnoughAmmo,
             actionMode } = ctx;
 
-    // Выбранное оружие резолвим один раз — нужно для цены перезарядки,
-    // проверки заряда, расхода боеприпаса и карточки.
+    // The selected weapon is resolved once — it's needed for the reload cost,
+    // the loaded check, ammunition consumption and the card.
     let selWeapon = null;
     if (requiresWeapon) {
       const selEl = dialog.element.querySelector("#use-weapon-select");
       selWeapon = selEl?.value ? actor.items.get(selEl.value) : null;
-      // Без валидного оружия использовать нельзя (диалог показывал только
-      // предупреждение — не даём подтвердить манёвр/свиток «голыми руками»).
+      // It can't be used without a valid weapon (the dialog only showed
+      // a warning — we don't allow confirming a maneuver/scroll "bare-handed").
       if (!selWeapon) {
         ui.notifications.warn(game.i18n.localize("DEDREL.Chat.NoEquippedWeapon"));
         return;
@@ -549,20 +549,20 @@ export default class DedrelItem extends Item {
       const inputEl = dialog.element.querySelector("#use-ap-cost");
       if (inputEl) finalApCost = parseInt(inputEl.value) || minAp;
     }
-    // Перезарядка: фактическая цена ОД — из выбранного оружия, не из манёвра.
+    // Reload: the actual AP cost comes from the selected weapon, not the maneuver.
     if (isReloadAction && selWeapon) {
       finalApCost = selWeapon.system.reload_cost || 1;
     }
 
-    // Темп фактически выбранного оружия. Считаем от базовой цены: в ctx.apCost
-    // уже сидит сдвиг по первому валидному оружию из диалога, а игрок мог
-    // выбрать в списке другое. Переменной цены это не касается — там сумму
-    // задаёт сам игрок.
+    // Tempo of the weapon actually selected. Computed from the base cost: ctx.apCost
+    // already contains the shift for the first valid weapon from the dialog, and the player may
+    // have picked another one in the list. This doesn't concern a variable cost — there the amount
+    // is set by the player.
     if (!isVariable && selWeapon && DedrelBonuses.isTempoManeuver(this)) {
       finalApCost = DedrelBonuses.applyWeaponTempo(ctx.apCostNoTempo, this, selWeapon);
     }
 
-    // Чтение свитка: фактическая цена ОД — из выбранного свитка.
+    // Reading a scroll: the actual AP cost comes from the selected scroll.
     let selScroll = null;
     if (isScrollRead) {
       const scrollEl = dialog.element.querySelector("#use-scroll-select");
@@ -574,9 +574,9 @@ export default class DedrelItem extends Item {
       finalApCost = selScroll.system.ap_cost || 0;
     }
 
-    // Выстрел из перезаряжаемого оружия: атакующий манёвр (цель — не сам
-    // стрелок, с боевыми кнопками) перезаряжаемым стволом. Прицеливание и
-    // прочие self-подготовки под это не подпадают. Из разряженного нельзя.
+    // A shot from a reloadable weapon: an attacking maneuver (target isn't the
+    // shooter themselves, with combat buttons) with a reloadable weapon. Aiming and
+    // other self preparations don't fall under this. An unloaded weapon can't fire.
     const isReloadingShot = requiresWeapon && !isReloadAction
       && !!selWeapon?.system?.is_reloading
       && this.system.target_type !== "self"
@@ -599,9 +599,9 @@ export default class DedrelItem extends Item {
       return;
     }
 
-    // Боеприпас ВЫБРАННОГО оружия (манёвр-выстрел с req_weapon). Резолвим и
-    // валидируем ДО траты ОД, чтобы не списать ОД при пустом колчане.
-    // Перезарядка боеприпас НЕ расходует (его тратит выстрел) — пропускаем.
+    // Ammunition of the SELECTED weapon (a shot maneuver with req_weapon). Resolved and
+    // validated BEFORE spending AP, so as not to spend AP with an empty quiver.
+    // Reload does NOT consume ammunition (the shot does) — skip it.
     let ammo = { weaponAmmo: null, weaponAmmoAmount: 1, ammoSnapshot: null };
     if (requiresWeapon && !isReloadAction && selWeapon?.system?.consume_target) {
       const resolved = this.#resolveWeaponAmmo(selWeapon);
@@ -612,14 +612,14 @@ export default class DedrelItem extends Item {
       ammo = resolved;
     }
 
-    // Списание ОД
+    // Spending AP
     if (finalApCost > 0) {
       await this.#spendAp(finalApCost, ctx);
     }
 
-    // Отметка «Действие за ход потрачено» (_rules/14. Combat Maneuvers).
-    // Предупреждаем, но не блокируем: реакция может законно сработать и в свой
-    // ход, а автоматика такой случай не отличит.
+    // Mark "Action spent this turn" (_rules/14. Combat Maneuvers).
+    // We warn but don't block: a reaction can legitimately fire on one's own
+    // turn too, and the automation can't tell such a case apart.
     if (actionMode === "action") {
       const wasSpent = await ActionEconomy.spendAction(actor);
       if (wasSpent) {
@@ -627,22 +627,22 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Сжигаем DSL-модификаторы стадии "use" (моды стоимости ОД).
-    // Эффект с модами более поздних стадий (attack/damage) сгорит после
-    // соответствующего броска, а не здесь.
+    // Burn the DSL modifiers of the "use" stage (AP cost mods).
+    // An effect with mods of later stages (attack/damage) burns after
+    // the corresponding roll, not here.
     if (this.type === "maneuver" || this.type === "spell") {
       await DedrelBonuses.consumeStage(actor, this, "use");
     }
 
-    // Списание Зарядов
+    // Spending Charges
     if (hasCharges) {
       await this.update({ "system.uses_value": usesValue - 1 });
     }
 
-    // Списание предметов / боеприпасов
-    // deleteSelfAfter: если сам предмет израсходован до нуля, НЕ удаляем его сразу —
-    // ниже postToChat() обращается к this (this.name, this.actor, this.effects).
-    // Удаляем в самом конце, после отправки карточки.
+    // Spending items / ammunition
+    // deleteSelfAfter: if the item itself is used up to zero, we do NOT delete it right away —
+    // postToChat() below accesses this (this.name, this.actor, this.effects).
+    // Delete at the very end, after the card is posted.
     let deleteSelfAfter = false;
     if (ammo.weaponAmmo) {
       await this.#spendWeaponAmmo(ammo.weaponAmmo, ammo.weaponAmmoAmount);
@@ -656,7 +656,7 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Состояние заряда: выстрел разряжает ствол, перезарядка — заряжает.
+    // Load state: a shot unloads the weapon, a reload loads it.
     if (isReloadingShot && selWeapon) {
       await selWeapon.update({ "system.loaded": false });
     } else if (isReloadAction && selWeapon) {
@@ -666,23 +666,23 @@ export default class DedrelItem extends Item {
 
     const selectedWeaponId = requiresWeapon ? (selWeapon?.id ?? null) : null;
 
-    // Применение шаблонных self-эффектов (flags.dedrel.applyTo = "self")
-    // с подстановкой @spentAp / @apCost / @overspent.
-    // Выполняется ДО макроса, чтобы аварийный люк (on_use_macro) видел уже применённый бафф.
+    // Applying template self effects (flags.dedrel.applyTo = "self")
+    // with @spentAp / @apCost / @overspent substituted.
+    // Runs BEFORE the macro, so that the escape hatch (on_use_macro) sees the buff already applied.
     await this._applySelfEffects({ spentAp: finalApCost, apCost: this.system.ap_cost || 0 });
 
-    // Вызов макроса если есть
+    // Call the macro if there is one
     if (this.system.on_use_macro) {
       await this.#runOnUseMacro(finalApCost, selectedWeaponId);
     }
 
-    // Свиток и magic_item со вшитым заклинанием кастуют его (эфемерная копия
-    // на акторе), а не шлют собственную карточку. Списание/заряд уже сняты выше.
+    // A scroll and a magic_item with a bound spell cast it (an ephemeral copy
+    // on the actor) rather than posting their own card. Consumption/charge were already taken above.
     const castsBoundSpell = this.type === "scroll"
       || (this.type === "magic_item" && (this.system.spell_id || this.system.spell_key));
     if (isScrollRead && selScroll) {
-      // Манёвр чтения кастует заклинание выбранного свитка и расходует его;
-      // собственную карточку манёвр не постит — карточкой служит сам каст.
+      // The reading maneuver casts the selected scroll's spell and consumes the scroll;
+      // the maneuver doesn't post its own card — the cast itself serves as the card.
       await selScroll.#castBoundSpell();
       const newQty = Math.max(0, (selScroll.system.quantity || 0) - 1);
       if (newQty <= 0) {
@@ -696,14 +696,14 @@ export default class DedrelItem extends Item {
       await this.postToChat(selectedWeaponId, ammo.ammoSnapshot);
     }
 
-    // Маркер концентрации (Длительность 4 ранга): эффект-напоминание на
-    // кастере без авто-истечения, снимается вручную; потеря сознания
-    // обрывает концентрацию (напоминание в описании эффекта).
+    // Concentration marker (Duration rank 4): a reminder effect on
+    // the caster with no auto-expiry, removed by hand; losing consciousness
+    // breaks concentration (a reminder in the effect's description).
     if (this.type === "spell") {
       await this._applyConcentrationMarker();
     }
 
-    // Обработка цепных манёвров (заклинания с Типом действия "В цепи" тоже)
+    // Chain maneuver handling (spells with the "Chain" Action Type too)
     if (this.type === "maneuver" || this.type === "spell") {
       const aType = this.system.action_type || {};
       if (aType.action || aType.chain || aType.reaction) {
@@ -714,19 +714,19 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Удаляем полностью израсходованный предмет только теперь,
-    // когда карточка уже отправлена и this больше не нужен.
+    // Delete the fully used-up item only now,
+    // when the card has been posted and this is no longer needed.
     if (deleteSelfAfter) {
       await this.delete();
     }
   }
 
   /**
-   * Резолвит боеприпас выбранного оружия (consume_target) и снимает снапшот его
-   * бонусов. Снапшот нужен СЕЙЧАС: при списании последней единицы предмет
-   * удаляется, а бросок урона (карта атаки) читает эти данные из флага
-   * сообщения уже после списания.
-   * @returns {{weaponAmmo: Item, weaponAmmoAmount: number, ammoSnapshot: object}|null} null — боеприпаса нет или не хватает.
+   * Resolves the selected weapon's ammunition (consume_target) and takes a snapshot of its
+   * bonuses. The snapshot is needed NOW: when the last unit is spent the item
+   * is deleted, and the damage roll (attack card) reads this data from the
+   * message flag after the spending.
+   * @returns {{weaponAmmo: Item, weaponAmmoAmount: number, ammoSnapshot: object}|null} null — no ammunition or not enough.
    */
   #resolveWeaponAmmo(selWeapon) {
     const weaponAmmo = this.actor.items.get(selWeapon.system.consume_target);
@@ -747,8 +747,8 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Списывает ОД: сперва из специального пула (манёвры → ap_maneuver, магия →
-   * ap_magic, см. #resolveApPools), остаток — из универсального.
+   * Spends AP: first from the special pool (maneuvers → ap_maneuver, magic →
+   * ap_magic, see #resolveApPools), the rest from the universal one.
    */
   async #spendAp(cost, { apSpecific, specificApKey }) {
     const apUniversal = this.actor.system.resources?.ap_universal?.value || 0;
@@ -770,12 +770,12 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Списывает боеприпас за выстрел (последняя единица удаляет предмет) и кидает
-   * проверку сбора. Поломка/сбор: shot (порох) не подбирается; иначе на каждую
-   * списанную единицу кидаем recovery_chance и сообщаем, сколько уцелело.
+   * Spends ammunition for a shot (the last unit deletes the item) and rolls
+   * the recovery check. Breakage/recovery: shot (powder) can't be picked up; otherwise for each
+   * spent unit we roll recovery_chance and report how many survived.
    */
   async #spendWeaponAmmo(weaponAmmo, amount) {
-    // Данные для проверки сбора снимаем ДО возможного удаления предмета.
+    // The data for the recovery check is taken BEFORE the item may be deleted.
     const aName = weaponAmmo.name;
     const aType = weaponAmmo.system.ammo_type;
     const aRecovery = weaponAmmo.system.recovery_chance || 0;
@@ -793,8 +793,8 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Резолв и запуск on_use_macro: имя в мире → UUID (Compendium./Macro.) →
-   * имя в паках макросов.
+   * Resolve and run on_use_macro: name in the world → UUID (Compendium./Macro.) →
+   * name in the macro packs.
    */
   async #runOnUseMacro(spentAp, selectedWeaponId) {
     const actor = this.actor;
@@ -817,7 +817,7 @@ export default class DedrelItem extends Item {
     }
 
     if (macro) {
-      // weapon — оружие/щит, выбранные игроком в диалоге использования (если требовалось)
+      // weapon — the weapon/shield the player selected in the use dialog (if required)
       macro.execute({
         actor: actor,
         item: this,
@@ -830,9 +830,9 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Находит заклинание, «запечатанное» в носителе (свиток или magic_item-жезл):
-   * сначала по spell_id (предмет на акторе / в мире / по UUID), затем по spell_key
-   * (компендиум заклинаний или мир).
+   * Finds the spell "sealed" in a carrier (a scroll or a magic_item wand):
+   * first by spell_id (an item on the actor / in the world / by UUID), then by spell_key
+   * (spell compendium or world).
    * @returns {Promise<Item|null>}
    */
   async #resolveBoundSpell() {
@@ -859,11 +859,11 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Каст вшитого заклинания (свиток или magic_item-жезл): носитель даёт магию мимо
-   * доктрины и ОД владельца. Создаём эфемерную копию заклинания на акторе (кнопки
-   * карточки чата ищут предмет по id) и шлём её карточку напрямую через postToChat —
-   * НЕ через use(), иначе нулевая стоимость открыла бы лист, а не отправила карточку,
-   * и списались бы ОД. Эфемерный предмет чистится в конце боя (см. combat.mjs) или макросом.
+   * Casting a bound spell (a scroll or a magic_item wand): the carrier provides magic bypassing
+   * the owner's doctrine and AP. We create an ephemeral copy of the spell on the actor (the chat
+   * card's buttons look up the item by id) and post its card directly via postToChat —
+   * NOT via use(), otherwise the zero cost would open the sheet instead of posting the card,
+   * and AP would be spent. The ephemeral item is cleaned up at the end of combat (see combat.mjs) or by a macro.
    */
   async #castBoundSpell() {
     const source = await this.#resolveBoundSpell();
@@ -881,12 +881,12 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Ре-валидация собранного заклинания перед кастом.
-   * Проверяет ранг доктрины, изученность пути сборки (пути — купленные таланты)
-   * и пересчитывает стоимость из исходника сборки; расхождение пересчёта
-   * с сохранённым ap_cost шепчется ГМу (ручная правка полей).
-   * Для линейных доктрин (нет в конфиге Конструктора) — только гейт ранга.
-   * @returns {Promise<boolean>} false — каст отменён.
+   * Re-validation of a built spell before casting.
+   * Checks the doctrine rank, whether the build's path is learned (paths are purchased talents)
+   * and recomputes the cost from the build source; a mismatch between the recomputation
+   * and the saved ap_cost is whispered to the GM (manual field edits).
+   * For linear doctrines (not in the Constructor config) — only the rank gate.
+   * @returns {Promise<boolean>} false — the cast is canceled.
    */
   async #validateSpellCast(actor) {
     const sys = this.system;
@@ -903,13 +903,13 @@ export default class DedrelItem extends Item {
       return false;
     }
 
-    // Линейная доктрина (фикс-заклинания, гайд §5): сборки нет — дальше проверять нечего
+    // Linear doctrine (fixed spells, guide §5): there's no build — nothing more to check
     const doctrineCfg = config?.doctrines?.[sys.doctrine];
     if (!doctrineCfg) return true;
 
-    // Путь сборки должен быть известен магу (куплен талантом); "без пути" легален всегда.
-    // Проверяется и у фиксированных заклинаний: фикс-заклинание, привязанное к пути,
-    // остаётся заклинанием этого пути и требует его таланта.
+    // The build's path must be known to the caster (purchased via a talent); "no path" is always legal.
+    // Fixed spells are checked too: a fixed spell bound to a path
+    // remains a spell of that path and requires its talent.
     if (sys.doctrine_path && !doctrineState?.paths?.[sys.doctrine_path]) {
       ui.notifications.error(game.i18n.format("DEDREL.Magic.UI.CastPathNotKnown", {
         path: game.i18n.localize(`DEDREL.Magic.Paths.${sys.doctrine_path}`)
@@ -917,10 +917,10 @@ export default class DedrelItem extends Item {
       return false;
     }
 
-    // Фиксированное заклинание доктрины, которая ЕСТЬ в Конструкторе (длинные
-    // касты Тенемантии/Биомантии): сборки у него нет, а гейты по Рангу и Пути
-    // уже отработали. Без этого выхода калькулятор получил бы пустой build
-    // и завалил каст на no_techniques.
+    // A fixed spell of a doctrine that IS in the Constructor (Shadowmancy/Biomancy
+    // long casts): it has no build, and the Rank and Path gates
+    // have already run. Without this exit the calculator would get an empty build
+    // and fail the cast on no_techniques.
     if (sys.is_fixed) return true;
 
     const build = {
@@ -954,10 +954,10 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Вешает на кастера эффект-напоминание «Концентрация: <заклинание>», если
-   * в сборке выбран Модификатор Длительность 4 ранга (концентрация).
-   * Без авто-истечения: снимается вручную (HUD статусов); механического
-   * обрыва по потере сознания в v1 нет — только напоминание в описании.
+   * Puts a reminder effect "Concentration: <spell>" on the caster if
+   * the build has the Duration Modifier at rank 4 (concentration) selected.
+   * No auto-expiry: removed by hand (status HUD); there's no mechanical
+   * break on losing consciousness in v1 — only a reminder in the description.
    */
   async _applyConcentrationMarker() {
     const actor = this.actor;
@@ -976,16 +976,16 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Применяет к владельцу шаблонные эффекты предмета, помеченные
-   * flags.dedrel.applyTo = "self". Это механизм переменной стоимости:
-   * «потраченные ОД конвертируются в параметр» без макросов.
+   * Applies to the owner the item's template effects marked
+   * flags.dedrel.applyTo = "self". This is the variable cost mechanism:
+   * "spent AP is converted into a parameter" without macros.
    *
-   * Плейсхолдеры, подставляемые в changes[].value, name и description:
-   *   @spentAp   — фактически потраченные ОД (ввод игрока при переменной стоимости)
-   *   @apCost    — базовая стоимость манёвра
-   *   @overspent — ОД, потраченные сверх базовой стоимости
-   * Если после подстановки значение — чистая арифметика (например "@spentAp * 2"),
-   * оно вычисляется через Roll.safeEval, чтобы в эффект попало готовое число.
+   * Placeholders substituted into changes[].value, name and description:
+   *   @spentAp   — AP actually spent (player input for a variable cost)
+   *   @apCost    — the maneuver's base cost
+   *   @overspent — AP spent above the base cost
+   * If after substitution the value is pure arithmetic (e.g. "@spentAp * 2"),
+   * it is evaluated via Roll.safeEval so that the effect gets a ready number.
    *
    * @param {{spentAp: number, apCost: number}} context
    */
@@ -1016,10 +1016,10 @@ export default class DedrelItem extends Item {
     const effectsData = selfEffects.map(e => {
       const data = e.toObject();
       delete data._id;
-      // V14: changes живут в system.changes (см. QUIRK 11/12). Берём исходные
-      // изменения из нового места с fallback, подставляем плейсхолдеры и
-      // записываем ОБРАТНО в system.changes. Легаси top-level data.changes
-      // удаляем, чтобы миграция ядра не затёрла им system.changes.
+      // V14: changes live in system.changes (see QUIRK 11/12). We take the source
+      // changes from the new location with a fallback, substitute placeholders and
+      // write them BACK to system.changes. The legacy top-level data.changes
+      // is removed so that core's migration doesn't overwrite system.changes with it.
       const srcChanges = e._source.system?.changes ?? e._source.changes ?? [];
       const newChanges = foundry.utils.deepClone(srcChanges).map(c => {
         let value = substitute(c.value);
@@ -1048,13 +1048,13 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Проверка сбора боеприпаса после выстрела: на каждую списанную единицу кидаем
-   * d100, уцелевшие (результат ≤ recovery_chance) можно подобрать нарративно.
-   * Сообщение в чат носит информативный характер — предмет-«россыпь» не создаётся.
+   * Ammunition recovery check after a shot: for each spent unit we roll
+   * d100, the survivors (result ≤ recovery_chance) can be picked up narratively.
+   * The chat message is informational — no "scattered ammo" item is created.
    * @param {Actor} actor
-   * @param {string} name  - имя боеприпаса (снято до возможного удаления)
-   * @param {number} chance - шанс сохранности, %
-   * @param {number} count - сколько единиц списано за выстрел
+   * @param {string} name  - ammunition name (taken before it may be deleted)
+   * @param {number} chance - survival chance, %
+   * @param {number} count - how many units were spent on the shot
    */
   async #reportAmmoRecovery(actor, name, chance, count) {
     const roll = new Roll(`${count}d100`);
@@ -1081,8 +1081,8 @@ export default class DedrelItem extends Item {
   }
 
   /**
-   * Отправляет карточку предмета в чат. Боевые кнопки (Атака/Урон) добавляются только боевым предметам.
-   * @param {string|null} weaponId - ID выбранного оружия (если есть)
+   * Posts the item card to chat. Combat buttons (Attack/Damage) are added only to combat items.
+   * @param {string|null} weaponId - ID of the selected weapon (if any)
    */
   async postToChat(weaponId = null, ammoSnapshot = null) {
     let weaponAttr = weaponId ? `data-weapon-id="${weaponId}"` : "";
@@ -1095,15 +1095,15 @@ export default class DedrelItem extends Item {
        const wDmg = this.system.req_weapon_damage_type || {};
        const reqSkill = this.system.req_weapon_skill_group || "";
        const reqKeys = (this.system.req_weapon_keys || []).filter(k => k && k.trim());
-       // "any" не считается требованием конкретного оружия (согласовано с use()).
+       // "any" doesn't count as a requirement for a specific weapon (consistent with use()).
        reqWeapon = (wType.melee || wType.ranged || wType.shield || wType.magic ||
                           wDmg.piercing || wDmg.bludgeoning || wDmg.slashing ||
                           reqKeys.length > 0 ||
                           (reqSkill !== "" && reqSkill !== "any"));
 
-       // Заклинания ВСЕГДА требуют фокус (weapon с типом magic), поэтому требование
-       // оружия не признак боевой карточки — смотрим только на формулы/спасбросок,
-       // иначе утилитарные заклинания получали бы бессмысленные кнопки Атаки/Урона.
+       // Spells ALWAYS require a focus (a weapon of type magic), so a weapon
+       // requirement isn't a sign of a combat card — we look only at the formulas/saving throw,
+       // otherwise utility spells would get meaningless Attack/Damage buttons.
        if (isSpell) {
          showCombatButtons = !!(this.system.formula_attack || this.system.formula_damage || this.system.save_attribute);
        } else if (reqWeapon || this.system.formula_attack || this.system.formula_damage || this.system.save_attribute || this.system.skill) {
@@ -1119,8 +1119,8 @@ export default class DedrelItem extends Item {
       buttons += `
         <div class="chat-buttons" style="display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap;">
       `;
-      // Атака: у заклинаний — только если есть формула атаки или урон (бросок
-      // по навыку "Магические атаки"); у манёвров — как раньше
+      // Attack: for spells — only if there's an attack formula or damage (a roll
+      // on the "Magical Attacks" skill); for maneuvers — as before
       const showAttack = isSpell
         ? (this.system.formula_attack || this.system.formula_damage)
         : (this.system.formula_attack || reqWeapon || this.system.skill);
@@ -1128,12 +1128,12 @@ export default class DedrelItem extends Item {
         buttons += `<button class="dedrel-chat-action" data-action="rollAttack" data-item-id="${this.id}" ${weaponAttr}><i class="fa-solid fa-crosshairs"></i> ${game.i18n.localize("DEDREL.Chat.Attack")}</button>`;
       }
       if (showCombatButtons && (this.system.formula_damage || (!isSpell && reqWeapon))) {
-        // Вариативный хват: отдельная кнопка урона «двуручным хватом» (+1 ступень
-        // Лестницы). Свободна ли рука — проверяется в момент клика (chat.mjs),
-        // потому что экипировка могла измениться после отправки карточки.
-        // Если манёвр ТРЕБУЕТ двуручный хват (req_weapon_property.is_twohanded),
-        // обычная кнопка урона для вариативного оружия прячется — одноручный
-        // бросок с такого манёвра всегда был бы неправильным.
+        // Variable grip: a separate "two-handed grip" damage button (+1 Ladder
+        // step). Whether the hand is free is checked at click time (chat.mjs),
+        // because the equipment may have changed after the card was posted.
+        // If the maneuver REQUIRES a two-handed grip (req_weapon_property.is_twohanded),
+        // the regular damage button for a variable-grip weapon is hidden — a one-handed
+        // roll from such a maneuver would always be wrong.
         const cardWeapon = weaponId ? this.actor?.items.get(weaponId) : null;
         const variableGrip = !!(cardWeapon?.system?.is_variable_grip && !cardWeapon.system.is_twohanded);
         const requiresTwoHanded = !isSpell && !!this.system.req_weapon_property?.is_twohanded;
@@ -1146,13 +1146,13 @@ export default class DedrelItem extends Item {
         }
       }
       if (this.system.formula_heal) {
-        // Формулу дублируем в data-атрибут: расходуемое зелье к моменту клика по
-        // кнопке уже удалено из инвентаря (quantity 0 → delete в #confirmUse), поэтому
-        // обработчик не может достать её из живого предмета по item-id.
+        // The formula is duplicated into a data attribute: by the time the button is clicked, a consumed potion
+        // has already been removed from the inventory (quantity 0 → delete in #confirmUse), so
+        // the handler can't get it from the live item by item-id.
         buttons += `<button class="dedrel-chat-action" data-action="applyHeal" data-item-id="${this.id}" data-heal-formula="${foundry.utils.escapeHTML(this.system.formula_heal)}"><i class="fa-solid fa-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyHeal")}</button>`;
       }
       if (this.system.formula_temp_hp) {
-        // Как и formula_heal: дублируем в data-атрибут для расходуемых носителей
+        // Like formula_heal: duplicated into a data attribute for consumable carriers
         buttons += `<button class="dedrel-chat-action" data-action="applyTempHp" data-item-id="${this.id}" data-temphp-formula="${foundry.utils.escapeHTML(this.system.formula_temp_hp)}"><i class="fa-solid fa-shield-heart"></i> ${game.i18n.localize("DEDREL.Chat.ApplyTempHp")}</button>`;
       }
       if (showCombatButtons && this.system.save_attribute) {
@@ -1162,24 +1162,24 @@ export default class DedrelItem extends Item {
       buttons += `</div>`;
     }
 
-    // Кнопки наложения состояний (собранные заклинания). Актуальная версия
-    // condition-предмета подтягивается из реестра статусов
-    // (CONFIG.statusEffects ← компендиум Conditions) в момент клика.
+    // Condition application buttons (built spells). The current version
+    // of the condition item is pulled from the status registry
+    // (CONFIG.statusEffects ← Conditions compendium) at click time.
     if (this.type === "spell") {
       const conditionKeys = [];
-      // Модификатор "Сила" с выбранным состоянием
+      // The "Power" Modifier with a selected condition
       const powerMod = (this.system.chosen_modifiers || []).find(m => m.key === "power");
       if (powerMod?.option && powerMod.option !== "bonus" && powerMod.option !== "penalty") {
         conditionKeys.push(powerMod.option);
       }
-      // Модификатор "Адаптация" (Биомантия): выбранная черта — тоже condition-предмет
-      // (паки biomancy_adaptations / mutilations), поэтому накладывается той же кнопкой
+      // The "Adaptation" Modifier (Biomancy): the selected trait is also a condition item
+      // (packs biomancy_adaptations / mutilations), so it is applied by the same button
       const adaptMod = (this.system.chosen_modifiers || []).find(m => m.key === "adapt");
       if (adaptMod?.option && !conditionKeys.includes(adaptMod.option)) {
         conditionKeys.push(adaptMod.option);
       }
-      // Уникальное свойство доктрины "Поджигание" (Пиромантия): уронное заклинание
-      // может оставить состояние "Горение"
+      // The doctrine's unique property "Ignite" (Pyromancy): a damaging spell
+      // can leave the "Burning" condition
       const igniteKey = CONFIG.DEDREL?.magic?.doctrines?.[this.system.doctrine]?.unique?.ignite;
       if (igniteKey && this.system.formula_damage && !conditionKeys.includes(igniteKey)) {
         conditionKeys.push(igniteKey);
@@ -1206,13 +1206,13 @@ export default class DedrelItem extends Item {
       `;
     }
 
-    // Картечь (аркебуза и пр.): scatter-оружие стреляет тем же манёвром-выстрелом,
-    // но по площади. Кнопки Атаки/Урона остаются как у обычного выстрела (один
-    // бросок на всех накрытых); дополнительно рисуем кнопку конуса. Длина конуса —
-    // из range оружия (парсим ведущее число), угол — стандартный (template.mjs).
-    // Только карточка ВЫСТРЕЛА, не перезарядка/прицеливание/прочие self-манёвры
-    // с тем же оружием: те же критерии, что isReloadingShot в #confirmUse — манёвр бьёт
-    // по цели (не self), требует оружие, не помечен перезарядкой и не прячет бой.
+    // Scatter (arquebus etc.): a scatter weapon fires with the same shot maneuver,
+    // but over an area. The Attack/Damage buttons stay as for a regular shot (one
+    // roll against everyone covered); in addition we draw a cone button. Cone length —
+    // from the weapon's range (we parse the leading number), angle — the standard one (template.mjs).
+    // Only on a SHOT card, not reload/aiming/other self maneuvers
+    // with the same weapon: the same criteria as isReloadingShot in #confirmUse — the maneuver strikes
+    // a target (not self), requires a weapon, isn't marked as reload and doesn't hide combat.
     const isShotCard = reqWeapon
       && !this.system.is_reload_action
       && this.system.target_type !== "self"
@@ -1229,12 +1229,12 @@ export default class DedrelItem extends Item {
       }
     }
 
-    // Если у предмета есть эффекты, которые НЕ переносятся автоматически (transfer: false),
-    // значит это бафы/дебафы, которые нужно накладывать вручную (например, яд, заклинание).
-    // Генерируем кнопку для наложения этих эффектов на выделенные токены.
-    // Self-эффекты (applyTo: "self") исключаем — они применяются к владельцу в #confirmUse.
-    // Аура-эффекты (payload applyTo: "aura" и маркеры flags.dedrel.aura) тоже:
-    // их накладывает и снимает регион-аура (см. src/canvas/aura-regions.mjs).
+    // If the item has effects that are NOT transferred automatically (transfer: false),
+    // those are buffs/debuffs that must be applied by hand (e.g. a poison, a spell).
+    // Generate a button for applying these effects to the selected tokens.
+    // Self effects (applyTo: "self") are excluded — they are applied to the owner in #confirmUse.
+    // Aura effects too (payload applyTo: "aura" and flags.dedrel.aura markers):
+    // they are applied and removed by the aura region (see src/canvas/aura-regions.mjs).
     const hasTransferableEffects = this.effects.some(e =>
       !e.transfer
       && !["self", "aura"].includes(e.getFlag("dedrel", "applyTo"))
@@ -1248,8 +1248,8 @@ export default class DedrelItem extends Item {
       `;
     }
 
-    // Тумблер ауры: включает/выключает эффект-маркер (регион и бафы
-    // создаёт/убирает синхронизация, см. src/canvas/aura-regions.mjs)
+    // Aura toggle: turns the marker effect on/off (the region and buffs
+    // are created/removed by the sync, see src/canvas/aura-regions.mjs)
     const hasAuraMarker = this.effects.some(e => e.getFlag("dedrel", "aura"));
     if (hasAuraMarker) {
       buttons += `
@@ -1259,9 +1259,9 @@ export default class DedrelItem extends Item {
       `;
     }
 
-    // Запрещённая защита — ручная механика: соблюдается за столом, поэтому
-    // обязана быть видна на карточке (у манёвров — Финт, у заклинаний —
-    // модификатор Конструктора forbidDefense).
+    // Forbidden defense is a manual mechanic: it's enforced at the table, so it
+    // must be visible on the card (for maneuvers — Feint, for spells —
+    // the Constructor's forbidDefense modifier).
     let forbiddenNote = "";
     const forbidden = this.system.forbidden_defense;
     if (forbidden) {
@@ -1270,9 +1270,9 @@ export default class DedrelItem extends Item {
       forbiddenNote = `<div style="margin-bottom: 8px; font-weight: bold; color: var(--color-level-error, #b22);"><i class="fa-solid fa-ban"></i> ${defText}</div>`;
     }
 
-    // Напоминание о перезарядке: выстрел, оставивший ствол разряженным, помечает
-    // это на карточке. Без кнопки — перезарядка совершается своим манёвром из HUD,
-    // а стрелок волен отложить её (карточка к тому моменту уже уедет вверх).
+    // Reload reminder: a shot that left the weapon unloaded marks
+    // this on the card. No button — reloading is done with its own maneuver from the HUD,
+    // and the shooter is free to postpone it (by then the card will have scrolled up anyway).
     let reloadNote = "";
     const cardWeaponReload = weaponId ? this.actor?.items.get(weaponId) : null;
     if (cardWeaponReload?.system?.is_reloading && !cardWeaponReload.system.loaded) {
@@ -1294,8 +1294,8 @@ export default class DedrelItem extends Item {
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: content
     };
-    // Снапшот боеприпаса (AP/доп. урон/vs_creature) кладём во флаг — бросок урона
-    // с этой карты (chat.mjs) читает его, т.к. сам боеприпас мог быть уже списан.
+    // The ammunition snapshot (Armor Piercing/extra damage/vs_creature) goes into a flag — the damage roll
+    // from this card (chat.mjs) reads it, since the ammunition itself may already have been spent.
     if (ammoSnapshot && (ammoSnapshot.ap || ammoSnapshot.dmg || Object.keys(ammoSnapshot.vs || {}).length)) {
       messageData.flags = { dedrel: { ammo: ammoSnapshot } };
     }

@@ -1,7 +1,7 @@
 export default class DedrelActor extends Actor {
   /**
-   * Ключи типов существа, которые несёт актёр (по вложенным Item creature_type).
-   * Используется для бонуса оружия/эффектов «против типа» и как индикатор на листе.
+   * Creature type keys the actor carries (from embedded creature_type Items).
+   * Used for the weapon/effect bonus "vs type" and as an indicator on the sheet.
    * @returns {string[]}
    */
   get creatureTypeKeys() {
@@ -29,14 +29,14 @@ export default class DedrelActor extends Actor {
   }
 
   async _preUpdate(changed, options, user) {
-    // Баланс кошелька не может быть отрицательным: любые отрицательные счётчики
-    // валют в обновлении зажимаем в 0. Ловит все пути записи (инлайн-инпуты
-    // листа с обходом client-side min="0", сокет-переводы, депозит монет).
+    // The wallet balance can't go negative: any negative currency counters
+    // in an update are clamped to 0. Catches every write path (inline inputs
+    // on the sheet bypassing client-side min="0", socket transfers, coin deposits).
     this.#clampCurrencyUpdate(changed);
     return super._preUpdate(changed, options, user);
   }
 
-  /** Зажимает отрицательные значения system.currency.* в 0 в объекте обновления. */
+  /** Clamps negative system.currency.* values to 0 in the update object. */
   #clampCurrencyUpdate(changed) {
     if (!changed || typeof changed !== "object") return;
     const clampObj = (obj) => {
@@ -47,24 +47,24 @@ export default class DedrelActor extends Actor {
       }
     };
     for (const key of Object.keys(changed)) {
-      // Отдельный счётчик валюты: "system.currency.<key>".
+      // A single currency counter: "system.currency.<key>".
       if (key.startsWith("system.currency.")) {
         const v = Number(changed[key]);
         if (Number.isFinite(v) && v < 0) changed[key] = 0;
       }
-      // Кошелёк целиком плоским ключом: "system.currency": { <key>: value }.
+      // The whole wallet as a flat key: "system.currency": { <key>: value }.
       else if (key === "system.currency") clampObj(changed[key]);
     }
-    // Кошелёк целиком вложенным объектом: system.currency = { <key>: value }.
+    // The whole wallet as a nested object: system.currency = { <key>: value }.
     clampObj(changed?.system?.currency);
   }
 
   /**
-   * Ядро применяет здесь фазу "initial" (в super). Сразу после неё выполняем
-   * нашу фазу "apply" — в ней живут все изменения системных полей (system.*),
-   * автоматически помечаемые хуком preCreateActiveEffect. Обе фазы отрабатывают
-   * ДО prepareDerivedData, поэтому баффы характеристик участвуют в расчёте
-   * производных, а бонусы к производным полям переживают паттерн "+=".
+   * Core applies the "initial" phase here (in super). Right after it we run
+   * our "apply" phase — it holds all changes to system fields (system.*),
+   * automatically tagged by the preCreateActiveEffect hook. Both phases run
+   * BEFORE prepareDerivedData, so attribute buffs take part in computing
+   * derived values, and bonuses to derived fields survive the "+=" pattern.
    */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
@@ -72,19 +72,19 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Расширение ядра: транслируемые (transfer) эффекты ЭКИПИРУЕМЫХ предметов
-   * применяются к актору только пока предмет экипирован. Ядро само такого
-   * подавления не делает (isSuppressed по умолчанию false — это обязанность
-   * системы), поэтому без гейта зачарованный меч баффал бы владельца из рюкзака.
+   * Core extension: transferred effects of EQUIPPABLE items
+   * apply to the actor only while the item is equipped. Core doesn't do this
+   * suppression itself (isSuppressed defaults to false — that's the system's
+   * job), so without the gate an enchanted sword would buff its owner from the backpack.
    *
-   *  - Аксессуары (непустой system.equip_slot: кольца, амулеты, шлемы-аксессуары):
-   *    «экипирован» = id стоит в одном из system.equipment_slots актора.
-   *  - Оружие: system.equipped (выставляется листом при взятии в руки/хвост).
-   *  - Броня тела (armor без equip_slot): id стоит в одном из слоёв брони.
+   *  - Accessories (non-empty system.equip_slot: rings, amulets, accessory helmets):
+   *    "equipped" = the id sits in one of the actor's system.equipment_slots.
+   *  - Weapons: system.equipped (set by the sheet when taken in hand/tail).
+   *  - Body armor (armor without equip_slot): the id sits in one of the armor layers.
    *
-   * Прочие предметы (мутации, таланты, зелья и т.п.) ведут себя как в ядре —
-   * их transfer-эффекты применяются, пока предмет в инвентаре. На акторах без
-   * equipment_slots (лут/контейнер) гейтится только оружие (по system.equipped).
+   * Other items (mutations, talents, potions, etc.) behave as in core —
+   * their transfer effects apply while the item is in the inventory. On actors without
+   * equipment_slots (loot/container) only weapons are gated (by system.equipped).
    */
   *allApplicableEffects() {
     for (const effect of this.effects) yield effect;
@@ -97,9 +97,9 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Действуют ли сейчас transfer-эффекты предмета на этого актора (правила гейта
-   * описаны в allApplicableEffects). Вынесено отдельным методом, чтобы тумблер
-   * света (DedrelItem#use) судил об экипировке по тем же правилам, а не по своим.
+   * Whether the item's transfer effects currently act on this actor (the gate rules
+   * are described in allApplicableEffects). Split into its own method so that the light
+   * toggle (DedrelItem#use) judges equipment by the same rules rather than its own.
    * @param {Item} item
    * @returns {boolean}
    */
@@ -172,11 +172,11 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Возвращает опыт за снятый с листа талант или мутацию (10. Progression).
-   * Сумма берётся из флага `xpPaid`, который лист ставит в момент покупки.
-   * Предметы без флага — залитые макросом или выданные Мастером мимо списания —
-   * возврата не дают: иначе на NPC-персонажах из макросов набегал бы опыт,
-   * которого им никто не выдавал.
+   * Refunds XP for a talent or mutation removed from the sheet (10. Progression).
+   * The amount is taken from the `xpPaid` flag, which the sheet sets at purchase time.
+   * Items without the flag — imported by a macro or handed out by the GM without spending —
+   * give no refund: otherwise NPC characters from macros would accumulate XP
+   * that nobody gave them.
    */
   #refundXpForDeletedItems(collection, documents) {
     if (collection !== "items" || this.type !== "character") return;
@@ -198,10 +198,10 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Чистит ссылки в equipment_slots на удалённые предметы. Без этого удаление
-   * экипированного оружия/аксессуара оставляет «мёртвый» item_id: слот в UI
-   * рисуется пустым (лист резолвит id → null), но проверки, читающие сырую
-   * строку, считают его занятым (ложное «нужны обе руки», см. character-sheet).
+   * Clears references in equipment_slots to deleted items. Without this, deleting
+   * an equipped weapon/accessory leaves a "dead" item_id: the slot in the UI
+   * is drawn empty (the sheet resolves id → null), but checks that read the raw
+   * string consider it occupied (a false "needs both hands", see character-sheet).
    */
   #clearSlotsForDeletedItems(collection, ids) {
     if (collection !== "items") return;
@@ -218,14 +218,14 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Применяет урон с учётом снижения урона (DR) по типу, бронебойности и временных ХП.
-   * Единая точка входа для кнопки урона в чате (src/chat.mjs) и тиков кондиций
-   * (src/combat.mjs) — математика DR должна оставаться одинаковой.
-   * @param {number} damage - входящий урон до снижения
+   * Applies damage accounting for damage reduction (DR) by type, Armor Piercing and temporary HP.
+   * A single entry point for the damage button in chat (src/chat.mjs) and condition ticks
+   * (src/combat.mjs) — the DR math must stay identical.
+   * @param {number} damage - incoming damage before reduction
    * @param {object} [options]
-   * @param {string} [options.drKey] - тип урона (ключ system.dr), "" — без снижения
-   * @param {number} [options.apLevel] - уровень бронебойности (каждый уровень гасит 10% DR)
-   * @param {string[]} [options.bypassTypes] - типы существ, чей DR игнорирует оружие-вскрыватель
+   * @param {string} [options.drKey] - damage type (system.dr key), "" — no reduction
+   * @param {number} [options.apLevel] - Armor Piercing level (each level cancels 10% of DR)
+   * @param {string[]} [options.bypassTypes] - creature types whose DR the breaker weapon ignores
    * @returns {Promise<{applied: number, blocked: number, tempHpDamage: number}>}
    */
   async applyDamage(damage, { drKey = "", apLevel = 0, bypassTypes = [] } = {}) {
@@ -236,31 +236,31 @@ export default class DedrelActor extends Actor {
     if (drKey && this.system.dr && this.system.dr[drKey] !== undefined) {
       drUnits = this.system.dr[drKey];
 
-      // Вскрыватель типа: если оружие настроено против одного из типов цели,
-      // вычитаем ровно тот DR, что дал этот тип (сумма его эффектов по drKey) —
-      // существо бьётся «как обычная плоть», броня/прочее остаются.
-      // См. _rules/18. Enemies.md §Вскрыватель типа.
+      // Type breaker: if the weapon is attuned against one of the target's types,
+      // subtract exactly the DR that this type granted (the sum of its effects for drKey) —
+      // the creature is hit "like ordinary flesh", armor and the rest remain.
+      // See _rules/18. Enemies.md §Type breaker.
       if (bypassTypes.length) {
         drUnits -= this.#creatureTypeDrContribution(drKey, bypassTypes);
       }
     }
 
-    // Единица DR = 10% снижения; бронебойность вычитается плоско из процентов
+    // One DR unit = 10% reduction; Armor Piercing is subtracted flatly from the percentage
     let drPercent = drUnits * 10;
     if (drPercent > 0) {
       drPercent = Math.max(0, drPercent - apLevel * 10);
     }
     drPercent = Math.min(drPercent, 100);
 
-    // Округление до десятых, чтобы избежать длинных дробей
+    // Round to tenths to avoid long fractions
     let finalDamage = Math.max(0, damage * (1 - drPercent / 100));
     finalDamage = Math.round(finalDamage * 10) / 10;
     const blocked = Math.round((damage - finalDamage) * 10) / 10;
 
-    // Пеон: здоровье в «попаданиях». Урон ПОСЛЕ DR сравнивается с порогом
-    // прочности; попадание ≥ toughness снимает ровно 1 хит, слабее — 0.
-    // Дробный остаток от DR округляется вверх до целого: пеон не должен выживать
-    // из-за 2.9 против Прочности 3 — считаем в пользу атакующего.
+    // Peon: health in "hits". Damage AFTER DR is compared with the toughness
+    // threshold; a hit ≥ toughness removes exactly 1 hit, a weaker one — 0.
+    // The fractional remainder from DR is rounded up to an integer: a peon shouldn't survive
+    // because of 2.9 against Toughness 3 — we count in the attacker's favor.
     if (isPeon) {
       const hits = this.system.resources.hits;
       const toughness = this.system.toughness || 0;
@@ -291,12 +291,12 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Сколько DR по типу урона drKey дали активные эффекты Item'ов creature_type,
-   * чьи ключи есть в bypassTypes. Источник истины — сами change-строки типа,
-   * поэтому дублировать DR в отдельный слой не нужно (см. applyDamage).
+   * How much DR for damage type drKey the active effects of creature_type Items
+   * whose keys are in bypassTypes granted. The source of truth is the type's own change rows,
+   * so there's no need to duplicate DR in a separate layer (see applyDamage).
    * @param {string} drKey
    * @param {string[]} bypassTypes
-   * @returns {number} суммарные единицы DR, дарованные совпавшими типами
+   * @returns {number} total DR units granted by the matching types
    */
   #creatureTypeDrContribution(drKey, bypassTypes) {
     const ADD = CONST.ACTIVE_EFFECT_MODES.ADD;
@@ -315,10 +315,10 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Восстанавливает ХП с капом по максимуму. Общая точка для кнопки исцеления
-   * в чате (src/chat.mjs) и лечащих тиков кондиций (src/combat.mjs).
+   * Restores HP, capped at the maximum. Shared entry point for the heal button
+   * in chat (src/chat.mjs) and healing condition ticks (src/combat.mjs).
    * @param {number} amount
-   * @returns {Promise<number>} фактически восстановленные ХП
+   * @returns {Promise<number>} the HP actually restored
    */
   async applyHealing(amount) {
     const hp = this.system.resources?.hp;
@@ -330,13 +330,13 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Выдаёт временные хиты (правила: "_rules/9. Combat and Damage.md" §4).
-   * Выдачи из разных источников СКЛАДЫВАЮТСЯ; сгорают на любом отдыхе
-   * (performRest) или выбиваются уроном (applyDamage снимает их первыми).
-   * Прямой апдейт source, НЕ Active Effect: эффект пересчитывался бы каждый
-   * prepareData и "отращивал" бы буфер после каждого поглощения урона.
+   * Grants temporary HP (rules: "_rules/9. Combat and Damage.md" §4).
+   * Grants from different sources STACK; they burn off on any rest
+   * (performRest) or are knocked out by damage (applyDamage removes them first).
+   * A direct source update, NOT an Active Effect: an effect would be recomputed on every
+   * prepareData and would "regrow" the buffer after each damage absorption.
    * @param {number} amount
-   * @returns {Promise<number>} фактически выданные временные хиты
+   * @returns {Promise<number>} the temporary HP actually granted
    */
   async grantTempHp(amount) {
     const hp = this.system.resources?.hp;
@@ -346,12 +346,12 @@ export default class DedrelActor extends Actor {
   }
 
   /* -------------------------------------------- */
-  /*  Стакающиеся кондиции                         */
+  /*  Stacking conditions                         */
   /* -------------------------------------------- */
 
   /**
-   * Находит эффект одиночного статуса на актёре — тем же способом,
-   * что и ядро в Actor#toggleStatusEffect (наши статусы без статичного _id).
+   * Finds a single-status effect on the actor — the same way
+   * core does it in Actor#toggleStatusEffect (our statuses have no static _id).
    * @param {string} statusId
    * @returns {ActiveEffect|null}
    */
@@ -360,17 +360,17 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Масштабирует change-строки статуса под число стаков: числовые значения
-   * с режимом ADD умножаются на количество стаков, остальные режимы
-   * (OVERRIDE, UPGRADE и т.д.) и нечисловые значения остаются базовыми.
+   * Scales a status's change rows to the stack count: numeric values
+   * in ADD mode are multiplied by the stack count, other modes
+   * (OVERRIDE, UPGRADE, etc.) and non-numeric values stay at base.
    *
-   * ВАЖНО (V14): тип изменения хранится в строковом `change.type` ("add",
-   * "override", ...), а НЕ в числовом `change.mode` — последний в V14 лишь
-   * deprecated-геттер-шим, которого к тому же нет на «сырых» объектах из
-   * CONFIG.statusEffects. Проверка по `mode` здесь всегда давала undefined,
-   * поэтому эффекты не масштабировались (масштабировался только тик-урон,
-   * идущий отдельным путём через @stacks). Сверяемся со строковым type,
-   * с запасной поддержкой легаси-`mode` на случай старых данных.
+   * IMPORTANT (V14): the change type is stored in the string `change.type` ("add",
+   * "override", ...), NOT in the numeric `change.mode` — in V14 the latter is just
+   * a deprecated getter shim, which moreover is absent on the "raw" objects from
+   * CONFIG.statusEffects. Checking `mode` here always gave undefined,
+   * so effects weren't scaled (only tick damage was scaled,
+   * since it goes a separate way through @stacks). We match on the string type,
+   * with fallback support for legacy `mode` in case of old data.
    */
   static #scaleStatusChanges(baseChanges, stacks) {
     return baseChanges.map(ch => {
@@ -384,10 +384,10 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Пересчитывает эффект под новое число стаков: имя «Имя ×N», масштабированные
-   * change-строки (пишем в system.changes — см. FOUNDRY V14 QUIRKS.md, раздел 11;
-   * фазу "apply" доставит хук preUpdateActiveEffect) и счётчик во флаге.
-   * При добавлении стака длительность отсчитывается заново.
+   * Recomputes the effect for a new stack count: name "Name ×N", scaled
+   * change rows (written to system.changes — see FOUNDRY V14 QUIRKS.md, section 11;
+   * the "apply" phase is delivered by the preUpdateActiveEffect hook) and the counter in the flag.
+   * When a stack is added the duration starts counting anew.
    */
   async #updateConditionStacks(effect, status, stacks, { refreshDuration = false } = {}) {
     const update = {
@@ -396,12 +396,12 @@ export default class DedrelActor extends Actor {
       "system.changes": DedrelActor.#scaleStatusChanges(status.changes ?? [], stacks)
     };
     if (refreshDuration) {
-      // ВАЖНО (V14): остаток длительности вычисляется от объекта `start`
-      // (round/turn/time/combat/combatant), а НЕ от полей duration.startRound/
-      // startTime — их в схеме V14 нет вовсе (duration = {value, units, expiry}).
-      // Прежний код писал в несуществующие поля, поэтому сброс не работал.
-      // Переустанавливаем `start` на текущий момент каноническим методом ядра
-      // (тем же, что и при создании эффекта) — это и есть «сброс таймера».
+      // IMPORTANT (V14): the remaining duration is computed from the `start` object
+      // (round/turn/time/combat/combatant), NOT from the duration.startRound/
+      // startTime fields — they don't exist in the V14 schema at all (duration = {value, units, expiry}).
+      // The old code wrote to nonexistent fields, so the reset didn't work.
+      // We reset `start` to the current moment with core's canonical method
+      // (the same one used when the effect is created) — that's the "timer reset".
       update.start = effect.constructor.getEffectStart();
     }
     await effect.update(update);
@@ -409,8 +409,8 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Накладывает стакающуюся кондицию или добавляет ей стак (до max_stacks).
-   * @param {string} statusId - id статуса из CONFIG.statusEffects
+   * Applies a stacking condition or adds a stack to it (up to max_stacks).
+   * @param {string} statusId - status id from CONFIG.statusEffects
    * @returns {Promise<ActiveEffect|boolean>}
    */
   async addConditionStack(statusId) {
@@ -420,8 +420,8 @@ export default class DedrelActor extends Actor {
     const existing = this.#findStatusEffect(statusId);
     if (!existing) return super.toggleStatusEffect(statusId, { active: true });
 
-    // Неактивный остаток (истёкший вне боя до срабатывания реестра или
-    // выключенный вручную) не наращиваем — заменяем свежим наложением
+    // An inactive leftover (expired outside combat before the registry fired, or
+    // disabled by hand) isn't stacked up — we replace it with a fresh application
     if (!existing.active) {
       await existing.delete();
       return super.toggleStatusEffect(statusId, { active: true });
@@ -433,15 +433,15 @@ export default class DedrelActor extends Actor {
       ui.notifications.info(game.i18n.format("DEDREL.Notifications.MaxStacksReached", { name: status.name, max }));
       return existing;
     }
-    // Таймер длительности обновляем только если у кондиции включена опция
-    // refresh_on_stack; иначе длительность идёт от первого наложения.
+    // The duration timer is refreshed only if the condition has the
+    // refresh_on_stack option on; otherwise the duration runs from the first application.
     const refreshDuration = status.flags?.dedrel?.refresh_on_stack ?? false;
     return this.#updateConditionStacks(existing, status, stacks + 1, { refreshDuration });
   }
 
   /**
-   * Снимает один стак стакающейся кондиции; последний стак удаляет эффект.
-   * @param {string} statusId - id статуса из CONFIG.statusEffects
+   * Removes one stack of a stacking condition; the last stack deletes the effect.
+   * @param {string} statusId - status id from CONFIG.statusEffects
    * @returns {Promise<ActiveEffect|null>}
    */
   async removeConditionStack(statusId) {
@@ -458,10 +458,10 @@ export default class DedrelActor extends Actor {
   }
 
   /**
-   * Для стакающихся кондиций принудительная активация (active: true) поверх уже
-   * висящего статуса добавляет стак вместо ядрового «уже активен» — так повторное
-   * применение заклинания/эффекта из чата наращивает счётчик. Снятие (active: false)
-   * и обычный toggle сохраняют поведение ядра; клики по HUD токена обрабатывает
+   * For stacking conditions, forced activation (active: true) on top of an already
+   * present status adds a stack instead of core's "already active" — so reapplying
+   * a spell/effect from chat increments the counter. Removal (active: false)
+   * and a regular toggle keep core behavior; token HUD clicks are handled by
    * DedrelTokenHUD (src/apps/token-hud.mjs).
    */
   async toggleStatusEffect(statusId, options = {}) {
