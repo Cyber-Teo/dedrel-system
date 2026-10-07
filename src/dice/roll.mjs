@@ -1,11 +1,11 @@
 import { DedrelBonuses } from "../utils/dedrel-bonuses.mjs";
 
 /**
- * Тяжесть осечки пороха по редкости оружия (канон: _rules/13. Weapons.md).
- * Шанс ФИКСИРОВАН — натуральная 1 на атаке огнестрелом (normal); подтверждённый
- * крит-провал (второй куб тоже 1) — тяжёлый исход (confirmed). null — осечки нет.
- * Легендарки не подводят никогда. «Кустарное» (тяжёлый клин/повреждение) в enum
- * редкости отсутствует — это решение Мастера, автоматизация его не покрывает.
+ * Powder misfire severity by weapon rarity (canon: _rules/13. Weapons.md).
+ * The chance is FIXED — a natural 1 on a firearm attack (normal); a confirmed
+ * critical fumble (the second die is also 1) — the severe outcome (confirmed). null — no misfire.
+ * Legendary weapons never fail. "Crude" (a hard jam/damage) is absent from the
+ * rarity enum — that's the GM's call, the automation doesn't cover it.
  */
 const MISFIRE_BY_RARITY = {
   common:    { normal: "Jam",      confirmed: "Jam" },
@@ -73,15 +73,15 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
   // Specialization adds +2
   const specBonus = isSpecialized ? 2 : 0;
 
-  // Предмет, по которому идёт бросок (нужен для DSL-модификаторов атаки)
+  // The item the roll is made for (needed for attack DSL modifiers)
   const item = (actor && itemId) ? actor.items.get(itemId) : null;
 
-  // DSL-модификаторы атаки (flags.dedrel.mod), например Прицеливание:
+  // Attack DSL modifiers (flags.dedrel.mod), e.g. Take Aim:
   // "attack:2; filter:ranged; consume:roll"
   let systemAttackBonus = 0;
   if (item && !isSave) {
     systemAttackBonus = DedrelBonuses.collect(actor, item).attack;
-    // Модификатор "Точность" собранного заклинания (Магический Конструктор)
+    // The "Accuracy" Modifier of a built spell (Spell Constructor)
     systemAttackBonus += item.system.attack_bonus || 0;
   }
 
@@ -91,14 +91,14 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
   const specificSaveBonus = (isSave && saveAttr) ? (actor?.system?.attributes[saveAttr]?.save_bonus || 0) : 0;
   const specificSkillBonus = (!isSave && skillId) ? (actor?.system?.skills[skillId]?.bonus || 0) : 0;
 
-  // Точка расширения: макросы и модули могут скорректировать итоговый бонус
+  // Extension point: macros and modules can adjust the final bonus
   const hookCtx = { actor, item, title, isSave, bonus, penalty, systemAttackBonus };
   Hooks.callAll("dedrelPreRoll", hookCtx);
   bonus = hookCtx.bonus;
   systemAttackBonus = hookCtx.systemAttackBonus;
 
-  // Глобальные бонусы (постоянные эффекты) сводятся в одно слагаемое.
-  // global_roll — ко всем броскам; global_skill — только к не-спасам; global_save — только к спасам.
+  // Global bonuses (permanent effects) are combined into one term.
+  // global_roll — to all rolls; global_skill — only to non-saves; global_save — only to saves.
   const globalBonus = globalRollBonus + globalSkillBonus + globalSaveBonus + specificSaveBonus + specificSkillBonus;
 
   // Construct parts for formula and tooltip
@@ -158,8 +158,8 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
         customChatAddon = `<div class="dedrel-fumble-averted" style="color: black; font-style: italic; margin-top: 5px;">${game.i18n.format("DEDREL.Dice.FumbleAverted", {fumbleResult: fumbleResult})}</div>`;
       }
 
-      // Осечка пороха: натуральная 1 на атаке огнестрелом. Переиспользуем уже
-      // брошенный подтверждающий куб крит-провала для тяжёлого исхода.
+      // Powder misfire: a natural 1 on a firearm attack. We reuse the critical fumble's
+      // already rolled confirmation die for the severe outcome.
       const weapon = (weaponId && actor) ? actor.items.get(weaponId) : null;
       if (!isSave && weapon?.system?.skill === "firearms") {
         const outcomes = MISFIRE_BY_RARITY[weapon.system.rarity] || MISFIRE_BY_RARITY.common;
@@ -168,7 +168,7 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
           const wName = foundry.utils.escapeHTML(weapon.name);
           customChatAddon += `<div class="dedrel-misfire" style="color: #b45309; font-weight: bold; margin-top: 5px;">`
             + `${game.i18n.format("DEDREL.Misfire.Title", { weapon: wName })}: ${game.i18n.localize(`DEDREL.Misfire.${outcome}`)}</div>`;
-          // Подсказка про талант Удачи «А вот и нет!» — отмену осечки, если есть заряды
+          // A hint about the Luck talent "Oh No You Don't!" — canceling the misfire, if it has charges
           const butNo = actor.items.find(i => i.type === "talent" && i.system.key === "but_no");
           if (butNo && (butNo.system.uses_value || 0) > 0) {
             customChatAddon += `<div style="font-style: italic; margin-top: 3px;">`
@@ -207,8 +207,8 @@ async function executeRoll({ actor, title, baseRank, itemId, isSpecialized, bonu
 
   await ChatMessage.create(chatData);
 
-  // Сжигаем DSL-модификаторы стадии "roll" (бонусы к атаке).
-  // Эффект, у которого остались моды урона (consume:damage), сгорит после броска урона.
+  // Burn the DSL modifiers of the "roll" stage (attack bonuses).
+  // An effect that still has damage mods (consume:damage) will burn after the damage roll.
   if (item && !isSave) {
     await DedrelBonuses.consumeStage(actor, item, "roll");
   }

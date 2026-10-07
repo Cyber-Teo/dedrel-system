@@ -1,5 +1,5 @@
 /* ==================================================
- * Хуки для Аур Токенов
+ * Hooks for Token Auras
  * ================================================== */
 function refreshTokensForAuras() {
   if (!canvas.ready) return;

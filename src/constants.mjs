@@ -1,5 +1,5 @@
-// Редкость предметов (см. "_rules/15. Inventory.md"). Канонические ключи —
-// с подчёркиванием (very_rare). Порядок = возрастание ценности/редкости.
+// Item rarity (see "_rules/15. Inventory.md"). The canonical keys use
+// an underscore (very_rare). Order = increasing value/rarity.
 export const ITEM_RARITY_ENUM = ["common", "uncommon", "rare", "very_rare", "legendary"];
 
 export const ITEM_RARITY_LABELS = {
@@ -10,24 +10,24 @@ export const ITEM_RARITY_LABELS = {
   legendary: "DEDREL.Rarity.legendary"
 };
 
-// Категории слотов аксессуаров (значения поля предмета system.equip_slot).
-// head — шлем/диадема; neck — ожерелье; torso — пояс; hand — кольца/браслеты
-// (подходят в любой слот кисти/хвоста). Пустая строка = не аксессуар.
+// Accessory slot categories (values of the item field system.equip_slot).
+// head — helmet/diadem; neck — necklace; torso — belt; hand — rings/bracelets
+// (they fit any hand/tail slot). An empty string = not an accessory.
 export const ACCESSORY_SLOT_TYPES = ["head", "neck", "torso", "hand"];
 
-// Деноминации валют по умолчанию. Реальный список валют мира задаётся в
-// настройке "currencies" (меню настроек); это лишь дефолтный набор/фолбэк.
+// Default currency denominations. The world's actual currency list is set in
+// the "currencies" setting (settings menu); this is just the default set/fallback.
 export const CURRENCY_DENOMINATION_ENUM = ["copper", "silver", "gold", "platinum"];
 
-// Дефолтный список валют мира (настройка "currencies"). Каждая валюта:
-//   key        — машинный ключ (латиница), ключ в кошельке актора system.currency.<key>
-//   name       — отображаемое название; у дефолтов это ключ i18n (DEDREL.Currency.*),
-//                который резолвится в DedrelCurrency.defs() — константы грузятся до словарей
-//   abbr       — короткая аббревиатура для UI кошелька (у дефолтов тоже ключ i18n)
-//   base_value — ценность в общих «базовых единицах» (механизм конвертации:
-//                медь=1, серебро=10, золото=100, платина=1000)
-//   weight     — вес одной монеты (кг), влияет на перегрузку
-//   color      — цвет-акцент в UI
+// Default world currency list (the "currencies" setting). Each currency:
+//   key        — machine key (Latin characters), the key in the actor's wallet system.currency.<key>
+//   name       — display name; for the defaults it's an i18n key (DEDREL.Currency.*),
+//                which is resolved in DedrelCurrency.defs() — the constants load before the dictionaries
+//   abbr       — short abbreviation for the wallet UI (also an i18n key for the defaults)
+//   base_value — value in shared "base units" (the conversion mechanism:
+//                copper=1, silver=10, gold=100, platinum=1000)
+//   weight     — weight of one coin (kg), affects encumbrance
+//   color      — accent color in the UI
 export const DEFAULT_CURRENCIES = [
   { key: "copper",   name: "DEDREL.Currency.Copper",   abbr: "DEDREL.Currency.CopperAbbr",   base_value: 1,    weight: 0.01, color: "#b87333" },
   { key: "silver",   name: "DEDREL.Currency.Silver",   abbr: "DEDREL.Currency.SilverAbbr",   base_value: 10,   weight: 0.01, color: "#c0c0c0" },
@@ -35,24 +35,24 @@ export const DEFAULT_CURRENCIES = [
   { key: "platinum", name: "DEDREL.Currency.Platinum", abbr: "DEDREL.Currency.PlatinumAbbr", base_value: 1000, weight: 0.01, color: "#e5e4e2" }
 ];
 
-// Функциональные ремёсла системы крафта (craft/New Craft.md): значения поля
-// system.crafting.discipline и дисциплина рецептов. Пустая строка = не задано.
+// Functional crafts of the crafting system (craft/New Craft.md): values of the field
+// system.crafting.discipline and the recipes' discipline. An empty string = not set.
 export const CRAFT_DISCIPLINE_ENUM = ["alchemy", "smithing", "inscription", "tailoring", "carpentry", "jewelry", "engineering"];
 
-// Классы ремесленных материалов (system.material_class у craft_material).
-// Семь канонических типов СЫРЬЯ из правил крафта (19. Crafting §Материалы) плюс
-// восьмой класс "processed" — ОБРАБОТАННЫЕ материалы: вторая ступень экономики,
-// то есть сами продукты крафта (чернила, бумага, склянки, слитки, порох, спирт).
-// У обработанных нет сигнатур и слотов: в оружие и доспех они не ложатся, они
-// живут только в рецептах как обычные ингредиенты.
+// Crafting material classes (system.material_class on craft_material).
+// The seven canonical RAW material types from the crafting rules (19. Crafting §Materials) plus
+// an eighth class "processed" — PROCESSED materials: the economy's second tier,
+// i.e. crafting products themselves (ink, paper, vials, ingots, powder, spirits).
+// Processed materials have no signatures or slots: they don't go into weapons or armor, they
+// live only in recipes as regular ingredients.
 export const MATERIAL_CLASS_ENUM = ["metal", "mineral", "wood", "herb", "leather", "cloth", "creature_part", "processed"];
 
-// Тиры слотов улучшений оружия/брони (без legendary: очень редкий — максимум).
+// Weapon/armor upgrade slot tiers (no legendary: very rare is the maximum).
 export const SLOT_TIER_ENUM = ["common", "uncommon", "rare", "very_rare"];
 
-// Типы боеприпасов (system.ammo_type у ammunition) и их привязка к классу
-// дальнобойного оружия. Порядок в RANGED_CLASS_KEYS важен: firearm и crossbow
-// проверяются ДО bow, т.к. подстрока "bow" содержится в "crossbow".
+// Ammunition types (system.ammo_type on ammunition) and their binding to the ranged
+// weapon class. The order in RANGED_CLASS_KEYS matters: firearm and crossbow
+// are checked BEFORE bow, since the substring "bow" is contained in "crossbow".
 export const AMMO_TYPE_ENUM = ["arrow", "bolt", "shot"];
 
 export const AMMO_TYPE_LABELS = {
@@ -61,9 +61,9 @@ export const AMMO_TYPE_LABELS = {
   shot: "DEDREL.Ammo.Type.shot"
 };
 
-// Класс дальнобойного оружия определяется по ключу/названию (подстрока).
-// ammo — совместимый тип боеприпаса; consumable_recovery=false → боеприпас
-// нельзя подобрать после выстрела (порох огнестрела).
+// The ranged weapon class is determined by key/name (substring).
+// ammo — the compatible ammunition type; consumable_recovery=false → the ammunition
+// can't be picked up after a shot (firearm powder).
 export const RANGED_CLASS_KEYS = [
   { class: "firearm",  ammo: "shot",  keys: ["musket", "pistol", "arquebus"], recoverable: false },
   { class: "crossbow", ammo: "bolt",  keys: ["crossbow"], recoverable: true },
@@ -84,13 +84,13 @@ export const DR_KEY_LABELS = {
 };
 
 /**
- * Ступени сопротивлений и уязвимостей (_rules/18. Enemies.md §Уязвимости и
- * особенности типов). value — единицы DR (1 единица = 10% урона); отрицательные
- * applyDamage() читает как уязвимость (усиление входящего урона).
+ * Resistance and vulnerability tiers (_rules/18. Enemies.md §Vulnerabilities and
+ * type features). value — DR units (1 unit = 10% of damage); negative values
+ * applyDamage() reads as vulnerability (amplifying incoming damage).
  *
- * Это комбинаторика (6 ступеней × 10 типов урона), поэтому такие эффекты
- * собираются генератором в пикере «Из библиотеки», а не лежат готовыми записями
- * в компендиуме active_effects — иначе список пикера распухает до 60 строк.
+ * This is combinatorics (6 tiers × 10 damage types), so such effects
+ * are assembled by the generator in the "From library" picker rather than stored as ready entries
+ * in the active_effects compendium — otherwise the picker list would swell to 60 rows.
  */
 export const DR_TIERS = {
   weak_resist: { value: 2, label: "DEDREL.EffectLib.Tier.WeakResist", img: "icons/svg/shield.svg" },

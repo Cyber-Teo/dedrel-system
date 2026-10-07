@@ -1,5 +1,5 @@
 /**
- * Хук "hotbarDrop" перехватывает перетаскивание предметов и навыков на панель макросов.
+ * The "hotbarDrop" hook intercepts dragging items and skills onto the macro bar.
  */
 Hooks.on("hotbarDrop", (bar, data, slot) => {
   if (data.type === "Item") {

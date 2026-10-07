@@ -1,35 +1,35 @@
 /* ==================================================
- * Синхронизация регионов-аур с эффектами-маркерами
+ * Synchronizing aura regions with marker effects
  * ==================================================
- * Аура задаётся Active Effect'ом с флагом flags.dedrel.aura
+ * An aura is defined by an Active Effect with the flags.dedrel.aura flag
  * ({radius, disposition, includeSelf, effects?, color?});
- * radius — в единицах дистанции сцены (метры).
- * Пока такой эффект активен на актёре, у каждого его токена
- * на текущей сцене существует регион-эманация (V14, attachment
- * к токену — ядро само двигает регион за токеном) с behavior
- * "dedrelAura" (см. src/data/region-behaviors/aura.mjs),
- * который вешает/снимает payload-эффекты на входящие токены.
+ * radius — in scene distance units (meters).
+ * While such an effect is active on the actor, each of its tokens
+ * on the current scene has an emanation region (V14, attachment
+ * to the token — core moves the region with the token by itself) with the behavior
+ * "dedrelAura" (see src/data/region-behaviors/aura.mjs),
+ * which applies/removes the payload effects on entering tokens.
  *
- * Весь модуль исполняется только на клиенте активного ГМа:
- * создание/удаление регионов и эффектов требует его прав,
- * а события и хуки приходят на все клиенты.
+ * The whole module runs only on the active GM's client:
+ * creating/deleting regions and effects requires their permissions,
+ * while events and hooks arrive on all clients.
  */
 
 /**
- * Собирает активные аура-маркеры актёра.
- * Маркер — "чистый" эффект с transfer: false: сам он ни на кого не действует
- * (носитель получает payload только через includeSelf), поэтому ищем по всем
- * эффектам актёра и его предметов, а не по allApplicableEffects (тот отдаёт
- * только transfer-эффекты предметов).
+ * Collects the actor's active aura markers.
+ * A marker is a "clean" effect with transfer: false: it affects no one itself
+ * (the bearer gets the payload only via includeSelf), so we search all
+ * effects of the actor and its items, not allApplicableEffects (that one returns
+ * only the items' transfer effects).
  * @param {Actor} actor
- * @returns {Map<string, {effect: ActiveEffect, params: object}>} uuid маркера → данные
+ * @returns {Map<string, {effect: ActiveEffect, params: object}>} marker uuid → data
  */
 function getAuraEffects(actor) {
   const result = new Map();
   const collect = (effect) => {
     if (effect.disabled || effect.isSuppressed) return;
-    // Копия, навешенная аурой, сама маркером быть не может — защита от
-    // загрязнённых данных (копии старых версий сохраняли флаг aura)
+    // A copy applied by an aura can't itself be a marker — protection against
+    // dirty data (copies from old versions kept the aura flag)
     if (effect.getFlag("dedrel", "auraApplied")) return;
     const params = effect.getFlag("dedrel", "aura");
     if (!params || !(Number(params.radius) > 0)) return;
@@ -43,9 +43,9 @@ function getAuraEffects(actor) {
 }
 
 /**
- * Нормализованный снимок параметров ауры: пишется во флаг региона
- * при создании и сравнивается при синхронизации, чтобы пересоздать
- * регион после правки радиуса/фильтров.
+ * A normalized snapshot of the aura parameters: written to the region flag
+ * on creation and compared during sync, so that the region is recreated
+ * after the radius/filters are edited.
  */
 function snapshotParams(params) {
   return {
@@ -57,10 +57,10 @@ function snapshotParams(params) {
 }
 
 /**
- * Снимает со всех актёров сцены эффекты, навешенные behavior'ами региона.
- * Нужна при удалении региона синхронизацией: ядро шлёт tokenExit только
- * токенам из region.tokens, а membership обновляется асинхронно — при быстром
- * пересоздании региона (toggle ауры) выход может не сработать и копии утекут.
+ * Removes the effects applied by the region's behaviors from all actors on the scene.
+ * Needed when the sync deletes a region: core sends tokenExit only
+ * to the tokens in region.tokens, and membership updates asynchronously — when a region
+ * is quickly recreated (aura toggle) the exit may not fire and the copies would leak.
  * @param {RegionDocument} region
  */
 async function cleanupRegionEffects(region) {
@@ -77,7 +77,7 @@ async function cleanupRegionEffects(region) {
 }
 
 /**
- * Приводит регионы одного токена в соответствие набору активных аур актёра.
+ * Brings one token's regions in line with the actor's set of active auras.
  * @param {TokenDocument} token
  * @param {Map<string, {effect: ActiveEffect, params: object}>} auraMap
  */
@@ -92,16 +92,16 @@ async function syncTokenAuras(token, auraMap) {
   for (const region of existing) {
     const meta = region.getFlag("dedrel", "aura");
     const desired = auraMap.get(meta.effectUuid);
-    // !keep.has(...) — дедупликация: если у токена уже оставлен регион этой
-    // ауры, любой второй с тем же маркером — утечка, удаляем вместе с его
-    // эффектами (иначе каждый дубль вешает свою копию — бонусы задваиваются)
+    // !keep.has(...) — deduplication: if the token already has a region of this
+    // aura kept, any second one with the same marker is a leak, delete it together with its
+    // effects (otherwise each duplicate applies its own copy — the bonuses double)
     if (desired && !keep.has(meta.effectUuid)
       && foundry.utils.equals(meta.params ?? {}, snapshotParams(desired.params))) {
       keep.add(meta.effectUuid);
     } else {
-      // Ядро при удалении шлёт tokenExit токенам из region.tokens, но membership
-      // обновляется асинхронно — зачищаем эффекты региона явно (идемпотентно
-      // с exit-обработчиком: повторное удаление не находит эффектов).
+      // On deletion core sends tokenExit to the tokens in region.tokens, but membership
+      // updates asynchronously — clear the region's effects explicitly (idempotent
+      // with the exit handler: a repeated deletion finds no effects).
       await cleanupRegionEffects(region);
       toDelete.push(region.id);
     }
@@ -114,10 +114,10 @@ async function syncTokenAuras(token, auraMap) {
     const { distance, distancePixels } = scene.dimensions;
     const center = token.getCenterPoint();
     const { elevation, depth, level } = token._source;
-    // Круг от центра токена (как у шаблонов предметов), а НЕ createTokenEmanation:
-    // эманация расширяет квадратный футпринт токена и выглядит квадратом со
-    // скруглёнными углами. Благодаря attachment.token ядро само переносит формы
-    // региона вместе с токеном (TokenDocument#computeAttachedRegionUpdates).
+    // A circle from the token's center (like item templates), NOT createTokenEmanation:
+    // an emanation expands the token's square footprint and looks like a square with
+    // rounded corners. Thanks to attachment.token core moves the region's shapes
+    // along with the token by itself (TokenDocument#computeAttachedRegionUpdates).
     await scene.createEmbeddedDocuments("Region", [{
       name: effect.name,
       color: snapshot.color ?? game.user.color,
@@ -146,16 +146,16 @@ async function syncTokenAuras(token, auraMap) {
       }]
     }]);
 
-    // Токены внутри (включая носителя) применять вручную НЕ нужно: сервер
-    // выставляет _priorRegions при любом изменении token._regions, поэтому
-    // после асинхронного обновления membership ядро само шлёт tokenEnter
-    // всем, кто оказался внутри нового региона. Ручное применение здесь
-    // гонялось бы с этим событием и давало бы дубли копий.
+    // Tokens inside (including the bearer) do NOT need to be handled by hand: the server
+    // sets _priorRegions on any change of token._regions, so
+    // after the asynchronous membership update core itself sends tokenEnter
+    // to everyone who ended up inside the new region. Applying by hand here
+    // would race with that event and produce duplicate copies.
   }
 }
 
 /**
- * Полная синхронизация аур актёра на всех его токенах текущей сцены.
+ * Full sync of the actor's auras across all its tokens on the current scene.
  * @param {Actor} actor
  */
 async function syncActorAuras(actor) {
@@ -167,9 +167,9 @@ async function syncActorAuras(actor) {
 }
 
 /* --------------------------------------------------
- * Очередь синхронизации: правки эффектов приходят пачками
- * (например, экипировка брони гасит несколько эффектов разом),
- * поэтому запросы на актёра коалесцируются через debounce.
+ * Sync queue: effect edits arrive in batches
+ * (e.g. equipping armor disables several effects at once),
+ * so requests per actor are coalesced via debounce.
  * -------------------------------------------------- */
 
 const pendingActors = new Set();
@@ -194,14 +194,14 @@ function queueActorSync(actor) {
   flushPending();
 }
 
-/** Возвращает актёра, которому принадлежит эффект (напрямую или через предмет). */
+/** Returns the actor the effect belongs to (directly or through an item). */
 function actorOfEffect(effect) {
   let parent = effect.parent;
   if (parent?.documentName === "Item") parent = parent.parent;
   return parent?.documentName === "Actor" ? parent : null;
 }
 
-/** Затрагивает ли эффект (или диф его изменений) аура-маркер. */
+/** Whether the effect (or its changes diff) touches an aura marker. */
 function touchesAura(effect, changes) {
   if (effect.getFlag("dedrel", "aura")) return true;
   const dedrelFlags = changes?.flags?.dedrel;
@@ -209,7 +209,7 @@ function touchesAura(effect, changes) {
 }
 
 /* --------------------------------------------------
- * Хуки жизненного цикла
+ * Lifecycle hooks
  * -------------------------------------------------- */
 
 Hooks.on("createActiveEffect", (effect) => {
@@ -217,7 +217,7 @@ Hooks.on("createActiveEffect", (effect) => {
 });
 
 Hooks.on("updateActiveEffect", (effect, changes) => {
-  // Покрывает toggle disabled, правку параметров ауры и снятие флага
+  // Covers the disabled toggle, editing the aura parameters and removing the flag
   if (touchesAura(effect, changes)) queueActorSync(actorOfEffect(effect));
 });
 
@@ -225,9 +225,9 @@ Hooks.on("deleteActiveEffect", (effect) => {
   if (touchesAura(effect)) queueActorSync(actorOfEffect(effect));
 });
 
-// Экипировка/снятие предмета меняет применимость его эффектов (гейт в
-// DedrelActor#allApplicableEffects) без отдельных хуков по эффектам —
-// синкаем актёра при правке предмета с аурами.
+// Equipping/unequipping an item changes the applicability of its effects (the gate in
+// DedrelActor#allApplicableEffects) without separate per-effect hooks —
+// we sync the actor when an item with auras is edited.
 function onItemChange(item) {
   if (item.parent?.documentName !== "Actor") return;
   if (!item.effects.some(e => e.getFlag("dedrel", "aura"))) return;
@@ -237,19 +237,19 @@ Hooks.on("createItem", onItemChange);
 Hooks.on("updateItem", onItemChange);
 Hooks.on("deleteItem", onItemChange);
 
-// Носитель ауры выставлен на сцену. Удаление токена не обрабатываем:
-// ядро само удаляет привязанные регионы и синтезирует tokenExit.
+// An aura bearer was placed on the scene. Token deletion isn't handled:
+// core itself deletes the attached regions and synthesizes tokenExit.
 Hooks.on("createToken", (token) => {
   if (token.actor) queueActorSync(token.actor);
 });
 
 /**
- * Сверка состояния при загрузке сцены. Регионы персистятся в данных сцены,
- * поэтому пересоздавать их не нужно — нужно лечить рассинхрон, накопившийся
- * пока ГМ был оффлайн (события аур в это время не исполнялись):
- * 1) синк регионов по актёрам + удаление регионов-сирот;
- * 2) удаление протухших payload-эффектов (аура исчезла/носитель не рядом);
- * 3) наложение недостающих эффектов на токены внутри аур.
+ * State reconciliation on scene load. Regions persist in the scene data,
+ * so there's no need to recreate them — we need to fix the desync accumulated
+ * while the GM was offline (aura events weren't executed during that time):
+ * 1) sync regions per actor + delete orphan regions;
+ * 2) delete stale payload effects (the aura is gone/the bearer isn't nearby);
+ * 3) apply the missing effects to tokens inside auras.
  */
 Hooks.on("canvasReady", async () => {
   if (!game.users.activeGM?.isSelf) return;
@@ -257,10 +257,10 @@ Hooks.on("canvasReady", async () => {
   if (!scene) return;
 
   try {
-    // 0. Осколки ранних версий: маркер ауры, скопированный на ЧУЖОГО актёра
-    // (старой кнопкой "Применить эффекты"). Сигнатура: актёрный эффект с флагом
-    // aura, чей origin резолвится в предмет другого актёра. Такой осколок сам
-    // становится излучателем ауры и задваивает бонусы — удаляем до синка.
+    // 0. Shards of early versions: an aura marker copied onto ANOTHER actor
+    // (by the old "Apply Effects" button). Signature: an actor effect with the
+    // aura flag whose origin resolves to another actor's item. Such a shard itself
+    // becomes an aura emitter and doubles the bonuses — delete it before the sync.
     for (const token of scene.tokens) {
       const actor = token.actor;
       if (!actor) continue;
@@ -272,14 +272,14 @@ Hooks.on("canvasReady", async () => {
       if (junk.length) await actor.deleteEmbeddedDocuments("ActiveEffect", junk);
     }
 
-    // 1. Синк всех актёров сцены (создаст недостающие регионы, удалит лишние)
+    // 1. Sync all actors on the scene (creates missing regions, deletes extra ones)
     const actors = new Set();
     for (const token of scene.tokens) {
       if (token.actor) actors.add(token.actor);
     }
     for (const actor of actors) await syncActorAuras(actor);
 
-    // Регионы-сироты: токен-носитель отсутствует на сцене
+    // Orphan regions: the bearer token is missing from the scene
     const orphans = scene.regions.filter(r => {
       const meta = r.getFlag("dedrel", "aura");
       return meta && !scene.tokens.has(meta.tokenId);
@@ -287,12 +287,12 @@ Hooks.on("canvasReady", async () => {
     for (const region of orphans) await cleanupRegionEffects(region);
     if (orphans.length) await scene.deleteEmbeddedDocuments("Region", orphans.map(r => r.id));
 
-    // 2. Эффекты, чей behavior-источник исчез или чей носитель уже не рядом.
-    // ВАЖНО: зачистка идёт ДО повторного применения (шаг 3): идемпотентность
-    // проверяется по маркеру, и протухшая копия с origin от старого региона
-    // иначе заблокировала бы наложение свежей.
-    // Здесь же снимаются дубли одного маркера (гонки прошлых версий):
-    // на актёре остаётся максимум одна копия каждой ауры.
+    // 2. Effects whose source behavior is gone or whose bearer is no longer nearby.
+    // IMPORTANT: the cleanup runs BEFORE re-applying (step 3): idempotency
+    // is checked by marker, and a stale copy with an origin from the old region
+    // would otherwise block applying a fresh one.
+    // Duplicates of a single marker (races from past versions) are removed here too:
+    // at most one copy of each aura remains on the actor.
     for (const token of scene.tokens) {
       const actor = token.actor;
       if (!actor) continue;
@@ -310,9 +310,9 @@ Hooks.on("canvasReady", async () => {
       if (stale.length) await actor.deleteEmbeddedDocuments("ActiveEffect", stale);
     }
 
-    // 3. Токены, вошедшие в ауры без ГМа: применяем эффекты (идемпотентно).
-    // Скрытые регионы пропускаем: ядро при скрытии синтезирует tokenExit,
-    // и аура считается выключенной, пока регион скрыт.
+    // 3. Tokens that entered auras without a GM: apply the effects (idempotently).
+    // Hidden regions are skipped: when hiding, core synthesizes tokenExit,
+    // and the aura counts as off while the region is hidden.
     for (const region of scene.regions) {
       if (region.hidden || !region.getFlag("dedrel", "aura")) continue;
       for (const behavior of region.behaviors) {

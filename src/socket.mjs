@@ -1,16 +1,16 @@
 import { DedrelCurrency } from "./utils/currency.mjs";
 
 /**
- * Системный socket-брокер Dedrel (канал "system.dedrel").
+ * Dedrel system socket broker (channel "system.dedrel").
  *
- * Назначение: операции, которые игрок не может выполнить сам из-за прав
- * (перевод денег, сделки с торговцами/лутом/контейнерами). Игрок эмитит запрос;
- * исполняет активный ГМ-клиент, владеющий всеми акторами. Валидацией/подтверждением
- * ГМ не занимается — операция проходит автоматически (как в loot-sheet), достаточно
- * ГМа онлайн на связи.
+ * Purpose: operations a player can't perform themselves due to permissions
+ * (money transfers, trades with merchants/loot/containers). The player emits a request;
+ * it is executed by the active GM client, which owns all actors. The GM doesn't
+ * validate/confirm anything — the operation goes through automatically (as in loot-sheet), it's enough
+ * for a GM to be online.
  *
- * Дублирование: при нескольких ГМах обрабатывает только «первый» активный.
- * Ошибки валидации возвращаются инициатору через action "notify".
+ * Duplication: with several GMs only the "first" active one handles it.
+ * Validation errors are returned to the initiator via the "notify" action.
  */
 export class DedrelSocket {
   static CHANNEL = "system.dedrel";
@@ -24,17 +24,17 @@ export class DedrelSocket {
   }
 
   static async #onMessage(data) {
-    // "notify" адресован конкретному пользователю (обычно инициатору сделки)
+    // "notify" is addressed to a specific user (usually the trade's initiator)
     if (data?.action === "notify") {
       if (data.userId === game.user.id) ui.notifications[data.type || "warn"](data.message);
       return;
     }
     if (!game.user.isGM) return;
-    if (this.#primaryGM?.id !== game.user.id) return; // операцию выполняет один ГМ
+    if (this.#primaryGM?.id !== game.user.id) return; // a single GM performs the operation
     return this.#execute(data);
   }
 
-  /** GM-сторона: маршрутизация операций. */
+  /** GM side: routing operations. */
   static async #execute(data) {
     switch (data?.action) {
       case "transferCurrency": return this._applyTransfer(data.sourceUuid, data.targetUuid, data.changes);
@@ -47,7 +47,7 @@ export class DedrelSocket {
     }
   }
 
-  /** Отправляет операцию: локально (если ГМ) или через активного ГМа. */
+  /** Sends an operation: locally (if GM) or through the active GM. */
   static async #dispatch(packet) {
     if (game.user.isGM) return this.#execute(packet);
     if (!this.#primaryGM) {
@@ -58,14 +58,14 @@ export class DedrelSocket {
     return true;
   }
 
-  /** Уведомление инициатору (или локально, если ГМ сам инициатор). */
+  /** Notification to the initiator (or locally, if the GM is the initiator). */
   static #notify(userId, message, type = "warn") {
     if (userId === game.user.id) { ui.notifications[type](message); return; }
     game.socket.emit(this.CHANNEL, { action: "notify", userId, message, type });
   }
 
   // ========================================================================
-  // Перевод валюты между акторами (кошелёк → кошелёк)
+  // Currency transfer between actors (wallet → wallet)
   // ========================================================================
   static async transferCurrency(source, target, changes) {
     if (!source || !target) return false;
@@ -112,7 +112,7 @@ export class DedrelSocket {
   }
 
   // ========================================================================
-  // Публичные помощники для листов (эмитят/исполняют операции)
+  // Public helpers for sheets (emit/execute operations)
   // ========================================================================
   static buy(buyer, merchant, itemId, quantity = 1) {
     return this.#dispatch({ action: "buy", buyerUuid: buyer.uuid, merchantUuid: merchant.uuid, itemId, quantity, userId: game.user.id });
@@ -131,7 +131,7 @@ export class DedrelSocket {
   }
 
   // ========================================================================
-  // GM-сторона: применение сделок
+  // GM side: applying trades
   // ========================================================================
   static async _applyBuy(data) {
     const buyer = await fromUuid(data.buyerUuid);
@@ -219,7 +219,7 @@ export class DedrelSocket {
     await DedrelCurrency.setWalletBase(buyer, buyerBase - price);
     await DedrelCurrency.setWalletBase(merchant, DedrelCurrency.walletBase(merchant) + price);
 
-    // Применяем эффекты услуги покупателю (если есть)
+    // Apply the service's effects to the buyer (if any)
     if (item.effects.size > 0) {
       const effects = item.effects.map(e => {
         const d = e.toObject(); delete d._id; d.origin = buyer.uuid; d.transfer = false; return d;
@@ -254,16 +254,16 @@ export class DedrelSocket {
   }
 
   // ========================================================================
-  // Внутренние помощники перемещения предметов
+  // Internal item movement helpers
   // ========================================================================
-  /** Ограничивает количество доступным стоком (для предметов с quantity). */
+  /** Limits the quantity to the available stock (for items with quantity). */
   static #clampQty(item, requested) {
     const q = Math.max(1, Number(requested) || 1);
     if (item.system?.quantity !== undefined) return Math.min(q, Math.max(1, Number(item.system.quantity) || 1));
-    return 1; // предметы без quantity считаются единичными
+    return 1; // items without quantity count as single
   }
 
-  /** Создаёт копию предмета у получателя в количестве qty. */
+  /** Creates a copy of the item at the recipient in the amount of qty. */
   static async #giveItem(actor, item, qty) {
     const data = item.toObject();
     delete data._id;
@@ -276,7 +276,7 @@ export class DedrelSocket {
     }
   }
 
-  /** Уменьшает сток предмета у источника на qty (удаляет при обнулении). */
+  /** Reduces the item's stock at the source by qty (deletes it when it hits zero). */
   static async #reduceStock(actor, item, qty) {
     if (item.system?.quantity !== undefined) {
       const left = (Number(item.system.quantity) || 0) - qty;

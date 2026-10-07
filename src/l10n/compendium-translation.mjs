@@ -1,27 +1,27 @@
 /**
- * Слой перевода компендиумов системы (T5, `Локализация/TRANSLATION_PLAN.md` §3.2–3.4).
+ * Translation layer for the system's compendiums (T5, `Локализация/TRANSLATION_PLAN.md` §3.2–3.4).
  *
- * Русский — источник истины в паках. Если действующий язык системы не русский
- * (настройка `dedrel.systemLanguage`, при «auto» — язык ядра), тексты документов
- * из паков `dedrel.*` подменяются переводом из `translations/en/<pack>.json`.
- * Формат файлов и правила перевода — скилл `translate` §2.2, проверка —
- * `scripts/translation_check.py`. Список файлов задаётся в `system.json`
- * (`flags.dedrel.translations.en`), чтобы клиент не запрашивал несуществующие.
+ * Russian is the source of truth in the packs. If the active system language isn't Russian
+ * (the `dedrel.systemLanguage` setting; with "auto" — core's language), the texts of documents
+ * from the `dedrel.*` packs are replaced with the translation from `translations/en/<pack>.json`.
+ * File format and translation rules — the `translate` skill §2.2, validation —
+ * `scripts/translation_check.py`. The file list is set in `system.json`
+ * (`flags.dedrel.translations.en`) so that the client doesn't request nonexistent ones.
  *
- * Как устроено:
- *  - Загрузка. Хук `init` срабатывает раньше, чем ядро грузит языковые файлы, а паки
- *    поднимаются ещё позже (`Game#setupGame`). Поэтому оборачиваем `game.i18n.initialize`:
- *    ядро ждёт его, и словарь гарантированно готов до создания первого документа.
- *  - Документы. `DedrelItem#_initializeSource` вызывает `translateSource`: перевод ложится
- *    в `_source` (как у Babele), поэтому импорт из компендиума в мир даёт английский предмет.
- *    Вложенные предметы акторов из паков переводятся тем же путём (по `system.key`).
- *  - Индекс и папки. Окно компендиума берёт имена из `pack.index`, а сервер присылает индекс
- *    без `system.key` и на каждом `getIndex()` вливает русские имена заново. Поэтому `system.key`
- *    добавлен в поля индекса, `getIndex` обёрнут, а на `setup` индекс паков дозапрашивается.
+ * How it works:
+ *  - Loading. The `init` hook fires before core loads the language files, and the packs
+ *    come up even later (`Game#setupGame`). So we wrap `game.i18n.initialize`:
+ *    core awaits it, and the dictionary is guaranteed to be ready before the first document is created.
+ *  - Documents. `DedrelItem#_initializeSource` calls `translateSource`: the translation goes
+ *    into `_source` (as in Babele), so importing from a compendium into the world yields an English item.
+ *    Embedded actor items from packs are translated the same way (by `system.key`).
+ *  - Index and folders. The compendium window takes names from `pack.index`, while the server sends the index
+ *    without `system.key` and pours the Russian names back in on every `getIndex()`. So `system.key`
+ *    is added to the index fields, `getIndex` is wrapped, and on `setup` the packs' index is re-requested.
  *
- * Ограничения: акторы (имена, биографии) не переводятся; документы, уже импортированные
- * в мир, остаются на языке импорта; правка переведённого текста в паке блокируется
- * (`stripTranslatedChanges`), чтобы английский не попал в русский источник.
+ * Limitations: actors (names, biographies) aren't translated; documents already imported
+ * into the world stay in the language of the import; editing translated text in a pack is blocked
+ * (`stripTranslatedChanges`) so that English doesn't end up in the Russian source.
  */
 
 const SYSTEM_ID = "dedrel";
@@ -29,21 +29,21 @@ const SOURCE_LANG = "ru";
 const TRANSLATION_LANG = "en";
 
 /**
- * Пак (имя без `dedrel.`) → {ключ документа (`system.key` или `_id`) → запись перевода}.
- * Ключ уникален внутри пака, но не между паками: `taunt` есть и в `additional_conditions`
- * (кондиция), и в `talents` (талант).
+ * Pack (name without `dedrel.`) → {document key (`system.key` or `_id`) → translation entry}.
+ * A key is unique within a pack but not across packs: `taunt` exists both in `additional_conditions`
+ * (a condition) and in `talents` (a talent).
  */
 const dictionaries = new Map();
 
-/** Русское имя папки компендиума → перевод. */
+/** Russian compendium folder name → translation. */
 let folderNames = {};
 
-/** Переведённые пути полей по объекту `_source` документа — для защиты от записи. */
+/** Translated field paths per document `_source` object — for write protection. */
 const translatedPaths = new WeakMap();
 
 let active = false;
 
-/** Действующий язык контента системы: настройка `systemLanguage` либо язык ядра. */
+/** The active system content language: the `systemLanguage` setting or core's language. */
 function contentLanguage() {
   const forced = game.settings.get(SYSTEM_ID, "systemLanguage");
   return (forced && forced !== "auto") ? forced : game.i18n.lang;
@@ -55,7 +55,7 @@ async function fetchJson(path) {
   return response.json();
 }
 
-/** Загрузить словарь перевода. Вызывается из обёртки `game.i18n.initialize`. */
+/** Load the translation dictionary. Called from the `game.i18n.initialize` wrapper. */
 async function load() {
   if (contentLanguage() === SOURCE_LANG) return;
   const packs = game.system.flags?.[SYSTEM_ID]?.translations?.[TRANSLATION_LANG] ?? [];
@@ -82,16 +82,16 @@ function isSystemPack(pack) {
   return !!id && id.startsWith(`${SYSTEM_ID}.`);
 }
 
-/** Имя пака без префикса системы. */
+/** Pack name without the system prefix. */
 function packName(pack) {
   const id = typeof pack === "string" ? pack : pack.collection;
   return id.slice(SYSTEM_ID.length + 1);
 }
 
 /**
- * Найти запись перевода документа. Документ своего пака ищется в его словаре.
- * Вложенный предмет актора из пака (`dedrel.actors`) своего словаря не имеет: ищем по всем,
- * а при совпадении ключа в нескольких паках берём пак с документами того же типа.
+ * Find a document's translation entry. A document of its own pack is looked up in its dictionary.
+ * An embedded actor item from a pack (`dedrel.actors`) has no dictionary of its own: we search all of them,
+ * and when the key matches in several packs we take the pack with documents of the same type.
  */
 function findEntry(source, pack) {
   const key = source.system?.key || source._id;
@@ -105,13 +105,13 @@ function findEntry(source, pack) {
 }
 
 /**
- * Применить перевод к исходным данным документа из пака системы (на месте).
- * @param {object} source         Данные документа (будущий `_source`)
- * @param {string|null} pack      Пак документа или его родителя
+ * Apply the translation to the source data of a document from a system pack (in place).
+ * @param {object} source         Document data (the future `_source`)
+ * @param {string|null} pack      The pack of the document or of its parent
  * @param {object} [options]
- * @param {boolean} [options.creation]  Документ создаётся: перевод не применяется,
- *                                      иначе в пак записался бы английский текст
- * @returns {object}              Тот же объект `source`
+ * @param {boolean} [options.creation]  The document is being created: the translation isn't applied,
+ *                                      otherwise English text would be written into the pack
+ * @returns {object}              The same `source` object
  */
 function translateSource(source, pack, { creation = false } = {}) {
   if (!active || creation || !isSystemPack(pack)) return source;
@@ -128,7 +128,7 @@ function translateSource(source, pack, { creation = false } = {}) {
       }
       continue;
     }
-    // Поле исчезло из RU-источника — запись устарела, не создаём его заново
+    // The field has disappeared from the RU source — the entry is stale, don't recreate the field
     if (!foundry.utils.hasProperty(source, path)) continue;
     foundry.utils.setProperty(source, path, value);
     paths.add(path);
@@ -138,17 +138,17 @@ function translateSource(source, pack, { creation = false } = {}) {
 }
 
 /**
- * Убрать из изменений переведённые поля документа пака, чтобы английский текст
- * не попал в русский источник. Вызывается из `DedrelItem#_preUpdate`.
- * @returns {boolean} были ли изменения отброшены
+ * Remove the document's translated fields from the changes of a pack document, so that English text
+ * doesn't end up in the Russian source. Called from `DedrelItem#_preUpdate`.
+ * @returns {boolean} whether any changes were discarded
  */
 function stripTranslatedChanges(document, changes) {
   const paths = translatedPaths.get(document._source);
   if (!paths?.size) return false;
   let stripped = false;
   for (const path of paths) {
-    // Изменения бывают и плоскими ({"system.description": …}), и вложенными;
-    // лист шлёт все поля формы, поэтому неизменённые убираем молча.
+    // Changes can be both flat ({"system.description": …}) and nested;
+    // the sheet sends all form fields, so unchanged ones are removed silently.
     let value;
     if (path in changes) { value = changes[path]; delete changes[path]; }
     else if (foundry.utils.hasProperty(changes, path)) {
@@ -162,7 +162,7 @@ function stripTranslatedChanges(document, changes) {
   return stripped;
 }
 
-/** Перевести имена записей индекса пака (на месте). */
+/** Translate the names of the pack's index entries (in place). */
 function translateIndex(pack) {
   const dict = dictionaries.get(packName(pack));
   if (!dict) return;
@@ -172,7 +172,7 @@ function translateIndex(pack) {
   }
 }
 
-/** Перевести имена папок пака: только локально, без записи в базу. */
+/** Translate the pack's folder names: locally only, without writing to the database. */
 function translateFolders(pack) {
   for (const folder of pack.folders) {
     const name = folderNames[folder.name];
@@ -186,7 +186,7 @@ export const CompendiumTranslation = {
 
   get active() { return active; },
 
-  /** Хук `init`: обёртки загрузки и индекса. */
+  /** The `init` hook: the loading and index wrappers. */
   init() {
     const indexFields = CONFIG.Item.compendiumIndexFields;
     if (!indexFields.includes("system.key")) indexFields.push("system.key");
@@ -209,8 +209,8 @@ export const CompendiumTranslation = {
   },
 
   /**
-   * Хук `setup`: паки уже созданы. Перевести папки и дозапросить индекс с `system.key`
-   * (переводится обёрткой `getIndex`), затем пересобрать деревья паков и перерисовать сайдбар.
+   * The `setup` hook: the packs are already created. Translate the folders and re-request the index with `system.key`
+   * (translated by the `getIndex` wrapper), then rebuild the pack trees and redraw the sidebar.
    */
   async translatePacks() {
     if (!active) return;

@@ -2,12 +2,12 @@ import { DR_KEY_LABELS } from "./constants.mjs";
 import { ActionEconomy } from "./utils/action-economy.mjs";
 
 /**
- * Кастомный документ боя: тики кондиций — периодический урон от состояний
- * (system.tick у Item типа condition, перенесён в flags.dedrel.tick статуса
- * при сборке CONFIG.statusEffects). Lifecycle-методы _onStartTurn/_onEndTurn
- * ядро вызывает только у активного ГМа и не вызывает при откате хода назад,
- * поэтому урон применяется ровно один раз. Пропущенные ходы (context.skipped
- * при перемотке инициативы) не тикают.
+ * Custom combat document: condition ticks — periodic damage from conditions
+ * (system.tick on Items of type condition, carried over into the status's flags.dedrel.tick
+ * when CONFIG.statusEffects is assembled). The lifecycle methods _onStartTurn/_onEndTurn
+ * are called by core only on the active GM and aren't called when a turn is rolled back,
+ * so damage is applied exactly once. Skipped turns (context.skipped
+ * when the initiative is fast-forwarded) don't tick.
  */
 export default class DedrelCombat extends Combat {
   async _onStartTurn(combatant, context) {
@@ -67,9 +67,9 @@ async function applyConditionTicks(actor, trigger) {
 }
 
 Hooks.on("updateCombat", async (combat, changed, options, userId) => {
-  // Гейт на АКТИВНОГО ГМа (а не любого isGM): при двух ГМ-клиентах восстановление
-  // ОД исполнялось бы дважды (идемпотентно, но дублировало нотификации).
-  // Закрытие chain-HUD ниже — клиентское, идёт до гейта.
+  // Gate on the ACTIVE GM (not any isGM): with two GM clients the AP
+  // restoration would run twice (idempotent, but duplicating notifications).
+  // Closing the chain HUD below is client-side and comes before the gate.
   if (changed.turn !== undefined || changed.round !== undefined) {
     if (game.dedrel.chainHUD && game.dedrel.chainHUD.actor) {
       game.dedrel.chainHUD.closeHUD();
@@ -80,7 +80,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
 
   const restoreTiming = game.settings.get("dedrel", "apRestoreTiming") || "startOfTurn";
 
-  // Логика восстановления в начале раунда для ВСЕХ
+  // Restoration logic at the start of the round for EVERYONE
   if (restoreTiming === "startOfRound" && changed.round !== undefined && combat.round > 0) {
     if (options.direction === 1 || options.direction === undefined) {
       let updatedAny = false;
@@ -117,7 +117,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
     }
   }
 
-  // Логика восстановления в начале хода для ТЕКУЩЕГО персонажа
+  // Restoration logic at the start of the turn for the CURRENT character
   if (restoreTiming === "startOfTurn" && (changed.turn !== undefined || changed.round !== undefined)) {
     if (options.direction === 1 || options.direction === undefined) {
       const combatant = combat.combatant;
@@ -151,11 +151,11 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
 });
 
 /**
- * Очистка эфемерных заклинаний (каст "на лету" из Конструктора без сохранения,
- * flags.dedrel.ephemeral) при завершении/удалении боя. Закреплённые кнопкой
- * "закрепить" заклинания флага не имеют и не удаляются.
- * Гейт на активного ГМа: хук приходит всем клиентам, а прав на чужих актёров
- * у игроков нет (та же схема, что у аур — см. FOUNDRY V14 QUIRKS.md, раздел 13).
+ * Cleanup of ephemeral spells (an "on the fly" cast from the Constructor without saving,
+ * flags.dedrel.ephemeral) when combat ends/is deleted. Spells pinned with the
+ * "pin" button don't have the flag and aren't deleted.
+ * Gate on the active GM: the hook arrives on all clients, and players have no permissions
+ * over other people's actors (the same scheme as auras — see FOUNDRY V14 QUIRKS.md, section 13).
  */
 Hooks.on("deleteCombat", async (combat) => {
   if (!game.users.activeGM?.isSelf) return;

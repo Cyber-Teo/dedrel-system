@@ -1,17 +1,17 @@
 import { buildTokenLightChanges, stripTokenLightChanges } from "./config/effect-library.mjs";
 
 /**
- * Управляет процессом миграции данных системы между версиями.
+ * Manages the process of migrating system data between versions.
  */
 export class DedrelMigration {
   /**
-   * Выполняет миграцию всех данных в мире.
-   * @param {string} currentVersion Текущая версия системы
+   * Runs the migration of all data in the world.
+   * @param {string} currentVersion The current system version
    */
   static async migrateWorld(currentVersion) {
     ui.notifications.info(`Dedrel | Начинаем миграцию данных системы до версии ${currentVersion}...`, { permanent: true });
     
-    // Миграция Актеров
+    // Migrating Actors
     for (const actor of game.actors) {
       try {
         const updateData = this.migrateActorData(actor.toObject());
@@ -24,7 +24,7 @@ export class DedrelMigration {
       }
     }
     
-    // Миграция Предметов
+    // Migrating Items
     for (const item of game.items) {
       try {
         const updateData = this.migrateItemData(item.toObject());
@@ -37,8 +37,8 @@ export class DedrelMigration {
       }
     }
 
-    // Миграция Сцен: свет токенов, «запечённый» удалённым хуком token-light
-    // (flags.dedrel.baseLight), и легаси-эффекты в дельтах непривязанных токенов
+    // Migrating Scenes: token light "baked" by the removed token-light hook
+    // (flags.dedrel.baseLight), and legacy effects in the deltas of unlinked tokens
     for (const scene of game.scenes) {
       try {
         const tokenUpdates = [];
@@ -60,30 +60,30 @@ export class DedrelMigration {
       }
     }
 
-    // Сохраняем новую версию миграции
+    // Save the new migration version
     await game.settings.set("dedrel", "systemMigrationVersion", currentVersion);
     ui.notifications.info(`Dedrel | Миграция системы до версии ${currentVersion} завершена!`, { permanent: true });
   }
 
   /**
-   * Логика миграции данных актера
+   * Actor data migration logic
    */
   static migrateActorData(actorData) {
     const updateData = {};
 
-    // Пример будущей миграции:
+    // Example of a future migration:
     // if (actorData.system.oldField !== undefined) {
     //   updateData["system.newField"] = actorData.system.oldField;
     //   updateData["system.-=oldField"] = null;
     // }
 
-    // Миграция собственных эффектов актера (наложенные зелья света и т.п.)
+    // Migrating the actor's own effects (applied light potions, etc.)
     const effectsUpdate = this.#migrateEffectsArray(actorData.effects);
     if (effectsUpdate.length > 0) {
       updateData.effects = effectsUpdate;
     }
 
-    // Миграция вложенных предметов актера
+    // Migrating the actor's embedded items
     if (actorData.items) {
       const itemsUpdate = actorData.items.reduce((arr, item) => {
         const itemUpdate = this.migrateItemData(item);
@@ -103,19 +103,19 @@ export class DedrelMigration {
   }
 
   /**
-   * Логика миграции данных предмета
+   * Item data migration logic
    */
   static migrateItemData(itemData) {
     const updateData = {};
 
-    // Нормализация редкости: легаси-значение "very rare" (с пробелом) →
-    // канонический ключ "very_rare" (см. ITEM_RARITY_ENUM). Затрагивает
-    // прежде всего броню, где раньше был выбор с пробелом.
+    // Rarity normalization: the legacy value "very rare" (with a space) →
+    // the canonical key "very_rare" (see ITEM_RARITY_ENUM). Affects
+    // armor first of all, where the choice used to have a space.
     if (itemData.system?.rarity === "very rare") {
       updateData["system.rarity"] = "very_rare";
     }
 
-    // Миграция эффектов предмета (легаси-свет токена)
+    // Migrating the item's effects (legacy token light)
     const effectsUpdate = this.#migrateEffectsArray(itemData.effects);
     if (effectsUpdate.length > 0) {
       updateData.effects = effectsUpdate;
@@ -125,11 +125,11 @@ export class DedrelMigration {
   }
 
   /**
-   * Логика миграции данных эффекта.
+   * Effect data migration logic.
    *
-   * Легаси-свет: маркер flags.dedrel.tokenLight (его читал удалённый хук
-   * src/canvas/token-light.mjs) → нативные change-строки `token.light.*`,
-   * которые ядро V14 само эфемерно применяет к токену носителя.
+   * Legacy light: the flags.dedrel.tokenLight marker (read by the removed hook
+   * src/canvas/token-light.mjs) → native `token.light.*` change rows,
+   * which V14 core applies to the bearer's token ephemerally by itself.
    */
   static migrateEffectData(effectData) {
     const updateData = {};
@@ -146,7 +146,7 @@ export class DedrelMigration {
     return updateData;
   }
 
-  /** Собирает массив обновлений для встроенных эффектов (с _id). */
+  /** Collects an array of updates for embedded effects (with _id). */
   static #migrateEffectsArray(effects) {
     return (effects ?? []).reduce((arr, effect) => {
       const effectUpdate = this.migrateEffectData(effect);
@@ -159,9 +159,9 @@ export class DedrelMigration {
   }
 
   /**
-   * Мигрирует эффекты синтетического актера (дельта непривязанного токена)
-   * прямыми обновлениями документов — массовый update дельты через сцену
-   * ненадёжен для вложенных коллекций.
+   * Migrates the effects of a synthetic actor (the delta of an unlinked token)
+   * with direct document updates — a bulk delta update through the scene
+   * is unreliable for embedded collections.
    */
   static async migrateActorEffects(actor) {
     const targets = [

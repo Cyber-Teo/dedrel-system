@@ -2,8 +2,8 @@ import CurrencyConfigApp from "./apps/currency-config.mjs";
 import { DEFAULT_CURRENCIES } from "./constants.mjs";
 
 export function registerSystemSettings() {
-  // Валюты мира (мультивалютность). Список деноминаций редактируется через меню
-  // (CurrencyConfigApp); кошелёк актора хранит счётчики по ключам этих валют.
+  // World currencies (multi-currency). The denomination list is edited through a menu
+  // (CurrencyConfigApp); the actor's wallet stores counters by the keys of these currencies.
   game.settings.register("dedrel", "currencies", {
     scope: "world",
     config: false,
@@ -20,12 +20,12 @@ export function registerSystemSettings() {
     restricted: true
   });
 
-  // Регистрация локализации (как пример настройки системы)
+  // Registering the localization (as an example of a system setting)
   game.settings.register("dedrel", "systemLanguage", {
     name: "DEDREL.Settings.Language.Name",
     hint: "DEDREL.Settings.Language.Hint",
-    scope: "client",       // Настройка индивидуальна для каждого игрока
-    config: true,          // Показывать в меню настроек
+    scope: "client",       // The setting is individual for each player
+    config: true,          // Show in the settings menu
     type: String,
     choices: {
       "auto": "DEDREL.Settings.Language.Auto",
@@ -33,7 +33,7 @@ export function registerSystemSettings() {
       "en": "English"
     },
     default: "auto",
-    requiresReload: true   // Foundry V11+ автоматически предложит перезагрузку
+    requiresReload: true   // Foundry V11+ will offer a reload automatically
   });
 
   game.settings.register("dedrel", "apRestoreTiming", {
@@ -67,10 +67,10 @@ export function registerSystemSettings() {
     }
   });
 
-  // Опциональное правило Магического Конструктора: что даёт Изобильный Источник.
-  // unlockAll — снимает лимит maxModCost целиком (слабый маг в море становится
-  //   могущественным); requireRank — только открывает 5-й ранг тем, чей Ранг
-  //   Доктрины и так позволяет платить 5 ОД за модификатор (maxModCost >= 5).
+  // Optional Spell Constructor rule: what an Abundant Source gives.
+  // unlockAll — lifts the maxModCost limit entirely (a weak caster at sea becomes
+  //   powerful); requireRank — only opens rank 5 to those whose Doctrine
+  //   Rank already allows paying 5 AP for a modifier (maxModCost >= 5).
   game.settings.register("dedrel", "abundantSourceMode", {
     name: "DEDREL.Settings.AbundantSourceMode.Name",
     hint: "DEDREL.Settings.AbundantSourceMode.Hint",
@@ -95,10 +95,10 @@ export function registerSystemSettings() {
     requiresReload: false
   });
 
-  // В будущем сюда можно добавлять другие настройки, например:
-  // - Использовать ли опциональные правила (scope: "world")
-  // - Тема оформления чаршита (scope: "client")
-  // и т.д.
+  // In the future other settings can be added here, e.g.:
+  // - Whether to use optional rules (scope: "world")
+  // - The character sheet theme (scope: "client")
+  // etc.
 
   game.settings.register("dedrel", "systemMigrationVersion", {
     name: "System Migration Version",
@@ -112,8 +112,8 @@ export function registerSystemSettings() {
 Hooks.once("setup", async function() {
   const sysLang = game.settings.get("dedrel", "systemLanguage");
   if (sysLang !== "auto" && sysLang !== game.i18n.lang) {
-    // Вместо глобального game.i18n.setLanguage (который ломает ключи ядра, если нет модуля перевода),
-    // мы точечно загружаем нужный словарь нашей системы и вливаем его поверх текущего языка.
+    // Instead of the global game.i18n.setLanguage (which breaks core keys if there's no translation module),
+    // we load the specific dictionary of our system and merge it on top of the current language.
     try {
       const response = await fetch(`systems/dedrel/lang/${sysLang}.json`);
       if (response.ok) {

@@ -5,8 +5,8 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
   if (!canvas.ready) return;
 
   const actor = tokenDocument.actor;
-  // Бюджет Скорости общий для персонажей и NPC: перемещение не манёвр и
-  // считается метрами у всех (_rules/9. Combat and Damage «Передвижение и Скорость»).
+  // The Speed budget is shared by characters and NPCs: movement isn't a maneuver and
+  // is counted in meters for everyone (_rules/9. Combat and Damage "Movement and Speed").
   if (!actor || !["character", "npc"].includes(actor.type)) return;
   
   const res = actor.system.resources;
@@ -17,30 +17,30 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
   const targetX = changes.x !== undefined ? changes.x : currentX;
   const targetY = changes.y !== undefined ? changes.y : currentY;
 
-  // Рассчитываем пройденную дистанцию в единицах измерения сцены (например, метры)
+  // Compute the distance traveled in scene units (e.g. meters)
   const waypoints = [{x: currentX, y: currentY}, {x: targetX, y: targetY}];
   let distance = 0;
   
-  // В Foundry V12+ метод измерения пути
+  // The path measuring method in Foundry V12+
   if (canvas.grid.measurePath) {
     const path = canvas.grid.measurePath(waypoints);
     distance = path.distance;
   } else if (canvas.grid.measureDistance) {
-    // Fallback для более старых версий (хотя в V14 должен быть measurePath)
+    // Fallback for older versions (although V14 should have measurePath)
     distance = canvas.grid.measureDistance(waypoints[0], waypoints[1]);
   }
 
-  // Скорость измеряется в МЕТРАХ. measurePath().distance уже возвращает дистанцию
-  // в единицах сцены (метрах) через клеточный движок Foundry — он считает в клетках
-  // даже при выключенной сетке, поэтому опираемся на его результат, а не на пиксели.
-  // Округляем до десятых, чтобы избежать накопления погрешности float.
+  // Speed is measured in METERS. measurePath().distance already returns the distance
+  // in scene units (meters) through Foundry's grid engine — it counts in squares
+  // even with the grid turned off, so we rely on its result rather than on pixels.
+  // Round to tenths to avoid accumulating float error.
   const speedCost = Math.round(distance * 10) / 10;
 
   if (speedCost > 0) {
     const currentSpeed = res.movement.value;
     const round = (x) => Math.round(x * 10) / 10;
 
-    // Если это отмена (Undo / Ctrl+Z), возвращаем скорость
+    // If this is an undo (Undo / Ctrl+Z), give the speed back
     if (options.undo || options.isUndo) {
       const newSpeed = Math.min(res.movement.max, round(currentSpeed + speedCost));
       actor.update({ "system.resources.movement.value": newSpeed });
@@ -49,13 +49,13 @@ Hooks.on("preUpdateToken", (tokenDocument, changes, options, userId) => {
 
     if (speedCost > currentSpeed) {
       ui.notifications.warn(game.i18n.format("DEDREL.Notifications.NotEnoughSpeed", {cost: speedCost, current: round(currentSpeed)}));
-      // Мы не блокируем движение (чтобы игроки могли ошибаться или договариваться с ГМом), но предупреждаем
+      // We don't block the movement (so that players can make mistakes or negotiate with the GM), but we warn
     }
 
-    // Вычитаем скорость, не опуская ниже 0
+    // Subtract the speed without going below 0
     const newSpeed = Math.max(0, round(currentSpeed - speedCost));
 
-    // Добавляем обновление актора в очередь
+    // Queue the actor update
     actor.update({ "system.resources.movement.value": newSpeed });
   }
 });

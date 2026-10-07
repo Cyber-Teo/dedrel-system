@@ -1,5 +1,5 @@
 export async function placeTemplatePreview(templateData, item) {
-  // Получаем конвертер пикселей к юнитам (grid units to pixels)
+  // Get the converter from units to pixels (grid units to pixels)
   const distancePixels = canvas.scene.grid.size / canvas.scene.grid.distance;
   const distance = templateData.distance;
   const color = templateData.fillColor || game.user.color;
@@ -20,9 +20,9 @@ export async function placeTemplatePreview(templateData, item) {
       shape = { type: "line", x: 0, y: 0, length: distance * distancePixels, width: width * distancePixels, rotation: 0, gridBased: true };
       break;
     case "rect":
-      // Для квадрата ширина и высота равны
+      // For a square, width and height are equal
       const rectSize = distance * distancePixels;
-      // Для совместимости с rect, мы используем rectangle с размерами
+      // For compatibility with rect, we use a rectangle with dimensions
       shape = { type: "rectangle", x: 0, y: 0, width: rectSize, height: rectSize, anchorX: 0, anchorY: 0, rotation: 0, gridBased: true };
       break;
     default:

@@ -1,12 +1,12 @@
 /**
- * Кастомный класс Токена для отрисовки дополнительных баров (ОД)
+ * Custom Token class for drawing extra bars (AP)
  */
 export default class DedrelToken extends foundry.canvas.placeables.Token {
   /** @override */
   async _draw(options) {
     await super._draw(options);
     
-    // Создаем контейнер для аур под токеном
+    // Create a container for the auras under the token
     this.controlAura = this.addChildAt(new PIXI.Graphics(), 0);
   }
 
@@ -20,7 +20,7 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
     if (!this.controlAura) return;
     this.controlAura.clear();
     
-    // Проверка: в бою ли мы, и наведен ли курсор
+    // Check: whether we're in combat, and whether the cursor is hovering
     const inCombat = game.combat?.active || game.combat?.started;
     const isHovered = this.hover || this.layer.highlightObjects;
     
@@ -29,7 +29,7 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
       return;
     }
 
-    // Ищем максимальную зону контроля оружия
+    // Look for the weapon's maximum control zone
     let maxZone = 0;
     const weapons = this.actor.items.filter(i => 
       i.type === "weapon" && 
@@ -49,7 +49,7 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
 
     this.controlAura.visible = true;
     
-    // Отрисовка ауры
+    // Drawing the aura
     const gridSize = canvas.grid.size;
     const {width, height} = this.document.getSize();
     
@@ -72,12 +72,12 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
 
   /** @override */
   drawBars() {
-    // Сначала отрисовываем стандартные бары (HP и т.д.)
+    // First draw the standard bars (HP, etc.)
     super.drawBars();
 
     if ( !this.actor || (this.document.displayBars === CONST.TOKEN_DISPLAY_MODES.NONE) ) return;
     
-    // Скрываем бары, если режим отображения этого не позволяет
+    // Hide the bars if the display mode doesn't allow it
     if (!this._canViewMode(this.document.displayBars)) {
       if (this.bars.apUni) this.bars.apUni.visible = false;
       if (this.bars.apMan) this.bars.apMan.visible = false;
@@ -88,29 +88,29 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
     const res = this.actor.system.resources;
     if (!res) return;
 
-    // Создаем графические объекты, если их еще нет
+    // Create the graphics objects if they don't exist yet
     if (!this.bars.apUni) this.bars.apUni = this.bars.addChild(new PIXI.Graphics());
     if (!this.bars.apMan) this.bars.apMan = this.bars.addChild(new PIXI.Graphics());
     if (!this.bars.apMag) this.bars.apMag = this.bars.addChild(new PIXI.Graphics());
 
-    // Индексы для позиционирования (один над другим)
+    // Indexes for positioning (one above another)
     let apIndex = 0;
 
-    // Отрисовка баров (Универсальные ОД - Moccasin)
+    // Drawing the bars (Universal AP - Moccasin)
     if (res.ap_universal && res.ap_universal.max > 0) {
       this._drawApBar(this.bars.apUni, res.ap_universal, 0xFFE4B5, apIndex++);
     } else {
       this.bars.apUni.visible = false;
     }
 
-    // ОД Манёвров - Gold
+    // Maneuver AP - Gold
     if (res.ap_maneuver && res.ap_maneuver.max > 0) {
       this._drawApBar(this.bars.apMan, res.ap_maneuver, 0xFFD700, apIndex++);
     } else {
       this.bars.apMan.visible = false;
     }
 
-    // ОД Магии - Indigo
+    // Magic AP - Indigo
     if (res.ap_magic && res.ap_magic.max > 0) {
       this._drawApBar(this.bars.apMag, res.ap_magic, 0x4B0082, apIndex++);
     } else {
@@ -126,17 +126,17 @@ export default class DedrelToken extends foundry.canvas.placeables.Token {
     const {width, height} = this.document.getSize();
     const s = canvas.dimensions.uiScale;
     const bw = width;
-    const bh = 5 * s; // Делаем полоски ОД тонкими
+    const bh = 5 * s; // Make the AP bars thin
 
     bar.clear();
     bar.lineStyle(s, 0x000000, 1.0);
     bar.beginFill(0x000000, 0.5).drawRoundedRect(0, 0, bw, bh, 2 * s);
     bar.beginFill(colorHex, 1.0).drawRoundedRect(0, 0, pct * bw, bh, 1 * s);
 
-    // Размещаем над токеном (над именем/баром)
-    // -bh отступает вверх на высоту бара
-    // дополнительный сдвиг -4s * index
-    // и еще -2s, чтобы не наезжало на саму рамку
+    // Place above the token (above the name/bar)
+    // -bh moves up by the bar's height
+    // an extra shift of -4s * index
+    // and another -2s so that it doesn't overlap the frame itself
     const posY = -bh - (index * (bh + 2 * s)) - (2 * s);
     bar.position.set(0, posY);
   }
