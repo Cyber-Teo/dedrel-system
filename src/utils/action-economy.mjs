@@ -49,6 +49,12 @@ export const ActionEconomy = {
     return game.combat.combatant?.actor?.uuid === actor.uuid;
   },
 
+  /** Whether the actor takes part in a started combat (not necessarily on its turn). */
+  isInCombat(actor) {
+    if (!game.combat?.started || !actor) return false;
+    return game.combat.combatants.some(c => c.actor?.uuid === actor.uuid);
+  },
+
   /** Whether the Action has been spent this turn. */
   isActionSpent(actor) {
     return !!actor?.getFlag(FLAG_SCOPE, FLAG_KEY);

@@ -203,6 +203,10 @@ export default class DedrelItem extends Item {
       apCost = validScrolls[0].system.ap_cost || 0;
     }
 
+    // Digging the item out of the pack (15. Inventory §2). For the reading maneuver it
+    // depends on the selected scroll: the dialog marks such scrolls, #confirmUse recomputes.
+    const retrieval = this.#retrievalFor(this);
+
     // Consumable items check.
     // IMPORTANT: the weapon's ammunition (consume_target) is NOT touched here — a weapon by
     // itself doesn't "fire". A shot = a maneuver with req_weapon; the selected weapon's
@@ -261,7 +265,7 @@ export default class DedrelItem extends Item {
       actor, apCost, apCostNoTempo, isVariable, minAp, ...pools, actionMode,
       hasCharges, usesValue, usesMax,
       requiresWeapon, validWeapons, isReloadAction,
-      isScrollRead, validScrolls,
+      isScrollRead, validScrolls, retrieval,
       isSelfConsume, consumeAmount, hasEnoughAmmo
     };
 
@@ -407,6 +411,40 @@ export default class DedrelItem extends Item {
   }
 
   /**
+   * Quick slots (15. Inventory §2): in combat a potion or scroll that isn't in a quick
+   * slot (not starred) has to be dug out of the pack with the Interact maneuver first —
+   * its AP and the turn's Action. Out of combat, or for a starred item, it's at hand.
+   * Whether the GM rules digging impossible right now (a tight passage, a clinch) is decided
+   * at the table; the automation only charges the price.
+   * @param {Item|null} item - the potion/scroll being used (for reading — the selected scroll)
+   * @returns {{cost: number, name: string}|null} null — the item is at hand
+   */
+  #retrievalFor(item) {
+    const actor = this.actor;
+    if (!item || !["potion", "scroll"].includes(item.type)) return null;
+    if (item.getFlag("dedrel", "isFavorite")) return null;
+    if (!ActionEconomy.isInCombat(actor)) return null;
+    const interact = actor.items.find(i => i.type === "maneuver" && i.system.key === "maneuver_interact");
+    return {
+      cost: interact?.system.ap_cost ?? 1,
+      name: interact?.name ?? game.i18n.localize("DEDREL.Chat.InteractManeuver")
+    };
+  }
+
+  /**
+   * How the Interact step is paid: like any maneuver — the maneuver pool first, then the
+   * universal one. Returns null if there isn't enough AP for it.
+   * @returns {{fromManeuver: number, fromUniversal: number}|null}
+   */
+  #planRetrievalSpend(cost) {
+    const res = this.actor.system.resources || {};
+    const fromManeuver = Math.min(res.ap_maneuver?.value || 0, cost);
+    const fromUniversal = cost - fromManeuver;
+    if (fromUniversal > (res.ap_universal?.value || 0)) return null;
+    return { fromManeuver, fromUniversal };
+  }
+
+  /**
    * Available AP pools for paying for the item. The special pool is used ONLY
    * if it exists in the actor's schema. NPCs don't have it (a single universal pool) →
    * the cost comes from ap_universal, and we don't write a phantom key into actor.update.
@@ -441,6 +479,10 @@ export default class DedrelItem extends Item {
     // (names are set by users and may contain markup).
     const esc = (s) => foundry.utils.escapeHTML(String(s ?? ""));
     let content = `<div style="margin-bottom: 15px;">`;
+
+    if (ctx.retrieval) {
+      content += `<p style="color: orange;">${game.i18n.format("DEDREL.Chat.RetrieveFromPack", { name: esc(ctx.retrieval.name), cost: ctx.retrieval.cost })}</p>`;
+    }
 
     if (ctx.apCost > 0 || ctx.isVariable) {
       if (ctx.isVariable) {
@@ -506,7 +548,12 @@ export default class DedrelItem extends Item {
         <div class="form-group" style="margin-top: 10px;">
           <label style="font-weight: bold;">${game.i18n.localize("DEDREL.Chat.ScrollSelect")}</label>
           <select name="scrollId" id="use-scroll-select" style="width: 100%; padding: 4px;">
-            ${ctx.validScrolls.map(s => `<option value="${s.id}">${esc(s.name)} (${s.system.ap_cost} ${game.i18n.localize("DEDREL.Magic.APShort")})</option>`).join("")}
+            ${ctx.validScrolls.map(s => {
+              // A scroll outside the quick slots costs an Interact on top (15. Inventory §2)
+              const fromPack = this.#retrievalFor(s);
+              const packLabel = fromPack ? ` — ${game.i18n.format("DEDREL.Chat.FromPackShort", { cost: fromPack.cost })}` : "";
+              return `<option value="${s.id}">${esc(s.name)} (${s.system.ap_cost} ${game.i18n.localize("DEDREL.Magic.APShort")})${packLabel}</option>`;
+            }).join("")}
           </select>
         </div>
       `;
@@ -586,7 +633,22 @@ export default class DedrelItem extends Item {
       return;
     }
 
-    if (finalApCost > 0 && finalApCost > currentAp) {
+    // Digging the item out of the pack (15. Inventory §2): an Interact before the use
+    // proper. For reading — by the scroll actually selected.
+    const retrieval = this.#retrievalFor(isScrollRead ? selScroll : this);
+    let retrievalSpend = null;
+    if (retrieval) {
+      retrievalSpend = this.#planRetrievalSpend(retrieval.cost);
+      if (!retrievalSpend) {
+        ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
+        return;
+      }
+    }
+    // Potions and scrolls (read directly or by the maneuver) are paid from the universal
+    // pool only, so the Interact step competes with them for its universal part alone.
+    const availableAp = currentAp - (retrievalSpend?.fromUniversal || 0);
+
+    if (finalApCost > 0 && finalApCost > availableAp) {
       ui.notifications.warn(game.i18n.localize("DEDREL.Notifications.NotEnoughAP"));
       return;
     }
@@ -610,6 +672,22 @@ export default class DedrelItem extends Item {
         return;
       }
       ammo = resolved;
+    }
+
+    // The Interact step: its AP and the turn's Action. Warn, don't block — same as below.
+    if (retrievalSpend) {
+      const res = actor.system.resources;
+      const updates = {};
+      if (retrievalSpend.fromManeuver) {
+        updates["system.resources.ap_maneuver.value"] = res.ap_maneuver.value - retrievalSpend.fromManeuver;
+      }
+      if (retrievalSpend.fromUniversal) {
+        updates["system.resources.ap_universal.value"] = res.ap_universal.value - retrievalSpend.fromUniversal;
+      }
+      if (Object.keys(updates).length) await actor.update(updates);
+      if (await ActionEconomy.spendAction(actor)) {
+        ui.notifications.warn(game.i18n.format("DEDREL.Notifications.ActionAlreadySpent", { name: retrieval.name }));
+      }
     }
 
     // Spending AP
