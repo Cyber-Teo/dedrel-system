@@ -1,0 +1,56 @@
+name: Mechanic proposal / Предложение механики
+description: A new mechanic, a rules change or a balance concern / Новая механика, правка правил или сомнение в балансе
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Rules and balance are discussed here before any code is written. Playtest experience is the most valuable input.
+        Правила и баланс обсуждаются здесь до того, как писать код. Опыт с реальных игр — самый ценный аргумент.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind / Тип
+      options:
+        - "New mechanic / Новая механика"
+        - "Change to an existing rule / Правка существующего правила"
+        - "Balance concern / Сомнение в балансе"
+        - "Automation in Foundry / Автоматизация в Foundry"
+    validations:
+      required: true
+
+  - type: input
+    id: area
+    attributes:
+      label: Rules area / Область правил
+      description: Rules chapter, entity or key, if known / Глава правил, сущность или ключ, если известно
+      placeholder: "Combat, maneuver_riposte, Magic: Pyromancy…"
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve? / Какую проблему решает?
+      description: Describe the situation at the table where the current rules fall short / Опишите ситуацию за столом, где текущих правил не хватает
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal / Предложение
+      description: How it should work; numbers and examples are welcome / Как это должно работать; числа и примеры приветствуются
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and risks / Альтернативы и риски
+      description: Other ways to solve it, what it could break or make too strong / Другие решения; что может сломаться или стать слишком сильным
+
+  - type: textarea
+    id: playtest
+    attributes:
+      label: Playtest experience / Опыт игры
+      description: Has it come up in a real game? / Встречалось ли это в реальной игре?

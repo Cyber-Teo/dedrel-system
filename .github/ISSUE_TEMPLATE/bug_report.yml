@@ -1,0 +1,79 @@
+name: Bug report / Баг
+description: Something in the system doesn't work as it should / Что-то в системе работает не так
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! The more precise the steps, the faster the fix.
+        Спасибо за сообщение! Чем точнее шаги, тем быстрее исправление.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / Что произошло?
+      description: What did you expect, and what happened instead? / Чего вы ожидали и что произошло на самом деле?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / Как воспроизвести
+      placeholder: |
+        1. Open a character sheet / Открыть лист персонажа
+        2. Use the maneuver "…" / Использовать манёвр «…»
+        3. …
+    validations:
+      required: true
+
+  - type: input
+    id: foundry-version
+    attributes:
+      label: Foundry VTT version / Версия Foundry VTT
+      description: Setup screen or Settings → General / Экран настройки или Настройки → Общие
+      placeholder: "14.368"
+    validations:
+      required: true
+
+  - type: input
+    id: system-version
+    attributes:
+      label: Dedrel system version / Версия системы Dedrel
+      placeholder: "0.1.3"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Interface language / Язык интерфейса
+      options:
+        - Русский
+        - English
+    validations:
+      required: true
+
+  - type: dropdown
+    id: modules
+    attributes:
+      label: Does it happen with all modules disabled? / Воспроизводится с отключёнными модулями?
+      description: Settings → Manage Modules, or Find the Culprit / Настройки → Управление модулями
+      options:
+        - "Yes, without modules / Да, без модулей"
+        - "Only with modules enabled / Только с модулями"
+        - "Didn't check / Не проверял(а)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output / Вывод консоли
+      description: Press F12 → Console, copy red errors and lines starting with "Dedrel" / F12 → Console, скопируйте красные ошибки и строки, начинающиеся с «Dedrel»
+      render: shell
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or anything else / Скриншоты и прочее
