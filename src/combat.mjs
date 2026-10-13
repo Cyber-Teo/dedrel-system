@@ -155,7 +155,7 @@ Hooks.on("updateCombat", async (combat, changed, options, userId) => {
  * flags.dedrel.ephemeral) when combat ends/is deleted. Spells pinned with the
  * "pin" button don't have the flag and aren't deleted.
  * Gate on the active GM: the hook arrives on all clients, and players have no permissions
- * over other people's actors (the same scheme as auras — see FOUNDRY V14 QUIRKS.md, section 13).
+ * over other people's actors (the same scheme as auras — see docs/foundry-v14-quirks.md, section 13).
  */
 Hooks.on("deleteCombat", async (combat) => {
   if (!game.users.activeGM?.isSelf) return;

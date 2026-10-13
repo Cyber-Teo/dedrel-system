@@ -2,7 +2,7 @@
  * Catalog of Active Effect keys for the Effect Key Browser (EffectKeyBrowserApp)
  * and the dictionaries of the flags.dedrel.mod DSL modifier builder.
  *
- * The human-readable version is EFFECT_KEYS_CHEAT_SHEET.md; this file is its
+ * The human-readable version is docs/effect-keys.md; this file is its
  * machine counterpart for the UI. So that the catalog doesn't have to be maintained by hand,
  * the lists of attributes/skills/DR/bonuses/doctrines are built by INTROSPECTING the character
  * schema (CONFIG.Actor.dataModels.character.schema): a new skill or bonus

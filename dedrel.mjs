@@ -610,7 +610,7 @@ async function rebuildStatusEffects() {
     // Without this, a status applied through the HUD arrives on the actor "empty".
     // IMPORTANT (V14): changes live in effect.system.changes (ActiveEffect
     // got a system model); e.changes and e._source.changes are deprecated shims
-    // that may return undefined. See FOUNDRY V14 QUIRKS.md, section 11.
+    // that may return undefined. See docs/foundry-v14-quirks.md, section 11.
     const changes = [];
     for (const e of c.effects) {
       changes.push(...foundry.utils.deepClone(e.system?.changes ?? e._source.changes ?? []));

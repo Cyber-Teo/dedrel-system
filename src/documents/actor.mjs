@@ -385,7 +385,7 @@ export default class DedrelActor extends Actor {
 
   /**
    * Recomputes the effect for a new stack count: name "Name ×N", scaled
-   * change rows (written to system.changes — see FOUNDRY V14 QUIRKS.md, section 11;
+   * change rows (written to system.changes — see docs/foundry-v14-quirks.md, section 11;
    * the "apply" phase is delivered by the preUpdateActiveEffect hook) and the counter in the flag.
    * When a stack is added the duration starts counting anew.
    */

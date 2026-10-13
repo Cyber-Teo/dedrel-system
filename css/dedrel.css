@@ -2268,7 +2268,7 @@ form.dedrel.sheet.item {
    NPC / Monster sheet (npc actor).
    ApplicationV2 quirk: .window-content is clipped (overflow:hidden), so
    the sheet's inner root scrolls. It needs a flex fill, min-height:0
-   and overflow-y:auto (see FOUNDRY V14 QUIRKS.md, the same trick as .loot-sheet).
+   and overflow-y:auto (see docs/foundry-v14-quirks.md, the same trick as .loot-sheet).
    ========================================================================== */
 .dedrel.npc .npc-sheet-body {
   flex: 1 1 auto;

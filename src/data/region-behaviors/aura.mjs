@@ -156,7 +156,7 @@ export default class DedrelAuraRegionBehaviorType extends foundry.data.regionBeh
 
   /**
    * Clones effect data for applying to a recipient.
-   * IMPORTANT (V14, QUIRKS §11): changes live in system.changes; the legacy
+   * IMPORTANT (V14, docs/foundry-v14-quirks.md §11): changes live in system.changes; the legacy
    * data.changes is removed so that the deprecated shim doesn't fire.
    * The "apply" phase for system.* changes will be set automatically
    * by the preCreateActiveEffect hook (see dedrel.mjs).

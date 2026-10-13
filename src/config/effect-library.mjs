@@ -10,7 +10,7 @@
  * buildEffectData(key, opts) assembles ActiveEffect data from a preset, ready for
  * createEmbeddedDocuments("ActiveEffect", [data]) (on an actor or an item).
  *
- * V14 COMPLIANCE (see FOUNDRY V14 QUIRKS.md):
+ * V14 COMPLIANCE (see docs/foundry-v14-quirks.md):
  *  - Changes live in `system.changes`, the operation type is the string `change.type`
  *    ("add"/"override"/…), NOT the numeric `mode` (§11, §13).
  *  - The "apply" phase is set for all system.* changes by the preCreateActiveEffect hook —

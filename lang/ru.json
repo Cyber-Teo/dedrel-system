@@ -1081,7 +1081,7 @@
       "NoWeaponSlots": "Нет свободных слотов для оружия (освободите руки или хвост).",
       "MacroNotFound": "Макрос с именем '{name}' не найден.",
       "SelfEffectApplied": "Эффект применён к персонажу: {names}",
-      "InvalidModString": "Не удалось разобрать DSL-модификатор: \"{value}\". Проверьте синтаксис (см. EFFECT_KEYS_CHEAT_SHEET.md).",
+      "InvalidModString": "Не удалось разобрать DSL-модификатор: \"{value}\". Проверьте синтаксис (см. docs/effect-keys.md).",
       "MaxStacksReached": "«{name}»: достигнут максимум стаков ({max}).",
       "UnknownDenomination": "Неизвестная валюта: {key}. Добавьте её в настройках валют.",
       "CurrencyDeposited": "Зачислено в кошелёк: {value} ({denom}).",

@@ -7,7 +7,7 @@
  *
  * One-shot and conditional "next maneuver" bonuses (formerly next_*)
  * are implemented as DSL modifiers on the Active Effect key
- * "flags.dedrel.mod" — see EFFECT_KEYS_CHEAT_SHEET.md and
+ * "flags.dedrel.mod" — see docs/effect-keys.md and
  * src/utils/dedrel-bonuses.mjs.
  */
 export function getBonusesSchema() {

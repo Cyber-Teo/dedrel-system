@@ -18,7 +18,7 @@ import { SOURCE_ORDER, sceneSourceScale } from "../utils/magic-source.mjs";
  *    (pre-made spells, later dragged into a compendium).
  *
  * The build state lives in this.build (NOT in the document form) — a deliberate
- * workaround for FormDataExtended (see FOUNDRY V14 QUIRKS.md, section 7).
+ * workaround for FormDataExtended (see docs/foundry-v14-quirks.md, section 7).
  */
 export default class SpellConstructorApp extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {

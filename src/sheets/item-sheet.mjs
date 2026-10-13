@@ -441,7 +441,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   /**
    * Listeners for the Crafting block: dropping an ingredient item and editing quantities.
    * The quantity and material slot inputs DELIBERATELY have no name: arrays can't
-   * be trusted to FormDataExtended (see FOUNDRY V14 QUIRKS §7) — we update the array
+   * be trusted to FormDataExtended (see docs/foundry-v14-quirks.md §7) — we update the array
    * as a whole via document.update.
    */
   #bindCraftingListeners() {
@@ -685,7 +685,7 @@ export class DedrelItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
                 return o;
               });
             // origin is bound to the current item. The phase of system.* changes
-            // will be set by the preCreateActiveEffect hook (QUIRKS §12).
+            // will be set by the preCreateActiveEffect hook (docs/foundry-v14-quirks.md §12).
             for (const d of data) d.origin = item.uuid;
             if (data.length) await item.createEmbeddedDocuments("ActiveEffect", data);
           }

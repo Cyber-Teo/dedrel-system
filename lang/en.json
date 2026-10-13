@@ -1081,7 +1081,7 @@
       "NoWeaponSlots": "No free slots for weapon (free up hands or tail).",
       "MacroNotFound": "Macro with name '{name}' not found.",
       "SelfEffectApplied": "Effect applied to character: {names}",
-      "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see EFFECT_KEYS_CHEAT_SHEET.md).",
+      "InvalidModString": "Failed to parse DSL modifier: \"{value}\". Check the syntax (see docs/effect-keys.md).",
       "MaxStacksReached": "\"{name}\": maximum stacks reached ({max}).",
       "UnknownDenomination": "Unknown currency: {key}. Add it in currency settings.",
       "CurrencyDeposited": "Deposited to wallet: {value} ({denom}).",
