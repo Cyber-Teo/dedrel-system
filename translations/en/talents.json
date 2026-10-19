@@ -364,7 +364,7 @@
     "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.JtTYJ7SiLRjQnuwu]{Last Stand}</p><p>This talent triggers as soon as the character's HP would drop to zero. The character restores 30% of their HP.</p><p></p>"
   },
   "leaders_gaze": {
-    "_src": "8bfedf1d82",
+    "_src": "dd83aa65d4",
     "name": "Leader's Gaze",
     "system.description": "<p>Grants the @UUID[Compendium.dedrel.maneuvers.Item.ma5tv1gidvMVjson]{Leader's Gaze} maneuver: 3 AP, the target's Willpower saving throw against a DC of “your Willpower + 8”; on a failure, 2 stacks of @UUID[Compendium.dedrel.conditions.Item.YdoGhveZiTy3WXav]{Disoriented}.</p>\n<p>A commander's tool, not a fighter's: it deals no damage, it makes someone else's turn more expensive. Two uses in a row on the same target push it to @UUID[Compendium.dedrel.conditions.Item.gDIEudCXkde0bEOp]{Stunned}.</p>"
   },

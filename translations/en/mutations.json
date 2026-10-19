@@ -40,9 +40,10 @@
     }
   },
   "demon_keen_smell": {
-    "_src": "aef23f1142",
+    "_src": "471a53f1a1",
     "name": "Keen Smell (Demon)",
-    "system.description": "The character can tell apart a great many smells. Grants a situational bonus of +2 to +5 to skill checks, at the GM's discretion."
+    "system.description": "The character can tell apart a great many smells. Grants a situational bonus of +2 to +5 to skill checks, at the GM's discretion.",
+    "system.situational_trigger": "The character can tell apart a great many smells. Grants a situational bonus of +2 to +5 to skill checks, at the GM's discretion."
   },
   "demon_rage": {
     "_src": "9de2839303",
