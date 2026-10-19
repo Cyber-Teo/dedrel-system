@@ -435,9 +435,9 @@
     }
   },
   "path_flow": {
-    "_src": "b131ff368c",
+    "_src": "f5fa1897cb",
     "name": "Path of the Flow",
-    "system.description": "<p><em>A Hydromancy specialization: water as a current that carries, knocks down, and spreads.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Area: Radius and the Direct/Move Technique.</li>\n<li><strong>Restriction:</strong> the Durability Modifier no higher than rank 2 (water holds no shape).</li>\n<li><strong>Doctrinal Modifier Knockdown:</strong> 2 AP: knock prone (<code>prone</code>, DC 12); 3 AP: push the target 4 m and knock it prone (DC 14).</li>\n<li><strong>Forms:</strong> as for the doctrine: bludgeoning (ram of a wave) and slashing (pressurized jet).</li>\n<li><strong>Water utility</strong> (via Imbue/Infuse + Duration): water walking, water breathing, faster swimming.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.description": "<p><em>A Hydromancy specialization: water as a current that carries, knocks down, and spreads.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Area: Radius and the Direct/Move Technique.</li>\n<li><strong>Restriction:</strong> the Durability Modifier no higher than rank 2 (water holds no shape).</li>\n<li><strong>Doctrinal Modifier Knockdown:</strong> 2 AP: knock prone (\"Prone\", DC 12); 3 AP: push the target 4 m and knock it prone (DC 14).</li>\n<li><strong>Forms:</strong> as for the doctrine: bludgeoning (ram of a wave) and slashing (pressurized jet).</li>\n<li><strong>Water utility</strong> (via Imbue/Infuse + Duration): water walking, water breathing, faster swimming.</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
     "system.prerequisites_text": "The Hydromancy talent (doctrine access).",
     "effects": {
       "DedrelAEPathFlow": {
@@ -446,9 +446,9 @@
     }
   },
   "path_ice": {
-    "_src": "9a18707716",
+    "_src": "8a7a435d2e",
     "name": "Path of Ice",
-    "system.description": "<p><em>A Hydromancy specialization: water frozen into shape that holds, cuts, and binds.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Durability and Form.</li>\n<li><strong>Form:</strong> piercing: icicles, ice blades (overrides the water forms).</li>\n<li><strong>Doctrinal Modifier Constraint:</strong> 2 AP: icing, speed −50% for Doctrine Rank rounds (DC 12); 3 AP: Entangled (<code>entangled</code>) for 1 round (DC 14); 5 AP: deep freeze, <code>full_paralysis</code> for 1 round (DC 18).</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
+    "system.description": "<p><em>A Hydromancy specialization: water frozen into shape that holds, cuts, and binds.</em></p>\n<ul>\n<li><strong>Affinity:</strong> −1 AP on Durability and Form.</li>\n<li><strong>Form:</strong> piercing: icicles, ice blades (overrides the water forms).</li>\n<li><strong>Doctrinal Modifier Constraint:</strong> 2 AP: icing, speed −50% for Doctrine Rank rounds (DC 12); 3 AP: \"Entangled\" for 1 round (DC 14); 5 AP: deep freeze: \"Full Paralysis\" for 1 round (DC 18).</li>\n</ul>\n<p><em>This talent unlocks a doctrine Path. The “no path” build always remains available; the Path's affinities, caps, and Modifiers apply only to spells of this Path.</em></p>",
     "system.prerequisites_text": "The Hydromancy talent (doctrine access).",
     "effects": {
       "DedrelAEPathIce0": {
