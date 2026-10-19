@@ -43,7 +43,7 @@
     "system.removal_text": "the body made peace"
   },
   "mut_flooded_lungs": {
-    "_src": "ad42f35b8b",
+    "_src": "fcf9790161",
     "name": "Flooded Lungs",
     "system.description": "<p><em>Mutilation of rank 4. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>The lungs swell and fill with their own fluid: the bearer drowns from within.</p><p><strong>Effect:</strong> at the start of each of their turns, the bearer gains a stack of the <strong>Suffocating</strong> condition. <em>Stack accumulation isn't automated; the GM adds them through the status HUD.</em></p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
     "system.application_text": "drowning",

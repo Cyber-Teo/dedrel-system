@@ -18,12 +18,12 @@
     "system.effect_description": "Summon a blade to your hand or keep from dropping it: 1/Short Rest."
   },
   "mi_wizard_hat": {
-    "_src": "845e89c0f9",
+    "_src": "5819686342",
     "name": "Wizard's Hat",
     "system.description": "<p>A wide-brimmed hat with a drooping crown; a line of ink that never fades runs along the inner seam.</p><p><b>Always.</b> Paper, scrolls, and ink under the crown don't get wet or stained, and the hat itself doesn't burn.</p><p><b>Use item, 0 AP: “Beacon.”</b> The tip of the hat lights up with a steady glow (bright 4 m, dim 8 m) and goes out with the same motion. Its whole value is that this light doesn't take up a hand, unlike a torch.</p><p><i>It only shines when worn: an unequipped hat doesn't carry its effect.</i></p>",
     "system.effect_description": "Light 8/4 m on command, doesn't take up a hand.",
     "effects": {
-      "N8sK9qxYnAPrFEzS": {
+      "dDSNxcx5OUVOZRRk": {
         "name": "Beacon"
       }
     }

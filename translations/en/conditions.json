@@ -25,7 +25,7 @@
     }
   },
   "burning": {
-    "_src": "4bed812223",
+    "_src": "01bc1c4f4f",
     "name": "Burning",
     "system.description": "<p>Take 3 fire damage at the start of your turn for each stack of Burning. Stacks up to 5 times. Lasts 3 rounds; new stacks reset the timer.<br>Removed by @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact}</p>",
     "system.application_text": "on fire",
@@ -42,7 +42,7 @@
     "name": "Curse"
   },
   "disoriented": {
-    "_src": "fad0570aac",
+    "_src": "0167ecfb37",
     "name": "Disoriented",
     "system.description": "<p>Lasts 1 round. Stacks. At three stacks it turns into Stunned.</p><p>Penalty: all maneuvers cost +1 AP per stack.</p>",
     "effects": {
@@ -52,7 +52,7 @@
     }
   },
   "dying": {
-    "_src": "5ec060b8ed",
+    "_src": "870de4ddcd",
     "name": "Dying",
     "system.description": "<p>You can spend 1 Luck Point to remove this condition.<br>Another character can use @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} and a Healing check to remove this condition.<br>A Potion of Healing or any ability that restores HP removes this condition.<br>After the first Dying condition in a session, the character gains the @UUID[Compendium.dedrel.conditions.Item.jDf1KR27t0mPAAlj]{Fatigued} condition; after the second, the @UUID[Compendium.dedrel.conditions.Item.gvltC2kWle3yTOyx]{Exhausted} condition.</p>"
   },
@@ -178,7 +178,7 @@
     }
   },
   "stunned": {
-    "_src": "b8c4c3caa9",
+    "_src": "a8f4287fff",
     "name": "Stunned",
     "system.description": "<p><strong>Effect:</strong> At most one maneuver per round, and maneuvers cost 3 AP more.</p><p><strong>Removal:</strong> When the duration ends, potions, spells</p><p><strong>Duration:</strong> until the start of the next turn.</p><p>NOT AUTOMATED</p>",
     "effects": {
@@ -188,7 +188,7 @@
     }
   },
   "suffocating": {
-    "_src": "3b0196cb51",
+    "_src": "0206e2d45e",
     "name": "Suffocating",
     "system.description": "<p><strong>Effect:</strong> A cumulative -1 penalty to all rolls for each round spent in this condition. At ten stacks: <strong>@UUID[Compendium.dedrel.conditions.Item.krX0myh7VFC4yKvJ]{Knockout}</strong><br><strong>Removal:</strong> When the duration ends (surfaced from the water, left the spell's area).</p>",
     "effects": {

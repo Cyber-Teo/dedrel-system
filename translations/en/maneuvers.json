@@ -336,7 +336,7 @@
     "system.description": "<p>This talent triggers as soon as the character's HP would drop to zero. The character restores 30% of their HP.</p>"
   },
   "maneuver_leaders_gaze": {
-    "_src": "41d070912c",
+    "_src": "5bec116abd",
     "name": "Leader's Gaze",
     "system.description": "<p><strong>Maneuver. Action, 3 AP.</strong> The target must be able to see you and have a developed mind.</p>\n<p>You look at them the way a pack leader looks at someone who has forgotten their place. The target makes a <strong>Willpower saving throw</strong> against a DC of <strong>your Willpower + 8</strong>.</p>\n<p><strong>Failure:</strong> the target gains <strong>2 stacks</strong> of the @UUID[Compendium.dedrel.conditions.Item.YdoGhveZiTy3WXav]{Disoriented} condition; each stack adds <strong>+1 AP</strong> to the cost of all its maneuvers. Stacks from different sources add up, capped at three; at the third, the condition turns into @UUID[Compendium.dedrel.conditions.Item.gDIEudCXkde0bEOp]{Stunned}.</p>\n<p><strong>Success:</strong> nothing. A leader doesn't press twice in a row on someone who held firm, but nobody canceled the next round.</p>\n<p><em>The condition is applied manually: click Disoriented in the token HUD the required number of times.</em></p>"
   },
