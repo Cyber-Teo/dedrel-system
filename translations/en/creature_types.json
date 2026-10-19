@@ -1,6 +1,120 @@
 {
-  "4P8XUQcnxSxtQhAH": {
-    "_src": "f6af6e1e4e",
+  "astral": {
+    "_src": "180b0066b4",
+    "system.description": "<p>Creatures of the Astral</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>",
+    "effects": {
+      "2z7QUbWTPhF01s54": {
+        "name": "Incorporeal",
+        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>"
+      }
+    },
+    "name": "Astral"
+  },
+  "construct": {
+    "_src": "5c14c09062",
+    "system.description": "<p>Monolith: strong resistance (DR 5) to all damage types. Adamantine weapons ignore Monolith (and hit constructs with a bonus; see materials).</p>",
+    "name": "Construct",
+    "effects": {
+      "VM9ItnA49wSpcXYF": {
+        "name": "Monolith"
+      }
+    }
+  },
+  "cosmic": {
+    "_src": "1694a43ac6",
+    "system.description": "<p>No general rules.</p>",
+    "name": "Cosmic"
+  },
+  "demon": {
+    "_src": "9bf802c3fe",
+    "system.description": "<p>Vulnerable to radiant. Plus one strong and one weak resistance, depending on the specific creature (a fire demon against fire, an ice demon against cold...).</p>",
+    "effects": {
+      "2SWDX4mkIpCElrb3": {
+        "name": "Demon Creature Type Base"
+      }
+    },
+    "name": "Demon"
+  },
+  "dragon": {
+    "_src": "ff57a4e78a",
+    "system.description": "<p>NPC race, no general rules.</p>",
+    "name": "Dragon"
+  },
+  "elf": {
+    "_src": "c272d5cec8",
+    "system.description": "<p>NPC race, no general rules.</p>",
+    "name": "Elf"
+  },
+  "ethereal": {
+    "_src": "3ae7ee936f",
+    "system.description": "<p>Creatures of the Aether</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>",
+    "effects": {
+      "5xU80F6INH3vBeGl": {
+        "name": "Incorporeal",
+        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant. No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names this creature type as its target.</p>"
+      }
+    },
+    "name": "Ethereal"
+  },
+  "human": {
+    "_src": "2384145fcb",
+    "system.description": "<p>NPC race, no general rules.</p>",
+    "name": "Human"
+  },
+  "magical_beast": {
+    "_src": "d4b3b5c7d4",
+    "name": "Magical Beast"
+  },
+  "ooze": {
+    "_src": "d4f5bcd0be",
+    "system.description": "<p>Amorphous devourers.</p><p>Amorphous: strong resistance to bludgeoning, weak to piercing and slashing.</p><p>No negative conditions affect them except Burning, Dying, Curse, and Full Paralysis, unless the ability's effect directly names the creature type as its target.</p>",
+    "effects": {
+      "PaFtlZevFmYWg8xV": {
+        "name": "Ooze Creature Type",
+        "description": "<p>Amorphous: strong resistance to bludgeoning, weak to piercing and slashing.</p><p>No negative conditions affect them except Burning, Dying, Curse, and Full Paralysis, unless the ability's effect directly names the creature type as its target.</p>"
+      }
+    },
+    "name": "Ooze"
+  },
+  "shade": {
+    "_src": "969c36f830",
+    "system.description": "<p>Undead without a physical shell.</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>",
+    "effects": {
+      "n2NxsfZKBevfmKbb": {
+        "name": "Incorporeal",
+        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>"
+      }
+    },
+    "name": "Shade"
+  },
+  "spirit": {
+    "_src": "cef2fb37b2",
+    "system.description": "<p>Spirits of places and ancestors: neutral-to-positive “undead.”</p><p></p><p>The Incorporeal package; vulnerable to radiant.</p>",
+    "effects": {
+      "aROljjhc2Ga3FAU1": {
+        "name": "Incorporeal"
+      }
+    },
+    "name": "Spirit"
+  },
+  "undead": {
+    "_src": "2e9917eee2",
+    "system.description": "<p>Undead: vulnerable to radiant; immune to necrotic.</p><p>Mindless undead (zombies, skeletons) are immune to psychic.</p><p>No negative conditions affect them except Off Guard, Entangled, Burning, and Prone, unless the ability's effect directly names the creature type as its target.</p>",
+    "effects": {
+      "bjcZYWysHzEUJUBP": {
+        "name": "Undead Creature Type",
+        "description": "<p>Undead: vulnerable to radiant; immune to necrotic.</p><p>Mindless undead (zombies, skeletons) are immune to psychic.</p><p>No negative conditions affect them except Off Guard, Entangled, Burning, and Prone, unless the ability's effect directly names the creature type as its target.</p>"
+      }
+    },
+    "name": "Undead"
+  },
+  "fay": {
+    "_src": "aea7312b8c",
+    "name": "Fay",
+    "system.description": "<p>No general rules.</p>"
+  },
+  "fire_elemental": {
+    "_src": "df47c01a6c",
     "name": "Fire Elemental",
     "effects": {
       "wa1ra43LoxA6FAUk": {
@@ -8,110 +122,22 @@
       }
     }
   },
-  "astral": {
-    "_src": "10e3a8c934",
-    "system.description": "<p>Creatures of the Astral</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p><span>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</span></p>",
-    "effects": {
-      "2z7QUbWTPhF01s54": {
-        "name": "Incorporeal",
-        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>"
-      }
-    }
-  },
-  "construct": {
-    "_src": "55e01a03b1",
-    "system.description": "<p>Monolith: strong resistance (DR 5) to all damage types. Adamantine weapons ignore Monolith (and hit constructs with a bonus; see materials).</p>"
-  },
-  "cosmic": {
-    "_src": "8639e1abdf",
-    "system.description": "<p>No general rules.</p>"
-  },
-  "demon": {
-    "_src": "f84a809453",
-    "system.description": "<p>Vulnerable to radiant. Plus one strong and one weak resistance, depending on the specific creature (a fire demon against fire, an ice demon against cold...).</p>",
-    "effects": {
-      "2SWDX4mkIpCElrb3": {
-        "name": "Demon Creature Type Base"
-      }
-    }
-  },
-  "dragon": {
-    "_src": "167465055b",
-    "system.description": "<p>NPC race, no general rules.</p>"
-  },
-  "elf": {
-    "_src": "167465055b",
-    "system.description": "<p>NPC race, no general rules.</p>"
-  },
-  "ethereal": {
-    "_src": "d4d25fe968",
-    "system.description": "<p>Creatures of the Aether</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p><span>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</span></p>",
-    "effects": {
-      "5xU80F6INH3vBeGl": {
-        "name": "Incorporeal",
-        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant. No negative conditions affect them except Off Guard and Burning.</p><p>This applies unless the ability's effect directly names the creature type as its target.</p>"
-      }
-    }
-  },
-  "fey": {
-    "_src": "e4d0b5f5f8",
-    "name": "Fay",
-    "system.description": "<p>No general rules.</p>"
-  },
-  "gLr7s35mdlTNLZYH": {
-    "_src": "82a65624cb",
+  "plant": {
+    "_src": "adcf0af988",
     "system.description": "<p>Predatory flora, forest guardians.</p><p>Vulnerable to fire and slashing; weak resistance to bludgeoning and piercing; immune to choking and bleeding.</p>",
     "effects": {
       "6xC7cxq4NliAsjiL": {
         "name": "Plant Creature Type"
       }
-    }
+    },
+    "name": "Plant"
   },
-  "human": {
-    "_src": "167465055b",
-    "system.description": "<p>NPC race, no general rules.</p>"
+  "beast": {
+    "_src": "8c2fa27db1",
+    "name": "Beast"
   },
-  "magical_beast": {
-    "_src": "a2f167472d",
-    "name": "Magical Beast"
-  },
-  "ooze": {
-    "_src": "1983ea296b",
-    "system.description": "<p>Amorphous devourers.</p><p>Amorphous: strong resistance to bludgeoning, weak to piercing and slashing.</p><p>No negative conditions affect them except Burning, Dying, Curse, and Full Paralysis, unless the ability's effect directly names the creature type as its target.</p>",
-    "effects": {
-      "PaFtlZevFmYWg8xV": {
-        "name": "Ooze Creature Type",
-        "description": "<p>Amorphous: strong resistance to bludgeoning, weak to piercing and slashing.</p><p>No negative conditions affect them except Burning, Dying, Curse, and Full Paralysis, unless the ability's effect directly names the creature type as its target.</p>"
-      }
-    }
-  },
-  "shade": {
-    "_src": "ac0adf4b00",
-    "system.description": "<p>Undead without a physical shell.</p><p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>",
-    "effects": {
-      "n2NxsfZKBevfmKbb": {
-        "name": "Incorporeal",
-        "description": "<p>Incorporeal: immune to all damage except necrotic and radiant.</p><p>No negative conditions affect them except Off Guard and Burning, unless the ability's effect directly names the creature type as its target.</p>"
-      }
-    }
-  },
-  "spirit": {
-    "_src": "a910d9d9ef",
-    "system.description": "<p>Spirits of places and ancestors: neutral-to-positive “undead.”</p><p></p><p>The Incorporeal package; vulnerable to radiant.</p>",
-    "effects": {
-      "aROljjhc2Ga3FAU1": {
-        "name": "Incorporeal"
-      }
-    }
-  },
-  "undead": {
-    "_src": "4d815405d2",
-    "system.description": "<p>Undead: vulnerable to radiant; immune to necrotic.</p><p>Mindless undead (zombies, skeletons) are immune to psychic.</p><p>No negative conditions affect them except Off Guard, Entangled, Burning, and Prone, unless the ability's effect directly names the creature type as its target.</p>",
-    "effects": {
-      "bjcZYWysHzEUJUBP": {
-        "name": "Undead Creature Type",
-        "description": "<p>Undead: vulnerable to radiant; immune to necrotic.</p><p>Mindless undead (zombies, skeletons) are immune to psychic.</p><p>No negative conditions affect them except Off Guard, Entangled, Burning, and Prone, unless the ability's effect directly names the creature type as its target.</p>"
-      }
-    }
+  "elemental": {
+    "_src": "2c9466f5e8",
+    "name": "Elemental"
   }
 }

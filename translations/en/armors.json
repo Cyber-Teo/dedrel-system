@@ -1,50 +1,69 @@
 {
   "animal_hide_leather_armor": {
-    "_src": "487e90f550",
-    "name": "Hide Armor"
+    "_src": "2a95172520",
+    "name": "Hide Armor",
+    "system.crafting.ingredients.0.name": "Animal Hide"
   },
   "animal_hide_studded_leather_armor": {
-    "_src": "22b296f91b",
-    "name": "Studded Hide Armor"
+    "_src": "e5120eccc8",
+    "name": "Studded Hide Armor",
+    "system.crafting.ingredients.0.name": "Animal Hide",
+    "system.crafting.ingredients.1.name": "Iron"
   },
   "iron_brigandine": {
-    "_src": "923524aa42",
-    "name": "Iron Brigandine"
+    "_src": "ef7df02b71",
+    "name": "Iron Brigandine",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Linen"
   },
   "iron_chainmail": {
-    "_src": "7632c0d5ec",
-    "name": "Iron Chainmail"
+    "_src": "92ccf21bc5",
+    "name": "Iron Chainmail",
+    "system.crafting.ingredients.0.name": "Iron"
   },
   "iron_cuirass": {
-    "_src": "f32da02f2b",
-    "name": "Iron Cuirass"
+    "_src": "da184987c6",
+    "name": "Iron Cuirass",
+    "system.crafting.ingredients.0.name": "Iron"
   },
   "iron_lamellar_armor": {
-    "_src": "1c79ec6a4b",
-    "name": "Iron Lamellar Armor"
+    "_src": "87deab0e5a",
+    "name": "Iron Lamellar Armor",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Animal Hide"
   },
   "iron_lamellar_armor_option": {
-    "_src": "7691e6fe63",
-    "name": "Iron Lamellar Armor (Variant)"
+    "_src": "1166db5f4f",
+    "name": "Iron Lamellar Armor (Variant)",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Animal Hide"
   },
   "iron_plate_armor": {
-    "_src": "321930efb7",
-    "name": "Iron Plate Armor"
+    "_src": "2ab2196f76",
+    "name": "Iron Plate Armor",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Linen",
+    "system.crafting.ingredients.2.name": "Animal Hide"
   },
   "linen_doublet": {
-    "_src": "080cbbb965",
-    "name": "Linen Doublet"
+    "_src": "fa051684ff",
+    "name": "Linen Doublet",
+    "system.crafting.ingredients.0.name": "Linen"
   },
   "linen_mantle": {
-    "_src": "310e440648",
-    "name": "Linen Mantle"
+    "_src": "e8ac03962d",
+    "name": "Linen Mantle",
+    "system.crafting.ingredients.0.name": "Linen"
   },
   "wool_gambeson": {
-    "_src": "256296492f",
-    "name": "Wool Gambeson"
+    "_src": "96ac5f0842",
+    "name": "Wool Gambeson",
+    "system.crafting.ingredients.0.name": "Wool"
   },
   "wool_reinforced_gambeson": {
-    "_src": "4ce506c48a",
-    "name": "Wool Reinforced Gambeson"
+    "_src": "4ab0f6d380",
+    "name": "Wool Reinforced Gambeson",
+    "system.crafting.ingredients.0.name": "Wool",
+    "system.crafting.ingredients.1.name": "Animal Hide"
   }
 }

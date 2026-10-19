@@ -1,6 +1,6 @@
 {
   "big_cover": {
-    "_src": "7017c7d923",
+    "_src": "78de8847ef",
     "name": "Large Cover",
     "system.description": "<p>+4 to Block</p>",
     "effects": {
@@ -42,7 +42,7 @@
     "name": "Curse"
   },
   "disoriented": {
-    "_src": "0167ecfb37",
+    "_src": "b53a015389",
     "name": "Disoriented",
     "system.description": "<p>Lasts 1 round. Stacks. At three stacks it turns into Stunned.</p><p>Penalty: all maneuvers cost +1 AP per stack.</p>",
     "effects": {
@@ -52,7 +52,7 @@
     }
   },
   "dying": {
-    "_src": "870de4ddcd",
+    "_src": "8babb45cab",
     "name": "Dying",
     "system.description": "<p>You can spend 1 Luck Point to remove this condition.<br>Another character can use @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} and a Healing check to remove this condition.<br>A Potion of Healing or any ability that restores HP removes this condition.<br>After the first Dying condition in a session, the character gains the @UUID[Compendium.dedrel.conditions.Item.jDf1KR27t0mPAAlj]{Fatigued} condition; after the second, the @UUID[Compendium.dedrel.conditions.Item.gvltC2kWle3yTOyx]{Exhausted} condition.</p>"
   },
@@ -69,7 +69,7 @@
     "system.description": "<p>Cannot take an active part in combat: the only maneuver available is @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact}. Movement is still allowed: it is not a maneuver and costs no AP.</p>\n<p>NOT AUTOMATED</p>"
   },
   "false_life": {
-    "_src": "e5cc250ed4",
+    "_src": "6ca24196ae",
     "name": "False Life",
     "system.description": "<p>Someone else's dead flesh is in the body: the wounds have closed over in gray, and the seams don't match in color.</p>\n<p><strong>Effect:</strong> the bearer <strong>cannot regain HP by any means</strong>: not by Biomancy, potions, a Healing check, or rest. They look like a walking corpse: ashen skin, the smell of decay.</p>\n<p><strong>Removal:</strong> cut open the seams (Interact with a Healing check), which removes the temporary HP entirely; or when the temporary HP run out; or on a Long Rest.</p>\n<p><strong>Source:</strong> Shadowmancy, the False Life Long Cast.</p>\n<p><em>Not automated: the GM enforces the healing ban.</em></p>",
     "system.application_text": "flesh not their own",
@@ -86,7 +86,7 @@
     }
   },
   "fear": {
-    "_src": "35185bf28a",
+    "_src": "10d45c2909",
     "name": "Fear",
     "system.description": "<p>The condition lasts two turns and does not stack.</p><p>The character takes -2 to skill checks.</p>",
     "effects": {
@@ -107,12 +107,12 @@
     }
   },
   "full_paralysis": {
-    "_src": "c17455868b",
+    "_src": "d7143c0bab",
     "name": "Full Paralysis",
     "system.description": "<p>Duration depends on the source; 3 rounds by default.</p><p>Completely unable to act: falls prone or stands frozen in place.</p><p>Removed when the duration ends, or by potions or spells.</p><p>NOT AUTOMATED</p>"
   },
   "grappled": {
-    "_src": "0ab7106979",
+    "_src": "bea8b23f2d",
     "name": "Grappled",
     "system.description": "<p><strong>Effect:</strong> Speed 0, −2 to Dodge. Unlike the Entangled condition, you can still Dodge, just worse.</p>\n<p><strong>The condition is mutual:</strong> the grappler is bound just as much and takes the same penalty, so apply Grappled to <strong>both</strong> participants.</p>\n<p><strong>The grapple holds</strong> as long as both are alive and conscious: leaving your square means letting go.</p>\n<p><strong>Removal:</strong> @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} with an Athletics contest against the opponent's Athletics (+2 per size category of difference in favor of the larger one). Success removes the condition from both.</p>\n<p><em>The Dodge penalty is automated. The GM enforces zero Speed manually: on NPCs, a manual speed override beats effects.</em></p>",
     "system.removal_text": "broke free of the grapple",
@@ -123,19 +123,19 @@
     }
   },
   "knockout": {
-    "_src": "778cc564a0",
+    "_src": "0064b04696",
     "name": "Knockout",
     "system.description": "<p>The character can no longer act and falls prone.<br>Removal: a Constitution saving throw at the start of the turn to come to (DC 12), potions, or @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Interact} (healing).</p><p>NOT AUTOMATED</p>"
   },
   "off_guard": {
-    "_src": "6b2045ebb1",
+    "_src": "af09850c6a",
     "name": "Off Guard",
     "system.description": "<p><strong>Effect:</strong> the target <strong>cannot Block</strong> against the next attack and defends with Dodge only. Anyone can make that attack, not just whoever applied the condition.</p>\n<p><strong>Applied by:</strong> @UUID[Compendium.dedrel.maneuvers.Item.8mgcq7OFtffV34Jw]{Feint} (Deception against Insight, Fast weapon) and @UUID[Compendium.dedrel.maneuvers.Item.kHwErvUQ3caABupP]{Sunder Block} (an axe or falchion attack against Athletics).</p>\n<p><strong>Removal:</strong> by the very first attack against the target, hit or miss, or at the end of the round.</p>\n<p><strong>Why it matters.</strong> A target defends with the highest applicable value, so the ban drops a blocker onto their secondary Dodge and zeroes out everything they invested in Block: shield, stances, bonuses. It pairs with the @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Pressed} condition, which breaks a dodger in exactly the same way.</p>\n<p><em>Not automated: enforced at the table; the maneuver card shows a Forbidden Defense badge.</em></p>",
     "system.application_text": "thrown off balance",
     "system.removal_text": "back in stance"
   },
   "pain": {
-    "_src": "99fa09c325",
+    "_src": "27f56fd9c2",
     "name": "Pain",
     "system.description": "<p>Penalty: all actions cost 1 AP more per stack of Pain.</p>",
     "effects": {
@@ -145,7 +145,7 @@
     }
   },
   "partial_paralysis": {
-    "_src": "ca2918fd82",
+    "_src": "da32c0df03",
     "name": "Partial Paralysis",
     "system.description": "<ul><li><p><strong>Effect:</strong> The affected limbs don't function (arms, legs, wings).</p></li><li><p><strong>Removal:</strong> Depends on the source.</p></li><li><p><strong>Duration:</strong> Depends on the source; 3 rounds by default.</p></li></ul><p>Penalties are situational, at the GM's discretion.</p>"
   },
@@ -178,7 +178,7 @@
     }
   },
   "stunned": {
-    "_src": "a8f4287fff",
+    "_src": "10aa4bf0cf",
     "name": "Stunned",
     "system.description": "<p><strong>Effect:</strong> At most one maneuver per round, and maneuvers cost 3 AP more.</p><p><strong>Removal:</strong> When the duration ends, potions, spells</p><p><strong>Duration:</strong> until the start of the next turn.</p><p>NOT AUTOMATED</p>",
     "effects": {
@@ -188,7 +188,7 @@
     }
   },
   "suffocating": {
-    "_src": "0206e2d45e",
+    "_src": "ab3bc8454d",
     "name": "Suffocating",
     "system.description": "<p><strong>Effect:</strong> A cumulative -1 penalty to all rolls for each round spent in this condition. At ten stacks: <strong>@UUID[Compendium.dedrel.conditions.Item.krX0myh7VFC4yKvJ]{Knockout}</strong><br><strong>Removal:</strong> When the duration ends (surfaced from the water, left the spell's area).</p>",
     "effects": {

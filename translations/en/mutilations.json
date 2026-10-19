@@ -167,7 +167,7 @@
     }
   },
   "mut_stunted_tail": {
-    "_src": "ea4f346568",
+    "_src": "48c197d29b",
     "name": "Stunted Tail",
     "system.description": "<p><em>Mutilation of rank 2. Biomancy, the Adaptation Modifier. Lasts Doctrine Rank in rounds (3 by default).</em></p><p>A short hairless stub pushes out of the tailbone. It can't hold anything, but it sways and throws off balance.</p><p><strong>Effect:</strong> −2 to Dodge and Athletics.</p><p><strong>Removal:</strong> mutilations inflicted by Biomancy <strong>can't be healed with potions</strong> and don't pass with rest. They can be removed only by Biomancy's own healing magic or by dispelling (the dispeller doctrine isn't defined yet; placeholder).</p>",
     "system.application_text": "grew a stub",

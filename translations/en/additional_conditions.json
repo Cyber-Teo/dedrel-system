@@ -25,7 +25,7 @@
     }
   },
   "genetic_memory_cultural_awareness": {
-    "_src": "315d058735",
+    "_src": "20d5635979",
     "name": "Genetic Memory: Cultural Awareness",
     "system.description": "<p>You gain a +2 bonus to <strong>Cultural Awareness</strong> checks. The effect ends automatically after a Long Rest.</p>",
     "effects": {
@@ -45,7 +45,7 @@
     }
   },
   "genetic_memory_engineering": {
-    "_src": "ab51e60404",
+    "_src": "7f40caa73a",
     "name": "Genetic Memory: Engineering",
     "system.description": "<p>You gain a +2 bonus to <strong>Engineering</strong> checks. The effect ends automatically after a Long Rest.</p>",
     "effects": {
@@ -55,7 +55,7 @@
     }
   },
   "genetic_memory_healing": {
-    "_src": "15b6f4c49a",
+    "_src": "9e593e42e5",
     "name": "Genetic Memory: Healing",
     "system.description": "<p>You gain a +2 bonus to <strong>Healing</strong> checks. The effect ends automatically after a Long Rest.</p>",
     "effects": {
@@ -95,7 +95,7 @@
     }
   },
   "genetic_memory_knowledge": {
-    "_src": "566d959745",
+    "_src": "c252540e74",
     "name": "Genetic Memory: Knowledge",
     "system.description": "<p>You gain a +2 bonus to <strong>Knowledge</strong> checks. The effect ends automatically after a Long Rest.</p>",
     "effects": {
@@ -105,7 +105,7 @@
     }
   },
   "genetic_memory_logic_reasoning": {
-    "_src": "8c2a4d6bcd",
+    "_src": "747d058bcb",
     "name": "Genetic Memory: Logic and Reasoning",
     "system.description": "<p>You gain a +2 bonus to <strong>Logic and Reasoning</strong> checks. The effect ends automatically after a Long Rest.</p>",
     "effects": {
@@ -115,13 +115,14 @@
     }
   },
   "genetic_memory_perception": {
-    "_src": "ff7e7c6815",
+    "_src": "228751c5ac",
     "name": "Genetic Memory: Perception",
     "effects": {
       "70bQaXuyQxkhRJUs": {
         "name": "Genetic Memory: Perception"
       }
-    }
+    },
+    "system.description": "<p>You gain a +2 bonus to <strong>Perception</strong> checks. The effect ends automatically after a Long Rest.</p>"
   },
   "genetic_memory_performance": {
     "_src": "a19aca32dc",
@@ -179,7 +180,7 @@
     "system.description": "<p>+2 to attacks against this target and the right to reroll one damage die (the new result must be kept).</p>"
   },
   "taunt": {
-    "_src": "f465b74271",
+    "_src": "1ed0bfe3b6",
     "name": "Taunt",
     "system.description": "<p>-3 to attacks against targets other than the taunter.</p>"
   }

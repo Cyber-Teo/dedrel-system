@@ -1,6 +1,6 @@
 {
   "effectlib_incorporeal": {
-    "_src": "b751d0b79d",
+    "_src": "8ff49c138d",
     "name": "Incorporeal",
     "effects": {
       "tZBnNC5UEe0SGB59": {
@@ -12,5 +12,9 @@
   "effectlib_monolith": {
     "_src": "dc0a35b7d2",
     "name": "Monolith"
+  },
+  "effectlib_torch": {
+    "_src": "b8e4637bbe",
+    "name": "Torch"
   }
 }

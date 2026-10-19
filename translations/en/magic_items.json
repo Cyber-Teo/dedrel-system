@@ -1,24 +1,30 @@
 {
   "mi_deck_of_fate_lesser": {
-    "_src": "b49292853b",
+    "_src": "776e060a6b",
     "name": "Lesser Deck of Divination",
     "system.description": "<p>A set of cards resembling ordinary playing cards, made in a style of the deck maker's choice. With this deck, filled with magical power, you can try to foretell the near future.<br>The user must ask a clear question about actions they or someone else intend to take within the next day and lay out the cards. The GM gives one of these answers (from the asker's point of view).<br>The outcome will be good.<br>The outcome will be bad.<br>The outcome will be both good and bad.<br>The outcome will bring nothing.<br>The spread doesn't come together (no answer).<br>The deck can be used no more than once per day.</p>",
-    "system.crafting.ingredients.1.name": "Rag Paper"
+    "system.crafting.ingredients.1.name": "Rag Paper",
+    "system.crafting.ingredients.0.name": "Common Magic Ink"
   },
   "mi_shadow_cloak": {
-    "_src": "6f07150016",
+    "_src": "a1810a98aa",
     "name": "Cloak of Stealth",
     "system.description": "<p>A cloak of dull undyed cloth: it doesn't rustle as you walk and doesn't glint even by torchlight.</p><p><b>Always.</b> The fabric is silent, and nobody can see what's in your hands under its folds, until you use it.</p><p><b>Once per Short Rest, 0 AP: “Freeze.”</b> One Stealth check counts as “taking 10” (<code>10 + Stealth rank + modifiers</code>), including in combat and under threat, where the usual Take 10 rule doesn't apply.</p><p><i>A common-tier magic item gives no numbers to rolls; see 15. Inventory §Magic Items.</i></p>",
-    "system.effect_description": "Take 10 on Stealth even in combat: 1/Short Rest."
+    "system.effect_description": "Take 10 on Stealth even in combat: 1/Short Rest.",
+    "system.crafting.ingredients.0.name": "Cotton",
+    "system.crafting.ingredients.1.name": "Copper"
   },
   "mi_swordsman_ring": {
-    "_src": "87e5bc063c",
+    "_src": "f3fec41e2a",
     "name": "Swordsman's Ring",
     "system.description": "<p>A narrow ring with a strip of blued steel around the band; worn by those who need a blade more than a purse.</p><p><b>Always.</b> You can draw or sheathe a bladed weapon for free: it doesn't cost a separate Interact.</p><p><b>Once per Short Rest, reaction, 0 AP: “The Blade Remembers the Hand.”</b> Your bladed weapon leaps into your palm from up to 9 meters away: from its sheath, from the mud underfoot, from someone else's hand. If you're losing the blade right now (critical fumble, an enemy effect, a disarm), it doesn't fall at all.</p><p><i>A common-tier magic item gives no numbers to rolls; see 15. Inventory §Magic Items.</i></p>",
-    "system.effect_description": "Summon a blade to your hand or keep from dropping it: 1/Short Rest."
+    "system.effect_description": "Summon a blade to your hand or keep from dropping it: 1/Short Rest.",
+    "system.crafting.ingredients.0.name": "Copper",
+    "system.crafting.ingredients.1.name": "Jasper",
+    "system.crafting.ingredients.2.name": "Generic Creature Parts"
   },
   "mi_wizard_hat": {
-    "_src": "5819686342",
+    "_src": "4ba182f3b8",
     "name": "Wizard's Hat",
     "system.description": "<p>A wide-brimmed hat with a drooping crown; a line of ink that never fades runs along the inner seam.</p><p><b>Always.</b> Paper, scrolls, and ink under the crown don't get wet or stained, and the hat itself doesn't burn.</p><p><b>Use item, 0 AP: “Beacon.”</b> The tip of the hat lights up with a steady glow (bright 4 m, dim 8 m) and goes out with the same motion. Its whole value is that this light doesn't take up a hand, unlike a torch.</p><p><i>It only shines when worn: an unequipped hat doesn't carry its effect.</i></p>",
     "system.effect_description": "Light 8/4 m on command, doesn't take up a hand.",
@@ -26,28 +32,34 @@
       "dDSNxcx5OUVOZRRk": {
         "name": "Beacon"
       }
-    }
+    },
+    "system.crafting.ingredients.0.name": "Turquoise",
+    "system.crafting.ingredients.1.name": "Copper",
+    "system.crafting.ingredients.2.name": "Cotton"
   },
   "seal_explosive_lesser": {
-    "_src": "4a830b081c",
+    "_src": "65a96e46f8",
     "name": "Lesser Explosive Seal",
     "system.description": "<p>This seal explodes, dealing 2d6 fire damage to everyone within 3 meters.<br>The user of this seal can activate it in one of three ways.</p><ol><li><p>Timer. The seal explodes after X rounds at the end of the user's turn, but no more than 5 rounds. (the seal can be attached to a thrown weapon, but not to ammunition)</p></li><li><p>Mine. The seal explodes if a creature enters the square where the seal is placed. (the seal can be concealed, Stealth check)</p></li><li><p>Tripwire. The seal explodes if its integrity is broken (can be used to make traps, thieves' tools check)</p></li></ol><p>After activation, the explosive seal stays active for 24 hours or until it triggers.<br>Chaining several seals together is forbidden (well, you can do it, but there's no extra damage!)</p>",
     "system.crafting.ingredients.0.name": "Parchment",
     "system.crafting.ingredients.2.name": "Alchemist's Fire",
-    "system.effect_description": "2d6 fire in a 3 m radius; timer / mine / tripwire."
+    "system.effect_description": "2d6 fire in a 3 m radius; timer / mine / tripwire.",
+    "system.crafting.ingredients.1.name": "Uncommon Magic Ink"
   },
   "seal_guard": {
-    "_src": "76241f9e76",
+    "_src": "ed96471f05",
     "name": "Warding Seal",
     "system.description": "<p>The seal depicts a dog in a style of the maker's choice.<br>This seal starts making a ringing sound of bells for 10 minutes when an uninvited material creature comes closer than 15 meters to it.<br>You can attach this seal to any surface or lay it on the ground. Before use, you must choose whom the alarm triggers on by crossing out the unneeded options on the seal.<br>Tiny creatures<br>Small creatures<br>Medium creatures<br>Large creatures<br>Huge creatures<br>You can also put a drop of blood on the seal from those it shouldn't trigger on (otherwise it will trigger on you, if you are a creature of a size on the list).<br>After the command word is spoken, the seal takes effect and stays active for 12 hours or until it triggers.</p>",
     "system.crafting.ingredients.1.name": "Rag Paper",
-    "system.effect_description": "Alarm on a stranger closer than 15 m; armed for 12 h."
+    "system.effect_description": "Alarm on a stranger closer than 15 m; armed for 12 h.",
+    "system.crafting.ingredients.0.name": "Common Magic Ink"
   },
   "seal_seeking": {
-    "_src": "2662df7f87",
+    "_src": "ab81870c38",
     "name": "Seal of Seeking",
-    "system.description": "<p>The seal depicts an eye in a style of the maker's choice.<br>This seal is meant for finding traps and other unexpected harmful effects in a 30-meter area.<br>You must hold the seal in your hands and speak the command word. If the image of the eye on the seal doesn't change, there are no traps within 60 ft. If the eye image “weeps” red ink, there is a trap nearby. After use, the seal becomes useless.</p>",
+    "system.description": "<p>The seal depicts an eye in a style of the maker's choice.<br>This seal is meant for finding traps and other unexpected harmful effects within a 20-meter radius.<br>You must hold the seal in your hands and speak the command word. If the image of the eye on the seal doesn't change, there are no traps within 20 meters. If the eye image “weeps” red ink, there is a trap nearby. After use, the seal becomes useless.</p>",
     "system.crafting.ingredients.0.name": "Rag Paper",
-    "system.effect_description": "Single-use: searches for traps within a 20 m radius."
+    "system.effect_description": "Single-use: searches for traps within a 20 m radius.",
+    "system.crafting.ingredients.1.name": "Common Magic Ink"
   }
 }

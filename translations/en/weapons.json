@@ -20,7 +20,7 @@
     "system.description": "<p>The guard chimera's main weapon: step IV, one step above the rank 3 row. This is what “hits hard” means: an elite buys a half-rank up in damage.</p><p><strong>Control Zone 1</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
   },
   "demon_claws_weapon": {
-    "_src": "301d14f6ba",
+    "_src": "6edff79651",
     "name": "Demonic Claws"
   },
   "dragon_claws_weapon": {
@@ -32,24 +32,31 @@
     "name": "Fay Claws"
   },
   "iron_dagger": {
-    "_src": "7087a713e4",
-    "name": "Iron Dagger"
+    "_src": "b4dd70364d",
+    "name": "Iron Dagger",
+    "system.crafting.ingredients.0.name": "Iron"
   },
   "iron_long_spear": {
-    "_src": "97060a8d3b",
-    "name": "Iron Long Spear"
+    "_src": "c2be45c36e",
+    "name": "Iron Long Spear",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
   },
   "iron_short_spear": {
-    "_src": "ef7818b8e4",
-    "name": "Iron Short Spear"
+    "_src": "fd8788ee62",
+    "name": "Iron Short Spear",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
   },
   "iron_short_sword": {
-    "_src": "da19995740",
-    "name": "Iron Short Sword"
+    "_src": "95a77115b9",
+    "name": "Iron Short Sword",
+    "system.crafting.ingredients.0.name": "Iron"
   },
   "iron_war_pick": {
-    "_src": "cf310c41cb",
-    "name": "Iron War Pick"
+    "_src": "2a52084c86",
+    "name": "Iron War Pick",
+    "system.crafting.ingredients.0.name": "Iron"
   },
   "matriarch_goat_horns": {
     "_src": "a22725cd78",
@@ -67,23 +74,164 @@
     "system.description": "<p><strong>The Matriarch's third head</strong>: a tail ending in a snake. Step III: it hits weaker than the other two but carries a venom that neither DR nor resistance reduces.</p><p><strong>Control Zone 2</strong>: it also carries the creature's size-based Control. The system reads CZ from the equipped melee weapon; the actor has no separate size field.</p>"
   },
   "oak_magic_staff": {
-    "_src": "8d8d5ad95b",
-    "name": "Magic Staff"
+    "_src": "48144467d7",
+    "name": "Magic Staff",
+    "system.crafting.ingredients.0.name": "Oak",
+    "system.crafting.ingredients.1.name": "Jasper"
   },
   "oak_magic_wand": {
-    "_src": "27417f88cf",
-    "name": "Oak Magic Wand"
+    "_src": "03dd9aceea",
+    "name": "Oak Magic Wand",
+    "system.crafting.ingredients.0.name": "Oak",
+    "system.crafting.ingredients.1.name": "Turquoise"
   },
   "paw": {
     "_src": "612d210bab",
     "name": "Paw"
   },
   "yew_long_bow": {
-    "_src": "01f327666b",
-    "name": "Yew Long Bow"
+    "_src": "4a4f4ef6b7",
+    "name": "Yew Long Bow",
+    "system.crafting.ingredients.0.name": "Yew"
   },
   "yew_short_bow": {
-    "_src": "012d15c457",
-    "name": "Yew Short Bow"
+    "_src": "4c710c98b3",
+    "name": "Yew Short Bow",
+    "system.crafting.ingredients.0.name": "Yew"
+  },
+  "iron_claws": {
+    "_src": "0f67aabaf9",
+    "name": "Iron Claws",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "iron_saber": {
+    "_src": "393dff9552",
+    "name": "Iron Saber",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "iron_halberd": {
+    "_src": "49acf96d71",
+    "name": "Iron Halberd",
+    "system.crafting.ingredients.0.name": "Pine",
+    "system.crafting.ingredients.1.name": "Iron"
+  },
+  "oak_tower_shield": {
+    "_src": "1d433a0edb",
+    "name": "Oak Tower Shield",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "oak_heavy_crossbow": {
+    "_src": "323b2962f5",
+    "name": "Oak Heavy Crossbow",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "strong_fangs": {
+    "_src": "798b6f2e42",
+    "name": "Strong Fangs"
+  },
+  "iron_pistol": {
+    "_src": "74d423dfdd",
+    "name": "Iron Pistol",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Bronze"
+  },
+  "iron_rapier": {
+    "_src": "36271ad830",
+    "name": "Iron Rapier",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "oak_repeating_crossbow": {
+    "_src": "942ee1eccf",
+    "name": "Oak Repeating Crossbow",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Bronze",
+    "system.crafting.ingredients.2.name": "Oak"
+  },
+  "fist": {
+    "_src": "f09e4962dc",
+    "name": "Fist"
+  },
+  "iron_falchion": {
+    "_src": "0caf507b92",
+    "name": "Iron Falchion",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "oak_club": {
+    "_src": "718764aa2a",
+    "name": "Oak Club",
+    "system.crafting.ingredients.0.name": "Oak"
+  },
+  "iron_berdiche": {
+    "_src": "80afcebbd9",
+    "name": "Iron Berdiche",
+    "system.crafting.ingredients.0.name": "Pine",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "iron_greatsword": {
+    "_src": "322a6a4761",
+    "name": "Iron Greatsword",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "oak_staff": {
+    "_src": "504c592c3e",
+    "name": "Oak Staff",
+    "system.crafting.ingredients.0.name": "Oak"
+  },
+  "oak_shield": {
+    "_src": "73205c87aa",
+    "name": "Oak Shield",
+    "system.crafting.ingredients.0.name": "Oak",
+    "system.crafting.ingredients.1.name": "Iron"
+  },
+  "oak_crossbow": {
+    "_src": "1bc3ae2841",
+    "name": "Oak Crossbow",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "iron_arquebus": {
+    "_src": "cd71550fea",
+    "name": "Iron Arquebus",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Bronze"
+  },
+  "iron_musket": {
+    "_src": "fdc3a33e70",
+    "name": "Iron Musket",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Bronze"
+  },
+  "iron_longsword": {
+    "_src": "d3e1a5e30d",
+    "name": "Iron Longsword",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "fangs": {
+    "_src": "0b980e196e",
+    "name": "Fangs"
+  },
+  "iron_axe": {
+    "_src": "a3c4b1dcfb",
+    "name": "Iron Axe",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "iron_mace": {
+    "_src": "328269908e",
+    "name": "Iron Mace",
+    "system.crafting.ingredients.0.name": "Iron"
+  },
+  "iron_glaive": {
+    "_src": "f885ce043d",
+    "name": "Iron Glaive",
+    "system.crafting.ingredients.0.name": "Iron",
+    "system.crafting.ingredients.1.name": "Oak"
+  },
+  "iron_katar": {
+    "_src": "a6cf71e75b",
+    "name": "Iron Katar",
+    "system.crafting.ingredients.0.name": "Iron"
   }
 }

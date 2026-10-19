@@ -1,32 +1,42 @@
 {
   "potion_acid": {
-    "_src": "03a67d381c",
-    "system.crafting.ingredients.1.name": "Vial"
+    "_src": "a94d3200ee",
+    "system.crafting.ingredients.1.name": "Vial",
+    "name": "Acid",
+    "system.crafting.ingredients.0.name": "Acid Mandibler Gland"
   },
   "potion_alchemical_fire": {
-    "_src": "42e690655f",
+    "_src": "d6a8f5484e",
     "name": "Alchemist's Fire",
     "system.crafting.ingredients.0.name": "Alcohol",
-    "system.crafting.ingredients.2.name": "Vial"
+    "system.crafting.ingredients.2.name": "Vial",
+    "system.crafting.ingredients.1.name": "Fire Beetle Innards"
   },
   "potion_healing_common": {
-    "_src": "afcbf7339e",
+    "_src": "48b3f1d195",
     "system.description": "<p>Heals 25% of HP</p>",
     "system.crafting.ingredients.0.name": "Alcohol",
-    "system.crafting.ingredients.2.name": "Vial"
+    "system.crafting.ingredients.2.name": "Vial",
+    "name": "Common Potion of Healing",
+    "system.crafting.ingredients.1.name": "Bluebloom"
   },
   "potion_healing_rare": {
-    "_src": "3c7575de40",
-    "system.description": "<p>Heals 75% of HP</p>"
+    "_src": "691a8ba96a",
+    "system.description": "<p>Heals 75% of HP</p>",
+    "name": "Rare Potion of Healing"
   },
   "potion_healing_uncommon": {
-    "_src": "f136108d66",
+    "_src": "f6e56c7bde",
     "system.description": "<p>Heals 50% of HP</p>",
     "system.crafting.ingredients.2.name": "Alcohol",
-    "system.crafting.ingredients.3.name": "Vial"
+    "system.crafting.ingredients.3.name": "Vial",
+    "name": "Uncommon Potion of Healing",
+    "system.crafting.ingredients.0.name": "Imperial Bloom",
+    "system.crafting.ingredients.1.name": "Bluebloom"
   },
   "potion_healing_very_rare": {
-    "_src": "3200d88f33",
-    "system.description": "<p>Heals 100% of HP</p>"
+    "_src": "5b2cae0b94",
+    "system.description": "<p>Heals 100% of HP</p>",
+    "name": "Very Rare Potion of Healing"
   }
 }
