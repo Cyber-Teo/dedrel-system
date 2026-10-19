@@ -17,7 +17,7 @@ export const CREATURE_TYPES = [
   "astral",        // Astral (creatures of the astral; often a paired type: astral + beast, etc.)
   "spirit",        // Spirits (neutral-to-positive "undead", spirits of places/ancestors)
   "shade",         // Shades (undead without a physical shell)
-  "fey",           // Fey
+  "fay",           // Fay (the key was `fey` before 2026-10-19)
   "demon",         // Demons (steeped in corruption)
   "dragon",        // Dragons (NPC)
   "elf",           // Elves (NPC)

@@ -1128,7 +1128,7 @@ system:
 # DedrelActor#creatureTypeKeys (урон *= 1 + potency*0.1 ДО вычета DR).
 # Пресеты ключей — CONFIG.DEDREL.creatureTypes (src/config/creature-types.mjs):
 # beast, magical_beast, plant, ooze, elemental, ethereal, astral, spirit, shade,
-# fey, demon, dragon, elf, human, undead, cosmic, construct.
+# fay, demon, dragon, elf, human, undead, cosmic, construct.
 # human вешается только на людей-NPC (стражники, бандиты); персонажи игроков
 # creature_type не несут — «против типа human» по ним не матчится.
 # Планарные типы (ethereal, astral) часто парные: актор несёт два creature_type
