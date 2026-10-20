@@ -271,7 +271,7 @@
     "_src": "07d2d01a4a",
     "name": "Feint",
     "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.8mgcq7OFtffV34Jw]{Feint}</p><p>Maneuver, Fast melee weapon.</p><p>Make a Deception check against the target's Insight. On a success, the target gains the @UUID[Compendium.dedrel.conditions.Item.CondOffGuard0001]{Off Guard} status (the status forbids using Block against the next attack)</p><p>As a chain, you may make a @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Thrust}.</p><p></p>",
-    "system.prerequisites_text": "Dexterity AND Charisma 3"
+    "system.prerequisites_text": "Dexterity 3 AND Charisma 3"
   },
   "flank_attack": {
     "_src": "4f2b52ea21",
