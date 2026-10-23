@@ -1,0 +1,136 @@
+Dedrel — game system for Foundry Virtual Tabletop
+Copyright (c) 2015–2026 Teo (Lucky Star Games)
+Website: https://dedrel.teo.uy · Contact: admin@teo.uy
+
+This repository contains two kinds of material under two different licenses,
+plus third-party assets under their own licenses. This file says which is which.
+In case of doubt, the license files themselves (LICENSE, LICENSE-CONTENT) and the
+third-party licenses take precedence over this summary.
+
+
+1. LICENSES BY FOLDER
+=====================
+
+Code — MIT License (see LICENSE), Copyright (c) 2026 Teo (Lucky Star Games):
+
+  dedrel.mjs          system entry point
+  src/                data models, documents, sheets, apps, utilities, config
+  templates/          Handlebars templates of the interface
+  css/                stylesheets
+  lang/               interface strings (en.json, ru.json)
+  scripts/            build and helper scripts
+  docs/               developer documentation
+  system.json         system manifest
+  .github/            issue and pull request templates, workflows
+  CONTRIBUTING.md     contribution guide
+  packs/macro/        compendium of system macros (script code)
+
+Content — CC BY-NC 4.0 (see LICENSE-CONTENT), Copyright (c) 2015–2026 Teo (Lucky Star Games):
+
+  packs/              compendiums: items, maneuvers, talents, mutations, spells,
+                      conditions, actors and other game content
+                      (except packs/macro/, which is code)
+  translations/       translations of compendium content
+  assets/             artwork: tokens, raster icons, banners
+                      (except the third-party files listed in section 4)
+
+CODE_OF_CONDUCT.md is adapted from the Contributor Covenant, version 2.1
+(https://www.contributor-covenant.org), licensed under CC BY 4.0.
+
+Files in the code folders are covered by the MIT License in their entirety,
+including any names or short texts they contain. Game mechanics as such are not
+claimed as copyrightable; the license covers their expression in texts and art.
+
+
+2. ADDITIONAL PERMISSION FOR DEDREL CONTENT
+===========================================
+
+Additional permission: in addition to CC BY-NC 4.0, you may use Dedrel content
+commercially in streams and recorded play, in paid games and on Patreon or
+similar platforms, and in modules and adventures made for the Dedrel system,
+provided you give attribution. You may not sell the Dedrel rules, the system, or
+copies of them as a standalone product.
+
+This permission concerns the content only; the code is already free for any use
+under the MIT License. The permission does not extend to the third-party
+material in section 4, which keeps its own license.
+
+Suggested attribution:
+
+  Dedrel © 2015–2026 Teo (Lucky Star Games), https://dedrel.teo.uy, CC BY-NC 4.0.
+
+Anything beyond this — for example a printed edition, a port of the setting to
+another system, or other commercial use — ask at admin@teo.uy.
+
+
+3. NAMES
+========
+
+The names "Dedrel" and "Lucky Star Games" and their logos are not licensed by
+LICENSE or LICENSE-CONTENT. You may not use them as the name, or part of the
+name, of your own product, module, fork or other derivative work, or in a way
+that suggests it is official or endorsed by the author. A fork published as a
+separate package needs its own name and its own package id.
+
+You may use the name to describe what your work is for or based on — for
+example "a module for the Dedrel system" or "based on Dedrel" — together with
+the attribution above.
+
+
+4. THIRD-PARTY MATERIAL
+=======================
+
+Icons from game-icons.net — CC BY 3.0
+  https://game-icons.net · https://creativecommons.org/licenses/by/3.0/
+  201 SVG icons in assets/icons/ by Lorc, Delapouite, Skoll, sbed, Viscious Speed,
+  Carl Olsen, Faithtoken, Felbrigg, Andy Meneely, Cathelineau, DarkZaitzev,
+  GeneralAce135, HeavenlyDog and Willdabeast. They are used unmodified and renamed
+  to match the system's entities. The full per-file list with the original icon
+  names and authors is in assets/ICON_CREDITS.md.
+
+Google Noto fonts — SIL Open Font License 1.1
+  https://fonts.google.com/noto · https://openfontlicense.org
+  The doctrine icons in assets/icons/doctrines/ are glyph outlines taken from
+  Noto Sans Symbols, Noto Sans Symbols 2 and Noto Sans Math
+  (Copyright The Noto Project Authors).
+
+Foundry Virtual Tabletop
+  Dedrel is an independent game system and is not affiliated with or endorsed by
+  Foundry Gaming LLC. Foundry Virtual Tabletop is a product of Foundry Gaming LLC;
+  its software is not included in this repository. Image paths starting with
+  "icons/" refer to assets shipped with Foundry itself and are not redistributed
+  here.
+
+
+5. AI DISCLOSURE
+================
+
+Dedrel — the game system and its setting — has been in development for over ten
+years. The rules, texts and concepts are almost exclusively written and designed
+by the author; AI tools were used to assist with translation, editing and
+brainstorming. The Foundry VTT system code was developed with AI coding
+assistants (Claude Code, Google Antigravity). Generated artwork (tokens and
+raster icons) was made with Google Gemini and AnimaYume.
+
+All raster images in assets/ (.webp, .jpeg) are AI-generated. The SVG banners in
+assets/banners/ and the skill icons assets/icons/skills/perception.svg and
+assets/icons/skills/thievery.svg are original works of the author.
+
+
+---
+
+КРАТКО ПО-РУССКИ
+
+Код системы (dedrel.mjs, src/, templates/, css/, lang/, scripts/, docs/,
+system.json, .github/, пак макросов packs/macro/) — под лицензией MIT. Контент —
+правила, тексты, компендиумы (packs/), переводы (translations/) и арт (assets/) —
+под CC BY-NC 4.0.
+Сверх неё контент Dedrel можно использовать коммерчески в стримах и записях игр,
+в платных играх, на Patreon и подобных площадках, в модулях и приключениях для
+системы — с указанием авторства. Продавать сами правила, систему или их копии как
+самостоятельный продукт нельзя. Названия «Dedrel» и «Lucky Star Games» не
+лицензируются: свой продукт, модуль или форк называйте иначе, но писать «модуль
+для системы Dedrel» или «по мотивам Dedrel» можно. Иконки game-icons.net (CC BY 3.0) и глифы Noto
+(OFL 1.1) остаются под своими лицензиями. Растровые изображения сгенерированы
+Google Gemini и AnimaYume, код написан с помощью Claude Code и Google Antigravity.
+Юридически действует английский текст выше.
