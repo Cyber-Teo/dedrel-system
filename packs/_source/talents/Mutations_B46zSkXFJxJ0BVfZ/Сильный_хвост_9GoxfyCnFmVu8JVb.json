@@ -2,7 +2,7 @@
   "name": "Сильный хвост",
   "type": "talent",
   "system": {
-    "description": "<p>Даёт +1 к спасброскам Силы<br></p>",
+    "description": "<p>Даёт +1 к рангу Силы.</p>",
     "key": "strong_tail",
     "subtype": "passive",
     "xp_cost": 1,

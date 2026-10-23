@@ -2,7 +2,7 @@
   "name": "Ловкий хвост",
   "type": "talent",
   "system": {
-    "description": "<p>Даёт +1 к спасброскам ловкости.</p>",
+    "description": "<p>Даёт +1 к рангу Ловкости.</p>",
     "key": "dexterous_tail",
     "subtype": "passive",
     "xp_cost": 1,

@@ -228,9 +228,9 @@
     "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.wFINBDNa0ghpigJ8]{Destroyer's Intuition}</p><p>Applies a status.</p><p>Your next attack with a bludgeoning weapon, @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Bash} or @UUID[Compendium.dedrel.maneuvers.Item.u2MUNJ2oJeExQuzq]{Power Bash}, costs 0 AP.</p><p>On a hit, the attack deals increased damage (1 damage step higher).</p><p>The target also suffers an injury.<br>The hit location is determined by a d100 roll. Arms 1-40% Torso 41-70% Legs 71%-90% Head 91-100%</p>"
   },
   "dexterous_tail": {
-    "_src": "b305304b0d",
+    "_src": "67e749bd35",
     "name": "Dexterous Tail",
-    "system.description": "<p>Grants +1 to Dexterity saving throws.</p>",
+    "system.description": "<p>Grants +1 to Dexterity rank.</p>",
     "effects": {
       "UkJJXWO5h2b7IavO": {
         "name": "Dexterous Tail"
@@ -640,9 +640,9 @@
     "system.description": "<p>This talent grants @UUID[Compendium.dedrel.maneuvers.Item.tqM7tetp1p2BCh2u]{Steel Momentum}</p><p>If at the end of your last turn you started @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Steel Barrier} and it didn't trigger before the start of your new turn, at the start of the turn you can use Steel Momentum: move up to your Speed and make an attack; on a hit, the damage is increased by one step.</p><p>This is a free action, and you can continue your turn.</p>"
   },
   "strong_tail": {
-    "_src": "cf04e037c7",
+    "_src": "60017eea76",
     "name": "Strong Tail",
-    "system.description": "<p>Grants +1 to Strength saving throws<br></p>",
+    "system.description": "<p>Grants +1 to Strength rank.</p>",
     "effects": {
       "cpAtugQDpPsFrXcn": {
         "name": "Strong Tail"

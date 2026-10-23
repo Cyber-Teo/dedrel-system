@@ -22,8 +22,7 @@
     "uses_per": "",
     "adds_items": [],
     "on_add_macro": "",
-    "has_situational_bonus": true,
-    "situational_trigger": "Персонаж получает возможность различать большое количество запахов. Даёт ситуационный бонус к проверкам навыков по решению мастера от +2 до +5."
+    "has_situational_bonus": true
   },
   "flags": {
     "dedrel": {
