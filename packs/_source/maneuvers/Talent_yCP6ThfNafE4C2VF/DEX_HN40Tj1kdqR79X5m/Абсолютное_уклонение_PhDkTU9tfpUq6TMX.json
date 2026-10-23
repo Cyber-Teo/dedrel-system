@@ -1,0 +1,88 @@
+{
+  "folder": "HN40Tj1kdqR79X5m",
+  "name": "Абсолютное уклонение",
+  "type": "maneuver",
+  "_id": "PhDkTU9tfpUq6TMX",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_absolute_evasion.svg",
+  "system": {
+    "description": "<p>1 раз в долгий отдых.</p><p>Вы уворачиваетесь от любой успешной атаки, первый раз в течение следующих 10 раундов. Можно использовать как реакцию.</p>",
+    "key": "maneuver_absolute_evasion",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 1,
+    "uses_max": "1",
+    "uses_per": "longRest",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "absolute_evasion"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "skill": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "hide_combat_buttons": false,
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783330971956,
+    "modifiedTime": 1792453976908,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!PhDkTU9tfpUq6TMX"
+}

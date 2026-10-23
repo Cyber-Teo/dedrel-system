@@ -1,0 +1,5064 @@
+{
+  "name": "Лайла",
+  "type": "character",
+  "_id": "DADbi2vXd60Woo8l",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "bloodlines": {
+      "human": {
+        "rank": 2
+      },
+      "demon": {
+        "rank": 3
+      },
+      "dragon": {
+        "rank": 2
+      },
+      "fay": {
+        "rank": 3
+      },
+      "elf": {
+        "rank": 5
+      }
+    },
+    "attributes": {
+      "int": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "dex": {
+        "rank": 4,
+        "save_bonus": 0
+      },
+      "log": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "rea": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "str": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "will": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "con": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "luck": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "cha": {
+        "rank": 1,
+        "save_bonus": 0
+      }
+    },
+    "skills": {
+      "crossbows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "unarmed_combat": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "pole_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "blunt_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "artillery": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "firearms": {
+        "rank": 3,
+        "specialization": "Мушкет",
+        "bonus": 0
+      },
+      "throwing": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "exotic_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "magical_attacks": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bladed_weapons": {
+        "rank": 1,
+        "specialization": "",
+        "bonus": 0
+      },
+      "armor_use": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "cultural_awareness": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "knowledge": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "logic_reasoning": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "interpretation": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "research": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "craftsmanship": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "stealth": {
+        "rank": 3,
+        "specialization": "В природе",
+        "bonus": 0
+      },
+      "thievery": {
+        "rank": 3,
+        "specialization": "Взлом замков",
+        "bonus": 0
+      },
+      "healing": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "survival": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "engineering": {
+        "rank": 3,
+        "specialization": "Огнестрел",
+        "bonus": 0
+      },
+      "atletism": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "perception": {
+        "rank": 3,
+        "specialization": "Слежка",
+        "bonus": 0
+      },
+      "persuasion": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "insight": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "deception": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "intimidation": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "performance": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      }
+    },
+    "doctrines": {
+      "geomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "hydromancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "flow": 0,
+          "ice": 0
+        }
+      },
+      "pyromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "ventomancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "squall": 0,
+          "echo": 0
+        }
+      },
+      "biomancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "mending": 0,
+          "sculpting": 0
+        }
+      },
+      "shadowmancy": {
+        "rank": 1,
+        "unlocked": 0
+      },
+      "aetheromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "electromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "temporalmancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "astralomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "aether_song": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "blood_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "chaos_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "shapeshifting": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "feral_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telekinesis": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telepathy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "zero": {
+        "rank": 0,
+        "unlocked": 0
+      }
+    },
+    "magic": {
+      "techniques": {
+        "create": 0,
+        "move": 0,
+        "transform": 0,
+        "sense": 0,
+        "imbue": 0
+      }
+    },
+    "resources": {
+      "hp": {
+        "value": 30,
+        "temp": 0,
+        "max": 10
+      },
+      "wounds": {
+        "level": 1,
+        "penalty": 0
+      },
+      "ap_universal": {
+        "max": 0,
+        "value": 0
+      },
+      "ap_maneuver": {
+        "max": 0,
+        "value": 0
+      },
+      "ap_magic": {
+        "max": 0,
+        "value": 0
+      },
+      "luck_points": {
+        "max": 0,
+        "value": 2
+      },
+      "movement": {
+        "max": 0,
+        "value": 0
+      }
+    },
+    "senses": {
+      "darkvision": 0
+    },
+    "defenses": {
+      "block": 0,
+      "dodge": 0,
+      "mdef": 0
+    },
+    "dr": {
+      "slashing": 0,
+      "piercing": 0,
+      "bludgeoning": 0,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "equipment_slots": {
+      "main_hand": {
+        "item_id": "o5L7bwTI5XaecZtv",
+        "type": "weapon"
+      },
+      "off_hand": {
+        "item_id": "o5L7bwTI5XaecZtv",
+        "type": "shield"
+      },
+      "tail": {
+        "item_id": "",
+        "type": ""
+      },
+      "armor_upper": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "armor_middle": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "armor_lower": {
+        "item_id": "Kt6kzNLYJvQrajOP",
+        "type": "armor"
+      },
+      "magic_item_1": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "magic_item_2": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "ammo": {
+        "item_id": "",
+        "type": "loot"
+      },
+      "head": {
+        "item_id": "",
+        "type": "head"
+      },
+      "neck": {
+        "item_id": "",
+        "type": "neck"
+      },
+      "torso": {
+        "item_id": "",
+        "type": "torso"
+      },
+      "acc_left_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_left_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_tail": {
+        "item_id": "",
+        "type": "hand"
+      }
+    },
+    "bonuses": {
+      "global_roll": 0,
+      "global_skill": 0,
+      "global_save": 0,
+      "global_ap_discount": 0,
+      "global_ap_penalty": 0,
+      "maneuver_ap_penalty": 0,
+      "spell_ap_penalty": 0,
+      "ignore_wound_penalty": 0,
+      "infinite_explode": 0,
+      "damage_explode": 0,
+      "hp_multiplier": 0,
+      "carry_capacity_mult": 0,
+      "carry_capacity_flat": 0,
+      "ignore_encumbrance_penalty": 0
+    },
+    "currency": {
+      "copper": 0,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "can_receive_currency": true,
+    "initiative": 0,
+    "details": {
+      "xp": 0,
+      "level": 1,
+      "biography": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Лайла",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": true,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": 1,
+    "displayBars": 30,
+    "bar1": {
+      "attribute": "resources.hp"
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": true,
+      "range": 6,
+      "angle": 360,
+      "visionMode": "darkvision",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "name": "Атака по возможности",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Если зона контроля персонажа равна 1 и больше и он не находится  @UUID[Compendium.dedrel.conditions.Item.1Ed1ogtSr0oxJhd5]{В клинче} он может без дополнительной траты ОД провести Выпад, Взмах или Удар, если держит в руках оружие, позволяющее проводить такие манёвры по персонажу который пересекает его зону контроля. Если атака была успешной (даже если не нанесла урон), движение противника после этого прекращается, персонажи переходят в состояние В Клинче Если противник пересекает несколько клеток зоны контроля, персонаж может проводить атаки по возможности за каждую пересеченную клетку.<br><br><strong>Эффекты:</strong> Следующий Взмах, Удар или выпад стоит 0.</p>",
+        "key": "maneuver_attack_of_opportunity",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Зона контроля >=1, нет состояния „В Клинче“.",
+        "target_type": "self",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_attack_of_opportunity",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "finuaBqY5NT9ilrO",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+      "effects": [
+        {
+          "name": "Атака по возможности",
+          "origin": "Compendium.dedrel.maneuvers.Item.kYkUGNsX9fbDKoRd",
+          "_id": "3vYKn5wCeaPokRqI",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:key:maneuver_swing|key:maneuver_thrust|key:maneuver_bash|key:maneuver_power_bash|key:maneuver_penetrating_strike|key:maneuver_paired_strike",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnEnd",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.finuaBqY5NT9ilrO.3vYKn5wCeaPokRqI"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.finuaBqY5NT9ilrO"
+    },
+    {
+      "name": "Взмах",
+      "type": "maneuver",
+      "system": {
+        "description": "Атака режущим оружием ближнего боя",
+        "key": "maneuver_swing",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "атака по возможности, ответный удар",
+        "chain_trigger_maneuvers": [
+          "maneuver_riposte",
+          "maneuver_attack_of_opportunity",
+          "maneuver_rage",
+          "maneuver_swing_on_a_move",
+          "maneuver_sunder_block"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": true
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Режущее оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "@weapon.damage_formulas.slashing",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_swing",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "ttIejCsbLwj9T5NV",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.ttIejCsbLwj9T5NV"
+    },
+    {
+      "name": "Взаимодействие",
+      "type": "maneuver",
+      "system": {
+        "description": "Базовое взаимодействие с окружающим миром: например потушить огонь на себе или союзнике, сделать проверку умения, толкнуть речь (что-то большее чем пара слов в бою, но не поэма), достать предмет из сумки и так далее по решению мастера.",
+        "key": "maneuver_interact",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 1,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_interact",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "CV2WKZ2TBH4ps6UP",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_interact.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.CV2WKZ2TBH4ps6UP"
+    },
+    {
+      "name": "Блок",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж тратит от 1 до 5 ОД и получает столько же очков к Блоку до начала своего следующего хода.</p>",
+        "key": "maneuver_block",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 1,
+        "is_variable_cost": true,
+        "variable_cost_max": 5,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": true,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "req_weapon_keys": [
+          ""
+        ],
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_block",
+          "folder": "Basic",
+          "isFavorite": false
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "Hiw7aROC6hGupq7P",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_block.svg",
+      "effects": [
+        {
+          "name": "Блок",
+          "origin": "Compendium.dedrel.maneuvers.Item.yJSvbNa53M5N7lrv",
+          "_id": "fdMU9e7VZ1mdQtNH",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_block.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.block",
+                "type": "add",
+                "value": "@spentAp",
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.Hiw7aROC6hGupq7P.fdMU9e7VZ1mdQtNH"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.Hiw7aROC6hGupq7P"
+    },
+    {
+      "name": "Выпад",
+      "type": "maneuver",
+      "system": {
+        "description": "Атака колющим оружием ближнего боя,",
+        "key": "maneuver_thrust",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "maneuver_preemptive_thrust",
+          "maneuver_riposte",
+          "maneuver_attack_of_opportunity",
+          "maneuver_rage",
+          "maneuver_feint_attack"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": true,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Колющее оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "@weapon.damage_formulas.piercing",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "req_weapon_keys": [
+          ""
+        ],
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_thrust",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "N50IzaUUZYyo0cEz",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_thrust.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.N50IzaUUZYyo0cEz"
+    },
+    {
+      "name": "Выстрел из арбалета",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Выстрел из арбалета</p>",
+        "key": "maneuver_crossbow_shot",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "Прицеливание дальнобойным оружием",
+        "chain_trigger_maneuvers": [
+          "maneuver_take_ranged_aim",
+          "maneuver_flying_shot",
+          "maneuver_mobile_marksman"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "crossbows",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "req_weapon_keys": [
+          "crossbow"
+        ],
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_crossbow_shot",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "VKHINxJIEGVWtNnl",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_crossbow_shot.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.VKHINxJIEGVWtNnl"
+    },
+    {
+      "name": "Выстрел из лука",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Выстрел из лука</p>",
+        "key": "maneuver_bow_shot",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "Прицеливание дальнобойным оружием",
+        "chain_trigger_maneuvers": [
+          "maneuver_armor_piersing_shot",
+          "maneuver_take_ranged_aim",
+          "maneuver_flying_shot",
+          "maneuver_mobile_marksman"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "bows",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Лук",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_bow_shot",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "AOcLNAClAg0OkDr8",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bow_shot.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.AOcLNAClAg0OkDr8"
+    },
+    {
+      "name": "Выстрел из огнестрела",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Выстрел из огнестрельного оружия.</p>",
+        "key": "maneuver_firearm_shot",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "Прицеливание дальнобойным оружием",
+        "chain_trigger_maneuvers": [
+          "maneuver_take_ranged_aim",
+          "maneuver_flying_shot",
+          "maneuver_mobile_marksman"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "firearms",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Огнестрел",
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_firearme_shot",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "FqkBiEuSvufN3dFx",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_firearm_shot.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977626,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.FqkBiEuSvufN3dFx"
+    },
+    {
+      "name": "Метнуть",
+      "type": "maneuver",
+      "system": {
+        "description": "Метнуть метательное оружие",
+        "key": "maneuver_trow",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "Прицеливание дальнобойным оружием",
+        "chain_trigger_maneuvers": [
+          "maneuver_take_ranged_aim",
+          "maneuver_flying_shot",
+          "maneuver_mobile_marksman"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Метательное оружие",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_trow",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "eaSwz3ImlpelovIm",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_trow.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.eaSwz3ImlpelovIm"
+    },
+    {
+      "name": "Ответная атака",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Если по персонажу была проведена успешная атака ближнего боя (не важно, нанесла ли она урон), используя этот манёвр, он может сразу без дополнительной траты ОД провести Выпад, Взмах или Удар.</p>",
+        "key": "maneuver_riposte",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 3,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "Grant_Free_Attack",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_riposte",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "I9pmZVp9zvvle43v",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+      "effects": [
+        {
+          "name": "Ответная атака",
+          "origin": "Compendium.dedrel.maneuvers.Item.vMmgn6eWaoidERxE",
+          "_id": "AocBKvLEPiiN0ENU",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:melee",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.I9pmZVp9zvvle43v.AocBKvLEPiiN0ENU"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.I9pmZVp9zvvle43v"
+    },
+    {
+      "name": "Перезарядка",
+      "type": "maneuver",
+      "system": {
+        "description": "Если оружие обладает перезарядкой, этот манёвр позволяет его перезарядить.",
+        "key": "maneuver_reload",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "Воткнуть Бердыш, Выстрел из огнестрела, Выстрел из арбалета.",
+        "chain_trigger_maneuvers": [
+          "maneuver_reload",
+          "maneuver_plant_berdiche",
+          "maneuver_firearm_shot",
+          "maneuver_crossbow_shot"
+        ],
+        "ap_cost": 1,
+        "is_variable_cost": true,
+        "variable_cost_max": 3,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": true,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "req_weapon_keys": [
+          ""
+        ],
+        "is_reload_action": true,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_reload",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "UIKElWLQl1z3wn4E",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reload.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.UIKElWLQl1z3wn4E"
+    },
+    {
+      "name": "Прицеливание дальнобойным оружием",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж получает +2 к следующему броску атаки Выстрел из огнестрела/лука/арбалета.<br><br></p>",
+        "key": "maneuver_take_ranged_aim",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "дальнобойное оружие",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_take_ranged_aim",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "x5MUsfBhRFg8C0Hq",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_take_ranged_aim.svg",
+      "effects": [
+        {
+          "name": "Прицеливание",
+          "origin": "Compendium.dedrel.maneuvers.Item.BzvI3mTFloQgmlz3",
+          "_id": "EdMTxYcl8kaelB3Z",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_take_ranged_aim.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "add",
+                "value": "ap_set:0; filter:ranged",
+                "phase": "initial",
+                "priority": null
+              },
+              {
+                "key": "flags.dedrel.mod",
+                "type": "add",
+                "value": "attack:2; filter:ranged; consume:roll",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.x5MUsfBhRFg8C0Hq.EdMTxYcl8kaelB3Z"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.x5MUsfBhRFg8C0Hq"
+    },
+    {
+      "folder": "XnZnoRTR9lDNupHv",
+      "name": "Прочитать свиток",
+      "type": "maneuver",
+      "_id": "7M9z5hclzQLkTzup",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_read_scroll.svg",
+      "system": {
+        "description": "",
+        "key": "maneuver_read_scroll",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "",
+        "req_weapon_keys": [
+          ""
+        ],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "hide_combat_buttons": false,
+        "on_use_macro": "",
+        "is_scroll_read": true
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.7M9z5hclzQLkTzup"
+    },
+    {
+      "name": "Разорвать дистанцию",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Вы разрываете сцепку: уходите из-под чужого оружия так, что противник не успевает достать вас на отходе.</p>\n<p><strong>Эффект:</strong> вы выходите из состояния <strong>В клинче</strong>, и партнёр по клинчу не получает по вам Атаку по возможности.</p>\n<p>Само перемещение манёвром не оплачивается — оно бесплатно и тратит только метры Скорости. Этот манёвр покупает не движение, а безнаказанный выход.</p>",
+        "key": "maneuver_disengage",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_disengage",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "sqW4ofxl2m4eqcme",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_disengage.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.sqW4ofxl2m4eqcme"
+    },
+    {
+      "name": "Спрятаться за щитом",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж тратит от 1 до 5 очков действия и получает столько же очков к Блоку до начала своего следующего хода. Помимо этого, персонаж получает Малое укрытие, если это средний щит, и Большое укрытие, если это ростовой щит.<br><br><strong>Эффекты:</strong> Блок получает бонус, равный потраченным ОД, до начала следующего хода этого персонажа. Персонаж получает статус Малое укрытие/Большое укрытие</p>",
+        "key": "maneuver_hide_behind_shield",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 1,
+        "is_variable_cost": true,
+        "variable_cost_max": 5,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": true,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Экипированный щит",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "shield!",
+        "hide_combat_buttons": true,
+        "req_weapon_keys": [
+          ""
+        ],
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_hide_behind_shield",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "OS7Isr4BldSdTxM3",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
+      "effects": [
+        {
+          "name": "Спрятаться за щитом",
+          "origin": "Compendium.dedrel.maneuvers.Item.CmX5ZyeZFOVWaLZ7",
+          "_id": "uY9xsLNoxQ5BimbQ",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.block",
+                "type": "add",
+                "value": "@spentAp",
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.OS7Isr4BldSdTxM3.uY9xsLNoxQ5BimbQ"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.OS7Isr4BldSdTxM3"
+    },
+    {
+      "name": "Удар",
+      "type": "maneuver",
+      "system": {
+        "description": "Атака дробящим оружием ближнего боя",
+        "key": "maneuver_bash",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
+        "chain_trigger_maneuvers": [
+          "maneuver_riposte",
+          "maneuver_attack_of_opportunity",
+          "maneuver_rage",
+          "maneuver_power_bash"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": true,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Дробящее оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "@weapon.damage_formulas.bludgeoning",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_bash",
+          "folder": "Basic"
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "UPjWKZbfXbiyVkbL",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bash.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.UPjWKZbfXbiyVkbL"
+    },
+    {
+      "name": "Уклонение",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж тратит от 1 до 5 ОД и получает столько же очков к Уклонению до начала своего следующего хода.</p>",
+        "key": "maneuver_dodge",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 0,
+        "is_variable_cost": true,
+        "variable_cost_max": 5,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_dodge",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "folder": "XnZnoRTR9lDNupHv",
+      "_id": "OC7GeDIwyE6o638g",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+      "effects": [
+        {
+          "name": "Уклонение",
+          "origin": "Compendium.dedrel.maneuvers.Item.balrTxNEl33DGerg",
+          "_id": "Qx96tAtFyvoGA4rF",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.dodge",
+                "type": "add",
+                "value": "@spentAp",
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.OC7GeDIwyE6o638g.Qx96tAtFyvoGA4rF"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.OC7GeDIwyE6o638g"
+    },
+    {
+      "_id": "RMQvP0DmXZgqzk3A",
+      "name": "Безобразие",
+      "type": "condition",
+      "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+      "flags": {
+        "dedrel": {
+          "folder": "Врождённые",
+          "starting": true,
+          "divergence": 0,
+          "origin": [],
+          "innate": true
+        }
+      },
+      "system": {
+        "key": "mut_hideous",
+        "description": "<p>Лицо собрано неправильно, и это первое, что замечают.</p>\n<p><strong>Эффект:</strong> −2 к Убеждению и Выступлению. Вас запоминают в лицо: любая попытка остаться неузнанным в людном месте осложнена.</p>\n<p><strong>Врождённый недостаток.</strong> Берётся на создании персонажа и даёт <strong>+1 Очко Мутаций</strong> (не более двух недостатков). Постоянен: не лечится, не снимается отдыхом, не убирается за опыт и не сводится биомантией — он часть образца тела.</p>",
+        "category": "negative",
+        "is_technical": false,
+        "stackable": false,
+        "max_stacks": 1,
+        "refresh_on_stack": false,
+        "duration": {
+          "units": "permanent",
+          "value": 0
+        },
+        "expiry_events": [],
+        "application_text": "от него отводят взгляд",
+        "removal_text": "лицо стало обычным",
+        "system_flags": {},
+        "tick": {
+          "formula": "",
+          "is_heal": false,
+          "damage_type": "",
+          "trigger": "turnStart"
+        }
+      },
+      "effects": [
+        {
+          "_id": "DedrelAEFlawHide",
+          "name": "Безобразие",
+          "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+          "type": "base",
+          "transfer": true,
+          "disabled": false,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "system": {
+            "changes": [
+              {
+                "key": "system.skills.persuasion.bonus",
+                "type": "add",
+                "value": -2,
+                "phase": "apply",
+                "priority": 0
+              },
+              {
+                "key": "system.skills.performance.bonus",
+                "type": "add",
+                "value": -2,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "start": null,
+          "description": "",
+          "origin": null,
+          "tint": "#ffffff",
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.RMQvP0DmXZgqzk3A.DedrelAEFlawHide"
+        }
+      ],
+      "folder": "jxMDTJ0VPo2vcLKo",
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.RMQvP0DmXZgqzk3A"
+    },
+    {
+      "_id": "jsn3fpC4ZreOsqKH",
+      "name": "Слабость: Сила",
+      "type": "condition",
+      "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+      "flags": {
+        "dedrel": {
+          "folder": "Врождённые",
+          "starting": true,
+          "divergence": 0,
+          "origin": [],
+          "innate": true
+        }
+      },
+      "system": {
+        "key": "mut_frailty_str",
+        "description": "<p>Мышца не набирается, сколько её ни нагружай: рукоять тяжелеет к середине боя, мешок приходится тащить волоком.</p>\n<p><strong>Эффект:</strong> <strong>−1 ранг Силы</strong>. Следом проседают Блок, переносимый вес и пул ОД Манёвра.</p>\n<p><strong>Врождённый недостаток.</strong> Берётся на создании персонажа и даёт <strong>+1 Очко Мутаций</strong> (не более двух недостатков). Постоянен: не лечится, не снимается отдыхом, не убирается за опыт и не сводится биомантией — он часть образца тела.</p>",
+        "category": "negative",
+        "is_technical": false,
+        "stackable": false,
+        "max_stacks": 1,
+        "refresh_on_stack": false,
+        "duration": {
+          "units": "permanent",
+          "value": 0
+        },
+        "expiry_events": [],
+        "application_text": "мышца не держит",
+        "removal_text": "в руках появилась сила",
+        "system_flags": {},
+        "tick": {
+          "formula": "",
+          "is_heal": false,
+          "damage_type": "",
+          "trigger": "turnStart"
+        }
+      },
+      "effects": [
+        {
+          "_id": "DedrelAEFlawFStr",
+          "name": "Слабость: Сила",
+          "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+          "type": "base",
+          "transfer": true,
+          "disabled": false,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "system": {
+            "changes": [
+              {
+                "key": "system.attributes.str.rank",
+                "type": "add",
+                "value": -1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "start": null,
+          "description": "",
+          "origin": null,
+          "tint": "#ffffff",
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.jsn3fpC4ZreOsqKH.DedrelAEFlawFStr"
+        }
+      ],
+      "folder": "jxMDTJ0VPo2vcLKo",
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.jsn3fpC4ZreOsqKH"
+    },
+    {
+      "name": "Темновидение (демон)",
+      "type": "mutation",
+      "system": {
+        "description": "<p>Позволяет видеть в 12 метрах в полной темноте.</p>",
+        "key": "demon_darkvision",
+        "mutation_type": "useful",
+        "starting": true,
+        "subtype": "passive",
+        "xp_cost": 2,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [
+          "Demon",
+          "2"
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "on_add_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "demon_darkvision",
+          "folder": "Demon/Rank 2"
+        }
+      },
+      "folder": "2MZFduZCKe2h2HFt",
+      "_id": "nffb2Y41WEjLeyMh",
+      "img": "systems/dedrel/assets/icons/items/mutation.svg",
+      "effects": [
+        {
+          "name": "Темновидение",
+          "origin": "Compendium.dedrel.mutations.Item.ZhVrk3bsnSxU1SL7",
+          "_id": "sMhUZhsXS2qbIGtb",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.senses.darkvision",
+                "type": "override",
+                "value": 6,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.368",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1792453977641,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.nffb2Y41WEjLeyMh.sMhUZhsXS2qbIGtb"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.nffb2Y41WEjLeyMh"
+    },
+    {
+      "name": "Гибкость",
+      "type": "mutation",
+      "system": {
+        "description": "<p>+2 к Уклонению.<br></p>",
+        "key": "elf_flexibility",
+        "mutation_type": "useful",
+        "starting": true,
+        "subtype": "passive",
+        "xp_cost": 3,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [
+          "Elf",
+          "3"
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "on_add_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "elf_flexibility",
+          "folder": "Elf/Rank 3"
+        }
+      },
+      "folder": "MiJdmVBFmewG7U7P",
+      "_id": "0KRSxMgyKkdKFeHR",
+      "img": "systems/dedrel/assets/icons/items/mutation.svg",
+      "effects": [
+        {
+          "name": "Гибкость",
+          "origin": "Compendium.dedrel.mutations.Item.v4PyXGnI44EVrpOf",
+          "_id": "2tMCDi1xGOXa9DMX",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.dodge",
+                "type": "add",
+                "value": 2,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.0KRSxMgyKkdKFeHR.2tMCDi1xGOXa9DMX"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.0KRSxMgyKkdKFeHR"
+    },
+    {
+      "folder": "vUzPEY8eiVeskxMb",
+      "name": "Снайперский выстрел",
+      "type": "talent",
+      "_id": "xzJn9FVK3CSjoyDJ",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "system": {
+        "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.zdHgW5kc1fzEGuVL]{Снайперский выстрел}</p><p>Мушкет или арбалет</p><p>До цели должно быть не меньше 20м.</p><p>Атака с бонусом +2.</p><p>Вы выбираете зону поражения: Руки, Торс, Ноги, Голова. Если атака нанесла хотя бы 5 единиц урона (после DR), цель получает травму.  </p>",
+        "key": "sniper_shot",
+        "subtype": "passive",
+        "xp_cost": 3,
+        "has_situational_bonus": false,
+        "prerequisites_text": "@attributes.dex.rank 2; @attributes.log.rank 3 | @attributes.int.rank 3",
+        "prerequisites_attributes": [
+          "@attributes.dex.rank 2",
+          "@attributes.log.rank 3 | @attributes.int.rank 3"
+        ],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          "maneuver_sniper_shot"
+        ],
+        "formula_heal": "",
+        "on_add_macro": "",
+        "on_use_macro": "",
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "xpPaid": 3
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.xzJn9FVK3CSjoyDJ"
+    },
+    {
+      "folder": "DlcSShmSgt4MdBFH",
+      "name": "Снайперский выстрел",
+      "type": "maneuver",
+      "_id": "heNXyyAohNw491UQ",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_sniper_shot.svg",
+      "system": {
+        "description": "<p>Мушкет или арбалет</p><p>До цели должно быть не меньше 20м.</p><p>Атака с бонусом +2.</p><p>Вы выбираете зону поражения: Руки, Торс, Ноги, Голова. Если атака нанесла хотя бы 5 единиц урона (после DR), цель получает травму.  </p>",
+        "key": "maneuver_sniper_shot",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [
+          "musket, crossbow,"
+        ],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [
+          "sniper_shot"
+        ],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "skill": "",
+        "attack_bonus": 2,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "hide_combat_buttons": false,
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "parentItemId": "xzJn9FVK3CSjoyDJ",
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.heNXyyAohNw491UQ"
+    },
+    {
+      "name": "Скользящий шаг",
+      "type": "talent",
+      "system": {
+        "description": "<p>После того как по вам не попали по Уклонению, вы можете в качестве реакции совершить @UUID[Compendium.dedrel.maneuvers.Item.COx23vBpriCHVVLO]{Разорвать дистанцию}.</p>",
+        "key": "sliding_step",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "prerequisites_text": "@attributes.dex.rank 1",
+        "prerequisites_attributes": [
+          "@attributes.dex.rank 1"
+        ],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "on_add_macro": "",
+        "on_use_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "sliding_step",
+          "folder": "DEX/Rank 1",
+          "xpPaid": 1
+        }
+      },
+      "folder": "DmqEVFeXYycHWn2C",
+      "_id": "8AauvOCKiKImDOwc",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.8AauvOCKiKImDOwc"
+    },
+    {
+      "name": "Ответный выстрел",
+      "type": "talent",
+      "system": {
+        "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.VPXOjhExSbvL2VvW]{Ответный выстрел}</p><p>Когда по вам проведена атака дальнего боя (удачная или нет), вы можете отреагировать проведя ответный выстрел (у вас должно быть экипировано оружие дальнего боя)</p>",
+        "key": "ranged_riposte",
+        "subtype": "passive",
+        "xp_cost": 2,
+        "prerequisites_text": "@attributes.rea.rank 2",
+        "prerequisites_attributes": [
+          "@attributes.rea.rank 2"
+        ],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          "maneuver_ranged_riposte"
+        ],
+        "on_add_macro": "",
+        "on_use_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "ranged_riposte",
+          "folder": "REA/Rank 2",
+          "xpPaid": 2
+        }
+      },
+      "folder": "cWxZXyrDvbYPGxyI",
+      "_id": "AbVGczUhHYAM3XpR",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.AbVGczUhHYAM3XpR"
+    },
+    {
+      "name": "Ответный выстрел",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Когда по вам проведена атака дальнего боя (удачная или нет), вы можете отреагировать проведя ответный выстрел (у вас должно быть экипировано оружие дальнего боя)</p>",
+        "key": "maneuver_ranged_riposte",
+        "source": "talent",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 3,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [
+          "ranged_riposte"
+        ],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_ranged_riposte",
+          "folder": "Talent",
+          "parentItemId": "AbVGczUhHYAM3XpR",
+          "isFavorite": true
+        }
+      },
+      "folder": "XSYMZBJ9q1vllJ79",
+      "_id": "u3efecDtpNB8XBiA",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_ranged_riposte.svg",
+      "effects": [
+        {
+          "name": "Ответный выстрел",
+          "origin": "Compendium.dedrel.maneuvers.Item.VPXOjhExSbvL2VvW",
+          "_id": "upUaq3rGXFRpIzKx",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_ranged_riposte.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:ranged",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.u3efecDtpNB8XBiA.upUaq3rGXFRpIzKx"
+        }
+      ],
+      "sort": 600000,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.u3efecDtpNB8XBiA"
+    },
+    {
+      "name": "Дозор",
+      "type": "talent",
+      "system": {
+        "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.tzVmsNDNjcSBfj9I]{Дозор}</p><p>Манёвр. Свободное действие. Вы можете выбрать один из доступных вам манёвров и задать триггер: когда маг начнёт колдовать, когда стражник попадёт в зону видимости (и т. д.). У вас должны быть ОД на целевой манёвр, он автоматически сработает когда будут выполнены условия. После использования Дозора, вы должны закончить свой ход.</p><p>Если манёвр сделает для цели невозможным выполнение действия, ОД которые она потратила не возвращаются.</p>",
+        "key": "overwatch",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "prerequisites_text": "@attributes.rea.rank 1",
+        "prerequisites_attributes": [
+          "@attributes.rea.rank 1"
+        ],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          "maneuver_overwatch"
+        ],
+        "on_add_macro": "",
+        "on_use_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "overwatch",
+          "folder": "REA/Rank 1",
+          "xpPaid": 1
+        }
+      },
+      "folder": "8Y31wJGXzC91Yxdk",
+      "_id": "llurEVBkh0zPJny2",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.llurEVBkh0zPJny2"
+    },
+    {
+      "name": "Дозор",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Манёвр. Свободное действие. Вы можете выбрать один из доступных вам манёвров и задать триггер: когда маг начнёт колдовать, когда стражник попадёт в зону видимости (и т. д.). У вас должны быть ОД на целевой манёвр, он автоматически сработает когда будут выполнены условия. После использования Дозора, вы должны закончить свой ход.</p><p>Если манёвр сделает для цели невозможным выполнение действия, ОД которые она потратила не возвращаются.</p>",
+        "key": "maneuver_overwatch",
+        "source": "talent",
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": true,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [
+          "overwatch"
+        ],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_overwatch",
+          "folder": "Talent",
+          "parentItemId": "llurEVBkh0zPJny2",
+          "isFavorite": true
+        }
+      },
+      "folder": "XSYMZBJ9q1vllJ79",
+      "_id": "zjwQJpBEwEIudrHg",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_overwatch.svg",
+      "effects": [],
+      "sort": 200000,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.zjwQJpBEwEIudrHg"
+    },
+    {
+      "_id": "EdDjlIDhGXFwDG7y",
+      "name": "Тенемантия",
+      "type": "talent",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "flags": {
+        "dedrel": {
+          "folder": "Magic/Доктрины",
+          "xpPaid": 2
+        }
+      },
+      "system": {
+        "key": "shadowmancy",
+        "description": "<p><em>Власть над тьмой, увяданием и мёртвой плотью. Дебафер: «Тень ослабляет».</em></p>\n<ul>\n<li><strong>Урон:</strong> некротический (necrotic), ступени II–VI.</li>\n<li><strong>Только таргетно:</strong> Области (конус, площадь, линия) запрещены.</li>\n<li><strong>Сродство:</strong> −1 ОД на «Длительность» — проклятия висят.</li>\n<li><strong>Ограничение:</strong> +1 ОД на «Урон».</li>\n<li><strong>Доктринный Модификатор:</strong> полный каталог «Силы» — фирменный инструмент доктрины.</li>\n<li><strong>Источник:</strong> трупы и тьма. Кладбище и катакомбы — изобильный источник, поле боя со свежими трупами — «есть источник».</li>\n</ul>\n<p><em>Доктрина в черновой версии — механика может измениться по итогам плейтестов.</em></p>",
+        "subtype": "passive",
+        "xp_cost": 2,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "_id": "DedrelAEDoctSha1",
+          "name": "Тенемантия",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "transfer": true,
+          "disabled": false,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "system": {
+            "changes": [
+              {
+                "key": "system.doctrines.shadowmancy.unlocked",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              },
+              {
+                "key": "system.doctrines.shadowmancy.rank",
+                "type": "add",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "start": null,
+          "description": "",
+          "origin": null,
+          "tint": "#ffffff",
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.EdDjlIDhGXFwDG7y.DedrelAEDoctSha1"
+        }
+      ],
+      "folder": "dgtPCLDCgdqagcJI",
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.EdDjlIDhGXFwDG7y"
+    },
+    {
+      "folder": "1t8jseQqrV1xDfyw",
+      "name": "Техника: Внедрить",
+      "type": "talent",
+      "_id": "SlOm1i5Ee1WoLHdK",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "system": {
+        "description": "<p>Внедряет магическое свойство Доктрины в цель (объект/существо).</p>",
+        "key": "technique_imbue",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          ""
+        ],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "name": "Техника: Внедрить",
+          "origin": "Compendium.dedrel.talents.Item.nasKVRrMBtf9SELR",
+          "_id": "Dg29qElfAnb7fwPX",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.magic.techniques.imbue",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.SlOm1i5Ee1WoLHdK.Dg29qElfAnb7fwPX"
+        }
+      ],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "xpPaid": 1
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.SlOm1i5Ee1WoLHdK"
+    },
+    {
+      "folder": "1t8jseQqrV1xDfyw",
+      "name": "Техника: Создать",
+      "type": "talent",
+      "_id": "87Hd0QVCMHCCzA9a",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "system": {
+        "description": "<p>Сотворяет энергию/материю из Астрала там, где её нет. Например зажигает факел. </p>",
+        "key": "technique_create",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          ""
+        ],
+        "formula_heal": "",
+        "on_add_macro": "",
+        "on_use_macro": "",
+        "formula_temp_hp": ""
+      },
+      "effects": [
+        {
+          "name": "Техника: создать",
+          "origin": "Compendium.dedrel.talents.Item.2o6ArbA1PVQkpql1",
+          "_id": "wbAmoBxtDCtN4c3M",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.magic.techniques.create",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789582372493,
+            "modifiedTime": 1789582372493,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!DADbi2vXd60Woo8l.87Hd0QVCMHCCzA9a.wbAmoBxtDCtN4c3M"
+        }
+      ],
+      "sort": 100000,
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "xpPaid": 1
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!DADbi2vXd60Woo8l.87Hd0QVCMHCCzA9a"
+    },
+    {
+      "name": "Укреплённая шерстяная стёганка",
+      "type": "armor",
+      "_id": "Kt6kzNLYJvQrajOP",
+      "img": "systems/dedrel/assets/icons/armor_icons/common/wool_reinforced_gambeson.webp",
+      "system": {
+        "description": "",
+        "key": "wool_reinforced_gambeson",
+        "rarity": "common",
+        "equip_slot": "",
+        "base_price": 52,
+        "weight": 5,
+        "crafting": {
+          "craftable": true,
+          "discipline": "tailoring",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.4P6oYJlQFkrEdmU4",
+              "name": "Шерсть",
+              "amount": 2
+            },
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.6D7jBKh1gjKeMZOZ",
+              "name": "Шкура животного",
+              "amount": 1
+            }
+          ],
+          "markup_pct": 30,
+          "cost_price": 40,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "slot": "lower",
+        "weight_class": "light",
+        "dr": {
+          "slashing": 2,
+          "piercing": 1,
+          "bludgeoning": 3,
+          "heat": 0,
+          "cold": 1,
+          "necrotic": 0,
+          "radiant": 0,
+          "electric": 0,
+          "sonic": 0,
+          "acid": 0
+        },
+        "modifiers": {
+          "dodge": 0,
+          "block": 0,
+          "stealth": 0,
+          "ranged_attack": 0,
+          "magic_attack": 0,
+          "movement": 0
+        },
+        "properties": {
+          "exclusive_slot": true,
+          "rigid": false,
+          "loud": false,
+          "encumbering": false,
+          "weak_point_protection": false,
+          "deflecting": 0,
+          "cohesion": 0,
+          "light_layers_only": false
+        },
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_heal": "",
+        "on_use_macro": "",
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "equipped": false,
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.Kt6kzNLYJvQrajOP"
+    },
+    {
+      "name": "Железный мушкет",
+      "type": "weapon",
+      "_id": "o5L7bwTI5XaecZtv",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_musket.webp",
+      "system": {
+        "description": "",
+        "key": "iron_musket",
+        "rarity": "common",
+        "weight": 5,
+        "base_price": 88,
+        "crafting": {
+          "craftable": true,
+          "discipline": "engineering",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+              "name": "Железо",
+              "amount": 3
+            },
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.fuj9kZHEipYrDKJB",
+              "name": "Бронза",
+              "amount": 1
+            }
+          ],
+          "markup_pct": 150,
+          "cost_price": 35,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "damage_type": {
+          "piercing": true,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "skill": "firearms",
+        "damage_formula": "",
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "2d8",
+          "bludgeoning": ""
+        },
+        "formula_heal": "",
+        "equipped": true,
+        "range": "",
+        "properties": {
+          "natural": false,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "control_zone": 0,
+        "armor_piercing": 2,
+        "vs_creature": {
+          "beast": 0,
+          "magical_beast": 0,
+          "elemental": 0,
+          "spirit": 0,
+          "shade": 0,
+          "demon": 0,
+          "dragon": 0,
+          "elf": 0,
+          "undead": 0,
+          "cosmic": 0,
+          "construct": 0,
+          "fay": 0
+        },
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": true,
+        "is_thrown": false,
+        "is_reloading": true,
+        "is_variable_grip": false,
+        "is_paired": false,
+        "reload_cost": 2,
+        "formula_temp_hp": "",
+        "cleaving": 0,
+        "deflecting": 0,
+        "bypass_creature": {},
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false
+      },
+      "effects": [],
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.o5L7bwTI5XaecZtv"
+    },
+    {
+      "name": "Железная рапира",
+      "type": "weapon",
+      "_id": "LaH8sPT1mB3TtwXN",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_rapier.webp",
+      "system": {
+        "description": "",
+        "key": "iron_rapier",
+        "rarity": "common",
+        "weight": 1.2,
+        "base_price": 30,
+        "crafting": {
+          "craftable": true,
+          "discipline": "smithing",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+              "name": "Железо",
+              "amount": 2
+            }
+          ],
+          "markup_pct": 50,
+          "cost_price": 20,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "damage_type": {
+          "piercing": true,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "skill": "bladed_weapons",
+        "damage_formula": "",
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "2d6",
+          "bludgeoning": ""
+        },
+        "formula_heal": "",
+        "equipped": false,
+        "range": "",
+        "properties": {
+          "natural": false,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "control_zone": 1,
+        "armor_piercing": 0,
+        "vs_creature": {
+          "beast": 0,
+          "magical_beast": 0,
+          "elemental": 0,
+          "spirit": 0,
+          "shade": 0,
+          "demon": 0,
+          "dragon": 0,
+          "elf": 0,
+          "undead": 0,
+          "cosmic": 0,
+          "construct": 0,
+          "fay": 0
+        },
+        "is_auxiliary": false,
+        "is_fast": true,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "is_variable_grip": false,
+        "is_paired": false,
+        "formula_temp_hp": "",
+        "cleaving": 0,
+        "deflecting": 0,
+        "bypass_creature": {},
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false
+      },
+      "effects": [],
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977627,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.LaH8sPT1mB3TtwXN"
+    },
+    {
+      "name": "Железный заряд",
+      "type": "ammunition",
+      "_id": "Zt9f9cLlMevA4pFt",
+      "img": "systems/dedrel/assets/icons/items/ammunition.svg",
+      "system": {
+        "description": "",
+        "key": "iron_shot",
+        "rarity": "common",
+        "weight": 0.05,
+        "base_price": 148,
+        "crafting": {
+          "craftable": true,
+          "discipline": "engineering",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.6UL6xnBIR9MyfLty",
+              "name": "Порох",
+              "amount": 1
+            },
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+              "name": "Железо",
+              "amount": 1
+            }
+          ],
+          "markup_pct": 50,
+          "cost_price": 98.5,
+          "output_quantity": 2,
+          "time_override": 0
+        },
+        "ammo_type": "shot",
+        "quantity": 20,
+        "stackable": true,
+        "armor_piercing": 1,
+        "damage_bonus": "",
+        "damage_bonus_type": "",
+        "vs_creature": {
+          "beast": 0,
+          "magical_beast": 0,
+          "elemental": 0,
+          "spirit": 0,
+          "shade": 0,
+          "demon": 0,
+          "dragon": 0,
+          "elf": 0,
+          "undead": 0,
+          "cosmic": 0,
+          "construct": 0,
+          "fay": 0
+        },
+        "recovery_chance": null
+      },
+      "effects": [],
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977628,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.Zt9f9cLlMevA4pFt"
+    },
+    {
+      "name": "Дубовая волшебная палочка",
+      "type": "weapon",
+      "_id": "tTddxCLwqdMQLXFL",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/oak_magic_wand.jpeg",
+      "system": {
+        "description": "",
+        "key": "oak_magic_wand",
+        "rarity": "common",
+        "weight": 0.3,
+        "base_price": 45,
+        "crafting": {
+          "craftable": true,
+          "discipline": "carpentry",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.VQ0r2aCvo4Q8aF4S",
+              "name": "Дуб",
+              "amount": 1
+            },
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.FZe96pNTEe02hU14",
+              "name": "Бирюза",
+              "amount": 1
+            }
+          ],
+          "markup_pct": 50,
+          "cost_price": 30,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "skill": "magical_attacks",
+        "damage_formula": "",
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "",
+          "bludgeoning": ""
+        },
+        "formula_heal": "",
+        "equipped": false,
+        "range": "",
+        "properties": {
+          "natural": false,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "control_zone": 0,
+        "armor_piercing": 0,
+        "cleaving": 0,
+        "deflecting": 0,
+        "vs_creature": {
+          "beast": 0,
+          "magical_beast": 0,
+          "elemental": 0,
+          "spirit": 0,
+          "shade": 0,
+          "demon": 0,
+          "dragon": 0,
+          "elf": 0,
+          "undead": 0,
+          "cosmic": 0,
+          "construct": 0,
+          "fay": 0
+        },
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false,
+        "is_variable_grip": false,
+        "is_paired": false,
+        "formula_temp_hp": "",
+        "bypass_creature": {}
+      },
+      "effects": [],
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977628,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.tTddxCLwqdMQLXFL"
+    },
+    {
+      "name": "Могильный хлад",
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "doctrine": "shadowmancy",
+        "doctrine_rank_req": 1,
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [
+          "imbue"
+        ],
+        "chosen_modifiers": [
+          {
+            "key": "damage",
+            "rank": 1,
+            "ap": 2,
+            "option": ""
+          },
+          {
+            "key": "range",
+            "rank": 1,
+            "ap": 1,
+            "option": ""
+          }
+        ],
+        "total_cost_breakdown": "Imbue/Infuse [1] + Damage 1 [1+1=2] + Range 1 [1] = 4 AP",
+        "ap_cost": 4,
+        "skill": "magical_attacks",
+        "attack_bonus": 0,
+        "action_type": {
+          "action": true,
+          "chain": false,
+          "reaction": false,
+          "free": false
+        },
+        "target_type": "creature",
+        "target_range": "2",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "formula_attack": "",
+        "formula_damage": "2d4[necrotic]",
+        "formula_heal": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "description": "<p><em>Imbue/Infuse [1] + Damage 1 [1+1=2] + Range 1 [1] = 4 AP</em></p><p>Source Scale: No Source</p>",
+        "key": "",
+        "source": "basic",
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "is_fixed": false,
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "_id": "JiP2enRDXgljqxcp",
+      "flags": {
+        "dedrel": {
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.JiP2enRDXgljqxcp"
+    },
+    {
+      "name": "Теневое копьё",
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "doctrine": "shadowmancy",
+        "doctrine_rank_req": 2,
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [
+          "imbue"
+        ],
+        "chosen_modifiers": [
+          {
+            "key": "range",
+            "rank": 2,
+            "ap": 2,
+            "option": ""
+          },
+          {
+            "key": "damage",
+            "rank": 2,
+            "ap": 3,
+            "option": ""
+          }
+        ],
+        "total_cost_breakdown": "Imbue/Infuse [1] + Range 2 [2] + Damage 2 [2+1=3] = 6 AP",
+        "ap_cost": 6,
+        "skill": "magical_attacks",
+        "attack_bonus": 0,
+        "action_type": {
+          "action": true,
+          "chain": false,
+          "reaction": false,
+          "free": false
+        },
+        "target_type": "creature",
+        "target_range": "10",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "formula_attack": "",
+        "formula_damage": "2d6[necrotic]",
+        "formula_heal": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "description": "<p><em>Imbue/Infuse [1] + Range 2 [2] + Damage 2 [2+1=3] = 6 AP</em></p><p>Source Scale: No Source</p>",
+        "key": "",
+        "source": "basic",
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "is_fixed": false,
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "_id": "pyZMmXqOJy5L3cQB",
+      "flags": {
+        "dedrel": {
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.pyZMmXqOJy5L3cQB"
+    },
+    {
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "source": "basic",
+        "doctrine": "shadowmancy",
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [],
+        "chosen_modifiers": [],
+        "total_cost_breakdown": "",
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "uses_value": 1,
+        "uses_max": "1",
+        "uses_per": "long_rest",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "25%",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "target_type": "creature",
+        "target_range": "2",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "on_use_macro": "",
+        "key": "shadow_false_life",
+        "doctrine_rank_req": 2,
+        "description": "<p><em>Длинный каст. Ранг Доктрины 2. Время: 1 час. Компонент: свежий труп не старше суток.</em></p>\n<p class=\"hint\">Только вне боя. ОД не тратит. Один длинный каст между долгими отдыхами. Требует магического фокуса.</p>\n<p>Маг снимает с мертвеца мясо и вгоняет его в цель. Труп расходуется целиком — остаются кожа и кости. Раны затягиваются серым, чужим; швы не совпадают по цвету.</p>\n<ul>\n<li>Цель получает временные хиты — <strong>25% от своего максимума ХП</strong>. Держатся до долгого отдыха.</li>\n<li><strong>Мёртвая плоть не лечится.</strong> Пока Ложная жизнь висит, цель <strong>не восстанавливает хиты никаким способом</strong> — ни Биомантией, ни зельями, ни проверкой Лечения, ни отдыхом.</li>\n<li>Снять досрочно — вскрыть швы: Взаимодействие с проверкой Лечения. Временные хиты при этом пропадают целиком.</li>\n</ul>\n<p><strong>Цена.</strong> Цель выглядит как живой мертвец: землистая кожа, трупный запах.</p>\n<p class=\"hint\">Наложите на цель состояние «Ложная жизнь» — запрет лечения не автоматизирован и держится Мастером.</p>",
+        "is_fixed": true
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Тенемантия/Длинные касты"
+        }
+      },
+      "_id": "DedrelSpShadFLif",
+      "name": "Ложная жизнь",
+      "effects": [],
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1792453977628,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.DedrelSpShadFLif"
+    },
+    {
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "source": "basic",
+        "doctrine": "shadowmancy",
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [],
+        "chosen_modifiers": [],
+        "total_cost_breakdown": "",
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "uses_value": 1,
+        "uses_max": "1",
+        "uses_per": "long_rest",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "target_type": "creature",
+        "target_range": "2",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "on_use_macro": "",
+        "key": "shadow_dead_tongue",
+        "doctrine_rank_req": 1,
+        "description": "<p><em>Длинный каст. Ранг Доктрины 1. Время: 1 час. Компонент: труп не старше [Ранг Доктрины] суток.</em></p>\n<p class=\"hint\">Только вне боя. ОД не тратит. Один длинный каст между долгими отдыхами. Требует магического фокуса.</p>\n<p>Тенемант вскрывает мертвецу рот, надрезает себе ладонь и кладёт её на язык покойника. Труп говорит — голосом мага, шевеля чужой челюстью.</p>\n<ul>\n<li>Труп отвечает на <strong>[Ранг Доктрины] вопросов</strong>.</li>\n<li>Он знает только то, что знал при жизни и видел своими глазами. О том, что случилось после его смерти, он не знает <strong>ничего</strong>.</li>\n<li>Он не догадывается и не истолковывает — отвечает буквально.</li>\n<li>Характер сохраняется: лжец лжёт, упрямец отмалчивается, дурак путается.</li>\n</ul>\n<p><strong>Мертвец отвечает один раз навсегда.</strong> Второй раз этот труп не заговорит — ни для этого мага, ни для любого другого. Тело — расходник.</p>\n<p><strong>Цена.</strong> Сутки маг чувствует во рту вкус того, чем труп питался в последний день своей жизни. До долгого отдыха: <strong>−2</strong> к Убеждению и Выступлению.</p>",
+        "is_fixed": true
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Тенемантия/Длинные касты"
+        }
+      },
+      "_id": "DedrelSpShadTong",
+      "name": "Мёртвый язык",
+      "effects": [],
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.DedrelSpShadTong"
+    },
+    {
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "source": "basic",
+        "doctrine": "shadowmancy",
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [],
+        "chosen_modifiers": [],
+        "total_cost_breakdown": "",
+        "ap_cost": 0,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "uses_value": 1,
+        "uses_max": "1",
+        "uses_per": "long_rest",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "will",
+        "save_dc_formula": "12",
+        "forbidden_defense": "",
+        "target_type": "creature",
+        "target_range": "2",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "on_use_macro": "",
+        "key": "shadow_severed_shade",
+        "doctrine_rank_req": 2,
+        "description": "<p><em>Длинный каст. Ранг Доктрины 2. Время: 1 час. Компонент: труп либо место, где кто-то умер.</em></p>\n<p class=\"hint\">Только вне боя. ОД не тратит. Один длинный каст между долгими отдыхами. Требует магического фокуса.</p>\n<p>Маг обводит ножом контур тела на земле и срезает тень с места, как шкуру. Она безголоса и безвольна — и узнаваема: это тень <strong>конкретного покойника</strong>, с его силуэтом, горбом, хромотой.</p>\n<p>Держится <strong>[Ранг Доктрины] &times; 10 минут</strong> либо до рассвета — что наступит раньше.</p>\n<p><strong>Режим выбирается при сотворении, один на каст:</strong></p>\n<ul>\n<li><strong>Разведка.</strong> Маг видит и слышит тем, что видит тень. Она уходит на [Ранг Доктрины] &times; 20 метров, проходит везде, где прошёл бы человек, но не открывает дверей и не трогает предметов. Пока маг смотрит её глазами, он <strong>слеп и глух к собственному телу</strong> и лежит там, где лёг.</li>\n<li><strong>Явление.</strong> Тень встаёт перед выбранной целью. Спасбросок Воли, Сложность 8 + 2 &times; Ранг Доктрины. Провал — <strong>Страх</strong>; на Ранге Доктрины 4 и выше — <strong>Ужас</strong>.</li>\n<li><strong>Отвлечение.</strong> Тень шумит и мелькает в стороне. Всё, что могло её заметить, смотрит туда [Ранг Доктрины] раундов: группа получает +[Ранг Доктрины] к одной проверке Скрытности либо проходит мимо поста без броска — решает Мастер.</li>\n</ul>\n<p><strong>Цена.</strong> Тень слушается неточно. Один раз за каст Мастер вправе дать ей сделать что-то по-своему — то, что при жизни делал покойник. И она узнаваема: если тень увидит тот, кто знал умершего, у этого будут последствия.</p>",
+        "is_fixed": true
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Тенемантия/Длинные касты"
+        }
+      },
+      "_id": "DedrelSpShadShde",
+      "name": "Срезанная тень",
+      "effects": [],
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789582372493,
+        "modifiedTime": 1789582372493,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!DADbi2vXd60Woo8l.DedrelSpShadShde"
+    }
+  ],
+  "effects": [],
+  "folder": "cPRsYhnfiujR69O4",
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {
+    "dedrel": {
+      "itemsLocked": false,
+      "showCreation": true,
+      "creationLocked": true,
+      "total_xp": 15,
+      "favoriteSkills": [
+        "firearms",
+        "stealth",
+        "thievery",
+        "engineering",
+        "perception"
+      ]
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789582372493,
+    "modifiedTime": 1789773788814,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 0,
+  "_key": "!actors!DADbi2vXd60Woo8l"
+}

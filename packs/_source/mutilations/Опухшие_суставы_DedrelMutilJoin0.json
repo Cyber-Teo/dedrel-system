@@ -1,0 +1,105 @@
+{
+  "_id": "DedrelMutilJoin0",
+  "name": "Опухшие суставы",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/conditions/mut_swollen_joints.svg",
+  "system": {
+    "description": "<p><em>Увечье 3 ранга. Биомантия, Модификатор «Адаптация». Держится Ранг Доктрины раундов (по умолчанию 3).</em></p><p>Колени и щиколотки раздувает, сустав ходит с хрустом и болью.</p><p><strong>Эффект:</strong> Скорость вдвое меньше.</p><p><strong>Снятие:</strong> увечья, наложенные Биомантией, <strong>не лечатся зельями</strong> и не проходят на отдыхе. Снимаются только лечащей магией самой Биомантии либо рассеиванием (доктрина-диспеллер пока не определена — заглушка).</p>",
+    "key": "mut_swollen_joints",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "суставы вздулись",
+    "removal_text": "опухоль спала",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    },
+    "refresh_on_stack": false
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEMutJnt10",
+      "name": "Опухшие суставы",
+      "img": "icons/svg/leg.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "system": {
+        "changes": [
+          {
+            "phase": "apply",
+            "priority": 0,
+            "key": "system.resources.movement.max",
+            "type": "multiply",
+            "value": 0.5
+          }
+        ]
+      },
+      "statuses": [],
+      "flags": {},
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789074996635,
+        "modifiedTime": 1789074996635,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelMutilJoin0.DedrelAEMutJnt10"
+    }
+  ],
+  "flags": {
+    "dedrel": {
+      "folder": "",
+      "rank": 3,
+      "divergence": 1,
+      "origin": []
+    }
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789074996635,
+    "modifiedTime": 1789326360545,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelMutilJoin0"
+}

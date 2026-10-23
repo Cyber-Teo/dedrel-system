@@ -1,0 +1,90 @@
+{
+  "name": "Мир на моей стороне",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Свободное действие. До конца раунда окружающие предметы и среда действуют в вашу пользу: механизм заклинивает, верёвка рвётся, камень укатывается. Мастер воплощает эффект исходя из контекста. Нельзя нанести урон или состояния напрямую — только изменить обстановку.</p>",
+    "key": "maneuver_world_favors_me",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 5,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "world_favors_me"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_world_favors_me",
+      "folder": "Talent"
+    }
+  },
+  "folder": "tRmdFAXyMwraGyI7",
+  "_id": "Gkn4UxC4PlG46Fal",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_world_favors_me.svg",
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024586,
+    "modifiedTime": 1784855818406,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Gkn4UxC4PlG46Fal"
+}

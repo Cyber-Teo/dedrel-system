@@ -1,0 +1,70 @@
+{
+  "name": "Флакон кислоты",
+  "type": "potion",
+  "_id": "jAb4VzPiRdKc3OSk",
+  "img": "systems/dedrel/assets/icons/items/potion.svg",
+  "system": {
+    "description": "",
+    "key": "potion_acid",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 17,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.wvfIec45OF2zsqcY",
+          "name": "Железа кислотного жвальника",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.le8FG2uuAJen8dTD",
+          "name": "Склянка",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 11,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "effect_description": "",
+    "consumable": true,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790036594100,
+    "modifiedTime": 1792453976996,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jAb4VzPiRdKc3OSk"
+}

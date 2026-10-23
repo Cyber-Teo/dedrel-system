@@ -1,0 +1,78 @@
+{
+  "name": "Кольцо мечника",
+  "type": "magic_item",
+  "_id": "VN0xKc2wX9TeUg3T",
+  "img": "systems/dedrel/assets/icons/items/magic_item.svg",
+  "system": {
+    "description": "<p>Узкое кольцо с полоской воронёной стали по ободу — такие носят те, кому клинок нужнее кошеля.</p><p><b>Всегда.</b> Обнажить или убрать клинковое оружие вы можете бесплатно: отдельного «Взаимодействия» на это не тратится.</p><p><b>1 раз за короткий отдых, реакция, 0 ОД — «Клинок помнит руку».</b> Ваше клинковое оружие прыгает вам в ладонь с расстояния до 9 метров: из ножен, из грязи под ногами, из чужой руки. Если вы теряете клинок прямо сейчас (критический провал, чужой эффект, обезоруживание) — он не выпадает вовсе.</p><p><i>Магвещь обычного тира чисел к броскам не даёт — см. 15. Inventory §Магические вещи.</i></p>",
+    "key": "mi_swordsman_ring",
+    "rarity": "common",
+    "weight": 0,
+    "base_price": 68,
+    "crafting": {
+      "craftable": true,
+      "discipline": "jewelry",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Kwsf1dnLfxiELpn4",
+          "name": "Медь",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.7lt81AIJFpQBQ8Z1",
+          "name": "Яшма",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.AqlGenxcRICbuwdA",
+          "name": "Части существ (обычные)",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 45,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "equip_slot": "hand",
+    "stackable": false,
+    "consumable": false,
+    "quantity": 1,
+    "effect_description": "Призвать клинок в руку или не выронить его — 1/короткий отдых.",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 1,
+    "uses_max": "1",
+    "uses_per": "short_rest",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790037768047,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!VN0xKc2wX9TeUg3T"
+}

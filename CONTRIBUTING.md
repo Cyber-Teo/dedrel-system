@@ -30,8 +30,20 @@ pull requests, but questions and ideas in issues are always welcome.
 1. Install Foundry VTT **V14**.
 2. Clone this repository into `Data/systems/dedrel` of your Foundry user data folder.
    The folder must be named `dedrel` — it is the system id.
-3. Create a world with the Dedrel system. There is no build step: reload the world (F5)
+3. Install [Node.js](https://nodejs.org) 22 or newer, then run `npm install` and
+   `npm run build-packs` in the repository folder. Compendiums are stored as JSON in
+   `packs/_source/`; this builds the databases Foundry reads.
+4. Create a world with the Dedrel system. Code needs no build step: reload the world (F5)
    after editing a file. Changes to `system.json` need a Foundry restart.
+
+Working with compendiums:
+
+- After editing content **in Foundry**, run `npm run save-packs` — it writes the packs
+  out to `packs/_source/` — and commit the changed JSON files.
+- After the JSON changed **in files** (a `git pull`, a manual edit), stop Foundry and run
+  `npm run build-packs`.
+- `npm run packs-status` shows which side changed. Both commands refuse to overwrite
+  changes made on the other side since the last sync; `--force` overrides that.
 
 Where to start reading: [docs/README.md](docs/README.md) (in Russian for now; the
 English version is planned). [docs/architecture.md](docs/architecture.md) is the map
@@ -49,10 +61,10 @@ of the code.
   Active Effects — most V14 pitfalls are already documented there.
 - Keep pull requests small and focused. In the description say what you changed, why,
   and how you tested it in Foundry.
-- **Compendium content** is currently stored in binary LevelDB packs that can't be
-  reviewed in a diff. Until the packs move to JSON sources, please propose content
-  changes (maneuvers, talents, spells…) in an issue with the text of the change rather
-  than as an edited pack in a pull request.
+- **Compendium content** lives in `packs/_source/<pack>/`, one JSON file per document.
+  Commit only these files — the databases in `packs/<pack>/` are build output and are
+  ignored by git. For larger content changes (new maneuvers, talents, spells…) open an
+  issue first, so the mechanics can be discussed before the work is done.
 - When editing `translations/en/*.json`, keep the `_src` field untouched: it tracks which
   Russian original the translation was made from.
 
@@ -127,8 +139,21 @@ Reports and questions: [admin@teo.uy](mailto:admin@teo.uy).
 1. Установите Foundry VTT **V14**.
 2. Клонируйте репозиторий в `Data/systems/dedrel` папки пользовательских данных Foundry.
    Папка должна называться `dedrel` — это id системы.
-3. Создайте мир на системе Dedrel. Сборки нет: после правки файла перезагрузите мир (F5).
-   Изменения `system.json` требуют перезапуска Foundry.
+3. Установите [Node.js](https://nodejs.org) 22 или новее и выполните в папке репозитория
+   `npm install` и `npm run build-packs`. Компендиумы хранятся в виде JSON в `packs/_source/`,
+   команда собирает из них базы, которые читает Foundry.
+4. Создайте мир на системе Dedrel. Код сборки не требует: после правки файла перезагрузите
+   мир (F5). Изменения `system.json` требуют перезапуска Foundry.
+
+Работа с компендиумами:
+
+- Поправили контент **в Foundry** — выполните `npm run save-packs` (выгружает паки
+  в `packs/_source/`) и закоммитьте изменившиеся JSON.
+- JSON изменился **в файлах** (`git pull`, ручная правка) — остановите Foundry и выполните
+  `npm run build-packs`.
+- `npm run packs-status` показывает, какая сторона изменилась. Обе команды отказываются
+  затирать правки, сделанные на другой стороне после прошлой синхронизации; `--force`
+  снимает эту защиту.
 
 С чего начать чтение: [docs/README.md](docs/README.md), карта кода —
 [docs/architecture.md](docs/architecture.md).
@@ -145,9 +170,10 @@ Reports and questions: [admin@teo.uy](mailto:admin@teo.uy).
   [docs/foundry-v14-quirks.md](docs/foundry-v14-quirks.md): большинство ловушек V14 там уже описано.
 - Пул-реквесты — небольшие и про одно. В описании укажите, что изменено, зачем и как вы
   проверили это в Foundry.
-- **Содержимое компендиумов** сейчас хранится в бинарных паках LevelDB, их нельзя
-  проверить по diff. Пока паки не переедут на JSON-исходники, предлагайте правки контента
-  (манёвры, таланты, заклинания…) в issue с текстом правки, а не изменённым паком в пул-реквесте.
+- **Содержимое компендиумов** лежит в `packs/_source/<пак>/`, по JSON-файлу на документ.
+  Коммитьте только их: базы в `packs/<пак>/` — результат сборки, git их игнорирует.
+  Крупные правки контента (новые манёвры, таланты, заклинания…) сначала обсудите в issue,
+  чтобы договориться о механике до того, как работа сделана.
 - В `translations/en/*.json` не трогайте поле `_src`: по нему отслеживается, с какой версии
   русского оригинала сделан перевод.
 

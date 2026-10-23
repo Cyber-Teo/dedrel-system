@@ -1,0 +1,57 @@
+{
+  "folder": "c43Ztt3AFRO7s4lb",
+  "name": "Шерсть",
+  "type": "craft_material",
+  "_id": "4P6oYJlQFkrEdmU4",
+  "img": "systems/dedrel/assets/icons/materials/cloth/Wool.webp",
+  "system": {
+    "description": "",
+    "key": "wool",
+    "rarity": "common",
+    "weight": 1,
+    "base_price": 15,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "cloth",
+    "material_class": "cloth",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": true,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": [],
+    "signature": {
+      "armor": "Cold DR +1"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783696431094,
+    "modifiedTime": 1792453977032,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4P6oYJlQFkrEdmU4"
+}

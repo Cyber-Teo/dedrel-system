@@ -1,0 +1,23 @@
+{
+  "name": "Fay",
+  "type": "Item",
+  "folder": null,
+  "_id": "Hpsnng5UKc9Gl87i",
+  "description": "",
+  "sorting": "a",
+  "sort": 100000,
+  "color": "#2f0e8b",
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992934,
+    "modifiedTime": 1788662109837,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!Hpsnng5UKc9Gl87i"
+}

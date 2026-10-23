@@ -1,0 +1,47 @@
+{
+  "name": "В клинче",
+  "type": "condition",
+  "_id": "1Ed1ogtSr0oxJhd5",
+  "img": "icons/svg/combat.svg",
+  "system": {
+    "description": "<div><p>1. Если вы попытаетесь отойти от соперника с которым вы находитесь в клинче, противник сможет провести реакцию Атака по возможности.</p></div><div><p>2. Стрельба в клинч осложнена, статус даёт штраф стрелкам -2 (при критическом промахе, выстрел попадает в союзника)</p></div><div><p>3. Если вы решите совершить атаку по возможности по персонажу который пересекает вашу зону контроля, считается что вы выходите из Клинча с текущим противником и он может провести атаку по возможности по вам. </p></div><div><p>4. Персонажи В клинче могут быть целями манёвра @UUID[Compendium.dedrel.maneuvers.Item.Y8Eh46LmqB2MOoCl]{Атака с фланга}</p></div>",
+    "category": "neutral",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "permanent",
+      "value": null
+    },
+    "expiry_events": [
+      ""
+    ],
+    "application_text": "",
+    "removal_text": "больше не в клинче",
+    "is_removable_by_skill": false,
+    "skill_to_remove": "",
+    "remove_dc": 0,
+    "system_flags": {},
+    "key": "clinch"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782889847402,
+    "modifiedTime": 1784181820108,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!1Ed1ogtSr0oxJhd5"
+}

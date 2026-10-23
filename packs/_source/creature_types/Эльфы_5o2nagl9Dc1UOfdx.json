@@ -1,0 +1,30 @@
+{
+  "name": "Эльфы",
+  "type": "creature_type",
+  "_id": "5o2nagl9Dc1UOfdx",
+  "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+  "system": {
+    "key": "elf",
+    "description": "<p>NPC-раса, общих правил нет.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784805908289,
+    "modifiedTime": 1792453977470,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5o2nagl9Dc1UOfdx"
+}

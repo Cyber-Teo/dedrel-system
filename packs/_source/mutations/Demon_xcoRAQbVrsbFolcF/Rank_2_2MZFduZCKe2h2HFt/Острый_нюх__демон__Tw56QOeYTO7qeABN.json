@@ -1,0 +1,55 @@
+{
+  "name": "Острый нюх (демон)",
+  "type": "mutation",
+  "system": {
+    "description": "Персонаж получает возможность различать большое количество запахов. Даёт ситуационный бонус к проверкам навыков по решению мастера от +2 до +5.",
+    "key": "demon_keen_smell",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "narrative",
+    "xp_cost": 2,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Demon",
+      "2"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "has_situational_bonus": true,
+    "situational_trigger": "Персонаж получает возможность различать большое количество запахов. Даёт ситуационный бонус к проверкам навыков по решению мастера от +2 до +5."
+  },
+  "flags": {
+    "dedrel": {
+      "key": "demon_keen_smell",
+      "folder": "Demon/Rank 2"
+    }
+  },
+  "folder": "2MZFduZCKe2h2HFt",
+  "_id": "Tw56QOeYTO7qeABN",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992965,
+    "modifiedTime": 1792453976712,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Tw56QOeYTO7qeABN"
+}

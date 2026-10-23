@@ -1,0 +1,92 @@
+{
+  "name": "Истинное зрение",
+  "type": "mutation",
+  "system": {
+    "description": "1 раз в долгий отдых видишь истинные формы и игнорируешь невидимость (возможны нарративные бонусы).",
+    "key": "dragon_true_sight",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "active",
+    "xp_cost": 10,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Dragon",
+      "6"
+    ],
+    "uses_value": 1,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "dragon_true_sight",
+      "folder": "Dragon/Rank 6"
+    }
+  },
+  "folder": "t7LGjkmGrPa9V2I0",
+  "_id": "rCLGdHJUIAR1dwMt",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [
+    {
+      "name": "Истинное зрение",
+      "origin": "Compendium.dedrel.mutations.Item.rCLGdHJUIAR1dwMt",
+      "_id": "FRiF9g9aFSQ3Enun",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "hours",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1782874805335,
+        "modifiedTime": 1782874824445,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!rCLGdHJUIAR1dwMt.FRiF9g9aFSQ3Enun"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992968,
+    "modifiedTime": 1784855818224,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!rCLGdHJUIAR1dwMt"
+}

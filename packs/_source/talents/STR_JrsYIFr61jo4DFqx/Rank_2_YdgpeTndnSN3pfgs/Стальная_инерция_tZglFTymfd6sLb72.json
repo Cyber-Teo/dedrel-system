@@ -1,0 +1,53 @@
+{
+  "name": "Стальная инерция",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.tqM7tetp1p2BCh2u]{Стальная инерция}</p><p>Если в конце прошлого хода вы начали @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Стальной барьер} и он не сработал до начала нового хода, то в начале хода вы можете применить Стальную Инерцию: подвигайтесь на свою скорость и проведите атаку, в случае попадания, урон будет увеличен на одну ступень.</p><p>Это свободное действие и вы сможете продолжить свой ход. </p>",
+    "key": "steel_momentum",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.str.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_steel_momentum"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "steel_momentum",
+      "folder": "STR/Rank 2"
+    }
+  },
+  "folder": "YdgpeTndnSN3pfgs",
+  "_id": "tZglFTymfd6sLb72",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!tZglFTymfd6sLb72"
+}

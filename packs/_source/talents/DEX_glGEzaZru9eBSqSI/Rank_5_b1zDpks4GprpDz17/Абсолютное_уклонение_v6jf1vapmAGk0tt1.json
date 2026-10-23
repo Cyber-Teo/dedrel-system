@@ -1,0 +1,53 @@
+{
+  "name": "Абсолютное уклонение",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.PhDkTU9tfpUq6TMX]{Абсолютное уклонение}</p><p>1 раз в долгий отдых.</p><p>Вы уворачиваетесь от любой успешной атаки, первый раз в течение следующих 10 раундов. Можно использовать как реакцию.</p>",
+    "key": "absolute_evasion",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.dex.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_absolute_evasion"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "absolute_evasion",
+      "folder": "DEX/Rank 5"
+    }
+  },
+  "folder": "b1zDpks4GprpDz17",
+  "_id": "v6jf1vapmAGk0tt1",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976777,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!v6jf1vapmAGk0tt1"
+}

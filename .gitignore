@@ -1,0 +1,6 @@
+node_modules/
+
+# Compendium databases are built from the JSON in packs/_source/ (npm run build-packs).
+# Only the sources are tracked; packs/.sync-state.json is local sync bookkeeping.
+packs/*
+!packs/_source/

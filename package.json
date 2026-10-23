@@ -1,0 +1,15 @@
+{
+  "name": "dedrel",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "save-packs": "node scripts/packs.mjs save",
+    "build-packs": "node scripts/packs.mjs build",
+    "packs-status": "node scripts/packs.mjs status"
+  },
+  "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "3.0.4",
+    "classic-level": "3.0.0"
+  }
+}

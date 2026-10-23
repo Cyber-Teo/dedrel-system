@@ -1,0 +1,116 @@
+{
+  "folder": "aiD2rdcfwL54MryP",
+  "name": "Железный мушкет",
+  "type": "weapon",
+  "_id": "o5L7bwTI5XaecZtv",
+  "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_musket.webp",
+  "system": {
+    "description": "",
+    "key": "iron_musket",
+    "rarity": "common",
+    "weight": 5,
+    "base_price": 88,
+    "crafting": {
+      "craftable": true,
+      "discipline": "engineering",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+          "name": "Железо",
+          "amount": 3
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.fuj9kZHEipYrDKJB",
+          "name": "Бронза",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 150,
+      "cost_price": 35,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "weapon_type": {
+      "melee": false,
+      "ranged": true,
+      "shield": false,
+      "magic": false
+    },
+    "damage_type": {
+      "piercing": true,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "skill": "firearms",
+    "damage_formula": "",
+    "damage_formulas": {
+      "slashing": "",
+      "piercing": "2d8",
+      "bludgeoning": ""
+    },
+    "formula_heal": "",
+    "equipped": false,
+    "range": "",
+    "properties": {
+      "natural": false,
+      "armor_piercing": false,
+      "misfire_chance": 0,
+      "consumed_on_use": false,
+      "can_be_sold": false,
+      "can_be_dropped": false
+    },
+    "quantity": 1,
+    "consume_target": "",
+    "consume_amount": 1,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "on_use_macro": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "control_zone": 0,
+    "armor_piercing": 2,
+    "vs_creature": {
+      "beast": 0,
+      "magical_beast": 0,
+      "elemental": 0,
+      "spirit": 0,
+      "shade": 0,
+      "demon": 0,
+      "dragon": 0,
+      "elf": 0,
+      "undead": 0,
+      "cosmic": 0,
+      "construct": 0,
+      "fay": 0
+    },
+    "is_auxiliary": false,
+    "is_fast": false,
+    "is_slow": false,
+    "is_twohanded": true,
+    "is_thrown": false,
+    "is_reloading": true,
+    "is_variable_grip": false,
+    "is_paired": false,
+    "reload_cost": 2
+  },
+  "effects": [],
+  "sort": 2000000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784004942663,
+    "modifiedTime": 1792453976954,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!o5L7bwTI5XaecZtv"
+}

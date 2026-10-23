@@ -1,0 +1,95 @@
+{
+  "name": "Финт",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Манёвр, Быстрое оружие ближнего боя.</p><p>Сделайте проверку умения Обман против Проницательности цели. В случае успеха, цель получает статус @UUID[Compendium.dedrel.conditions.Item.CondOffGuard0001]{Сбит с толку} (статус запрещает использовать блок против следующей атаки)</p><p>В цепи вы можете нанести @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Выпад}.</p><p></p>",
+    "key": "maneuver_feint_attack",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": true,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "feint_attack"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "req_weapon_keys": [
+      ""
+    ],
+    "hide_combat_buttons": true,
+    "skill": "deception"
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_feint_attack",
+      "folder": "Talent"
+    }
+  },
+  "folder": "DlcSShmSgt4MdBFH",
+  "_id": "8mgcq7OFtffV34Jw",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_feint_attack.svg",
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024584,
+    "modifiedTime": 1789660057869,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8mgcq7OFtffV34Jw"
+}

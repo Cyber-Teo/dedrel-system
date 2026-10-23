@@ -1,0 +1,145 @@
+{
+  "name": "Спрятаться за щитом",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Персонаж тратит от 1 до 5 очков действия и получает столько же очков к Блоку до начала своего следующего хода. Помимо этого, персонаж получает Малое укрытие, если это средний щит, и Большое укрытие, если это ростовой щит.<br><br><strong>Эффекты:</strong> Блок получает бонус, равный потраченным ОД, до начала следующего хода этого персонажа. Персонаж получает статус Малое укрытие/Большое укрытие</p>",
+    "key": "maneuver_hide_behind_shield",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [
+      "any"
+    ],
+    "ap_cost": 1,
+    "is_variable_cost": true,
+    "variable_cost_max": 5,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": true
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "Экипированный щит",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "shield!",
+    "hide_combat_buttons": true,
+    "req_weapon_keys": [
+      ""
+    ]
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_hide_behind_shield",
+      "folder": "Basic"
+    }
+  },
+  "folder": "XnZnoRTR9lDNupHv",
+  "_id": "CmX5ZyeZFOVWaLZ7",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
+  "effects": [
+    {
+      "name": "Спрятаться за щитом",
+      "origin": "Compendium.dedrel.maneuvers.Item.CmX5ZyeZFOVWaLZ7",
+      "_id": "uY9xsLNoxQ5BimbQ",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.defenses.block",
+            "type": "add",
+            "value": "@spentAp",
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783235100444,
+        "modifiedTime": 1783744435289,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!CmX5ZyeZFOVWaLZ7.uY9xsLNoxQ5BimbQ"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024580,
+    "modifiedTime": 1792453976908,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!CmX5ZyeZFOVWaLZ7"
+}

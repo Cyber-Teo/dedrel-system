@@ -1,0 +1,50 @@
+{
+  "folder": "H4IEH7dBOCLnbH4K",
+  "name": "Прорубание защиты",
+  "type": "talent",
+  "_id": "jOZVuqzhuVkQzrZj",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Даёт манёвр.<br><br>Проведите атаку используя фальчион или топор против встречного броска Атлетики цели. При успехе, цель получает статус Сбит с толку (статус запрещает использовать блок против следующей атаки) против следующей атаки. </p><p>В цепи вы можете провести @UUID[Compendium.dedrel.maneuvers.Item.lHGticf7d6hKImJ6]{Взмах}.</p><p></p>",
+    "key": "sunder_block",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "has_situational_bonus": false,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_sunder_block"
+    ],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783841643861,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jOZVuqzhuVkQzrZj"
+}

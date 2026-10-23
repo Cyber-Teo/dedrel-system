@@ -1,0 +1,53 @@
+{
+  "name": "Давящее присутствие",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.wnWWCQ1EdneoDSPN]{Давящее присутствие}</p><p>Проверка CHA vs WILL цели. При успехе — [🔧 плейсхолдер: лёгкий дебаф] на 2 раунда. Нарративно: не страх, а ощущение что противник заведомо проиграл.</p>",
+    "key": "unnerving_presence",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "@attributes.cha.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.cha.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_unnerving_presence"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "unnerving_presence",
+      "folder": "CHA/Rank 3"
+    }
+  },
+  "folder": "QhU0KHAu546FTZ3N",
+  "_id": "KX8BxeL8v0oKpDX2",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!KX8BxeL8v0oKpDX2"
+}

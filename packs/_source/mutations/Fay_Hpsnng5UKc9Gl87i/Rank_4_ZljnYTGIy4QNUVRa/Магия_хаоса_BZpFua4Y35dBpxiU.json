@@ -1,0 +1,53 @@
+{
+  "name": "Магия хаоса",
+  "type": "mutation",
+  "system": {
+    "description": "Открывает доступ к доктрине Магия хаоса и даёт в ней 1 ранг.<br><br><b>On Add Macro:</b><br>Doctrines.chaos_magic.rank +1",
+    "key": "fay_chaos_magic",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_chaos_magic",
+      "folder": "Fay/Rank 4"
+    }
+  },
+  "folder": "ZljnYTGIy4QNUVRa",
+  "_id": "BZpFua4Y35dBpxiU",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784181820030,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BZpFua4Y35dBpxiU"
+}

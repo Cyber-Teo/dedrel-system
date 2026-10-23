@@ -1,0 +1,57 @@
+{
+  "name": "Золото",
+  "type": "craft_material",
+  "_id": "IziSUEHoRA7eN351",
+  "img": "systems/dedrel/assets/icons/materials/metal/Gold.webp",
+  "system": {
+    "description": "<div><p>Основа монетарной системы мира, драгоценный металл заполучить который жаждут многие. Не только из-за его цены или внешнего вида - он отлично подходит для создания мощных магических вещей.</p></div>",
+    "key": "gold",
+    "rarity": "rare",
+    "weight": 2,
+    "base_price": 500,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": true
+    },
+    "grants": [],
+    "slots": [
+      "rare"
+    ]
+  },
+  "effects": [],
+  "folder": "GDOFOWKGG9OaiugJ",
+  "sort": 101563,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783681159597,
+    "modifiedTime": 1792453977033,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!IziSUEHoRA7eN351"
+}

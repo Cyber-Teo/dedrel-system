@@ -1,0 +1,53 @@
+{
+  "name": "Шёпот камней",
+  "type": "mutation",
+  "system": {
+    "description": "Персонаж ощущает ауру окружающей природной местности и может задать мастеру до трёх вопросов о месте, где находится.\nОтветы приходят в виде образов и ощущений — например: «камни помнят, как на них лилась кровь», «скала пуста внутри», «деревья помнят яростное пламя».",
+    "key": "elf_whisper_of_stones",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "narrative",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Elf",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "elf_whisper_of_stones",
+      "folder": "Elf/Rank 4"
+    }
+  },
+  "folder": "NcZoi7f0MMVkVeDx",
+  "_id": "mE0zI8GSkShaDH7U",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992966,
+    "modifiedTime": 1784181820033,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mE0zI8GSkShaDH7U"
+}

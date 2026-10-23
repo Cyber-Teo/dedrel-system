@@ -1,0 +1,54 @@
+{
+  "folder": "PjHUG0gKgaYdl5hC",
+  "name": "Золотошерстная лиана",
+  "type": "craft_material",
+  "_id": "2soRqhlIqjXoUJxC",
+  "img": "systems/dedrel/assets/icons/materials/herb/Goldenfleece%20Vine.webp",
+  "system": {
+    "description": "<div><p>леса (джунгли). </p><p>Волосистая кора этой лианы действительно отливает золотом или бронзой с определённых углов зрения. </p></div>",
+    "key": "goldenfleece_vine",
+    "rarity": "uncommon",
+    "weight": 0.1,
+    "base_price": 50,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783693663145,
+    "modifiedTime": 1792453977032,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2soRqhlIqjXoUJxC"
+}

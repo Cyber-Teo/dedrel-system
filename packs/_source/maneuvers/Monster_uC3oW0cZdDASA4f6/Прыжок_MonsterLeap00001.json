@@ -1,0 +1,99 @@
+{
+  "_id": "MonsterLeap00001",
+  "name": "Прыжок",
+  "type": "maneuver",
+  "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_monster_leap",
+      "folder": "Monster"
+    }
+  },
+  "system": {
+    "key": "maneuver_monster_leap",
+    "source": "basic",
+    "description": "<p>Существо прыгает на <strong>до 5 м</strong> по горизонтали (до 2 м вверх), минуя всё, что между: барьеры, ямы, чужие Зоны Контроля и существ не крупнее себя. Приземляется на свободную клетку.</p>\n<p><strong>Метры прыжка не тратят запас Скорости</strong> — это и есть то, за что платятся 2 ОД: обычное движение бесплатно, но обходит препятствие по земле, а прыжок его перелетает.</p>\n<p>Покидая чужую Зону Контроля, прыжок <strong>провоцирует Атаку по возможности</strong> как любое движение: он обходит то, что на пути, а не того, кто уже вцепился.</p>\n<p><em>Кому давать: тем, у кого длинные ноги и повод их использовать — сторожевым тварям через баррикады, кошачьим на уступы, лошадиным гибридам через ров.</em></p>",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "skill": "atletism",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "target_type": "self",
+    "target_value": 0,
+    "hide_combat_buttons": true,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "is_reload_action": false,
+    "is_scroll_read": false,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_range": "",
+    "template_shape": "",
+    "template_size": 0,
+    "attack_bonus": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "folder": "uC3oW0cZdDASA4f6",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789510161441,
+    "modifiedTime": 1789510161442,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterLeap00001"
+}

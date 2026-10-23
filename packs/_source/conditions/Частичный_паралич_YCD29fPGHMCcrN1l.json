@@ -1,0 +1,48 @@
+{
+  "name": "Частичный паралич",
+  "type": "condition",
+  "_id": "YCD29fPGHMCcrN1l",
+  "img": "icons/svg/leg.svg",
+  "system": {
+    "description": "<ul><li><p><strong>Эффект:</strong> Поражённые конечности не функционируют (руки, ноги, крылья).</p></li><li><p><strong>Снятие:</strong> Зависит от источника.</p></li><li><p><strong>Длительность:</strong> Зависит от источника, по умолчанию 3 раунда.</p></li></ul><p>Штрафы ситуационные, по решению мастера.</p>",
+    "key": "partial_paralysis",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "roundEnd"
+    ],
+    "application_text": "",
+    "removal_text": "",
+    "is_removable_by_skill": false,
+    "skill_to_remove": "",
+    "remove_dc": 0,
+    "system_flags": {},
+    "formula_heal": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783373116771,
+    "modifiedTime": 1792453976745,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YCD29fPGHMCcrN1l"
+}

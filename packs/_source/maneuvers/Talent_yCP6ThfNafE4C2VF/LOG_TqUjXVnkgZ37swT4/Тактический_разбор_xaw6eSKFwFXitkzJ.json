@@ -1,0 +1,91 @@
+{
+  "name": "Тактический разбор",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Манёвр, свободное действие. Выберите одного противника. Все союзники в радиусе 20 метров от вас, получают против этой цели до конца раунда: +2 к атаке и право перебросить один кубик урона (новый результат обязателен).</p>",
+    "key": "maneuver_tactical_breakdown",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "tactical_breakdown"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "circle",
+    "template_size": 20,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_tactical_breakdown",
+      "folder": "Talent"
+    }
+  },
+  "folder": "TqUjXVnkgZ37swT4",
+  "_id": "xaw6eSKFwFXitkzJ",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_tactical_breakdown.svg",
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024585,
+    "modifiedTime": 1784855818411,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!xaw6eSKFwFXitkzJ"
+}

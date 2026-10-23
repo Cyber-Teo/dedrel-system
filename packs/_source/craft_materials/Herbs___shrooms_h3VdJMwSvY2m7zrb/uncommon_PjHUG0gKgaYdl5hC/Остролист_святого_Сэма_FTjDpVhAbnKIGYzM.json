@@ -1,0 +1,54 @@
+{
+  "folder": "PjHUG0gKgaYdl5hC",
+  "name": "Остролист святого Сэма",
+  "type": "craft_material",
+  "_id": "FTjDpVhAbnKIGYzM",
+  "img": "systems/dedrel/assets/icons/materials/herb/Saint%20Sam%27s%20Holly.webp",
+  "system": {
+    "description": "<div><p>реки, озера. </p><p>Стебли этого растения напоминают стрелы, фиолетовые цветы раскрываются только по ночам.</p></div>",
+    "key": "saint_sam_s_holly",
+    "rarity": "uncommon",
+    "weight": 0.1,
+    "base_price": 50,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783693768391,
+    "modifiedTime": 1792454404077,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FTjDpVhAbnKIGYzM"
+}

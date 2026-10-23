@@ -1,0 +1,114 @@
+{
+  "_id": "MonsterMaulBite1",
+  "name": "Загрызть",
+  "type": "maneuver",
+  "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_monster_maul",
+      "folder": "Monster"
+    }
+  },
+  "system": {
+    "key": "maneuver_monster_maul",
+    "source": "basic",
+    "description": "<p>Зверь рвёт добычу, которая уже не держится на ногах. Проводится только по цели со статусом @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит} или @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен}.</p>\n<p>Атака естественным оружием, урон — на <strong>ступень выше</strong> по Лестнице (1d4 → 1d6 → 2d4 → 2d6 → 2d8 → 3d6). Сдвиг считает система; действует правило одной ступени, поэтому с другими бафами урона он не складывается сверх +1.</p>\n<p>Зеркало «Подсечки»: та роняет цель, эта снимает с этого урожай. От универсального «Добивания» отличается тем, что «Добивание» — реакция в момент падения, а «Загрызть» проводится в свой ход по уже лежащей добыче.</p>",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "после Рывка или Мёртвой хватки",
+    "chain_trigger_maneuvers": [
+      "maneuver_monster_pounce",
+      "maneuver_monster_jaw_lock"
+    ],
+    "ap_cost": 2,
+    "skill": "unarmed_combat",
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "weapon_dice_step": 1,
+    "target_type": "creature",
+    "target_value": 1,
+    "prerequisites_text": "Цель со статусом «Лежит» или «Схвачен».",
+    "hide_combat_buttons": false,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "is_reload_action": false,
+    "is_scroll_read": false,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [
+      ""
+    ],
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_attributes": [
+      ""
+    ],
+    "prerequisites_skills": [
+      ""
+    ],
+    "prerequisites_talents": [
+      ""
+    ],
+    "prerequisites_mutations": [
+      ""
+    ],
+    "prerequisites_bloodlines": [
+      ""
+    ],
+    "target_range": "",
+    "template_shape": "",
+    "template_size": 0,
+    "attack_bonus": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "folder": "uC3oW0cZdDASA4f6",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784968873689,
+    "modifiedTime": 1789435063997,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterMaulBite1"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Живой осадный механизм",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.XhMoleyZsEkQPkFm]{Живой осадный механизм (в разработке)}</p>Ты можешь поднимать и швырять огромные, тяжелые объекты с силой катапульты.\nТы можешь поднять и швырнуть большой объект (валун, колонну) на расстояние до (ранг Силы × 5) клеток. При попадании в цель или в точку на земле, объект наносит большой урон по области (например, радиус 1–2 клетки).<br><br><b>Комментарии:</b> переформулировать/переписать этот манёвр",
+    "key": "living_siege_engine",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.str.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_living_siege_engine"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "living_siege_engine",
+      "folder": "STR/Rank 5"
+    }
+  },
+  "folder": "pSNRTtxaMK9j6Off",
+  "_id": "PRIRhiPwnfhyw2ql",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!PRIRhiPwnfhyw2ql"
+}

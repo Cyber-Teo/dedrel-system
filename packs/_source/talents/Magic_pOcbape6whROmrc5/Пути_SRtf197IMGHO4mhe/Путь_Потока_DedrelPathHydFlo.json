@@ -1,0 +1,100 @@
+{
+  "_id": "DedrelPathHydFlo",
+  "name": "Путь Потока",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Magic/Пути"
+    }
+  },
+  "system": {
+    "key": "path_flow",
+    "description": "<p><em>Специализация Гидромантии: вода как течение — несёт, сбивает, растекается.</em></p>\n<ul>\n<li><strong>Сродство:</strong> −1 ОД на «Область: площадь» и технику «Направить/Переместить».</li>\n<li><strong>Ограничение:</strong> Модификатор «Прочность» — не выше 2-го ранга (вода не держит форму).</li>\n<li><strong>Доктринный Модификатор «Сбивание»:</strong> 2 ОД — сбить с ног («Лежит», СЛ 12); 3 ОД — оттолкнуть цель на 4 м и сбить с ног (СЛ 14).</li>\n<li><strong>Формы:</strong> как у доктрины — дробящий (таран волны) и режущий (струя под давлением).</li>\n<li><strong>Утилитарность воды</strong> (через «Насытить/Внедрить» + «Длительность»): хождение по воде, подводное дыхание, ускоренное плавание.</li>\n</ul>\n<p><em>Талант открывает Путь доктрины. Сборка «без пути» остаётся доступной всегда; сродства, капы и Модификаторы Пути применяются только к заклинаниям этого Пути.</em></p>",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "has_situational_bonus": false,
+    "prerequisites_text": "Талант «Гидромантия» (доступ к доктрине).",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "hydromancy"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEPathFlow",
+      "name": "Путь Потока",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "system": {
+        "changes": [
+          {
+            "key": "system.doctrines.hydromancy.paths.flow",
+            "type": "override",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789527814087,
+        "modifiedTime": 1789527814087,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelPathHydFlo.DedrelAEPathFlow"
+    }
+  ],
+  "folder": "SRtf197IMGHO4mhe",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789137452938,
+    "modifiedTime": 1792452307272,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelPathHydFlo"
+}

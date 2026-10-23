@@ -1,0 +1,133 @@
+{
+  "name": "Несокрушимость",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>1 раз в долгий отдых.</p><p>Вы игнорируете любой урон, полученный первый раз в течение следующих 10 раундов.</p>",
+    "key": "maneuver_unbreakable",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "unbreakable"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_unbreakable",
+      "folder": "Talent"
+    }
+  },
+  "folder": "fleS8YIj86AeHBTz",
+  "_id": "t7fPr5KCAThyxKvQ",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_unbreakable.svg",
+  "effects": [
+    {
+      "name": "Несокрушимость",
+      "origin": "Compendium.dedrel.maneuvers.Item.t7fPr5KCAThyxKvQ",
+      "_id": "reX9liOrb84rETdJ",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_unbreakable.svg",
+      "type": "base",
+      "system": {
+        "changes": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 10,
+        "units": "rounds",
+        "expiry": "combatEnd",
+        "expired": false
+      },
+      "description": "<p>Вы игнорируете любой урон, полученный первый раз в течение следующих 10 раундов.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1783296453784,
+        "modifiedTime": 1792453976938,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!t7fPr5KCAThyxKvQ.reX9liOrb84rETdJ"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024582,
+    "modifiedTime": 1792453976910,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!t7fPr5KCAThyxKvQ"
+}

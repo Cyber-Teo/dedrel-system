@@ -1,0 +1,54 @@
+{
+  "name": "Иммунитет",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Персонаж получает иммунитет к обычным болезням и +3 к спасброскам против магических болезней.<br></p>",
+    "key": "elf_immunity",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Elf",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "has_situational_bonus": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "elf_immunity",
+      "folder": "Elf/Rank 4"
+    }
+  },
+  "folder": "NcZoi7f0MMVkVeDx",
+  "_id": "hMzVO4CcuuUbH8Dg",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992966,
+    "modifiedTime": 1784855818223,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!hMzVO4CcuuUbH8Dg"
+}

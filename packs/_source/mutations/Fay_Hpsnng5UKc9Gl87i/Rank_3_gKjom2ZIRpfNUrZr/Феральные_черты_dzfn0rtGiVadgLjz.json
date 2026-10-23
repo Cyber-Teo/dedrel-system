@@ -1,0 +1,53 @@
+{
+  "name": "Феральные черты",
+  "type": "mutation",
+  "system": {
+    "description": "<p>выбираешь две особенности из списка (перетащи в чаршит из компендиума)</p><p><br></p><p>@UUID[Compendium.dedrel.mutations.Item.qjEmKmHZ5x7hS8Ip]{Острый Нюх}</p><p></p><p>@UUID[Compendium.dedrel.mutations.Item.W9428oZ9ieMFGzB5]{Острый слух}</p><p></p><p>@UUID[Compendium.dedrel.mutations.Item.ob8nJxlnanBNxRnj]{Когти}</p>",
+    "key": "fay_feral_traits",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_feral_traits",
+      "folder": "Fay/Rank 3"
+    }
+  },
+  "folder": "gKjom2ZIRpfNUrZr",
+  "_id": "dzfn0rtGiVadgLjz",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784855818223,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dzfn0rtGiVadgLjz"
+}

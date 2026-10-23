@@ -1,0 +1,23 @@
+{
+  "name": "Врождённые",
+  "type": "Item",
+  "folder": null,
+  "_id": "jxMDTJ0VPo2vcLKo",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789143633869,
+    "modifiedTime": 1789143633869,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!jxMDTJ0VPo2vcLKo"
+}

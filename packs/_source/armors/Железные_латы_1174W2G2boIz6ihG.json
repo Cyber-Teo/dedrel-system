@@ -1,0 +1,102 @@
+{
+  "name": "Железные латы",
+  "type": "armor",
+  "_id": "1174W2G2boIz6ihG",
+  "img": "systems/dedrel/assets/icons/armor_icons/common/Iron_plate_armor.webp",
+  "system": {
+    "description": "",
+    "key": "iron_plate_armor",
+    "rarity": "common",
+    "equip_slot": "",
+    "base_price": 98,
+    "weight": 25,
+    "crafting": {
+      "craftable": true,
+      "discipline": "",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+          "name": "Железо",
+          "amount": 5
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
+          "name": "Лён",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.6D7jBKh1gjKeMZOZ",
+          "name": "Шкура животного",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 65,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "slot": "upper",
+    "weight_class": "heavy",
+    "dr": {
+      "slashing": 3,
+      "piercing": 3,
+      "bludgeoning": 3,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "modifiers": {
+      "dodge": 0,
+      "block": 0,
+      "stealth": 0,
+      "ranged_attack": 0,
+      "magic_attack": 0,
+      "movement": 0
+    },
+    "properties": {
+      "exclusive_slot": false,
+      "rigid": true,
+      "loud": true,
+      "encumbering": true,
+      "weak_point_protection": false,
+      "deflecting": 0,
+      "cohesion": 0
+    },
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "on_use_macro": "",
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "equipped": false
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784180002818,
+    "modifiedTime": 1792453976976,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!1174W2G2boIz6ihG"
+}

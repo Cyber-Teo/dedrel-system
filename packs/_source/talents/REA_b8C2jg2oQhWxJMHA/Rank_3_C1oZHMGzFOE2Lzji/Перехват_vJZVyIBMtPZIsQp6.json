@@ -1,0 +1,53 @@
+{
+  "name": "Перехват",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.lKtVDXTjwQOUh0x1]{Перехват}</p><p>Манёвр. Дальнобойное оружие. Если в области досягаемости вашего персонажа противник проводит Перезарядку, Прицеливание. Вы можете совершить манёвр Выстрел или Бросок в качестве реакции без траты дополнительных ОД. Если ваша атака попадёт и нанесёт урон, действие противника будет считаться сорванным, а потраченные ОД — сгоревшими.</p>",
+    "key": "intercepting_shot",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "@attributes.rea.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_intercepting_shot"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "intercepting_shot",
+      "folder": "REA/Rank 3"
+    }
+  },
+  "folder": "C1oZHMGzFOE2Lzji",
+  "_id": "vJZVyIBMtPZIsQp6",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976777,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!vJZVyIBMtPZIsQp6"
+}

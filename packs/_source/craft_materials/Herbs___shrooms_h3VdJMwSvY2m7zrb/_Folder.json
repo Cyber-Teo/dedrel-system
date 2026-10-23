@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": null,
+  "name": "Herbs & shrooms",
+  "color": null,
+  "sorting": "a",
+  "_id": "h3VdJMwSvY2m7zrb",
+  "description": "",
+  "sort": 600000,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783687435285,
+    "modifiedTime": 1783699289945,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!h3VdJMwSvY2m7zrb"
+}

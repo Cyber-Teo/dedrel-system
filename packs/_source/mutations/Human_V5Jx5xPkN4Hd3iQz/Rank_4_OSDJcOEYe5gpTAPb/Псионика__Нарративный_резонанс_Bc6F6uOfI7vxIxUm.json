@@ -1,0 +1,53 @@
+{
+  "name": "Псионика: Нарративный резонанс",
+  "type": "mutation",
+  "system": {
+    "description": "1 раз в долгий отдых получаешь “сон-ответ” от предка на заданный вопрос.",
+    "key": "human_psionics_narrative_resonance",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "narrative",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Human",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "human_psionics_narrative_resonance",
+      "folder": "Human/Rank 4"
+    }
+  },
+  "folder": "OSDJcOEYe5gpTAPb",
+  "_id": "Bc6F6uOfI7vxIxUm",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992964,
+    "modifiedTime": 1784181820030,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Bc6F6uOfI7vxIxUm"
+}

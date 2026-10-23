@@ -1,0 +1,90 @@
+{
+  "name": "Суперпозиция",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Манёвр. Вы выставляете до 4 копий вашего персонажа на поле боя в пределах видимости. У каждой копии 1 хит, после получения урона она исчезает. После того как противник совершает атаку по одному из ваших токенов вы выбираете: он атакует копию или настоящего персонажа. В свой ход вы также решаете, какой из токенов — ваш персонаж.</p>",
+    "key": "maneuver_superposition",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 5,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "superposition"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_superposition",
+      "folder": "Talent"
+    }
+  },
+  "folder": "HN40Tj1kdqR79X5m",
+  "_id": "2Ow7yTA7lTa9T3Wq",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_superposition.svg",
+  "effects": [],
+  "sort": 700000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024584,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2Ow7yTA7lTa9T3Wq"
+}

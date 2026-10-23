@@ -1,0 +1,53 @@
+{
+  "name": "Долголетие",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Персонаж взрослел дольше среднего, его потенциальный срок жизни увеличен (200+ лет).</p><p>Срок жизни может являться ингредиентом ритуалов или целью для магии.</p><p>Мастер выдаст на старте 4 дополнительных очка опыта, которые ты должен будешь потратить перед первой сессией.</p>",
+    "key": "elf_longevity",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "narrative",
+    "xp_cost": 4,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Elf",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "elf_longevity",
+      "folder": "Elf/Rank 4"
+    }
+  },
+  "folder": "NcZoi7f0MMVkVeDx",
+  "_id": "ayJIN08spg41cePt",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992966,
+    "modifiedTime": 1792453976712,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ayJIN08spg41cePt"
+}

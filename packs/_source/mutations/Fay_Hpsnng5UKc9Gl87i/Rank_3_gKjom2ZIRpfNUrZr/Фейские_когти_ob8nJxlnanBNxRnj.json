@@ -1,0 +1,57 @@
+{
+  "name": "Фейские когти",
+  "type": "mutation",
+  "system": {
+    "description": "Как оружие когти. Персонаж получает возможность с лёгкостью лазить по деревьям и другим подобным поверхностям (не требуется проверка).",
+    "key": "fay_claws",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 0,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "fay_feral_traits"
+    ],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "fay_claws_weapon"
+    ],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_claws",
+      "folder": "Fay/Rank 3"
+    }
+  },
+  "folder": "gKjom2ZIRpfNUrZr",
+  "_id": "ob8nJxlnanBNxRnj",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784855818224,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ob8nJxlnanBNxRnj"
+}

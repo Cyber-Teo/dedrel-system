@@ -1,0 +1,148 @@
+{
+  "name": "Закрытые глаза",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Манёвр. Действие, 3 ОД. На 1 раунд вы полностью игнорируете состояние «Ослепление» и все штрафы от визуальных помех и невидимости. Дополнительно получаете +2 к Блоку и Уклонению на этот раунд, так как перестаёте реагировать на ложные движения.</p>",
+    "key": "maneuver_closed_eyes",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "closed_eyes"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "3",
+    "uses_per": "short_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_closed_eyes",
+      "folder": "Talent"
+    }
+  },
+  "folder": "djiDRYsAu5lnrkNP",
+  "_id": "Ya5hWVlm7tdozbJQ",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_closed_eyes.svg",
+  "effects": [
+    {
+      "name": "Закрытые глаза",
+      "origin": "Compendium.dedrel.maneuvers.Item.Ya5hWVlm7tdozbJQ",
+      "_id": "yaoiVNLQM8xkONmr",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_closed_eyes.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.defenses.dodge",
+            "type": "add",
+            "value": 2,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.defenses.block",
+            "type": "add",
+            "value": 2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "<p>Манёвр. Действие, 3 ОД. На 1 раунд вы полностью игнорируете состояние «Ослепление» и все штрафы от визуальных помех и невидимости. Дополнительно получаете +2 к Блоку и Уклонению на этот раунд, так как перестаёте реагировать на ложные движения.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783295995729,
+        "modifiedTime": 1792453976933,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!Ya5hWVlm7tdozbJQ.yaoiVNLQM8xkONmr"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024584,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Ya5hWVlm7tdozbJQ"
+}

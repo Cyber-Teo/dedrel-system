@@ -1,0 +1,92 @@
+{
+  "name": "Взмах на ходу",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Вы не стоите на месте: рубите на бегу, разрывая дистанцию и заходя с новой стороны. Атака входит в сам манёвр — отдельный Взмах после него не нужен.</p>\n<p><strong>Карусель.</strong> Первое применение тратит ваше Действие, каждое следующее идёт цепью после предыдущего — и так, пока хватает ОД и метров Скорости.</p>\n<p><strong>Условия:</strong></p>\n<ul>\n<li>Между атаками нужно пройти <strong>не менее 2 метров</strong>.</li>\n<li>Карусель нельзя прерывать другими манёврами — прервали, и она закончена.</li>\n<li>Каждая атака — <strong>по новой цели</strong>: дважды за ход одного и того же противника карусель не бьёт.</li>\n<li>Если вас остановили чужой зоной контроля (например, «Упреждающим выпадом»), манёвр сорван.</li>\n</ul>",
+    "key": "maneuver_swing_on_a_move",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "после самого себя (карусель)",
+    "chain_trigger_maneuvers": [
+      "maneuver_swing_on_a_move"
+    ],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": true
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "swing_on_a_move"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_swing_on_a_move",
+      "folder": "Talent"
+    }
+  },
+  "folder": "HN40Tj1kdqR79X5m",
+  "_id": "hrkYLX9Zy60dKn2C",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing_on_a_move.svg",
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024583,
+    "modifiedTime": 1784968899992,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!hrkYLX9Zy60dKn2C"
+}

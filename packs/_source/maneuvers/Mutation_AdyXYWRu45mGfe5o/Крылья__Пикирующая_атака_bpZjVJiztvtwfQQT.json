@@ -1,0 +1,151 @@
+{
+  "name": "Крылья: Пикирующая атака",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Персонаж взлетает и обрушивается на противника. Цель должна находиться минимум в 9 метрах от персонажа, максимум не может превышать движение персонажа. <br>Соверши атаку ближнего боя с бонусом +2 к атаке и +2 к урону.</p>",
+    "key": "maneuver_wings_dive_strike",
+    "source": "mutation",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [
+      "maneuver_fly"
+    ],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "demon_wings",
+      "dragon_wings"
+    ],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "оружие ближнего боя",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_wings_dive_strike",
+      "folder": "Mutation"
+    }
+  },
+  "folder": "AdyXYWRu45mGfe5o",
+  "_id": "bpZjVJiztvtwfQQT",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_wings_dive_strike.svg",
+  "effects": [
+    {
+      "name": "Крылья: Пикирующая атака",
+      "origin": "Compendium.dedrel.maneuvers.Item.bpZjVJiztvtwfQQT",
+      "_id": "xal7BvtCzAJlbU0P",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_wings_dive_strike.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dedrel.mod",
+            "type": "add",
+            "value": "damage:2; filter:melee",
+            "phase": "initial",
+            "priority": null
+          },
+          {
+            "key": "flags.dedrel.mod",
+            "type": "add",
+            "value": "attak:2; filter:melee",
+            "phase": "initial",
+            "priority": null
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1782965699004,
+        "modifiedTime": 1783237351322,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!bpZjVJiztvtwfQQT.xal7BvtCzAJlbU0P"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024581,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bpZjVJiztvtwfQQT"
+}

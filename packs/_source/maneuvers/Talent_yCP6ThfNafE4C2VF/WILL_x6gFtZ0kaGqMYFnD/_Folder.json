@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": "yCP6ThfNafE4C2VF",
+  "name": "WILL",
+  "color": null,
+  "sorting": "a",
+  "_id": "x6gFtZ0kaGqMYFnD",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783830698501,
+    "modifiedTime": 1783830704116,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!x6gFtZ0kaGqMYFnD"
+}

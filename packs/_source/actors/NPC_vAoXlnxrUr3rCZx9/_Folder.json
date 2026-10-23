@@ -1,0 +1,23 @@
+{
+  "type": "Actor",
+  "folder": null,
+  "name": "NPC",
+  "color": null,
+  "sorting": "a",
+  "_id": "vAoXlnxrUr3rCZx9",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1785065270176,
+    "modifiedTime": 1785065270176,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!vAoXlnxrUr3rCZx9"
+}

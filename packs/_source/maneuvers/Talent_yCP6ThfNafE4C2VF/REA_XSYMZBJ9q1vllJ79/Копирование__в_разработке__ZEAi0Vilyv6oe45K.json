@@ -1,0 +1,90 @@
+{
+  "name": "Копирование (в разработке)",
+  "type": "maneuver",
+  "system": {
+    "description": "Когда противник применяет против вас или в вашем поле зрения небазовый манёвр (source: talent), вы можете немедленно добавить его в список доступных вам манёвров до конца сцены. Требования к оружию сохраняются. Манёвры с требованием мутации (крылья, хвост и т.п.) скопировать нельзя.<br><br><b>Комментарии:</b> Додумать механику этого манёвра, сейчас она не доделана",
+    "key": "maneuver_copying",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 4,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "copying"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_copying",
+      "folder": "Talent"
+    }
+  },
+  "folder": "XSYMZBJ9q1vllJ79",
+  "_id": "ZEAi0Vilyv6oe45K",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_copying.svg",
+  "effects": [],
+  "sort": 800000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024584,
+    "modifiedTime": 1784855818408,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZEAi0Vilyv6oe45K"
+}

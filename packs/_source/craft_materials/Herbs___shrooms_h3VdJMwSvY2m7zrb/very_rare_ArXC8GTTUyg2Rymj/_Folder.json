@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": "h3VdJMwSvY2m7zrb",
+  "name": "very rare",
+  "color": null,
+  "sorting": "a",
+  "_id": "ArXC8GTTUyg2Rymj",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783694521463,
+    "modifiedTime": 1783694521463,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!ArXC8GTTUyg2Rymj"
+}

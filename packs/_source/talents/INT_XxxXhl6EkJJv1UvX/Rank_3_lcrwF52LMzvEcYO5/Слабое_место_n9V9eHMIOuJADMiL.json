@@ -1,0 +1,53 @@
+{
+  "name": "Слабое место",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.KRGHho0GBoNiiHGB]{Слабое место}</p><p>Перед атакой вы объявляете что «читаете» противника, ваша следующая атака любым оружием получает Бронебойность 3</p>",
+    "key": "weak_spot",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "@attributes.int.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_weak_spot"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "weak_spot",
+      "folder": "INT/Rank 3"
+    }
+  },
+  "folder": "lcrwF52LMzvEcYO5",
+  "_id": "n9V9eHMIOuJADMiL",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!n9V9eHMIOuJADMiL"
+}

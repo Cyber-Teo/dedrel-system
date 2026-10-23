@@ -1,0 +1,75 @@
+{
+  "name": "Алхимический огонь",
+  "type": "potion",
+  "_id": "0ardrx7Bd5nwvJkA",
+  "img": "systems/dedrel/assets/icons/items/potion.svg",
+  "system": {
+    "description": "",
+    "key": "potion_alchemical_fire",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 21,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.hqpVCfwEK9sWdS80",
+          "name": "Спирт",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.7EprmCSVXudVwr8h",
+          "name": "Потроха огненного жука",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.le8FG2uuAJen8dTD",
+          "name": "Склянка",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 14,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "effect_description": "",
+    "consumable": true,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790033866723,
+    "modifiedTime": 1792453976995,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!0ardrx7Bd5nwvJkA"
+}

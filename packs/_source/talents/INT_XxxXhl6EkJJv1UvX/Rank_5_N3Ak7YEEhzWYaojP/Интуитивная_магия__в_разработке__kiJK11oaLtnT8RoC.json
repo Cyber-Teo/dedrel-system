@@ -1,0 +1,51 @@
+{
+  "name": "Интуитивная магия (в разработке)",
+  "type": "talent",
+  "system": {
+    "description": "[Плейсхолдер — требует финализации раздела магии]. При создании заклинания вы можете превысить одно из ограничений вашего ранга доктрины на 1: взять модификатор на 1 дороже чем позволяет ранг, либо добавить одну лишнюю технику. Нарративно: вы просто не знаете что это «невозможно».",
+    "key": "intuitive_magic",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.int.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "intuitive_magic",
+      "folder": "INT/Rank 5"
+    }
+  },
+  "folder": "N3Ak7YEEhzWYaojP",
+  "_id": "kiJK11oaLtnT8RoC",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1784855818320,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!kiJK11oaLtnT8RoC"
+}

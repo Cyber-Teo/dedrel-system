@@ -1,0 +1,50 @@
+{
+  "folder": "C1oZHMGzFOE2Lzji",
+  "name": "Упреждающий удар",
+  "type": "talent",
+  "_id": "u7lrkDR65SZhCuiF",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.Pp79Pln9JPEb7ZCb]{Упреждающий выпад}</p><p>Когда противник входит в вашу зону контроля вы можете реакцией провести атаку копьём. Если атака попадает (и даже если не наносит урон), враг останавливается, а манёвр давший ему движение срывается. В цепи вы можете выполнить @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Выпад}</p>",
+    "key": "preemptive_thrust",
+    "subtype": "passive",
+    "xp_cost": 0,
+    "has_situational_bonus": false,
+    "prerequisites_text": "@attributes.rea.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_preemptive_thrust"
+    ],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783847246592,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!u7lrkDR65SZhCuiF"
+}

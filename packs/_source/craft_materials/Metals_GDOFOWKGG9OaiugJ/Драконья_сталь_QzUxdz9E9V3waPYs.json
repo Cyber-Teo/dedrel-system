@@ -1,0 +1,60 @@
+{
+  "folder": "GDOFOWKGG9OaiugJ",
+  "name": "Драконья сталь",
+  "type": "craft_material",
+  "_id": "QzUxdz9E9V3waPYs",
+  "img": "systems/dedrel/assets/icons/materials/metal/Dragon%20Steel.webp",
+  "system": {
+    "description": "",
+    "key": "dragon_steel",
+    "rarity": "very_rare",
+    "weight": 1,
+    "base_price": 4000,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "weight_class": "normal",
+    "slots": [],
+    "signature": {
+      "armor": "",
+      "weapon": "",
+      "magic": ""
+    },
+    "applicable_to": {
+      "weapon": true,
+      "armor": true,
+      "shield": true,
+      "jewelry": false
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784159195817,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!QzUxdz9E9V3waPYs"
+}

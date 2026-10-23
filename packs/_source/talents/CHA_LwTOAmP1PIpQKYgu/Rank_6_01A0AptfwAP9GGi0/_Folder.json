@@ -1,0 +1,23 @@
+{
+  "name": "Rank 6",
+  "type": "Item",
+  "folder": "LwTOAmP1PIpQKYgu",
+  "_id": "01A0AptfwAP9GGi0",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044226,
+    "modifiedTime": 1782801044226,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!01A0AptfwAP9GGi0"
+}

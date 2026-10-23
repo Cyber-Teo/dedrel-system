@@ -1,0 +1,120 @@
+{
+  "name": "Толстая кожа",
+  "type": "spell",
+  "img": "systems/dedrel/assets/icons/items/spell.svg",
+  "system": {
+    "doctrine": "biomancy",
+    "doctrine_rank_req": 3,
+    "doctrine_path": "",
+    "source_scale": "none",
+    "chosen_techniques": [
+      "imbue"
+    ],
+    "chosen_modifiers": [
+      {
+        "key": "adapt",
+        "rank": 2,
+        "ap": 2,
+        "option": "adapt_thick_skin"
+      },
+      {
+        "key": "duration",
+        "rank": 2,
+        "ap": 2,
+        "option": ""
+      },
+      {
+        "key": "range",
+        "rank": 1,
+        "ap": 1,
+        "option": ""
+      }
+    ],
+    "total_cost_breakdown": "Imbue/Infuse [1] + Adaptation 2 [2] + Duration 2 [2] + Range 1 [1] = 6 AP",
+    "ap_cost": 6,
+    "skill": "magical_attacks",
+    "attack_bonus": 0,
+    "action_type": {
+      "action": true,
+      "chain": false,
+      "reaction": false,
+      "free": false
+    },
+    "target_type": "creature",
+    "target_range": "2",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "save_attribute": "will",
+    "save_dc_formula": "12",
+    "forbidden_defense": "",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false,
+      "magic": true
+    },
+    "description": "<p><em>Imbue/Infuse [1] + Adaptation 2 [2] + Duration 2 [2] + Range 1 [1] = 6 AP</em></p><p>Duration: 6 round(s) · Adaptation 2: Temporary rank 2 mutation (hostile targets get a save) — adapt_thick_skin (DC 12)</p>",
+    "key": "bio_thick_skin",
+    "source": "basic",
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "is_fixed": false,
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "_id": "Gkz4E0tEdCNRN63t",
+  "folder": "ovvaJP2joVDj2LO4",
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789572820040,
+    "modifiedTime": 1789665483195,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 0,
+  "_key": "!items!Gkz4E0tEdCNRN63t"
+}

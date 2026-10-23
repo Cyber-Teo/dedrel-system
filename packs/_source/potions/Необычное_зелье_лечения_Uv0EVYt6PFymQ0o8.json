@@ -1,0 +1,79 @@
+{
+  "folder": null,
+  "name": "Необычное зелье лечения",
+  "type": "potion",
+  "img": "systems/dedrel/assets/icons/items/potion.svg",
+  "system": {
+    "description": "<p>Лечит 50% хитов</p>",
+    "key": "potion_healing_uncommon",
+    "rarity": "uncommon",
+    "weight": 0.1,
+    "base_price": 54,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Pwh1i0KcZezBy08c",
+          "name": "Императорский цвет",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.ezQv4BgG3XBMsYSA",
+          "name": "Синецвет",
+          "amount": 2
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.hqpVCfwEK9sWdS80",
+          "name": "Спирт",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.le8FG2uuAJen8dTD",
+          "name": "Склянка",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 36,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "effect_description": "",
+    "consumable": true,
+    "uses_value": 1,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "50%",
+    "on_use_macro": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784275876754,
+    "modifiedTime": 1792453976996,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_id": "Uv0EVYt6PFymQ0o8",
+  "sort": 200000,
+  "_key": "!items!Uv0EVYt6PFymQ0o8"
+}

@@ -1,0 +1,1959 @@
+{
+  "_id": "MatriarchChimera",
+  "name": "Матриарх",
+  "type": "npc",
+  "img": "systems/dedrel/assets/Actors/Tokens/citychimera01.webp",
+  "folder": "ge2u5Rz1tPtGJYRu",
+  "system": {
+    "tier": "boss",
+    "attributes": {
+      "str": {
+        "rank": 4,
+        "save_bonus": 0
+      },
+      "con": {
+        "rank": 4,
+        "save_bonus": 0
+      },
+      "rea": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "will": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "dex": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "int": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "log": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "luck": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "cha": {
+        "rank": 1,
+        "save_bonus": 0
+      }
+    },
+    "skills": {
+      "unarmed_combat": {
+        "rank": 3,
+        "specialization": "Львиная пасть",
+        "bonus": 0
+      },
+      "atletism": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "perception": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "intimidation": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "survival": {
+        "rank": 2,
+        "specialization": "",
+        "bonus": 0
+      },
+      "crossbows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "pole_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "blunt_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "artillery": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "firearms": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "throwing": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "exotic_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "magical_attacks": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bladed_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "armor_use": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "cultural_awareness": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "knowledge": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "logic_reasoning": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "interpretation": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "research": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "craftsmanship": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "stealth": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "healing": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "engineering": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "persuasion": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "insight": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "deception": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "performance": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      }
+    },
+    "resources": {
+      "ap_universal": {
+        "value": 9,
+        "max": 0
+      },
+      "movement": {
+        "value": 10,
+        "max": 0
+      },
+      "hp": {
+        "value": 120,
+        "temp": 0,
+        "max": 120
+      },
+      "hits": {
+        "value": 2,
+        "max": 2
+      },
+      "wounds": {
+        "level": 1,
+        "penalty": 0
+      }
+    },
+    "overrides": {
+      "ap_max": 9,
+      "movement_max": 10,
+      "hp_max": 120
+    },
+    "details": {
+      "threat": "3 (босс, огромная)",
+      "biography": "<p><strong>Ранг угрозы 3, ярус «босс» (ЭВ 4.0), размер ОГРОМНЫЙ.</strong> Первая удачная работа Ниэвес. Лев, козёл и змея, сшитые в одно тело так, что шва не видно — и именно поэтому она страшная, а не жалкая.</p>\n<p><strong>Числа.</strong> Хиты <strong>120</strong> (босс = ×3), <strong>9 ОД</strong> (+50%), Блок 13, Уклонение 11, МЗ 12, DR 3 (шкура), скорость 10 м. Занимает <strong>3×3 клетки, Контроль +2</strong>.</p>\n\n<h3>Три головы (правило Мастера, движком не считается)</h3>\n<p><strong>Хиты разделены на три по 40.</strong> Львиная голова — 40, козлиная — 40, змеиная — 40. Лист показывает общие 120; какой голове записан урон, Мастер ведёт на бумаге.</p>\n<p><strong>Игроки объявляют, куда бьют</strong> — объявление бесплатно, штрафа за прицел нет. Если не объявили, урон идёт в <strong>львиную</strong> голову как в главную.</p>\n<p><strong>Убитая голова</strong> перестаёт атаковать: её оружие и завязанные на него манёвры недоступны. <strong>Пул ОД сокращается на треть: 9 → 6 → 3.</strong></p>\n<p><em>Почему это честно.</em> Суммарно голов всё равно 120 хитов — фокус по одной не ускоряет убийство. Он покупает другое: выключить конкретную угрозу раньше и отнять треть действий. Это выбор про порядок, а не про скорость, и он вознаграждает тех, кто читает бой.</p>\n\n<h3>Чем бьёт каждая голова</h3>\n<ul>\n<li><strong>Лев — Укус</strong> (2 ОД, 2d8 колющего) и <strong>Загрызть</strong> (2 ОД, ступень выше по лежачей или схваченной цели), <strong>Мёртвая хватка</strong> (1 ОД в цепи → <em>Схвачен</em>).</li>\n<li><strong>Козёл — Таран</strong> (3 ОД, разгон ≥6 м, 2d8 дробящего): контест против Атлетизма отбрасывает на 4 м и роняет. О стену или решётку — дополнительный урон как от падения. Ею она ломает строй и вбивает кастеров в камень.</li>\n<li><strong>Змея — Ядовитый укус</strong> (2 ОД, 2d6 колющего): при попадании спасбросок <strong>Телосложения DC 12</strong> (9 + ранг угрозы) или <strong>Отравление (боевое)</strong>. Тик (стаки)d4 в конце хода, до 3 стаков, безрезистный — мимо DR и сопротивлений. Самая слабая по урону голова и самая опасная по итогу.</li>\n</ul>\n\n<h3>Девять ОД — это ОД для чужого хода</h3>\n<p><strong>Ответный укус</strong> (3 ОД, реакция): по ней попали в ближнем бою — она бьёт в ответ, один раз на каждого атакующего за раунд. Плюс монстровая <strong>Атака по возможности</strong> (2 ОД) по всем, кто уходит.</p>\n<p><em>Водить её надо так:</em> в свой ход тратить 3–4 ОД (Таран или Укус + Ядовитый укус), остальное <strong>держать</strong>. Трое в клинче — это три Ответных укуса за чужой раунд. Партия, которая облепила её со всех сторон, наказывает сама себя, и это должно стать для игроков открытием на втором раунде, а не на пятом.</p>\n\n<h3>Исступление (последняя голова)</h3>\n<p>Когда остаётся <strong>одна голова</strong>, Мастер вешает состояние <strong>Исступление</strong>: она <strong>игнорирует штрафы за ранения</strong> и <strong>перестаёт разбирать своих</strong> — если в сцене есть её союзники (выпущенные образцы, сама Ниэвес), она может ударить их, если они ближе или ударили последними.</p>\n<p><strong>Кислота снимает Исступление.</strong> Любой урон типа <code>acid</code> — склянки из лаборатории Ниэвес — немедленно снимает Исступление и вешает вместо него <strong>Страх</strong> на 2 раунда (−2 ко всем проверкам умений). Это знание добывается в модуле: записи Ниэвес, допрос образцов, проверка Знания. Партия, которая его нашла, получает рычаг; партия, которая не искала, дерётся с тварью, которой нечего терять.</p>\n\n<p><strong>Триггер:</strong> морали не проверяет никогда. Это не храбрость — ей просто не с чем сравнивать.</p>"
+    },
+    "defenses": {
+      "block": 0,
+      "dodge": 0,
+      "mdef": 0
+    },
+    "dr": {
+      "slashing": 0,
+      "piercing": 0,
+      "bludgeoning": 0,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "equipment_slots": {
+      "main_hand": {
+        "item_id": "",
+        "type": "weapon"
+      },
+      "off_hand": {
+        "item_id": "",
+        "type": "shield"
+      },
+      "tail": {
+        "item_id": "",
+        "type": ""
+      },
+      "armor_upper": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "armor_middle": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "armor_lower": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "magic_item_1": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "magic_item_2": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "ammo": {
+        "item_id": "",
+        "type": "loot"
+      },
+      "head": {
+        "item_id": "",
+        "type": "head"
+      },
+      "neck": {
+        "item_id": "",
+        "type": "neck"
+      },
+      "torso": {
+        "item_id": "",
+        "type": "torso"
+      },
+      "acc_left_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_left_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_tail": {
+        "item_id": "",
+        "type": "hand"
+      }
+    },
+    "bonuses": {
+      "global_roll": 0,
+      "global_skill": 0,
+      "global_save": 0,
+      "global_ap_discount": 0,
+      "global_ap_penalty": 0,
+      "maneuver_ap_penalty": 0,
+      "spell_ap_penalty": 0,
+      "ignore_wound_penalty": 0,
+      "infinite_explode": 0,
+      "damage_explode": 0,
+      "hp_multiplier": 0,
+      "carry_capacity_mult": 0,
+      "carry_capacity_flat": 0,
+      "ignore_encumbrance_penalty": 0
+    },
+    "doctrines": {
+      "geomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "hydromancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "flow": 0,
+          "ice": 0
+        }
+      },
+      "pyromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "ventomancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "squall": 0,
+          "echo": 0
+        }
+      },
+      "biomancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "mending": 0,
+          "sculpting": 0
+        }
+      },
+      "shadowmancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "aetheromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "electromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "temporalmancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "astralomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "aether_song": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "blood_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "chaos_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "shapeshifting": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "feral_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telekinesis": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telepathy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "zero": {
+        "rank": 0,
+        "unlocked": 0
+      }
+    },
+    "magic": {
+      "techniques": {
+        "create": 0,
+        "move": 0,
+        "transform": 0,
+        "sense": 0,
+        "imbue": 0
+      }
+    },
+    "toughness": 0,
+    "senses": {
+      "darkvision": 0
+    },
+    "initiative": 0
+  },
+  "items": [
+    {
+      "name": "Магические твари",
+      "type": "creature_type",
+      "_id": "vPFdpJ5KEV3ESI2c",
+      "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+      "system": {
+        "key": "magical_beast",
+        "description": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1792453977778,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.vPFdpJ5KEV3ESI2c"
+    },
+    {
+      "_id": "MatriarchLionMaw",
+      "name": "Львиная пасть",
+      "type": "weapon",
+      "img": "systems/dedrel/assets/icons/items/weapon.svg",
+      "flags": {
+        "dedrel": {
+          "key": "matriarch_lion_maw",
+          "folder": "For opponents/Chimeras"
+        }
+      },
+      "system": {
+        "key": "matriarch_lion_maw",
+        "description": "<p><strong>Первая голова Матриарха.</strong> Ступень IV. Главная голова: если игрок не объявил, куда бьёт, урон записывается ей.</p><p><strong>Зона Контроля 2</strong> — она же несёт размерный Контроль существа: в системе ЗК читается с экипированного оружия ближнего боя, отдельного поля размера у актора нет.</p>",
+        "rarity": "common",
+        "weight": 0,
+        "base_price": 0,
+        "crafting": {
+          "craftable": false,
+          "discipline": "",
+          "ingredients": [],
+          "markup_pct": 50,
+          "cost_price": 0,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "damage_type": {
+          "piercing": true,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "2d8",
+          "bludgeoning": ""
+        },
+        "skill": "unarmed_combat",
+        "properties": {
+          "natural": true,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "control_zone": 2,
+        "armor_piercing": 0,
+        "equipped": true,
+        "damage_formula": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "range": "",
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "cleaving": 0,
+        "deflecting": 0,
+        "vs_creature": {},
+        "bypass_creature": {},
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false,
+        "is_variable_grip": false,
+        "is_paired": false
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MatriarchLionMaw"
+    },
+    {
+      "_id": "MatriarchGoatHrn",
+      "name": "Козлиные рога",
+      "type": "weapon",
+      "img": "systems/dedrel/assets/icons/items/weapon.svg",
+      "flags": {
+        "dedrel": {
+          "key": "matriarch_goat_horns",
+          "folder": "For opponents/Chimeras"
+        }
+      },
+      "system": {
+        "key": "matriarch_goat_horns",
+        "description": "<p><strong>Вторая голова Матриарха.</strong> Ступень IV, дробящий — единственное её оружие, которым проходит «Таран».</p><p><strong>Зона Контроля 2</strong> — она же несёт размерный Контроль существа: в системе ЗК читается с экипированного оружия ближнего боя, отдельного поля размера у актора нет.</p>",
+        "rarity": "common",
+        "weight": 0,
+        "base_price": 0,
+        "crafting": {
+          "craftable": false,
+          "discipline": "",
+          "ingredients": [],
+          "markup_pct": 50,
+          "cost_price": 0,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "damage_type": {
+          "piercing": false,
+          "bludgeoning": true,
+          "slashing": false
+        },
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "",
+          "bludgeoning": "2d8"
+        },
+        "skill": "unarmed_combat",
+        "properties": {
+          "natural": true,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "control_zone": 2,
+        "armor_piercing": 0,
+        "equipped": true,
+        "damage_formula": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "range": "",
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "cleaving": 0,
+        "deflecting": 0,
+        "vs_creature": {},
+        "bypass_creature": {},
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false,
+        "is_variable_grip": false,
+        "is_paired": false
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MatriarchGoatHrn"
+    },
+    {
+      "_id": "MatriarchSerpent",
+      "name": "Змеиная голова",
+      "type": "weapon",
+      "img": "systems/dedrel/assets/icons/items/weapon.svg",
+      "flags": {
+        "dedrel": {
+          "key": "matriarch_serpent_head",
+          "folder": "For opponents/Chimeras"
+        }
+      },
+      "system": {
+        "key": "matriarch_serpent_head",
+        "description": "<p><strong>Третья голова Матриарха</strong> — хвост, оканчивающийся змеёй. Ступень III: бьёт слабее двух других, но несёт яд, который не срезается ни DR, ни сопротивлением.</p><p><strong>Зона Контроля 2</strong> — она же несёт размерный Контроль существа: в системе ЗК читается с экипированного оружия ближнего боя, отдельного поля размера у актора нет.</p>",
+        "rarity": "common",
+        "weight": 0,
+        "base_price": 0,
+        "crafting": {
+          "craftable": false,
+          "discipline": "",
+          "ingredients": [],
+          "markup_pct": 50,
+          "cost_price": 0,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "damage_type": {
+          "piercing": true,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "2d6",
+          "bludgeoning": ""
+        },
+        "skill": "unarmed_combat",
+        "properties": {
+          "natural": true,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "control_zone": 2,
+        "armor_piercing": 0,
+        "equipped": true,
+        "damage_formula": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "range": "",
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "cleaving": 0,
+        "deflecting": 0,
+        "vs_creature": {},
+        "bypass_creature": {},
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false,
+        "is_variable_grip": false,
+        "is_paired": false
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MatriarchSerpent"
+    },
+    {
+      "name": "Укус",
+      "type": "maneuver",
+      "_id": "oLaqBxtIBjNcM9mC",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "system": {
+        "description": "<p>Атака естественным оружием — клыками, жвалами, клювом. Формула и тип урона берутся с самого оружия, поэтому один манёвр обслуживает любое существо: у волка это клыки, у медведя — пасть.</p>\n<p>По цели, которая уже лежит или схвачена, бьют не Укусом, а манёвром «Загрызть» — он сам считает урон на ступень выше.</p>",
+        "key": "maneuver_common_monster_bite",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "после Атаки по возможности",
+        "chain_trigger_maneuvers": [
+          "maneuver_monster_attack_of_opportunity"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [
+          ""
+        ],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "skill": "unarmed_combat",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "hide_combat_buttons": false,
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_common_monster_bite",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.oLaqBxtIBjNcM9mC"
+    },
+    {
+      "_id": "MonsterRam000001",
+      "name": "Таран",
+      "type": "maneuver",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_monster_ram",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "system": {
+        "key": "maneuver_monster_ram",
+        "source": "basic",
+        "description": "<p>Разгон по прямой <strong>не менее 6 м</strong> (входит в манёвр и тратит Скорость) и удар всей массой: рогами, лбом, тушей.</p>\n<p>Требует <strong>дробящего</strong> естественного оружия — тем же правилом, что «Полоснуть» требует режущего.</p>\n<p><strong>При попадании</strong> — контест броска атаки против Атлетики цели. Успех отталкивает цель на <strong>2 м</strong> (на <strong>4 м</strong>, если существо крупнее цели хотя бы на категорию) и сбивает её с ног (@UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит}).</p>\n<p><strong>Если отброшенная цель врезается</strong> в стену, решётку или другое существо — она получает дополнительный урон, как от падения с той же дистанции (см. правила «Бой и урон»), и останавливается на месте удара.</p>\n<p><strong>Размер:</strong> +2 контесту за каждую категорию разницы в пользу большего. Цель на две и более категории крупнее сдвинуть нельзя.</p>\n<p><em>Экономика. Таран дороже Рывка на разгон (6 м против 4) и не даёт цепи «Придавить» — он не валит под себя, а вышибает прочь. Это манёвр контроля пространства: разорвать строй, выбить стрелка с уступа, вбить кастера в стену.</em></p>",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 3,
+        "skill": "unarmed_combat",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": true,
+          "slashing": false
+        },
+        "target_type": "creature",
+        "target_value": 1,
+        "prerequisites_text": "6 м свободного пространства по прямой для разгона.",
+        "hide_combat_buttons": false,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_range": "",
+        "template_shape": "",
+        "template_size": 0,
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1792453977778,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MonsterRam000001"
+    },
+    {
+      "_id": "MonsterVenomBite",
+      "name": "Ядовитый укус",
+      "type": "maneuver",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_monster_venom_bite",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "system": {
+        "key": "maneuver_monster_venom_bite",
+        "source": "basic",
+        "description": "<p>Атака естественным оружием, несущим яд: змеиная голова, жвалы, ядовитый шип. Формула и тип урона — с оружия.</p>\n<p><strong>При попадании</strong> цель делает спасбросок <strong>Телосложения, DC 9 + ранг угрозы</strong> существа (то же правило, что у «Даров», см. «Способности существ»). Провал — цель получает @UUID[Compendium.dedrel.conditions.Item.ConditionPoisonC]{Отравление (боевое)}, один стак.</p>\n<p>Повторные попадания <strong>добавляют стаки</strong> и обновляют длительность. Стаки складываются в уроне тика, потолок — 3.</p>\n<p><em>Яд — не тип урона, а save-ось: его не срезает ни DR, ни сопротивление стихии. Единственные ответы — спасбросок, антидот и лечение.</em></p>",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "после Укуса или монстровой Атаки по возможности",
+        "chain_trigger_maneuvers": [
+          "maneuver_common_monster_bite",
+          "maneuver_monster_attack_of_opportunity"
+        ],
+        "ap_cost": 2,
+        "skill": "unarmed_combat",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "target_type": "creature",
+        "target_value": 1,
+        "save_attribute": "con",
+        "hide_combat_buttons": false,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_range": "",
+        "template_shape": "",
+        "template_size": 0,
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MonsterVenomBite"
+    },
+    {
+      "_id": "MonsterMaulBite1",
+      "name": "Загрызть",
+      "type": "maneuver",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_monster_maul",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "system": {
+        "key": "maneuver_monster_maul",
+        "source": "basic",
+        "description": "<p>Зверь рвёт добычу, которая уже не держится на ногах. Проводится только по цели со статусом @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит} или @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен}.</p>\n<p>Атака естественным оружием, урон — на <strong>ступень выше</strong> по Лестнице (1d4 → 1d6 → 2d4 → 2d6 → 2d8 → 3d6). Сдвиг считает система; действует правило одной ступени, поэтому с другими бафами урона он не складывается сверх +1.</p>\n<p>Зеркало «Подсечки»: та роняет цель, эта снимает с этого урожай. От универсального «Добивания» отличается тем, что «Добивание» — реакция в момент падения, а «Загрызть» проводится в свой ход по уже лежащей добыче.</p>",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "после Рывка или Мёртвой хватки",
+        "chain_trigger_maneuvers": [
+          "maneuver_monster_pounce",
+          "maneuver_monster_jaw_lock"
+        ],
+        "ap_cost": 2,
+        "skill": "unarmed_combat",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "weapon_dice_step": 1,
+        "target_type": "creature",
+        "target_value": 1,
+        "prerequisites_text": "Цель со статусом «Лежит» или «Схвачен».",
+        "hide_combat_buttons": false,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [
+          ""
+        ],
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "target_range": "",
+        "template_shape": "",
+        "template_size": 0,
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MonsterMaulBite1"
+    },
+    {
+      "_id": "MonsterJawLock01",
+      "name": "Мёртвая хватка",
+      "type": "maneuver",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_monster_jaw_lock",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "system": {
+        "key": "maneuver_monster_jaw_lock",
+        "source": "basic",
+        "description": "<p>Существо смыкает челюсти и виснет на добыче. Проводится только после <strong>попавшего</strong> @UUID[Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC]{Укус}.</p>\n<p><strong>Контест:</strong> Атлетика существа против Атлетики цели (кнопка броска катит Атлетику). При успехе @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен} получают <strong>оба</strong>: захват связывает и добычу, и хищника.</p>\n<p><strong>Пока захват держится:</strong> существо не сходит с места — уйти с клетки значит отпустить. Цель освобождается манёвром @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Взаимодействие} со встречным Атлетикой, и состояние спадает с обоих.</p>\n<p><strong>Размер:</strong> +2 контесту за каждую категорию разницы в пользу большего; на две категории крупнее захват невозможен.</p>",
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "после попавшего Укуса",
+        "chain_trigger_maneuvers": [
+          "maneuver_common_monster_bite"
+        ],
+        "ap_cost": 1,
+        "skill": "atletism",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "target_type": "creature",
+        "target_value": 1,
+        "hide_combat_buttons": false,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [
+          ""
+        ],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "target_range": "",
+        "template_shape": "",
+        "template_size": 0,
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1792453977779,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MonsterJawLock01"
+    },
+    {
+      "_id": "MonsterRetaliat1",
+      "name": "Ответный укус",
+      "type": "maneuver",
+      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_monster_retaliate",
+          "folder": "Monster",
+          "isFavorite": true
+        }
+      },
+      "system": {
+        "key": "maneuver_monster_retaliate",
+        "source": "basic",
+        "description": "<p><strong>Реакция.</strong> После того как по существу <strong>попали в ближнем бою</strong>, оно немедленно бьёт в ответ естественным оружием. Урон с оружия, без сдвига ступени.</p>\n<p><strong>Один раз на каждого атакующего за раунд.</strong> Два разных противника — две реакции, если хватает ОД; один противник, ударивший дважды, получает ответ только на первый удар.</p>\n<p><em>Зачем это существует. Монстровая «Атака по возможности» ловит тех, кто уходит; «Ответный укус» — тех, кто остался и бьёт. Вместе они превращают большой пул ОД в угрозу, которая работает В ЧУЖОЙ ход: соло-босс, потративший весь свой ход на атаки, всё равно опасен, пока у него есть ОД.</em></p>\n<p><em>Кому давать: одиночкам с раздутым пулом ОД — боссам, элите, многоголовым. Массовке нельзя: пачка пеонов с реакциями останавливает бой.</em></p>",
+        "action_type": {
+          "action": false,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 3,
+        "skill": "unarmed_combat",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "target_type": "creature",
+        "target_value": 1,
+        "hide_combat_buttons": false,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_range": "",
+        "template_shape": "",
+        "template_size": 0,
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.MonsterRetaliat1"
+    },
+    {
+      "name": "Атака по возможности (m)",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Если зона контроля персонажа равна 1 и больше и он не находится @UUID[Compendium.dedrel.conditions.Item.1Ed1ogtSr0oxJhd5]{В клинче} он может без дополнительной траты ОД провести Выпад, Взмах или Удар, если держит в руках оружие, позволяющее проводить такие манёвры по персонажу который пересекает его зону контроля. Если атака была успешной (даже если не нанесла урон), движение противника после этого прекращается, персонажи переходят в состояние В Клинче Если противник пересекает несколько клеток зоны контроля, персонаж может проводить атаки по возможности за каждую пересеченную клетку.<br><br><strong>Эффекты:</strong> Следующий Взмах, Удар или выпад стоит 0.</p>",
+        "key": "maneuver_monster_attack_of_opportunity",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          ""
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "prerequisites_text": "Зона контроля >=1, нет состояния „В Клинче“.",
+        "target_type": "self",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [
+          ""
+        ],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_attack_of_opportunity",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+      "effects": [
+        {
+          "name": "Атака по возможности",
+          "origin": "Compendium.dedrel.maneuvers.Item.kYkUGNsX9fbDKoRd",
+          "_id": "3vYKn5wCeaPokRqI",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:key:maneuver_common_monster_bite",
+                "phase": "initial",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnEnd",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789510175515,
+            "modifiedTime": 1789510175515,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!MatriarchChimera.iyN115gveSxkInc3.3vYKn5wCeaPokRqI"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_id": "iyN115gveSxkInc3",
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.iyN115gveSxkInc3"
+    },
+    {
+      "name": "Уклонение",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж тратит от 1 до 5 ОД и получает столько же очков к Уклонению до начала своего следующего хода.</p>",
+        "key": "maneuver_dodge",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 0,
+        "is_variable_cost": true,
+        "variable_cost_max": 5,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_dodge",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "balrTxNEl33DGerg",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+      "effects": [
+        {
+          "name": "Уклонение",
+          "origin": "Compendium.dedrel.maneuvers.Item.balrTxNEl33DGerg",
+          "_id": "Qx96tAtFyvoGA4rF",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.dodge",
+                "type": "add",
+                "value": "@spentAp",
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789510175515,
+            "modifiedTime": 1789510175515,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!MatriarchChimera.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1792453977779,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.balrTxNEl33DGerg"
+    },
+    {
+      "name": "Разорвать дистанцию",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Вы разрываете сцепку: уходите из-под чужого оружия так, что противник не успевает достать вас на отходе.</p>\n<p><strong>Эффект:</strong> вы выходите из состояния <strong>В клинче</strong>, и партнёр по клинчу не получает по вам Атаку по возможности.</p>\n<p>Само перемещение манёвром не оплачивается — оно бесплатно и тратит только метры Скорости. Этот манёвр покупает не движение, а безнаказанный выход.</p>",
+        "key": "maneuver_disengage",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_disengage",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "COx23vBpriCHVVLO",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_disengage.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789510175515,
+        "modifiedTime": 1789510175515,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!MatriarchChimera.COx23vBpriCHVVLO"
+    }
+  ],
+  "prototypeToken": {
+    "name": "Матриарх",
+    "texture": {
+      "src": "systems/dedrel/assets/Actors/Tokens/citychimera01.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "width": 3,
+    "height": 3,
+    "actorLink": false,
+    "disposition": -1,
+    "displayName": 0,
+    "displayBars": 50,
+    "bar1": {
+      "attribute": "resources.hp"
+    },
+    "lockRotation": true,
+    "randomImg": false,
+    "appendNumber": true,
+    "sight": {
+      "enabled": true,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "depth": 1,
+    "rotation": 0,
+    "alpha": 1,
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "prependAdjective": false
+  },
+  "flags": {
+    "dedrel": {
+      "itemsLocked": false,
+      "favoriteSkills": [
+        "unarmed_combat",
+        "atletism",
+        "intimidation"
+      ],
+      "folder": "NPC/Chimeras"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789510175515,
+    "modifiedTime": 1789510175516,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!MatriarchChimera"
+}

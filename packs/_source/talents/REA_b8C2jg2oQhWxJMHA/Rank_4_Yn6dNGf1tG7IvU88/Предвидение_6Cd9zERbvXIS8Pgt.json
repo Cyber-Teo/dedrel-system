@@ -1,0 +1,51 @@
+{
+  "name": "Предвидение",
+  "type": "talent",
+  "system": {
+    "description": "В начале каждого боя, до первого хода, бросьте 2d10 и запомните результаты. В любой момент до конца боя вы можете заменить любой бросок d10 — свой или противника — одним из запомненных значений. Каждое значение можно использовать только один раз.",
+    "key": "portent",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.rea.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "portent",
+      "folder": "REA/Rank 4"
+    }
+  },
+  "folder": "Yn6dNGf1tG7IvU88",
+  "_id": "6Cd9zERbvXIS8Pgt",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1784181820247,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6Cd9zERbvXIS8Pgt"
+}

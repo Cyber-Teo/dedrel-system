@@ -1,0 +1,90 @@
+{
+  "name": "Живой осадный механизм (в разработке)",
+  "type": "maneuver",
+  "system": {
+    "description": "Ты можешь поднимать и швырять огромные, тяжелые объекты с силой катапульты.\nТы можешь поднять и швырнуть большой объект (валун, колонну) на расстояние до (ранг Силы × 5) клеток. При попадании в цель или в точку на земле, объект наносит большой урон по области (например, радиус 1–2 клетки).<br><br><b>Комментарии:</b> переформулировать/переписать этот манёвр",
+    "key": "maneuver_living_siege_engine",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 0,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "living_siege_engine"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "2",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_living_siege_engine",
+      "folder": "Talent"
+    }
+  },
+  "folder": "1Buiz9OO3aZTKlAz",
+  "_id": "XhMoleyZsEkQPkFm",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_living_siege_engine.svg",
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024583,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!XhMoleyZsEkQPkFm"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "LOG",
+  "type": "Item",
+  "folder": null,
+  "_id": "sPD7AcjOTfTqvRbH",
+  "description": "",
+  "sorting": "a",
+  "sort": 800000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044206,
+    "modifiedTime": 1783330543872,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!sPD7AcjOTfTqvRbH"
+}

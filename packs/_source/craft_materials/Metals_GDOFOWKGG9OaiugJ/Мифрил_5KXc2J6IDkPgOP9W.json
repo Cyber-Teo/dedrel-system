@@ -1,0 +1,67 @@
+{
+  "name": "Мифрил",
+  "type": "craft_material",
+  "_id": "5KXc2J6IDkPgOP9W",
+  "img": "systems/dedrel/assets/icons/materials/metal/Mithral.webp",
+  "system": {
+    "description": "<div><p>Эльфы очень любят этот металл. Они научили людей работать с ним. Сами эльфы создают из него не только чудесные доспехи, но и украшения. И хоть обладающий собственной магией он не способен принять дополнительные чары, его серебристый блеск неизменно привлекает к себе внимание. К сожалению мифрил слишком лёгок и гибок для изготовления оружия.</p></div>",
+    "key": "mithral",
+    "rarity": "uncommon",
+    "weight": 0.5,
+    "base_price": 200,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": true,
+      "shield": true,
+      "jewelry": false
+    },
+    "grants": [
+      {
+        "label": "common slot",
+        "bonus": 0,
+        "slots": [
+          "common"
+        ]
+      }
+    ],
+    "weight_class": "light",
+    "signature": {
+      "armor": "One step of lightness: Layer -1 OR Weight class -1 (choose one at crafting)",
+      "magic": "Protection from clairvoyance"
+    }
+  },
+  "effects": [],
+  "folder": "GDOFOWKGG9OaiugJ",
+  "sort": 100098,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783680121175,
+    "modifiedTime": 1792453977032,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5KXc2J6IDkPgOP9W"
+}

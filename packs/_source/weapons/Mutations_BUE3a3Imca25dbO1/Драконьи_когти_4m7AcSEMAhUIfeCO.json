@@ -1,0 +1,75 @@
+{
+  "name": "Драконьи когти",
+  "type": "weapon",
+  "_id": "4m7AcSEMAhUIfeCO",
+  "img": "systems/dedrel/assets/icons/weapon_icons/claws.svg",
+  "system": {
+    "description": "",
+    "key": "dragon_claws_weapon",
+    "weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "damage_type": {
+      "piercing": true,
+      "bludgeoning": false,
+      "slashing": true
+    },
+    "skill": "unarmed_combat",
+    "damage_formula": "",
+    "range": "",
+    "properties": {
+      "natural": false,
+      "armor_piercing": false,
+      "misfire_chance": 0,
+      "consumed_on_use": false,
+      "can_be_sold": false,
+      "can_be_dropped": false
+    },
+    "quantity": 1,
+    "consume_target": "",
+    "consume_amount": 1,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "on_use_macro": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "control_zone": 0,
+    "armor_piercing": 0,
+    "is_auxiliary": false,
+    "is_fast": false,
+    "is_slow": false,
+    "is_twohanded": false,
+    "is_thrown": false,
+    "is_enchanted": false,
+    "is_reloading": false,
+    "equipped": false,
+    "damage_formulas": {
+      "slashing": "1d6",
+      "piercing": "1d6"
+    }
+  },
+  "effects": [],
+  "folder": "BUE3a3Imca25dbO1",
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782866516234,
+    "modifiedTime": 1789523008754,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4m7AcSEMAhUIfeCO"
+}

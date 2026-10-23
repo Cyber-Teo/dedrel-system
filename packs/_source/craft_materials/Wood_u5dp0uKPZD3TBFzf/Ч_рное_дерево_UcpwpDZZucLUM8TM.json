@@ -1,0 +1,60 @@
+{
+  "folder": "u5dp0uKPZD3TBFzf",
+  "name": "Чёрное дерево",
+  "type": "craft_material",
+  "_id": "UcpwpDZZucLUM8TM",
+  "img": "systems/dedrel/assets/icons/materials/wood/Ebony.webp",
+  "system": {
+    "description": "<div><p>Это дерево встречается в Подменном лесу и является одним из главных экспортных товаров королевства Гросс. Способное нести в себе магию при этом красивое, оно широко используется в декоративных целях и для создания магических предметов. Из-за веса, плохо подходит для изготовления оружия. </p></div>",
+    "key": "ebony",
+    "rarity": "uncommon",
+    "weight": 1,
+    "base_price": 100,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "wood",
+    "material_class": "wood",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": true
+    },
+    "grants": [],
+    "slots": [
+      "uncommon"
+    ],
+    "signature": {
+      "magic": "Action Cost discount -1 for chosen technique"
+    }
+  },
+  "effects": [],
+  "sort": 1000000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783686313634,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!UcpwpDZZucLUM8TM"
+}

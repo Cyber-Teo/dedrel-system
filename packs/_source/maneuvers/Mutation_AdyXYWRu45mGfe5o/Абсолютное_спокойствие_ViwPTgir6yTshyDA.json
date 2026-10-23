@@ -1,0 +1,127 @@
+{
+  "name": "Абсолютное спокойствие",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>- Персонаж невосприимчив к эффектам влияющим на эмоции. В частности он иммунен к Страху, Провокации и Ужасу. - 10 раундов</p>",
+    "key": "maneuver_absolute_calm",
+    "source": "mutation",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 1,
+    "uses_max": "@attributes.will.rank",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_absolute_calm",
+      "folder": "Mutation"
+    }
+  },
+  "folder": "AdyXYWRu45mGfe5o",
+  "_id": "ViwPTgir6yTshyDA",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_absolute_calm.svg",
+  "effects": [
+    {
+      "name": "Абсолютное спокойствие",
+      "origin": "Compendium.dedrel.maneuvers.Item.ViwPTgir6yTshyDA",
+      "_id": "9B1sbbVGNWshcZky",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_absolute_calm.svg",
+      "type": "base",
+      "system": {
+        "changes": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 10,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "<p>- Персонаж невосприимчив к эффектам влияющим на эмоции. В частности он иммунен к Страху, Провокации и Ужасу. - 10 раундов</p>",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1782876569821,
+        "modifiedTime": 1783235919506,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!ViwPTgir6yTshyDA.9B1sbbVGNWshcZky"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024586,
+    "modifiedTime": 1784855818407,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ViwPTgir6yTshyDA"
+}

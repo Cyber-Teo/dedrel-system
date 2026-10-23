@@ -1,0 +1,147 @@
+{
+  "name": "Прицеливание дальнобойным оружием",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Персонаж получает +2 к следующему броску атаки Выстрел из огнестрела/лука/арбалета.<br><br></p>",
+    "key": "maneuver_take_ranged_aim",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": true,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "дальнобойное оружие",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_take_ranged_aim",
+      "folder": "Basic"
+    }
+  },
+  "folder": "XnZnoRTR9lDNupHv",
+  "_id": "BzvI3mTFloQgmlz3",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_take_ranged_aim.svg",
+  "effects": [
+    {
+      "name": "Прицеливание",
+      "origin": "Compendium.dedrel.maneuvers.Item.BzvI3mTFloQgmlz3",
+      "_id": "EdMTxYcl8kaelB3Z",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_take_ranged_aim.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dedrel.mod",
+            "type": "add",
+            "value": "ap_set:0; filter:ranged",
+            "phase": "initial",
+            "priority": null
+          },
+          {
+            "key": "flags.dedrel.mod",
+            "type": "add",
+            "value": "attack:2; filter:ranged; consume:roll",
+            "phase": "initial",
+            "priority": null
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783236247698,
+        "modifiedTime": 1783845664568,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!BzvI3mTFloQgmlz3.EdMTxYcl8kaelB3Z"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024581,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BzvI3mTFloQgmlz3"
+}

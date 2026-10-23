@@ -1,0 +1,51 @@
+{
+  "name": "Грузоподъемный (в разработке)",
+  "type": "talent",
+  "system": {
+    "description": "При расчете максимального переносимого веса твой ранг Телосложения считается удвоенным.<br><br><b>On Add Macro:</b><br>Base encumbrance(STR + (CON * 2))",
+    "key": "burden_bearer",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.con.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.con.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "burden_bearer",
+      "folder": "CON/Rank 2"
+    }
+  },
+  "folder": "twOIKau4JogrmiYV",
+  "_id": "o359k7R8JtRP6Q2L",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!o359k7R8JtRP6Q2L"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Демонические когти",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Как оружие когти. Персонаж получает возможность с лёгкостью лазить по деревьям и другим подобным поверхностям (не требуется проверка).</p>",
+    "key": "demon_claws",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Demon",
+      "2"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "demon_claws_weapon"
+    ],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "demon_claws",
+      "folder": "Demon/Rank 2"
+    }
+  },
+  "folder": "2MZFduZCKe2h2HFt",
+  "_id": "N5Ui7DnZx4VKCmuo",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992965,
+    "modifiedTime": 1792453976711,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!N5Ui7DnZx4VKCmuo"
+}

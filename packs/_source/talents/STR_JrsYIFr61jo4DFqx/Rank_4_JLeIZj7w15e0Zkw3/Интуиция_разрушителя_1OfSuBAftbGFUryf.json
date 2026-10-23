@@ -1,0 +1,53 @@
+{
+  "name": "Интуиция разрушителя",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.wFINBDNa0ghpigJ8]{Интуиция разрушителя}</p><p>Вешает статус.</p><p>Ваша следующая атака дробящим оружием - @UUID[Compendium.dedrel.maneuvers.Item.mscX6Oj6Expeah49]{Удар} или @UUID[Compendium.dedrel.maneuvers.Item.u2MUNJ2oJeExQuzq]{Удар с замахом} стоит 0 ОД. </p><p>В случае попадания, атака нанесёт усиленный урон (1 ступень урона выше). </p><p>Так же, цель получит травму. <br>Зона поражения определяется броском д100. Руки 1-40% Торс 41-70% Ноги 71%-90% Голова 91-100%</p>",
+    "key": "destroyers_intuition",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.str.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_destroyers_intuition"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "destroyers_intuition",
+      "folder": "STR/Rank 4"
+    }
+  },
+  "folder": "JLeIZj7w15e0Zkw3",
+  "_id": "1OfSuBAftbGFUryf",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!1OfSuBAftbGFUryf"
+}

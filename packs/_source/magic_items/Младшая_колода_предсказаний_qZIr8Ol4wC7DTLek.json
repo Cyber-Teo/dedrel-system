@@ -1,0 +1,73 @@
+{
+  "name": "Младшая колода предсказаний",
+  "type": "magic_item",
+  "_id": "qZIr8Ol4wC7DTLek",
+  "img": "systems/dedrel/assets/icons/magic_items/card-random.svg",
+  "system": {
+    "description": "<p>Это набор карт, похожих на обычные игральные карты выполненные в стиле по выбору создателя колоды. При помощи этой колоды наполненной магическими силами можно пытаться предсказывать ближайшее будущее.<br>Использующий должен задать чёткий вопрос который касается действий, которые он или кто-то другой собирается совершить в ближайшие сутки и разложить карты. Мастер даст один из ответов (с точки зрения вопрошающего).<br>Исход дела будет благополучным.<br>Исход дела будет дурным.<br>Исход дела будет благополучным и дурным одновременно.<br>Исход дела не принесёт ничего.<br>Расклад не складывается (нет ответа).<br>Колоду можно использовать не чаще чем раз в сутки.</p>",
+    "key": "mi_deck_of_fate_lesser",
+    "rarity": "common",
+    "weight": 0.2,
+    "base_price": 127,
+    "crafting": {
+      "craftable": true,
+      "discipline": "inscription",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Thm1IYyp64OHS0Y7",
+          "name": "Обычные магические чернила",
+          "amount": 3
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.f1swBuJZeCEKcx0r",
+          "name": "Тряпичная бумага",
+          "amount": 4
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 84.8,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "equip_slot": "",
+    "stackable": false,
+    "consumable": false,
+    "quantity": 1,
+    "effect_description": "",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "day",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790035244899,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!qZIr8Ol4wC7DTLek"
+}

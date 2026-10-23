@@ -1,0 +1,57 @@
+{
+  "name": "Медь",
+  "type": "craft_material",
+  "_id": "Kwsf1dnLfxiELpn4",
+  "img": "systems/dedrel/assets/icons/materials/metal/Copper.webp",
+  "system": {
+    "description": "<div><p>Основной материал для производства дешевых украшений и инкрустации.</p></div>",
+    "key": "copper",
+    "rarity": "common",
+    "weight": 2,
+    "base_price": 5,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": true
+    },
+    "grants": [],
+    "slots": [
+      "common"
+    ]
+  },
+  "effects": [],
+  "folder": "GDOFOWKGG9OaiugJ",
+  "sort": 106250,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783677425319,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Kwsf1dnLfxiELpn4"
+}

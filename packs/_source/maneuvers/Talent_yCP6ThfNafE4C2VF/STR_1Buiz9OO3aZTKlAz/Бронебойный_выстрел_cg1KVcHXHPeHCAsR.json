@@ -1,0 +1,148 @@
+{
+  "name": "Бронебойный выстрел",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Позволяет использовать длинные луки на полную мощность и совершать чудовищно мощные выстрелы, которые получают свойство Бронебойное 1-3 в зависимости от потраченных ОД.</p><p>После использования Бронебойного выстрела, вы можете сделать в цепи @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Быстрый выстрел из лука} или @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Выстрел из лука}</p>",
+    "key": "maneuver_armor_piersing_shot",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [
+      "maneuver_mobile_marksman",
+      "maneuver_take_ranged_aim"
+    ],
+    "ap_cost": 1,
+    "is_variable_cost": true,
+    "variable_cost_max": 3,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": true,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "armor_piersing_shot"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true,
+    "req_weapon_keys": [
+      "longbow"
+    ]
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_armor_piersing_shot",
+      "folder": "Talent"
+    }
+  },
+  "folder": "1Buiz9OO3aZTKlAz",
+  "_id": "cg1KVcHXHPeHCAsR",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_armor_piersing_shot.svg",
+  "effects": [
+    {
+      "name": "Бронебойный выстрел",
+      "origin": "Compendium.dedrel.maneuvers.Item.cg1KVcHXHPeHCAsR",
+      "_id": "oWUMaPyHcy0V6MWq",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_armor_piersing_shot.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dedrel.mod",
+            "type": "add",
+            "value": "pierce:@spentAp; filter:key:maneuver_bow_shot|key:maneuver_rapid_bow_shot",
+            "phase": "initial",
+            "priority": null
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "turns",
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783832700709,
+        "modifiedTime": 1783833249235,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!cg1KVcHXHPeHCAsR.oWUMaPyHcy0V6MWq"
+    }
+  ],
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024583,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!cg1KVcHXHPeHCAsR"
+}

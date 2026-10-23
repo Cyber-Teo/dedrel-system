@@ -1,0 +1,54 @@
+{
+  "folder": "oOirhH7dzgCNslGM",
+  "name": "Чаша семи звёзд",
+  "type": "craft_material",
+  "_id": "PJ96K3AUF8e4KS7r",
+  "img": "systems/dedrel/assets/icons/items/craft_material.svg",
+  "system": {
+    "description": "<div><p>озёра, реки. </p><p>Эти огромные белые цветы предпочитают расти в воде и распускаются по ночам, когда светят звёзды.</p></div>",
+    "key": "chalice_of_seven_stars",
+    "rarity": "rare",
+    "weight": 0.1,
+    "base_price": 400,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783694398153,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!PJ96K3AUF8e4KS7r"
+}

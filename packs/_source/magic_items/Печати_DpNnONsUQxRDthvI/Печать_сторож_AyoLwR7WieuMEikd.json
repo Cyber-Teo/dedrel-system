@@ -1,0 +1,77 @@
+{
+  "name": "Печать-сторож",
+  "type": "magic_item",
+  "img": "systems/dedrel/assets/icons/items/scroll.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Печати"
+    }
+  },
+  "system": {
+    "description": "<p>На печати изображается пёс в стиле по выбору создателя.<br>Эта печать начинает издавать звонкий звук колокольчиков в течение 10 минут, когда незваное материальное существо приближается к ней ближе чем на 15 метров.<br>Вы можете прикрепить эту печать к любой поверхности или положить её на землю. Перед использованием вам необходимо выбрать на кого срабатывает сигнал тревоги зачеркнув ненужные опции в печати.<br>Крошечные существа<br>Маленькие существа<br>Средние существа<br>Большие существа<br>Огромные существа<br>Вы также можете капнуть на печать каплю крови тех, на кого печать не должна срабатывать (в ином случае она сработает на вас, если вы существо указанного в списке размера).<br>После произнесения командного слова, печать начинает действовать и будет активна в течение 12 часов или до тех пор пока не сработает.</p>",
+    "key": "seal_guard",
+    "rarity": "common",
+    "weight": 0.01,
+    "base_price": 21,
+    "crafting": {
+      "craftable": true,
+      "discipline": "inscription",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Thm1IYyp64OHS0Y7",
+          "name": "Обычные магические чернила",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.f1swBuJZeCEKcx0r",
+          "name": "Тряпичная бумага",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 14.1,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "equip_slot": "",
+    "stackable": true,
+    "consumable": true,
+    "quantity": 1,
+    "effect_description": "Тревога на чужака ближе 15 м; взведена 12 ч.",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "folder": "DpNnONsUQxRDthvI",
+  "_id": "AyoLwR7WieuMEikd",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790096445287,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AyoLwR7WieuMEikd"
+}

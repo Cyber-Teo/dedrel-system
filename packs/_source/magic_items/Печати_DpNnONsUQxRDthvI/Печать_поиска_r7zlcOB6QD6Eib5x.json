@@ -1,0 +1,77 @@
+{
+  "name": "Печать поиска",
+  "type": "magic_item",
+  "img": "systems/dedrel/assets/icons/items/scroll.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Печати"
+    }
+  },
+  "system": {
+    "description": "<p>На печати изображается глаз в стиле по выбору создателя.<br>Эта печать предназначена для поиска ловушек и других неожиданных вредных эффектов в радиусе 20 метров.<br>Вы должны держать печать в руках и произнести командное слово. Если изображение глаза на печати не изменится, то значит в радиусе 20 метров ловушек нет. Если изображение глаза “заплачет” красными чернилами, значит ловушка поблизости есть. После использования печать становится бесполезна.</p>",
+    "key": "seal_seeking",
+    "rarity": "uncommon",
+    "weight": 0.01,
+    "base_price": 21,
+    "crafting": {
+      "craftable": true,
+      "discipline": "inscription",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.f1swBuJZeCEKcx0r",
+          "name": "Тряпичная бумага",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Thm1IYyp64OHS0Y7",
+          "name": "Обычные магические чернила",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 14.1,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "equip_slot": "",
+    "stackable": true,
+    "consumable": true,
+    "quantity": 1,
+    "effect_description": "Одноразовая: ищет ловушки в радиусе 20 м.",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "folder": "DpNnONsUQxRDthvI",
+  "_id": "r7zlcOB6QD6Eib5x",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790096445278,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!r7zlcOB6QD6Eib5x"
+}

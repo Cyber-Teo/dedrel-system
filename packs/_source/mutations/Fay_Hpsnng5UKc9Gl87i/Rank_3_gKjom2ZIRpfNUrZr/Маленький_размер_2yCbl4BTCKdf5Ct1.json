@@ -1,0 +1,121 @@
+{
+  "name": "Маленький размер",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Персонаж очень маленького роста (до 1,2м) <br>При создании персонажа +1 Ловкость, +1 Реакция, +1 Скрытность, −2 Блок<br></p><p><strong>не стакается с @UUID[Compendium.dedrel.mutations.Item.MUxh5rwGfo0VqPHW]{Огромный размер}</strong></p>",
+    "key": "fay_small_size",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_small_size",
+      "folder": "Fay/Rank 3"
+    }
+  },
+  "folder": "gKjom2ZIRpfNUrZr",
+  "_id": "2yCbl4BTCKdf5Ct1",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [
+    {
+      "name": "Маленький размер",
+      "origin": "Compendium.dedrel.mutations.Item.2yCbl4BTCKdf5Ct1",
+      "_id": "twF9853yXxGjZu1a",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.dex.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.attributes.rea.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.skills.stealth.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.defenses.block",
+            "type": "add",
+            "value": -2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1782878736890,
+        "modifiedTime": 1789085011382,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!2yCbl4BTCKdf5Ct1.twF9853yXxGjZu1a"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1792453976710,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2yCbl4BTCKdf5Ct1"
+}

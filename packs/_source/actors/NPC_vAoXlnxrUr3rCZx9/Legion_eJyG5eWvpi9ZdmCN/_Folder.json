@@ -1,0 +1,23 @@
+{
+  "name": "Legion",
+  "type": "Actor",
+  "folder": "vAoXlnxrUr3rCZx9",
+  "_id": "eJyG5eWvpi9ZdmCN",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789437675180,
+    "modifiedTime": 1789437675180,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!eJyG5eWvpi9ZdmCN"
+}

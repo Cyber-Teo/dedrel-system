@@ -1,0 +1,101 @@
+{
+  "name": "Сильный хвост",
+  "type": "talent",
+  "system": {
+    "description": "<p>Даёт +1 к спасброскам Силы<br></p>",
+    "key": "strong_tail",
+    "subtype": "passive",
+    "xp_cost": 1,
+    "prerequisites_text": "@attributes.str.rank 1",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 1"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "demon_tail",
+      "dragon_tail"
+    ],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "strong_tail",
+      "folder": "Mutations"
+    }
+  },
+  "folder": "B46zSkXFJxJ0BVfZ",
+  "_id": "9GoxfyCnFmVu8JVb",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [
+    {
+      "name": "Сильный хвост",
+      "origin": "Compendium.dedrel.talents.Item.9GoxfyCnFmVu8JVb",
+      "_id": "cpAtugQDpPsFrXcn",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.str.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783332923787,
+        "modifiedTime": 1783744435258,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!9GoxfyCnFmVu8JVb.cpAtugQDpPsFrXcn"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1784855818318,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!9GoxfyCnFmVu8JVb"
+}

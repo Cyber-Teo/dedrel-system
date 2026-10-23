@@ -1,0 +1,118 @@
+{
+  "_id": "NievesBodyTune01",
+  "name": "Подгонка тела",
+  "type": "spell",
+  "img": "systems/dedrel/assets/icons/items/spell.svg",
+  "folder": "ovvaJP2joVDj2LO4",
+  "system": {
+    "doctrine": "biomancy",
+    "doctrine_rank_req": 2,
+    "doctrine_path": "",
+    "source_scale": "none",
+    "chosen_techniques": [
+      "imbue"
+    ],
+    "chosen_modifiers": [
+      {
+        "key": "imbuement",
+        "rank": 2,
+        "ap": 2,
+        "option": "dr"
+      },
+      {
+        "key": "duration",
+        "rank": 2,
+        "ap": 2,
+        "option": ""
+      }
+    ],
+    "total_cost_breakdown": "Imbue/Infuse [1] + Imbuement 2 [2] + Duration 2 [2] = 5 AP",
+    "ap_cost": 5,
+    "skill": "magical_attacks",
+    "attack_bonus": 0,
+    "action_type": {
+      "action": true,
+      "chain": false,
+      "reaction": false,
+      "free": false
+    },
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false,
+      "magic": true
+    },
+    "key": "nieves_body_tuning",
+    "description": "<p>Она правит собственное тело так же спокойно, как чужое: слои под кожей уплотняются, и удар уходит в мясо, не доходя до кости.</p>\n<p><strong>Эффект:</strong> +2 DR себе на 6 раундов.</p>\n<p><strong>В сцене:</strong> объясняет, почему её не берут с первого удара. Кастуется до боя, если у Ниэвес было время услышать шаги.</p>",
+    "source": "basic",
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "is_fixed": false,
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "folder": "Biomancy"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789664058211,
+    "modifiedTime": 1789664058211,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NievesBodyTune01"
+}

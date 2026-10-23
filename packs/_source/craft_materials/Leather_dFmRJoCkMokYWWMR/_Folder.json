@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": null,
+  "name": "Leather",
+  "color": null,
+  "sorting": "a",
+  "_id": "dFmRJoCkMokYWWMR",
+  "description": "",
+  "sort": 500000,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783686747531,
+    "modifiedTime": 1783699289945,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!dFmRJoCkMokYWWMR"
+}

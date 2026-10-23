@@ -1,0 +1,53 @@
+{
+  "name": "Псионика: Телепатия",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Открывает доступ к доктрине телепатия и даёт в ней 1 ранг.</p>",
+    "key": "human_psionics_telepathy",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 6,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Human",
+      "5"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "human_psionics_telepathy",
+      "folder": "Human/Rank 5"
+    }
+  },
+  "folder": "qaIM7MKfRRIuVbCH",
+  "_id": "FYv4BM1CkbJzvdZz",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992964,
+    "modifiedTime": 1784855818222,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FYv4BM1CkbJzvdZz"
+}

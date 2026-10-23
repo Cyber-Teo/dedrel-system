@@ -1,0 +1,141 @@
+{
+  "name": "Сквозь боль",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>3 раза в долгий отдых</p><p>Свободное действие. Игнорируете штрафы от ранений до конца раунда.</p>",
+    "key": "maneuver_through_the_pain",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "through_the_pain"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_through_the_pain",
+      "folder": "Talent"
+    }
+  },
+  "folder": "x6gFtZ0kaGqMYFnD",
+  "_id": "oV4BXCAQLoBVjnWM",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_through_the_pain.svg",
+  "effects": [
+    {
+      "name": "Сквозь боль",
+      "origin": "Compendium.dedrel.maneuvers.Item.oV4BXCAQLoBVjnWM",
+      "_id": "uIlQRDvsY5P09gfv",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_through_the_pain.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.ignore_wound_penalty",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783333982880,
+        "modifiedTime": 1783744435300,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!oV4BXCAQLoBVjnWM.uIlQRDvsY5P09gfv"
+    }
+  ],
+  "sort": 500000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024585,
+    "modifiedTime": 1784855818409,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!oV4BXCAQLoBVjnWM"
+}

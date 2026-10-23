@@ -1,0 +1,114 @@
+{
+  "name": "Черты фей",
+  "type": "mutation",
+  "system": {
+    "description": "<p>При создании персонажа +1 Харизма, +1 Удача, +1 Выступление<br></p>",
+    "key": "fay_fay_traits",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_fay_traits",
+      "folder": "Fay/Rank 3"
+    }
+  },
+  "folder": "gKjom2ZIRpfNUrZr",
+  "_id": "iaSaP8lDkHx5ZwZO",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [
+    {
+      "name": "Черты фей",
+      "origin": "Compendium.dedrel.mutations.Item.iaSaP8lDkHx5ZwZO",
+      "_id": "8564MXOFZ725VSGp",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.cha.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.attributes.luck.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.skills.performance.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1782878858879,
+        "modifiedTime": 1783744434878,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!iaSaP8lDkHx5ZwZO.8564MXOFZ725VSGp"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1792453976712,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!iaSaP8lDkHx5ZwZO"
+}

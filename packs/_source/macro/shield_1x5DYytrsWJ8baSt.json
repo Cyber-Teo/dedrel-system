@@ -1,0 +1,28 @@
+{
+  "name": "shield",
+  "type": "script",
+  "_id": "1x5DYytrsWJ8baSt",
+  "author": "Gw6OqVIulw8cCPjC",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const shield = scope.weapon;\nif (!shield) return;\nconst key = shield.system.key || \"\";\nif (key === \"shield_tower\") {\n    await actor.toggleStatusEffect(\"big_cover\", { active: true });\n} else if (key === \"shield_medium\") {\n    await actor.toggleStatusEffect(\"small_cover\", { active: true });\n}",
+  "folder": null,
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1783233922226,
+    "modifiedTime": 1784856103785,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!macros!1x5DYytrsWJ8baSt"
+}

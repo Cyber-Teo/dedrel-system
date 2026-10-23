@@ -1,0 +1,101 @@
+{
+  "_id": "MonsterPinDown01",
+  "name": "Придавить",
+  "type": "maneuver",
+  "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_monster_pin_down",
+      "folder": "Monster"
+    }
+  },
+  "system": {
+    "key": "maneuver_monster_pin_down",
+    "source": "basic",
+    "description": "<p>Туша валится на сбитую добычу всем весом, вжимает её в землю и начинает драть. Реакция на собственный @UUID[Compendium.dedrel.maneuvers.Item.MonsterPounce01x]{Рывок}: доступна, только если цель от него легла (@UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит}).</p>\n<p><strong>Атака</strong> естественным оружием по обычной формуле — ступени урона манёвр не двигает: он берёт не уроном, а хваткой.</p>\n<p><strong>При попадании:</strong> контест — тот же <strong>бросок атаки против Атлетики</strong> цели, как у Рывка. При успехе цель дополнительно получает @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен}.</p>\n<p><strong>Пока прижатие держится:</strong> существо не сходит с места — уйти с клетки значит выпустить добычу. Цель освобождается манёвром @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Взаимодействие} со встречным Атлетикой.</p>\n<p><strong>Размер:</strong> +2 контесту за каждую категорию разницы в пользу большего. Навалиться можно только на цель <strong>не крупнее себя</strong> — чтобы придавить весом, вес надо иметь.</p>\n<p>Развилка с @UUID[Compendium.dedrel.maneuvers.Item.MonsterMaulBite1]{Загрызть}: та за те же 2 ОД бьёт на ступень выше, эта — сажает добычу на землю. Урон или контроль, но не оба сразу.</p>\n<p><em>Контест ручной: система катит атаку и урон, Атлетику цели Мастер бросает отдельно и сам вешает «Схвачен».</em></p>",
+    "action_type": {
+      "action": false,
+      "reaction": true,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "реакция после Рывка, сбившего цель с ног",
+    "chain_trigger_maneuvers": [
+      "maneuver_monster_pounce"
+    ],
+    "ap_cost": 2,
+    "skill": "unarmed_combat",
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "target_type": "creature",
+    "target_value": 1,
+    "prerequisites_text": "Цель сбита с ног вашим Рывком и не крупнее вас.",
+    "hide_combat_buttons": false,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "is_reload_action": false,
+    "is_scroll_read": false,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_range": "",
+    "template_shape": "",
+    "template_size": 0,
+    "attack_bonus": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "folder": "uC3oW0cZdDASA4f6",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784979478640,
+    "modifiedTime": 1792453976908,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterPinDown01"
+}

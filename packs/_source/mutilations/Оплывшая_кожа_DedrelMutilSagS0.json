@@ -1,0 +1,105 @@
+{
+  "_id": "DedrelMutilSagS0",
+  "name": "Оплывшая кожа",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/conditions/mut_sagging_skin.svg",
+  "system": {
+    "description": "<p><em>Увечье 1 ранга. Биомантия, Модификатор «Адаптация». Держится Ранг Доктрины раундов (по умолчанию 3).</em></p><p>Кожа отходит от мышцы и висит складками, мешая движению рук.</p><p><strong>Эффект:</strong> −2 к Блоку.</p><p><strong>Снятие:</strong> увечья, наложенные Биомантией, <strong>не лечатся зельями</strong> и не проходят на отдыхе. Снимаются только лечащей магией самой Биомантии либо рассеиванием (доктрина-диспеллер пока не определена — заглушка).</p>",
+    "key": "mut_sagging_skin",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "кожа обвисла",
+    "removal_text": "кожа подтянулась",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    },
+    "refresh_on_stack": false
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEMutSag10",
+      "name": "Оплывшая кожа",
+      "img": "systems/dedrel/assets/icons/conditions/vomiting.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "system": {
+        "changes": [
+          {
+            "phase": "apply",
+            "priority": 0,
+            "key": "system.defenses.block",
+            "type": "add",
+            "value": -2
+          }
+        ]
+      },
+      "statuses": [],
+      "flags": {},
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789074996634,
+        "modifiedTime": 1789074996634,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelMutilSagS0.DedrelAEMutSag10"
+    }
+  ],
+  "flags": {
+    "dedrel": {
+      "folder": "",
+      "rank": 1,
+      "divergence": 1,
+      "origin": []
+    }
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789074996634,
+    "modifiedTime": 1789326345365,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelMutilSagS0"
+}

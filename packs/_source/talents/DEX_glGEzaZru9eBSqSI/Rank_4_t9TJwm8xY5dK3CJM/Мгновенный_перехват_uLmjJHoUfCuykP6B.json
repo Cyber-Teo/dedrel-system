@@ -1,0 +1,53 @@
+{
+  "name": "Мгновенный перехват",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.q5Goksq4bCkK9YMY]{Мгновенный перехват}</p>Манёвр, реакция. Если по вам попадает дальнобойная атака противника, вы можете использовать этот манёвр в качестве реакции и отбить летящий снаряд. Требование: снаряженное оружие ближнего боя.",
+    "key": "instant_intercept",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.dex.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_instant_intercept"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "instant_intercept",
+      "folder": "DEX/Rank 4"
+    }
+  },
+  "folder": "t9TJwm8xY5dK3CJM",
+  "_id": "uLmjJHoUfCuykP6B",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!uLmjJHoUfCuykP6B"
+}

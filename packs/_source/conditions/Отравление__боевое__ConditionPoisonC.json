@@ -1,0 +1,55 @@
+{
+  "_id": "ConditionPoisonC",
+  "name": "Отравление (боевое)",
+  "type": "condition",
+  "img": "icons/magic/death/skull-poison-green.webp",
+  "flags": {
+    "dedrel": {
+      "folder": ""
+    }
+  },
+  "system": {
+    "key": "poison_combat",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": true,
+    "max_stacks": 3,
+    "refresh_on_stack": true,
+    "tick": {
+      "formula": "(@stacks)d4",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnEnd"
+    },
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "removal_text": "яд вышел",
+    "description": "<p><strong>Эффект:</strong> в конце своего хода носитель получает <strong>(стаки)d4</strong> урона. Урон <strong>безрезистный</strong>: яд — не тип урона, а save-ось, его не срезает ни DR, ни сопротивление стихии.</p>\n<p><strong>Стаки.</strong> Складывается как Кровотечение, потолок — <strong>3</strong>. Новый стак обновляет длительность целиком.</p>\n<p><strong>Длительность:</strong> 3 раунда от последнего стака.</p>\n<p><strong>Снятие:</strong> антидот, лечащая магия Биомантии, истечение срока. Спасбросок делается в момент попадания, а не каждый ход: устоял — значит не отравился вовсе.</p>\n<p><em>Это шасси, а не именной яд. Конкретные яды — предметы-расходники, которые вешают это состояние; сложность спасброска берётся с источника (у существ 9 + ранг угрозы, у крафтовых ядов — по редкости).</em></p>",
+    "application_text": "",
+    "system_flags": {}
+  },
+  "folder": null,
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789510161555,
+    "modifiedTime": 1789510161555,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ConditionPoisonC"
+}

@@ -1,0 +1,66 @@
+{
+  "folder": "u5dp0uKPZD3TBFzf",
+  "name": "Падук",
+  "type": "craft_material",
+  "_id": "EQ7ThVQQb8MKotgh",
+  "img": "systems/dedrel/assets/icons/materials/wood/Padauk.webp",
+  "system": {
+    "description": "<div><p>Прочное и устойчивое дерево, которое к тому же способно нести в себе магический заряд. Широко используется при изготовлении оружия. </p></div>",
+    "key": "padauk",
+    "rarity": "rare",
+    "weight": 1,
+    "base_price": 1000,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "wood",
+    "material_class": "wood",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": true,
+      "armor": false,
+      "shield": true,
+      "jewelry": false
+    },
+    "grants": [
+      {
+        "label": "+1 and rare slot OR +2 and uncomon slot",
+        "bonus": 2,
+        "slots": [
+          "uncommon",
+          "rare"
+        ]
+      }
+    ],
+    "slots": [
+      "rare"
+    ]
+  },
+  "effects": [],
+  "sort": 600000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783686361064,
+    "modifiedTime": 1792453977033,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!EQ7ThVQQb8MKotgh"
+}

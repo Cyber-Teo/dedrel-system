@@ -1,0 +1,28 @@
+{
+  "folder": null,
+  "name": "нормализатор",
+  "type": "script",
+  "_id": "pR61mchRJkQDfNHZ",
+  "author": "Gw6OqVIulw8cCPjC",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "// Foundry VTT Macro: Нормализация ссылочных массивов (adds_items, prerequisites_*, chain_*)\n// Чинит артефакты импорта: элементы, склеенные через «;» в одну строку\n// («maneuver_a; maneuver_b»), лишние пробелы, пустые строки \"\" и дубликаты.\n// По всем Item-компендиумам dedrel.*. Идемпотентно, повторный запуск безопасен.\n//\n// ВНИМАНИЕ: дедупликация может убрать НАМЕРЕННЫЙ дубль (например, два одинаковых\n// natural-weapon в adds_items — «двойные когти»). Все снятые дубли выводятся в\n// отчёт (console) отдельным списком — просмотрите и верните вручную, если нужно.\n// Разбиение по «;» и чистку пустых/пробелов делаем всегда — они безопасны.\n(async () => {\n  if (!game.user.isGM) return ui.notifications.warn(\"Только для ГМа: правит компендиумы.\");\n\n  const FIELDS = [\n    \"adds_items\",\n    \"chain_trigger_maneuvers\",\n    \"prerequisites_attributes\",\n    \"prerequisites_skills\",\n    \"prerequisites_talents\",\n    \"prerequisites_mutations\",\n    \"prerequisites_bloodlines\"\n  ];\n\n  // Массив -> {clean, removedDupes}: split \";\", trim, drop empty, dedup (сохраняя порядок).\n  function normalize(arr) {\n    const flat = [];\n    for (const el of arr) {\n      if (typeof el !== \"string\") { flat.push(el); continue; }\n      for (const part of el.split(\";\")) {\n        const t = part.trim();\n        if (t) flat.push(t);\n      }\n    }\n    const seen = new Set();\n    const clean = [];\n    const removedDupes = [];\n    for (const el of flat) {\n      if (seen.has(el)) { removedDupes.push(el); continue; }\n      seen.add(el);\n      clean.push(el);\n    }\n    return { clean, removedDupes };\n  }\n\n  const packs = game.packs.filter(p => p.documentName === \"Item\" && p.collection.startsWith(\"dedrel.\"));\n  if (!packs.length) return ui.notifications.error(\"Item-компендиумы dedrel.* не найдены.\");\n\n  let itemsFixed = 0, fieldsFixed = 0;\n  const dupeReport = [];   // строки «Предмет / поле: удалён дубль key»\n\n  for (const pack of packs) {\n    const wasLocked = pack.locked;\n    if (wasLocked) await pack.configure({ locked: false });\n\n    const docs = await pack.getDocuments();\n    const updates = [];\n    for (const item of docs) {\n      const sys = item.system ?? {};\n      const patch = {};\n      for (const field of FIELDS) {\n        const arr = sys[field];\n        if (!Array.isArray(arr) || !arr.length) continue;\n        const { clean, removedDupes } = normalize(arr);\n        if (JSON.stringify(clean) !== JSON.stringify(arr)) {\n          patch[`system.${field}`] = clean;\n          fieldsFixed++;\n          for (const d of removedDupes) dupeReport.push(`${pack.collection} / ${item.name} / ${field}: дубль «${d}»`);\n        }\n      }\n      if (Object.keys(patch).length) { patch._id = item.id; updates.push(patch); }\n    }\n\n    if (updates.length) {\n      await Item.updateDocuments(updates, { pack: pack.collection });\n      itemsFixed += updates.length;\n    }\n    if (wasLocked) await pack.configure({ locked: true });\n  }\n\n  const summary = `Нормализация массивов: предметов ${itemsFixed}, полей ${fieldsFixed}` +\n    (dupeReport.length ? `, снято дублей ${dupeReport.length} (см. консоль)` : \"\");\n  ui.notifications.info(summary);\n  console.log(`[normalize_reference_arrays] ${summary}`);\n  if (dupeReport.length) console.warn(\"[normalize_reference_arrays] СНЯТЫЕ ДУБЛИ — проверьте, не было ли намеренных:\\n\" + dupeReport.join(\"\\n\"));\n})();",
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784856103771,
+    "modifiedTime": 1784856103785,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 200000,
+  "_key": "!macros!pR61mchRJkQDfNHZ"
+}

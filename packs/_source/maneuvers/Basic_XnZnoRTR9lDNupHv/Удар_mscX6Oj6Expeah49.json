@@ -1,0 +1,96 @@
+{
+  "name": "Удар",
+  "type": "maneuver",
+  "system": {
+    "description": "Атака дробящим оружием ближнего боя",
+    "key": "maneuver_bash",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
+    "chain_trigger_maneuvers": [
+      "maneuver_riposte",
+      "maneuver_attack_of_opportunity",
+      "maneuver_rage",
+      "maneuver_power_bash",
+      "maneuver_covering_blow",
+      "maneuver_crowding",
+      "maneuver_cornering"
+    ],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": true,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "Дробящее оружие ближнего боя",
+    "target_type": "creature",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "@weapon.damage_formulas.bludgeoning",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_bash",
+      "folder": "Basic"
+    }
+  },
+  "folder": "XnZnoRTR9lDNupHv",
+  "_id": "mscX6Oj6Expeah49",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bash.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024580,
+    "modifiedTime": 1789660057850,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mscX6Oj6Expeah49"
+}

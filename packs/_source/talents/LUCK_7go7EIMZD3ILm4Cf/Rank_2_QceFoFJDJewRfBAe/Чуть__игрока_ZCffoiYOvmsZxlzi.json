@@ -1,0 +1,51 @@
+{
+  "name": "Чутьё игрока",
+  "type": "talent",
+  "system": {
+    "description": "Прибавляете ранг Удачи к проверкам связанным с азартными играми и ставками.",
+    "key": "gamblers_intuition",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.luck.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.luck.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "gamblers_intuition",
+      "folder": "LUCK/Rank 2"
+    }
+  },
+  "folder": "QceFoFJDJewRfBAe",
+  "_id": "ZCffoiYOvmsZxlzi",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044250,
+    "modifiedTime": 1784181820249,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZCffoiYOvmsZxlzi"
+}

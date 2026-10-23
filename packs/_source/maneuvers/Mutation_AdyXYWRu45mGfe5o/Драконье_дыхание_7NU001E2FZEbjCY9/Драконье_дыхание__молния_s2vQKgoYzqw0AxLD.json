@@ -1,0 +1,94 @@
+{
+  "name": "Драконье дыхание: молния",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>3 раза в долгий отдых.</p><p>Персонаж выдыхает перед собой конус электрических разрядов 4м.</p><p></p>",
+    "key": "maneuver_breath_weapon_electric",
+    "source": "mutation",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "dragon_breath_weapon_electric"
+    ],
+    "prerequisites_bloodlines": [
+      "Dragon",
+      "3"
+    ],
+    "prerequisites_text": "",
+    "target_type": "area",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "cone",
+    "template_size": 4,
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "2d4+2 [electric]",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "system.defenses.block",
+    "on_use_macro": "",
+    "skill": "unarmed_combat"
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_breath_weapon",
+      "folder": "Mutation"
+    }
+  },
+  "folder": "7NU001E2FZEbjCY9",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_breath_weapon.svg",
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782872743772,
+    "modifiedTime": 1792453976910,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_id": "s2vQKgoYzqw0AxLD",
+  "sort": 300000,
+  "_key": "!items!s2vQKgoYzqw0AxLD"
+}

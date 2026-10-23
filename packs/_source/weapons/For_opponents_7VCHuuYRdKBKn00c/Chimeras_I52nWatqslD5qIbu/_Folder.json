@@ -1,0 +1,23 @@
+{
+  "name": "Chimeras",
+  "type": "Item",
+  "folder": "7VCHuuYRdKBKn00c",
+  "_id": "I52nWatqslD5qIbu",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789510161465,
+    "modifiedTime": 1789510161465,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!I52nWatqslD5qIbu"
+}

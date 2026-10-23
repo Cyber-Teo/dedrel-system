@@ -1,0 +1,23 @@
+{
+  "name": "Talent",
+  "type": "Item",
+  "folder": null,
+  "_id": "yCP6ThfNafE4C2VF",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801024553,
+    "modifiedTime": 1782801024553,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!yCP6ThfNafE4C2VF"
+}

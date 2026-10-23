@@ -1,0 +1,90 @@
+{
+  "name": "Гипнотический взгляд",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Количество раз в день равное Харизме или Силе воли (что больше)</p><p>Необходимо иметь визуальный контакт с целью (расстояние не больше 6м), цель должна обладать сознанием. Если цель проваливает спас, можно дать ей простой приказ: брось оружие, стой смирно, беги, упади. Цель не станет выполнять очевидно суицидальные приказы (кинься со скалы, зарежь себя). Если цель проходит спасбросок, она иммунна к этому манёвру на ближайшие сутки.</p>",
+    "key": "maneuver_hypnotic_gaze",
+    "source": "mutation",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "dragon_hypnotic_gaze"
+    ],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "6",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "max(@attributes.will.rank or @attributes.cha.rank)",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "will",
+    "save_dc_formula": "@attributes.will.rank+8",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_hypnotic_gaze",
+      "folder": "Mutation"
+    }
+  },
+  "folder": "AdyXYWRu45mGfe5o",
+  "_id": "AB34H5yuNCEshrNj",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hypnotic_gaze.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024582,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AB34H5yuNCEshrNj"
+}

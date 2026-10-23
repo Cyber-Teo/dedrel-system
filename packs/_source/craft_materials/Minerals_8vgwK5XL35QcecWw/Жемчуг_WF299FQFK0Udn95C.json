@@ -1,0 +1,54 @@
+{
+  "folder": "8vgwK5XL35QcecWw",
+  "name": "Жемчуг",
+  "type": "craft_material",
+  "_id": "WF299FQFK0Udn95C",
+  "img": "systems/dedrel/assets/icons/materials/mineral/Pearl.webp",
+  "system": {
+    "description": "",
+    "key": "pearl",
+    "rarity": "uncommon",
+    "weight": 0.1,
+    "base_price": 100,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "gemstone",
+    "material_class": "mineral",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783684230530,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!WF299FQFK0Udn95C"
+}

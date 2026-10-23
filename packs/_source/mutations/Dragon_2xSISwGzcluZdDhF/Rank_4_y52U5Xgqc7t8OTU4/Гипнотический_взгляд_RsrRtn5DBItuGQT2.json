@@ -1,0 +1,55 @@
+{
+  "name": "Гипнотический взгляд",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Даёт манёвр: Гипнотический взгляд.</p><p>Количество раз в день равно рангу Харизмы или Силы воли (что больше).</p><p>Необходимо иметь визуальный контакт с целью, цель должна обладать сознанием. Если цель проваливает спас, можно дать ей простой приказ: брось оружие, стой смирно, беги, упади. Цель не станет выполнять очевидно суицидальные приказы (кинься со скалы, зарежь себя). Если цель проходит спасбросок, она иммунна к этому манёвру на ближайшие сутки.</p>",
+    "key": "dragon_hypnotic_gaze",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Dragon",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_hypnotic_gaze"
+    ],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "dragon_hypnotic_gaze",
+      "folder": "Dragon/Rank 4"
+    }
+  },
+  "folder": "y52U5Xgqc7t8OTU4",
+  "_id": "RsrRtn5DBItuGQT2",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1792453976711,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!RsrRtn5DBItuGQT2"
+}

@@ -1,0 +1,95 @@
+{
+  "name": "Малое укрытие",
+  "type": "condition",
+  "_id": "5E2eR7CtLFLNiy0P",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "description": "<p>+2 к блоку</p>",
+    "category": "positive",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "turns",
+      "value": 1
+    },
+    "expiry_events": [
+      "turnStart"
+    ],
+    "application_text": "",
+    "removal_text": "",
+    "is_removable_by_skill": false,
+    "skill_to_remove": "",
+    "remove_dc": 0,
+    "system_flags": {},
+    "formula_heal": "",
+    "key": "small_cover"
+  },
+  "effects": [
+    {
+      "name": "Малое укрытие",
+      "origin": "Compendium.dedrel.conditions.Item.5E2eR7CtLFLNiy0P",
+      "_id": "Gmu3ALF2gmCH9Ri2",
+      "img": "icons/svg/shield.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.defenses.block",
+            "type": "add",
+            "value": 2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783234626746,
+        "modifiedTime": 1783744434886,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!5E2eR7CtLFLNiy0P.Gmu3ALF2gmCH9Ri2"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1783234024000,
+    "modifiedTime": 1784181820108,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5E2eR7CtLFLNiy0P"
+}

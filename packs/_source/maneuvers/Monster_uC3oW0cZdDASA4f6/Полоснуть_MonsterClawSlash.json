@@ -1,0 +1,103 @@
+{
+  "_id": "MonsterClawSlash",
+  "name": "Полоснуть",
+  "type": "maneuver",
+  "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_monster_claw_slash",
+      "folder": "Monster"
+    }
+  },
+  "system": {
+    "key": "maneuver_monster_claw_slash",
+    "source": "basic",
+    "description": "<p>Короткий удар когтями или лапой в уже начатой связке. Формула и тип урона — с самого оружия, без сдвига ступени.</p>\n<p>Требует <strong>режущего</strong> естественного оружия: клыками не полоснёшь, для пасти есть @UUID[Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC]{Укус}.</p>\n<p><em>За 1 ОД зверь докупает удар к связке. Размен: третий Укус за 2 ОД или два коротких удара когтями — вторые чаще пробивают Прочность пеона, но хуже идут против DR.</em></p>",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "после Укуса, Рывка или Атаки по возможности",
+    "chain_trigger_maneuvers": [
+      "maneuver_common_monster_bite",
+      "maneuver_monster_pounce",
+      "maneuver_monster_attack_of_opportunity"
+    ],
+    "ap_cost": 1,
+    "skill": "unarmed_combat",
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": true
+    },
+    "target_type": "creature",
+    "target_value": 1,
+    "hide_combat_buttons": false,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "is_reload_action": false,
+    "is_scroll_read": false,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_range": "",
+    "template_shape": "",
+    "template_size": 0,
+    "attack_bonus": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "folder": "uC3oW0cZdDASA4f6",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1787701916129,
+    "modifiedTime": 1789435064028,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterClawSlash"
+}

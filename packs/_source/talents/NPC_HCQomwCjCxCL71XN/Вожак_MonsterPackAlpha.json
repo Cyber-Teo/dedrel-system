@@ -1,0 +1,64 @@
+{
+  "_id": "MonsterPackAlpha",
+  "name": "Вожак",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "key": "pack_alpha",
+      "folder": "NPC"
+    }
+  },
+  "system": {
+    "key": "pack_alpha",
+    "subtype": "passive",
+    "xp_cost": 0,
+    "description": "<p>Существо ведёт за собой стаю: волчий вожак, капитан бандитов, гоблин-босс — меняется только описание.</p>\n<p>Даёт манёвр «Вой стаи».</p>\n<p><strong>Пока вожак жив и в сознании</strong>, его стая не проверяет мораль. Когда вожак падает, мораль проверяется по обычному триггеру существа.</p>",
+    "adds_items": [
+      "maneuver_monster_pack_howl"
+    ],
+    "has_situational_bonus": false,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [
+      ""
+    ],
+    "prerequisites_skills": [
+      ""
+    ],
+    "prerequisites_talents": [
+      ""
+    ],
+    "prerequisites_mutations": [
+      ""
+    ],
+    "prerequisites_bloodlines": [
+      ""
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "folder": "HCQomwCjCxCL71XN",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784950463542,
+    "modifiedTime": 1784978341465,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterPackAlpha"
+}

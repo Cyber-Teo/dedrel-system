@@ -1,0 +1,59 @@
+{
+  "_id": "DedrelAdaptScent",
+  "name": "Нюх",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/adaptations/scent.svg",
+  "flags": {
+    "dedrel": {
+      "rank": 2,
+      "divergence": 2,
+      "origin": [
+        "beast"
+      ]
+    }
+  },
+  "system": {
+    "key": "adapt_scent",
+    "description": "<p>Носовые ходы разрастаются вглубь черепа, ноздри становятся влажными и подвижными.</p>\n<p><strong>Эффект:</strong> носитель идёт по следу по запаху, узнаёт знакомого по запаху и чует присутствие живого за стеной или в темноте. Числового бонуса нет — это новая способность, а не прибавка к проверке.</p>\n<p><em>Ступень 2:</em> человеческий нос так не умеет — нужна ткань зверя и длинный каст.</p>\n<p><em>Адаптация. Биомантия, Модификатор «Адаптация». В боевом темпе держится Ранг Доктрины раундов; длинным кастом Ваяния — до долгого отдыха (ступень 1) либо веху (ступень 2).</em></p>",
+    "category": "positive",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "refresh_on_stack": false,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "ноздри разошлись",
+    "removal_text": "запахи померкли",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789150310007,
+    "modifiedTime": 1789150310008,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelAdaptScent"
+}

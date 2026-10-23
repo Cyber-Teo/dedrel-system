@@ -1,0 +1,30 @@
+{
+  "name": "1",
+  "type": "exp",
+  "_id": "cGU94vapPOFsxOhL",
+  "img": "icons/magic/light/orb-lightbulb-gray.webp",
+  "system": {
+    "description": "",
+    "value": 1
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782880025853,
+    "modifiedTime": 1784181820934,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!cGU94vapPOFsxOhL"
+}

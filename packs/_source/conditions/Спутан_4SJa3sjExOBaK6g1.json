@@ -1,0 +1,55 @@
+{
+  "name": "Спутан",
+  "type": "condition",
+  "_id": "4SJa3sjExOBaK6g1",
+  "img": "icons/svg/net.svg",
+  "system": {
+    "description": "<p><strong>Эффект:</strong> цель <strong>не может уклоняться</strong> вообще — только блокировать, — и её <strong>Скорость сводится к 0</strong>. Держится <strong>1 раунд</strong>, а не одну атаку.</p>\n<p><strong>Источники:</strong> магия (Гидромантия, Путь Льда — модификатор «Сковывание» ранга 3, DC 14; модификатор «Запрет защиты» ранга 4 с выбором «уклонение»), паутинные гранаты, опутывающее экзотическое оружие — сеть, боло, сасумата (в разработке).</p>\n<p><strong>Отличие от @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Зажат}:</strong> тот вешается обычным оружием, стоит цели одной атаки и не трогает Скорость. «Спутан» — жёсткая версия: целый раунд без уклонения и без движения, поэтому и доступен только магии и специальному снаряжению.</p>\n<p><em>Не автоматизировано: запрет уклонения и нулевую Скорость Мастер держит вручную (у NPC ручной override скорости перебивает эффекты).</em></p>",
+    "key": "entangled",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "refresh_on_stack": false,
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    },
+    "duration": {
+      "units": "rounds",
+      "value": 1
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "опутан, уклоняться нечем",
+    "removal_text": "выпутался",
+    "system_flags": {}
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {
+    "dedrel": {
+      "folder": ""
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784186199780,
+    "modifiedTime": 1789660057698,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4SJa3sjExOBaK6g1"
+}

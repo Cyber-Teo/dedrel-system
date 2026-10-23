@@ -1,0 +1,23 @@
+{
+  "name": "Mercs",
+  "type": "Actor",
+  "folder": "XJbvcyIJTGPKdNz2",
+  "_id": "fU9OpHD9vva2IlTE",
+  "description": "",
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1787699581535,
+    "modifiedTime": 1787699581535,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!fU9OpHD9vva2IlTE"
+}

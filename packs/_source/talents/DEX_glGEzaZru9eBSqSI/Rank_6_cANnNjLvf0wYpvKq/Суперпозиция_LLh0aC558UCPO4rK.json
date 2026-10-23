@@ -1,0 +1,53 @@
+{
+  "name": "Суперпозиция",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.2Ow7yTA7lTa9T3Wq]{Суперпозиция}</p><p>Манёвр. Вы выставляете до 4 копий вашего персонажа на поле боя в пределах видимости. У каждой копии 1 хит, после получения урона она исчезает. После того как противник совершает атаку по одному из ваших токенов вы выбираете: он атакует копию или настоящего персонажа. В свой ход вы также решаете, какой из токенов — ваш персонаж.</p>",
+    "key": "superposition",
+    "subtype": "passive",
+    "xp_cost": 6,
+    "prerequisites_text": "@attributes.dex.rank 6",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 6"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_superposition"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "superposition",
+      "folder": "DEX/Rank 6"
+    }
+  },
+  "folder": "cANnNjLvf0wYpvKq",
+  "_id": "LLh0aC558UCPO4rK",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!LLh0aC558UCPO4rK"
+}

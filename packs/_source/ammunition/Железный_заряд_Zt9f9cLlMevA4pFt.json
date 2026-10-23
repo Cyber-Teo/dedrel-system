@@ -1,0 +1,74 @@
+{
+  "name": "Железный заряд",
+  "type": "ammunition",
+  "_id": "Zt9f9cLlMevA4pFt",
+  "img": "systems/dedrel/assets/icons/items/ammunition.svg",
+  "system": {
+    "description": "",
+    "key": "iron_shot",
+    "rarity": "common",
+    "weight": 0.05,
+    "base_price": 148,
+    "crafting": {
+      "craftable": true,
+      "discipline": "engineering",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.6UL6xnBIR9MyfLty",
+          "name": "Порох",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+          "name": "Железо",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 98.5,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "ammo_type": "shot",
+    "quantity": 20,
+    "stackable": true,
+    "armor_piercing": 1,
+    "damage_bonus": "",
+    "damage_bonus_type": "",
+    "vs_creature": {
+      "beast": 0,
+      "magical_beast": 0,
+      "elemental": 0,
+      "spirit": 0,
+      "shade": 0,
+      "demon": 0,
+      "dragon": 0,
+      "elf": 0,
+      "undead": 0,
+      "cosmic": 0,
+      "construct": 0,
+      "fay": 0
+    },
+    "recovery_chance": null
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784005954073,
+    "modifiedTime": 1792453976982,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Zt9f9cLlMevA4pFt"
+}

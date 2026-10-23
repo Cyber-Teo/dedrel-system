@@ -1,0 +1,100 @@
+{
+  "_id": "DedrelPathVenEch",
+  "name": "Путь Эха",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Magic/Пути"
+    }
+  },
+  "system": {
+    "key": "path_echo",
+    "description": "<p><em>Специализация Вентомантии: ветер как звук. Ниша ветреных бардов — командные бафы и психоакустика.</em></p>\n<ul>\n<li><strong>Сродство:</strong> −1 ОД на «Силу», «Цели» и «Длительность».</li>\n<li><strong>Звуковой урон:</strong> «Урон» получает тип <code>sonic</code>, ступени Лестницы II–VI — сопротивление (DR) к звуку встречается крайне редко. Именно за это доктрина платит налог +1 ОД на «Урон».</li>\n<li><strong>Психоакустика:</strong> доступ к Модификатору «Сила» рангов 1–3 (полный каталог принадлежит Тенемантии); техника «Насытить/Внедрить» применяется к существам.</li>\n<li><strong>Долгая песня:</strong> скидка на «Длительность» — ниша командных бафов. Бард насыщает союзника звуком («Насытить» + «Насыщение» + «Длительность») на 6–10 раундов дешевле прочих доктрин; свойство обязано выводиться из звука. На «Силу» скидка не действует: её длительность задана рангом.</li>\n<li><strong>Фокус:</strong> концептуально музыкальный инструмент (отдельной проверки нет — фокус обязателен для любой магии).</li>\n</ul>\n<p><em>Талант открывает Путь доктрины. Сборка «без пути» остаётся доступной всегда; сродства, капы и Модификаторы Пути применяются только к заклинаниям этого Пути.</em></p>",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "has_situational_bonus": false,
+    "prerequisites_text": "Талант «Вентомантия» (доступ к доктрине).",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "ventomancy"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEPathEcho",
+      "name": "Путь Эха",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "system": {
+        "changes": [
+          {
+            "key": "system.doctrines.ventomancy.paths.echo",
+            "type": "override",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789527814113,
+        "modifiedTime": 1789527814113,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelPathVenEch.DedrelAEPathEcho"
+    }
+  ],
+  "folder": "SRtf197IMGHO4mhe",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789137452940,
+    "modifiedTime": 1789527814105,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelPathVenEch"
+}

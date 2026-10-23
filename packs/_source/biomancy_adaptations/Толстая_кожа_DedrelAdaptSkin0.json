@@ -1,0 +1,114 @@
+{
+  "_id": "DedrelAdaptSkin0",
+  "name": "Толстая кожа",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/conditions/skeleton-inside.svg",
+  "system": {
+    "description": "<p><em>Адаптация 2 ранга. Биомантия, Модификатор «Адаптация». Держится Ранг Доктрины раундов (по умолчанию 3).</em></p><p>Кожа грубеет и утолщается, покрывается роговыми наростами.</p><p><strong>Эффект:</strong> DR 1 против режущего и колющего урона.</p>",
+    "key": "adapt_thick_skin",
+    "category": "positive",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "кожа грубеет",
+    "removal_text": "кожа смягчается",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    },
+    "refresh_on_stack": false
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEAdptSkn1",
+      "name": "Толстая кожа",
+      "img": "systems/dedrel/assets/icons/conditions/skeleton-inside.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "system": {
+        "changes": [
+          {
+            "phase": "apply",
+            "priority": 0,
+            "key": "system.dr.piercing",
+            "type": "add",
+            "value": 1
+          },
+          {
+            "phase": "apply",
+            "priority": 0,
+            "key": "system.dr.slashing",
+            "type": "add",
+            "value": 1
+          }
+        ]
+      },
+      "statuses": [],
+      "flags": {},
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789074996616,
+        "modifiedTime": 1789074996616,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelAdaptSkin0.DedrelAEAdptSkn1"
+    }
+  ],
+  "flags": {
+    "dedrel": {
+      "folder": "",
+      "rank": 2,
+      "divergence": 2,
+      "origin": [
+        "demon 3"
+      ]
+    }
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789074996616,
+    "modifiedTime": 1789143633834,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelAdaptSkin0"
+}

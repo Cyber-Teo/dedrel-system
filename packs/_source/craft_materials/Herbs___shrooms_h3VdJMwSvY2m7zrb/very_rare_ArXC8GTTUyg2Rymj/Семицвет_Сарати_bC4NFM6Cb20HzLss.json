@@ -1,0 +1,54 @@
+{
+  "folder": "ArXC8GTTUyg2Rymj",
+  "name": "Семицвет Сарати",
+  "type": "craft_material",
+  "_id": "bC4NFM6Cb20HzLss",
+  "img": "systems/dedrel/assets/icons/materials/herb/Sarati%27s%20Sevenbloom.webp",
+  "system": {
+    "description": "<div><p>реки. </p><p>Красивый семицветный цветок, растущий по берегам рек но преимущественно около реки Сарати.</p></div>",
+    "key": "sarati_s_sevenbloom",
+    "rarity": "very_rare",
+    "weight": 0.1,
+    "base_price": 2500,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783694919952,
+    "modifiedTime": 1792453977035,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bC4NFM6Cb20HzLss"
+}

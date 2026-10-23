@@ -1,0 +1,30 @@
+{
+  "name": "Люди",
+  "type": "creature_type",
+  "_id": "aBpVy31Ul0e0h8SJ",
+  "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+  "system": {
+    "key": "human",
+    "description": "<p>NPC-раса, общих правил нет.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784805932778,
+    "modifiedTime": 1792453977471,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!aBpVy31Ul0e0h8SJ"
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Провокация",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Цель должна слышать вас и обладать развитым сознанием. <br>Проверка Убеждения против Проницательности цели. <br>При провале штраф -3 на атаки против целей отличающихся от провокатора до начала следующего хода.</p>",
+    "key": "maneuver_taunt",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 1,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "taunt"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "skill": "persuasion"
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_taunt",
+      "folder": "Talent"
+    }
+  },
+  "folder": "tRmdFAXyMwraGyI7",
+  "_id": "YVl6pkv3tAM5k5YD",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_taunt.svg",
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024585,
+    "modifiedTime": 1784855818407,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YVl6pkv3tAM5k5YD"
+}

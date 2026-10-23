@@ -1,0 +1,53 @@
+{
+  "name": "Ответный выстрел",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.VPXOjhExSbvL2VvW]{Ответный выстрел}</p><p>Когда по вам проведена атака дальнего боя (удачная или нет), вы можете отреагировать проведя ответный выстрел (у вас должно быть экипировано оружие дальнего боя)</p>",
+    "key": "ranged_riposte",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.rea.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_ranged_riposte"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "ranged_riposte",
+      "folder": "REA/Rank 2"
+    }
+  },
+  "folder": "cWxZXyrDvbYPGxyI",
+  "_id": "og17QMULNPNDecKE",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!og17QMULNPNDecKE"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Выстрел из-за укрытия",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.cdqQapGR8nIyhgvZ]{Выстрел из-за укрытия}</p><p>Вы держитесь за парапетом или стволом дерева, выходите на линию огня ровно на выстрел и тут же ныряете обратно. Выстрел входит в сам манёвр.</p>\n<p><strong>Эффект:</strong> до начала вашего следующего хода вы считаетесь в <strong>Малом укрытии</strong> (+2 к Блоку) — вы почти всё время за преградой.</p>\n<p><strong>Цена скорострельности:</strong> манёвр — Действие, а «Прицеливание», «Бронебойный выстрел» и «Выстрел с упора» тоже Действия. Совместить их с этим выстрелом нельзя: бьёте навскидку.</p>\n<p>Подходить и отходить отдельным манёвром не нужно — перемещение бесплатно и дробится как угодно.</p>",
+    "key": "mobile_marksman",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.dex.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_mobile_marksman"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "mobile_marksman",
+      "folder": "DEX/Rank 2"
+    }
+  },
+  "folder": "9slcLvz7nDgdoNIs",
+  "_id": "pdMhLNBxUajpNH1I",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792454404068,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!pdMhLNBxUajpNH1I"
+}

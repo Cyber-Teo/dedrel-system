@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": null,
+  "name": "Metals",
+  "color": null,
+  "sorting": "a",
+  "_id": "GDOFOWKGG9OaiugJ",
+  "description": "",
+  "sort": 200000,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783681631107,
+    "modifiedTime": 1783699289945,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!GDOFOWKGG9OaiugJ"
+}

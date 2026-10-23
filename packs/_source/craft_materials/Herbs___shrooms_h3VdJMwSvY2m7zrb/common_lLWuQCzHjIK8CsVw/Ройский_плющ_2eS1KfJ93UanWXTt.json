@@ -1,0 +1,54 @@
+{
+  "folder": "lLWuQCzHjIK8CsVw",
+  "name": "Ройский плющ",
+  "type": "craft_material",
+  "_id": "2eS1KfJ93UanWXTt",
+  "img": "systems/dedrel/assets/icons/materials/herb/Rojian%20Ivy.webp",
+  "system": {
+    "description": "<div><p>поля, реки, озёра, побережье. </p><p>Плющ, чьи листья краснеют к краям, будто пламя. </p></div>",
+    "key": "rojian_ivy",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 10,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 900000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783687571207,
+    "modifiedTime": 1792453977032,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2eS1KfJ93UanWXTt"
+}

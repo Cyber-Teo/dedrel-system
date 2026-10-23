@@ -1,0 +1,76 @@
+{
+  "folder": "ePWKatbTVvrn4Ccp",
+  "name": "Обычные магические чернила",
+  "type": "craft_material",
+  "_id": "Thm1IYyp64OHS0Y7",
+  "img": "systems/dedrel/assets/icons/materials/crafted/bubbling-flask.svg",
+  "system": {
+    "description": "",
+    "key": "common_ink",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 28,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.sbGlL8DqOE2GGs8f",
+          "name": "Дядюшкин горецвет",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.LEMxQv7bOIid1Gfy",
+          "name": "Эссенция полтергейста",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.le8FG2uuAJen8dTD",
+          "name": "Склянка",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 18.5,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ink",
+    "material_class": "processed",
+    "special_rules": "",
+    "weight_class": "normal",
+    "slots": [],
+    "signature": {
+      "armor": "",
+      "weapon": "",
+      "magic": ""
+    },
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790034337320,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Thm1IYyp64OHS0Y7"
+}

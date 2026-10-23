@@ -1,0 +1,90 @@
+{
+  "name": "Королевская воля (в разработке)",
+  "type": "maneuver",
+  "system": {
+    "description": "Все враги в радиусе 2+WILL клеток проходят проверку WILL против вашего WILL+12. Провал — [🔧 плейсхолдер: Ужас]. Успех — [🔧 плейсхолдер: лёгкий статус].<br><br><b>Комментарии:</b> подумать над введением сущности \"аура\"",
+    "key": "maneuver_sovereign_will",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "sovereign_will"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "area",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "circle",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "1",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "will",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_sovereign_will",
+      "folder": "Talent"
+    }
+  },
+  "folder": "x6gFtZ0kaGqMYFnD",
+  "_id": "0lbAvOq416OQzRkh",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_sovereign_will.svg",
+  "effects": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024586,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!0lbAvOq416OQzRkh"
+}

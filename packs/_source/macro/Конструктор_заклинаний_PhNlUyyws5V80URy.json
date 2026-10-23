@@ -1,0 +1,28 @@
+{
+  "name": "Конструктор заклинаний",
+  "type": "script",
+  "_id": "PhNlUyyws5V80URy",
+  "author": "Gw6OqVIulw8cCPjC",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "// Foundry VTT Macro: Конструктор заклинаний\n// Открывает Конструктор для выделенного токена (или назначенного персонажа игрока).\n// ГМ без выделенного токена получает standalone-режим (пресозданные заклинания:\n// ручной ранг доктрины, сохранение в мировые предметы).\n(() => {\n  const actor = canvas.tokens.controlled[0]?.actor || game.user.character || null;\n  if (!actor && !game.user.isGM) {\n    return ui.notifications.warn(game.i18n.localize(\"DEDREL.Notifications.SelectToken\"));\n  }\n  game.dedrel.openSpellConstructor(actor);\n})();",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784856098131,
+    "modifiedTime": 1784856103786,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 800000,
+  "_key": "!macros!PhNlUyyws5V80URy"
+}

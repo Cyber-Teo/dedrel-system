@@ -1,0 +1,53 @@
+{
+  "name": "Закрытые глаза",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.Ya5hWVlm7tdozbJQ]{Закрытые глаза}</p><p>Манёвр. Действие, 3 ОД. На 1 раунд вы полностью игнорируете состояние «Ослепление» и все штрафы от визуальных помех и невидимости. Дополнительно получаете +2 к Блоку и Уклонению на этот раунд, так как перестаёте реагировать на ложные движения.</p>",
+    "key": "closed_eyes",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.int.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_closed_eyes"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "closed_eyes",
+      "folder": "INT/Rank 4"
+    }
+  },
+  "folder": "dDkzyRm9LbCtieku",
+  "_id": "K8ha3aZKFAhol0xs",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!K8ha3aZKFAhol0xs"
+}

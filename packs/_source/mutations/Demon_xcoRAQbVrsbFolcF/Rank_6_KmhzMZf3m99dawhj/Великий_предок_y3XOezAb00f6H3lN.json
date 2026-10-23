@@ -1,0 +1,53 @@
+{
+  "name": "Великий предок",
+  "type": "mutation",
+  "system": {
+    "description": "Выбор архидемона → бонус (список в разработке)",
+    "key": "demon_great_ancestor",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 10,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Demon",
+      "6"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "demon_great_ancestor",
+      "folder": "Demon/Rank 6"
+    }
+  },
+  "folder": "KmhzMZf3m99dawhj",
+  "_id": "y3XOezAb00f6H3lN",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992965,
+    "modifiedTime": 1784181820033,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!y3XOezAb00f6H3lN"
+}

@@ -1,0 +1,54 @@
+{
+  "folder": "ArXC8GTTUyg2Rymj",
+  "name": "Ложный вонючник",
+  "type": "craft_material",
+  "_id": "R0aandRhgEmcgQET",
+  "img": "systems/dedrel/assets/icons/materials/herb/False%20Stinkweed.webp",
+  "system": {
+    "description": "<div><p>пустыня. </p><p>Желтые, будто погибшие пучки травы, растущие среди песков. В отличие от настоящего вонючника - бесполезной для алхимии травы, это резко пахнущее растение обладает большой силой.</p></div>",
+    "key": "false_stinkweed",
+    "rarity": "very_rare",
+    "weight": 0.1,
+    "base_price": 2500,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783694803372,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!R0aandRhgEmcgQET"
+}

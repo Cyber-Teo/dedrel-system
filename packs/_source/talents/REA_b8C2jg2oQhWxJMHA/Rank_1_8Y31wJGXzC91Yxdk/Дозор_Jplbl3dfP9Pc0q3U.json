@@ -1,0 +1,53 @@
+{
+  "name": "Дозор",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.tzVmsNDNjcSBfj9I]{Дозор}</p><p>Манёвр. Свободное действие. Вы можете выбрать один из доступных вам манёвров и задать триггер: когда маг начнёт колдовать, когда стражник попадёт в зону видимости (и т. д.). У вас должны быть ОД на целевой манёвр, он автоматически сработает когда будут выполнены условия. После использования Дозора, вы должны закончить свой ход.</p><p>Если манёвр сделает для цели невозможным выполнение действия, ОД которые она потратила не возвращаются.</p>",
+    "key": "overwatch",
+    "subtype": "passive",
+    "xp_cost": 1,
+    "prerequisites_text": "@attributes.rea.rank 1",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 1"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_overwatch"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "overwatch",
+      "folder": "REA/Rank 1"
+    }
+  },
+  "folder": "8Y31wJGXzC91Yxdk",
+  "_id": "Jplbl3dfP9Pc0q3U",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Jplbl3dfP9Pc0q3U"
+}

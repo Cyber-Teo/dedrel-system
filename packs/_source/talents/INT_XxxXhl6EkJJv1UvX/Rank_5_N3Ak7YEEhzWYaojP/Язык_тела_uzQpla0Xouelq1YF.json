@@ -1,0 +1,53 @@
+{
+  "name": "Язык тела",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.vX0hT3zoWWGp99j1]{Язык тела}</p><p>Манёвр. Действие, 4 ОД. Вы выбираете одного противника. Эффект длится 10 раундов. Все атаки выбранного противника против вас совершаются только с базовым броском без бонусов от талантов, состояний или манёвров. Противник не может применять против вас манёвры требующие скрытности или внезапности.</p>",
+    "key": "body_language",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.int.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_body_language"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "body_language",
+      "folder": "INT/Rank 5"
+    }
+  },
+  "folder": "N3Ak7YEEhzWYaojP",
+  "_id": "uzQpla0Xouelq1YF",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!uzQpla0Xouelq1YF"
+}

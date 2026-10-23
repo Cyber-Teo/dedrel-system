@@ -1,0 +1,65 @@
+{
+  "folder": "ePWKatbTVvrn4Ccp",
+  "name": "Порох",
+  "type": "craft_material",
+  "_id": "6UL6xnBIR9MyfLty",
+  "img": "systems/dedrel/assets/icons/materials/crafted/swap-bag.svg",
+  "system": {
+    "description": "",
+    "key": "gunpowder",
+    "rarity": "common",
+    "weight": 0,
+    "base_price": 187,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Cf1WUMD71emyuSvp",
+          "name": "Селитра",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.6YPl3RfATjp30Xxn",
+          "name": "Сера",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 10,
+      "cost_price": 170,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "powder",
+    "material_class": "processed",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784005853874,
+    "modifiedTime": 1792453977032,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6UL6xnBIR9MyfLty"
+}

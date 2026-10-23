@@ -1,0 +1,107 @@
+{
+  "name": "Толстая кожа",
+  "type": "mutation",
+  "system": {
+    "description": "Персонаж получает сопротивление 10% к режущему и колющему урону.<br><br><b>Комментарии:</b> добавить в игру предмет броня, Толстая шкура которая нарушает обычные правила ношения брони и не занимает слот брони, давая ДР",
+    "key": "demon_thick_skin",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Demon",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "demon_thick_skin",
+      "folder": "Demon/Rank 3"
+    }
+  },
+  "folder": "aV3TPLiC7SI4gNOW",
+  "_id": "CLBFT7Ys2dGNI8cx",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [
+    {
+      "name": "Толстая кожа",
+      "origin": "Compendium.dedrel.mutations.Item.CLBFT7Ys2dGNI8cx",
+      "_id": "PKnWGSQGV608FH02",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.dr.piercing",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.dr.slashing",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1782861472071,
+        "modifiedTime": 1783744434860,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!CLBFT7Ys2dGNI8cx.PKnWGSQGV608FH02"
+    }
+  ],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992965,
+    "modifiedTime": 1792453976710,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!CLBFT7Ys2dGNI8cx"
+}

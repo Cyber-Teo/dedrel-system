@@ -1,0 +1,30 @@
+{
+  "name": "Животные",
+  "type": "creature_type",
+  "_id": "oip8THsPDXqN85dW",
+  "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+  "system": {
+    "key": "beast",
+    "description": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784799528540,
+    "modifiedTime": 1792453977471,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!oip8THsPDXqN85dW"
+}

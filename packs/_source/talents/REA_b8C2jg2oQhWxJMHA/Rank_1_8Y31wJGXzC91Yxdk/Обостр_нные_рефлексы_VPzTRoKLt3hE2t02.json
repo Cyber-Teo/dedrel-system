@@ -1,0 +1,98 @@
+{
+  "name": "Обострённые рефлексы",
+  "type": "talent",
+  "system": {
+    "description": "+2 к спасброскам Реакции<br><br><b>On Add Macro:</b><br>@saves.rea.bonus +2",
+    "key": "heightened_reflexes",
+    "subtype": "passive",
+    "xp_cost": 1,
+    "prerequisites_text": "@attributes.rea.rank 1",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 1"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "heightened_reflexes",
+      "folder": "REA/Rank 1"
+    }
+  },
+  "folder": "8Y31wJGXzC91Yxdk",
+  "_id": "VPzTRoKLt3hE2t02",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [
+    {
+      "name": "Обострённые рефлексы",
+      "origin": "Compendium.dedrel.talents.Item.VPzTRoKLt3hE2t02",
+      "_id": "0yZfz3EGaOgeQKmQ",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.rea.save_bonus",
+            "type": "add",
+            "value": 2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783333064779,
+        "modifiedTime": 1792453976894,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!VPzTRoKLt3hE2t02.0yZfz3EGaOgeQKmQ"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!VPzTRoKLt3hE2t02"
+}

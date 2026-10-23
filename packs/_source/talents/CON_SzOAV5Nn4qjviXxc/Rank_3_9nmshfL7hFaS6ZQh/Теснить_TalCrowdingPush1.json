@@ -1,0 +1,56 @@
+{
+  "_id": "TalCrowdingPush1",
+  "name": "Теснить",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "key": "crowding",
+      "folder": "CON/Rank 3"
+    }
+  },
+  "system": {
+    "key": "crowding",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "description": "<p>Даёт манёвр «Теснить»: Атлетика против Скрытности цели, при успехе — состояние @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Зажат} (запрет уклонения на одну атаку). Нужен щит или второе оружие в левой руке.</p>\n<p>Ниша щитовика и бойца с парой клинков: вы не быстрее противника, вы просто не отпускаете его.</p>",
+    "adds_items": [
+      "maneuver_crowding"
+    ],
+    "prerequisites_text": "Телосложение 3",
+    "prerequisites_attributes": [
+      "@attributes.con.rank 3"
+    ],
+    "has_situational_bonus": false,
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "folder": "9nmshfL7hFaS6ZQh",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789660057933,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TalCrowdingPush1"
+}

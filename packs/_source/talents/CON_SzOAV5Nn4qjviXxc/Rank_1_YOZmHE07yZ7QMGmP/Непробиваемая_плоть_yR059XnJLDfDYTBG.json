@@ -1,0 +1,98 @@
+{
+  "name": "Непробиваемая плоть",
+  "type": "talent",
+  "system": {
+    "description": "Увеличивает твои шансы сопротивляться эффектам, требующим спасброска на Телосложение. +2 к спасброскам на Телосложение (CON saves).<br><br><b>On Add Macro:</b><br>@saves.con bonus +2",
+    "key": "impenetrable_flesh",
+    "subtype": "passive",
+    "xp_cost": 1,
+    "prerequisites_text": "@attributes.con.rank 1",
+    "prerequisites_attributes": [
+      "@attributes.con.rank 1"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "impenetrable_flesh",
+      "folder": "CON/Rank 1"
+    }
+  },
+  "folder": "YOZmHE07yZ7QMGmP",
+  "_id": "yR059XnJLDfDYTBG",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [
+    {
+      "name": "Непробиваемая плоть",
+      "origin": "Compendium.dedrel.talents.Item.yR059XnJLDfDYTBG",
+      "_id": "pylT3tf0ZMTCc425",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.con.save_bonus",
+            "type": "add",
+            "value": 2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783329233667,
+        "modifiedTime": 1783744435284,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!yR059XnJLDfDYTBG.pylT3tf0ZMTCc425"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044245,
+    "modifiedTime": 1792453976777,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!yR059XnJLDfDYTBG"
+}

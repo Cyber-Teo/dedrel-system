@@ -1,0 +1,63 @@
+{
+  "name": "Бронза",
+  "type": "craft_material",
+  "_id": "fuj9kZHEipYrDKJB",
+  "img": "systems/dedrel/assets/icons/materials/metal/Bronze.webp",
+  "system": {
+    "description": "<p>Почти не используется в настоящее время. Говорят бронзовым оружием пользовались Феи, которые недолюбливают железо. Оружие и доспехи из бронзы очень тяжелы и неудобны, да и не всякий доспех получится из такого материала, но всё же он восприимчив к магии.</p><p></p>",
+    "key": "bronze",
+    "rarity": "common",
+    "weight": 2,
+    "base_price": 5,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": true,
+      "armor": true,
+      "shield": true,
+      "jewelry": false
+    },
+    "grants": [
+      {
+        "label": "common slot",
+        "bonus": 0,
+        "slots": [
+          "common"
+        ]
+      }
+    ],
+    "weight_class": "heavy"
+  },
+  "effects": [],
+  "folder": "GDOFOWKGG9OaiugJ",
+  "sort": 125000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783676486578,
+    "modifiedTime": 1792453977035,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fuj9kZHEipYrDKJB"
+}

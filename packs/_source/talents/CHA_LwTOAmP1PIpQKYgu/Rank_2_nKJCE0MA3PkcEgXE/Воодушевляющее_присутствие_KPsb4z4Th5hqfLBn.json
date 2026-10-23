@@ -1,0 +1,53 @@
+{
+  "name": "Воодушевляющее присутствие",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.f9CJzcGtdvYHevzM]{Воодушевляющее присутствие}</p><p>Когда союзник в пределах слышимости совершает бросок навыка — потратьте заряд, он добавляет +2 к результату. Объявляется после броска, до объявления результата.</p>",
+    "key": "inspiring_presence",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.cha.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.cha.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_inspiring_presence"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "inspiring_presence",
+      "folder": "CHA/Rank 2"
+    }
+  },
+  "folder": "nKJCE0MA3PkcEgXE",
+  "_id": "KPsb4z4Th5hqfLBn",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!KPsb4z4Th5hqfLBn"
+}

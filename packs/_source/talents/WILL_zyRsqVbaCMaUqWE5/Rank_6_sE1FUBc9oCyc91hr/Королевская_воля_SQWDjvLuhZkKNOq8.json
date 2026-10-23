@@ -1,0 +1,53 @@
+{
+  "name": "Королевская воля",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.0lbAvOq416OQzRkh]{Королевская воля (в разработке)}</p>Все враги в радиусе 2+WILL клеток проходят проверку WILL против вашего WILL+12. Провал — [🔧 плейсхолдер: Ужас]. Успех — [🔧 плейсхолдер: лёгкий статус].<br><br><b>Комментарии:</b> подумать над введением сущности \"аура\"",
+    "key": "sovereign_will",
+    "subtype": "passive",
+    "xp_cost": 6,
+    "prerequisites_text": "@attributes.will.rank 6",
+    "prerequisites_attributes": [
+      "@attributes.will.rank 6"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_sovereign_will"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "sovereign_will",
+      "folder": "WILL/Rank 6"
+    }
+  },
+  "folder": "sE1FUBc9oCyc91hr",
+  "_id": "SQWDjvLuhZkKNOq8",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!SQWDjvLuhZkKNOq8"
+}

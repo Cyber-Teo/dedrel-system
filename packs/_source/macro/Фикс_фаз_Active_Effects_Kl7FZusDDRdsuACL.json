@@ -1,0 +1,28 @@
+{
+  "name": "Фикс фаз Active Effects",
+  "type": "script",
+  "_id": "Kl7FZusDDRdsuACL",
+  "author": "Gw6OqVIulw8cCPjC",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "// Foundry VTT Macro: Фикс фаз Active Effects (system.* -> \"apply\")\n// Проходит по всем Item-компендиумам dedrel.* и всем изменениям (changes)\n// эффектов: каждому изменению с ключом system.* и фазой, отличной от \"apply\",\n// проставляет каноническую фазу \"apply\" (конвенция системы — хук\n// preCreateActiveEffect делает это автоматически при обычном создании,\n// но данные, импортированные макросами из JSON, хук обходили).\n// См. FOUNDRY V14 QUIRKS.md §12. Перед запуском рекомендуется прогнать\n// data_validation_macro.js, после — прогнать его же для контроля.\n(async () => {\n  const packs = game.packs.filter(p => p.documentName === \"Item\" && p.collection.startsWith(\"dedrel.\"));\n  if (!packs.length) return ui.notifications.error(\"Item-компендиумы dedrel.* не найдены.\");\n\n  ui.notifications.info(`Фикс фаз: сканирую ${packs.length} компендиумов...`);\n\n  // --- Проход 1: план правок (ничего не пишем) ---\n  // plan: pack -> Map(itemId -> { item, updates: [{_id, ...}], log: [строки] })\n  const plan = new Map();\n  for (const pack of packs) {\n    const docs = await pack.getDocuments();\n    for (const item of docs) {\n      for (const eff of item.effects) {\n        const update = { _id: eff.id };\n        const log = [];\n\n        // V14: системные фазы живут в effect.system.changes; на всякий случай\n        // правим и legacy-массив effect.changes, если там есть system.*-ключи\n        for (const [path, arr] of [[\"system.changes\", eff.system?.changes], [\"changes\", eff.changes]]) {\n          if (!Array.isArray(arr) || !arr.length) continue;\n          const fixed = foundry.utils.deepClone(arr);\n          let dirty = false;\n          for (const ch of fixed) {\n            if (ch?.key?.startsWith(\"system.\") && ch.phase !== \"apply\") {\n              log.push(`${item.name} / «${eff.name}»: ${ch.key} — фаза «${ch.phase ?? \"нет\"}» -> «apply»`);\n              ch.phase = \"apply\";\n              dirty = true;\n            }\n          }\n          if (dirty) update[path] = fixed;\n        }\n\n        if (log.length) {\n          if (!plan.has(pack)) plan.set(pack, new Map());\n          const byItem = plan.get(pack);\n          if (!byItem.has(item.id)) byItem.set(item.id, { item, updates: [], log: [] });\n          byItem.get(item.id).updates.push(update);\n          byItem.get(item.id).log.push(...log);\n        }\n      }\n    }\n  }\n\n  const allLog = [...plan.values()].flatMap(byItem => [...byItem.values()].flatMap(e => e.log));\n  if (!allLog.length) return ui.notifications.info(\"Фикс фаз: все system.*-изменения уже имеют фазу «apply». Править нечего.\");\n\n  // --- Подтверждение ---\n  const confirmed = await foundry.applications.api.DialogV2.confirm({\n    window: { title: \"Фикс фаз Active Effects\" },\n    content: `\n      <p>Будет исправлено <b>${allLog.length}</b> изменений в эффектах:</p>\n      <div style=\"max-height:300px;overflow-y:auto;font-size:12px;border:1px solid #999;padding:4px;\">\n        ${allLog.map(l => `<div>${l}</div>`).join(\"\")}\n      </div>\n      <p>Компендиумы будут временно разблокированы. Продолжить?</p>\n    `,\n    rejectClose: false\n  });\n  if (!confirmed) return ui.notifications.warn(\"Фикс фаз отменён.\");\n\n  // --- Проход 2: запись ---\n  let fixedItems = 0;\n  for (const [pack, byItem] of plan) {\n    const wasLocked = pack.locked;\n    if (wasLocked) await pack.configure({ locked: false });\n    try {\n      for (const { item, updates } of byItem.values()) {\n        await item.updateEmbeddedDocuments(\"ActiveEffect\", updates);\n        fixedItems++;\n      }\n    } finally {\n      if (wasLocked) await pack.configure({ locked: true });\n    }\n  }\n\n  const content = `\n    <h3>Фикс фаз Active Effects</h3>\n    <p>Исправлено изменений: <b>${allLog.length}</b> (предметов: ${fixedItems}).</p>\n    <div style=\"font-size:12px;\">${allLog.map(l => `<div>${l}</div>`).join(\"\")}</div>\n    <p><i>Прогоните data_validation_macro.js для контроля.</i></p>\n  `;\n  await ChatMessage.create({ user: game.user.id, content, whisper: [game.user.id] });\n  console.log(\"Dedrel | Фикс фаз:\", allLog);\n  ui.notifications.info(`Фикс фаз: исправлено ${allLog.length} изменений в ${fixedItems} предметах.`);\n})();",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789150357517,
+    "modifiedTime": 1789150367256,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!macros!Kl7FZusDDRdsuACL"
+}

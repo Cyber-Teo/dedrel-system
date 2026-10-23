@@ -1,0 +1,93 @@
+{
+  "name": "Железная кираса",
+  "type": "armor",
+  "_id": "evVTPyzBoe5O6BzP",
+  "img": "systems/dedrel/assets/icons/items/armor.svg",
+  "system": {
+    "description": "",
+    "key": "iron_cuirass",
+    "rarity": "common",
+    "equip_slot": "",
+    "base_price": 60,
+    "weight": 8,
+    "crafting": {
+      "craftable": true,
+      "discipline": "smithing",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+          "name": "Железо",
+          "amount": 4
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 40,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "slot": "upper",
+    "weight_class": "medium",
+    "dr": {
+      "slashing": 2,
+      "piercing": 1,
+      "bludgeoning": 1,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "modifiers": {
+      "dodge": 0,
+      "block": 0,
+      "stealth": 0,
+      "ranged_attack": 0,
+      "magic_attack": 0,
+      "movement": 0
+    },
+    "properties": {
+      "exclusive_slot": false,
+      "rigid": true,
+      "loud": false,
+      "encumbering": false,
+      "weak_point_protection": false,
+      "deflecting": 0,
+      "cohesion": 0
+    },
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "equipped": false
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789574893350,
+    "modifiedTime": 1792453976977,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!evVTPyzBoe5O6BzP"
+}

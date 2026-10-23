@@ -1,0 +1,51 @@
+{
+  "name": "Лингвист (в разработке)",
+  "type": "talent",
+  "system": {
+    "description": "<p>Выучиваете один дополнительный язык на выбор. Талант можно брать несколько раз.</p>",
+    "key": "linguist",
+    "subtype": "passive",
+    "xp_cost": 1,
+    "prerequisites_text": "@attributes.log.rank 1",
+    "prerequisites_attributes": [
+      "@attributes.log.rank 1"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "linguist",
+      "folder": "LOG/Rank 1"
+    }
+  },
+  "folder": "0lFDvFLOj47tgOeW",
+  "_id": "MtKshQITBhLf6bnw",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MtKshQITBhLf6bnw"
+}

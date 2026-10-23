@@ -1,0 +1,90 @@
+{
+  "name": "Резервная выносливость",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>3 раза в короткий отдых. <br>Мгновенно восстановите до ранга Телосложения универсальных Очков Действия.</p>",
+    "key": "maneuver_reserve_stamina",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 0,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "reserve_stamina"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "short_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "restoreAP"
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_reserve_stamina",
+      "folder": "Talent"
+    }
+  },
+  "folder": "fleS8YIj86AeHBTz",
+  "_id": "6tvGOWHSL6vm2pw2",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reserve_stamina.svg",
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024582,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6tvGOWHSL6vm2pw2"
+}

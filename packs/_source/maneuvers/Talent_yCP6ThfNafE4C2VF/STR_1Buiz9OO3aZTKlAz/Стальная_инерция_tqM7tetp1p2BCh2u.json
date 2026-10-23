@@ -1,0 +1,133 @@
+{
+  "name": "Стальная инерция",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Если в конце прошлого хода вы начали @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Стальной барьер} и он не сработал до начала нового хода, то в начале хода вы можете применить Стальную Инерцию: подвигайтесь на свою скорость и проведите атаку, в случае попадания, урон будет увеличен на одну ступень.</p><p>Это свободное действие и вы сможете продолжить свой ход. </p>",
+    "key": "maneuver_steel_momentum",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 1,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": true
+    },
+    "req_weapon_skill_group": "bladed_weapons",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": true,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "steel_momentum"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "статус стальной барьер",
+    "target_type": "creature",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": null,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "req_weapon_keys": [
+      "greatsword"
+    ],
+    "weapon_dice_step": 1
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_steel_momentum",
+      "folder": "Talent"
+    }
+  },
+  "folder": "1Buiz9OO3aZTKlAz",
+  "_id": "tqM7tetp1p2BCh2u",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_steel_momentum.svg",
+  "effects": [
+    {
+      "name": "Стальная инерция",
+      "origin": "Compendium.dedrel.maneuvers.Item.tqM7tetp1p2BCh2u",
+      "_id": "xz0BMkXYoHtusqZ2",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_steel_momentum.svg",
+      "type": "base",
+      "system": {
+        "changes": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783831462585,
+        "modifiedTime": 1783831479237,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!tqM7tetp1p2BCh2u.xz0BMkXYoHtusqZ2"
+    }
+  ],
+  "sort": 600000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024582,
+    "modifiedTime": 1789662047791,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!tqM7tetp1p2BCh2u"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "LUCK",
+  "type": "Item",
+  "folder": null,
+  "_id": "7go7EIMZD3ILm4Cf",
+  "description": "",
+  "sorting": "a",
+  "sort": 100000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044227,
+    "modifiedTime": 1783330543872,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!7go7EIMZD3ILm4Cf"
+}

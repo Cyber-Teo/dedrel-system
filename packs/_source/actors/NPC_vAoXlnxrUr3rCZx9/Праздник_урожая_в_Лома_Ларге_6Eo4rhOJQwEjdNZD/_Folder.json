@@ -1,0 +1,23 @@
+{
+  "type": "Actor",
+  "folder": "vAoXlnxrUr3rCZx9",
+  "name": "Праздник урожая в Лома-Ларге",
+  "color": null,
+  "sorting": "a",
+  "_id": "6Eo4rhOJQwEjdNZD",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789656077931,
+    "modifiedTime": 1789656077931,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!6Eo4rhOJQwEjdNZD"
+}

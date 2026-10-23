@@ -1,0 +1,114 @@
+{
+  "name": "Дребезги [Путь эха]",
+  "type": "spell",
+  "img": "systems/dedrel/assets/icons/items/spell.svg",
+  "system": {
+    "doctrine": "ventomancy",
+    "doctrine_rank_req": 2,
+    "doctrine_path": "echo",
+    "source_scale": "any",
+    "chosen_techniques": [
+      "imbue"
+    ],
+    "chosen_modifiers": [
+      {
+        "key": "range",
+        "rank": 2,
+        "ap": 2,
+        "option": ""
+      },
+      {
+        "key": "damage",
+        "rank": 1,
+        "ap": 2,
+        "option": ""
+      }
+    ],
+    "total_cost_breakdown": "Imbue/Infuse [1] + Range 2 [2] + Damage 1 [1+1=2] = 5 AP",
+    "ap_cost": 5,
+    "skill": "magical_attacks",
+    "attack_bonus": 0,
+    "action_type": {
+      "action": true,
+      "chain": false,
+      "reaction": false,
+      "free": false
+    },
+    "target_type": "creature",
+    "target_range": "10",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "formula_attack": "",
+    "formula_damage": "2d4[sonic]",
+    "formula_heal": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false,
+      "magic": true
+    },
+    "description": "<p><em>Imbue/Infuse [1] + Range 2 [2] + Damage 1 [1+1=2] = 5 AP</em></p><p>Source Scale: Source Available · Path of the Echo</p>",
+    "key": "vento_echo_shards",
+    "source": "basic",
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "is_fixed": false,
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "_id": "s7znUwTqIVOeLN0g",
+  "folder": "BPgJuNzYyItPZbIK",
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789570320280,
+    "modifiedTime": 1789665483177,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 500000,
+  "_key": "!items!s7znUwTqIVOeLN0g"
+}

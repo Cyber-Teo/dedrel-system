@@ -1,0 +1,23 @@
+{
+  "name": "Elf",
+  "type": "Item",
+  "folder": null,
+  "_id": "bT8lVYrbMfb02Axw",
+  "description": "",
+  "sorting": "a",
+  "sort": 300000,
+  "color": "#082702",
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992927,
+    "modifiedTime": 1788662109837,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!bT8lVYrbMfb02Axw"
+}

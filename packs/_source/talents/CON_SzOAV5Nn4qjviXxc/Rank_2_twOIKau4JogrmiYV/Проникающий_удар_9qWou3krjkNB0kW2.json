@@ -1,0 +1,61 @@
+{
+  "name": "Проникающий удар",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.EAb2rrgB0ew8Cnmr]{Проникающий удар}</p><p>Вы используете две конечности и свой вес чтобы нанести дополнительный колющий урон равный рангу силы.</p>",
+    "key": "penetrating_strike",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.con.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.con.rank 2"
+    ],
+    "prerequisites_skills": [
+      ""
+    ],
+    "prerequisites_talents": [
+      ""
+    ],
+    "prerequisites_mutations": [
+      ""
+    ],
+    "prerequisites_bloodlines": [
+      ""
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_penetrating_strike"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "penetrating_strike",
+      "folder": "STR/Rank 2"
+    }
+  },
+  "folder": "twOIKau4JogrmiYV",
+  "_id": "9qWou3krjkNB0kW2",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!9qWou3krjkNB0kW2"
+}

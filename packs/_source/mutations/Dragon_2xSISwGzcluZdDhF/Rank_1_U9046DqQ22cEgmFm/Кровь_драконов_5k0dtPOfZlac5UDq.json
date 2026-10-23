@@ -1,0 +1,53 @@
+{
+  "name": "Кровь драконов",
+  "type": "mutation",
+  "system": {
+    "description": "Кровь как признак/ресурс для ритуалов и механик",
+    "key": "dragon_blood",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 0,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Dragon",
+      "1"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "dragon_blood",
+      "folder": "Dragon/Rank 1"
+    }
+  },
+  "folder": "U9046DqQ22cEgmFm",
+  "_id": "5k0dtPOfZlac5UDq",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784181820030,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5k0dtPOfZlac5UDq"
+}

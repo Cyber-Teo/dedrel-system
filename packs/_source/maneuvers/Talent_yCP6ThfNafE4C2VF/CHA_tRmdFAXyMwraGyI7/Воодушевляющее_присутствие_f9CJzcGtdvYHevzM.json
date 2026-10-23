@@ -1,0 +1,90 @@
+{
+  "name": "Воодушевляющее присутствие",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Когда союзник в пределах слышимости совершает бросок навыка — потратьте заряд, он добавляет +2 к результату. Объявляется после броска, до объявления результата.</p>",
+    "key": "maneuver_inspiring_presence",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 1,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "inspiring_presence"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "short_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_inspiring_presence",
+      "folder": "Talent"
+    }
+  },
+  "folder": "tRmdFAXyMwraGyI7",
+  "_id": "f9CJzcGtdvYHevzM",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_inspiring_presence.svg",
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024585,
+    "modifiedTime": 1784855818408,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!f9CJzcGtdvYHevzM"
+}

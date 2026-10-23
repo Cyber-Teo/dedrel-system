@@ -1,0 +1,134 @@
+{
+  "name": "Фантомный шаг",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Вы читаете чужую стойку и проскальзываете там, где вас ждут.</p>\n<p><strong>Эффект:</strong> до конца этого хода ваше перемещение <strong>сквозь чужие зоны контроля</strong> не провоцирует Атак по возможности.</p>\n<p><strong>Чего не делает:</strong> не освобождает от клинча — для этого есть «Разорвать дистанцию». И не спасает от реакций с собственным триггером: «Упреждающий выпад» срабатывает на вход в зону контроля, а не на Атаку по возможности, и по-прежнему вас остановит.</p>",
+    "key": "maneuver_phantom_tread",
+    "source": "talent",
+    "action_type": {
+      "action": false,
+      "reaction": false,
+      "free": true,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 1,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "phantom_tread"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_phantom_tread",
+      "folder": "Talent"
+    }
+  },
+  "folder": "HN40Tj1kdqR79X5m",
+  "_id": "OzLWpsHxnDHRrBdg",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_phantom_tread.svg",
+  "effects": [
+    {
+      "_id": "PhantomTreadEff1",
+      "name": "Фантомный шаг",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_phantom_tread.svg",
+      "type": "base",
+      "transfer": false,
+      "disabled": false,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "system": {
+        "changes": []
+      },
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1784968900014,
+        "modifiedTime": 1784968900014,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!OzLWpsHxnDHRrBdg.PhantomTreadEff1"
+    }
+  ],
+  "sort": 800000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024583,
+    "modifiedTime": 1784968900010,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!OzLWpsHxnDHRrBdg"
+}

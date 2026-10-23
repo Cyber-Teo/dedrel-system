@@ -1,0 +1,2181 @@
+{
+  "_id": "NievesCaldera001",
+  "name": "Ниэвес Кальдера",
+  "img": "icons/svg/mystery-man.svg",
+  "folder": "vKsB4yqNbnRzQJio",
+  "items": [
+    {
+      "name": "Люди",
+      "type": "creature_type",
+      "_id": "aBpVy31Ul0e0h8SJ",
+      "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+      "system": {
+        "key": "human",
+        "description": "<p>NPC-раса, общих правил нет.</p>"
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1792453977785,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.aBpVy31Ul0e0h8SJ"
+    },
+    {
+      "name": "Дубовая волшебная палочка",
+      "type": "weapon",
+      "_id": "tTddxCLwqdMQLXFL",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/oak_magic_wand.jpeg",
+      "system": {
+        "description": "",
+        "key": "oak_magic_wand",
+        "rarity": "common",
+        "weight": 0.3,
+        "base_price": 45,
+        "crafting": {
+          "craftable": true,
+          "discipline": "carpentry",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.VQ0r2aCvo4Q8aF4S",
+              "name": "Дуб",
+              "amount": 1
+            },
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.FZe96pNTEe02hU14",
+              "name": "Бирюза",
+              "amount": 1
+            }
+          ],
+          "markup_pct": 50,
+          "cost_price": 30,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "skill": "magical_attacks",
+        "damage_formula": "",
+        "damage_formulas": {
+          "slashing": "",
+          "piercing": "",
+          "bludgeoning": ""
+        },
+        "formula_heal": "",
+        "equipped": true,
+        "range": "",
+        "properties": {
+          "natural": false,
+          "armor_piercing": false,
+          "misfire_chance": 0,
+          "consumed_on_use": false,
+          "can_be_sold": false,
+          "can_be_dropped": false
+        },
+        "quantity": 1,
+        "consume_target": "",
+        "consume_amount": 1,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "on_use_macro": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "control_zone": 0,
+        "armor_piercing": 0,
+        "cleaving": 0,
+        "deflecting": 0,
+        "vs_creature": {
+          "beast": 0,
+          "magical_beast": 0,
+          "elemental": 0,
+          "spirit": 0,
+          "shade": 0,
+          "demon": 0,
+          "dragon": 0,
+          "elf": 0,
+          "undead": 0,
+          "cosmic": 0,
+          "construct": 0,
+          "fay": 0
+        },
+        "is_auxiliary": false,
+        "is_fast": false,
+        "is_slow": false,
+        "is_twohanded": false,
+        "is_thrown": false,
+        "is_reloading": false,
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false,
+        "is_variable_grip": false,
+        "is_paired": false,
+        "formula_temp_hp": "",
+        "bypass_creature": {}
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1792453977785,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.tTddxCLwqdMQLXFL"
+    },
+    {
+      "name": "Льняная мантия",
+      "type": "armor",
+      "_id": "Icf6PpwHkLQZdvEv",
+      "img": "systems/dedrel/assets/icons/armor_icons/common/linen_mantle.webp",
+      "system": {
+        "description": "",
+        "key": "linen_mantle",
+        "rarity": "common",
+        "equip_slot": "",
+        "base_price": 20,
+        "weight": 1.5,
+        "crafting": {
+          "craftable": true,
+          "discipline": "tailoring",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
+              "name": "Лён",
+              "amount": 3
+            }
+          ],
+          "markup_pct": 30,
+          "cost_price": 15,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "slot": "upper",
+        "weight_class": "light",
+        "dr": {
+          "slashing": 1,
+          "piercing": 0,
+          "bludgeoning": 1,
+          "heat": 0,
+          "cold": 0,
+          "necrotic": 0,
+          "radiant": 0,
+          "electric": 0,
+          "sonic": 0,
+          "acid": 0
+        },
+        "modifiers": {
+          "dodge": 0,
+          "block": 0,
+          "stealth": 0,
+          "ranged_attack": 0,
+          "magic_attack": 0,
+          "movement": 0
+        },
+        "properties": {
+          "exclusive_slot": false,
+          "rigid": false,
+          "loud": false,
+          "encumbering": false,
+          "weak_point_protection": false,
+          "deflecting": 0,
+          "cohesion": 0,
+          "light_layers_only": true
+        },
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_heal": "",
+        "on_use_macro": "",
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "equipped": false,
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1792453977785,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.Icf6PpwHkLQZdvEv"
+    },
+    {
+      "_id": "NievesStitching1",
+      "name": "Штопка",
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "doctrine": "biomancy",
+        "doctrine_rank_req": 3,
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [
+          "transform"
+        ],
+        "chosen_modifiers": [
+          {
+            "key": "heal",
+            "rank": 3,
+            "ap": 3,
+            "option": ""
+          },
+          {
+            "key": "range",
+            "rank": 2,
+            "ap": 2,
+            "option": ""
+          }
+        ],
+        "total_cost_breakdown": "Alter/Transform [1] + Healing 3 [3] + Range 2 [2] = 6 AP",
+        "ap_cost": 6,
+        "skill": "magical_attacks",
+        "attack_bonus": 0,
+        "action_type": {
+          "action": true,
+          "chain": false,
+          "reaction": false,
+          "free": false
+        },
+        "target_type": "creature",
+        "target_range": "10",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "2d8",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "key": "nieves_stitching",
+        "description": "<p>Ниэвес не лечит — она <em>чинит</em>. Разорванная плоть сходится стежком, которого никто не накладывал, и шов ложится ровно там, где она смотрит.</p>\n<p><strong>В сцене:</strong> её ход целиком. Пока она жива и видит Матриарха, бой с боссом не кончается — это и есть ответ на вопрос «зачем партии лезть к ведьме за решётку».</p>",
+        "source": "basic",
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "is_fixed": false,
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "on_use_macro": ""
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Biomancy",
+          "isFavorite": true
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.NievesStitching1"
+    },
+    {
+      "_id": "NievesGrafting01",
+      "name": "Прививка",
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "doctrine": "biomancy",
+        "doctrine_rank_req": 2,
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [
+          "transform"
+        ],
+        "chosen_modifiers": [
+          {
+            "key": "adapt",
+            "rank": 2,
+            "ap": 2,
+            "option": "adapt_thick_skin"
+          },
+          {
+            "key": "range",
+            "rank": 2,
+            "ap": 2,
+            "option": ""
+          }
+        ],
+        "total_cost_breakdown": "Alter/Transform [1] + Adaptation 2 [2] + Range 2 [2] = 5 AP",
+        "ap_cost": 5,
+        "skill": "magical_attacks",
+        "attack_bonus": 0,
+        "action_type": {
+          "action": true,
+          "chain": false,
+          "reaction": false,
+          "free": false
+        },
+        "target_type": "creature",
+        "target_range": "10",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "save_attribute": "will",
+        "save_dc_formula": "12",
+        "forbidden_defense": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "key": "nieves_grafting",
+        "description": "<p>Чужая черта, приживлённая на ходу: кожа Матриарха грубеет и идёт роговыми наростами прямо посреди боя.</p>\n<p><strong>Эффект:</strong> адаптация «Толстая кожа» — DR 1 против режущего и колющего, на Ранг Доктрины раундов (3). Согласная цель спасбросок не делает; несогласная — Воля против DC 12.</p>\n<p><strong>В сцене:</strong> тест Модификатора «Адаптация» на стороне Мастера. Вешается кнопкой с карточки.</p>",
+        "source": "basic",
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "is_fixed": false,
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "on_use_macro": ""
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Biomancy",
+          "isFavorite": true
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.NievesGrafting01"
+    },
+    {
+      "_id": "NievesBodyTune01",
+      "name": "Подгонка тела",
+      "type": "spell",
+      "img": "systems/dedrel/assets/icons/items/spell.svg",
+      "system": {
+        "doctrine": "biomancy",
+        "doctrine_rank_req": 2,
+        "doctrine_path": "",
+        "source_scale": "none",
+        "chosen_techniques": [
+          "imbue"
+        ],
+        "chosen_modifiers": [
+          {
+            "key": "imbuement",
+            "rank": 2,
+            "ap": 2,
+            "option": "dr"
+          },
+          {
+            "key": "duration",
+            "rank": 2,
+            "ap": 2,
+            "option": ""
+          }
+        ],
+        "total_cost_breakdown": "Imbue/Infuse [1] + Imbuement 2 [2] + Duration 2 [2] = 5 AP",
+        "ap_cost": 5,
+        "skill": "magical_attacks",
+        "attack_bonus": 0,
+        "action_type": {
+          "action": true,
+          "chain": false,
+          "reaction": false,
+          "free": false
+        },
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": true
+        },
+        "key": "nieves_body_tuning",
+        "description": "<p>Она правит собственное тело так же спокойно, как чужое: слои под кожей уплотняются, и удар уходит в мясо, не доходя до кости.</p>\n<p><strong>Эффект:</strong> +2 DR себе на 6 раундов.</p>\n<p><strong>В сцене:</strong> объясняет, почему её не берут с первого удара. Кастуется до боя, если у Ниэвес было время услышать шаги.</p>",
+        "source": "basic",
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "is_fixed": false,
+        "formula_temp_hp": "",
+        "formula_custom": "",
+        "on_use_macro": ""
+      },
+      "flags": {
+        "dedrel": {
+          "folder": "Biomancy",
+          "isFavorite": true
+        }
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.NievesBodyTune01"
+    },
+    {
+      "name": "Атака по возможности",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Если зона контроля персонажа равна 1 и больше и он не находится  @UUID[Compendium.dedrel.conditions.Item.1Ed1ogtSr0oxJhd5]{В клинче} он может без дополнительной траты ОД провести Выпад, Взмах или Удар, если держит в руках оружие, позволяющее проводить такие манёвры по персонажу который пересекает его зону контроля. Если атака была успешной (даже если не нанесла урон), движение противника после этого прекращается, персонажи переходят в состояние В Клинче Если противник пересекает несколько клеток зоны контроля, персонаж может проводить атаки по возможности за каждую пересеченную клетку.<br><br><strong>Эффекты:</strong> Следующий Взмах, Удар или выпад стоит 0.</p>",
+        "key": "maneuver_attack_of_opportunity",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Зона контроля >=1, нет состояния „В Клинче“.",
+        "target_type": "self",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_attack_of_opportunity",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "kYkUGNsX9fbDKoRd",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+      "effects": [
+        {
+          "name": "Атака по возможности",
+          "origin": "Compendium.dedrel.maneuvers.Item.kYkUGNsX9fbDKoRd",
+          "_id": "3vYKn5wCeaPokRqI",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_attack_of_opportunity.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:key:maneuver_swing|key:maneuver_thrust|key:maneuver_bash|key:maneuver_power_bash|key:maneuver_penetrating_strike|key:maneuver_paired_strike",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnEnd",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1789664072171,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.kYkUGNsX9fbDKoRd.3vYKn5wCeaPokRqI"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.kYkUGNsX9fbDKoRd"
+    },
+    {
+      "name": "Уклонение",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж тратит от 1 до 5 ОД и получает столько же очков к Уклонению до начала своего следующего хода.</p>",
+        "key": "maneuver_dodge",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 0,
+        "is_variable_cost": true,
+        "variable_cost_max": 5,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_dodge",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "balrTxNEl33DGerg",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+      "effects": [
+        {
+          "name": "Уклонение",
+          "origin": "Compendium.dedrel.maneuvers.Item.balrTxNEl33DGerg",
+          "_id": "Qx96tAtFyvoGA4rF",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_dodge.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.defenses.dodge",
+                "type": "add",
+                "value": "@spentAp",
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1789664072171,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1792453977785,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.balrTxNEl33DGerg"
+    },
+    {
+      "name": "Разорвать дистанцию",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Вы разрываете сцепку: уходите из-под чужого оружия так, что противник не успевает достать вас на отходе.</p>\n<p><strong>Эффект:</strong> вы выходите из состояния <strong>В клинче</strong>, и партнёр по клинчу не получает по вам Атаку по возможности.</p>\n<p>Само перемещение манёвром не оплачивается — оно бесплатно и тратит только метры Скорости. Этот манёвр покупает не движение, а безнаказанный выход.</p>",
+        "key": "maneuver_disengage",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_disengage",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "COx23vBpriCHVVLO",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_disengage.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.COx23vBpriCHVVLO"
+    },
+    {
+      "name": "Добивание",
+      "type": "maneuver",
+      "_id": "WXAudjnk26RUhhma",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_finishing_blow.svg",
+      "system": {
+        "description": "<p>Когда противник в вашей зоне контроля получает статус «Лежит» (падает), вы можете активировать эту реакцию и нанести ему удар. </p>",
+        "key": "finishing_blow",
+        "source": "basic",
+        "action_type": {
+          "action": false,
+          "reaction": true,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "uses_value": 0,
+        "uses_max": "0",
+        "uses_per": "",
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_keys": [
+          ""
+        ],
+        "weapon_dice_step": 0,
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [
+          "bladed_weapons 3 | blunt_weapons 3 | pole_weapons 3 | unarmed_combat 3 | exotic_weapons 3"
+        ],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_heal": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "hide_combat_buttons": false,
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {
+        "dedrel": {
+          "isFavorite": true
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1792453977785,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.WXAudjnk26RUhhma"
+    },
+    {
+      "name": "Взаимодействие",
+      "type": "maneuver",
+      "system": {
+        "description": "Базовое взаимодействие с окружающим миром: например потушить огонь на себе или союзнике, сделать проверку умения, толкнуть речь (что-то большее чем пара слов в бою, но не поэма), достать предмет из сумки и так далее по решению мастера.",
+        "key": "maneuver_interact",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 1,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_interact",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "Enl336RoHnl7foYR",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_interact.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.Enl336RoHnl7foYR"
+    },
+    {
+      "_id": "DedrelDoctBiom01",
+      "name": "Биомантия",
+      "type": "talent",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "flags": {
+        "dedrel": {
+          "folder": "Magic/Доктрины"
+        }
+      },
+      "system": {
+        "key": "biomancy",
+        "description": "<p><em>Магия живой плоти. Единственное прямое лечение в системе.</em></p>\n<ul>\n<li><strong>Урон запрещён целиком</strong> — конституция доктрины.</li>\n<li><strong>Только таргетно:</strong> Области (конус, площадь, линия) запрещены.</li>\n<li><strong>Источник не нужен:</strong> живое тело и есть источник — селект Источника скрыт.</li>\n<li><strong>Модификатор «Лечение»:</strong> зеркало Лестницы — 2d4 / 2d6 / 2d8 / 3d6 / 3d8 за 1–5 ОД.</li>\n<li><strong>Модификатор «Адаптация»:</strong> временная телесная мутация ранга, равного рангу Модификатора. На союзника — полезная, на врага — негативная со спасброском (СЛ 8 + 2 × ранг).</li>\n</ul>\n<p><em>Доктрина в черновой версии — механика может измениться по итогам плейтестов.</em></p>",
+        "subtype": "passive",
+        "xp_cost": 2,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "_id": "DedrelAEDoctBio1",
+          "name": "Биомантия",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "transfer": true,
+          "disabled": false,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "system": {
+            "changes": [
+              {
+                "key": "system.doctrines.biomancy.unlocked",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              },
+              {
+                "key": "system.doctrines.biomancy.rank",
+                "type": "add",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "start": null,
+          "description": "",
+          "origin": null,
+          "tint": "#ffffff",
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1789664072171,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.DedrelDoctBiom01.DedrelAEDoctBio1"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.DedrelDoctBiom01"
+    },
+    {
+      "name": "Техника: Преобразовать",
+      "type": "talent",
+      "_id": "IlzWTnTmzzkpUKDZ",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "system": {
+        "description": "<p>Меняет внутренние свойства материи/энергии, но не её положение.</p>",
+        "key": "technique_transform",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "name": "Техника: Преобразовать",
+          "origin": "Compendium.dedrel.talents.Item.IlzWTnTmzzkpUKDZ",
+          "_id": "8kUsDWMabQxXHhYN",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.magic.techniques.transform",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.368",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1792453977791,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.IlzWTnTmzzkpUKDZ.8kUsDWMabQxXHhYN"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.IlzWTnTmzzkpUKDZ"
+    },
+    {
+      "name": "Техника: Внедрить",
+      "type": "talent",
+      "_id": "nasKVRrMBtf9SELR",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "system": {
+        "description": "<p>Внедряет магическое свойство Доктрины в цель (объект/существо).</p>",
+        "key": "technique_imbue",
+        "subtype": "passive",
+        "xp_cost": 1,
+        "has_situational_bonus": false,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [
+          ""
+        ],
+        "prerequisites_skills": [
+          ""
+        ],
+        "prerequisites_talents": [
+          ""
+        ],
+        "prerequisites_mutations": [
+          ""
+        ],
+        "prerequisites_bloodlines": [
+          ""
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "name": "Техника: Внедрить",
+          "origin": "Compendium.dedrel.talents.Item.nasKVRrMBtf9SELR",
+          "_id": "Dg29qElfAnb7fwPX",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "system.magic.techniques.imbue",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1789664072171,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.nasKVRrMBtf9SELR.Dg29qElfAnb7fwPX"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.nasKVRrMBtf9SELR"
+    },
+    {
+      "_id": "DedrelPathBioScu",
+      "name": "Путь Ваяния",
+      "type": "talent",
+      "img": "systems/dedrel/assets/icons/items/talent.svg",
+      "flags": {
+        "dedrel": {
+          "folder": "Magic/Пути"
+        }
+      },
+      "system": {
+        "key": "path_sculpting",
+        "description": "<p><em>Специализация Биомантии: работа <strong>против</strong> образца тела — ваятель удерживает плоть в чужой форме, пока она не сползла обратно.</em></p>\n<ul>\n<li><strong>Сродство:</strong> −1 ОД на «Адаптацию» и «Длительность».</li>\n<li><strong>Снимает потолок Адаптации:</strong> доступны все ранги 1–5 (без Пути — только 1–3).</li>\n<li><strong>Ограничения:</strong> «Лечение» не выше 3 ранга; <strong>«Дальность» только касание</strong> — ваяние делается руками.</li>\n<li><strong>Длинные касты:</strong> монополия Пути. Та же черта из каталога, вылепленная за часы, держится до долгого отдыха вместо раундов.</li>\n<li><strong>Ступень расхождения 2</strong> (черта чужой Линии крови) требует ткани донора нужной Линии рангом не ниже ранга черты.</li>\n</ul>\n<p><em>Талант открывает Путь доктрины. Сборка «без пути» остаётся доступной всегда; сродства, капы и Модификаторы Пути применяются только к заклинаниям этого Пути.</em></p>",
+        "subtype": "passive",
+        "xp_cost": 2,
+        "has_situational_bonus": false,
+        "prerequisites_text": "Талант «Биомантия» (доступ к доктрине).",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [
+          "biomancy"
+        ],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [],
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "on_add_macro": "",
+        "on_use_macro": ""
+      },
+      "effects": [
+        {
+          "_id": "DedrelAEPathScul",
+          "name": "Путь Ваяния",
+          "img": "icons/svg/aura.svg",
+          "type": "base",
+          "transfer": true,
+          "disabled": false,
+          "duration": {
+            "value": null,
+            "units": "seconds",
+            "expiry": null,
+            "expired": false
+          },
+          "system": {
+            "changes": [
+              {
+                "key": "system.doctrines.biomancy.paths.sculpting",
+                "type": "override",
+                "value": 1,
+                "phase": "apply",
+                "priority": 0
+              }
+            ]
+          },
+          "start": null,
+          "description": "",
+          "origin": null,
+          "tint": "#ffffff",
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1789664072171,
+            "modifiedTime": 1789664072171,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!NievesCaldera001.DedrelPathBioScu.DedrelAEPathScul"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789664072171,
+        "modifiedTime": 1789664072171,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!NievesCaldera001.DedrelPathBioScu"
+    }
+  ],
+  "prototypeToken": {
+    "name": "Ниэвес",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "width": 1,
+    "height": 1,
+    "actorLink": false,
+    "disposition": -1,
+    "displayName": 0,
+    "displayBars": 50,
+    "bar1": {
+      "attribute": "resources.hp"
+    },
+    "lockRotation": true,
+    "randomImg": false,
+    "appendNumber": false,
+    "sight": {
+      "enabled": true,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "depth": 1,
+    "rotation": 0,
+    "alpha": 1,
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "prependAdjective": false
+  },
+  "flags": {
+    "dedrel": {
+      "itemsLocked": true,
+      "favoriteSkills": [
+        "magical_attacks",
+        "healing",
+        "knowledge"
+      ],
+      "folder": "NPC/Named"
+    }
+  },
+  "type": "npc",
+  "system": {
+    "tier": "boss",
+    "attributes": {
+      "log": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "int": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "cha": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "con": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "will": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "luck": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "dex": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "rea": {
+        "rank": 1,
+        "save_bonus": 0
+      },
+      "str": {
+        "rank": 1,
+        "save_bonus": 0
+      }
+    },
+    "skills": {
+      "magical_attacks": {
+        "rank": 3,
+        "specialization": "Биомантия",
+        "bonus": 0
+      },
+      "healing": {
+        "rank": 4,
+        "specialization": "",
+        "bonus": 0
+      },
+      "knowledge": {
+        "rank": 4,
+        "specialization": "",
+        "bonus": 0
+      },
+      "research": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "insight": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "persuasion": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "perception": {
+        "rank": 2,
+        "specialization": "",
+        "bonus": 0
+      },
+      "crossbows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "unarmed_combat": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "pole_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "blunt_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "artillery": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "firearms": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "throwing": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "exotic_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bows": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "bladed_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "armor_use": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "cultural_awareness": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "logic_reasoning": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "interpretation": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "craftsmanship": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "stealth": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "thievery": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "survival": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "engineering": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "atletism": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "deception": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "intimidation": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "performance": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      }
+    },
+    "equipment_slots": {
+      "main_hand": {
+        "item_id": "tTddxCLwqdMQLXFL",
+        "type": "weapon"
+      },
+      "armor_upper": {
+        "item_id": "Icf6PpwHkLQZdvEv",
+        "type": "armor"
+      },
+      "off_hand": {
+        "item_id": "",
+        "type": "shield"
+      },
+      "tail": {
+        "item_id": "",
+        "type": ""
+      },
+      "armor_middle": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "armor_lower": {
+        "item_id": "",
+        "type": "armor"
+      },
+      "magic_item_1": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "magic_item_2": {
+        "item_id": "",
+        "type": "magic_item"
+      },
+      "ammo": {
+        "item_id": "",
+        "type": "loot"
+      },
+      "head": {
+        "item_id": "",
+        "type": "head"
+      },
+      "neck": {
+        "item_id": "",
+        "type": "neck"
+      },
+      "torso": {
+        "item_id": "",
+        "type": "torso"
+      },
+      "acc_left_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_left_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_1": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_right_2": {
+        "item_id": "",
+        "type": "hand"
+      },
+      "acc_tail": {
+        "item_id": "",
+        "type": "hand"
+      }
+    },
+    "resources": {
+      "hp": {
+        "value": 80,
+        "temp": 0,
+        "max": 80
+      },
+      "ap_universal": {
+        "value": 6,
+        "max": 0
+      },
+      "movement": {
+        "value": 6,
+        "max": 0
+      },
+      "hits": {
+        "value": 2,
+        "max": 2
+      },
+      "wounds": {
+        "level": 1,
+        "penalty": 0
+      }
+    },
+    "overrides": {
+      "ap_max": 6,
+      "hp_max": 80,
+      "movement_max": null
+    },
+    "details": {
+      "threat": "3 (элита-кастер)",
+      "biography": "<p><strong>Ранг угрозы 3, ярус «элита-кастер» (ЭВ 2).</strong> Расстрижена Церковью Звёзд три года назад за «отрицание божественной сущности Первых Людей». Лучшая ученица магистра Ласаро. Делает химер, чтобы доказать, что плоть — материал, а не благодать. Акт 7, виварий.</p>\n<p><strong>Числа.</strong> Хиты 80, <strong>МЗ 12</strong>, Уклонение 10, Блок 8, DR <strong>1 / 0 / 1</strong> (одна мантия), скорость <strong>6 м</strong>, инициатива 3, <strong>единый пул 6 ОД</strong>. Оружия ближнего боя нет вовсе — в руке волшебная палочка, и это не оружие, а фокус.</p>\n<p><strong>Она собрана как цель, а не как боец.</strong> Восемьдесят хитов на бумаге выглядят солидно, но защиты у неё кастерские, брони нет, ходит она шесть метров. Партия, которая догадается сфокусить её первой, выключит её за раунд — и это <strong>правильное</strong> решение сцены, а не поломка баланса. Матриарх без Ниэвес заметно проще.</p>\n<p><strong>Три заклинания, все — Биомантия ранга 3 (§12.4).</strong></p>\n<ul>\n<li><strong>Штопка</strong> (6 ОД, дальность 10 м): лечит <strong>2d8</strong> Матриарху или себе. Это её ход целиком.</li>\n<li><strong>Прививка</strong> (5 ОД, 10 м): вешает на Матриарха адаптацию «Толстая кожа» — DR 1 против режущего и колющего на 3 раунда. Несогласная цель спасается Волей против DC 12.</li>\n<li><strong>Подгонка тела</strong> (5 ОД, на себя): +2 DR на 6 раундов. Кастуется до боя, если она услышала шаги.</li>\n</ul>\n<p><strong>Экономика хода.</strong> Шесть ОД — это <em>одно</em> заклинание за раунд и ничего больше. Она физически не может и лечить, и прививать в один ход: каждый раунд Мастер выбирает, что важнее, и партия видит этот выбор.</p>\n<p><strong>Первый прогон — без «Штопки»</strong> (см. врезку в §12.4). Модуль меряет, губка ли босс за 4 ЭВ; хилка на 2d8 в раунд смазывает именно это измерение. Пусть Ниэвес прививает, объясняет и прячется. Если бой окажется лёгким — второй прогон с лечением покажет цену одного лекаря при боссе.</p>\n<p><strong>Как её играть.</strong> Она <strong>не сражается</strong>: отступает за решётку и оттуда кастует, продолжая говорить. Она искренне не понимает, почему её остановили: «Ласаро вскрывал людей, и его звали магистром. Я собираю их обратно, и меня зовут ведьмой. Разница только в направлении шва.» Её можно убедить, купить, обмануть — Проницательность 3 читает ложь, но Убеждение 3 и собственная правота делают её открытой к разговору. И она всё равно опасна, потому что не считает себя неправой.</p>\n<p><strong>Триггер.</strong> Морали не проверяет — бежать ей некуда и незачем, здесь вся её работа. Если Матриарх падает раньше неё, она пытается уйти вниз, к образцам, а не сдаться.</p>"
+    },
+    "doctrines": {
+      "biomancy": {
+        "rank": 2,
+        "unlocked": 0,
+        "paths": {
+          "mending": 0,
+          "sculpting": 0
+        }
+      },
+      "geomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "hydromancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "flow": 0,
+          "ice": 0
+        }
+      },
+      "pyromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "ventomancy": {
+        "rank": 0,
+        "unlocked": 0,
+        "paths": {
+          "squall": 0,
+          "echo": 0
+        }
+      },
+      "shadowmancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "aetheromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "electromancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "temporalmancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "astralomancy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "aether_song": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "blood_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "chaos_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "shapeshifting": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "feral_magic": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telekinesis": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "telepathy": {
+        "rank": 0,
+        "unlocked": 0
+      },
+      "zero": {
+        "rank": 0,
+        "unlocked": 0
+      }
+    },
+    "defenses": {
+      "block": 0,
+      "dodge": 0,
+      "mdef": 0
+    },
+    "dr": {
+      "slashing": 0,
+      "piercing": 0,
+      "bludgeoning": 0,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "bonuses": {
+      "global_roll": 0,
+      "global_skill": 0,
+      "global_save": 0,
+      "global_ap_discount": 0,
+      "global_ap_penalty": 0,
+      "maneuver_ap_penalty": 0,
+      "spell_ap_penalty": 0,
+      "ignore_wound_penalty": 0,
+      "infinite_explode": 0,
+      "damage_explode": 0,
+      "hp_multiplier": 0,
+      "carry_capacity_mult": 0,
+      "carry_capacity_flat": 0,
+      "ignore_encumbrance_penalty": 0
+    },
+    "magic": {
+      "techniques": {
+        "create": 0,
+        "move": 0,
+        "transform": 0,
+        "sense": 0,
+        "imbue": 0
+      }
+    },
+    "toughness": 0,
+    "senses": {
+      "darkvision": 0
+    },
+    "initiative": 0
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789664072171,
+    "modifiedTime": 1789664773837,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!NievesCaldera001"
+}

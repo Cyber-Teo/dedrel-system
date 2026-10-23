@@ -1,0 +1,53 @@
+{
+  "name": "Феральная магия",
+  "type": "mutation",
+  "system": {
+    "description": "<p>Открывает доступ к доктрине Феральная магия и даёт в ней 1 ранг.</p>",
+    "key": "fay_feral_magic",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 6,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "5"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_feral_magic",
+      "folder": "Fay/Rank 5"
+    }
+  },
+  "folder": "LY2qtpvlNu6FuZ8p",
+  "_id": "pRIZUoZ1denO4ACc",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784855818224,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!pRIZUoZ1denO4ACc"
+}

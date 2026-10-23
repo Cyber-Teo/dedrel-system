@@ -1,0 +1,53 @@
+{
+  "name": "Пыльца фей (в разработке)",
+  "type": "mutation",
+  "system": {
+    "description": "1 раз в сутки получаешь пыльцу (невидимость/ингредиент; баланс в разработке).<br><br><b>Комментарии:</b> Надо подумать над этой мутацией нормально.",
+    "key": "fay_fairy_dust",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Fay",
+      "4"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "fay_fairy_dust",
+      "folder": "Fay/Rank 4"
+    }
+  },
+  "folder": "ZljnYTGIy4QNUVRa",
+  "_id": "Qy7WhJNTvnlk8HUN",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782800992967,
+    "modifiedTime": 1784855818222,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Qy7WhJNTvnlk8HUN"
+}

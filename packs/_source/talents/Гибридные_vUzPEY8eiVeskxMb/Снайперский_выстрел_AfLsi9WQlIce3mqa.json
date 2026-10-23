@@ -1,0 +1,51 @@
+{
+  "folder": "vUzPEY8eiVeskxMb",
+  "name": "Снайперский выстрел",
+  "type": "talent",
+  "_id": "AfLsi9WQlIce3mqa",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.zdHgW5kc1fzEGuVL]{Снайперский выстрел}</p><p>Мушкет или арбалет</p><p>До цели должно быть не меньше 20м.</p><p>Атака с бонусом +2.</p><p>Вы выбираете зону поражения: Руки, Торс, Ноги, Голова. Если атака нанесла хотя бы 5 единиц урона (после DR), цель получает травму.  </p>",
+    "key": "sniper_shot",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "has_situational_bonus": false,
+    "prerequisites_text": "@attributes.dex.rank 2; @attributes.log.rank 3 | @attributes.int.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 2",
+      "@attributes.log.rank 3 | @attributes.int.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_sniper_shot"
+    ],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783850076630,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AfLsi9WQlIce3mqa"
+}

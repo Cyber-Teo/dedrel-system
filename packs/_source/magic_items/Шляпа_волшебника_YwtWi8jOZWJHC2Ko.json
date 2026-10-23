@@ -1,0 +1,160 @@
+{
+  "name": "Шляпа волшебника",
+  "type": "magic_item",
+  "_id": "YwtWi8jOZWJHC2Ko",
+  "img": "systems/dedrel/assets/icons/items/magic_item.svg",
+  "system": {
+    "description": "<p>Широкополая шляпа с обвисшей тульей; по внутреннему шву пущена строчка чернилами, которые не выцветают.</p><p><b>Всегда.</b> Бумага, свитки и чернила под тульёй не мокнут и не пачкаются, а сама шляпа не горит.</p><p><b>Использовать предмет, 0 ОД — «Светоч».</b> Кончик шляпы загорается ровным светом (яркий 4 м, тусклый 8 м) и гаснет тем же движением. Вся её цена в том, что этот свет не занимает руку — в отличие от факела.</p><p><i>Светит только надетой: неэкипированная шляпа свой эффект не переносит.</i></p>",
+    "key": "mi_wizard_hat",
+    "rarity": "common",
+    "weight": 0,
+    "base_price": 53,
+    "crafting": {
+      "craftable": true,
+      "discipline": "tailoring",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.FZe96pNTEe02hU14",
+          "name": "Бирюза",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Kwsf1dnLfxiELpn4",
+          "name": "Медь",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.Lx3jwnO3HzA7CPKV",
+          "name": "Хлопок",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 35,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "equip_slot": "head",
+    "stackable": false,
+    "consumable": false,
+    "quantity": 1,
+    "effect_description": "Свет 8/4 м по команде, руку не занимает.",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [
+    {
+      "name": "Светоч",
+      "img": "icons/magic/light/explosion-star-glow-blue-purple.webp",
+      "type": "base",
+      "transfer": true,
+      "disabled": true,
+      "system": {
+        "changes": [
+          {
+            "key": "token.light.dim",
+            "type": "override",
+            "value": 8,
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.bright",
+            "type": "override",
+            "value": 4,
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.color",
+            "type": "override",
+            "value": "#bfa9ff",
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.alpha",
+            "type": "override",
+            "value": 0.35,
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.animation.type",
+            "type": "override",
+            "value": "pulse",
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.animation.speed",
+            "type": "override",
+            "value": 1,
+            "phase": "initial"
+          },
+          {
+            "key": "token.light.animation.intensity",
+            "type": "override",
+            "value": 3,
+            "phase": "initial"
+          }
+        ]
+      },
+      "_id": "dDSNxcx5OUVOZRRk",
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1791838176737,
+        "modifiedTime": 1791838176737,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!YwtWi8jOZWJHC2Ko.dDSNxcx5OUVOZRRk"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790037353584,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YwtWi8jOZWJHC2Ko"
+}

@@ -1,0 +1,140 @@
+{
+  "name": "Ответная атака",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Если по персонажу была проведена успешная атака ближнего боя (не важно, нанесла ли она урон), используя этот манёвр, он может сразу без дополнительной траты ОД провести Выпад, Взмах или Удар.</p>",
+    "key": "maneuver_riposte",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "оружие ближнего боя",
+    "target_type": "creature",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "Grant_Free_Attack",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_riposte",
+      "folder": "Basic"
+    }
+  },
+  "folder": "XnZnoRTR9lDNupHv",
+  "_id": "vMmgn6eWaoidERxE",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+  "effects": [
+    {
+      "name": "Ответная атака",
+      "origin": "Compendium.dedrel.maneuvers.Item.vMmgn6eWaoidERxE",
+      "_id": "AocBKvLEPiiN0ENU",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dedrel.mod",
+            "type": "override",
+            "value": "ap_set:0; filter:melee",
+            "phase": "initial",
+            "priority": null
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1783232965183,
+        "modifiedTime": 1783296725204,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!vMmgn6eWaoidERxE.AocBKvLEPiiN0ENU"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024580,
+    "modifiedTime": 1784855818410,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!vMmgn6eWaoidERxE"
+}

@@ -1,0 +1,54 @@
+{
+  "folder": "lLWuQCzHjIK8CsVw",
+  "name": "Морская алая кувшинка",
+  "type": "craft_material",
+  "_id": "NZnIfeAdFu9X6Y8K",
+  "img": "systems/dedrel/assets/icons/materials/herb/Sea%20Scarlet%20Waterlily.webp",
+  "system": {
+    "description": "<div><p>побережье. </p><p>Красные цветы которые растут на солнечных островах - основной ингредиент для наркотика Ятон.</p></div>",
+    "key": "sea_scarlet_waterlily",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 30,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783692785252,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NZnIfeAdFu9X6Y8K"
+}

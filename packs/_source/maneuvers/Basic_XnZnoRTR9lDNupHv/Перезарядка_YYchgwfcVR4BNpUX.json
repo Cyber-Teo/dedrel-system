@@ -1,0 +1,98 @@
+{
+  "name": "Перезарядка",
+  "type": "maneuver",
+  "system": {
+    "description": "Если оружие обладает перезарядкой, этот манёвр позволяет его перезарядить.",
+    "key": "maneuver_reload",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "Воткнуть Бердыш, Выстрел из огнестрела, Выстрел из арбалета.",
+    "chain_trigger_maneuvers": [
+      "maneuver_reload",
+      "maneuver_plant_berdiche",
+      "maneuver_firearm_shot",
+      "maneuver_crossbow_shot"
+    ],
+    "ap_cost": 1,
+    "is_variable_cost": true,
+    "variable_cost_max": 3,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": true
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true,
+    "req_weapon_keys": [
+      ""
+    ],
+    "is_reload_action": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_reload",
+      "folder": "Basic"
+    }
+  },
+  "folder": "XnZnoRTR9lDNupHv",
+  "_id": "YYchgwfcVR4BNpUX",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reload.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024581,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YYchgwfcVR4BNpUX"
+}

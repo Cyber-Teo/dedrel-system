@@ -1,0 +1,58 @@
+{
+  "folder": null,
+  "name": "Редкое зелье лечения",
+  "type": "potion",
+  "img": "systems/dedrel/assets/icons/items/potion.svg",
+  "system": {
+    "description": "<p>Лечит 75% хитов</p>",
+    "key": "potion_healing_rare",
+    "rarity": "rare",
+    "weight": 0.1,
+    "base_price": 0,
+    "crafting": {
+      "craftable": true,
+      "discipline": "alchemy",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "effect_description": "",
+    "consumable": true,
+    "uses_value": 1,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "70%",
+    "on_use_macro": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784275875375,
+    "modifiedTime": 1792453976995,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_id": "55L31Dxkl9CWlNqg",
+  "sort": 300000,
+  "_key": "!items!55L31Dxkl9CWlNqg"
+}

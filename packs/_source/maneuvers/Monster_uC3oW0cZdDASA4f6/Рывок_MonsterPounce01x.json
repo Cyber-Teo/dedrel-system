@@ -1,0 +1,111 @@
+{
+  "_id": "MonsterPounce01x",
+  "name": "Рывок",
+  "type": "maneuver",
+  "img": "systems/dedrel/assets/icons/items/maneuver.svg",
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_monster_pounce",
+      "folder": "Monster"
+    }
+  },
+  "system": {
+    "key": "maneuver_monster_pounce",
+    "source": "basic",
+    "description": "<p>Существо разгоняется по прямой <strong>не менее 4 м</strong> (перемещение входит в манёвр и тратит Скорость) и с ходу бьёт естественным оружием.</p>\n<p><strong>При попадании:</strong> контест — бросок атаки против <strong>Атлетики</strong> цели. При успехе цель получает @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит}.</p>\n<p><strong>Размер:</strong> +2 контесту за каждую категорию разницы в пользу большего. Цель на две и более категории крупнее опрокинуть нельзя.</p>\n<p><em>Контест ручной: система катит атаку и урон, Атлетику цели Мастер бросает отдельно.</em></p>",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "skill": "unarmed_combat",
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "target_type": "creature",
+    "target_value": 1,
+    "prerequisites_text": "4 м свободного пространства по прямой для разгона.",
+    "hide_combat_buttons": false,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "is_reload_action": false,
+    "is_scroll_read": false,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [
+      ""
+    ],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_attributes": [
+      ""
+    ],
+    "prerequisites_skills": [
+      ""
+    ],
+    "prerequisites_talents": [
+      ""
+    ],
+    "prerequisites_mutations": [
+      ""
+    ],
+    "prerequisites_bloodlines": [
+      ""
+    ],
+    "target_range": "",
+    "template_shape": "",
+    "template_size": 0,
+    "attack_bonus": 0,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "folder": "uC3oW0cZdDASA4f6",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784950463486,
+    "modifiedTime": 1792453976908,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterPounce01x"
+}

@@ -1,0 +1,52 @@
+{
+  "_id": "MonsterBloodScnt",
+  "name": "Чующий кровь",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "key": "blood_scent",
+      "folder": "NPC"
+    }
+  },
+  "system": {
+    "key": "blood_scent",
+    "subtype": "passive",
+    "xp_cost": 0,
+    "has_situational_bonus": true,
+    "description": "<p>Хищник чует подранка и добивает его первым.</p>\n<p><strong>+2 к атакам</strong> по целям, которые ранены (трек ран 2 и выше) или носят состояние Кровотечение.</p>\n<p><em>Ситуационный бонус: система подсказывает его в диалоге броска, применяет Мастер.</em></p>",
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "folder": "HCQomwCjCxCL71XN",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784950463546,
+    "modifiedTime": 1784950463546,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MonsterBloodScnt"
+}

@@ -23,13 +23,14 @@ Code — MIT License (see LICENSE), Copyright (c) 2026 Teo (Lucky Star Games):
   system.json         system manifest
   .github/            issue and pull request templates, workflows
   CONTRIBUTING.md     contribution guide
-  packs/macro/        compendium of system macros (script code)
+  packs/_source/macro/  compendium of system macros (script code)
+  package.json        build tooling
 
 Content — CC BY-NC 4.0 (see LICENSE-CONTENT), Copyright (c) 2015–2026 Teo (Lucky Star Games):
 
-  packs/              compendiums: items, maneuvers, talents, mutations, spells,
-                      conditions, actors and other game content
-                      (except packs/macro/, which is code)
+  packs/              compendiums (JSON sources in packs/_source/): items,
+                      maneuvers, talents, mutations, spells, conditions, actors
+                      and other game content (except the macro pack, which is code)
   translations/       translations of compendium content
   assets/             artwork: tokens, raster icons, banners
                       (except the third-party files listed in section 4)
@@ -122,7 +123,7 @@ assets/icons/skills/thievery.svg are original works of the author.
 КРАТКО ПО-РУССКИ
 
 Код системы (dedrel.mjs, src/, templates/, css/, lang/, scripts/, docs/,
-system.json, .github/, пак макросов packs/macro/) — под лицензией MIT. Контент —
+system.json, .github/, пак макросов packs/_source/macro/) — под лицензией MIT. Контент —
 правила, тексты, компендиумы (packs/), переводы (translations/) и арт (assets/) —
 под CC BY-NC 4.0.
 Сверх неё контент Dedrel можно использовать коммерчески в стримах и записях игр,

@@ -1,0 +1,104 @@
+{
+  "_id": "MatriarchGoatHrn",
+  "name": "Козлиные рога",
+  "type": "weapon",
+  "img": "systems/dedrel/assets/icons/items/weapon.svg",
+  "flags": {
+    "dedrel": {
+      "key": "matriarch_goat_horns",
+      "folder": "For opponents/Chimeras"
+    }
+  },
+  "system": {
+    "key": "matriarch_goat_horns",
+    "description": "<p><strong>Вторая голова Матриарха.</strong> Ступень IV, дробящий — единственное её оружие, которым проходит «Таран».</p><p><strong>Зона Контроля 2</strong> — она же несёт размерный Контроль существа: в системе ЗК читается с экипированного оружия ближнего боя, отдельного поля размера у актора нет.</p>",
+    "rarity": "common",
+    "weight": 0,
+    "base_price": 0,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "damage_type": {
+      "piercing": false,
+      "bludgeoning": true,
+      "slashing": false
+    },
+    "damage_formulas": {
+      "slashing": "",
+      "piercing": "",
+      "bludgeoning": "2d8"
+    },
+    "skill": "unarmed_combat",
+    "properties": {
+      "natural": true,
+      "armor_piercing": false,
+      "misfire_chance": 0,
+      "consumed_on_use": false,
+      "can_be_sold": false,
+      "can_be_dropped": false
+    },
+    "quantity": 1,
+    "control_zone": 2,
+    "armor_piercing": 0,
+    "equipped": false,
+    "damage_formula": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "range": "",
+    "consume_target": "",
+    "consume_amount": 1,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "on_use_macro": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "cleaving": 0,
+    "deflecting": 0,
+    "vs_creature": {},
+    "bypass_creature": {},
+    "is_auxiliary": false,
+    "is_fast": false,
+    "is_slow": false,
+    "is_twohanded": false,
+    "is_thrown": false,
+    "is_reloading": false,
+    "reload_cost": 1,
+    "loaded": true,
+    "is_point_blank": false,
+    "is_scatter": false,
+    "is_variable_grip": false,
+    "is_paired": false
+  },
+  "folder": "I52nWatqslD5qIbu",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789510161475,
+    "modifiedTime": 1789510161475,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MatriarchGoatHrn"
+}

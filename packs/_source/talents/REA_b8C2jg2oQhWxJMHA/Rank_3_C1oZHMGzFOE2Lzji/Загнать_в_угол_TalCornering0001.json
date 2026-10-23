@@ -1,0 +1,56 @@
+{
+  "_id": "TalCornering0001",
+  "name": "Загнать в угол",
+  "type": "talent",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "flags": {
+    "dedrel": {
+      "key": "cornering",
+      "folder": "REA/Rank 3"
+    }
+  },
+  "system": {
+    "key": "cornering",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "description": "<p>Даёт манёвр «Загнать в угол»: 1 ОД, Атлетика против Внимательности цели, при успехе — состояние @UUID[Compendium.dedrel.conditions.Item.ConditionPressed]{Зажат} (запрет уклонения на одну атаку). Работает, только если за целью препятствие.</p>\n<p>Дешёвый и универсальный вскрыватель, который читает поле боя: в чистом поле бесполезен, в коридоре, у стены или в тесной комнате решает.</p>",
+    "adds_items": [
+      "maneuver_cornering"
+    ],
+    "prerequisites_text": "Реакция 3",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 3"
+    ],
+    "has_situational_bonus": false,
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "folder": "C1oZHMGzFOE2Lzji",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789660057935,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TalCornering0001"
+}

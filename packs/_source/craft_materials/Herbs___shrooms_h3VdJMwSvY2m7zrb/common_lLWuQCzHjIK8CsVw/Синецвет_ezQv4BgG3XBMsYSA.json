@@ -1,0 +1,54 @@
+{
+  "folder": "lLWuQCzHjIK8CsVw",
+  "name": "Синецвет",
+  "type": "craft_material",
+  "_id": "ezQv4BgG3XBMsYSA",
+  "img": "systems/dedrel/assets/icons/materials/herb/Bluebloom.webp",
+  "system": {
+    "description": "<div><p>арктика, реки, озёра, болота.</p><p>Растение с синими цветами, при обработке даёт зелью красный цвет.</p></div>",
+    "key": "bluebloom",
+    "rarity": "common",
+    "weight": 0.1,
+    "base_price": 7,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "herb",
+    "material_class": "herb",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": false
+    },
+    "grants": []
+  },
+  "effects": [],
+  "sort": 1100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783687532590,
+    "modifiedTime": 1792453977035,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ezQv4BgG3XBMsYSA"
+}

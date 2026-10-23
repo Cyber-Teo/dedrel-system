@@ -1,0 +1,94 @@
+{
+  "folder": "DlcSShmSgt4MdBFH",
+  "name": "Снайперский выстрел",
+  "type": "maneuver",
+  "_id": "zdHgW5kc1fzEGuVL",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_sniper_shot.svg",
+  "system": {
+    "description": "<p>Мушкет или арбалет</p><p>До цели должно быть не меньше 20м.</p><p>Атака с бонусом +2.</p><p>Вы выбираете зону поражения: Руки, Торс, Ноги, Голова. Если атака нанесла хотя бы 5 единиц урона (после DR), цель получает травму.  </p>",
+    "key": "maneuver_sniper_shot",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 0,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": true,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [
+      "musket, crossbow,"
+    ],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false,
+      "is_paired": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "sniper_shot"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_type": "creature",
+    "target_range": "",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "skill": "",
+    "attack_bonus": 2,
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "hide_combat_buttons": false,
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783850323123,
+    "modifiedTime": 1792453976910,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!zdHgW5kc1fzEGuVL"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Dragon",
+  "type": "Item",
+  "folder": null,
+  "_id": "2xSISwGzcluZdDhF",
+  "description": "",
+  "sorting": "a",
+  "sort": 400000,
+  "color": "#3e3d3d",
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992942,
+    "modifiedTime": 1788662109837,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!2xSISwGzcluZdDhF"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Космические",
+  "type": "creature_type",
+  "_id": "8HGERTD42FxP0LZY",
+  "img": "systems/dedrel/assets/icons/items/creature_type.svg",
+  "system": {
+    "key": "cosmic",
+    "description": "<p>Общих правил нет.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784805953336,
+    "modifiedTime": 1792453977470,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8HGERTD42FxP0LZY"
+}

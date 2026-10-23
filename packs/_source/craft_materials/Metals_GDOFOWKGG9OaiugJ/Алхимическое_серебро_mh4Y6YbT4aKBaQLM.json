@@ -1,0 +1,70 @@
+{
+  "name": "Алхимическое серебро",
+  "type": "craft_material",
+  "_id": "mh4Y6YbT4aKBaQLM",
+  "img": "systems/dedrel/assets/icons/materials/metal/Alchemical%20Silver.webp",
+  "system": {
+    "description": "<div><p>Продукт изысканий алхимиков начала нашей эры. Серебро не слишком хороший материал для изготовления оружия, между тем некоторые монстры уязвимы только к нему. Учёные нашли способ создать сплав, сочетающий в себе некоторые преимущества Легированной стали и серебра</p></div>",
+    "key": "alchemical_silver",
+    "rarity": "uncommon",
+    "weight": 1,
+    "base_price": 150,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": true,
+      "armor": true,
+      "shield": true,
+      "jewelry": false
+    },
+    "grants": [
+      {
+        "label": "+1 and common slot",
+        "bonus": 1,
+        "slots": [
+          "common"
+        ]
+      }
+    ],
+    "slots": [
+      "uncommon"
+    ],
+    "signature": {
+      "armor": "Necrotic DR +2",
+      "weapon": "1d6 vs Shadow type",
+      "magic": "TODO"
+    }
+  },
+  "effects": [],
+  "folder": "GDOFOWKGG9OaiugJ",
+  "sort": 150000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783680458639,
+    "modifiedTime": 1792453977035,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mh4Y6YbT4aKBaQLM"
+}

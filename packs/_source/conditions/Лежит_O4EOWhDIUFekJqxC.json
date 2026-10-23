@@ -1,0 +1,48 @@
+{
+  "name": "Лежит",
+  "type": "condition",
+  "_id": "O4EOWhDIUFekJqxC",
+  "img": "icons/svg/falling.svg",
+  "system": {
+    "description": "<p><strong>Эффект:</strong> +2 к Увороту от дальних атак, -2 к Блоку и Увороту от ближних атак. </p><p><strong>Снятие:</strong> @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Взаимодействие} (встать)</p><p>НЕ АВТОМАТИЗИРУЕТСЯ.</p>",
+    "key": "prone",
+    "category": "neutral",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 1
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "",
+    "removal_text": "",
+    "is_removable_by_skill": false,
+    "skill_to_remove": "",
+    "remove_dc": 0,
+    "system_flags": {},
+    "formula_heal": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1783373170763,
+    "modifiedTime": 1788828686153,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!O4EOWhDIUFekJqxC"
+}

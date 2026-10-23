@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": "h3VdJMwSvY2m7zrb",
+  "name": "common",
+  "color": null,
+  "sorting": "a",
+  "_id": "lLWuQCzHjIK8CsVw",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783687778838,
+    "modifiedTime": 1783687778838,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!lLWuQCzHjIK8CsVw"
+}

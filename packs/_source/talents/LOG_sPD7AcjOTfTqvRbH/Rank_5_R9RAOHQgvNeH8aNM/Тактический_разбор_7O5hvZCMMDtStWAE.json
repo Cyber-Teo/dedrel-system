@@ -1,0 +1,53 @@
+{
+  "name": "Тактический разбор",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.xaw6eSKFwFXitkzJ]{Тактический разбор}</p><p>Манёвр, свободное действие. Выберите одного противника. Все союзники в радиусе 20 метров от вас, получают против этой цели до конца раунда: +2 к атаке и право перебросить один кубик урона (новый результат обязателен).</p>",
+    "key": "tactical_breakdown",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.log.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.log.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_tactical_breakdown"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "tactical_breakdown",
+      "folder": "LOG/Rank 5"
+    }
+  },
+  "folder": "R9RAOHQgvNeH8aNM",
+  "_id": "7O5hvZCMMDtStWAE",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!7O5hvZCMMDtStWAE"
+}

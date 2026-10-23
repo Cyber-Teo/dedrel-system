@@ -1,0 +1,142 @@
+{
+  "name": "Карающий промах",
+  "type": "maneuver",
+  "system": {
+    "description": "Как @UUID[Compendium.dedrel.maneuvers.Item.vMmgn6eWaoidERxE]{Ответная атака}, но можно активировать после промаха противника.",
+    "key": "maneuver_punishing_miss",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": true,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "punishing_miss"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "weapon",
+    "target_value": 1,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_punishing_miss",
+      "folder": "Talent"
+    }
+  },
+  "folder": "XSYMZBJ9q1vllJ79",
+  "_id": "AB0Q2InegZxKsBu3",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_punishing_miss.svg",
+  "effects": [
+    {
+      "name": "Карающий промах",
+      "origin": "Compendium.dedrel.maneuvers.Item.AB0Q2InegZxKsBu3",
+      "_id": "P1CQtTrU7HPEc4qU",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_punishing_miss.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "flags.dedrel.mod",
+            "type": "override",
+            "value": "ap_set:0; filter:key:maneuver_swing|key:maneuver_thrust|key:maneuver_bash",
+            "phase": "initial",
+            "priority": null
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnStart",
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1783245302014,
+        "modifiedTime": 1783245346707,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!AB0Q2InegZxKsBu3.P1CQtTrU7HPEc4qU"
+    }
+  ],
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024584,
+    "modifiedTime": 1792453976907,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AB0Q2InegZxKsBu3"
+}

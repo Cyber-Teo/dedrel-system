@@ -1,0 +1,110 @@
+{
+  "folder": "aiD2rdcfwL54MryP",
+  "name": "Железная рапира",
+  "type": "weapon",
+  "_id": "LaH8sPT1mB3TtwXN",
+  "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_rapier.webp",
+  "system": {
+    "description": "",
+    "key": "iron_rapier",
+    "rarity": "common",
+    "weight": 1.2,
+    "base_price": 30,
+    "crafting": {
+      "craftable": true,
+      "discipline": "smithing",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+          "name": "Железо",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 20,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "damage_type": {
+      "piercing": true,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "skill": "bladed_weapons",
+    "damage_formula": "",
+    "damage_formulas": {
+      "slashing": "",
+      "piercing": "2d6",
+      "bludgeoning": ""
+    },
+    "formula_heal": "",
+    "equipped": false,
+    "range": "",
+    "properties": {
+      "natural": false,
+      "armor_piercing": false,
+      "misfire_chance": 0,
+      "consumed_on_use": false,
+      "can_be_sold": false,
+      "can_be_dropped": false
+    },
+    "quantity": 1,
+    "consume_target": "",
+    "consume_amount": 1,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "on_use_macro": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "control_zone": 1,
+    "armor_piercing": 0,
+    "vs_creature": {
+      "beast": 0,
+      "magical_beast": 0,
+      "elemental": 0,
+      "spirit": 0,
+      "shade": 0,
+      "demon": 0,
+      "dragon": 0,
+      "elf": 0,
+      "undead": 0,
+      "cosmic": 0,
+      "construct": 0,
+      "fay": 0
+    },
+    "is_auxiliary": false,
+    "is_fast": true,
+    "is_slow": false,
+    "is_twohanded": false,
+    "is_thrown": false,
+    "is_reloading": false,
+    "is_variable_grip": false,
+    "is_paired": false
+  },
+  "effects": [],
+  "sort": 600000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784001393883,
+    "modifiedTime": 1792453976953,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!LaH8sPT1mB3TtwXN"
+}

@@ -1,0 +1,82 @@
+{
+  "name": "Малая взрывная печать",
+  "type": "magic_item",
+  "img": "systems/dedrel/assets/icons/items/scroll.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Печати"
+    }
+  },
+  "system": {
+    "description": "<p>Эта печать взрывается нанося всем в радиусе 3 метров 2d6 урона огнём.<br>Использующий эту печать может активировать её одним из трёх способов.</p><ol><li><p>Таймер. Печать взрывается через Х раундов в конце хода использующего, но не более 5 раундов. (печать можно крепить к метательному оружию, но не к снарядам)</p></li><li><p>Мина. Печать взрывается, если существо попадает в клетку, где расположена печать. (печать можно маскировать, проверка скрытности)</p></li><li><p>Растяжка. Печать взрывается, если её целостность нарушена (можно использовать для создания ловушек, проверка инструменты вора)</p></li></ol><p>После активации, взрывная печать остаётся активной 24 часа или до тех пор пока не сработает.<br>Запрещено делать связки из нескольких печатей (ну то есть делать можно, но прибавки урона не будет!)</p>",
+    "key": "seal_explosive_lesser",
+    "rarity": "uncommon",
+    "weight": 0.01,
+    "base_price": 89,
+    "crafting": {
+      "craftable": true,
+      "discipline": "inscription",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.WmB6CC0vOL6b07W7",
+          "name": "Пергамент",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.ta7GQpJIUi3PQGNa",
+          "name": "Необычные магические чернила",
+          "amount": 1
+        },
+        {
+          "uuid": "Compendium.dedrel.potions.Item.0ardrx7Bd5nwvJkA",
+          "name": "Алхимический огонь",
+          "amount": 1
+        }
+      ],
+      "markup_pct": 50,
+      "cost_price": 59,
+      "output_quantity": 2,
+      "time_override": 0
+    },
+    "equip_slot": "",
+    "stackable": true,
+    "consumable": true,
+    "quantity": 1,
+    "effect_description": "2d6 огнём в радиусе 3 м; таймер / мина / растяжка.",
+    "spell_id": "",
+    "spell_key": "",
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "on_use_macro": "",
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "requirements": {
+      "text": "",
+      "attribute": {
+        "key": "",
+        "rank": 0
+      }
+    }
+  },
+  "folder": "DpNnONsUQxRDthvI",
+  "_id": "FCYvEDWaVnRuD3xf",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1790096445295,
+    "modifiedTime": 1792453976990,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FCYvEDWaVnRuD3xf"
+}

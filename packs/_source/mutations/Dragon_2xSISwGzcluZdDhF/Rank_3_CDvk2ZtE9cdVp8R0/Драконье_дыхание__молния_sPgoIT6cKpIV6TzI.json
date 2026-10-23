@@ -1,0 +1,56 @@
+{
+  "name": "Драконье дыхание: молния",
+  "type": "mutation",
+  "system": {
+    "description": "<p>3 раза в долгий отдых.</p><p>Персонаж выдыхает перед собой конус электрических разрядов 4м.</p>",
+    "key": "dragon_breath_weapon_electric",
+    "mutation_type": "useful",
+    "starting": true,
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [
+      "Dragon",
+      "3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_breath_weapon_electric"
+    ],
+    "on_add_macro": "",
+    "has_situational_bonus": false
+  },
+  "flags": {
+    "dedrel": {
+      "key": "dragon_breath_weapon",
+      "folder": "Dragon/Rank 3"
+    }
+  },
+  "folder": "CDvk2ZtE9cdVp8R0",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782867215718,
+    "modifiedTime": 1792453976713,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_id": "sPgoIT6cKpIV6TzI",
+  "sort": 300000,
+  "_key": "!items!sPgoIT6cKpIV6TzI"
+}

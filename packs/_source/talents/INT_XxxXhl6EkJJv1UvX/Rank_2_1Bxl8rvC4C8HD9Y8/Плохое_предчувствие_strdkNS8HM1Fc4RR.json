@@ -1,0 +1,51 @@
+{
+  "name": "Плохое предчувствие",
+  "type": "talent",
+  "system": {
+    "description": "Мастер обязан предупредить персонажа о ловушке или скрытой угрозе до того как она сработает («у вас нехорошее предчувствие»). Помимо этого: если персонажу не хватает ровно 1 до успеха на любой проверке — результат считается успешным.",
+    "key": "bad_feeling",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.int.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "bad_feeling",
+      "folder": "INT/Rank 2"
+    }
+  },
+  "folder": "1Bxl8rvC4C8HD9Y8",
+  "_id": "strdkNS8HM1Fc4RR",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1784181820250,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!strdkNS8HM1Fc4RR"
+}

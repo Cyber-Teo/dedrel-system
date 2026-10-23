@@ -1,0 +1,95 @@
+{
+  "name": "Боль",
+  "type": "condition",
+  "_id": "fRDGrOWHFWmQjzgf",
+  "img": "systems/dedrel/assets/icons/conditions/back-pain.svg",
+  "system": {
+    "description": "<p>Штраф 1 ОД на все действия за каждый стак Боли. </p>",
+    "key": "pain",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": true,
+    "max_stacks": 5,
+    "duration": {
+      "units": "rounds",
+      "value": null
+    },
+    "expiry_events": [
+      ""
+    ],
+    "application_text": "",
+    "removal_text": "",
+    "is_removable_by_skill": false,
+    "skill_to_remove": "",
+    "remove_dc": 0,
+    "system_flags": {},
+    "formula_heal": ""
+  },
+  "effects": [
+    {
+      "name": "Боль",
+      "origin": "Compendium.dedrel.conditions.Item.fRDGrOWHFWmQjzgf",
+      "_id": "iCxiOYutZ3SMCOiT",
+      "img": "systems/dedrel/assets/icons/conditions/back-pain.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.bonuses.global_ap_penalty",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1783419336808,
+        "modifiedTime": 1792453976756,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!fRDGrOWHFWmQjzgf.iCxiOYutZ3SMCOiT"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1783373018858,
+    "modifiedTime": 1788828655849,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fRDGrOWHFWmQjzgf"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Точка приложения силы",
+  "type": "talent",
+  "system": {
+    "description": "Задайте Мастеру вопрос строго в формате: «Какое одно действие запустит нужный каскад чтобы [X]?». Мастер обязан дать честный и конкретный ответ. Работает на масштабных событиях: рынки, выборы, политические процессы. Исполнение действия остаётся за игроком.",
+    "key": "leverage_point",
+    "subtype": "narrative",
+    "xp_cost": 6,
+    "prerequisites_text": "@attributes.log.rank 6",
+    "prerequisites_attributes": [
+      "@attributes.log.rank 6"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "leverage_point",
+      "folder": "LOG/Rank 6"
+    }
+  },
+  "folder": "NA0uZbECoLw1Ibiz",
+  "_id": "TzeL7pRM58vW2amH",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1784181820248,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TzeL7pRM58vW2amH"
+}

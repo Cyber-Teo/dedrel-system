@@ -1,0 +1,48 @@
+{
+  "folder": "Y9H5knLFn7CcJ0Ik",
+  "name": "А вот и нет!",
+  "type": "talent",
+  "_id": "6LH1BBuOLcAWLjdC",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Свободное действие.</p><p>Если у вашего огнестрельного оружия произошла осечка. Три раза в день вы можете сказать \"А вот и нет!\" и отменить эту осечку (повезло, показалось)</p>",
+    "key": "but_no",
+    "subtype": "active",
+    "xp_cost": 3,
+    "has_situational_bonus": false,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [
+      "@attributes.luck.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 3,
+    "uses_max": "3",
+    "uses_per": "day",
+    "adds_items": [],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783850575938,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6LH1BBuOLcAWLjdC"
+}

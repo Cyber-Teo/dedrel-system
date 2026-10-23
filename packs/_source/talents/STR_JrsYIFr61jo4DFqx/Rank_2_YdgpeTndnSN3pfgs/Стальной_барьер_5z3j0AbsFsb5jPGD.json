@@ -1,0 +1,53 @@
+{
+  "name": "Стальной барьер",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.SV2SH36D9xsyZ19G]{Стальной барьер}</p><p>Вы раскручиваете свой меч, создавая вокруг себя зону отчуждения до начала своего следующего хода. Первый противник, вошедший в вашу зону контроля, получает от вас автоматическое попадание, после чего манёвр прекращается.</p>\n<p><strong>Пока держите стойку — не перемещаетесь.</strong> Сдвинулись хотя бы на метр — барьер спал. Активация другого манёвра до срабатывания барьера тоже его отменяет.</p>",
+    "key": "steel_barrier",
+    "subtype": "passive",
+    "xp_cost": 2,
+    "prerequisites_text": "@attributes.str.rank 2",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 2"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_steel_barrier"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "steel_barrier",
+      "folder": "STR/Rank 2"
+    }
+  },
+  "folder": "YdgpeTndnSN3pfgs",
+  "_id": "5z3j0AbsFsb5jPGD",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5z3j0AbsFsb5jPGD"
+}

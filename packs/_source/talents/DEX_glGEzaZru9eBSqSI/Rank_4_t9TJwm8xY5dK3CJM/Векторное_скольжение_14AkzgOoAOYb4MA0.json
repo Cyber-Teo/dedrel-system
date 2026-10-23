@@ -1,0 +1,53 @@
+{
+  "name": "Векторное скольжение",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.gMEjIkxkE8XmSv1w]{Векторное скольжение}</p><p>Вы срываетесь в бег, которому безразлична гравитация.</p>\n<p><strong>Эффект:</strong> до конца этого хода вы бегаете по вертикальным поверхностям и воде. Перемещение обычное, метрами Скорости.</p>\n<p><strong>Риск:</strong> если движение закончится на вертикали или на воде, персонаж падает (урон от падения — см. правила).</p>",
+    "key": "vector_glide",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.dex.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_vector_glide"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "vector_glide",
+      "folder": "DEX/Rank 4"
+    }
+  },
+  "folder": "t9TJwm8xY5dK3CJM",
+  "_id": "14AkzgOoAOYb4MA0",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976773,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!14AkzgOoAOYb4MA0"
+}

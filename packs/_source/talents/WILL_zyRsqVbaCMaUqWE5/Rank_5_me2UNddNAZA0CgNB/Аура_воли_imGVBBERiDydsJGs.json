@@ -1,0 +1,53 @@
+{
+  "name": "Аура воли",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.gXMDw2cok8GFwXbM]{Аура воли}</p><p>На 10 раундов, все союзники в радиусе 10 метров получают +2 к спасброскам Силы Воли.</p>",
+    "key": "will_aura",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.will.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.will.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_will_aura"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "will_aura",
+      "folder": "WILL/Rank 5"
+    }
+  },
+  "folder": "me2UNddNAZA0CgNB",
+  "_id": "imGVBBERiDydsJGs",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044249,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!imGVBBERiDydsJGs"
+}

@@ -1,0 +1,60 @@
+{
+  "folder": "GDOFOWKGG9OaiugJ",
+  "name": "Демоническая бронза",
+  "type": "craft_material",
+  "_id": "HLq7F5VzsVE9bLzb",
+  "img": "systems/dedrel/assets/icons/materials/metal/Demonic%20Bronze.webp",
+  "system": {
+    "description": "",
+    "key": "demonic_bronze",
+    "rarity": "very_rare",
+    "weight": 2,
+    "base_price": 0,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "ore",
+    "material_class": "metal",
+    "special_rules": "",
+    "weight_class": "heavy",
+    "slots": [],
+    "signature": {
+      "armor": "Radiant DR +2",
+      "weapon": "2d6 to Cosmic",
+      "magic": "Bonus to malicious rituals"
+    },
+    "applicable_to": {
+      "weapon": true,
+      "armor": true,
+      "shield": true,
+      "jewelry": true
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784159272981,
+    "modifiedTime": 1792453977033,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!HLq7F5VzsVE9bLzb"
+}

@@ -1,0 +1,63 @@
+{
+  "folder": "u5dp0uKPZD3TBFzf",
+  "name": "Дуб",
+  "type": "craft_material",
+  "_id": "VQ0r2aCvo4Q8aF4S",
+  "img": "systems/dedrel/assets/icons/materials/wood/Oak.webp",
+  "system": {
+    "description": "<div><p>Распространён по всему миру, в основном культивируется в королевстве Гросс, Иллиорской империи и королевстве Занра. Используется для изготовления оружия, кораблей, мебели и в строительстве. </p></div>",
+    "key": "oak",
+    "rarity": "common",
+    "weight": 1,
+    "base_price": 10,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "wood",
+    "material_class": "wood",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": true,
+      "armor": false,
+      "shield": true,
+      "jewelry": false
+    },
+    "grants": [
+      {
+        "label": "common slot",
+        "bonus": 0,
+        "slots": [
+          "common"
+        ]
+      }
+    ],
+    "slots": []
+  },
+  "effects": [],
+  "sort": 1200000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783685888069,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!VQ0r2aCvo4Q8aF4S"
+}

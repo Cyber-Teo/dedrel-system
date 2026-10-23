@@ -1,0 +1,54 @@
+{
+  "name": "Финт",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.8mgcq7OFtffV34Jw]{Финт}</p><p>Манёвр, Быстрое оружие ближнего боя.</p><p>Сделайте проверку умения Обман против Проницательности цели. В случае успеха, цель получает статус @UUID[Compendium.dedrel.conditions.Item.CondOffGuard0001]{Сбит с толку} (статус запрещает использовать блок против следующей атаки)</p><p>В цепи вы можете нанести @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Выпад}.</p><p></p>",
+    "key": "feint_attack",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "Ловкость 3 И Харизма 3",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 3",
+      "@attributes.cha.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_feint_attack"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "feint_attack",
+      "folder": "DEX/Rank 3"
+    }
+  },
+  "folder": "vUzPEY8eiVeskxMb",
+  "_id": "rB2EecAY3zIw7KlW",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044247,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!rB2EecAY3zIw7KlW"
+}

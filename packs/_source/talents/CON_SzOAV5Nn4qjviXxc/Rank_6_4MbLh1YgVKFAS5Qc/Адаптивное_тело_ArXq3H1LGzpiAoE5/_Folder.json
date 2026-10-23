@@ -1,0 +1,23 @@
+{
+  "type": "Item",
+  "folder": "4MbLh1YgVKFAS5Qc",
+  "name": "Адаптивное тело",
+  "color": null,
+  "sorting": "a",
+  "_id": "ArXq3H1LGzpiAoE5",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1783330030817,
+    "modifiedTime": 1783330030817,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!ArXq3H1LGzpiAoE5"
+}

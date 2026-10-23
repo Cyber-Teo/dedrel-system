@@ -1,0 +1,138 @@
+{
+  "name": "Пламенная душа",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Ранг харизмы или силы воли в день (что больше)</p><p>Все Тени, Нежить и Демоны в радиусе 10 метров должны пройти проверку Силы Воли против харизмы или силы воли персонажа +12 (что больше), при провале они получают статус Ужас на 3 раунда, при успехе Дезориентацию.</p>",
+    "key": "maneuver_flaming_soul",
+    "source": "mutation",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "elf_flaming_soul"
+    ],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": null,
+    "uses_value": 1,
+    "uses_max": "max(@attributes.will.rank, @attributes.cha.rank)",
+    "uses_per": "long_rest",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "Will",
+    "save_dc_formula": "max(@attributes.will.rank, @attributes.cha.rank)+12",
+    "forbidden_defense": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_flaming_soul",
+      "folder": "Mutation"
+    }
+  },
+  "folder": "AdyXYWRu45mGfe5o",
+  "_id": "jJKY13VSOEB1q7bt",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flaming_soul.svg",
+  "effects": [
+    {
+      "name": "Пламенная душа",
+      "origin": "Compendium.dedrel.maneuvers.Item.jJKY13VSOEB1q7bt",
+      "_id": "QMurK0bZjojARTSo",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flaming_soul.svg",
+      "type": "base",
+      "system": {
+        "changes": []
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "description": "<p>Все Тени, Нежить и Демоны в радиусе 10 метров должны пройти проверку Силы Воли против харизмы или силы воли персонажа +12 (что больше), при провале они получают статус Ужас на 3 раунда, при успехе Дезориентацию.</p>",
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {
+        "dedrel": {
+          "aura": {
+            "radius": 10,
+            "disposition": "hostile",
+            "includeSelf": false,
+            "color": "#e39f0d"
+          }
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.0",
+        "createdTime": 1783295262742,
+        "modifiedTime": 1792453976937,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!jJKY13VSOEB1q7bt.QMurK0bZjojARTSo"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024581,
+    "modifiedTime": 1792453976909,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jJKY13VSOEB1q7bt"
+}

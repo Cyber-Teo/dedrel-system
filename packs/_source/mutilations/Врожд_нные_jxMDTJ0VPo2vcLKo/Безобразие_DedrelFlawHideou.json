@@ -1,0 +1,110 @@
+{
+  "_id": "DedrelFlawHideou",
+  "name": "Безобразие",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+  "flags": {
+    "dedrel": {
+      "folder": "Врождённые",
+      "starting": true,
+      "divergence": 0,
+      "origin": []
+    }
+  },
+  "system": {
+    "key": "mut_hideous",
+    "description": "<p>Лицо собрано неправильно, и это первое, что замечают.</p>\n<p><strong>Эффект:</strong> −2 к Убеждению и Выступлению. Вас запоминают в лицо: любая попытка остаться неузнанным в людном месте осложнена.</p>\n<p><strong>Врождённый недостаток.</strong> Берётся на создании персонажа и даёт <strong>+1 Очко Мутаций</strong> (не более двух недостатков). Постоянен: не лечится, не снимается отдыхом, не убирается за опыт и не сводится биомантией — он часть образца тела.</p>",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "refresh_on_stack": false,
+    "duration": {
+      "units": "permanent",
+      "value": 0
+    },
+    "expiry_events": [],
+    "application_text": "от него отводят взгляд",
+    "removal_text": "лицо стало обычным",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    }
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEFlawHide",
+      "name": "Безобразие",
+      "img": "systems/dedrel/assets/icons/flaws/mutilation.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "system": {
+        "changes": [
+          {
+            "key": "system.skills.persuasion.bonus",
+            "type": "add",
+            "value": -2,
+            "phase": "apply",
+            "priority": 0
+          },
+          {
+            "key": "system.skills.performance.bonus",
+            "type": "add",
+            "value": -2,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789518756156,
+        "modifiedTime": 1789518756156,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelFlawHideou.DedrelAEFlawHide"
+    }
+  ],
+  "folder": "jxMDTJ0VPo2vcLKo",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789143633874,
+    "modifiedTime": 1789325248071,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelFlawHideou"
+}

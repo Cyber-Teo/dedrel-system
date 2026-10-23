@@ -1,0 +1,50 @@
+{
+  "folder": "zVy8h0WrKxmgZYHB",
+  "name": "Широкий размах",
+  "type": "talent",
+  "_id": "7QmiOHAkT2BWpruf",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Даёт манёвр</p><p>Используя глефу, вы делаете широкий взмах, одним броском атакуя до 3 противников, попадающих в конус 4м. Урон также откидывается единожды и применяется ко всем противникам.  </p>",
+    "key": "sweeping_arc",
+    "subtype": "passive",
+    "xp_cost": 0,
+    "has_situational_bonus": false,
+    "prerequisites_text": "@attributes.dex.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_sweeping_arc"
+    ],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783842739033,
+    "modifiedTime": 1792453976774,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!7QmiOHAkT2BWpruf"
+}

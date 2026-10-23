@@ -1,0 +1,53 @@
+{
+  "name": "Пустой ум",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.wROxYdMieHag5spy]{Пустой ум}</p><p>Когда на вас направлено заклинание или способность с ментальным эффектом — потратьте 2 ОД. Атакующий обязан перебросить бросок и взять худший результат. Если у способности нет броска атаки, а только спасбросок — вы получаете право на один переброс спасброска, если провалили с первого раза.</p>",
+    "key": "empty_mind",
+    "subtype": "passive",
+    "xp_cost": 4,
+    "prerequisites_text": "@attributes.int.rank 4",
+    "prerequisites_attributes": [
+      "@attributes.int.rank 4"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_empty_mind"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "empty_mind",
+      "folder": "INT/Rank 4"
+    }
+  },
+  "folder": "dDkzyRm9LbCtieku",
+  "_id": "fn74a7edKYk9dvBp",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fn74a7edKYk9dvBp"
+}

@@ -1,0 +1,105 @@
+{
+  "_id": "DedrelMutilFing0",
+  "name": "Сросшиеся пальцы",
+  "type": "condition",
+  "img": "systems/dedrel/assets/icons/conditions/mut_fused_fingers.svg",
+  "system": {
+    "description": "<p><em>Увечье 4 ранга. Биомантия, Модификатор «Адаптация». Держится Ранг Доктрины раундов (по умолчанию 3).</em></p><p>Пальцы срастаются перепонкой в неподатливую ласту.</p><p><strong>Эффект:</strong> −2 ко всем атакам; двуручный хват невозможен, пока увечье держится. <em>Запрет хвата не автоматизирован — держит Мастер.</em></p><p><strong>Снятие:</strong> увечья, наложенные Биомантией, <strong>не лечатся зельями</strong> и не проходят на отдыхе. Снимаются только лечащей магией самой Биомантии либо рассеиванием (доктрина-диспеллер пока не определена — заглушка).</p>",
+    "key": "mut_fused_fingers",
+    "category": "negative",
+    "is_technical": false,
+    "stackable": false,
+    "max_stacks": 1,
+    "duration": {
+      "units": "rounds",
+      "value": 3
+    },
+    "expiry_events": [
+      "turnEnd"
+    ],
+    "application_text": "пальцы срослись",
+    "removal_text": "пальцы разошлись",
+    "system_flags": {},
+    "tick": {
+      "formula": "",
+      "is_heal": false,
+      "damage_type": "",
+      "trigger": "turnStart"
+    },
+    "refresh_on_stack": false
+  },
+  "effects": [
+    {
+      "_id": "DedrelAEMutFng10",
+      "name": "Сросшиеся пальцы",
+      "img": "icons/svg/paralysis.svg",
+      "type": "base",
+      "transfer": true,
+      "disabled": false,
+      "system": {
+        "changes": [
+          {
+            "phase": "apply",
+            "priority": 0,
+            "key": "system.bonuses.global_skill",
+            "type": "add",
+            "value": -2
+          }
+        ]
+      },
+      "statuses": [],
+      "flags": {},
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1789074996635,
+        "modifiedTime": 1789074996635,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!DedrelMutilFing0.DedrelAEMutFng10"
+    }
+  ],
+  "flags": {
+    "dedrel": {
+      "folder": "",
+      "rank": 4,
+      "divergence": 1,
+      "origin": []
+    }
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1789074996635,
+    "modifiedTime": 1789326403268,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DedrelMutilFing0"
+}

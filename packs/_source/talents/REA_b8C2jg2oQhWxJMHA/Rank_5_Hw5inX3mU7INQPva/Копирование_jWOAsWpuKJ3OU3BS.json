@@ -1,0 +1,53 @@
+{
+  "name": "Копирование",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.ZEAi0Vilyv6oe45K]{Копирование (в разработке)}</p>Когда противник применяет против вас или в вашем поле зрения небазовый манёвр (source: talent), вы можете немедленно добавить его в список доступных вам манёвров до конца сцены. Требования к оружию сохраняются. Манёвры с требованием мутации (крылья, хвост и т.п.) скопировать нельзя.<br><br><b>Комментарии:</b> Додумать механику этого манёвра, сейчас она не доделана",
+    "key": "copying",
+    "subtype": "passive",
+    "xp_cost": 5,
+    "prerequisites_text": "@attributes.rea.rank 5",
+    "prerequisites_attributes": [
+      "@attributes.rea.rank 5"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_copying"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "copying",
+      "folder": "REA/Rank 5"
+    }
+  },
+  "folder": "Hw5inX3mU7INQPva",
+  "_id": "jWOAsWpuKJ3OU3BS",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044248,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jWOAsWpuKJ3OU3BS"
+}

@@ -1,0 +1,92 @@
+{
+  "name": "Льняной дублет",
+  "type": "armor",
+  "_id": "4gJHtKqhAMsaGpLv",
+  "img": "systems/dedrel/assets/icons/armor_icons/common/linen_doublet.webp",
+  "system": {
+    "description": "",
+    "key": "linen_doublet",
+    "rarity": "common",
+    "equip_slot": "",
+    "base_price": 12,
+    "weight": 1,
+    "crafting": {
+      "craftable": true,
+      "discipline": "weaving",
+      "ingredients": [
+        {
+          "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
+          "name": "Лён",
+          "amount": 2
+        }
+      ],
+      "markup_pct": 20,
+      "cost_price": 10,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "slot": "universal",
+    "weight_class": "light",
+    "dr": {
+      "slashing": 1,
+      "piercing": 0,
+      "bludgeoning": 0,
+      "heat": 0,
+      "cold": 0,
+      "necrotic": 0,
+      "radiant": 0,
+      "electric": 0,
+      "sonic": 0,
+      "acid": 0
+    },
+    "modifiers": {
+      "dodge": 0,
+      "block": 0,
+      "stealth": 0,
+      "ranged_attack": 0,
+      "magic_attack": 0,
+      "movement": 0
+    },
+    "properties": {
+      "exclusive_slot": false,
+      "rigid": false,
+      "loud": false,
+      "encumbering": false,
+      "weak_point_protection": false,
+      "deflecting": 0,
+      "cohesion": 0
+    },
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_heal": "",
+    "on_use_macro": "",
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "equipped": false
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784179241353,
+    "modifiedTime": 1792453976976,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4gJHtKqhAMsaGpLv"
+}

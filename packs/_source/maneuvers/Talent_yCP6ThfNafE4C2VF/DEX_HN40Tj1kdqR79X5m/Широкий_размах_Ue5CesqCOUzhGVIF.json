@@ -1,0 +1,92 @@
+{
+  "folder": "HN40Tj1kdqR79X5m",
+  "name": "Широкий размах",
+  "type": "maneuver",
+  "_id": "Ue5CesqCOUzhGVIF",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_sweeping_arc.svg",
+  "system": {
+    "description": "<p>Используя глефу, вы делаете широкий взмах, одним броском атакуя до 3 противников, попадающих в конус 4м. Урон также откидывается единожды и применяется ко всем противникам.  </p>",
+    "key": "maneuver_sweeping_arc",
+    "source": "basic",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": false
+    },
+    "chain_trigger_text": "",
+    "chain_trigger_maneuvers": [],
+    "ap_cost": 3,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "uses_value": 0,
+    "uses_max": "0",
+    "uses_per": "",
+    "req_weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": true
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_keys": [
+      "glaive"
+    ],
+    "weapon_dice_step": 0,
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_reloading": false,
+      "is_variable_grip": false
+    },
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "sweeping_arc"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "target_type": "area",
+    "target_range": "",
+    "target_value": null,
+    "template_shape": "cone",
+    "template_size": 4,
+    "skill": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_heal": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "hide_combat_buttons": false,
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783842799876,
+    "modifiedTime": 1792453976908,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Ue5CesqCOUzhGVIF"
+}

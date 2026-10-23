@@ -1,0 +1,50 @@
+{
+  "folder": "zVy8h0WrKxmgZYHB",
+  "name": "Парный удар",
+  "type": "talent",
+  "_id": "NSqEhMFH4F2ku6Vv",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.9EreRef9viUKfqaC]{Парный удар}</p><p>Если вы дерётесь парным оружием (катары, когти) после первой атаки, если она попала в цель вы можете совершить вторую атаку (прожав её в карточке в чате, без траты ресурсов). </p>",
+    "key": "paired_strike",
+    "subtype": "passive",
+    "xp_cost": 0,
+    "has_situational_bonus": false,
+    "prerequisites_text": "@attributes.dex.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.dex.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_paired_strike"
+    ],
+    "formula_heal": "",
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783848267359,
+    "modifiedTime": 1792453976775,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NSqEhMFH4F2ku6Vv"
+}

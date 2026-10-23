@@ -1,0 +1,53 @@
+{
+  "name": "Бронебойный выстрел",
+  "type": "talent",
+  "system": {
+    "description": "<p>Этот талант даёт @UUID[Compendium.dedrel.maneuvers.Item.cg1KVcHXHPeHCAsR]{Бронебойный выстрел}</p><p>Позволяет использовать длинные луки на полную мощность и совершать чудовищно мощные выстрелы, которые получают свойство Бронебойное 1-3 в зависимости от потраченных ОД.</p><p>После использования Бронебойного выстрела, вы можете сделать в цепи @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Быстрый выстрел из лука} или @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Выстрел из лука}</p>",
+    "key": "armor_piersing_shot",
+    "subtype": "passive",
+    "xp_cost": 3,
+    "prerequisites_text": "@attributes.str.rank 3",
+    "prerequisites_attributes": [
+      "@attributes.str.rank 3"
+    ],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [
+      "maneuver_armor_piersing_shot"
+    ],
+    "on_add_macro": "",
+    "on_use_macro": ""
+  },
+  "flags": {
+    "dedrel": {
+      "key": "armor_piersing_shot",
+      "folder": "STR/Rank 3"
+    }
+  },
+  "folder": "H4IEH7dBOCLnbH4K",
+  "_id": "gOFQCpOfrnfydQd9",
+  "img": "systems/dedrel/assets/icons/items/talent.svg",
+  "effects": [],
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801044246,
+    "modifiedTime": 1792453976776,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!gOFQCpOfrnfydQd9"
+}

@@ -1,0 +1,97 @@
+{
+  "folder": "c8EC9JnMQHpvz327",
+  "name": "Адаптивность: Логика",
+  "type": "mutation",
+  "img": "systems/dedrel/assets/icons/items/mutation.svg",
+  "system": {
+    "description": "<p>+1 к Логике. Вариант мутации «Адаптивность»: при создании персонажа выберите два варианта с разными характеристиками.</p>",
+    "key": "human_adaptability_log",
+    "mutation_type": "useful",
+    "starting": false,
+    "subtype": "passive",
+    "xp_cost": 0,
+    "has_situational_bonus": false,
+    "prerequisites_text": "",
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [],
+    "prerequisites_mutations": [
+      "human_adaptability"
+    ],
+    "prerequisites_bloodlines": [
+      "human,3"
+    ],
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "adds_items": [],
+    "on_add_macro": ""
+  },
+  "effects": [
+    {
+      "name": "Адаптивность: Логика",
+      "origin": "Compendium.dedrel.mutations.Item.Q00Qy29jAAqGCESH",
+      "_id": "BJONsFcv6igO2K7E",
+      "img": "icons/svg/aura.svg",
+      "type": "base",
+      "system": {
+        "changes": [
+          {
+            "key": "system.attributes.log.rank",
+            "type": "add",
+            "value": 1,
+            "phase": "apply",
+            "priority": 0
+          }
+        ]
+      },
+      "disabled": false,
+      "start": null,
+      "duration": {
+        "value": null,
+        "units": "seconds",
+        "expiry": null,
+        "expired": false
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1782880789042,
+        "modifiedTime": 1792453976738,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!kUdeBYC1NIxwB3lL.BJONsFcv6igO2K7E"
+    }
+  ],
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782880789042,
+    "modifiedTime": 1792453976713,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "_id": "kUdeBYC1NIxwB3lL",
+  "sort": 100000,
+  "_key": "!items!kUdeBYC1NIxwB3lL"
+}

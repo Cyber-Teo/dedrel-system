@@ -1,0 +1,23 @@
+{
+  "name": "Human",
+  "type": "Item",
+  "folder": null,
+  "_id": "V5Jx5xPkN4Hd3iQz",
+  "description": "",
+  "sorting": "a",
+  "sort": 200000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.0",
+    "createdTime": 1782800992910,
+    "modifiedTime": 1788662109837,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!V5Jx5xPkN4Hd3iQz"
+}

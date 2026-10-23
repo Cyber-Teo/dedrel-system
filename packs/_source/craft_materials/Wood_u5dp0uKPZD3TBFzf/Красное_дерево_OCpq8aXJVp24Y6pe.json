@@ -1,0 +1,60 @@
+{
+  "folder": "u5dp0uKPZD3TBFzf",
+  "name": "Красное дерево",
+  "type": "craft_material",
+  "_id": "OCpq8aXJVp24Y6pe",
+  "img": "systems/dedrel/assets/icons/materials/wood/Mahogany.webp",
+  "system": {
+    "description": "<div><p>Красивая древесина, отлично подходящая для создания музыкальных инструментов, мебели и инкрустации.</p></div>",
+    "key": "mahogany",
+    "rarity": "rare",
+    "weight": 1,
+    "base_price": 1000,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "quantity": 1,
+    "stackable": true,
+    "material_type": "wood",
+    "material_class": "wood",
+    "special_rules": "",
+    "applicable_to": {
+      "weapon": false,
+      "armor": false,
+      "shield": false,
+      "jewelry": true
+    },
+    "grants": [],
+    "slots": [
+      "rare"
+    ],
+    "signature": {
+      "magic": "Action Cost discount -1 for 2 chosen techniques"
+    }
+  },
+  "effects": [],
+  "sort": 900000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1783686533196,
+    "modifiedTime": 1792453977034,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!OCpq8aXJVp24Y6pe"
+}

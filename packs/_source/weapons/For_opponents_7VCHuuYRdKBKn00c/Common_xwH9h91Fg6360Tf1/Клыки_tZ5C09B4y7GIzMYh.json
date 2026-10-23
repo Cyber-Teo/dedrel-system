@@ -1,0 +1,139 @@
+{
+  "folder": "xwH9h91Fg6360Tf1",
+  "name": "Клыки",
+  "type": "weapon",
+  "_id": "tZ5C09B4y7GIzMYh",
+  "img": "systems/dedrel/assets/icons/items/weapon.svg",
+  "system": {
+    "description": "",
+    "key": "fangs",
+    "rarity": "common",
+    "weight": 0,
+    "base_price": 0,
+    "crafting": {
+      "craftable": false,
+      "discipline": "",
+      "ingredients": [],
+      "markup_pct": 50,
+      "cost_price": 0,
+      "output_quantity": 1,
+      "time_override": 0
+    },
+    "weapon_type": {
+      "melee": true,
+      "ranged": false,
+      "shield": false,
+      "magic": false
+    },
+    "damage_type": {
+      "piercing": true,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "skill": "unarmed_combat",
+    "damage_formula": "",
+    "damage_formulas": {
+      "slashing": "",
+      "piercing": "1d6",
+      "bludgeoning": ""
+    },
+    "formula_heal": "",
+    "formula_temp_hp": "",
+    "equipped": false,
+    "range": "",
+    "properties": {
+      "natural": true,
+      "armor_piercing": false,
+      "misfire_chance": 0,
+      "consumed_on_use": false,
+      "can_be_sold": false,
+      "can_be_dropped": false
+    },
+    "quantity": 1,
+    "consume_target": "",
+    "consume_amount": 1,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "on_use_macro": "",
+    "prerequisites_attributes": [
+      ""
+    ],
+    "prerequisites_skills": [
+      ""
+    ],
+    "control_zone": 0,
+    "armor_piercing": 0,
+    "cleaving": 0,
+    "deflecting": 0,
+    "vs_creature": {
+      "beast": 0,
+      "magical_beast": 0,
+      "plant": 0,
+      "ooze": 0,
+      "elemental": 0,
+      "ethereal": 0,
+      "astral": 0,
+      "spirit": 0,
+      "shade": 0,
+      "demon": 0,
+      "dragon": 0,
+      "elf": 0,
+      "human": 0,
+      "undead": 0,
+      "cosmic": 0,
+      "construct": 0,
+      "fay": 0
+    },
+    "bypass_creature": {
+      "beast": false,
+      "magical_beast": false,
+      "plant": false,
+      "ooze": false,
+      "elemental": false,
+      "ethereal": false,
+      "astral": false,
+      "spirit": false,
+      "shade": false,
+      "demon": false,
+      "dragon": false,
+      "elf": false,
+      "human": false,
+      "undead": false,
+      "cosmic": false,
+      "construct": false,
+      "fay": false
+    },
+    "is_auxiliary": false,
+    "is_fast": false,
+    "is_slow": false,
+    "is_twohanded": false,
+    "is_thrown": false,
+    "is_reloading": false,
+    "reload_cost": 1,
+    "loaded": true,
+    "is_point_blank": false,
+    "is_scatter": false,
+    "is_variable_grip": false,
+    "is_paired": false
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1784941718096,
+    "modifiedTime": 1792453976955,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!tZ5C09B4y7GIzMYh"
+}

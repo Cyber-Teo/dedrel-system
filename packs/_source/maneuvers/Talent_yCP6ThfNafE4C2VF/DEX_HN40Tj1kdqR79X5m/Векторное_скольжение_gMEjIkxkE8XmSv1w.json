@@ -1,0 +1,136 @@
+{
+  "name": "Векторное скольжение",
+  "type": "maneuver",
+  "system": {
+    "description": "<p>Вы срываетесь в бег, которому безразлична гравитация.</p>\n<p><strong>Эффект:</strong> до конца этого хода вы бегаете по вертикальным поверхностям и воде. Перемещение обычное, метрами Скорости.</p>\n<p><strong>Риск:</strong> если движение закончится на вертикали или на воде, персонаж падает (урон от падения — см. правила).</p>",
+    "key": "maneuver_vector_glide",
+    "source": "talent",
+    "action_type": {
+      "action": true,
+      "reaction": false,
+      "free": false,
+      "chain": true
+    },
+    "chain_trigger_text": "любой манёвр",
+    "chain_trigger_maneuvers": [
+      "any"
+    ],
+    "ap_cost": 2,
+    "is_variable_cost": false,
+    "variable_cost_max": 0,
+    "req_weapon_type": {
+      "melee": false,
+      "ranged": false,
+      "shield": false
+    },
+    "req_weapon_damage_type": {
+      "piercing": false,
+      "bludgeoning": false,
+      "slashing": false
+    },
+    "req_weapon_skill_group": "any",
+    "req_weapon_property": {
+      "is_auxiliary": false,
+      "is_fast": false,
+      "is_slow": false,
+      "is_twohanded": false,
+      "is_thrown": false,
+      "is_enchanted": false,
+      "is_reloading": false
+    },
+    "prerequisites_attributes": [],
+    "prerequisites_skills": [],
+    "prerequisites_talents": [
+      "vector_glide"
+    ],
+    "prerequisites_mutations": [],
+    "prerequisites_bloodlines": [],
+    "prerequisites_text": "",
+    "target_type": "self",
+    "target_range": "",
+    "target_value": 0,
+    "template_shape": "",
+    "template_size": 0,
+    "uses_value": 0,
+    "uses_max": "",
+    "uses_per": "",
+    "formula_attack": "",
+    "formula_damage": "",
+    "formula_custom": "",
+    "save_attribute": "",
+    "save_dc_formula": "",
+    "forbidden_defense": "",
+    "on_use_macro": "",
+    "hide_combat_buttons": true
+  },
+  "flags": {
+    "dedrel": {
+      "key": "maneuver_vector_glide",
+      "folder": "Talent"
+    }
+  },
+  "folder": "HN40Tj1kdqR79X5m",
+  "_id": "gMEjIkxkE8XmSv1w",
+  "img": "systems/dedrel/assets/icons/maneuvers/maneuver_vector_glide.svg",
+  "effects": [
+    {
+      "_id": "VectorGlideEff01",
+      "name": "Векторное скольжение",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_vector_glide.svg",
+      "type": "base",
+      "transfer": false,
+      "disabled": false,
+      "duration": {
+        "value": 1,
+        "units": "rounds",
+        "expiry": "turnEnd",
+        "expired": false
+      },
+      "system": {
+        "changes": []
+      },
+      "flags": {
+        "dedrel": {
+          "applyTo": "self"
+        }
+      },
+      "start": null,
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "statuses": [],
+      "showIcon": 1,
+      "folder": null,
+      "sort": 0,
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1784968900033,
+        "modifiedTime": 1784968900033,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!items.effects!gMEjIkxkE8XmSv1w.VectorGlideEff01"
+    }
+  ],
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_stats": {
+    "coreVersion": "14.364",
+    "systemId": "dedrel",
+    "systemVersion": "0.1.3",
+    "createdTime": 1782801024583,
+    "modifiedTime": 1784968900029,
+    "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!gMEjIkxkE8XmSv1w"
+}
