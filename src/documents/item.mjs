@@ -22,7 +22,7 @@ export default class DedrelItem extends Item {
   _initializeSource(data, options = {}) {
     const source = super._initializeSource(data, options);
     return CompendiumTranslation.translateSource(source, options.pack ?? this.parent?.pack,
-      { creation: options.creation });
+      { creation: options.creation, embedded: !!this.parent });
   }
 
   /** Don't let English text be written into the pack's Russian source. @override */

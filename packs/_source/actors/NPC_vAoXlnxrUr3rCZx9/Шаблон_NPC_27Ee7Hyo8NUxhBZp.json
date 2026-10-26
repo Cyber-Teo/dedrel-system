@@ -1,6 +1,6 @@
 {
   "folder": "vAoXlnxrUr3rCZx9",
-  "name": "NPC template",
+  "name": "Шаблон NPC",
   "type": "npc",
   "_id": "27Ee7Hyo8NUxhBZp",
   "img": "icons/svg/mystery-man.svg",
@@ -424,7 +424,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Bandit pikeman",
+    "name": "Бандит-копейщик",
     "displayName": 0,
     "actorLink": false,
     "width": 1,

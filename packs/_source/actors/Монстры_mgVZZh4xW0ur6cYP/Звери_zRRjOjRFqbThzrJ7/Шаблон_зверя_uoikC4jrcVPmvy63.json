@@ -1,8 +1,7 @@
 {
   "folder": "zRRjOjRFqbThzrJ7",
-  "name": "Wolf",
+  "name": "Шаблон зверя",
   "type": "npc",
-  "_id": "C2HnH1rFN4VYuQGt",
   "img": "icons/svg/mystery-man.svg",
   "system": {
     "tier": "peon",
@@ -12,8 +11,8 @@
         "save_bonus": 0
       },
       "dex": {
-        "rank": 2,
-        "save_bonus": 1
+        "rank": 1,
+        "save_bonus": 0
       },
       "log": {
         "rank": 1,
@@ -21,7 +20,7 @@
       },
       "rea": {
         "rank": 1,
-        "save_bonus": 1
+        "save_bonus": 0
       },
       "str": {
         "rank": 1,
@@ -33,7 +32,7 @@
       },
       "con": {
         "rank": 1,
-        "save_bonus": 1
+        "save_bonus": 0
       },
       "luck": {
         "rank": 1,
@@ -51,7 +50,7 @@
         "bonus": 0
       },
       "unarmed_combat": {
-        "rank": 2,
+        "rank": 0,
         "specialization": "",
         "bonus": 0
       },
@@ -156,12 +155,12 @@
         "bonus": 0
       },
       "atletism": {
-        "rank": 1,
+        "rank": 0,
         "specialization": "",
         "bonus": 0
       },
       "perception": {
-        "rank": 2,
+        "rank": 0,
         "specialization": "",
         "bonus": 0
       },
@@ -197,11 +196,11 @@
       "mdef": 0
     },
     "dr": {
-      "slashing": 2,
-      "piercing": 2,
-      "bludgeoning": 2,
+      "slashing": 0,
+      "piercing": 0,
+      "bludgeoning": 0,
       "heat": 0,
-      "cold": 2,
+      "cold": 0,
       "necrotic": 0,
       "radiant": 0,
       "electric": 0,
@@ -419,19 +418,19 @@
     },
     "initiative": 0,
     "details": {
-      "threat": "1.5 (пеон)",
+      "threat": "1",
       "biography": ""
     }
   },
   "prototypeToken": {
-    "name": "Wolf",
+    "name": "Волк",
     "displayName": 30,
     "actorLink": false,
     "width": 1,
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "systems/dedrel/assets/Actors/Tokens/wolfs/*.webp",
+      "src": "icons/svg/mystery-man.svg",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -511,7 +510,7 @@
     },
     "movementAction": "walk",
     "flags": {},
-    "randomImg": true,
+    "randomImg": false,
     "appendNumber": true,
     "prependAdjective": false
   },
@@ -640,180 +639,19 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1784942095842,
-        "modifiedTime": 1792453977582,
+        "createdTime": 1784979082462,
+        "modifiedTime": 1792453977872,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.weapons.Item.tZ5C09B4y7GIzMYh",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.tZ5C09B4y7GIzMYh"
-    },
-    {
-      "name": "Атака с фланга",
-      "type": "maneuver",
-      "system": {
-        "description": "<p>Вы немедленно проводите один из манёвров ближнего боя без дополнительной траты ОД, против противника который находится В клинче. Атака получит бонус +3.</p>",
-        "key": "maneuver_flank_attack",
-        "source": "talent",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": false
-        },
-        "chain_trigger_text": "",
-        "chain_trigger_maneuvers": [],
-        "ap_cost": 3,
-        "is_variable_cost": false,
-        "variable_cost_max": 0,
-        "req_weapon_type": {
-          "melee": true,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [],
-        "prerequisites_skills": [],
-        "prerequisites_talents": [
-          "flank_attack"
-        ],
-        "prerequisites_mutations": [],
-        "prerequisites_bloodlines": [],
-        "prerequisites_text": "",
-        "target_type": "self",
-        "target_range": "",
-        "target_value": 1,
-        "template_shape": "",
-        "template_size": 0,
-        "uses_value": 0,
-        "uses_max": "",
-        "uses_per": "",
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": "",
-        "hide_combat_buttons": true,
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "req_weapon_keys": [],
-        "weapon_dice_step": 0,
-        "skill": "",
-        "attack_bonus": 0,
-        "formula_heal": "",
-        "formula_temp_hp": ""
-      },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_flank_attack",
-          "folder": "Talent",
-          "isFavorite": true
-        }
-      },
-      "folder": "HN40Tj1kdqR79X5m",
-      "_id": "TucGO98UIhOeZkqr",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flank_attack.svg",
-      "effects": [
-        {
-          "name": "Атака с фланга",
-          "origin": "Compendium.dedrel.maneuvers.Item.Y8Eh46LmqB2MOoCl",
-          "_id": "OwKVZwNYO8PK0oCr",
-          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flank_attack.svg",
-          "type": "base",
-          "system": {
-            "changes": [
-              {
-                "key": "flags.dedrel.mod",
-                "type": "add",
-                "value": "ap_set:0; filter:melee",
-                "phase": "initial",
-                "priority": null
-              },
-              {
-                "key": "flags.dedrel.mod",
-                "type": "add",
-                "value": "attak:3; filter:melee",
-                "phase": "initial",
-                "priority": null
-              }
-            ]
-          },
-          "disabled": false,
-          "start": null,
-          "duration": {
-            "value": 1,
-            "units": "rounds",
-            "expiry": "turnEnd",
-            "expired": false
-          },
-          "description": "",
-          "tint": "#ffffff",
-          "transfer": false,
-          "statuses": [],
-          "showIcon": 1,
-          "folder": null,
-          "sort": 0,
-          "flags": {
-            "dedrel": {
-              "applyTo": "self"
-            }
-          },
-          "_stats": {
-            "coreVersion": "14.364",
-            "systemId": "dedrel",
-            "systemVersion": "0.1.3",
-            "createdTime": 1784942226505,
-            "modifiedTime": 1784942226505,
-            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-            "compendiumSource": null,
-            "duplicateSource": null,
-            "exportSource": null
-          },
-          "_key": "!actors.items.effects!C2HnH1rFN4VYuQGt.TucGO98UIhOeZkqr.OwKVZwNYO8PK0oCr"
-        }
-      ],
-      "sort": 300000,
       "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
+        "default": 0
       },
-      "_stats": {
-        "coreVersion": "14.364",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1784942226505,
-        "modifiedTime": 1784977482039,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.Y8Eh46LmqB2MOoCl",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.TucGO98UIhOeZkqr"
+      "_key": "!actors.items!uoikC4jrcVPmvy63.tZ5C09B4y7GIzMYh"
     },
     {
       "name": "Животные",
@@ -830,20 +668,19 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1784942774058,
-        "modifiedTime": 1792453977582,
+        "createdTime": 1784979082462,
+        "modifiedTime": 1792453977872,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.creature_types.Item.oip8THsPDXqN85dW",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.oip8THsPDXqN85dW"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!uoikC4jrcVPmvy63.oip8THsPDXqN85dW"
     },
     {
       "name": "Атака по возможности (m)",
@@ -981,380 +818,33 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1784977333913,
-            "modifiedTime": 1789510122907,
+            "createdTime": 1784979082462,
+            "modifiedTime": 1789510122918,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!C2HnH1rFN4VYuQGt.K6sXbDMkS5BYvAT1.3vYKn5wCeaPokRqI"
+          "_key": "!actors.items.effects!uoikC4jrcVPmvy63.K6sXbDMkS5BYvAT1.3vYKn5wCeaPokRqI"
         }
       ],
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
       "_stats": {
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1784977333913,
-        "modifiedTime": 1784977479070,
+        "createdTime": 1784979082462,
+        "modifiedTime": 1784979082462,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "exportSource": null,
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.iyN115gveSxkInc3",
+        "compendiumSource": null,
         "duplicateSource": null
       },
       "_id": "K6sXbDMkS5BYvAT1",
       "sort": 300000,
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.K6sXbDMkS5BYvAT1"
-    },
-    {
-      "folder": "uC3oW0cZdDASA4f6",
-      "name": "Укус",
-      "type": "maneuver",
-      "_id": "DeTdnRGwkCu1yLKX",
-      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
-      "system": {
-        "description": "<p>Атака естественным оружием — клыками, жвалами, клювом. Формула и тип урона берутся с самого оружия, поэтому один манёвр обслуживает любое существо: у волка это клыки, у медведя — пасть.</p>\n<p>По цели, которая уже лежит или схвачена, бьют не Укусом, а манёвром «Загрызть» — он сам считает урон на ступень выше.</p>",
-        "key": "maneuver_common_monster_bite",
-        "source": "basic",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "после Атаки по возможности",
-        "chain_trigger_maneuvers": [
-          "maneuver_monster_attack_of_opportunity"
-        ],
-        "ap_cost": 2,
-        "is_variable_cost": false,
-        "variable_cost_max": 0,
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "uses_value": 0,
-        "uses_max": "0",
-        "uses_per": "",
-        "req_weapon_type": {
-          "melee": true,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_keys": [
-          ""
-        ],
-        "weapon_dice_step": 0,
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_text": "",
-        "prerequisites_attributes": [
-          ""
-        ],
-        "prerequisites_skills": [
-          ""
-        ],
-        "prerequisites_talents": [
-          ""
-        ],
-        "prerequisites_mutations": [
-          ""
-        ],
-        "prerequisites_bloodlines": [
-          ""
-        ],
-        "target_type": "creature",
-        "target_range": "",
-        "target_value": 1,
-        "template_shape": "",
-        "template_size": 0,
-        "skill": "unarmed_combat",
-        "attack_bonus": 0,
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_heal": "",
-        "formula_temp_hp": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "hide_combat_buttons": false,
-        "on_use_macro": ""
-      },
-      "effects": [],
-      "sort": 100000,
       "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
+        "default": 0
       },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_common_monster_bite",
-          "folder": "Monster",
-          "isFavorite": true,
-          "parentItemId": null
-        }
-      },
-      "_stats": {
-        "coreVersion": "14.364",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1784977353367,
-        "modifiedTime": 1787702047555,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.DeTdnRGwkCu1yLKX"
-    },
-    {
-      "_id": "toogqryiiClXdqLN",
-      "name": "Загрызть",
-      "type": "maneuver",
-      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_monster_maul",
-          "folder": "Monster",
-          "isFavorite": true,
-          "parentItemId": null
-        }
-      },
-      "system": {
-        "key": "maneuver_monster_maul",
-        "source": "basic",
-        "description": "<p>Зверь рвёт добычу, которая уже не держится на ногах. Проводится только по цели со статусом @UUID[Compendium.dedrel.conditions.Item.O4EOWhDIUFekJqxC]{Лежит} или @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен}.</p>\n<p>Атака естественным оружием, урон — на <strong>ступень выше</strong> по Лестнице (1d4 → 1d6 → 2d4 → 2d6 → 2d8 → 3d6). Сдвиг считает система; действует правило одной ступени, поэтому с другими бафами урона он не складывается сверх +1.</p>\n<p>Зеркало «Подсечки»: та роняет цель, эта снимает с этого урожай. От универсального «Добивания» отличается тем, что «Добивание» — реакция в момент падения, а «Загрызть» проводится в свой ход по уже лежащей добыче.</p>",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "после Рывка или Мёртвой хватки",
-        "chain_trigger_maneuvers": [
-          "maneuver_monster_pounce",
-          "maneuver_monster_jaw_lock"
-        ],
-        "ap_cost": 2,
-        "skill": "unarmed_combat",
-        "req_weapon_type": {
-          "melee": true,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "weapon_dice_step": 1,
-        "target_type": "creature",
-        "target_value": 1,
-        "prerequisites_text": "Цель со статусом «Лежит» или «Схвачен».",
-        "hide_combat_buttons": false,
-        "is_variable_cost": false,
-        "variable_cost_max": 0,
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "uses_value": 0,
-        "uses_max": "0",
-        "uses_per": "",
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_keys": [
-          ""
-        ],
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [
-          ""
-        ],
-        "prerequisites_skills": [
-          ""
-        ],
-        "prerequisites_talents": [
-          ""
-        ],
-        "prerequisites_mutations": [
-          ""
-        ],
-        "prerequisites_bloodlines": [
-          ""
-        ],
-        "target_range": "",
-        "template_shape": "",
-        "template_size": 0,
-        "attack_bonus": 0,
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_heal": "",
-        "formula_temp_hp": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": ""
-      },
-      "folder": "uC3oW0cZdDASA4f6",
-      "effects": [],
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.364",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1784977366586,
-        "modifiedTime": 1787702047555,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.MonsterMaulBite1",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.toogqryiiClXdqLN"
-    },
-    {
-      "_id": "e0PlfGOpoPhoz2qQ",
-      "name": "Мёртвая хватка",
-      "type": "maneuver",
-      "img": "systems/dedrel/assets/icons/items/maneuver.svg",
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_monster_jaw_lock",
-          "folder": "Monster",
-          "isFavorite": true,
-          "parentItemId": null
-        }
-      },
-      "system": {
-        "key": "maneuver_monster_jaw_lock",
-        "source": "basic",
-        "description": "<p>Существо смыкает челюсти и виснет на добыче. Проводится только после <strong>попавшего</strong> @UUID[Compendium.dedrel.maneuvers.Item.oLaqBxtIBjNcM9mC]{Укус}.</p>\n<p><strong>Контест:</strong> Атлетика существа против Атлетики цели (кнопка броска катит Атлетику). При успехе @UUID[Compendium.dedrel.conditions.Item.ConditionGrapple]{Схвачен} получают <strong>оба</strong>: захват связывает и добычу, и хищника.</p>\n<p><strong>Пока захват держится:</strong> существо не сходит с места — уйти с клетки значит отпустить. Цель освобождается манёвром @UUID[Compendium.dedrel.maneuvers.Item.Enl336RoHnl7foYR]{Взаимодействие} со встречным Атлетикой, и состояние спадает с обоих.</p>\n<p><strong>Размер:</strong> +2 контесту за каждую категорию разницы в пользу большего; на две категории крупнее захват невозможен.</p>",
-        "action_type": {
-          "action": false,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "после попавшего Укуса",
-        "chain_trigger_maneuvers": [
-          "maneuver_common_monster_bite"
-        ],
-        "ap_cost": 1,
-        "skill": "atletism",
-        "req_weapon_type": {
-          "melee": false,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "target_type": "creature",
-        "target_value": 1,
-        "hide_combat_buttons": false,
-        "is_variable_cost": false,
-        "variable_cost_max": 0,
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "uses_value": 0,
-        "uses_max": "0",
-        "uses_per": "",
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_keys": [
-          ""
-        ],
-        "weapon_dice_step": 0,
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_text": "",
-        "prerequisites_attributes": [
-          ""
-        ],
-        "prerequisites_skills": [
-          ""
-        ],
-        "prerequisites_talents": [
-          ""
-        ],
-        "prerequisites_mutations": [
-          ""
-        ],
-        "prerequisites_bloodlines": [
-          ""
-        ],
-        "target_range": "",
-        "template_shape": "",
-        "template_size": 0,
-        "attack_bonus": 0,
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_heal": "",
-        "formula_temp_hp": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": ""
-      },
-      "folder": "uC3oW0cZdDASA4f6",
-      "effects": [],
-      "sort": 0,
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.368",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1784977376520,
-        "modifiedTime": 1792453977582,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.MonsterJawLock01",
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.e0PlfGOpoPhoz2qQ"
+      "_key": "!actors.items!uoikC4jrcVPmvy63.K6sXbDMkS5BYvAT1"
     },
     {
       "name": "Разорвать дистанцию",
@@ -1440,22 +930,21 @@
       "img": "systems/dedrel/assets/icons/maneuvers/maneuver_disengage.svg",
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
       "_stats": {
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1784977420620,
-        "modifiedTime": 1787702047555,
+        "createdTime": 1784979082462,
+        "modifiedTime": 1787702047845,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.COx23vBpriCHVVLO",
-        "duplicateSource": null,
-        "exportSource": null
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.n3Q39sQuMHba59HO"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!uoikC4jrcVPmvy63.n3Q39sQuMHba59HO"
     },
     {
       "name": "Уклонение",
@@ -1582,44 +1071,38 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1784977422953,
-            "modifiedTime": 1784977422953,
+            "createdTime": 1784979082462,
+            "modifiedTime": 1784979082462,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!C2HnH1rFN4VYuQGt.4TwhbFKw06VeCV0k.Qx96tAtFyvoGA4rF"
+          "_key": "!actors.items.effects!uoikC4jrcVPmvy63.4TwhbFKw06VeCV0k.Qx96tAtFyvoGA4rF"
         }
       ],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
       "_stats": {
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1784977422953,
-        "modifiedTime": 1792453977582,
+        "createdTime": 1784979082462,
+        "modifiedTime": 1792453977872,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": "Compendium.dedrel.maneuvers.Item.balrTxNEl33DGerg",
-        "duplicateSource": null,
-        "exportSource": null
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
       },
-      "_key": "!actors.items!C2HnH1rFN4VYuQGt.4TwhbFKw06VeCV0k"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!uoikC4jrcVPmvy63.4TwhbFKw06VeCV0k"
     }
   ],
   "effects": [],
-  "sort": 100000,
-  "ownership": {
-    "default": 0,
-    "Gw6OqVIulw8cCPjC": 3
-  },
   "flags": {
     "dedrel": {
-      "itemsLocked": true,
+      "itemsLocked": false,
       "favoriteSkills": [
         "perception"
       ]
@@ -1629,12 +1112,18 @@
     "coreVersion": "14.364",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1784941854125,
-    "modifiedTime": 1787702047564,
+    "createdTime": 1784979082462,
+    "modifiedTime": 1787702047851,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+    "exportSource": null,
     "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
+    "duplicateSource": null
   },
-  "_key": "!actors!C2HnH1rFN4VYuQGt"
+  "ownership": {
+    "default": 0,
+    "Gw6OqVIulw8cCPjC": 3
+  },
+  "_id": "uoikC4jrcVPmvy63",
+  "sort": 400000,
+  "_key": "!actors!uoikC4jrcVPmvy63"
 }

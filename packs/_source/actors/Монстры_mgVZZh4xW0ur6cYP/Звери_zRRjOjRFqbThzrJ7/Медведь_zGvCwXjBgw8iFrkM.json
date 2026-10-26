@@ -1,6 +1,6 @@
 {
   "folder": "zRRjOjRFqbThzrJ7",
-  "name": "Bear",
+  "name": "Медведь",
   "type": "npc",
   "_id": "zGvCwXjBgw8iFrkM",
   "img": "icons/svg/mystery-man.svg",
@@ -424,7 +424,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Bear",
+    "name": "Медведь",
     "displayName": 30,
     "actorLink": false,
     "width": 1,

@@ -1,23 +1,23 @@
 {
-  "name": "Commoners",
+  "name": "Легион",
   "type": "Actor",
   "folder": "vAoXlnxrUr3rCZx9",
-  "_id": "3BgdYMkwe2PzVokw",
+  "_id": "eJyG5eWvpi9ZdmCN",
   "description": "",
   "sorting": "a",
-  "sort": 100000,
+  "sort": 500000,
   "color": null,
   "flags": {},
   "_stats": {
     "coreVersion": "14.368",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1789664046017,
+    "createdTime": 1789437675180,
     "modifiedTime": 1793045217795,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!folders!3BgdYMkwe2PzVokw"
+  "_key": "!folders!eJyG5eWvpi9ZdmCN"
 }

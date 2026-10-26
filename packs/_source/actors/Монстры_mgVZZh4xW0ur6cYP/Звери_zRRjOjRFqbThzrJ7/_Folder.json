@@ -1,10 +1,10 @@
 {
   "type": "Actor",
-  "folder": null,
-  "name": "PC",
+  "folder": "mgVZZh4xW0ur6cYP",
+  "name": "Звери",
   "color": null,
   "sorting": "a",
-  "_id": "cPRsYhnfiujR69O4",
+  "_id": "zRRjOjRFqbThzrJ7",
   "description": "",
   "sort": 0,
   "flags": {},
@@ -12,12 +12,12 @@
     "coreVersion": "14.364",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1788662904735,
-    "modifiedTime": 1788662904735,
+    "createdTime": 1784941287395,
+    "modifiedTime": 1784941287395,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!folders!cPRsYhnfiujR69O4"
+  "_key": "!folders!zRRjOjRFqbThzrJ7"
 }

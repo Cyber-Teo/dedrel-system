@@ -1,23 +1,23 @@
 {
-  "name": "Mercs",
   "type": "Actor",
-  "folder": "XJbvcyIJTGPKdNz2",
-  "_id": "fU9OpHD9vva2IlTE",
-  "description": "",
-  "sorting": "a",
-  "sort": 0,
+  "folder": null,
+  "name": "Монстры",
   "color": null,
+  "sorting": "a",
+  "_id": "mgVZZh4xW0ur6cYP",
+  "description": "",
+  "sort": 0,
   "flags": {},
   "_stats": {
     "coreVersion": "14.364",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1787699581535,
-    "modifiedTime": 1787699581535,
+    "createdTime": 1784941214252,
+    "modifiedTime": 1784941214252,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!folders!fU9OpHD9vva2IlTE"
+  "_key": "!folders!mgVZZh4xW0ur6cYP"
 }

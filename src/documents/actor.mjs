@@ -1,4 +1,15 @@
+import { CompendiumTranslation } from "../l10n/compendium-translation.mjs";
+
 export default class DedrelActor extends Actor {
+  /**
+   * Translation of actors from the system's packs (src/l10n/compendium-translation.mjs).
+   * @override
+   */
+  _initializeSource(data, options = {}) {
+    const source = super._initializeSource(data, options);
+    return CompendiumTranslation.translateSource(source, options.pack, { creation: options.creation });
+  }
+
   /**
    * Creature type keys the actor carries (from embedded creature_type Items).
    * Used for the weapon/effect bonus "vs type" and as an indicator on the sheet.
@@ -33,6 +44,8 @@ export default class DedrelActor extends Actor {
     // in an update are clamped to 0. Catches every write path (inline inputs
     // on the sheet bypassing client-side min="0", socket transfers, coin deposits).
     this.#clampCurrencyUpdate(changed);
+    // Don't let English text be written into the pack's Russian source
+    CompendiumTranslation.stripTranslatedChanges(this, changed);
     return super._preUpdate(changed, options, user);
   }
 

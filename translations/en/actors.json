@@ -1,0 +1,152 @@
+{
+  "BanditWingArcher": {
+    "_src": "ea604616cb",
+    "name": "Winged Archer Bandit",
+    "prototypeToken.name": "Winged Archer"
+  },
+  "BanditHalberd001": {
+    "_src": "369e5461d3",
+    "name": "Bandit Halberdier",
+    "prototypeToken.name": "Halberdier"
+  },
+  "BanditCrossbow01": {
+    "_src": "e651a9be2f",
+    "name": "Bandit Crossbowman",
+    "prototypeToken.name": "Crossbowman"
+  },
+  "BanditBruiser001": {
+    "_src": "ebba185706",
+    "name": "Armored Bandit Bruiser",
+    "prototypeToken.name": "Man-at-Arms"
+  },
+  "BanditDuelist001": {
+    "_src": "ade57eb996",
+    "name": "Bandit Duelist",
+    "prototypeToken.name": "Duelist"
+  },
+  "cm05VGOkaxLWxnvm": {
+    "_src": "578dd6e65f",
+    "name": "Spearman Bandit",
+    "prototypeToken.name": "Guard"
+  },
+  "BanditSorcerer01": {
+    "_src": "19bd09b1fc",
+    "name": "Bandit Sorcerer",
+    "prototypeToken.name": "Renegade"
+  },
+  "BanditFleshPeon1": {
+    "_src": "e0f2ae1cce",
+    "name": "Gang Biomancer (Peon)",
+    "prototypeToken.name": "Bonesetter"
+  },
+  "RToXJMKHU0hR0rNF": {
+    "_src": "f69809a20e",
+    "name": "Wolf Pack Leader",
+    "prototypeToken.name": "Wolf Pack Leader"
+  },
+  "C2HnH1rFN4VYuQGt": {
+    "_src": "5e0d379532",
+    "name": "Wolf",
+    "prototypeToken.name": "Wolf"
+  },
+  "CommonerSharpEye": {
+    "_src": "2e2ed3e479",
+    "name": "Townsfolk: Lookout",
+    "prototypeToken.name": "Townsperson"
+  },
+  "CommonerScribe01": {
+    "_src": "11d4fccf66",
+    "name": "Townsfolk: Scribe",
+    "prototypeToken.name": "Townsperson"
+  },
+  "CommonerBarker01": {
+    "_src": "837dc57f74",
+    "name": "Townsfolk: Barker",
+    "prototypeToken.name": "Townsperson"
+  },
+  "CommonerCrafter1": {
+    "_src": "9a83f798c8",
+    "name": "Townsfolk: Artisan",
+    "prototypeToken.name": "Artisan"
+  },
+  "CommonerLiar0001": {
+    "_src": "427cddfa15",
+    "name": "Townsfolk: Hustler",
+    "prototypeToken.name": "Townsperson"
+  },
+  "CommonerLabor001": {
+    "_src": "b3003c0fdc",
+    "name": "Townsfolk: Laborer",
+    "prototypeToken.name": "Laborer"
+  },
+  "CommonerHerbal01": {
+    "_src": "96189d7b0f",
+    "name": "Townsfolk: Herbalist",
+    "prototypeToken.name": "Townsperson"
+  },
+  "CommonerPickpkt1": {
+    "_src": "e72b450426",
+    "name": "Townsfolk: Pickpocket",
+    "prototypeToken.name": "Townsperson"
+  },
+  "DADbi2vXd60Woo8l": {
+    "_src": "45de25e851",
+    "name": "Layla",
+    "prototypeToken.name": "Layla"
+  },
+  "LegionVelite0001": {
+    "_src": "9bc9d41e9b",
+    "name": "Legion: Velite",
+    "prototypeToken.name": "Velite"
+  },
+  "LegionMedicBio01": {
+    "_src": "4ab42821d6",
+    "name": "Legion: Medic (Biomancer)",
+    "prototypeToken.name": "Medic"
+  },
+  "LegionSapperGeo1": {
+    "_src": "72764d3570",
+    "name": "Legion: Sapper (Geomancer)",
+    "prototypeToken.name": "Sapper"
+  },
+  "LegionHeavyInf01": {
+    "_src": "6101abee80",
+    "name": "Legion: Heavy Infantry",
+    "prototypeToken.name": "Legionary"
+  },
+  "zGvCwXjBgw8iFrkM": {
+    "_src": "957a119bc9",
+    "name": "Bear",
+    "prototypeToken.name": "Bear"
+  },
+  "zOhck6W8JQb0o0yA": {
+    "_src": "1496e7fa2b",
+    "name": "Miroslava",
+    "prototypeToken.name": "Miroslava"
+  },
+  "dHl4ljJ3phFAV5YR": {
+    "_src": "116211451a",
+    "name": "Ulrich",
+    "prototypeToken.name": "Ulrich"
+  },
+  "27Ee7Hyo8NUxhBZp": {
+    "_src": "979464b5d9",
+    "name": "NPC Template",
+    "prototypeToken.name": "Spearman Bandit"
+  },
+  "uoikC4jrcVPmvy63": {
+    "_src": "5514d6225c",
+    "name": "Beast Template",
+    "prototypeToken.name": "Wolf"
+  },
+  "yFOvfG8TiuokQru5": {
+    "_src": "e0e24ca528",
+    "name": "Iamblichus Plinius",
+    "prototypeToken.name": "Iamblichus Plinius"
+  },
+  "KMdL0I30pOwwcyV9": {
+    "_src": "cd027f1a22",
+    "name": "Janek Novák",
+    "prototypeToken.name": "Janek"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "folder": "zRRjOjRFqbThzrJ7",
-  "name": "Wolf pack leader",
+  "name": "Вожак волчьей стаи",
   "type": "npc",
   "_id": "RToXJMKHU0hR0rNF",
   "img": "icons/svg/mystery-man.svg",
@@ -424,7 +424,7 @@
     }
   },
   "prototypeToken": {
-    "name": "Wolf pack leader",
+    "name": "Вожак волчьей стаи",
     "displayName": 30,
     "actorLink": false,
     "width": 1,

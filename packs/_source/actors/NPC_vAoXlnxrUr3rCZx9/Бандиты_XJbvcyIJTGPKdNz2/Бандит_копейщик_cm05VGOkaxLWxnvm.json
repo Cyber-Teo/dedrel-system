@@ -1,5 +1,5 @@
 {
-  "name": "Spearman bandit",
+  "name": "Бандит-копейщик",
   "type": "npc",
   "_id": "cm05VGOkaxLWxnvm",
   "img": "icons/svg/mystery-man.svg",
@@ -3403,7 +3403,7 @@
     }
   ],
   "effects": [],
-  "folder": "nsHkpNAgN4XYKrVA",
+  "folder": "XJbvcyIJTGPKdNz2",
   "ownership": {
     "default": 0,
     "Gw6OqVIulw8cCPjC": 3

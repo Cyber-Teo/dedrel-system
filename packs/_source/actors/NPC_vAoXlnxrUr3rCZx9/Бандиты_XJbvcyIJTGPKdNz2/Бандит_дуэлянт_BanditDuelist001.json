@@ -1,77 +1,77 @@
 {
-  "_id": "BanditBruiser001",
-  "name": "Armored bandit bruiser",
+  "_id": "BanditDuelist001",
+  "name": "Бандит-дуэлянт",
   "type": "npc",
-  "img": "systems/dedrel/assets/Actors/Tokens/bandits/bandit07.webp",
-  "folder": "fU9OpHD9vva2IlTE",
+  "img": "systems/dedrel/assets/Actors/Tokens/bandits/bandit01.webp",
+  "folder": "XJbvcyIJTGPKdNz2",
   "system": {
     "tier": "peon",
     "attributes": {
-      "str": {
-        "rank": 3,
-        "save_bonus": 0
-      },
-      "con": {
-        "rank": 3,
+      "dex": {
+        "rank": 4,
         "save_bonus": 0
       },
       "rea": {
+        "rank": 3,
+        "save_bonus": 0
+      },
+      "str": {
         "rank": 2,
         "save_bonus": 0
       },
-      "will": {
+      "con": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "int": {
         "rank": 2,
         "save_bonus": 0
       },
       "cha": {
-        "rank": 3,
+        "rank": 2,
         "save_bonus": 0
       },
-      "int": {
-        "rank": 1,
-        "save_bonus": 0
-      },
-      "dex": {
-        "rank": 1,
+      "luck": {
+        "rank": 2,
         "save_bonus": 0
       },
       "log": {
         "rank": 1,
         "save_bonus": 0
       },
-      "luck": {
+      "will": {
         "rank": 1,
         "save_bonus": 0
       }
     },
     "skills": {
-      "blunt_weapons": {
+      "bladed_weapons": {
         "rank": 3,
-        "specialization": "Булава",
+        "specialization": "Рапира",
         "bonus": 0
       },
       "armor_use": {
-        "rank": 4,
+        "rank": 1,
         "specialization": "",
         "bonus": 0
       },
       "atletism": {
-        "rank": 2,
+        "rank": 3,
         "specialization": "",
         "bonus": 0
       },
-      "persuasion": {
-        "rank": 2,
+      "deception": {
+        "rank": 3,
         "specialization": "",
         "bonus": 0
       },
-      "intimidation": {
+      "stealth": {
         "rank": 2,
         "specialization": "",
         "bonus": 0
       },
       "insight": {
-        "rank": 1,
+        "rank": 2,
         "specialization": "",
         "bonus": 0
       },
@@ -86,6 +86,11 @@
         "bonus": 0
       },
       "pole_weapons": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "blunt_weapons": {
         "rank": 0,
         "specialization": "",
         "bonus": 0
@@ -120,11 +125,6 @@
         "specialization": "",
         "bonus": 0
       },
-      "bladed_weapons": {
-        "rank": 0,
-        "specialization": "",
-        "bonus": 0
-      },
       "cultural_awareness": {
         "rank": 0,
         "specialization": "",
@@ -155,11 +155,6 @@
         "specialization": "",
         "bonus": 0
       },
-      "stealth": {
-        "rank": 0,
-        "specialization": "",
-        "bonus": 0
-      },
       "healing": {
         "rank": 0,
         "specialization": "",
@@ -180,7 +175,12 @@
         "specialization": "",
         "bonus": 0
       },
-      "deception": {
+      "persuasion": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
+      "intimidation": {
         "rank": 0,
         "specialization": "",
         "bonus": 0
@@ -193,26 +193,26 @@
     },
     "equipment_slots": {
       "main_hand": {
-        "item_id": "wNPkgeZbzJmjQs54",
+        "item_id": "LaH8sPT1mB3TtwXN",
         "type": "weapon"
       },
       "off_hand": {
-        "item_id": "85W0gV3KOVo6lLvP",
+        "item_id": "om962vgrbfZXZ3mU",
         "type": "shield"
       },
-      "armor_upper": {
-        "item_id": "1174W2G2boIz6ihG",
+      "armor_middle": {
+        "item_id": "bCRGg5GOjoaYsyIY",
+        "type": "armor"
+      },
+      "armor_lower": {
+        "item_id": "4gJHtKqhAMsaGpLv",
         "type": "armor"
       },
       "tail": {
         "item_id": "",
         "type": ""
       },
-      "armor_middle": {
-        "item_id": "",
-        "type": "armor"
-      },
-      "armor_lower": {
+      "armor_upper": {
         "item_id": "",
         "type": "armor"
       },
@@ -352,18 +352,18 @@
         "imbue": 0
       }
     },
-    "toughness": 5,
+    "toughness": 3,
     "resources": {
       "hits": {
-        "value": 3,
-        "max": 3
+        "value": 2,
+        "max": 2
       },
       "ap_universal": {
-        "value": 6,
+        "value": 7,
         "max": 0
       },
       "movement": {
-        "value": 6,
+        "value": 12,
         "max": 0
       },
       "hp": {
@@ -377,13 +377,13 @@
       }
     },
     "overrides": {
-      "ap_max": 6,
+      "ap_max": 7,
       "movement_max": null,
       "hp_max": null
     },
     "details": {
-      "threat": "3 (пеон)",
-      "biography": "<p><strong>Кто это.</strong> Громила в трофейных латах — с боя снятых и кое-как подогнанных. Носить их умеет (Ношение брони 4), поэтому не спотыкается, но и бегать в них не может.</p>\n<p><strong>Тактика.</strong> Встаёт в проходе и Провокацией тянет внимание на себя. Блок 15 и DR 3/3/3: чтобы снять ему хит, нужно 8+ урона одним ударом. Дробящее и бронебойное (боевая кирка, арбалетные болты) роняют порог до 6 — это и есть способ его вскрыть, а не «бить сильнее».</p>\n<p><strong>Триггер:</strong> не отступает никогда — на последнем hit идёт вперёд и бьёт, пока стоит. Именно поэтому банда за ним и прячется.</p>"
+      "threat": "3.5 (пеон)",
+      "biography": "<p><strong>Кто это.</strong> Разжалованный фехтовальщик, ушедший на большую дорогу: рапира, кинжал в левой, доспеха ровно столько, чтобы не мешал. Полуранг вверх по скорости, ОД и Уклонению — оплачен двумя хитами.</p>\n<p><strong>Тактика.</strong> 12 м скорости и 7 ОД: заходит с фланга, вскрывает защиту Финтом (Обман против Проницательности — мимо Блока и Уклонения) и бьёт. В строю не стоит, размен ударами не выдерживает.</p>\n<p><strong>Триггер:</strong> потерял первый hit → Разорвать дистанцию и заход с другой стороны; в лоб второй раз не полезет.</p>"
     },
     "defenses": {
       "block": 0,
@@ -443,8 +443,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977518,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977532,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -452,19 +452,19 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.aBpVy31Ul0e0h8SJ"
+      "_key": "!actors.items!BanditDuelist001.aBpVy31Ul0e0h8SJ"
     },
     {
-      "name": "Железная булава",
+      "name": "Железная рапира",
       "type": "weapon",
-      "_id": "wNPkgeZbzJmjQs54",
-      "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_mace.webp",
+      "_id": "LaH8sPT1mB3TtwXN",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_rapier.webp",
       "system": {
         "description": "",
-        "key": "iron_mace",
+        "key": "iron_rapier",
         "rarity": "common",
         "weight": 1.2,
-        "base_price": 26,
+        "base_price": 30,
         "crafting": {
           "craftable": true,
           "discipline": "smithing",
@@ -475,7 +475,7 @@
               "amount": 2
             }
           ],
-          "markup_pct": 30,
+          "markup_pct": 50,
           "cost_price": 20,
           "output_quantity": 1,
           "time_override": 0
@@ -487,16 +487,16 @@
           "magic": false
         },
         "damage_type": {
-          "piercing": false,
-          "bludgeoning": true,
+          "piercing": true,
+          "bludgeoning": false,
           "slashing": false
         },
-        "skill": "blunt_weapons",
+        "skill": "bladed_weapons",
         "damage_formula": "",
         "damage_formulas": {
           "slashing": "",
-          "piercing": "",
-          "bludgeoning": "2d4"
+          "piercing": "2d6",
+          "bludgeoning": ""
         },
         "formula_heal": "",
         "equipped": true,
@@ -535,7 +535,7 @@
           "fay": 0
         },
         "is_auxiliary": false,
-        "is_fast": false,
+        "is_fast": true,
         "is_slow": false,
         "is_twohanded": false,
         "is_thrown": false,
@@ -561,8 +561,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977518,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977532,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -570,55 +570,50 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.wNPkgeZbzJmjQs54"
+      "_key": "!actors.items!BanditDuelist001.LaH8sPT1mB3TtwXN"
     },
     {
-      "name": "Дубовый ростовой щит",
+      "name": "Железный кинжал",
       "type": "weapon",
-      "_id": "85W0gV3KOVo6lLvP",
-      "img": "systems/dedrel/assets/icons/weapon_icons/common/oak_tower_shield.webp",
+      "_id": "om962vgrbfZXZ3mU",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/iron_dagger.webp",
       "system": {
         "description": "",
-        "key": "oak_tower_shield",
+        "key": "iron_dagger",
         "rarity": "common",
-        "weight": 5,
-        "base_price": 52,
+        "weight": 0.4,
+        "base_price": 13,
         "crafting": {
           "craftable": true,
-          "discipline": "",
+          "discipline": "smithing",
           "ingredients": [
             {
               "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
               "name": "Железо",
               "amount": 1
-            },
-            {
-              "uuid": "Compendium.dedrel.craft_materials.Item.VQ0r2aCvo4Q8aF4S",
-              "name": "Дуб",
-              "amount": 3
             }
           ],
           "markup_pct": 30,
-          "cost_price": 40,
+          "cost_price": 10,
           "output_quantity": 1,
           "time_override": 0
         },
         "weapon_type": {
-          "melee": false,
+          "melee": true,
           "ranged": false,
-          "shield": true,
+          "shield": false,
           "magic": false
         },
         "damage_type": {
-          "piercing": false,
+          "piercing": true,
           "bludgeoning": false,
-          "slashing": false
+          "slashing": true
         },
-        "skill": "",
+        "skill": "bladed_weapons",
         "damage_formula": "",
         "damage_formulas": {
-          "slashing": "",
-          "piercing": "",
+          "slashing": "1d6",
+          "piercing": "1d6",
           "bludgeoning": ""
         },
         "formula_heal": "",
@@ -643,8 +638,6 @@
         "prerequisites_skills": [],
         "control_zone": 0,
         "armor_piercing": 0,
-        "cleaving": 0,
-        "deflecting": 2,
         "vs_creature": {
           "beast": 0,
           "magical_beast": 0,
@@ -659,20 +652,22 @@
           "construct": 0,
           "fay": 0
         },
-        "is_auxiliary": false,
-        "is_fast": false,
+        "is_auxiliary": true,
+        "is_fast": true,
         "is_slow": false,
         "is_twohanded": false,
         "is_thrown": false,
         "is_reloading": false,
-        "reload_cost": 1,
-        "loaded": true,
-        "is_point_blank": false,
-        "is_scatter": false,
         "is_variable_grip": false,
         "is_paired": false,
         "formula_temp_hp": "",
-        "bypass_creature": {}
+        "cleaving": 0,
+        "deflecting": 0,
+        "bypass_creature": {},
+        "reload_cost": 1,
+        "loaded": true,
+        "is_point_blank": false,
+        "is_scatter": false
       },
       "effects": [],
       "ownership": {
@@ -684,8 +679,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977532,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -693,51 +688,41 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.85W0gV3KOVo6lLvP"
+      "_key": "!actors.items!BanditDuelist001.om962vgrbfZXZ3mU"
     },
     {
-      "name": "Железные латы",
+      "name": "Кожаный доспех из звериной кожи",
       "type": "armor",
-      "_id": "1174W2G2boIz6ihG",
-      "img": "systems/dedrel/assets/icons/armor_icons/common/Iron_plate_armor.webp",
+      "_id": "bCRGg5GOjoaYsyIY",
+      "img": "systems/dedrel/assets/icons/armor_icons/common/animal_hide_leather_armor.webp",
       "system": {
         "description": "",
-        "key": "iron_plate_armor",
+        "key": "animal_hide_leather_armor",
         "rarity": "common",
         "equip_slot": "",
-        "base_price": 98,
-        "weight": 25,
+        "base_price": 26,
+        "weight": 5,
         "crafting": {
           "craftable": true,
-          "discipline": "",
+          "discipline": "tailoring",
           "ingredients": [
-            {
-              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
-              "name": "Железо",
-              "amount": 5
-            },
-            {
-              "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
-              "name": "Лён",
-              "amount": 1
-            },
             {
               "uuid": "Compendium.dedrel.craft_materials.Item.6D7jBKh1gjKeMZOZ",
               "name": "Шкура животного",
-              "amount": 1
+              "amount": 2
             }
           ],
-          "markup_pct": 50,
-          "cost_price": 65,
+          "markup_pct": 30,
+          "cost_price": 20,
           "output_quantity": 1,
           "time_override": 0
         },
-        "slot": "upper",
-        "weight_class": "heavy",
+        "slot": "middle",
+        "weight_class": "light",
         "dr": {
-          "slashing": 3,
-          "piercing": 3,
-          "bludgeoning": 3,
+          "slashing": 1,
+          "piercing": 0,
+          "bludgeoning": 1,
           "heat": 0,
           "cold": 0,
           "necrotic": 0,
@@ -756,9 +741,9 @@
         },
         "properties": {
           "exclusive_slot": false,
-          "rigid": true,
-          "loud": true,
-          "encumbering": true,
+          "rigid": false,
+          "loud": false,
+          "encumbering": false,
           "weak_point_protection": false,
           "deflecting": 0,
           "cohesion": 0
@@ -787,8 +772,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977533,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -796,14 +781,107 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.1174W2G2boIz6ihG"
+      "_key": "!actors.items!BanditDuelist001.bCRGg5GOjoaYsyIY"
     },
     {
-      "name": "Удар",
+      "name": "Льняной дублет",
+      "type": "armor",
+      "_id": "4gJHtKqhAMsaGpLv",
+      "img": "systems/dedrel/assets/icons/armor_icons/common/linen_doublet.webp",
+      "system": {
+        "description": "",
+        "key": "linen_doublet",
+        "rarity": "common",
+        "equip_slot": "",
+        "base_price": 12,
+        "weight": 1,
+        "crafting": {
+          "craftable": true,
+          "discipline": "tailoring",
+          "ingredients": [
+            {
+              "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
+              "name": "Лён",
+              "amount": 2
+            }
+          ],
+          "markup_pct": 20,
+          "cost_price": 10,
+          "output_quantity": 1,
+          "time_override": 0
+        },
+        "slot": "universal",
+        "weight_class": "light",
+        "dr": {
+          "slashing": 1,
+          "piercing": 0,
+          "bludgeoning": 0,
+          "heat": 0,
+          "cold": 0,
+          "necrotic": 0,
+          "radiant": 0,
+          "electric": 0,
+          "sonic": 0,
+          "acid": 0
+        },
+        "modifiers": {
+          "dodge": 0,
+          "block": 0,
+          "stealth": 0,
+          "ranged_attack": 0,
+          "magic_attack": 0,
+          "movement": 0
+        },
+        "properties": {
+          "exclusive_slot": false,
+          "rigid": false,
+          "loud": false,
+          "encumbering": false,
+          "weak_point_protection": false,
+          "deflecting": 0,
+          "cohesion": 0
+        },
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_heal": "",
+        "on_use_macro": "",
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "equipped": false,
+        "formula_temp_hp": ""
+      },
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977533,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditDuelist001.4gJHtKqhAMsaGpLv"
+    },
+    {
+      "name": "Выпад",
       "type": "maneuver",
       "system": {
-        "description": "Атака дробящим оружием ближнего боя",
-        "key": "maneuver_bash",
+        "description": "Атака колющим оружием ближнего боя,",
+        "key": "maneuver_thrust",
         "source": "basic",
         "action_type": {
           "action": true,
@@ -811,12 +889,13 @@
           "free": false,
           "chain": true
         },
-        "chain_trigger_text": "атака по возможности, ответный удар, Ярость",
+        "chain_trigger_text": "",
         "chain_trigger_maneuvers": [
+          "maneuver_preemptive_thrust",
           "maneuver_riposte",
           "maneuver_attack_of_opportunity",
           "maneuver_rage",
-          "maneuver_power_bash"
+          "maneuver_feint_attack"
         ],
         "ap_cost": 2,
         "is_variable_cost": false,
@@ -828,8 +907,8 @@
           "magic": false
         },
         "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": true,
+          "piercing": true,
+          "bludgeoning": false,
           "slashing": false
         },
         "req_weapon_skill_group": "any",
@@ -848,7 +927,7 @@
         "prerequisites_talents": [],
         "prerequisites_mutations": [],
         "prerequisites_bloodlines": [],
-        "prerequisites_text": "Дробящее оружие ближнего боя",
+        "prerequisites_text": "Колющее оружие ближнего боя",
         "target_type": "creature",
         "target_range": "weapon",
         "target_value": 1,
@@ -858,7 +937,115 @@
         "uses_max": "",
         "uses_per": "",
         "formula_attack": "",
-        "formula_damage": "@weapon.damage_formulas.bludgeoning",
+        "formula_damage": "@weapon.damage_formulas.piercing",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "req_weapon_keys": [
+          ""
+        ],
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_thrust",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "QxeLaAzEcKygoZdj",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_thrust.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditDuelist001.QxeLaAzEcKygoZdj"
+    },
+    {
+      "name": "Взмах",
+      "type": "maneuver",
+      "system": {
+        "description": "Атака режущим оружием ближнего боя",
+        "key": "maneuver_swing",
+        "source": "basic",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "атака по возможности, ответный удар",
+        "chain_trigger_maneuvers": [
+          "maneuver_riposte",
+          "maneuver_attack_of_opportunity",
+          "maneuver_rage",
+          "maneuver_swing_on_a_move",
+          "maneuver_sunder_block"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": true
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "Режущее оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "@weapon.damage_formulas.slashing",
         "formula_custom": "",
         "save_attribute": "",
         "save_dc_formula": "",
@@ -876,13 +1063,13 @@
       },
       "flags": {
         "dedrel": {
-          "key": "maneuver_bash",
+          "key": "maneuver_swing",
           "folder": "Basic",
           "isFavorite": true
         }
       },
-      "_id": "mscX6Oj6Expeah49",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bash.svg",
+      "_id": "lHGticf7d6hKImJ6",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing.svg",
       "effects": [],
       "ownership": {
         "default": 0,
@@ -892,8 +1079,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -901,328 +1088,18 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.mscX6Oj6Expeah49"
+      "_key": "!actors.items!BanditDuelist001.lHGticf7d6hKImJ6"
     },
     {
-      "name": "Блок",
+      "name": "Финт",
       "type": "maneuver",
       "system": {
-        "description": "<p>Персонаж тратит от 1 до 5 ОД и получает столько же очков к Блоку до начала своего следующего хода.</p>",
-        "key": "maneuver_block",
-        "source": "basic",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "",
-        "chain_trigger_maneuvers": [
-          "any"
-        ],
-        "ap_cost": 1,
-        "is_variable_cost": true,
-        "variable_cost_max": 5,
-        "req_weapon_type": {
-          "melee": true,
-          "ranged": false,
-          "shield": true,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [],
-        "prerequisites_skills": [],
-        "prerequisites_talents": [],
-        "prerequisites_mutations": [],
-        "prerequisites_bloodlines": [],
-        "prerequisites_text": "",
-        "target_type": "self",
-        "target_range": "",
-        "target_value": 0,
-        "template_shape": "",
-        "template_size": 0,
-        "uses_value": 0,
-        "uses_max": "",
-        "uses_per": "",
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": "",
-        "hide_combat_buttons": true,
-        "req_weapon_keys": [
-          ""
-        ],
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "weapon_dice_step": 0,
-        "skill": "",
-        "attack_bonus": 0,
-        "formula_heal": "",
-        "formula_temp_hp": ""
-      },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_block",
-          "folder": "Basic",
-          "isFavorite": true
-        }
-      },
-      "_id": "yJSvbNa53M5N7lrv",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_block.svg",
-      "effects": [
-        {
-          "name": "Блок",
-          "origin": "Compendium.dedrel.maneuvers.Item.yJSvbNa53M5N7lrv",
-          "_id": "fdMU9e7VZ1mdQtNH",
-          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_block.svg",
-          "type": "base",
-          "system": {
-            "changes": [
-              {
-                "key": "system.defenses.block",
-                "type": "add",
-                "value": "@spentAp",
-                "phase": "apply",
-                "priority": 0
-              }
-            ]
-          },
-          "disabled": false,
-          "start": null,
-          "duration": {
-            "value": 1,
-            "units": "rounds",
-            "expiry": "turnStart",
-            "expired": false
-          },
-          "description": "",
-          "tint": "#ffffff",
-          "transfer": false,
-          "statuses": [],
-          "showIcon": 1,
-          "folder": null,
-          "sort": 0,
-          "flags": {
-            "dedrel": {
-              "applyTo": "self"
-            }
-          },
-          "_stats": {
-            "coreVersion": "14.364",
-            "systemId": "dedrel",
-            "systemVersion": "0.1.3",
-            "createdTime": 1787699581667,
-            "modifiedTime": 1787699581667,
-            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-            "compendiumSource": null,
-            "duplicateSource": null,
-            "exportSource": null
-          },
-          "_key": "!actors.items.effects!BanditBruiser001.yJSvbNa53M5N7lrv.fdMU9e7VZ1mdQtNH"
-        }
-      ],
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.364",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "folder": null,
-      "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.yJSvbNa53M5N7lrv"
-    },
-    {
-      "name": "Спрятаться за щитом",
-      "type": "maneuver",
-      "system": {
-        "description": "<p>Персонаж тратит от 1 до 5 очков действия и получает столько же очков к Блоку до начала своего следующего хода. Помимо этого, персонаж получает Малое укрытие, если это средний щит, и Большое укрытие, если это ростовой щит.<br><br><strong>Эффекты:</strong> Блок получает бонус, равный потраченным ОД, до начала следующего хода этого персонажа. Персонаж получает статус Малое укрытие/Большое укрытие</p>",
-        "key": "maneuver_hide_behind_shield",
-        "source": "basic",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "",
-        "chain_trigger_maneuvers": [
-          "any"
-        ],
-        "ap_cost": 1,
-        "is_variable_cost": true,
-        "variable_cost_max": 5,
-        "req_weapon_type": {
-          "melee": false,
-          "ranged": false,
-          "shield": true,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [],
-        "prerequisites_skills": [],
-        "prerequisites_talents": [],
-        "prerequisites_mutations": [],
-        "prerequisites_bloodlines": [],
-        "prerequisites_text": "Экипированный щит",
-        "target_type": "self",
-        "target_range": "",
-        "target_value": 0,
-        "template_shape": "",
-        "template_size": 0,
-        "uses_value": 0,
-        "uses_max": "",
-        "uses_per": "",
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": "shield!",
-        "hide_combat_buttons": true,
-        "req_weapon_keys": [
-          ""
-        ],
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "weapon_dice_step": 0,
-        "skill": "",
-        "attack_bonus": 0,
-        "formula_heal": "",
-        "formula_temp_hp": ""
-      },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_hide_behind_shield",
-          "folder": "Basic",
-          "isFavorite": true
-        }
-      },
-      "_id": "CmX5ZyeZFOVWaLZ7",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
-      "effects": [
-        {
-          "name": "Спрятаться за щитом",
-          "origin": "Compendium.dedrel.maneuvers.Item.CmX5ZyeZFOVWaLZ7",
-          "_id": "uY9xsLNoxQ5BimbQ",
-          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_hide_behind_shield.svg",
-          "type": "base",
-          "system": {
-            "changes": [
-              {
-                "key": "system.defenses.block",
-                "type": "add",
-                "value": "@spentAp",
-                "phase": "apply",
-                "priority": 0
-              }
-            ]
-          },
-          "disabled": false,
-          "start": null,
-          "duration": {
-            "value": 1,
-            "units": "rounds",
-            "expiry": "turnStart",
-            "expired": false
-          },
-          "description": "",
-          "tint": "#ffffff",
-          "transfer": false,
-          "statuses": [],
-          "showIcon": 1,
-          "folder": null,
-          "sort": 0,
-          "flags": {
-            "dedrel": {
-              "applyTo": "self"
-            }
-          },
-          "_stats": {
-            "coreVersion": "14.364",
-            "systemId": "dedrel",
-            "systemVersion": "0.1.3",
-            "createdTime": 1787699581667,
-            "modifiedTime": 1787699581667,
-            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-            "compendiumSource": null,
-            "duplicateSource": null,
-            "exportSource": null
-          },
-          "_key": "!actors.items.effects!BanditBruiser001.CmX5ZyeZFOVWaLZ7.uY9xsLNoxQ5BimbQ"
-        }
-      ],
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.368",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "folder": null,
-      "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.CmX5ZyeZFOVWaLZ7"
-    },
-    {
-      "name": "Удар щитом",
-      "type": "maneuver",
-      "system": {
-        "description": "<p>Необходимо держать в руке щит. </p><p>Вы наносите противнику мощный удар щитом, используя навык Атлетика. Если атака успешна, вы отбрасываете противника на (ранг Телосложения × 2) метров. Урон в карточке = ваш ранг Телосложения.</p>",
-        "key": "maneuver_shield_bash",
+        "description": "<p>Манёвр, Быстрое оружие ближнего боя.</p><p>Сделайте проверку умения Обман против Проницательности цели. В случае успеха, цель получает статус Сбит с толку (статус запрещает использовать блок против следующей атаки)</p><p>В цепи вы можете нанести @UUID[Compendium.dedrel.maneuvers.Item.QxeLaAzEcKygoZdj]{Выпад}.</p><p></p>",
+        "key": "maneuver_feint_attack",
         "source": "talent",
         "action_type": {
           "action": true,
-          "reaction": false,
+          "reaction": true,
           "free": false,
           "chain": false
         },
@@ -1232,9 +1109,9 @@
         "is_variable_cost": false,
         "variable_cost_max": 0,
         "req_weapon_type": {
-          "melee": false,
+          "melee": true,
           "ranged": false,
-          "shield": true,
+          "shield": false,
           "magic": false
         },
         "req_weapon_damage_type": {
@@ -1245,7 +1122,7 @@
         "req_weapon_skill_group": "any",
         "req_weapon_property": {
           "is_auxiliary": false,
-          "is_fast": false,
+          "is_fast": true,
           "is_slow": false,
           "is_twohanded": false,
           "is_thrown": false,
@@ -1256,7 +1133,7 @@
         "prerequisites_attributes": [],
         "prerequisites_skills": [],
         "prerequisites_talents": [
-          "shield_bash"
+          "feint_attack"
         ],
         "prerequisites_mutations": [],
         "prerequisites_bloodlines": [],
@@ -1270,42 +1147,44 @@
         "uses_max": "",
         "uses_per": "",
         "formula_attack": "",
-        "formula_damage": "@attributes.con.rank",
+        "formula_damage": "",
         "formula_custom": "",
         "save_attribute": "",
         "save_dc_formula": "",
         "forbidden_defense": "",
         "on_use_macro": "",
-        "skill": "atletism",
+        "req_weapon_keys": [
+          ""
+        ],
+        "hide_combat_buttons": true,
+        "skill": "deception",
         "is_reload_action": false,
         "is_scroll_read": false,
-        "req_weapon_keys": [],
         "weapon_dice_step": 0,
         "attack_bonus": 0,
         "formula_heal": "",
-        "formula_temp_hp": "",
-        "hide_combat_buttons": false
+        "formula_temp_hp": ""
       },
       "flags": {
         "dedrel": {
-          "key": "maneuver_shield_bash",
+          "key": "maneuver_feint_attack",
           "folder": "Talent",
           "isFavorite": true
         }
       },
-      "_id": "RqvEocSQqKFVXtbj",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_shield_bash.svg",
+      "_id": "8mgcq7OFtffV34Jw",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_feint_attack.svg",
       "effects": [],
       "ownership": {
         "default": 0,
         "Gw6OqVIulw8cCPjC": 3
       },
       "_stats": {
-        "coreVersion": "14.368",
+        "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1313,28 +1192,28 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.RqvEocSQqKFVXtbj"
+      "_key": "!actors.items!BanditDuelist001.8mgcq7OFtffV34Jw"
     },
     {
-      "name": "Провокация",
+      "name": "Ответная атака",
       "type": "maneuver",
       "system": {
-        "description": "<p>Цель должна слышать вас и обладать развитым сознанием. <br>Проверка Убеждения против Проницательности цели. <br>При провале штраф -3 на атаки против целей отличающихся от провокатора до начала следующего хода.</p>",
-        "key": "maneuver_taunt",
-        "source": "talent",
+        "description": "<p>Если по персонажу была проведена успешная атака ближнего боя (не важно, нанесла ли она урон), используя этот манёвр, он может сразу без дополнительной траты ОД провести Выпад, Взмах или Удар.</p>",
+        "key": "maneuver_riposte",
+        "source": "basic",
         "action_type": {
           "action": true,
-          "reaction": false,
+          "reaction": true,
           "free": false,
           "chain": false
         },
         "chain_trigger_text": "",
         "chain_trigger_maneuvers": [],
-        "ap_cost": 1,
+        "ap_cost": 3,
         "is_variable_cost": false,
         "variable_cost_max": 0,
         "req_weapon_type": {
-          "melee": false,
+          "melee": true,
           "ranged": false,
           "shield": false,
           "magic": false
@@ -1357,14 +1236,167 @@
         },
         "prerequisites_attributes": [],
         "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "Grant_Free_Attack",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_riposte",
+          "folder": "Basic",
+          "isFavorite": true
+        }
+      },
+      "_id": "vMmgn6eWaoidERxE",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+      "effects": [
+        {
+          "name": "Ответная атака",
+          "origin": "Compendium.dedrel.maneuvers.Item.vMmgn6eWaoidERxE",
+          "_id": "AocBKvLEPiiN0ENU",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_riposte.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "override",
+                "value": "ap_set:0; filter:melee",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnStart",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1787699581694,
+            "modifiedTime": 1787699581694,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!BanditDuelist001.vMmgn6eWaoidERxE.AocBKvLEPiiN0ENU"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditDuelist001.vMmgn6eWaoidERxE"
+    },
+    {
+      "name": "Взмах на ходу",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Вы не стоите на месте: рубите на бегу, разрывая дистанцию и заходя с новой стороны. Атака входит в сам манёвр — отдельный Взмах после него не нужен.</p>\n<p><strong>Карусель.</strong> Первое применение тратит ваше Действие, каждое следующее идёт цепью после предыдущего — и так, пока хватает ОД и метров Скорости.</p>\n<p><strong>Условия:</strong></p>\n<ul>\n<li>Между атаками нужно пройти <strong>не менее 2 метров</strong>.</li>\n<li>Карусель нельзя прерывать другими манёврами — прервали, и она закончена.</li>\n<li>Каждая атака — <strong>по новой цели</strong>: дважды за ход одного и того же противника карусель не бьёт.</li>\n<li>Если вас остановили чужой зоной контроля (например, «Упреждающим выпадом»), манёвр сорван.</li>\n</ul>",
+        "key": "maneuver_swing_on_a_move",
+        "source": "talent",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": true
+        },
+        "chain_trigger_text": "после самого себя (карусель)",
+        "chain_trigger_maneuvers": [
+          "maneuver_swing_on_a_move"
+        ],
+        "ap_cost": 3,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": true
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
         "prerequisites_talents": [
-          "taunt"
+          "swing_on_a_move"
         ],
         "prerequisites_mutations": [],
         "prerequisites_bloodlines": [],
         "prerequisites_text": "",
         "target_type": "creature",
-        "target_range": "",
+        "target_range": "weapon",
         "target_value": 1,
         "template_shape": "",
         "template_size": 0,
@@ -1378,11 +1410,11 @@
         "save_dc_formula": "",
         "forbidden_defense": "",
         "on_use_macro": "",
-        "skill": "persuasion",
         "is_reload_action": false,
         "is_scroll_read": false,
         "req_weapon_keys": [],
         "weapon_dice_step": 0,
+        "skill": "",
         "attack_bonus": 0,
         "formula_heal": "",
         "formula_temp_hp": "",
@@ -1390,13 +1422,13 @@
       },
       "flags": {
         "dedrel": {
-          "key": "maneuver_taunt",
+          "key": "maneuver_swing_on_a_move",
           "folder": "Talent",
           "isFavorite": true
         }
       },
-      "_id": "YVl6pkv3tAM5k5YD",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_taunt.svg",
+      "_id": "hrkYLX9Zy60dKn2C",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing_on_a_move.svg",
       "effects": [],
       "ownership": {
         "default": 0,
@@ -1406,8 +1438,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1415,7 +1447,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.YVl6pkv3tAM5k5YD"
+      "_key": "!actors.items!BanditDuelist001.hrkYLX9Zy60dKn2C"
     },
     {
       "name": "Атака по возможности",
@@ -1539,14 +1571,14 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1787699581667,
-            "modifiedTime": 1787699581667,
+            "createdTime": 1787699581694,
+            "modifiedTime": 1787699581694,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!BanditBruiser001.kYkUGNsX9fbDKoRd.3vYKn5wCeaPokRqI"
+          "_key": "!actors.items.effects!BanditDuelist001.kYkUGNsX9fbDKoRd.3vYKn5wCeaPokRqI"
         }
       ],
       "ownership": {
@@ -1557,8 +1589,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1566,7 +1598,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.kYkUGNsX9fbDKoRd"
+      "_key": "!actors.items!BanditDuelist001.kYkUGNsX9fbDKoRd"
     },
     {
       "name": "Уклонение",
@@ -1692,14 +1724,14 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1787699581667,
-            "modifiedTime": 1787699581667,
+            "createdTime": 1787699581694,
+            "modifiedTime": 1787699581694,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!BanditBruiser001.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
+          "_key": "!actors.items.effects!BanditDuelist001.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
         }
       ],
       "ownership": {
@@ -1710,8 +1742,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977533,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1719,7 +1751,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.balrTxNEl33DGerg"
+      "_key": "!actors.items!BanditDuelist001.balrTxNEl33DGerg"
     },
     {
       "name": "Разорвать дистанцию",
@@ -1810,8 +1842,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1819,7 +1851,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.COx23vBpriCHVVLO"
+      "_key": "!actors.items!BanditDuelist001.COx23vBpriCHVVLO"
     },
     {
       "name": "Добивание",
@@ -1912,8 +1944,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1792453977519,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1792453977533,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1921,7 +1953,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.WXAudjnk26RUhhma"
+      "_key": "!actors.items!BanditDuelist001.WXAudjnk26RUhhma"
     },
     {
       "name": "Взаимодействие",
@@ -2012,8 +2044,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581667,
-        "modifiedTime": 1787699581667,
+        "createdTime": 1787699581694,
+        "modifiedTime": 1787699581694,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -2021,13 +2053,13 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditBruiser001.Enl336RoHnl7foYR"
+      "_key": "!actors.items!BanditDuelist001.Enl336RoHnl7foYR"
     }
   ],
   "prototypeToken": {
-    "name": "Латник",
+    "name": "Дуэлянт",
     "texture": {
-      "src": "systems/dedrel/assets/Actors/Tokens/bandits/bandit07.webp",
+      "src": "systems/dedrel/assets/Actors/Tokens/bandits/bandit01.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -2120,9 +2152,9 @@
     "dedrel": {
       "itemsLocked": false,
       "favoriteSkills": [
-        "blunt_weapons",
-        "armor_use",
-        "intimidation"
+        "bladed_weapons",
+        "atletism",
+        "deception"
       ],
       "folder": "NPC/Common Bandits/Mercs"
     }
@@ -2137,12 +2169,12 @@
     "coreVersion": "14.364",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1787699581667,
-    "modifiedTime": 1787699581669,
+    "createdTime": 1787699581694,
+    "modifiedTime": 1787699581695,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!actors!BanditBruiser001"
+  "_key": "!actors!BanditDuelist001"
 }

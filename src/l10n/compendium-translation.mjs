@@ -12,14 +12,15 @@
  *  - Loading. The `init` hook fires before core loads the language files, and the packs
  *    come up even later (`Game#setupGame`). So we wrap `game.i18n.initialize`:
  *    core awaits it, and the dictionary is guaranteed to be ready before the first document is created.
- *  - Documents. `DedrelItem#_initializeSource` calls `translateSource`: the translation goes
- *    into `_source` (as in Babele), so importing from a compendium into the world yields an English item.
- *    Embedded actor items from packs are translated the same way (by `system.key`).
+ *  - Documents. `DedrelItem#_initializeSource` and `DedrelActor#_initializeSource` call `translateSource`:
+ *    the translation goes into `_source` (as in Babele), so importing from a compendium into the world
+ *    yields an English document. Actors are keyed by `_id`. Embedded actor items from packs are translated
+ *    by `system.key` from the item packs' dictionaries.
  *  - Index and folders. The compendium window takes names from `pack.index`, while the server sends the index
  *    without `system.key` and pours the Russian names back in on every `getIndex()`. So `system.key`
  *    is added to the index fields, `getIndex` is wrapped, and on `setup` the packs' index is re-requested.
  *
- * Limitations: actors (names, biographies) aren't translated; documents already imported
+ * Limitations: actor biographies aren't translated yet (only names); documents already imported
  * into the world stay in the language of the import; editing translated text in a pack is blocked
  * (`stripTranslatedChanges`) so that English doesn't end up in the Russian source.
  */
@@ -90,13 +91,12 @@ function packName(pack) {
 
 /**
  * Find a document's translation entry. A document of its own pack is looked up in its dictionary.
- * An embedded actor item from a pack (`dedrel.actors`) has no dictionary of its own: we search all of them,
- * and when the key matches in several packs we take the pack with documents of the same type.
+ * An embedded actor item from a pack (`dedrel.actors`) isn't in that pack's dictionary (it holds the actors):
+ * we search all of them, and when the key matches in several packs we take the pack with documents of the same type.
  */
-function findEntry(source, pack) {
+function findEntry(source, pack, embedded) {
   const key = source.system?.key || source._id;
-  const own = dictionaries.get(packName(pack));
-  if (own) return own[key];
+  if (!embedded) return dictionaries.get(packName(pack))?.[key];
   const candidates = [...dictionaries].filter(([, dict]) => key in dict);
   if (candidates.length <= 1) return candidates[0]?.[1][key];
   const match = candidates.find(([name]) =>
@@ -111,11 +111,12 @@ function findEntry(source, pack) {
  * @param {object} [options]
  * @param {boolean} [options.creation]  The document is being created: the translation isn't applied,
  *                                      otherwise English text would be written into the pack
+ * @param {boolean} [options.embedded]  The document is embedded in a pack actor
  * @returns {object}              The same `source` object
  */
-function translateSource(source, pack, { creation = false } = {}) {
+function translateSource(source, pack, { creation = false, embedded = false } = {}) {
   if (!active || creation || !isSystemPack(pack)) return source;
-  const entry = findEntry(source, pack);
+  const entry = findEntry(source, pack, embedded);
   if (!entry) return source;
   const paths = new Set();
   for (const [path, value] of Object.entries(entry)) {
@@ -214,7 +215,7 @@ export const CompendiumTranslation = {
    */
   async translatePacks() {
     if (!active) return;
-    const packs = game.packs.filter(p => isSystemPack(p) && (p.documentName === "Item"));
+    const packs = game.packs.filter(p => isSystemPack(p) && ["Item", "Actor"].includes(p.documentName));
     for (const pack of packs) translateFolders(pack);
     await Promise.all(packs.map(pack => pack.getIndex().catch(err =>
       console.warn(`Dedrel | Index of ${pack.collection} not translated`, err))));

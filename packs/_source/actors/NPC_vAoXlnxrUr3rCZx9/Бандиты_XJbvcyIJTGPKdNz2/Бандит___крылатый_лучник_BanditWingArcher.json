@@ -1,9 +1,9 @@
 {
-  "_id": "BanditCrossbow01",
-  "name": "Bandit crossbowman",
+  "_id": "BanditWingArcher",
+  "name": "Бандит — крылатый лучник",
   "type": "npc",
-  "img": "systems/dedrel/assets/Actors/Tokens/bandits/bandit02.webp",
-  "folder": "fU9OpHD9vva2IlTE",
+  "img": "systems/dedrel/assets/Actors/Tokens/bandits/bandit03.webp",
+  "folder": "XJbvcyIJTGPKdNz2",
   "system": {
     "tier": "peon",
     "attributes": {
@@ -12,10 +12,10 @@
         "save_bonus": 0
       },
       "rea": {
-        "rank": 2,
+        "rank": 3,
         "save_bonus": 0
       },
-      "int": {
+      "str": {
         "rank": 2,
         "save_bonus": 0
       },
@@ -23,15 +23,15 @@
         "rank": 2,
         "save_bonus": 0
       },
-      "str": {
+      "will": {
+        "rank": 2,
+        "save_bonus": 0
+      },
+      "int": {
         "rank": 2,
         "save_bonus": 0
       },
       "log": {
-        "rank": 1,
-        "save_bonus": 0
-      },
-      "will": {
         "rank": 1,
         "save_bonus": 0
       },
@@ -45,22 +45,22 @@
       }
     },
     "skills": {
-      "crossbows": {
+      "bows": {
         "rank": 3,
-        "specialization": "Арбалет",
+        "specialization": "Короткий лук",
         "bonus": 0
       },
       "bladed_weapons": {
-        "rank": 2,
-        "specialization": "",
-        "bonus": 0
-      },
-      "armor_use": {
         "rank": 1,
         "specialization": "",
         "bonus": 0
       },
       "atletism": {
+        "rank": 3,
+        "specialization": "",
+        "bonus": 0
+      },
+      "perception": {
         "rank": 2,
         "specialization": "",
         "bonus": 0
@@ -70,13 +70,8 @@
         "specialization": "",
         "bonus": 0
       },
-      "perception": {
-        "rank": 2,
-        "specialization": "",
-        "bonus": 0
-      },
-      "insight": {
-        "rank": 2,
+      "crossbows": {
+        "rank": 0,
         "specialization": "",
         "bonus": 0
       },
@@ -120,7 +115,7 @@
         "specialization": "",
         "bonus": 0
       },
-      "bows": {
+      "armor_use": {
         "rank": 0,
         "specialization": "",
         "bonus": 0
@@ -175,6 +170,11 @@
         "specialization": "",
         "bonus": 0
       },
+      "insight": {
+        "rank": 0,
+        "specialization": "",
+        "bonus": 0
+      },
       "deception": {
         "rank": 0,
         "specialization": "",
@@ -193,11 +193,11 @@
     },
     "equipment_slots": {
       "main_hand": {
-        "item_id": "kpQn6uX64u0RBUks",
+        "item_id": "l2GM2wO7OGx2TRJ4",
         "type": "weapon"
       },
       "ammo": {
-        "item_id": "rwSAhbU2FK2UVdeR",
+        "item_id": "p4ZuwjmCDObkyj1R",
         "type": "loot"
       },
       "armor_middle": {
@@ -205,7 +205,7 @@
         "type": "armor"
       },
       "armor_lower": {
-        "item_id": "KW42y6kTVPh4ZXr2",
+        "item_id": "4gJHtKqhAMsaGpLv",
         "type": "armor"
       },
       "off_hand": {
@@ -382,8 +382,8 @@
       "hp_max": null
     },
     "details": {
-      "threat": "2.5 (пеон)",
-      "biography": "<p><strong>Кто это.</strong> Наёмный стрелок при банде: держится за спинами, стреляет по тому, кого укажут. Болты бронебойные — латника в отряде партии он видит первым.</p>\n<p><strong>Тактика.</strong> Ход в 6 ОД — выстрел (2), перезарядка (1), выстрел (2). Если до него дошли в ближний бой, меняет арбалет на кинжал и отступает к своим.</p>\n<p><strong>Триггер:</strong> потерял первый hit → уходит на 10 м к ближайшему укрытию и стреляет оттуда; остался последний hit → бежит с поля.</p>"
+      "threat": "3 (пеон)",
+      "biography": "<p><strong>Кто это.</strong> Полукровка с демонической кровью: рога, красная кожа, рабочие крылья. В банде — глаза и «артиллерия», к которой не подобраться по земле.</p>\n<p><strong>Тактика.</strong> Ход в 6 ОД — «Выстрел в полёте» (4 ОД, выстрел бесплатно поверх укрытий и голов) плюс обычный выстрел (2). Крылья не дают зависнуть: в конце манёвра он обязан приземлиться, и вот тогда его достают.</p>\n<p><strong>Ближний бой.</strong> Лук двуручный, поэтому пока он с луком — ни Атаки по возможности, ни Добивания, ни Пикирующей атаки: чтобы пикировать с клинком, нужно сперва сменить лук на кинжал (Взаимодействие). Так и задумано — в свалке он бесполезен.</p>\n<p><strong>Триггер:</strong> потерял первый hit → взлетает и уходит на 20+ м, работать по нему могут только стрелки и маги.</p>"
     },
     "defenses": {
       "block": 0,
@@ -443,8 +443,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977525,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -452,36 +452,31 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.aBpVy31Ul0e0h8SJ"
+      "_key": "!actors.items!BanditWingArcher.aBpVy31Ul0e0h8SJ"
     },
     {
-      "name": "Дубовый арбалет",
+      "name": "Тисовый короткий лук",
       "type": "weapon",
-      "_id": "kpQn6uX64u0RBUks",
-      "img": "systems/dedrel/assets/icons/weapon_icons/common/oak_crossbow.webp",
+      "_id": "l2GM2wO7OGx2TRJ4",
+      "img": "systems/dedrel/assets/icons/weapon_icons/common/yew_short_bow.webp",
       "system": {
         "description": "",
-        "key": "oak_crossbow",
+        "key": "yew_short_bow",
         "rarity": "common",
-        "weight": 3,
-        "base_price": 39,
+        "weight": 0.7,
+        "base_price": 26,
         "crafting": {
           "craftable": true,
           "discipline": "carpentry",
           "ingredients": [
             {
-              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
-              "name": "Железо",
-              "amount": 1
-            },
-            {
-              "uuid": "Compendium.dedrel.craft_materials.Item.VQ0r2aCvo4Q8aF4S",
-              "name": "Дуб",
+              "uuid": "Compendium.dedrel.craft_materials.Item.97haSyB00F5wGPh7",
+              "name": "Тис",
               "amount": 2
             }
           ],
           "markup_pct": 30,
-          "cost_price": 30,
+          "cost_price": 20,
           "output_quantity": 1,
           "time_override": 0
         },
@@ -496,7 +491,7 @@
           "bludgeoning": false,
           "slashing": false
         },
-        "skill": "crossbows",
+        "skill": "bows",
         "damage_formula": "",
         "damage_formulas": {
           "slashing": "",
@@ -515,7 +510,7 @@
           "can_be_dropped": false
         },
         "quantity": 1,
-        "consume_target": "rwSAhbU2FK2UVdeR",
+        "consume_target": "p4ZuwjmCDObkyj1R",
         "consume_amount": 1,
         "uses_value": 0,
         "uses_max": "",
@@ -544,7 +539,7 @@
         "is_slow": false,
         "is_twohanded": true,
         "is_thrown": false,
-        "is_reloading": true,
+        "is_reloading": false,
         "is_variable_grip": false,
         "is_paired": false,
         "formula_temp_hp": "",
@@ -566,8 +561,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -575,16 +570,16 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.kpQn6uX64u0RBUks"
+      "_key": "!actors.items!BanditWingArcher.l2GM2wO7OGx2TRJ4"
     },
     {
-      "name": "Железный болт",
+      "name": "Железная стрела",
       "type": "ammunition",
-      "_id": "rwSAhbU2FK2UVdeR",
+      "_id": "p4ZuwjmCDObkyj1R",
       "img": "systems/dedrel/assets/icons/items/ammunition.svg",
       "system": {
         "description": "",
-        "key": "iron_blot",
+        "key": "iron_arrow",
         "rarity": "common",
         "weight": 0.05,
         "base_price": 12,
@@ -593,13 +588,13 @@
           "discipline": "carpentry",
           "ingredients": [
             {
-              "uuid": "Compendium.dedrel.craft_materials.Item.JZMScyb9w8M37g2z",
-              "name": "Сосна",
+              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
+              "name": "Железо",
               "amount": 1
             },
             {
-              "uuid": "Compendium.dedrel.craft_materials.Item.TBJqCVBxu0NdMlzn",
-              "name": "Железо",
+              "uuid": "Compendium.dedrel.craft_materials.Item.JZMScyb9w8M37g2z",
+              "name": "Сосна",
               "amount": 1
             }
           ],
@@ -608,10 +603,10 @@
           "output_quantity": 2,
           "time_override": 0
         },
-        "ammo_type": "bolt",
+        "ammo_type": "arrow",
         "quantity": 20,
         "stackable": true,
-        "armor_piercing": 1,
+        "armor_piercing": 0,
         "damage_bonus": "",
         "damage_bonus_type": "",
         "vs_creature": {
@@ -640,8 +635,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792454404084,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -649,7 +644,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.rwSAhbU2FK2UVdeR"
+      "_key": "!actors.items!BanditWingArcher.p4ZuwjmCDObkyj1R"
     },
     {
       "name": "Железный кинжал",
@@ -758,8 +753,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -767,7 +762,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.om962vgrbfZXZ3mU"
+      "_key": "!actors.items!BanditWingArcher.om962vgrbfZXZ3mU"
     },
     {
       "name": "Кожаный доспех из звериной кожи",
@@ -851,8 +846,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -860,43 +855,43 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.bCRGg5GOjoaYsyIY"
+      "_key": "!actors.items!BanditWingArcher.bCRGg5GOjoaYsyIY"
     },
     {
-      "name": "Шерстяная стёганка",
+      "name": "Льняной дублет",
       "type": "armor",
-      "_id": "KW42y6kTVPh4ZXr2",
-      "img": "systems/dedrel/assets/icons/armor_icons/common/wool_gambeson.webp",
+      "_id": "4gJHtKqhAMsaGpLv",
+      "img": "systems/dedrel/assets/icons/armor_icons/common/linen_doublet.webp",
       "system": {
         "description": "",
-        "key": "wool_gambeson",
+        "key": "linen_doublet",
         "rarity": "common",
         "equip_slot": "",
-        "base_price": 36,
-        "weight": 3,
+        "base_price": 12,
+        "weight": 1,
         "crafting": {
           "craftable": true,
           "discipline": "tailoring",
           "ingredients": [
             {
-              "uuid": "Compendium.dedrel.craft_materials.Item.4P6oYJlQFkrEdmU4",
-              "name": "Шерсть",
+              "uuid": "Compendium.dedrel.craft_materials.Item.UfmzAqZTDWQjOOZ8",
+              "name": "Лён",
               "amount": 2
             }
           ],
           "markup_pct": 20,
-          "cost_price": 30,
+          "cost_price": 10,
           "output_quantity": 1,
           "time_override": 0
         },
-        "slot": "lower",
+        "slot": "universal",
         "weight_class": "light",
         "dr": {
-          "slashing": 0,
+          "slashing": 1,
           "piercing": 0,
-          "bludgeoning": 1,
+          "bludgeoning": 0,
           "heat": 0,
-          "cold": 1,
+          "cold": 0,
           "necrotic": 0,
           "radiant": 0,
           "electric": 0,
@@ -944,8 +939,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -953,14 +948,14 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.KW42y6kTVPh4ZXr2"
+      "_key": "!actors.items!BanditWingArcher.4gJHtKqhAMsaGpLv"
     },
     {
-      "name": "Выстрел из арбалета",
+      "name": "Выстрел из лука",
       "type": "maneuver",
       "system": {
-        "description": "<p>Выстрел из арбалета</p>",
-        "key": "maneuver_crossbow_shot",
+        "description": "<p>Выстрел из лука</p>",
+        "key": "maneuver_bow_shot",
         "source": "basic",
         "action_type": {
           "action": true,
@@ -970,6 +965,7 @@
         },
         "chain_trigger_text": "Прицеливание дальнобойным оружием",
         "chain_trigger_maneuvers": [
+          "maneuver_armor_piersing_shot",
           "maneuver_take_ranged_aim",
           "maneuver_flying_shot",
           "maneuver_mobile_marksman"
@@ -979,7 +975,7 @@
         "variable_cost_max": 0,
         "req_weapon_type": {
           "melee": false,
-          "ranged": true,
+          "ranged": false,
           "shield": false,
           "magic": false
         },
@@ -988,7 +984,7 @@
           "bludgeoning": false,
           "slashing": false
         },
-        "req_weapon_skill_group": "crossbows",
+        "req_weapon_skill_group": "bows",
         "req_weapon_property": {
           "is_auxiliary": false,
           "is_fast": false,
@@ -1004,7 +1000,7 @@
         "prerequisites_talents": [],
         "prerequisites_mutations": [],
         "prerequisites_bloodlines": [],
-        "prerequisites_text": "",
+        "prerequisites_text": "Лук",
         "target_type": "creature",
         "target_range": "weapon",
         "target_value": 1,
@@ -1020,11 +1016,9 @@
         "save_dc_formula": "",
         "forbidden_defense": "",
         "on_use_macro": "",
-        "req_weapon_keys": [
-          "crossbow"
-        ],
         "is_reload_action": false,
         "is_scroll_read": false,
+        "req_weapon_keys": [],
         "weapon_dice_step": 0,
         "skill": "",
         "attack_bonus": 0,
@@ -1034,13 +1028,13 @@
       },
       "flags": {
         "dedrel": {
-          "key": "maneuver_crossbow_shot",
+          "key": "maneuver_bow_shot",
           "folder": "Basic",
           "isFavorite": true
         }
       },
-      "_id": "yxZAedU3MoXYOrD1",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_crossbow_shot.svg",
+      "_id": "38YfFPkDVBNl1Hsh",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_bow_shot.svg",
       "effects": [],
       "ownership": {
         "default": 0,
@@ -1050,8 +1044,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1787699581609,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787699581635,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1059,114 +1053,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.yxZAedU3MoXYOrD1"
-    },
-    {
-      "name": "Перезарядка",
-      "type": "maneuver",
-      "system": {
-        "description": "Если оружие обладает перезарядкой, этот манёвр позволяет его перезарядить.",
-        "key": "maneuver_reload",
-        "source": "basic",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "Воткнуть Бердыш, Выстрел из огнестрела, Выстрел из арбалета.",
-        "chain_trigger_maneuvers": [
-          "maneuver_reload",
-          "maneuver_plant_berdiche",
-          "maneuver_firearm_shot",
-          "maneuver_crossbow_shot"
-        ],
-        "ap_cost": 1,
-        "is_variable_cost": true,
-        "variable_cost_max": 3,
-        "req_weapon_type": {
-          "melee": false,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": false
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": true,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [],
-        "prerequisites_skills": [],
-        "prerequisites_talents": [],
-        "prerequisites_mutations": [],
-        "prerequisites_bloodlines": [],
-        "prerequisites_text": "",
-        "target_type": "self",
-        "target_range": "",
-        "target_value": 0,
-        "template_shape": "",
-        "template_size": 0,
-        "uses_value": 0,
-        "uses_max": "",
-        "uses_per": "",
-        "formula_attack": "",
-        "formula_damage": "",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": "",
-        "hide_combat_buttons": true,
-        "req_weapon_keys": [
-          ""
-        ],
-        "is_reload_action": true,
-        "is_scroll_read": false,
-        "weapon_dice_step": 0,
-        "skill": "",
-        "attack_bonus": 0,
-        "formula_heal": "",
-        "formula_temp_hp": ""
-      },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_reload",
-          "folder": "Basic",
-          "isFavorite": true
-        }
-      },
-      "_id": "YYchgwfcVR4BNpUX",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_reload.svg",
-      "effects": [],
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.368",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "folder": null,
-      "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.YYchgwfcVR4BNpUX"
+      "_key": "!actors.items!BanditWingArcher.38YfFPkDVBNl1Hsh"
     },
     {
       "name": "Прицеливание дальнобойным оружием",
@@ -1297,14 +1184,14 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1787699581609,
-            "modifiedTime": 1787699581609,
+            "createdTime": 1787699581635,
+            "modifiedTime": 1787699581635,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!BanditCrossbow01.BzvI3mTFloQgmlz3.EdMTxYcl8kaelB3Z"
+          "_key": "!actors.items.effects!BanditWingArcher.BzvI3mTFloQgmlz3.EdMTxYcl8kaelB3Z"
         }
       ],
       "ownership": {
@@ -1315,8 +1202,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1324,113 +1211,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.BzvI3mTFloQgmlz3"
-    },
-    {
-      "name": "Взмах",
-      "type": "maneuver",
-      "system": {
-        "description": "Атака режущим оружием ближнего боя",
-        "key": "maneuver_swing",
-        "source": "basic",
-        "action_type": {
-          "action": true,
-          "reaction": false,
-          "free": false,
-          "chain": true
-        },
-        "chain_trigger_text": "атака по возможности, ответный удар",
-        "chain_trigger_maneuvers": [
-          "maneuver_riposte",
-          "maneuver_attack_of_opportunity",
-          "maneuver_rage",
-          "maneuver_swing_on_a_move",
-          "maneuver_sunder_block"
-        ],
-        "ap_cost": 2,
-        "is_variable_cost": false,
-        "variable_cost_max": 0,
-        "req_weapon_type": {
-          "melee": true,
-          "ranged": false,
-          "shield": false,
-          "magic": false
-        },
-        "req_weapon_damage_type": {
-          "piercing": false,
-          "bludgeoning": false,
-          "slashing": true
-        },
-        "req_weapon_skill_group": "any",
-        "req_weapon_property": {
-          "is_auxiliary": false,
-          "is_fast": false,
-          "is_slow": false,
-          "is_twohanded": false,
-          "is_thrown": false,
-          "is_reloading": false,
-          "is_variable_grip": false,
-          "is_paired": false
-        },
-        "prerequisites_attributes": [],
-        "prerequisites_skills": [],
-        "prerequisites_talents": [],
-        "prerequisites_mutations": [],
-        "prerequisites_bloodlines": [],
-        "prerequisites_text": "Режущее оружие ближнего боя",
-        "target_type": "creature",
-        "target_range": "weapon",
-        "target_value": 1,
-        "template_shape": "",
-        "template_size": 0,
-        "uses_value": 0,
-        "uses_max": "",
-        "uses_per": "",
-        "formula_attack": "",
-        "formula_damage": "@weapon.damage_formulas.slashing",
-        "formula_custom": "",
-        "save_attribute": "",
-        "save_dc_formula": "",
-        "forbidden_defense": "",
-        "on_use_macro": "",
-        "is_reload_action": false,
-        "is_scroll_read": false,
-        "req_weapon_keys": [],
-        "weapon_dice_step": 0,
-        "skill": "",
-        "attack_bonus": 0,
-        "formula_heal": "",
-        "formula_temp_hp": "",
-        "hide_combat_buttons": false
-      },
-      "flags": {
-        "dedrel": {
-          "key": "maneuver_swing",
-          "folder": "Basic",
-          "isFavorite": true
-        }
-      },
-      "_id": "lHGticf7d6hKImJ6",
-      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_swing.svg",
-      "effects": [],
-      "ownership": {
-        "default": 0,
-        "Gw6OqVIulw8cCPjC": 3
-      },
-      "_stats": {
-        "coreVersion": "14.364",
-        "systemId": "dedrel",
-        "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1787699581609,
-        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "folder": null,
-      "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.lHGticf7d6hKImJ6"
+      "_key": "!actors.items!BanditWingArcher.BzvI3mTFloQgmlz3"
     },
     {
       "name": "Атака по возможности",
@@ -1554,14 +1335,14 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1787699581609,
-            "modifiedTime": 1787699581609,
+            "createdTime": 1787699581635,
+            "modifiedTime": 1787699581635,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!BanditCrossbow01.kYkUGNsX9fbDKoRd.3vYKn5wCeaPokRqI"
+          "_key": "!actors.items.effects!BanditWingArcher.kYkUGNsX9fbDKoRd.3vYKn5wCeaPokRqI"
         }
       ],
       "ownership": {
@@ -1572,8 +1353,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1787699581609,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787699581635,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1581,7 +1362,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.kYkUGNsX9fbDKoRd"
+      "_key": "!actors.items!BanditWingArcher.kYkUGNsX9fbDKoRd"
     },
     {
       "name": "Уклонение",
@@ -1707,14 +1488,14 @@
             "coreVersion": "14.364",
             "systemId": "dedrel",
             "systemVersion": "0.1.3",
-            "createdTime": 1787699581609,
-            "modifiedTime": 1787699581609,
+            "createdTime": 1787699581635,
+            "modifiedTime": 1787699581635,
             "lastModifiedBy": "Gw6OqVIulw8cCPjC",
             "compendiumSource": null,
             "duplicateSource": null,
             "exportSource": null
           },
-          "_key": "!actors.items.effects!BanditCrossbow01.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
+          "_key": "!actors.items.effects!BanditWingArcher.balrTxNEl33DGerg.Qx96tAtFyvoGA4rF"
         }
       ],
       "ownership": {
@@ -1725,8 +1506,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1734,7 +1515,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.balrTxNEl33DGerg"
+      "_key": "!actors.items!BanditWingArcher.balrTxNEl33DGerg"
     },
     {
       "name": "Разорвать дистанцию",
@@ -1825,8 +1606,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1787699581609,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787699581635,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1834,7 +1615,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.COx23vBpriCHVVLO"
+      "_key": "!actors.items!BanditWingArcher.COx23vBpriCHVVLO"
     },
     {
       "name": "Добивание",
@@ -1927,8 +1708,8 @@
         "coreVersion": "14.368",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1792453977526,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -1936,7 +1717,7 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.WXAudjnk26RUhhma"
+      "_key": "!actors.items!BanditWingArcher.WXAudjnk26RUhhma"
     },
     {
       "name": "Взаимодействие",
@@ -2027,8 +1808,8 @@
         "coreVersion": "14.364",
         "systemId": "dedrel",
         "systemVersion": "0.1.3",
-        "createdTime": 1787699581609,
-        "modifiedTime": 1787699581609,
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787699581635,
         "lastModifiedBy": "Gw6OqVIulw8cCPjC",
         "compendiumSource": null,
         "duplicateSource": null,
@@ -2036,13 +1817,500 @@
       },
       "folder": null,
       "sort": 0,
-      "_key": "!actors.items!BanditCrossbow01.Enl336RoHnl7foYR"
+      "_key": "!actors.items!BanditWingArcher.Enl336RoHnl7foYR"
+    },
+    {
+      "name": "Демонические крылья",
+      "type": "mutation",
+      "system": {
+        "description": "<p>У персонажа есть функциональные крылья (пернатые или кожаные, по выбору игрока), которые позволяют ему летать.</p>",
+        "key": "demon_wings",
+        "mutation_type": "useful",
+        "starting": true,
+        "subtype": "passive",
+        "xp_cost": 4,
+        "prerequisites_text": "",
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [],
+        "prerequisites_bloodlines": [
+          "Demon",
+          "4"
+        ],
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "adds_items": [
+          "maneuver_wings_dive_strike",
+          "maneuver_flying_shot",
+          "maneuver_fly"
+        ],
+        "on_add_macro": "",
+        "has_situational_bonus": false,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "demon_wings",
+          "folder": "Demon/Rank 4",
+          "isFavorite": false,
+          "parentItemId": null
+        }
+      },
+      "_id": "axSorDsPaCRN3LgN",
+      "img": "systems/dedrel/assets/icons/items/mutation.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787702047546,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditWingArcher.axSorDsPaCRN3LgN"
+    },
+    {
+      "name": "Полёт",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Тактический прыжок по воздуху: персонаж перемещается в пределах остатка Скорости, игнорируя сложную местность, наземные препятствия, ловушки и наземные магические эффекты, а также <strong>чужие зоны контроля</strong>.</p>\n<p><strong>Требования:</strong> разгон не менее 4 метров и обязательная посадка на твёрдую поверхность в целевой клетке — зависнуть между ходами нельзя.</p>\n<p>Атака по возможности по летящему возможна только оружием с досягаемостью 3.</p>\n<p>Перемещение тратит метры Скорости, как обычное; 1 ОД — плата за сам режим полёта.</p>",
+        "key": "maneuver_fly",
+        "source": "mutation",
+        "action_type": {
+          "action": false,
+          "reaction": false,
+          "free": true,
+          "chain": true
+        },
+        "chain_trigger_text": "любой манёвр",
+        "chain_trigger_maneuvers": [
+          "any"
+        ],
+        "ap_cost": 1,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [
+          "demon_wings",
+          "dragon_wings"
+        ],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "",
+        "target_type": "self",
+        "target_range": "",
+        "target_value": 0,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_fly",
+          "folder": "Mutation",
+          "parentItemId": "axSorDsPaCRN3LgN",
+          "isFavorite": true
+        }
+      },
+      "_id": "0X0ewlCUt5TCNd3D",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_fly.svg",
+      "effects": [],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.364",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581635,
+        "modifiedTime": 1787699581635,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditWingArcher.0X0ewlCUt5TCNd3D"
+    },
+    {
+      "name": "Выстрел в полёте",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Над персонажем должно быть минимум 4 метра свободного вертикального пространства. Персонаж совершает резкий взлет с помощью крыльев на долю секунды поднимаясь над полем боя. Это позволяет оценить тактическую обстановку и произвести @UUID[Compendium.dedrel.maneuvers.Item.38YfFPkDVBNl1Hsh]{Выстрел из лука}, @UUID[Compendium.dedrel.maneuvers.Item.yxZAedU3MoXYOrD1]{Выстрел из арбалета}, @UUID[Compendium.dedrel.maneuvers.Item.GDIxF1sFVeDcrZDK]{Выстрел из огнестрела}, @UUID[Compendium.dedrel.maneuvers.Item.g89PRL1EdFGe76OT]{Метнуть} или @UUID[Compendium.dedrel.maneuvers.Item.5QDQGSIUGoRxpI45]{Быстрый выстрел из лука} без дополнительных трат ОД поверх препятствий, после чего персонаж приземляется в ту же клетку, из которой начинал движение.<br><br></p><p></p><p></p>",
+        "key": "maneuver_flying_shot",
+        "source": "mutation",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [],
+        "ap_cost": 4,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": false,
+          "ranged": true,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [
+          "demon_wings",
+          "dragon_wings"
+        ],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "дальнобойное оружие",
+        "target_type": "creature",
+        "target_range": "weapon",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "hide_combat_buttons": true,
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": ""
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_flying_shot",
+          "folder": "Mutation",
+          "parentItemId": "axSorDsPaCRN3LgN",
+          "isFavorite": true
+        }
+      },
+      "_id": "zhgXXPP69vnzpK93",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flying_shot.svg",
+      "effects": [
+        {
+          "name": "Выстрел в полёте",
+          "origin": "Compendium.dedrel.maneuvers.Item.zhgXXPP69vnzpK93",
+          "_id": "jNPnHJffRdGkHMG5",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_flying_shot.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "add",
+                "value": "ap_set:0; filter:ranged",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnEnd",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1787699581635,
+            "modifiedTime": 1787699581635,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!BanditWingArcher.zhgXXPP69vnzpK93.jNPnHJffRdGkHMG5"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditWingArcher.zhgXXPP69vnzpK93"
+    },
+    {
+      "name": "Крылья: Пикирующая атака",
+      "type": "maneuver",
+      "system": {
+        "description": "<p>Персонаж взлетает и обрушивается на противника. Цель должна находиться минимум в 9 метрах от персонажа, максимум не может превышать движение персонажа. <br>Соверши атаку ближнего боя с бонусом +2 к атаке и +2 к урону.</p>",
+        "key": "maneuver_wings_dive_strike",
+        "source": "mutation",
+        "action_type": {
+          "action": true,
+          "reaction": false,
+          "free": false,
+          "chain": false
+        },
+        "chain_trigger_text": "",
+        "chain_trigger_maneuvers": [
+          "maneuver_fly"
+        ],
+        "ap_cost": 2,
+        "is_variable_cost": false,
+        "variable_cost_max": 0,
+        "req_weapon_type": {
+          "melee": true,
+          "ranged": false,
+          "shield": false,
+          "magic": false
+        },
+        "req_weapon_damage_type": {
+          "piercing": false,
+          "bludgeoning": false,
+          "slashing": false
+        },
+        "req_weapon_skill_group": "any",
+        "req_weapon_property": {
+          "is_auxiliary": false,
+          "is_fast": false,
+          "is_slow": false,
+          "is_twohanded": false,
+          "is_thrown": false,
+          "is_reloading": false,
+          "is_variable_grip": false,
+          "is_paired": false
+        },
+        "prerequisites_attributes": [],
+        "prerequisites_skills": [],
+        "prerequisites_talents": [],
+        "prerequisites_mutations": [
+          "demon_wings",
+          "dragon_wings"
+        ],
+        "prerequisites_bloodlines": [],
+        "prerequisites_text": "оружие ближнего боя",
+        "target_type": "creature",
+        "target_range": "",
+        "target_value": 1,
+        "template_shape": "",
+        "template_size": 0,
+        "uses_value": 0,
+        "uses_max": "",
+        "uses_per": "",
+        "formula_attack": "",
+        "formula_damage": "",
+        "formula_custom": "",
+        "save_attribute": "",
+        "save_dc_formula": "",
+        "forbidden_defense": "",
+        "on_use_macro": "",
+        "is_reload_action": false,
+        "is_scroll_read": false,
+        "req_weapon_keys": [],
+        "weapon_dice_step": 0,
+        "skill": "",
+        "attack_bonus": 0,
+        "formula_heal": "",
+        "formula_temp_hp": "",
+        "hide_combat_buttons": false
+      },
+      "flags": {
+        "dedrel": {
+          "key": "maneuver_wings_dive_strike",
+          "folder": "Mutation",
+          "parentItemId": "axSorDsPaCRN3LgN",
+          "isFavorite": true
+        }
+      },
+      "_id": "bpZjVJiztvtwfQQT",
+      "img": "systems/dedrel/assets/icons/maneuvers/maneuver_wings_dive_strike.svg",
+      "effects": [
+        {
+          "name": "Крылья: Пикирующая атака",
+          "origin": "Compendium.dedrel.maneuvers.Item.bpZjVJiztvtwfQQT",
+          "_id": "xal7BvtCzAJlbU0P",
+          "img": "systems/dedrel/assets/icons/maneuvers/maneuver_wings_dive_strike.svg",
+          "type": "base",
+          "system": {
+            "changes": [
+              {
+                "key": "flags.dedrel.mod",
+                "type": "add",
+                "value": "damage:2; filter:melee",
+                "phase": "initial",
+                "priority": null
+              },
+              {
+                "key": "flags.dedrel.mod",
+                "type": "add",
+                "value": "attak:2; filter:melee",
+                "phase": "initial",
+                "priority": null
+              }
+            ]
+          },
+          "disabled": false,
+          "start": null,
+          "duration": {
+            "value": 1,
+            "units": "rounds",
+            "expiry": "turnEnd",
+            "expired": false
+          },
+          "description": "",
+          "tint": "#ffffff",
+          "transfer": false,
+          "statuses": [],
+          "showIcon": 1,
+          "folder": null,
+          "sort": 0,
+          "flags": {
+            "dedrel": {
+              "applyTo": "self"
+            }
+          },
+          "_stats": {
+            "coreVersion": "14.364",
+            "systemId": "dedrel",
+            "systemVersion": "0.1.3",
+            "createdTime": 1787699581635,
+            "modifiedTime": 1787699581635,
+            "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          },
+          "_key": "!actors.items.effects!BanditWingArcher.bpZjVJiztvtwfQQT.xal7BvtCzAJlbU0P"
+        }
+      ],
+      "ownership": {
+        "default": 0,
+        "Gw6OqVIulw8cCPjC": 3
+      },
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "dedrel",
+        "systemVersion": "0.1.3",
+        "createdTime": 1787699581635,
+        "modifiedTime": 1792453977575,
+        "lastModifiedBy": "Gw6OqVIulw8cCPjC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "folder": null,
+      "sort": 0,
+      "_key": "!actors.items!BanditWingArcher.bpZjVJiztvtwfQQT"
     }
   ],
   "prototypeToken": {
-    "name": "Арбалетчик",
+    "name": "Крылатый лучник",
     "texture": {
-      "src": "systems/dedrel/assets/Actors/Tokens/bandits/bandit02.webp",
+      "src": "systems/dedrel/assets/Actors/Tokens/bandits/bandit03.webp",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -2135,9 +2403,9 @@
     "dedrel": {
       "itemsLocked": false,
       "favoriteSkills": [
-        "crossbows",
-        "perception",
-        "stealth"
+        "bows",
+        "atletism",
+        "perception"
       ],
       "folder": "NPC/Common Bandits/Mercs"
     }
@@ -2152,12 +2420,12 @@
     "coreVersion": "14.364",
     "systemId": "dedrel",
     "systemVersion": "0.1.3",
-    "createdTime": 1787699581609,
-    "modifiedTime": 1787699581610,
+    "createdTime": 1787699581635,
+    "modifiedTime": 1787699581636,
     "lastModifiedBy": "Gw6OqVIulw8cCPjC",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!actors!BanditCrossbow01"
+  "_key": "!actors!BanditWingArcher"
 }
