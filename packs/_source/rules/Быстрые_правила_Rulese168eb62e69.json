@@ -1,0 +1,65 @@
+{
+  "_id": "Rulese168eb62e69",
+  "name": "Быстрые правила",
+  "pages": [
+    {
+      "_id": "Rules668ad7ff1af",
+      "name": "Быстрые правила",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Quick-Rules",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Quick-Rules"
+      },
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulese168eb62e69.Rules668ad7ff1af"
+    }
+  ],
+  "folder": null,
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "categories": [],
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Rulese168eb62e69"
+}

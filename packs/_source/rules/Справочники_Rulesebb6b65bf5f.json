@@ -1,0 +1,225 @@
+{
+  "_id": "Rulesebb6b65bf5f",
+  "name": "Справочники",
+  "pages": [
+    {
+      "_id": "Rulesa909538f275",
+      "name": "Все таланты",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/alltalents/_talents_hub",
+        "srcEn": "https://dedrel.teo.uy/en/rules/alltalents/_talents_hub"
+      },
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesebb6b65bf5f.Rulesa909538f275"
+    },
+    {
+      "_id": "Rules9b7b22cac1b",
+      "name": "Все манёвры",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/allmaneuvers/_maneuvers_hub",
+        "srcEn": "https://dedrel.teo.uy/en/rules/allmaneuvers/_maneuvers_hub"
+      },
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesebb6b65bf5f.Rules9b7b22cac1b"
+    },
+    {
+      "_id": "Rules5ce46e2fbe2",
+      "name": "Все мутации",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/allmutations/_mutations_hub",
+        "srcEn": "https://dedrel.teo.uy/en/rules/allmutations/_mutations_hub"
+      },
+      "sort": 300000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesebb6b65bf5f.Rules5ce46e2fbe2"
+    },
+    {
+      "_id": "Rules5cff8ccb743",
+      "name": "Все состояния",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/allconditions/_conditions_hub",
+        "srcEn": "https://dedrel.teo.uy/en/rules/allconditions/_conditions_hub"
+      },
+      "sort": 400000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesebb6b65bf5f.Rules5cff8ccb743"
+    },
+    {
+      "_id": "Rules6eccf2e6278",
+      "name": "Таблица развития",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/development-table",
+        "srcEn": "https://dedrel.teo.uy/en/rules/development-table"
+      },
+      "sort": 500000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesebb6b65bf5f.Rules6eccf2e6278"
+    }
+  ],
+  "folder": null,
+  "sort": 700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "categories": [],
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Rulesebb6b65bf5f"
+}

@@ -1,0 +1,125 @@
+{
+  "Rulese168eb62e69": {
+    "_src": "2b95ca1d07",
+    "name": "Quick Rules",
+    "pages": {
+      "Rules668ad7ff1af": {
+        "name": "Quick Rules"
+      }
+    }
+  },
+  "Rules7416728d257": {
+    "_src": "2f5ec9a032",
+    "name": "Character Creation",
+    "pages": {
+      "Rulesb8a4e5311cd": {
+        "name": "Bloodlines"
+      },
+      "Rules51dd12e0761": {
+        "name": "Homeland"
+      },
+      "Rules06cef957398": {
+        "name": "Core Attributes"
+      },
+      "Rulesa5f60cd9d7b": {
+        "name": "Secondary Attributes"
+      },
+      "Rules0f8b6b17b1a": {
+        "name": "Skills"
+      },
+      "Rules0ac03f1bcd5": {
+        "name": "Beneficial Mutations"
+      },
+      "Rules71e71668b99": {
+        "name": "Harmful Mutations"
+      },
+      "Rules0dc0b6184c2": {
+        "name": "Talents"
+      },
+      "Rules47cc9770772": {
+        "name": "Progression and Experience"
+      }
+    }
+  },
+  "Rules886da8ffed0": {
+    "_src": "f714bdbe42",
+    "name": "Core and Combat",
+    "pages": {
+      "Rules780e8baa09c": {
+        "name": "Core Mechanics: Checks, Difficulty, Rest"
+      },
+      "Rules61bf31ee774": {
+        "name": "Combat and Damage"
+      },
+      "Rules0c78faee690": {
+        "name": "Maneuvers"
+      },
+      "Rules1fb4dc426ae": {
+        "name": "Conditions"
+      }
+    }
+  },
+  "Rules345cac230f2": {
+    "_src": "f2460b3890",
+    "name": "Equipment",
+    "pages": {
+      "Rules83642c2fa0a": {
+        "name": "Weapons"
+      },
+      "Rules35b48ac1c39": {
+        "name": "Armor and Shields"
+      },
+      "Rules53b262a3862": {
+        "name": "Inventory and Item Types"
+      },
+      "Rulesd0a2c8b9526": {
+        "name": "Crafting"
+      }
+    }
+  },
+  "Rulesa5e4bf8530e": {
+    "_src": "7189e7315f",
+    "name": "Magic",
+    "pages": {
+      "Rules718d6c2bc5b": {
+        "name": "Magic: Doctrines, Techniques, Modifiers"
+      },
+      "Rulesa253ccd1ee6": {
+        "name": "Rituals and Long Casts"
+      }
+    }
+  },
+  "Rules2949b9b26e0": {
+    "_src": "bd73973adc",
+    "name": "For the GM",
+    "pages": {
+      "Rules4f1d8268d91": {
+        "name": "Enemies: Creature Types, Tiers, Monster Maneuvers"
+      },
+      "Rules7e615a13d82": {
+        "name": "Creature Building (GM Guide)"
+      }
+    }
+  },
+  "Rulesebb6b65bf5f": {
+    "_src": "4f7c7cc281",
+    "name": "References",
+    "pages": {
+      "Rulesa909538f275": {
+        "name": "All Talents"
+      },
+      "Rules9b7b22cac1b": {
+        "name": "All Maneuvers"
+      },
+      "Rules5ce46e2fbe2": {
+        "name": "All Mutations"
+      },
+      "Rules5cff8ccb743": {
+        "name": "All Conditions"
+      },
+      "Rules6eccf2e6278": {
+        "name": "Development Table"
+      }
+    }
+  }
+}

@@ -113,7 +113,8 @@
       "CharacterSheet": "Dedrel Character Sheet",
       "ItemSheet": "Dedrel Item Sheet",
       "LootSheet": "Dedrel Loot/Merchant Sheet",
-      "NpcSheet": "NPC / Monster"
+      "NpcSheet": "NPC / Monster",
+      "WebPageSheet": "Web Page"
     },
     "ItemFields": {
       "SystemKey": "System Key",
@@ -1382,6 +1383,22 @@
         }
       }
     },
+    "JournalPages": {
+      "Web": {
+        "FIELDS": {
+          "src": {
+            "label": "Address",
+            "hint": "Full address of the page (https://…). Shown for Russian."
+          },
+          "srcEn": {
+            "label": "Address (English)",
+            "hint": "Shown for any other system language. If empty, the main address is used."
+          }
+        },
+        "Open": "Open in browser",
+        "Empty": "No address set for this page."
+      }
+    },
     "Encumbrance": {
       "light": "Light",
       "medium": "Medium",
@@ -1651,6 +1668,9 @@
     },
     "RegionBehavior": {
       "dedrelAura": "Dedrel Aura"
+    },
+    "JournalEntryPage": {
+      "web": "Web Page"
     },
     "Actor": {
       "loot": "Loot/Merchant",

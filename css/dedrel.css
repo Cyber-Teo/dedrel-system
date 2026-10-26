@@ -2698,3 +2698,34 @@ form.dedrel.sheet.item {
 #dedrel-source-hud .source-hud-column.readonly .source-doctrine {
   cursor: default;
 }
+
+/* ----------------------------------------- */
+/*  Journal page "web page" (iframe)          */
+/*  Same layout as the core PDF page          */
+/* ----------------------------------------- */
+.journal-entry-page.dedrel-web-page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 4px;
+  height: 100%;
+}
+.journal-entry-page.dedrel-web-page > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.journal-entry-page.dedrel-web-page iframe {
+  flex-grow: 1;
+  width: 100%;
+  min-height: 620px;
+  border: none;
+}
+.multi-page .journal-entry-page.dedrel-web-page iframe {
+  flex-basis: 620px;
+}
+.journal-entry-page.dedrel-web-page .web-page-open {
+  align-self: flex-end;
+  margin-top: 4px;
+  font-size: var(--font-size-12);
+}

@@ -22,6 +22,14 @@
   ],
   "packs": [
     {
+      "name": "rules",
+      "label": "Rules",
+      "path": "packs/rules.db",
+      "type": "JournalEntry",
+      "system": "dedrel",
+      "banner": "systems/dedrel/assets/banners/rules.svg"
+    },
+    {
       "name": "actors",
       "label": "Actors",
       "path": "packs/actors.db",
@@ -266,6 +274,9 @@
     },
     "RegionBehavior": {
       "dedrelAura": {}
+    },
+    "JournalEntryPage": {
+      "web": {}
     }
   },
   "flags": {
@@ -285,6 +296,7 @@
           "mutations",
           "mutilations",
           "potions",
+          "rules",
           "spells",
           "talents",
           "weapons"

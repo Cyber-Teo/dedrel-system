@@ -1,0 +1,105 @@
+{
+  "_id": "Rulesa5e4bf8530e",
+  "name": "Магия",
+  "pages": [
+    {
+      "_id": "Rules718d6c2bc5b",
+      "name": "Магия: доктрины, техники, модификаторы",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Magic",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Magic"
+      },
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesa5e4bf8530e.Rules718d6c2bc5b"
+    },
+    {
+      "_id": "Rulesa253ccd1ee6",
+      "name": "Ритуалы и длинные касты",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Rituals",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Rituals"
+      },
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rulesa5e4bf8530e.Rulesa253ccd1ee6"
+    }
+  ],
+  "folder": null,
+  "sort": 500000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "categories": [],
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Rulesa5e4bf8530e"
+}

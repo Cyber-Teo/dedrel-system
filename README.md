@@ -52,6 +52,8 @@ are enough to sit down at the table with a ready-made character.
 - **Combat HUDs**: action points, maneuvers available as a chain, active effects with
   remaining duration; movement budget per round; auras.
 - **World time and calendar**: effects lasting hours and days, group rests.
+- **The rules inside Foundry**: the *Rules* compendium shows the website chapters right in
+  the journal, so they are always the current version.
 - **Compendiums**: 106 maneuvers, 121 talents, 80 mutations, 28 spells, 28 conditions,
   45 weapons, 178 crafting materials, a starter bestiary and more.
 - **English and Russian**: the interface is fully translated; compendium content is
@@ -62,7 +64,6 @@ are enough to sit down at the table with a ready-made character.
 
 - **No release package yet**, so installing by manifest URL is not possible — see
   [Installation](#installation).
-- **The rules are not inside Foundry yet** — read them on the website.
 - **No adventures are bundled.** The bestiary is small: beasts, bandits, townsfolk, a legion.
 - **Some texts are Russian only**: NPC biographies in the bestiary and the developer
   documentation in [`docs/`](docs/README.md).

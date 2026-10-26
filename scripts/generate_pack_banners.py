@@ -45,6 +45,7 @@ PACKS = {
     "scrolls":              ("#a8651b", "items/scroll.svg"),
     "craft_materials":      ("#92400e", "items/crafting_material.svg"),
     "actors":               ("#1d4ed8", "skills/atletism.svg"),
+    "rules":                ("#9f1239", "skills/knowledge.svg"),
 }
 
 

@@ -69,6 +69,7 @@ change-строкам `system.*` и проверяют синтаксис DSL), 
 | `data/items/` | 21 тип предмета, по файлу на тип; `index.mjs` — реестр «тип → модель» |
 | `data/items/_physical.mjs`, `_crafting.mjs` | наборы полей, которые вливаются в схемы физических предметов (редкость, вес, цена; блок крафта) |
 | `data/region-behaviors/aura.mjs` | системный подтип поведения региона `dedrelAura` |
+| `data/journal/web-page.mjs` | тип страницы журнала `web`: страница сайта в iframe (пак правил `rules`) |
 
 Полный пересказ схем с комментариями — [data-schema.md](data-schema.md). Источник
 истины всегда код: при расхождении прав `src/data/`.
@@ -96,6 +97,9 @@ change-строкам `system.*` и проверяют синтаксис DSL), 
 - перевод текстов документов из паков (`_initializeSource`) и защита русского
   источника от записи английского текста (`_preUpdate`).
 
+**`DedrelJournalEntry`** (`journal-entry.mjs`): только перевод записей журнала из паков
+и их страниц (пак `rules`) — тот же `_initializeSource` / `_preUpdate`.
+
 ### 4. Подготовка данных актора
 
 Порядок, в котором Foundry и система считают актора — от него зависят почти все
@@ -119,7 +123,8 @@ Change-строки `system.*` получают фазу `apply` автомат�
 
 ApplicationV2 + Handlebars. `DedrelCharacterSheet` (персонаж), `DedrelNpcSheet`
 (наследник листа персонажа), `DedrelLootSheet` (лут, торговец, контейнер),
-`DedrelItemSheet` (один лист на все 21 тип предмета). Шаблоны разбиты на части
+`DedrelItemSheet` (один лист на все 21 тип предмета), `DedrelWebPageSheet` (страница
+журнала `web`: iframe в режиме просмотра, два поля адреса в режиме правки). Шаблоны разбиты на части
 (`PARTS`) в `templates/actor/parts/` и `templates/item/parts/`. Как это устроено
 и как расширять — [sheets.md](sheets.md).
 

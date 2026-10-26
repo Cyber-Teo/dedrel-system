@@ -113,7 +113,8 @@
       "CharacterSheet": "Лист персонажа Dedrel",
       "ItemSheet": "Лист предмета Dedrel",
       "LootSheet": "Лист лута/торговца Dedrel",
-      "NpcSheet": "Лист NPC / Монстра"
+      "NpcSheet": "Лист NPC / Монстра",
+      "WebPageSheet": "Веб-страница"
     },
     "ItemFields": {
       "SystemKey": "Системный ключ",
@@ -1382,6 +1383,22 @@
         }
       }
     },
+    "JournalPages": {
+      "Web": {
+        "FIELDS": {
+          "src": {
+            "label": "Адрес",
+            "hint": "Полный адрес страницы (https://…). Показывается на русском."
+          },
+          "srcEn": {
+            "label": "Адрес (английский)",
+            "hint": "Показывается при любом другом языке системы. Если пусто — берётся основной адрес."
+          }
+        },
+        "Open": "Открыть в браузере",
+        "Empty": "У страницы не задан адрес."
+      }
+    },
     "Encumbrance": {
       "light": "Лёгкий",
       "medium": "Средний",
@@ -1651,6 +1668,9 @@
     },
     "RegionBehavior": {
       "dedrelAura": "Аура Dedrel"
+    },
+    "JournalEntryPage": {
+      "web": "Веб-страница"
     },
     "Actor": {
       "loot": "Лут/Торговец",

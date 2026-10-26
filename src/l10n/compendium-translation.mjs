@@ -12,9 +12,10 @@
  *  - Loading. The `init` hook fires before core loads the language files, and the packs
  *    come up even later (`Game#setupGame`). So we wrap `game.i18n.initialize`:
  *    core awaits it, and the dictionary is guaranteed to be ready before the first document is created.
- *  - Documents. `DedrelItem#_initializeSource` and `DedrelActor#_initializeSource` call `translateSource`:
+ *  - Documents. `_initializeSource` of DedrelItem, DedrelActor and DedrelJournalEntry calls `translateSource`:
  *    the translation goes into `_source` (as in Babele), so importing from a compendium into the world
- *    yields an English document. Actors are keyed by `_id`. Embedded actor items from packs are translated
+ *    yields an English document. Actors and journals are keyed by `_id`, a journal's pages — under `pages`
+ *    by page `_id`, like an item's `effects`. Embedded actor items from packs are translated
  *    by `system.key` from the item packs' dictionaries.
  *  - Index and folders. The compendium window takes names from `pack.index`, while the server sends the index
  *    without `system.key` and pours the Russian names back in on every `getIndex()`. So `system.key`
@@ -45,7 +46,7 @@ const translatedPaths = new WeakMap();
 let active = false;
 
 /** The active system content language: the `systemLanguage` setting or core's language. */
-function contentLanguage() {
+export function contentLanguage() {
   const forced = game.settings.get(SYSTEM_ID, "systemLanguage");
   return (forced && forced !== "auto") ? forced : game.i18n.lang;
 }
@@ -121,11 +122,12 @@ function translateSource(source, pack, { creation = false, embedded = false } = 
   const paths = new Set();
   for (const [path, value] of Object.entries(entry)) {
     if (path === "_src") continue;
-    if (path === "effects") {
-      for (const [effectId, fields] of Object.entries(value)) {
-        const effect = source.effects?.find(e => e._id === effectId);
-        if (!effect) continue;
-        for (const [field, text] of Object.entries(fields)) if (field in effect) effect[field] = text;
+    // Embedded documents (an item's effects, a journal's pages) — a dictionary by `_id`
+    if (path === "effects" || path === "pages") {
+      for (const [embeddedId, fields] of Object.entries(value)) {
+        const embedded = source[path]?.find(e => e._id === embeddedId);
+        if (!embedded) continue;
+        for (const [field, text] of Object.entries(fields)) if (field in embedded) embedded[field] = text;
       }
       continue;
     }
@@ -215,7 +217,7 @@ export const CompendiumTranslation = {
    */
   async translatePacks() {
     if (!active) return;
-    const packs = game.packs.filter(p => isSystemPack(p) && ["Item", "Actor"].includes(p.documentName));
+    const packs = game.packs.filter(p => isSystemPack(p) && ["Item", "Actor", "JournalEntry"].includes(p.documentName));
     for (const pack of packs) translateFolders(pack);
     await Promise.all(packs.map(pack => pack.getIndex().catch(err =>
       console.warn(`Dedrel | Index of ${pack.collection} not translated`, err))));

@@ -1,0 +1,17 @@
+<div>
+    {{#if title.show}}
+    <header class="journal-page-header">
+        <h{{ title.level }}>{{ name }}</h{{ title.level }}>
+    </header>
+    {{/if}}
+
+    {{#if url}}
+    <iframe src="{{ url }}" loading="lazy" referrerpolicy="no-referrer"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+    <a class="web-page-open" href="{{ url }}" target="_blank" rel="noopener">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> {{ localize "DEDREL.JournalPages.Web.Open" }}
+    </a>
+    {{else}}
+    <p class="hint">{{ localize "DEDREL.JournalPages.Web.Empty" }}</p>
+    {{/if}}
+</div>

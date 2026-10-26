@@ -11,6 +11,9 @@ import DedrelLootSheet from "./src/sheets/loot-sheet.mjs";
 import DedrelNpcSheet from "./src/sheets/npc-sheet.mjs";
 import DedrelActor from "./src/documents/actor.mjs";
 import DedrelItem from "./src/documents/item.mjs";
+import DedrelJournalEntry from "./src/documents/journal-entry.mjs";
+import DedrelWebPageData from "./src/data/journal/web-page.mjs";
+import DedrelWebPageSheet from "./src/sheets/web-page-sheet.mjs";
 import { DedrelMigration } from "./src/migration.mjs";
 import { showRollDialog } from "./src/dice/roll.mjs";
 import { registerSystemSettings } from "./src/settings.mjs";
@@ -92,6 +95,7 @@ Hooks.once("init", function() {
   // Registering the custom item class and the item data models (Item)
   CONFIG.Actor.documentClass = DedrelActor;
   CONFIG.Item.documentClass = DedrelItem;
+  CONFIG.JournalEntry.documentClass = DedrelJournalEntry;
   CONFIG.Item.dataModels = {
     ...CONFIG.Item.dataModels,
     ...ItemDataModels
@@ -106,6 +110,10 @@ Hooks.once("init", function() {
   // The "Aura" region behavior (the subtype is declared in system.json → documentTypes.RegionBehavior)
   CONFIG.RegionBehavior.dataModels.dedrelAura = DedrelAuraRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons.dedrelAura = "fa-solid fa-circle-dot";
+
+  // The "Web page" journal page — an iframe by address (the subtype is declared in system.json → documentTypes.JournalEntryPage)
+  CONFIG.JournalEntryPage.dataModels.web = DedrelWebPageData;
+  CONFIG.JournalEntryPage.typeIcons.web = "fa-solid fa-globe";
 
   // Registering Active Effects for the system
   CONFIG.ActiveEffect.legacyTransferral = false;
@@ -146,6 +154,8 @@ Hooks.once("init", function() {
 
   // Preloading partial Handlebars templates so they can be reused via {{> "path"}}
   foundry.applications.handlebars.loadTemplates([
+    "systems/dedrel/templates/journal/web-page-view.hbs",
+    "systems/dedrel/templates/journal/web-page-edit.hbs",
     "systems/dedrel/templates/actor/parts/character-header.hbs",
     "systems/dedrel/templates/actor/parts/character-navigation.hbs",
     "systems/dedrel/templates/actor/parts/character-main.hbs",
@@ -206,6 +216,12 @@ Hooks.once("init", function() {
     types: ["currency", "loot", "trade_good", "potion", "scroll", "craft_material", "quest_item", "service", "mutilation", "countryoforigin", "mutation", "talent", "maneuver", "spell", "weapon", "armor", "magic_item", "exp", "condition", "ammunition", "creature_type"],
     makeDefault: true,
     label: "DEDREL.Sheets.ItemSheet"
+  });
+
+  foundry.applications.apps.DocumentSheetConfig.registerSheet(JournalEntryPage, "dedrel", DedrelWebPageSheet, {
+    types: ["web"],
+    makeDefault: true,
+    label: "DEDREL.Sheets.WebPageSheet"
   });
 
   console.log("Dedrel | Item Data Models Registered:", Object.keys(ItemDataModels));

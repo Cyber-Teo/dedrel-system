@@ -1,0 +1,185 @@
+{
+  "_id": "Rules886da8ffed0",
+  "name": "Ядро и бой",
+  "pages": [
+    {
+      "_id": "Rules780e8baa09c",
+      "name": "Система: проверки, сложность, отдых",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Core-Mechanics",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Core-Mechanics"
+      },
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rules886da8ffed0.Rules780e8baa09c"
+    },
+    {
+      "_id": "Rules61bf31ee774",
+      "name": "Бой и урон",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Combat-and-Damage",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Combat-and-Damage"
+      },
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rules886da8ffed0.Rules61bf31ee774"
+    },
+    {
+      "_id": "Rules0c78faee690",
+      "name": "Манёвры",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Combat-Maneuvers",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Combat-Maneuvers"
+      },
+      "sort": 300000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rules886da8ffed0.Rules0c78faee690"
+    },
+    {
+      "_id": "Rules1fb4dc426ae",
+      "name": "Состояния",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "https://dedrel.teo.uy/rules/Conditions",
+        "srcEn": "https://dedrel.teo.uy/en/rules/Conditions"
+      },
+      "sort": 400000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!Rules886da8ffed0.Rules1fb4dc426ae"
+    }
+  ],
+  "folder": null,
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "categories": [],
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Rules886da8ffed0"
+}
