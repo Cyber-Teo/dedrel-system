@@ -6,8 +6,11 @@ const { JournalEntryPageHandlebarsSheet } = foundry.applications.sheets.journal;
 
 export default class DedrelWebPageSheet extends JournalEntryPageHandlebarsSheet {
 
+  // Embedded in a journal, the sheet's own classes are stripped: the page wrapper only gets
+  // the page type and `viewClasses` (JournalEntrySheet#_renderPageViews), so the CSS hook goes there too.
   static DEFAULT_OPTIONS = {
     classes: ["dedrel-web-page"],
+    viewClasses: ["dedrel-web-page"],
     window: {
       icon: "fa-solid fa-globe"
     }

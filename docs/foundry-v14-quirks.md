@@ -457,3 +457,13 @@ game.i18n.initialize = async (...args) => { await initialize(...args); await loa
 **Проблема 2 — индекс пака.** Сервер присылает начальный индекс только с полями ядра (`name`, `img`, `type`, `sort`, `folder`); окно компендиума и поиск сайдбара читают `pack.index` **напрямую**, без `getIndex()`. Каждый `getIndex({fields})` вливает в записи свежие данные сервера (`mergeObject`) и перезаписывает всё, что вы туда положили локально. Чтобы держать в индексе своё (например, переведённое имя): добавить поле в `CONFIG.Item.compendiumIndexFields` на `init`, обернуть `CompendiumCollection.prototype.getIndex` и править записи после оригинала, а на `setup` один раз вызвать `getIndex()` и `pack.initializeTree()` — дерево пака строится из индекса и само не пересобирается.
 
 **Попутно:** документ, создаваемый в паке (`Document.create(data, {pack})`), сначала строится на клиенте как черновик с опцией `creation: true` (`ClientDatabaseBackend#preCreateDocumentArray`), и именно его данные уходят на сервер. Любую подмену `_source` в `_initializeSource` при `options.creation` надо пропускать, иначе она запишется в пак.
+
+## 26. Классы листа страницы журнала теряются, когда страница показана внутри журнала
+
+**Проблема:** свой тип страницы (`JournalEntryPage`) со стилями по классу из `DEFAULT_OPTIONS.classes` выглядит голым: CSS не применяется, iframe остаётся размером по умолчанию. В режиме просмотра журнал рендерит лист страницы, **снимает с его элемента все классы** (`sheet.element.removeAttribute("class")`) и вкладывает в обёртку `<article class="journal-entry-page …">`. Обёртка получает только тип страницы, `level<N>`, `page` и `options.viewClasses` (`JournalEntrySheet#_renderPageViews`, 14.368). Встроенные типы этого не замечают: их CSS висит на типе (`.journal-entry-page.pdf`).
+
+**Решение:** класс для стилей — в `viewClasses` (для отдельного окна страницы — ещё и в `classes`):
+```javascript
+static DEFAULT_OPTIONS = { classes: ["my-page"], viewClasses: ["my-page"] };
+```
+Пример — `src/sheets/web-page-sheet.mjs`.
