@@ -23,6 +23,7 @@ Code — MIT License (see LICENSE), Copyright (c) 2026 Teo (Lucky Star Games):
   system.json         system manifest
   .github/            issue and pull request templates, workflows
   CONTRIBUTING.md     contribution guide
+  README.md, README.ru.md  project description
   packs/_source/macro/  compendium of system macros (script code)
   package.json        build tooling
 
