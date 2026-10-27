@@ -30,9 +30,31 @@ The rules are built around a few ideas:
   spell, and the Spell Constructor calculates its cost and effect.
 - **No classes or levels**: characters grow by spending experience on attributes, skills
   and talents; mutations change the body itself.
+- **Enemies by role**: one to three hits take a peon out of the fight — it dies or flees;
+  regular enemies are built like player characters; bosses get unique mechanics and
+  boosted stats, and elites are "simple bosses" without them.
 
 The rules and the world are on the website: [Quick Rules](https://dedrel.teo.uy/en/rules/Quick-Rules)
 are enough to sit down at the table with a ready-made character.
+
+## Screenshots
+
+<img src="docs/screenshots/compendiums.png" alt="Compendiums: armor, conditions, mutilations, mutations, weapons and the rules" width="100%">
+
+<p>
+  <img src="docs/screenshots/battle-hud-use-maneuver.png" alt="Battle HUD: using the Thrust maneuver" width="38%">
+  <img src="docs/screenshots/battle-hud-chain.png" alt="Maneuvers available as a chain after Thrust" width="28%">
+  <img src="docs/screenshots/chat-cards.png" alt="Chat cards: maneuver, attack roll, damage" width="22%">
+</p>
+
+*A turn in combat: choose a maneuver on the battle HUD, continue with a chain, roll and apply damage from chat.*
+
+<p>
+  <img src="docs/screenshots/character-experience.png" alt="Character sheet, Experience tab" width="49%">
+  <img src="docs/screenshots/npc-sheet.png" alt="NPC sheet" width="49%">
+</p>
+
+*Character sheet: spending experience. NPC sheet: a bear with its tier, defenses and natural weapons.*
 
 ## What works
 
