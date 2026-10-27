@@ -87,7 +87,7 @@ export default class WeaponDataModel extends foundry.abstract.TypeDataModel {
       // SUBTRACTS from its DR exactly that type's contribution (the sum of its effects), leaving
       // the armor/natural base DR (see applyDamage, _rules/18. Enemies.md §Type breaker).
       // Currently set by hand on the sheet; when crafting is introduced it will move to
-      // enchantments/materials (silver→shade, adamantine→construct). See NOTES.md.
+      // enchantments/materials (silver→shade, adamantine→construct).
       bypass_creature: new fields.ObjectField({ initial: {} }),
 
       // Properties — flat property flags; maneuvers are gated by them (req_weapon_property)

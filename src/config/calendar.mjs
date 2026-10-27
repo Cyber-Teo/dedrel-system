@@ -1,7 +1,7 @@
 /**
  * The Dedrel world calendar — config for the native Foundry V14 calendar.
  * Hooked up in the init hook: CONFIG.time.worldCalendarConfig = DEDREL_CALENDAR_CONFIG.
- * Schema — foundry.data.CalendarData (see NOTES.md, the "Calendar" section).
+ * Schema — foundry.data.CalendarData.
  *
  * World specifics:
  *  - 12 months of EXACTLY 30 days (year = 360 days), no leap years;

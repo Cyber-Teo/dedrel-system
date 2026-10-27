@@ -1,8 +1,8 @@
 /**
  * Two-handed grip (Variable grip).
  *
- * The system has no full "how many hands hold the weapon" state (postponed,
- * see NOTES.md "Weapon Versatility / Grips"). Working heuristic: a weapon with
+ * The system has no full "how many hands hold the weapon" state (postponed).
+ * Working heuristic: a weapon with
  * a variable grip is held two-handed if the SECOND hand slot is empty.
  * A true two-handed weapon (is_twohanded) occupies both slots and is always two-handed.
  *

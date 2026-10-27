@@ -305,7 +305,7 @@ Hooks.once("init", function() {
      * are copied by the "From library" picker on the item sheet and by the copy_active_effect macro,
      * and the combinatorial ones (resistances/vulnerabilities) are assembled by the same picker's generator.
      * The seed macro that build() lived for has been deleted; the API is kept for manual calls
-     * from macros until the config is cleaned up (see NOTES.md).
+     * from macros until the config is cleaned up.
      */
     effects: {
       /** @returns {object|null} ActiveEffect data from the preset. */

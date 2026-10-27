@@ -259,7 +259,7 @@ export default class CharacterDataModel extends foundry.abstract.TypeDataModel {
         // so they are taken from every worn layer and add up — the rules
         // explicitly allow this for Rigid ("stacks with the penalties from the type").
         // props.encumbering is DELIBERATELY not handled here: the actor has no channel
-        // for a penalty to ranged/magical attacks (see NOTES.md).
+        // for a penalty to ranged/magical attacks yet.
         const props = armor.system.properties || {};
         if (props.rigid) def.dodge -= 1;
         if (props.loud && this.skills?.stealth) this.skills.stealth.bonus -= 2;

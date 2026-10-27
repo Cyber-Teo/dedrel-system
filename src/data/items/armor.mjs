@@ -39,7 +39,7 @@ export default class ArmorDataModel extends foundry.abstract.TypeDataModel {
         block: new fields.NumberField({ initial: 0, integer: true }),
         stealth: new fields.NumberField({ initial: 0, integer: true }),
         // NOT APPLIED: the actor has no channel for penalties to ranged/magical
-        // attacks (analysis and options — in NOTES.md).
+        // attacks yet.
         ranged_attack: new fields.NumberField({ initial: 0, integer: true }),
         magic_attack: new fields.NumberField({ initial: 0, integer: true }),
         movement: new fields.NumberField({ initial: 0, integer: true })

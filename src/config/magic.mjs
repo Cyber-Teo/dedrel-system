@@ -449,7 +449,7 @@ export const DEDREL_MAGIC = {
       // No forms: Pyromancy burns with pure heat (the form modifier is unavailable)
       forms: [],
       // Ignite is the default: a damaging spell sets the target on fire (the burning condition);
-      // v1 — an "Apply: Burning" button on the card (auto-application is an open BALANCE.md question)
+      // v1 — an "Apply: Burning" button on the card (auto-application is an open balance question)
       unique: { ignite: "burning" }
     },
 
@@ -562,7 +562,7 @@ export const DEDREL_MAGIC = {
       // The full Power catalog belongs to Shadowmancy (the Echo — ranks 1–3 only)
       modifiers: ["power"],
       // TODO (roadmap §3.2): modifierOverrides — Durability → undead HP,
-      // Form → undead type/guise ("Raising"); waits for the spawn mechanics (NOTES.md).
+      // Form → undead type/guise ("Raising"); waits for the spawn mechanics.
       // The Source (corpses and darkness) is raised by the GM with the Scene Sources macro.
       unique: {}
     },
