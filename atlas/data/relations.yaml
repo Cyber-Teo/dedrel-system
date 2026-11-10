@@ -1,0 +1,595 @@
+# Связи персонажей: только явно сказанное в people.relations и выжимках лора. a→b; для родства/брака/союза/вражды порядок не важен.
+# type: родство | брак | союз | вражда | покровительство | служба. note — что именно сказано в тексте.
+- a: person:yorik_maldred_avgust_tarkviniy
+  b: person:filipp_spuriy_tarkviniy
+  type: родство
+  note: 'братья (Йорик: «брат Филиппа Спурия»)'
+  sources:
+  - countries/illior_empire/index
+  - characters/houses_clans/tarquinii
+  confidence: canon
+- a: person:yorik_maldred_avgust_tarkviniy
+  b: person:lok_filipp_tarkviniy
+  type: родство
+  note: дядя и племянник
+  sources:
+  - countries/illior_empire/index
+  - characters/houses_clans/tarquinii
+  confidence: canon
+- a: person:filipp_spuriy_tarkviniy
+  b: person:lok_filipp_tarkviniy
+  type: родство
+  note: отец и сын («отец Лока Филиппа Тарквиния»)
+  sources:
+  - characters/houses_clans/tarquinii
+  - characters/yorick
+  confidence: canon
+- a: person:yorik_maldred_avgust_tarkviniy
+  b: characters/lucius_claudius
+  type: родство
+  note: дядя Йорика — Луций Клавдий
+  sources:
+  - countries/illior_empire/index
+  - characters/houses_clans/tarquinii
+  confidence: canon
+- a: person:yorik_maldred_avgust_tarkviniy
+  b: characters/elena_klavdia
+  type: родство
+  note: двоюродные брат и сестра
+  sources:
+  - countries/illior_empire/index
+  - characters/houses_clans/tarquinii
+  confidence: canon
+- a: person:numeriya_maldreda_avgusta_tarkviniya
+  b: person:yorik_maldred_avgust_tarkviniy
+  type: родство
+  note: мать и сын
+  sources:
+  - characters/houses_clans/claudia
+  - countries/illior_empire/index
+  confidence: canon
+- a: person:avl_maldred_avgust_tarkviniy
+  b: person:numeriya_maldreda_avgusta_tarkviniya
+  type: родство
+  note: отец и дочь («отец Нумерии, Мирны, Луция Клавдия»)
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:avl_maldred_avgust_tarkviniy
+  b: person:mirna_avla_klavdiya
+  type: родство
+  note: отец и дочь
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:avl_maldred_avgust_tarkviniy
+  b: characters/lucius_claudius
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:numeriya_maldreda_avgusta_tarkviniya
+  b: person:mirna_avla_klavdiya
+  type: родство
+  note: сёстры («сестра Мирны и Луция»)
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:numeriya_maldreda_avgusta_tarkviniya
+  b: characters/lucius_claudius
+  type: родство
+  note: сестра и брат
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:mirna_avla_klavdiya
+  b: characters/lucius_claudius
+  type: родство
+  note: сестра и брат
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:avl_maldred_avgust_tarkviniy
+  b: person:kirena_klavdiya
+  type: брак
+  note: «жена Авла»; императрица Кирена из дома Клавдиев
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:mark_galevski
+  b: person:mirna_avla_klavdiya
+  type: брак
+  note: «муж Мирны»
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:mirna_avla_klavdiya
+  b: person:marianna_marka_klavdiya_galevska
+  type: родство
+  note: мать и дочь («мать Марианны»)
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:marianna_marka_klavdiya_galevska
+  b: person:yorik_maldred_avgust_tarkviniy
+  type: брак
+  note: «жена Йорика» (+977); двоюродные
+  sources:
+  - characters/houses_clans/claudia
+  - characters/yorick
+  confidence: canon
+- a: characters/lucius_claudius
+  b: characters/elena_klavdia
+  type: родство
+  note: отец и дочь
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+- a: person:raloro_maldred_avgust_tarkviniy
+  b: person:linri_tariana_avgusta_tarkviniya_furiya
+  type: брак
+  note: «муж Линри Фурии»
+  sources:
+  - characters/houses_clans/opia
+  - countries/enforis/index
+  confidence: canon
+- a: person:fernand_tarkviniy_ezhitski
+  b: person:raloro_maldred_avgust_tarkviniy
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/opia
+  - history/era_troubles
+  confidence: canon
+- a: person:dana_auliya_opiya
+  b: person:raloro_maldred_avgust_tarkviniy
+  type: родство
+  note: мать и сын
+  sources:
+  - characters/houses_clans/opia
+  - countries/enforis/index
+  confidence: canon
+- a: person:lyutsiy
+  b: person:yasfira_tarkviniya_sulpitsiya
+  type: брак
+  note: «жена Ясфира»
+  sources:
+  - characters/houses_clans/sulpicia
+  - history/era_troubles
+  confidence: canon
+- a: person:ralvek_maldred_avgust_tarkviniy
+  b: person:safiel_tiberiya_yuniya
+  type: брак
+  note: «муж Сафиэль Юнии»
+  sources:
+  - characters/houses_clans/junia
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+- a: person:elen_maldreda_avgusta_tarkviniya
+  b: person:ralvek_maldred_avgust_tarkviniy
+  type: родство
+  note: мать и сын
+  sources:
+  - characters/houses_clans/junia
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+- a: person:brona_kizhanovska
+  b: person:ralvek_maldred_avgust_tarkviniy
+  type: брак
+  note: «муж Ралвек»
+  sources:
+  - countries/gross/index
+  - history/era_troubles
+  confidence: canon
+- a: person:brona_kizhanovska
+  b: person:lukas_maldred_avgust_tarkviniy
+  type: родство
+  note: мать и сын («сын Лукас»)
+  sources:
+  - countries/gross/index
+  - history/era_troubles
+  confidence: canon
+- a: characters/hirius_furia
+  b: characters/decimus_furia
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  confidence: canon
+- a: characters/hirius_furia
+  b: person:nartsiss_hirius_furiy
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  confidence: canon
+- a: characters/decimus_furia
+  b: person:nartsiss_hirius_furiy
+  type: родство
+  note: братья
+  sources:
+  - characters/houses_clans/furia
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: person:nartsiss_hirius_furiy
+  b: characters/klara_furia
+  type: родство
+  note: отец и дочь
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  confidence: canon
+- a: person:nartsiss_hirius_furiy
+  b: characters/vibius_furia
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  confidence: canon
+- a: characters/klara_furia
+  b: characters/vibius_furia
+  type: родство
+  note: сестра и брат
+  sources:
+  - characters/houses_clans/furia
+  - history/era_new_age
+  confidence: canon
+- a: characters/decimus_furia
+  b: characters/klara_furia
+  type: родство
+  note: дядя и племянница
+  sources:
+  - characters/houses_clans/furia
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: characters/decimus_furia
+  b: characters/vibius_furia
+  type: родство
+  note: дядя и племянник
+  sources:
+  - characters/houses_clans/furia
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: characters/oktavius_opius
+  b: characters/lukrecija_opija
+  type: родство
+  note: брат и сестра
+  sources:
+  - characters/houses_clans/opia
+  - characters/oktavius_opius
+  confidence: canon
+- a: characters/tit_aemilius
+  b: characters/quinta_emilia
+  type: родство
+  note: брат и сестра
+  sources:
+  - characters/houses_clans/aemilia
+  - characters/tit_aemilius
+  confidence: canon
+- a: characters/augustus_junia
+  b: characters/euripdus_junius
+  type: родство
+  note: отец и сын
+  sources:
+  - characters/houses_clans/junia
+  - characters/augustus_junia
+  confidence: canon
+- a: characters/genevre_larcia
+  b: characters/serafina_larcia
+  type: родство
+  note: мать и дочь
+  sources:
+  - characters/houses_clans/larcia
+  - characters/genevre_larcia
+  confidence: canon
+- a: characters/olma_numicia
+  b: characters/gortensia_numicia
+  type: родство
+  note: сёстры
+  sources:
+  - characters/houses_clans/numicii
+  - countries/rojo/regions/rojo_danir_region
+  confidence: canon
+- a: characters/filomen_papiria
+  b: person:aleriya_tilmota_papiriya
+  type: родство
+  note: брат и сестра
+  sources:
+  - characters/houses_clans/papiria
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: person:aleriya_tilmota_papiriya
+  b: characters/danzar_papirius
+  type: родство
+  note: мать и сын
+  sources:
+  - characters/houses_clans/papiria
+  - characters/danzar_papirius
+  confidence: canon
+- a: characters/filomen_papiria
+  b: characters/danzar_papirius
+  type: родство
+  note: дядя и племянник; Дранзар — наследник
+  sources:
+  - characters/houses_clans/papiria
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: characters/filomen_papiria
+  b: characters/nala_salvidenija
+  type: служба
+  note: Нала — помощница Филомена («Филомен — начальник»)
+  sources:
+  - characters/houses_clans/papiria
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: characters/decimus_furia
+  b: characters/nala_salvidenija
+  type: союз
+  note: «Децимус — партнёр по бюджету»
+  sources:
+  - characters/houses_clans/furia
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+- a: characters/alia_sulpicia
+  b: characters/maria_pomar
+  type: покровительство
+  note: Алия Сульпиция — спонсор Марии Помар
+  sources:
+  - characters/houses_clans/sulpicia
+  - characters/alia_sulpicia
+  confidence: canon
+- a: characters/maria_pomar
+  b: characters/alia_sulpicia
+  type: служба
+  note: Мария Помар — легат её легиона
+  sources:
+  - countries/illior_empire/illior_empire_army
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: characters/irena_ptashzhinska
+  b: person:gzhegosh_ptashzhinski
+  type: родство
+  note: дядя — Гжегош Пташжински
+  sources:
+  - countries/gross/gross_army
+  - history/vilarin_convention
+  confidence: canon
+- a: characters/irena_ptashzhinska
+  b: characters/gustaviii
+  type: служба
+  note: Ирена назначена королём; Густав III назначил её командующей
+  sources:
+  - countries/gross/gross_army
+  - history/vilarin_convention
+  confidence: canon
+- a: person:voytseh_sapish_glen_sapish
+  b: person:amanda_kalpurniya
+  type: вражда
+  note: род Сапишей «соперничают с Кальпурниями» (соперничество)
+  sources:
+  - countries/gross/cities/city_unfortunate_stronghold
+  confidence: canon
+- a: person:enfina
+  b: person:markus_maldred_avgust_tarkviniy
+  type: брак
+  note: «Маркус — муж Энфины»
+  sources:
+  - countries/gross/index
+  - countries/rojo/index
+  confidence: canon
+- a: person:kvennid
+  b: person:adamar
+  type: брак
+  note: «жена/спутница Адамара»
+  sources:
+  - countries/enforis/index
+  - history/great_war
+  confidence: canon
+- a: person:kvennid
+  b: person:enfina
+  type: родство
+  note: Квеннид — предок Энфины
+  sources:
+  - countries/enforis/index
+  - history/great_war
+  confidence: canon
+- a: person:silviya
+  b: person:enfina
+  type: родство
+  note: дочь Энфины
+  sources:
+  - countries/enforis/index
+  - history/era_troubles
+  confidence: canon
+- a: person:damian_tarkviniy_kalatrava
+  b: person:riklaeron
+  type: родство
+  note: внук Риклаэрона
+  sources:
+  - countries/gross/index
+  - countries/rojo/index
+  confidence: canon
+- a: characters/dzhok_i
+  b: person:sabrina_delamota
+  type: брак
+  note: «муж Сабрины Деламота»
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: characters/dzhok_i
+  b: characters/augustin_espinar
+  type: союз
+  note: Эспинар поддерживает Джока I
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: characters/dzhok_i
+  b: characters/toyokuza
+  type: союз
+  note: «союзник Джока»
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: characters/augustin_espinar
+  b: characters/salvador_gerenius
+  type: вражда
+  note: Герений — враг Эспинара; проклял Эспинара
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: person:aleksis_tafalla
+  b: person:rikardo_tafalla
+  type: родство
+  note: старший и младший родичи
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+  - guilds/dawn_dolphins
+  confidence: canon
+- a: characters/morena
+  b: person:migel_i
+  type: родство
+  note: отец и дочь
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  confidence: canon
+- a: person:dzhulinika
+  b: person:gay_i
+  type: родство
+  note: бабушка и внук
+  sources:
+  - countries/rojo/index
+  - history/era_imperial
+  confidence: canon
+- a: person:maldred_avgust_tarkviniy
+  b: person:gney_maldred_avgust_tarkviniy
+  type: родство
+  note: «сын Малдреда»
+  sources:
+  - countries/illior_empire/index
+  - countries/gross/index
+  confidence: canon
+- a: person:maldred_avgust_tarkviniy
+  b: person:konstantsiya_narrakez
+  type: брак
+  note: «жена Констанция Нарракез»
+  sources:
+  - history/era_imperial
+  - countries/rojo/index
+  confidence: canon
+- a: person:maldred_avgust_tarkviniy
+  b: person:anselm_tarkviniy
+  type: родство
+  note: отец и сын (Ансельм)
+  sources:
+  - history/era_imperial
+  confidence: canon
+- a: person:maldred_avgust_tarkviniy
+  b: person:almet
+  type: родство
+  note: дед — эльфийский воин Алмет
+  sources:
+  - history/era_imperial
+  confidence: canon
+- a: person:amdzhad_al_bakir
+  b: person:yassir_al_bakir
+  type: родство
+  note: отец и сын
+  sources:
+  - history/second_igni_rojo_war
+  - countries/igni/regions/west_bank
+  confidence: canon
+- a: person:ana_kezon_ebutsiy
+  b: person:erri
+  type: родство
+  note: мать и дочь
+  sources:
+  - countries/zanra/index
+  confidence: canon
+- a: person:erri
+  b: person:trem
+  type: родство
+  note: мать и сын
+  sources:
+  - countries/zanra/index
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+- a: person:trem
+  b: person:erhi
+  type: родство
+  note: отец и дочь
+  sources:
+  - countries/zanra/index
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+- a: person:otal_kezon_ebutsiy
+  b: person:eloren_neschastnaya
+  type: брак
+  note: «муж Элорен»
+  sources:
+  - countries/zanra/index
+  - history/era_new_age
+  confidence: canon
+- a: person:otal_kezon_ebutsiy
+  b: person:avl_maldred_avgust_tarkviniy
+  type: родство
+  note: отец и сын
+  sources:
+  - countries/zanra/index
+  - history/era_new_age
+  confidence: canon
+- a: person:ali_velikolepnyy
+  b: person:viziri_radzhi
+  type: покровительство
+  note: «опекаются визирями»
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+- a: person:ali_velikolepnyy
+  b: person:otets_ali_bez_imeni
+  type: родство
+  note: «сын погибшего раджи»
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+- a: person:rulfari
+  b: person:asmodey
+  type: betrayal
+  note: 'в −111 году командующая армией людей перешла на сторону Асмодея, предав союзников'
+  sources:
+  - countries/archdemon_s_plateau/index
+  - history/great_war
+  confidence: canon
+- a: person:margo_i_mag_almos
+  b: characters/ana_vranova
+  type: служба
+  note: Марго — наёмница-агент, маг Алмос — помощник Анны Вранова
+  sources:
+  - characters/ana_vranova
+  confidence: canon
+- a: person:arhibald_kvint_marius
+  b: person:yorik_maldred_avgust_tarkviniy
+  type: служба
+  note: «император Йорик — господин»
+  sources:
+  - characters/archibald_quintus_marius
+  - countries/illior_empire/index
+  confidence: canon

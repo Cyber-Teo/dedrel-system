@@ -1,0 +1,58 @@
+# Врезка Солнечных островов: СХЕМА, не карта. Острова лежат ≈4000 км от Гарна и Олифанора — за краем карты (≈1980×1490 км).
+# Координаты x,y — вспомогательная система врезки (кадр 480×320, y вниз); масштаб и форма условные.
+# Состав (какие острова кому принадлежат) — по вики (confidence canon); форма и взаимное положение — выдумка схемы (speculative),
+# кроме явно сказанного: Тилэнакади ближайший к континенту (запад); Шанталос самый восточный у Элки; Элка — северная часть архипелага;
+# Святая Земля и Порт Кусуму — на севере; Коста Нова — центральный остров Ройо; Салмир рядом с Кифором.
+meta:
+  title: Солнечные острова (врезка)
+  caption: ≈4000 км к востоку от Гарна; масштаб врезки условный
+  distance_km: 4000
+  frame: { w: 480, h: 320 }
+  shape_confidence: speculative
+  composition_confidence: canon
+  sources:
+    - countries/sunny_islands/index
+sea_route:
+  from: [geo:garn, geo:olifanor]
+  label: к Солнечным островам, ≈4000 км (Тёмный океан)
+  enters_at: [14, 150]
+holdings:
+  - id: elka
+    name: Олигархия Элка
+    place: geo:oligarhiya_elka
+    color: '#2f7f8f'
+    polygon: [[26, 70], [120, 52], [200, 64], [262, 98], [248, 150], [170, 178], [90, 186], [34, 150]]
+    sources: [countries/sunny_islands/elka_s_oligarchy]
+    islands:
+      - { name: Тилэнакади, place: 'geo:tilenakadi', x: 56, y: 120, r: 13, note: ближайший к континенту }
+      - { name: Осегрот, place: 'geo:osegrot', x: 122, y: 108, r: 17, note: столица Элка }
+      - { name: Тэмар-Алора, place: 'geo:temar_alora', x: 112, y: 160, r: 14 }
+      - { name: Арвебель, place: 'geo:arvebel', x: 176, y: 84, r: 9 }
+      - { name: Шанталос, place: 'geo:shantalos', x: 226, y: 128, r: 14, note: самый восточный остров Элки }
+  - id: rojo
+    name: Колониальное Ройо
+    place: countries/sunny_islands/colonial_rojo
+    color: '#a8472b'
+    polygon: [[150, 214], [250, 196], [338, 214], [352, 262], [270, 292], [176, 288], [140, 252]]
+    sources: [countries/sunny_islands/colonial_rojo]
+    islands:
+      - { name: Коста Нова, place: 'geo:kosta_nova', x: 246, y: 244, r: 17, note: центральный остров, Новый Данир }
+      - { name: Форталеса, place: 'geo:fortalesa', x: 310, y: 232, r: 11, note: гористый, крепость и флот }
+  - id: makharatha
+    name: Колонии Махаратхи
+    place: countries/sunny_islands/colonies_of_makharatkha
+    color: '#8a6d1f'
+    polygon: [[360, 112], [430, 100], [466, 148], [458, 214], [398, 232], [364, 184]]
+    sources: [countries/sunny_islands/colonies_of_makharatkha]
+    islands:
+      - { name: Кифор, place: 'geo:kifor', x: 408, y: 160, r: 16, note: столица колоний }
+      - { name: Салмир, place: 'geo:salmir', x: 440, y: 190, r: 10, note: рядом с Кифором }
+      - { name: Сильренеас, place: 'geo:silreneas', x: 386, y: 206, r: 8 }
+      - { name: Хасти, place: 'geo:hasti', x: 436, y: 128, r: 8 }
+independent:
+  - { id: kusumu, name: Порт Кусуму, place: 'geo:port_kusumu', x: 340, y: 44, r: 11, color: '#4a4a4a', note: пиратский порт на одном из самых северных островов, sources: [countries/sunny_islands/index] }
+  - { id: holy, name: Святая Земля, place: 'geo:svyataya_zemlya', x: 150, y: 26, r: 11, color: '#6a4c93', note: остров на севере архипелагов, sources: [countries/sunny_islands/index] }
+unplaced_islands:
+  # названы в списке «Другие острова» без положения — на схеме не размещены
+  names: [Остров Терезы, Остров Южной Туманности, Гряда Сахейлы, Исла Алаварда, Акогальпа, Коста Фарфир]
+  sources: [countries/sunny_islands/index]

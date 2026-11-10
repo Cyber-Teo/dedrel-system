@@ -1,0 +1,616 @@
+/* окна «Связи» и «Схема Иллиора», врезка Солнечных островов */
+.gwin {
+  position: fixed;
+  z-index: 30;
+  top: var(--top-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f3ead4;
+}
+.gbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  background: var(--parch);
+  border-bottom: 1px solid var(--gold);
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.gbar b {
+  font: 700 20px var(--serif);
+}
+.gcnt {
+  color: var(--ink-soft);
+  font-size: 13px;
+  flex: 1;
+  min-width: 140px;
+}
+.gbar select,
+.gbar input {
+  padding: 4px 6px;
+  font-size: 14px;
+}
+.gback {
+  order: -1;
+  min-height: 36px;
+  font-weight: 600;
+}
+.gsearch {
+  position: relative;
+}
+.gsearch ul {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  margin: 2px 0 0;
+  padding: 4px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  box-shadow: 0 4px 14px #0003;
+}
+.gsearch li button {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 5px 6px;
+  font-size: 14px;
+}
+.gsearch li small {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.glegend {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 14px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+.gt,
+.gg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.45;
+  padding: 3px 8px;
+  font-size: 13px;
+}
+.gt.on,
+.gg.on {
+  opacity: 1;
+  background: #fff;
+  border-color: var(--gold);
+  color: var(--ink);
+}
+.gt i {
+  font-style: normal;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.gg i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.gcol {
+  display: contents;
+}
+.gmain {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  position: relative;
+}
+.gsvg {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3ead4;
+}
+.gn {
+  cursor: pointer;
+}
+.gn text {
+  font: 600 13px var(--text);
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: #f9f2dd;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.gn circle {
+  transition: r 0.12s;
+}
+.gcard {
+  width: 300px;
+  padding: 12px 14px;
+  overflow: auto;
+  background: var(--parch);
+  border-left: 1px solid var(--gold);
+  font-size: 14px;
+  position: relative;
+}
+.gcard .gx {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.gcard h3 {
+  margin: 0 34px 4px 0;
+  font: 700 20px var(--serif);
+}
+.gcard h4 {
+  margin: 10px 0 4px;
+  font: 700 15px var(--serif);
+}
+.gcard .meta {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.grels {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+.grels li {
+  margin: 4px 0;
+}
+.grels li > i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.grels li button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--blood);
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+}
+.grels small {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.sch .schbody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.schcard {
+  order: -1;
+  width: 300px;
+  padding: 12px 14px;
+  overflow: auto;
+  background: var(--parch);
+  border-right: 1px solid var(--gold);
+  font-size: 14px;
+}
+.schcard h3 {
+  margin: 0 0 4px;
+  font: 700 20px var(--serif);
+}
+.schcard .meta,
+.schcard .links {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.schcard .links a {
+  display: block;
+}
+.schl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 13px;
+}
+.schl i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+}
+.schd {
+  font: 600 12px var(--text);
+  fill: var(--ink);
+  text-anchor: middle;
+  pointer-events: none;
+}
+.schr {
+  font: italic 14px var(--text);
+  fill: #3b6577;
+}
+.schv {
+  font: 12px var(--text);
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: #efe4c4;
+  stroke-width: 3px;
+}
+.dst,
+.ven {
+  cursor: pointer;
+}
+.dst:hover rect {
+  fill: #efe2b4;
+}
+.ven.hl .mk {
+  filter: drop-shadow(0 0 4px #8c1c13);
+}
+.ven .vlbl {
+  display: none;
+}
+.ven:hover .vlbl,
+.ven.hl .vlbl {
+  display: block;
+}
+.schlist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  max-height: 120px;
+  overflow: auto;
+  margin: 6px 0;
+}
+.schlist button {
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.schlist button:hover,
+.schlist button.hl {
+  background: #efe2b4;
+}
+@media (max-width: 760px) {
+  .gmain {
+    flex-direction: column;
+  }
+  .gcard {
+    width: auto;
+    max-height: 45%;
+    border-left: 0;
+    border-top: 1px solid var(--gold);
+  }
+  .schcard {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-height: 45%;
+    border-right: 0;
+    border-top: 1px solid var(--gold);
+    z-index: 3;
+  }
+  .gbar {
+    gap: 6px;
+    padding: 6px 10px;
+    flex-wrap: nowrap;
+  }
+  .gbar > button {
+    white-space: nowrap;
+    flex: none;
+  }
+  .gbt {
+    display: none;
+  }
+  .gback {
+    min-width: 44px;
+  }
+  .gback {
+    min-height: 44px;
+  }
+  .gcnt {
+    display: none;
+  }
+  .gbar b {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  } /* заголовок окна остаётся для чтения с экрана и фокуса */
+  .gsearch {
+    flex: 1;
+    min-width: 120px;
+  }
+  .gsearch input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .glegend {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 4px 10px;
+  }
+  .gt,
+  .gg {
+    flex: none;
+  }
+  .gwin:not(.sch) .gbar label {
+    font-size: 13px;
+  }
+  .gbar label select {
+    max-width: 130px;
+  }
+}
+/* врезка: поверх всех чипов слоёв, справа под шапкой; при открытом досье сдвигается левее него */
+.sunny {
+  position: fixed;
+  top: calc(var(--top-h) + 12px);
+  right: 12px;
+  width: min(360px, calc(100vw - 24px));
+  max-height: calc(100vh - var(--top-h) - var(--dock-h) - 24px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--parch);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 14px #2b211355;
+  z-index: 12;
+  pointer-events: auto;
+}
+body.dossier-open .sunny {
+  right: calc(var(--side-w) + 20px);
+}
+.sunny-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 700 16px var(--serif);
+}
+.sx {
+  padding: 0 6px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.sunny-svg {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+.sunny-t {
+  font: 12px var(--text);
+  fill: var(--ink);
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #cfe0e4;
+  stroke-width: 2.5px;
+}
+.sunny-n {
+  font: 700 13px var(--serif);
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: #cfe0e4;
+  stroke-width: 3px;
+}
+.sh polygon,
+.sh circle {
+  cursor: pointer;
+}
+.sh.hov polygon {
+  fill-opacity: 0.5;
+}
+.sunny-cap {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 3px;
+}
+/* чип */
+.sunny-mark {
+  position: absolute;
+  z-index: 5;
+  top: 12px;
+  right: 12px;
+  max-width: calc(100vw - 24px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  min-height: 36px;
+  box-sizing: border-box;
+  background: var(--parch);
+  color: #1f4f7a;
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  font: 600 14px var(--serif);
+  line-height: 1.1;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 1px 6px #2b211355;
+  white-space: nowrap;
+}
+.sunny-mark:hover {
+  background: #fff8e1;
+}
+body.dossier-open .sunny-mark,
+body.tool-active .sunny-mark,
+body.gwin-open .sunny-mark {
+  display: none;
+}
+@media (max-width: 1365px) {
+  .sunny-mark {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .sunny-mark .sm-t {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+@media (max-width: 760px) {
+  .sunny {
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: var(--dock-h);
+    width: auto;
+    max-height: 55vh;
+    border-radius: 12px 12px 0 0;
+  }
+  body.dossier-open .sunny {
+    right: 0;
+  }
+  .sx {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 18px;
+  }
+}
+.schq {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* поля выбора и поиска окна «Связи» — в тон панелям */
+.gbar select,
+.gbar input[type='search'] {
+  background: #fffaf0;
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  font: 14px var(--text);
+  min-height: 32px;
+  box-sizing: border-box;
+}
+.gbar select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 4px 26px 4px 8px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--blood) 50%),
+    linear-gradient(135deg, var(--blood) 50%, transparent 50%);
+  background-position:
+    calc(100% - 13px) 55%,
+    calc(100% - 8px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.gbar select:hover,
+.gbar input[type='search']:hover {
+  background-color: #fff;
+}
+.gbar select:focus-visible,
+.gbar input[type='search']:focus-visible {
+  outline: 2px solid var(--blood);
+  outline-offset: 1px;
+}
+
+/* телефон: фильтры (дом, эпоха, типы связей) — под одной кнопкой «Фильтры» */
+.gfbtn {
+  display: none;
+}
+.gn:focus {
+  outline: none;
+}
+.gn:focus-visible circle {
+  stroke: #000;
+  stroke-width: 3.5;
+}
+@media (max-width: 700px) {
+  .gfbtn {
+    display: inline-flex;
+    min-height: 36px;
+  }
+  .gbar .gfl,
+  .gbar .gcnt {
+    display: none;
+  }
+  .gbar.fopen .gfl {
+    display: inline-flex;
+  }
+  .glegend {
+    display: none;
+  }
+  .glegend.fopen {
+    display: flex;
+  }
+}
+
+/* схема Иллиора: список заведений — значок + имя с переносом, выбранное подсвечено */
+.schlist {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  max-height: 220px;
+  gap: 1px;
+}
+.schlist button {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+  padding: 3px 4px;
+  border-radius: 4px;
+}
+.schlist button svg {
+  flex: none;
+  margin-top: 1px;
+}
+.schlist button.hl {
+  background: #f3e2a8;
+  box-shadow: inset 3px 0 0 var(--blood);
+  font-weight: 600;
+}
+.schd.sche {
+  font-style: italic;
+  font-weight: 400;
+  fill: var(--ink-soft);
+  font-size: 11px;
+}
+.sunny-arrow-lbl {
+  font: italic 12px var(--text);
+  color: #1f4f8f;
+  text-shadow:
+    0 0 3px #fff,
+    0 0 3px #fff,
+    0 0 3px #fff;
+  white-space: nowrap;
+  pointer-events: none;
+}

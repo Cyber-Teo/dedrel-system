@@ -1,0 +1,54 @@
+{
+  "name": "dedrel-atlas",
+  "version": "1.0.0",
+  "description": "Интерактивный атлас мира Дедрел: карта, хронология, досье, слои и сценарии",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.34.9",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "tsx scripts/dev-api.ts",
+    "prebuild": "tsx scripts/build/build-master.ts",
+    "build": "pnpm typecheck && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
+    "test": "vitest run",
+    "validate": "tsx scripts/check/validate.ts",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "e2e": "playwright test",
+    "tiles": "python3 scripts/geo/tiles.py",
+    "sync": "tsx scripts/build/sync.ts",
+    "check:master": "node scripts/check/check-dist-master.mjs",
+    "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm validate"
+  },
+  "dependencies": {
+    "maplibre-gl": "^6.17.0",
+    "preact": "^11.2.0",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
+    "@preact/preset-vite": "^2.10.6",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "~8.71.2",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

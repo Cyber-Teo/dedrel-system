@@ -1,0 +1,56 @@
+# Сценарий: Основание Иллиорской империи, 206 год, и отказ Энфориса в 207.
+# Источники: события 206–207 в data/events.yaml (вики history/era_imperial, countries/*). Только то, что сказано там;
+# места без координат (Гросс, Хрэлл — регионы) на карте не рисуются, камера берётся по городам с координатами.
+id: empire-206
+title: Основание Иллиорской империи (206)
+summary: '206 год: 181-летний Малдред превращает Иллиорский союз в империю — префектуры Арност, Гросс, Хрэлл, Залесское княжество; в 207 году Энфорис отказывается входить.'
+sources: [history/era_imperial, countries/illior_empire/index]
+steps:
+  - title: Союз становится империей
+    date: { year: 206 }
+    text: >-
+      На закате жизни 181-летний Малдред Завоеватель превращает Иллиорский союз в империю — почти на все Восточные земли. С тех пор
+      императоры носят династическое имя Малдред Август; Дом Тарквиниев становится правящим.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 206
+    sources: [history/era_imperial, countries/illior_empire/index, characters/houses_clans/tarquinii]
+  - title: Префектура Арност
+    date: { year: 206 }
+    text: >-
+      Создана префектура Арност со столицей в Нордхельде; к ней присоединено Вышневодское княжество.
+    camera: { place: geo:nordheld, zoom: 3 }
+    highlight:
+      places: [geo:nordheld, geo:vyshnevodsk]
+      lines: [{ label: 'Нордхельд — Вышневодск (схематично, по прямой)', via: [geo:nordheld, geo:vyshnevodsk] }]
+    sources: [countries/rojo/index, countries/vishnevodskoye_principality/index]
+  - title: Гросс входит добровольно
+    date: { year: 206 }
+    text: >-
+      Королевство Гросс добровольно входит в империю: корона переходит императору, но автономия сохраняется — так возникает
+      префектура Гросс.
+    camera: { place: geo:bersan, zoom: 3.4 }
+    highlight:
+      places: [geo:bersan]
+    sources: [countries/gross/index, history/era_imperial]
+  - title: Хрэлл и Залесское княжество
+    date: { year: 206 }
+    text: >-
+      Самрун становится столицей префектуры Хрэлл. Залесск и окрестности подчинены напрямую канцелярии и называются Залесским княжеством.
+    camera: { place: geo:samrun, zoom: 3 }
+    highlight:
+      places: [geo:samrun, geo:zalessk]
+      lines: [{ label: 'Залесск — Самрун (схематично, по прямой)', via: [geo:zalessk, geo:samrun] }]
+    sources: [countries/khrell/index, countries/zalessk/index, history/era_imperial]
+  - title: Энфорис отказывается
+    date: { year: 207 }
+    text: >-
+      Всенародным голосованием граждане Энфориса отказываются войти в империю; отношения охлаждаются, Энфорис остаётся независимым.
+    camera: { px: [7613, 760], zoom: 3 }
+    highlight:
+      places: []
+      polities: [countries/enforis/index]
+    owners_at: 207
+    sources: [countries/enforis/index, history/era_imperial]

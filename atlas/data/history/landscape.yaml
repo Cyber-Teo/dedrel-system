@@ -1,0 +1,57 @@
+# Ландшафт по эпохам: объект отсутствует до года absent_before (на карте закрыт цветом суши с подписью label),
+# с этого года виден как нарисован на растре. Геометрия — id полигонов из data/geo/terrain.geojson или data/geo/inner-sea.geojson.
+# event — событие из data/events.yaml, по которому назначен год.
+- id: landscape:inner_sea
+  name: Внутреннее море
+  absent_before: -490
+  label: "Внутреннего моря ещё нет: до −490"
+  geometry: [landscape:inner_sea]
+  event: ev:-490:bitva_ognennoy_yarosti
+  confidence: derived
+  sources: [history/great_war, history/era_great_war_summary, geo:vnutrennee_more, map:растр]
+  note: Битва Огненной ярости ≈−490 — «образуется Внутреннее море». До неё на этом месте суша. Форма суши — по контуру моря на растре (граница с океаном — хорда через Солнечный пролив), поэтому derived.
+- id: landscape:long_swamp
+  name: Долгое болото
+  absent_before: -500
+  label: "Долгого болота ещё нет: до −500"
+  geometry: [terrain:swamp:9]
+  event: ev:-495:voyna_straha_proklyatie_denrary_sozd
+  confidence: derived
+  sources: [history/great_war, geography/long_swamp, map:растр]
+  note: Событие датировано ≈−500…−490 (проклятие Денрары создаёт Долгое и Морозное болота); взято начало диапазона −500. Контур — как на растре, до проклятия там были земли Первых людей.
+- id: landscape:frosty_marsh
+  name: Морозное болото
+  absent_before: -500
+  label: "Морозного болота ещё нет: до −500"
+  geometry: [terrain:swamp:10]
+  event: ev:-495:voyna_straha_proklyatie_denrary_sozd
+  confidence: derived
+  sources: [history/great_war, geography/frosty_marsh, map:растр]
+  note: Событие датировано ≈−500…−490; взято начало диапазона −500.
+- id: landscape:vilarin_swamps
+  name: Виларинские болота
+  absent_before: -290
+  label: "Виларинских болот ещё нет: до −290"
+  geometry: [terrain:swamp:11, terrain:swamp:12]
+  event: ev:-290:padenie_arkadii_nochnoy_shturm_podze
+  confidence: speculative
+  sources: [history/great_war, history/era_great_war_summary, geo:vilarinskie_bolota, geo:arkadiya, map:растр]
+  note: Аркадия пала ≈−290 и «поглощена болотами»; Виларинские болота — «большая часть префектуры Виларин», у участков свои имена. Полигон — два названных болота префектуры (Болото чёрного пламени, Болото пляшущих молний), весь контур Виларинских болот на карте не выделен. Другая версия — земли у Аркадии отравлены уже Битвой при Аркадии (после −490).
+- id: landscape:archdemon_wastes
+  name: Пустоши у Плато Архидемона
+  absent_before: -500
+  label: "Пустошей у плато ещё нет: до −500"
+  geometry: [cell:147, cell:148, cell:149, cell:150, cell:156]
+  event: ev:-500:vtorzhenie_demonov_pervye_portaly_na
+  confidence: derived
+  sources: [history/great_war, history/era_great_war_summary, countries/archdemon_s_plateau/index, map:растр]
+  note: "Вторжение демонов ≈−500: Первые люди выжигают земли вокруг плато («пустошь до сих пор»). Контур — ячейки плато без Асмодиуса и Аль Баджики, точный контур выжженных земель неизвестен, поэтому derived."
+- id: landscape:arnost_zone
+  name: Зона Арноста
+  absent_before: 672
+  label: "Зоны Арноста ещё нет: до 672"
+  geometry: [cell:85, cell:86, cell:87, cell:89, cell:90, cell:91]
+  event: ev:672:katastrofa_v_arnoste
+  confidence: derived
+  sources: [history/arnost_catastrophe, history/era_troubles, map:растр]
+  note: "Катастрофа в Арносте 672 — зона отчуждения («Префектура мертвецов»). До неё на этом месте обычная имперская префектура. Контур — по ячейкам Арноста на карте."

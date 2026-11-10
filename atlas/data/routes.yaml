@@ -1,0 +1,1356 @@
+# Пути и походы. Собрано scripts/geo/build-routes.py из data/flows.yaml (flows — id исходных потоков); геометрия — data/geo/routes.geojson.
+# kind: trade_land|trade_river|trade_sea|caravan|slave|campaign; from/to/via — id мест; geom: road|river|sea|mixed|straight (straight = прямая, на карте пунктир, confidence не выше derived).
+- id: route:trade_river-001
+  flows:
+  - flow:river_trade-067ff8
+  kind: trade_river
+  name: серебро и грузы, суда мимо Форта Болотного; пираты
+  from: geo:serebryanye_gory
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: серебро и грузы, суда мимо Форта Болотного; пираты
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/illior_empire/regions/illior_empire_vilarin_region
+- id: route:trade_river-002
+  flows:
+  - flow:river_trade-6d6477
+  kind: trade_river
+  name: перевалка речной торговли, редкие деревья и звери
+  from: geo:metis
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: перевалка речной торговли, редкие деревья и звери
+  geom: river
+  confidence: canon
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+- id: route:trade_land-001
+  flows:
+  - flow:road-f3d7f4
+  kind: trade_land
+  name: западный тракт, пошлины
+  from: countries/illior_empire/cities/city_illior
+  to: geo:visentiya
+  year_from: null
+  year_to: null
+  what: западный тракт, пошлины
+  geom: road
+  confidence: canon
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+- id: route:trade_land-002
+  flows:
+  - flow:road-a9ebe9
+  kind: trade_land
+  name: восточный тракт
+  from: countries/illior_empire/cities/city_illior
+  to: geo:kameraska
+  year_from: null
+  year_to: null
+  what: восточный тракт
+  geom: road
+  confidence: canon
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+- id: route:trade_land-003
+  flows:
+  - flow:road-a9ebe9
+  kind: trade_land
+  name: восточный тракт
+  from: countries/illior_empire/cities/city_illior
+  to: geo:korialum
+  year_from: null
+  year_to: null
+  what: восточный тракт
+  geom: road
+  confidence: canon
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+- id: route:trade_land-004
+  flows:
+  - flow:road-a9ebe9
+  kind: trade_land
+  name: восточный тракт
+  from: countries/illior_empire/cities/city_illior
+  to: geo:mikris
+  year_from: null
+  year_to: null
+  what: восточный тракт
+  geom: road
+  confidence: canon
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+- id: route:trade_land-005
+  flows:
+  - flow:road-033ab4
+  kind: trade_land
+  name: студенты и поступающие
+  from: countries/illior_empire/cities/city_illior
+  to: geo:vilarin_gorod
+  year_from: null
+  year_to: null
+  what: студенты и поступающие
+  geom: road
+  confidence: canon
+  sources:
+  - countries/illior_empire/cities/city_illior
+- id: route:trade_land-006
+  flows:
+  - flow:road-fbf2d1
+  kind: trade_land
+  name: югозападный тракт Сервилиев
+  from: geo:bersan
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: югозападный тракт Сервилиев
+  geom: road
+  confidence: canon
+  sources:
+  - characters/houses_clans/servilii
+- id: route:slave-001
+  flows:
+  - flow:slave_trade-699fbb
+  - flow:rabotorgovlya-121281
+  kind: slave
+  name: рабы через махаратских купцов
+  from: countries/slavetraders_coast/index
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: рабы через махаратских купцов
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/illior_empire/index
+  - guilds/north_road
+- id: route:caravan-001
+  flows:
+  - flow:caravan-4ec215
+  - flow:karavannyy_put-1ca17f
+  kind: caravan
+  name: торговые караваны Клавдиев
+  from: countries/illior_empire/cities/city_illior
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: торговые караваны Клавдиев
+  geom: straight
+  confidence: derived
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+- id: route:trade_river-003
+  flows:
+  - flow:sea_river_trade-60fcc7
+  kind: trade_river
+  name: грузы в речные порты
+  from: geo:vyshnevodsk
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: грузы в речные порты
+  geom: river
+  confidence: canon
+  sources:
+  - countries/illior_empire/cities/city_illior
+- id: route:campaign-001
+  flows:
+  - flow:military-5ad2e7
+  - flow:voennyy_pohod-8ff401
+  - flow:voennyy_pohod-7d49c0
+  kind: campaign
+  name: добровольческий легион (817)
+  from: countries/illior_empire/cities/city_illior
+  to: geo:mikris
+  year_from: 817
+  year_to: 817
+  what: добровольческий легион (817)
+  geom: road
+  confidence: canon
+  sources:
+  - characters/filomen_papiria
+  - characters/houses_clans/horatii
+  - countries/zanra/index
+- id: route:campaign-002
+  flows:
+  - flow:military-e26801
+  kind: campaign
+  name: размещение XXIII легиона (1005)
+  from: countries/illior_empire/cities/city_illior
+  to: geo:greyheld
+  year_from: 1005
+  year_to: 1005
+  what: размещение XXIII легиона (1005)
+  geom: road
+  confidence: canon
+  sources:
+  - characters/houses_clans/opia
+- id: route:trade_land-007
+  flows:
+  - flow:torgovyy_trakt-8661d8
+  kind: trade_land
+  name: товары, купцы, пиво, изделия из дерева
+  from: geo:danir
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: товары, купцы, пиво, изделия из дерева
+  geom: road
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_central_region
+- id: route:trade_river-004
+  flows:
+  - flow:reka-c90e04
+  kind: trade_river
+  name: рыба, торговля, хмель, зерно
+  from: geo:bredon
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: рыба, торговля, хмель, зерно
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+- id: route:trade_river-005
+  flows:
+  - flow:reka-c90e04
+  kind: trade_river
+  name: рыба, торговля, хмель, зерно
+  from: geo:bredon
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: рыба, торговля, хмель, зерно
+  geom: river
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+- id: route:trade_river-006
+  flows:
+  - flow:reka-c90e04
+  kind: trade_river
+  name: рыба, торговля, хмель, зерно
+  from: geo:bredon
+  to: geo:vyshnevodsk
+  year_from: null
+  year_to: null
+  what: рыба, торговля, хмель, зерно
+  geom: river
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+- id: route:trade_sea-001
+  flows:
+  - flow:morskaya_liniya-4dde98
+  kind: trade_sea
+  name: корабельный лес, пошлины, корабли Дринрога
+  from: geo:nizhniy_balatter
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: корабельный лес, пошлины, корабли Дринрога
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_lior_delta
+- id: route:trade_land-008
+  flows:
+  - flow:torgovlya-985ff0
+  kind: trade_land
+  name: корабельная и магическая древесина
+  from: geography/changeling_forest
+  to: geo:danir
+  year_from: null
+  year_to: null
+  what: корабельная и магическая древесина
+  geom: road
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_changeling_forest
+- id: route:trade_land-009
+  flows:
+  - flow:torgovlya-985ff0
+  kind: trade_land
+  name: корабельная и магическая древесина
+  from: geography/changeling_forest
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: корабельная и магическая древесина
+  geom: road
+  confidence: canon
+  sources:
+  - countries/gross/regions/gross_changeling_forest
+- id: route:trade_sea-002
+  flows:
+  - flow:morskoy_put-d32f9a
+  kind: trade_sea
+  name: ткани, роскошь, переселенцы
+  from: geo:kuro_minato
+  to: geo:samrun
+  year_from: null
+  year_to: null
+  what: ткани, роскошь, переселенцы
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/khrell/index
+- id: route:trade_land-010
+  flows:
+  - flow:torgovyy_trakt-ee0ad0
+  kind: trade_land
+  name: драгоценные камни и металлы
+  from: countries/illior_empire/cities/city_illior
+  to: geo:samrun
+  year_from: null
+  year_to: null
+  what: драгоценные камни и металлы
+  geom: road
+  confidence: canon
+  sources:
+  - countries/khrell/index
+- id: route:trade_land-011
+  flows:
+  - flow:kontrabanda-997529
+  kind: trade_land
+  name: товары запада
+  from: countries/dragons_country/index
+  to: geo:zalessk
+  year_from: null
+  year_to: null
+  what: товары запада
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:trade_river-007
+  flows:
+  - flow:vodnyy_put-d449ef
+  kind: trade_river
+  name: всё сообщение через Гиблую
+  from: geo:zalessk
+  to: geo:vnutrennee_more
+  year_from: null
+  year_to: null
+  what: всё сообщение через Гиблую
+  geom: river
+  confidence: canon
+  sources:
+  - countries/zalessk/index
+- id: route:trade_land-012
+  flows:
+  - flow:ukreplennaya_doroga-0d3558
+  kind: trade_land
+  name: сообщение с империей (оборвано в 672)
+  from: geo:vyshpa
+  to: geo:nordheld
+  year_from: null
+  year_to: null
+  what: сообщение с империей (оборвано в 672)
+  geom: road
+  confidence: canon
+  sources:
+  - countries/zalessk/index
+- id: route:trade_sea-003
+  flows:
+  - flow:morskaya_liniya-1ef9af
+  kind: trade_sea
+  name: связь, рыба, морские чудовища
+  from: geo:antium
+  to: geo:vyshnevodsk
+  year_from: null
+  year_to: null
+  what: связь, рыба, морские чудовища
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/zalessk/index
+- id: route:slave-002
+  flows:
+  - flow:rabotorgovlya-8ea2c4
+  kind: slave
+  name: покупка рабов, заморские вещи
+  from: geo:maharatha_gorod
+  to: geo:zalessk
+  year_from: null
+  year_to: null
+  what: покупка рабов, заморские вещи
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:trade_land-013
+  flows:
+  - flow:torgovlya-ad5220
+  kind: trade_land
+  name: артефакты за бумажные деньги
+  from: geo:zalessk
+  to: geo:mikris
+  year_from: null
+  year_to: null
+  what: артефакты за бумажные деньги
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:campaign-003
+  flows:
+  - flow:voennyy_pohod-0844d8
+  - flow:voennyy_pohod-ed2537
+  kind: campaign
+  name: армия Малдреда 163
+  from: geo:nordheld
+  to: geo:zalessk
+  via:
+  - geo:vyshpa
+  - geo:antium
+  - geo:sovinyy_pogost
+  year_from: 163
+  year_to: 163
+  what: армия Малдреда 163
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+  - history/era_imperial
+- id: route:campaign-004
+  flows:
+  - flow:voennyy_pohod-b1e1ae
+  kind: campaign
+  name: флот Малдреда 164
+  from: geo:zalessk
+  to: geo:samrun
+  year_from: 164
+  year_to: 164
+  what: флот Малдреда 164
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/khrell/index
+- id: route:campaign-005
+  flows:
+  - flow:voennyy_pohod-f34d6f
+  kind: campaign
+  name: варвары и ссыльные 562-567
+  from: geo:zalessk
+  to: countries/khrell/index
+  year_from: 562
+  year_to: 567
+  what: варвары и ссыльные 562-567
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:trade_land-014
+  flows:
+  - flow:torgovlya-7f8174
+  kind: trade_land
+  name: пушнина, артефакты
+  from: geo:zalessk
+  to: geo:vyshnevodsk
+  year_from: null
+  year_to: null
+  what: пушнина, артефакты
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:trade_land-015
+  flows:
+  - flow:torgovlya-7f8174
+  kind: trade_land
+  name: пушнина, артефакты
+  from: geo:zalessk
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: пушнина, артефакты
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/zalessk/index
+- id: route:trade_land-016
+  flows:
+  - flow:torgovyy_put-26fba6
+  kind: trade_land
+  name: Торговля
+  from: geo:nuetida
+  to: countries/dragons_country/index
+  year_from: null
+  year_to: null
+  what: Торговля
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+- id: route:trade_sea-004
+  flows:
+  - flow:torgovyy_put-5e5c60
+  kind: trade_sea
+  name: Торговля
+  from: geo:nadzhir
+  to: geo:solnechnyy_proliv
+  year_from: null
+  year_to: null
+  what: Торговля
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/rojo/index
+- id: route:trade_river-008
+  flows:
+  - flow:rechnoy_morskoy_put-52145c
+  kind: trade_river
+  name: Торговля
+  from: geo:savo
+  to: geography/monstrous_sea
+  year_from: null
+  year_to: null
+  what: Торговля
+  geom: river
+  confidence: canon
+  sources:
+  - countries/drinrog/index
+- id: route:trade_land-017
+  flows:
+  - flow:doroga_poshliny-f7cda7
+  kind: trade_land
+  name: Южный тракт
+  from: geo:siladel
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: Южный тракт
+  geom: road
+  confidence: canon
+  sources:
+  - countries/drinrog/index
+- id: route:trade_land-018
+  flows:
+  - flow:torgovlya-6e808e
+  kind: trade_land
+  name: Бумага
+  from: geo:mikris
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: Бумага
+  geom: road
+  confidence: canon
+  sources:
+  - countries/drinrog/index
+- id: route:trade_land-019
+  flows:
+  - flow:torgovlya-75fb80
+  kind: trade_land
+  name: Оружие, пушки
+  from: geo:mikris
+  to: geo:danir
+  year_from: null
+  year_to: null
+  what: Оружие, пушки
+  geom: road
+  confidence: canon
+  sources:
+  - countries/rojo/index
+- id: route:trade_land-020
+  flows:
+  - flow:trakt-e9b25f
+  kind: trade_land
+  name: Дорога империи в Залесск
+  from: geo:nordheld
+  to: geo:vyshpa
+  year_from: null
+  year_to: null
+  what: Дорога империи в Залесск
+  geom: road
+  confidence: canon
+  sources:
+  - history/arnost_catastrophe
+- id: route:campaign-006
+  flows:
+  - flow:voennyy_pohod-c5837e
+  - flow:voennyy_pohod-a637d4
+  kind: campaign
+  name: Малдред 171–173
+  from: countries/illior_empire/cities/city_illior
+  to: geo:nadzhir
+  year_from: 171
+  year_to: 173
+  what: Малдред 171–173
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/rojo/index
+  - history/era_imperial
+- id: route:campaign-007
+  flows:
+  - flow:voennyy_pohod-f16b61
+  - flow:voennyy_pohod-9274e5
+  kind: campaign
+  name: 277–279
+  from: countries/illior_empire/cities/city_illior
+  to: geo:zapadnyy_bereg_prefektura_rinar
+  year_from: 277
+  year_to: 279
+  what: 277–279
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/rojo/index
+  - history/era_imperial
+- id: route:campaign-008
+  flows:
+  - flow:voennyy_pohod-3e101f
+  kind: campaign
+  name: '1005'
+  from: geo:tarpet
+  to: geo:abbatstvo
+  via:
+  - geo:zapadnyy_bereg_prefektura_rinar
+  year_from: 1005
+  year_to: 1005
+  what: '1005'
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/rojo/index
+- id: route:trade_land-021
+  flows:
+  - flow:torgovyy_put-f03fcb
+  kind: trade_land
+  name: драгметаллы по Лиору
+  from: geo:serebryanye_gory
+  to: geo:koshchin
+  year_from: null
+  year_to: null
+  what: драгметаллы по Лиору
+  geom: road
+  confidence: canon
+  sources:
+  - countries/vishnevodskoye_principality/index
+- id: route:trade_river-009
+  flows:
+  - flow:rechnoy_put-128ccb
+  kind: trade_river
+  name: металлы, сера
+  from: geo:vyshnevodsk
+  to: geography/monstrous_sea
+  year_from: null
+  year_to: null
+  what: металлы, сера
+  geom: river
+  confidence: canon
+  sources:
+  - countries/vishnevodskoye_principality/index
+- id: route:trade_land-022
+  flows:
+  - flow:torgovyy_put-ce4938
+  - flow:torgovyy_put-fa3b62
+  kind: trade_land
+  name: товары через Старый лес
+  from: countries/illior_empire/cities/city_illior
+  to: geo:garn
+  year_from: null
+  year_to: null
+  what: товары через Старый лес
+  geom: road
+  confidence: canon
+  sources:
+  - countries/zanra/index
+  - geography/old_forest
+- id: route:trade_land-023
+  flows:
+  - flow:torgovyy_put-7bf877
+  kind: trade_land
+  name: драгоценности из Серебряных гор
+  from: geo:garn
+  to: geo:olifanor
+  year_from: null
+  year_to: null
+  what: драгоценности из Серебряных гор
+  geom: road
+  confidence: canon
+  sources:
+  - countries/enforis/index
+- id: route:slave-003
+  flows:
+  - flow:rabotorgovlya-fc7b48
+  kind: slave
+  name: рабы
+  from: geo:maharatha_gorod
+  to: geo:vyshnevodsk
+  year_from: null
+  year_to: null
+  what: рабы
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/vishnevodskoye_principality/index
+- id: route:campaign-009
+  flows:
+  - flow:voennyy_pohod-c73992
+  - flow:voennyy_pohod-2d7f99
+  kind: campaign
+  name: поход Малдреда 88
+  from: countries/illior_empire/cities/city_illior
+  to: geo:garn
+  year_from: 88
+  year_to: 88
+  what: поход Малдреда 88
+  geom: road
+  confidence: canon
+  sources:
+  - countries/zanra/index
+  - history/era_imperial
+- id: route:campaign-010
+  flows:
+  - flow:voennyy_pohod-2e990a
+  - flow:voennyy_pohod-fc4c70
+  kind: campaign
+  name: поход Гнея 176
+  from: geo:lior_reka
+  to: geo:vyshnevodsk
+  year_from: 176
+  year_to: 176
+  what: поход Гнея 176
+  geom: road
+  confidence: canon
+  sources:
+  - countries/vishnevodskoye_principality/index
+  - history/era_imperial
+- id: route:trade_sea-005
+  flows:
+  - flow:morskoy_fraht-2c837d
+  - flow:morskoy_put-cb50f7
+  kind: trade_sea
+  name: Чёрные всадники
+  from: geo:port_novoy_nadezhdy
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: Чёрные всадники
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/enforis/index
+  - countries/slavetraders_coast/index
+- id: route:campaign-011
+  flows:
+  - flow:nalety-4b2ced
+  kind: campaign
+  name: 5.11.730
+  from: geo:olifanor
+  to: geo:artisium
+  year_from: 730
+  year_to: 730
+  what: 5.11.730
+  geom: road
+  confidence: canon
+  sources:
+  - countries/enforis/index
+- id: route:trade_land-024
+  flows:
+  - flow:tovarnyy_potok-6581aa
+  kind: trade_land
+  name: фейерверки
+  from: geo:mikris
+  to: geo:vyshnevodsk
+  year_from: null
+  year_to: null
+  what: фейерверки
+  geom: road
+  confidence: canon
+  sources:
+  - countries/vishnevodskoye_principality/index
+- id: route:trade_land-025
+  flows:
+  - flow:tovarnyy_potok-7b995d
+  kind: trade_land
+  name: наёмники
+  from: geo:zalessk
+  to: geo:talar
+  year_from: null
+  year_to: null
+  what: наёмники
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/enforis/index
+- id: route:trade_land-026
+  flows:
+  - flow:kontrabanda_pomosch-cec6cd
+  kind: trade_land
+  name: гуманитарные грузы в 300-х
+  from: geo:mikris
+  to: geo:olifanor
+  year_from: null
+  year_to: null
+  what: гуманитарные грузы в 300-х
+  geom: road
+  confidence: canon
+  sources:
+  - countries/zanra/index
+- id: route:caravan-002
+  flows:
+  - flow:karavannaya_doroga-99dd4d
+  - flow:karavannyy_put-6cd0dd
+  kind: caravan
+  name: торговые караваны
+  from: geo:maharatha_gorod
+  to: geo:tarpet
+  year_from: null
+  year_to: null
+  what: торговые караваны
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/land_of_oases/index
+  - countries/makharatkha/index
+- id: route:caravan-003
+  flows:
+  - flow:karavannaya_doroga-99dd4d
+  - flow:karavannyy_put-6cd0dd
+  kind: caravan
+  name: торговые караваны
+  from: geo:maharatha_gorod
+  to: geo:madakish
+  year_from: null
+  year_to: null
+  what: торговые караваны
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/land_of_oases/index
+  - countries/makharatkha/index
+- id: route:caravan-004
+  flows:
+  - flow:karavannaya_doroga-31a16e
+  kind: caravan
+  name: торговля
+  from: geo:al_badzhika
+  to: geo:tarpet
+  year_from: null
+  year_to: null
+  what: торговля
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/archdemon_s_plateau/index
+- id: route:slave-004
+  flows:
+  - flow:rabotorgovlya-e681e2
+  kind: slave
+  name: умелые рабы
+  from: geo:madakish
+  to: countries/slavetraders_coast/index
+  year_from: null
+  year_to: null
+  what: умелые рабы
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/archdemon_s_plateau/index
+- id: route:slave-005
+  flows:
+  - flow:rabotorgovlya-a3264c
+  kind: slave
+  name: пленные
+  from: geo:vandatari
+  to: countries/slavetraders_coast/index
+  year_from: null
+  year_to: null
+  what: пленные
+  geom: road
+  confidence: canon
+  sources:
+  - countries/land_of_oases/index
+- id: route:trade_land-027
+  flows:
+  - flow:doroga-d95292
+  kind: trade_land
+  name: путь
+  from: geo:oviday
+  to: geo:vandatari
+  year_from: null
+  year_to: null
+  what: путь
+  geom: road
+  confidence: canon
+  sources:
+  - countries/archdemon_s_plateau/index
+- id: route:trade_land-028
+  flows:
+  - flow:doroga-78f220
+  kind: trade_land
+  name: путь
+  from: geo:herift
+  to: geo:asmodius
+  year_from: null
+  year_to: null
+  what: путь
+  geom: road
+  confidence: canon
+  sources:
+  - countries/slavetraders_coast/index
+- id: route:caravan-005
+  flows:
+  - flow:karavannaya_doroga-060e22
+  kind: caravan
+  name: перекрёсток
+  from: geo:vandatari
+  to: geo:kohet
+  year_from: null
+  year_to: null
+  what: перекрёсток
+  geom: road
+  confidence: canon
+  sources:
+  - countries/slavetraders_coast/index
+- id: route:trade_river-010
+  flows:
+  - flow:rechnoy_put-6d9cbc
+  kind: trade_river
+  name: Сарати
+  from: geo:nepiya
+  to: geo:sulmipur
+  year_from: null
+  year_to: null
+  what: Сарати
+  geom: river
+  confidence: canon
+  sources:
+  - countries/igni/regions/igni_sarati_region
+- id: route:trade_river-011
+  flows:
+  - flow:rechnoy_put-6d9cbc
+  kind: trade_river
+  name: Сарати
+  from: geo:nepiya
+  to: geography/monstrous_sea
+  year_from: null
+  year_to: null
+  what: Сарати
+  geom: river
+  confidence: canon
+  sources:
+  - countries/igni/regions/igni_sarati_region
+- id: route:campaign-012
+  flows:
+  - flow:voennyy_pohod-cb76d6
+  kind: campaign
+  name: армия Дааса
+  from: geo:tarpet
+  to: geo:danir
+  via:
+  - geo:vestheld
+  - geo:nadzhir
+  year_from: 625
+  year_to: 625
+  what: армия Дааса
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/igni/index
+- id: route:campaign-013
+  flows:
+  - flow:voennyy_pohod-5e2175
+  kind: campaign
+  name: легионы Гая I
+  from: geo:zapadnyy_bereg_prefektura_rinar
+  to: geo:sarati
+  via:
+  - geo:nichya_pustynya
+  year_from: 280
+  year_to: 280
+  what: легионы Гая I
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/igni/index
+- id: route:campaign-014
+  flows:
+  - flow:voennyy_pohod-af4eb0
+  - flow:voennyy_pohod-049370
+  kind: campaign
+  name: войско Махродана
+  from: geo:asmodius
+  to: geo:gandzhapar
+  via:
+  - geo:bandurdeh
+  year_from: 653
+  year_to: 653
+  what: войско Махродана
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/archdemon_s_plateau/index
+  - history/era_troubles
+- id: route:campaign-015
+  flows:
+  - flow:voennyy_pohod-26742f
+  kind: campaign
+  name: армия Чандера
+  from: geo:tarpet
+  to: geo:nadzhir
+  via:
+  - geo:viverna
+  - geo:vestheld
+  year_from: 1005
+  year_to: 1005
+  what: армия Чандера
+  geom: straight
+  confidence: derived
+  sources:
+  - history/second_igni_rojo_war
+- id: route:trade_sea-006
+  flows:
+  - flow:morskaya_suhoputnaya_torgovlya-755e44
+  kind: trade_sea
+  name: товары и провизия
+  from: countries/illior_empire/cities/city_illior
+  to: geo:drinrog
+  year_from: null
+  year_to: null
+  what: товары и провизия
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/makharatkha/index
+- id: route:trade_sea-007
+  flows:
+  - flow:morskaya_torgovlya-1929e4
+  kind: trade_sea
+  name: товары и провизия
+  from: geo:drinrog
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: товары и провизия
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/makharatkha/index
+- id: route:slave-006
+  flows:
+  - flow:rabotorgovlya-1215fe
+  kind: slave
+  name: рабы
+  from: geo:maharatha_gorod
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: рабы
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/makharatkha/index
+- id: route:trade_sea-008
+  flows:
+  - flow:morskaya_torgovlya-402769
+  kind: trade_sea
+  name: шёлк (обмен на роскошь)
+  from: countries/dragons_country/index
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: шёлк (обмен на роскошь)
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/makharatkha/index
+- id: route:slave-007
+  flows:
+  - flow:karavannaya_torgovlya-cb90d1
+  kind: slave
+  name: рабы
+  from: geo:vandatari
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: рабы
+  geom: road
+  confidence: canon
+  sources:
+  - countries/makharatkha/index
+- id: route:trade_land-029
+  flows:
+  - flow:suhoputnyy-c1c4bd
+  kind: trade_land
+  name: караванная дорога на юг
+  from: geo:maharatha_gorod
+  to: geo:chungada
+  year_from: null
+  year_to: null
+  what: караванная дорога на юг
+  geom: road
+  confidence: canon
+  sources:
+  - countries/makharatkha/index
+- id: route:trade_sea-009
+  flows:
+  - flow:morskaya-9c237c
+  kind: trade_sea
+  name: трасса кораблей
+  from: geo:maharatha_gorod
+  to: geography/dark_ocean
+  year_from: null
+  year_to: null
+  what: трасса кораблей
+  geom: sea
+  confidence: canon
+  sources:
+  - countries/horseshoe_islands/index
+- id: route:campaign-016
+  flows:
+  - flow:voennyy_pohod-bb51bc
+  kind: campaign
+  name: нападение Махродана, 673
+  from: geo:madakish
+  to: geo:maharatha_gorod
+  year_from: 673
+  year_to: 673
+  what: нападение Махродана, 673
+  geom: straight
+  confidence: derived
+  sources:
+  - countries/makharatkha/index
+- id: route:trade_sea-010
+  flows:
+  - flow:morskoy_put-ca79ab
+  kind: trade_sea
+  name: пленные демоны
+  from: geo:serebryanye_gory
+  to: geo:etel_gorod
+  year_from: null
+  year_to: null
+  what: пленные демоны
+  geom: sea
+  confidence: canon
+  sources:
+  - history/great_war
+- id: route:campaign-017
+  flows:
+  - flow:voennyy_pohod-82f36c
+  kind: campaign
+  name: 81–83
+  from: countries/illior_empire/cities/city_illior
+  to: geo:greyheld
+  via:
+  - geo:moroznoe_boloto
+  - geo:nordheld
+  year_from: 81
+  year_to: 83
+  what: 81–83
+  geom: road
+  confidence: canon
+  sources:
+  - history/era_imperial
+- id: route:trade_land-030
+  flows:
+  - flow:doroga-9bb7c0
+  kind: trade_land
+  name: восточный тракт
+  from: countries/illior_empire/cities/city_illior
+  to: geo:kameraski
+  year_from: null
+  year_to: null
+  what: восточный тракт
+  geom: road
+  confidence: canon
+  sources:
+  - history/era_troubles
+- id: route:campaign-018
+  flows:
+  - flow:voennyy_pohod-abbb33
+  kind: campaign
+  name: 467–473
+  from: geo:maharatha_gorod
+  to: geo:madakish
+  year_from: 467
+  year_to: 473
+  what: 467–473
+  geom: straight
+  confidence: derived
+  sources:
+  - history/era_imperial
+- id: route:trade_land-031
+  flows:
+  - flow:torgovyy_put-4c4b47
+  - flow:torgovlya-a4bbb7
+  kind: trade_land
+  name: растёт торговля
+  from: countries/illior_empire/cities/city_illior
+  to: countries/dragons_country/index
+  year_from: null
+  year_to: null
+  what: растёт торговля
+  geom: straight
+  confidence: derived
+  sources:
+  - characters/yorick
+  - history/era_new_age
+- id: route:campaign-019
+  flows:
+  - flow:voennyy_pohod-6f6a29
+  kind: campaign
+  name: налёт с воздуха, 730
+  from: geo:olifanor
+  to: geo:koshchin
+  via:
+  - geo:artisium
+  year_from: 730
+  year_to: 730
+  what: налёт с воздуха, 730
+  geom: road
+  confidence: canon
+  sources:
+  - history/era_troubles
+- id: route:campaign-020
+  flows:
+  - flow:voennyy_pohod-5eb69c
+  kind: campaign
+  name: некромантия, с 819
+  from: geo:vyshnevodsk
+  to: geo:serebryanye_gory
+  year_from: 819
+  year_to: 819
+  what: некромантия, с 819
+  geom: road
+  confidence: canon
+  sources:
+  - history/era_troubles
+- id: route:caravan-006
+  flows:
+  - flow:karavannyy_put-cdb81c
+  kind: caravan
+  name: Налёты на караваны
+  from: countries/slavetraders_coast/index
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: Налёты на караваны
+  geom: road
+  confidence: canon
+  sources:
+  - characters/antarius
+- id: route:slave-008
+  flows:
+  - flow:rabotorgovlya-121281
+  kind: slave
+  name: рабы с Побережья работорговцев на торги и плантации
+  from: countries/slavetraders_coast/index
+  to: geo:maharatha_gorod
+  year_from: null
+  year_to: null
+  what: рабы с Побережья работорговцев на торги и плантации
+  geom: road
+  confidence: canon
+  sources:
+  - guilds/north_road
+- id: route:caravan-007
+  flows:
+  - flow:karavannyy_put-b54da0
+  kind: caravan
+  name: южные караваны
+  from: geo:zolotye_peski
+  to: geo:vandatari
+  year_from: null
+  year_to: null
+  what: южные караваны
+  geom: road
+  confidence: canon
+  sources:
+  - guilds/desert_cartel
+- id: route:caravan-008
+  flows:
+  - flow:karavannyy_put-b54da0
+  kind: caravan
+  name: южные караваны
+  from: geo:zolotye_peski
+  to: geography/great_desert
+  year_from: null
+  year_to: null
+  what: южные караваны
+  geom: straight
+  confidence: derived
+  sources:
+  - guilds/desert_cartel
+- id: route:caravan-009
+  flows:
+  - flow:karavannyy_put-b54da0
+  kind: caravan
+  name: южные караваны
+  from: geo:zolotye_peski
+  to: geo:tarpet
+  year_from: null
+  year_to: null
+  what: южные караваны
+  geom: straight
+  confidence: derived
+  sources:
+  - guilds/desert_cartel
+- id: route:trade_land-032
+  flows:
+  - flow:postavki_lesa_i_uglya-f64480
+  - flow:postavki_lesa_i_uglya-f64480
+  kind: trade_land
+  name: дерево, уголь
+  from: geography/changeling_forest
+  to: geo:greyheld
+  year_from: null
+  year_to: null
+  what: дерево, уголь
+  geom: road
+  confidence: canon
+  sources:
+  - guilds/metal_makers
+- id: route:trade_land-033
+  flows:
+  - flow:postavki_lesa_i_uglya-f64480
+  kind: trade_land
+  name: дерево, уголь
+  from: geography/changeling_forest
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: дерево, уголь
+  geom: road
+  confidence: canon
+  sources:
+  - guilds/metal_makers
+- id: route:trade_land-034
+  flows:
+  - flow:postavki_poroha-ebb318
+  kind: trade_land
+  name: порох и огнестрел; одарённые дети в Занру
+  from: geo:mikris
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: порох и огнестрел; одарённые дети в Занру
+  geom: road
+  confidence: canon
+  sources:
+  - guilds/zanra_pyrotechnicians
+- id: route:trade_land-035
+  flows:
+  - flow:vyvoz_vin_i_napitkov-68e100
+  kind: trade_land
+  name: вино Этеля, Ройо; пиво Гросса; водка Вышневодска; эль Дринрога; ореховый эль Сарка
+  from: geo:etel_gorod
+  to: countries/illior_empire/cities/city_illior
+  year_from: null
+  year_to: null
+  what: вино Этеля, Ройо; пиво Гросса; водка Вышневодска; эль Дринрога; ореховый эль Сарка
+  geom: road
+  confidence: canon
+  sources:
+  - establishments/taverns/drevnij_strazh

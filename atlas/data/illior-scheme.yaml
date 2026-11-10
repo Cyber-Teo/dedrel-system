@@ -1,0 +1,674 @@
+# Схема Иллиора (не масштабная). Состав — canon (вики), x/y районов — условные (speculative). Собрано из data/site/pages.json (establishments/*) и A_illior.json; дальше правится вручную.
+meta:
+  title: Схема Иллиора
+  frame:
+    w: 960
+    h: 690
+  legend: 'Схема не масштабная: положение районов, мостов и заведений условное; состав — по вики. Заведения без названного района вынесены в нижнюю полосу.'
+  river:
+    name: Лиор
+    note: делит город на две части; направление течения в источниках не указано (ниже Ремесленного квартала — Месиво, вода непригодна ещё 12 км)
+    sources:
+    - countries/illior_empire/cities/city_illior
+  sources:
+  - countries/illior_empire/cities/city_illior
+  composition_confidence: canon
+  position_confidence: speculative
+districts:
+- id: remeslenny
+  name: Ремесленный квартал
+  x: 40
+  y: 150
+  w: 180
+  h: 120
+  bank: С
+  walled: false
+  place: geo:remeslennyy_kvartal
+  note: почти всё крупное производство столицы; отходы идут в Лиор; при ветре на Дворец производство приходится останавливать
+  hint: запад, между городской стеной и Императорской ареной
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: imp_arena
+  name: Императорская арена
+  x: 240
+  y: 170
+  w: 100
+  h: 100
+  bank: С
+  walled: false
+  place: geo:imperatorskaya_arena
+  note: до 300 000 зрителей; крупнейшая в мире; постоянные состязания и бои
+  hint: между цитаделью, Золотым кварталом и Ремесленным кварталом (на западе); вокруг парк
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: zolotoy
+  name: Золотой квартал
+  x: 350
+  y: 170
+  w: 90
+  h: 100
+  bank: С
+  walled: false
+  place: geo:zolotoy_kvartal
+  note: второе по цене и престижу место города
+  hint: между цитаделью и Императорской ареной
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: citadel
+  name: Дворец Основателя / Цитадель
+  x: 450
+  y: 190
+  w: 120
+  h: 80
+  bank: С
+  walled: true
+  place: geo:dvorets_osnovatelya
+  note: резиденция императорской семьи; шпиль главной башни 200 м светится магическим светом; магический щит; по слухам, в 1005 г. император остановил огненную чуму древней магией дворца
+  hint: 'центр города, мощная крепость; с Южного берега видны Дворец и набережная (вывод: цитадель на северном берегу Лиора, т.к. Выселки на северном, Торговый район на южном)'
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: bezuprechny
+  name: Безупречный район
+  x: 450
+  y: 110
+  w: 120
+  h: 70
+  bank: С
+  walled: true
+  place: geo:bezuprechnyy_rayon
+  note: 'самое престижное место города: посольства, дома сенаторов и богатых аристократов; вход ограничен'
+  hint: внутри стен цитадели рядом с Дворцом Основателя
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: treugolnik
+  name: Треугольник
+  x: 585
+  y: 110
+  w: 100
+  h: 55
+  bank: С
+  walled: true
+  place: geo:treugolnik
+  note: район чиновников; большей частью принадлежит императорской семье, сдаётся подчинённым
+  hint: рядом с городской префектурой
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: sadovy
+  name: Садовый квартал
+  x: 585
+  y: 175
+  w: 100
+  h: 50
+  bank: С
+  walled: true
+  place: geo:sadovyy_kvartal
+  note: Иллиорская коллегия бардов, студенты-барды
+  hint: Старый город
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: magic_market
+  name: Магический рынок
+  x: 695
+  y: 110
+  w: 100
+  h: 55
+  bank: С
+  walled: true
+  place: geo:magicheskiy_rynok
+  note: десятки лавок магических предметов и свитков; главное здание гильдии Огненная саламандра (яркие изразцы); крупный магазин гильдии Арканум
+  hint: Старый город
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: razvlecheniy
+  name: Квартал развлечений
+  x: 695
+  y: 175
+  w: 100
+  h: 95
+  bank: С
+  walled: true
+  place: geo:kvartal_razvlecheniy_illior
+  note: большая часть борделей
+  hint: Старый город
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: dlinny
+  name: Длинный район
+  x: 805
+  y: 150
+  w: 120
+  h: 120
+  bank: С
+  walled: true
+  place: geo:dlinnyy_rayon
+  note: один из самых густонаселённых; дома 5–7 этажей; 7–8 человек в комнатке
+  hint: Старый город
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: tolkuchka
+  name: Толкучка
+  x: 580
+  y: 235
+  w: 105
+  h: 35
+  bank: С
+  walled: false
+  place: geo:tolkuchka
+  note: стихийный рынок; первая свежая речная рыба; барахолка
+  hint: у стен цитадели; товары везут по воде с другого берега
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: vyselki
+  name: Выселки
+  x: 805
+  y: 50
+  w: 120
+  h: 90
+  bank: С
+  walled: false
+  place: geo:vyselki
+  note: беднейший район; с 1005 г. лидер Скотт Флетчер, карантин во время огненной чумы; мэр ему благоволит
+  hint: северный берег Лиора
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: trade
+  name: Торговый район
+  x: 420
+  y: 350
+  w: 140
+  h: 85
+  bank: Ю
+  walled: true
+  place: geo:torgovyy_rayon_illior
+  note: Большой рынок — один из важнейших в мире; аукционный дом; представительства торговых гильдий; рынок уже тысячу лет назад
+  hint: южный берег Лиора, обнесён стеной как часть города
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: south_bank
+  name: Южный берег
+  x: 580
+  y: 350
+  w: 120
+  h: 70
+  bank: Ю
+  walled: false
+  place: geo:yuzhnyy_bereg_illior
+  note: 'престижный: набережная, пляжи, дворец семьи Фуриев'
+  hint: южный берег, за стенами; с тыла прикрыт Легавым районом
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: legavy
+  name: Легавый район
+  x: 580
+  y: 430
+  w: 120
+  h: 70
+  bank: Ю
+  walled: false
+  place: geo:legavyy_rayon
+  note: казармы стражи, при осаде — малая крепость; дома для семей стражников построены ~300 лет назад
+  hint: за Южным берегом (с тыла)
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: mages
+  name: Квартал магов
+  x: 720
+  y: 350
+  w: 140
+  h: 80
+  bank: Ю
+  walled: false
+  place: geo:kvartal_magov_illior
+  note: башня магов гильдии Арканум; общежития и школы для абитуриентов Виларинского университета; на востоке — Рыбный ряд
+  hint: юго-восток города, по дороге в Виларин
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: fish
+  name: Рыбный ряд
+  x: 870
+  y: 350
+  w: 70
+  h: 80
+  bank: Ю
+  walled: false
+  place: geo:rybnyy_ryad
+  note: рыбаки с окрестных хуторов привозят улов; закупают трактирщики, торговцы, промышленники
+  hint: восток Квартала магов
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: pristenny
+  name: Пристенный квартал
+  x: 300
+  y: 350
+  w: 110
+  h: 70
+  bank: Ю
+  walled: false
+  place: geo:pristennyy_kvartal
+  note: болотный парк с памятником императору Риклаэрону Строителю; вольнодумцы
+  hint: между районами с разным достатком
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: mesivo
+  name: Месиво
+  x: 150
+  y: 350
+  w: 140
+  h: 70
+  bank: Ю
+  walled: false
+  place: geo:mesivo
+  note: грязный неблагополучный район; Мясной ряд; дешёвое жильё; бегство от погони
+  hint: ниже Ремесленного квартала по течению (вода Лиора отравлена); соседствует с Районом дельцов и тюрьмой (вывод)
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: delcov
+  name: Район дельцов
+  x: 40
+  y: 350
+  w: 100
+  h: 70
+  bank: Ю
+  walled: false
+  place: geo:rayon_deltsov
+  note: команды торговых кораблей ждут здесь отплытия; сделки в обход Торгового района; усиленные патрули
+  hint: окраина, граничит с Месивом и тюрьмой; рядом гильдейские склады
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: prison
+  name: Иллиорская тюрьма
+  x: 40
+  y: 430
+  w: 100
+  h: 60
+  bank: Ю
+  walled: false
+  place: geo:illiorskaya_tyurma
+  note: форт при императоре Риклаэроне после судебной реформы; до 5000 человек; мелкие преступники, ожидающие казни, политзаключённые
+  hint: рядом с Народной ареной и Районом дельцов
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: narod_arena
+  name: Народная арена
+  x: 150
+  y: 430
+  w: 110
+  h: 60
+  bank: Ю
+  walled: false
+  place: geo:narodnaya_arena
+  note: меньше Императорской, дешёвые билеты; бесплатные представления политиков; строилась для публичных казней
+  hint: неподалёку от тюрьмы
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+- id: guild_wh
+  name: Гильдейские склады
+  x: 30
+  y: 330
+  w: 270
+  h: 14
+  bank: Ю
+  walled: false
+  place: geo:gildeyskie_sklady
+  note: склады гильдий и порт для крупных кораблей; охраняют сами гильдейцы
+  hint: узкая полоса берега Лиора за высокой стеной
+  sources:
+  - countries/illior_empire/cities/city_illior
+  pos_confidence: speculative
+bridges:
+- id: bridge_30
+  name: Мост Тридцати героев
+  x: 410
+  sources:
+  - countries/illior_empire/cities/city_illior
+  note: один из двух мостов города; заторы
+- id: bridge_fish
+  name: Рыбацкий мост
+  x: 640
+  sources:
+  - countries/illior_empire/cities/city_illior
+  note: второй из двух мостов города
+venues:
+- id: imperial_bank
+  name: Иллиорский Императорский банк
+  kind: bank
+  price: none
+  owner: 'Салустия Тарквиния, назначенная императором Владелец: императорская семья'
+  rooms: ''
+  district: bezuprechny
+  where: Иллиор, Безупречный район
+  sources:
+  - establishments/banks/imperial_bank
+- id: quick_deal_bank
+  name: Быстрое дело
+  kind: bank
+  price: none
+  owner: Фадия Дурония
+  rooms: ''
+  district: dlinny
+  where: Иллиор, Длинный район
+  sources:
+  - establishments/banks/quick_deal_bank
+- id: ad
+  name: Ад
+  kind: brothel
+  price: dear
+  owner: Кара
+  rooms: 11 комнат
+  district: razvlecheniy
+  where: Иллиор
+  sources:
+  - establishments/brothels/ad
+- id: laguna_ljubvi
+  name: Лагуна любви
+  kind: brothel
+  price: dear
+  owner: Инагаки Окама
+  rooms: 20 комнат
+  district: razvlecheniy
+  where: Иллиор
+  sources:
+  - establishments/brothels/laguna_ljubvi
+- id: vysshij_svet
+  name: Высший свет
+  kind: brothel
+  price: mid
+  owner: Дагоберт Руссо
+  rooms: 25 комнат
+  district: razvlecheniy
+  where: Иллиор
+  sources:
+  - establishments/brothels/vysshij_svet
+- id: znoj
+  name: Зной
+  kind: brothel
+  price: cheap
+  owner: Мила Валери
+  rooms: 12 комнат
+  district: razvlecheniy
+  where: Иллиор
+  sources:
+  - establishments/brothels/znoj
+- id: fine_arts_academys
+  name: Иллиорская коллегия бардов
+  kind: school
+  price: none
+  owner: ''
+  rooms: ''
+  district: sadovy
+  where: Иллиор, Садовый квартал
+  sources:
+  - establishments/educational/fine_arts_academys
+- id: desjat_bochonkov
+  name: Десять Бочонков
+  kind: tavern
+  price: mid
+  owner: Глорг Пузо
+  rooms: Комнат нет
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/desjat_bochonkov
+- id: drevnij_strazh
+  name: Древний Страж
+  kind: tavern
+  price: mid
+  owner: Эрки Тимберс Пок
+  rooms: 4 комнаты
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/drevnij_strazh
+- id: dva_luchnika
+  name: Два Лучника
+  kind: inn
+  price: mid
+  owner: Летин Углесерд
+  rooms: 12 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/dva_luchnika
+- id: dvenadcat_pjanic
+  name: Двенадцать Пьяниц
+  kind: tavern
+  price: cheap
+  owner: Верна Зеленофляг
+  rooms: 10 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/dvenadcat_pjanic
+- id: garcujuschie_djavoly
+  name: Гарцующие Дьяволы
+  kind: tavern
+  price: dear
+  owner: Тит Гэлфир Эмилий; управляет Лум Паконий
+  rooms: 6 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/garcujuschie_djavoly
+- id: izumrudnaja_chasha
+  name: Изумрудная Чаша
+  kind: tavern
+  price: dear
+  owner: Абелия Диеговна
+  rooms: 10 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/izumrudnaja_chasha
+- id: izyskannaja_zmeja
+  name: Изысканная Змея
+  kind: tavern
+  price: dear
+  owner: спорный — идёт суд; управляет дом Корнелиев
+  rooms: 8 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/izyskannaja_zmeja
+- id: jantarnye_princy
+  name: Янтарные Принцы
+  kind: tavern
+  price: cheap
+  owner: Кутрин Акралех
+  rooms: Комнат нет
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/jantarnye_princy
+- id: kotjol_i_demon
+  name: Котёл и Демон
+  kind: tavern
+  price: cheap
+  owner: Раад Милов
+  rooms: 10 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/kotjol_i_demon
+- id: nabozhnyj_stervjatnik
+  name: Набожный Стервятник
+  kind: tavern
+  price: cheap
+  owner: Аранви Сверкающая Луна
+  rooms: 6 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/nabozhnyj_stervjatnik
+- id: oblako_i_serdce
+  name: Облако и Сердце
+  kind: tavern
+  price: mid
+  owner: Квортесса Тетнувеш
+  rooms: 8 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/oblako_i_serdce
+- id: pod_toporom
+  name: Под топором
+  kind: tavern
+  price: mid
+  owner: Арвэль
+  rooms: 7 комнат
+  district: dlinny
+  where: Иллиор, Длинный район
+  sources:
+  - establishments/taverns/pod_toporom
+- id: pokornaja_oxotnica
+  name: Покорная Охотница
+  kind: tavern
+  price: mid
+  owner: Лора “Покорная Охотница”
+  rooms: 6 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/pokornaja_oxotnica
+- id: radostnyj_paxar
+  name: Радостный Пахарь
+  kind: tavern
+  price: mid
+  owner: Радонаар Бурено
+  rooms: 4 комнаты
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/radostnyj_paxar
+- id: severnaja
+  name: Северная
+  kind: tavern
+  price: mid
+  owner: Марта Андрик
+  rooms: 10 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/severnaja
+- id: shumnyj_agnec
+  name: Шумный Агнец
+  kind: tavern
+  price: cheap
+  owner: Дига Кривой
+  rooms: 6 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/shumnyj_agnec
+- id: staryj_gorod
+  name: Старый город
+  kind: inn
+  price: dear
+  owner: Кассиопея Вагния Сервилия (дом Сервилиев)
+  rooms: 20 комнат
+  district: citadel
+  where: Иллиор
+  sources:
+  - establishments/taverns/staryj_gorod
+- id: u_drakona
+  name: У дракона
+  kind: tavern
+  price: dear
+  owner: Алверада Армансус
+  rooms: 4 комнаты
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/u_drakona
+- id: u_mamy
+  name: У Мамы
+  kind: inn
+  price: mid
+  owner: Лукреция Копея Солона Опия
+  rooms: 18 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/u_mamy
+- id: udachlivaja_butylka
+  name: Удачливая Бутылка
+  kind: tavern
+  price: cheap
+  owner: Фонкин Нингел
+  rooms: 8 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/udachlivaja_butylka
+- id: udachlivyj_glashataj
+  name: Удачливый Глашатай
+  kind: tavern
+  price: mid
+  owner: Элдон “Бочка”
+  rooms: 12 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/udachlivyj_glashataj
+- id: volshebnaja_boroda
+  name: Волшебная Борода
+  kind: inn
+  price: mid
+  owner: Квентин Бассано Младший
+  rooms: 20 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/volshebnaja_boroda
+- id: vybor_grazhdanina
+  name: Выбор гражданина
+  kind: tavern
+  price: mid
+  owner: Больг Секстий
+  rooms: 10 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/vybor_grazhdanina
+- id: zhadnyj_medved
+  name: Жадный Медведь
+  kind: tavern
+  price: mid-dear
+  owner: Ларс Кондий Аквилий (дом Аквилиев)
+  rooms: 6 комнат
+  district: ''
+  where: Иллиор
+  sources:
+  - establishments/taverns/zhadnyj_medved
+- id: vilarin_university
+  name: Виларинский университет магии
+  kind: school
+  price: none
+  owner: ректор — архимаг Сарина
+  rooms: ''
+  district: ''
+  outside: true
+  where: Виларин, префектура Виларин (вне Иллиора; дорога из Квартала магов на ЮВ)
+  sources:
+  - establishments/educational/vilarin_university

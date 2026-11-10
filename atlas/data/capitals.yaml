@@ -1,0 +1,63 @@
+# Столицы стран: place → государство (полигон в data/geo/states-1006.geojson). scripts/check/validate.ts проверяет, что точка места лежит внутри полигона.
+# Правило: положение — по карте (растр), принадлежность — по тексту вики; sources — страницы, где место названо столицей/центром.
+
+- place: countries/illior_empire/cities/city_illior
+  state: countries/illior_empire/index
+  sources: [countries/illior_empire/cities/city_illior, countries/gross/index, map:газеттир]
+  confidence: canon
+- place: geo:mikris
+  state: countries/zanra/index
+  sources: [characters/houses_clans/horatii, countries/zanra/index, map:газеттир]
+  confidence: canon
+- place: geo:zalessk
+  state: countries/zalessk/index
+  sources: [countries/zalessk/index, history/era_imperial, map:газеттир]
+  confidence: canon
+- place: geo:vyshnevodsk
+  state: countries/vishnevodskoye_principality/index
+  sources: [countries/gross/index, history/arnost_catastrophe, map:газеттир]
+  confidence: canon
+- place: geo:danir_gorod
+  state: countries/rojo/index
+  sources: [countries/rojo/regions/rojo_danir_region, map:газеттир]
+  confidence: canon
+- place: geo:drinrog_gorod
+  state: countries/drinrog/index
+  sources: [countries/drinrog/index, map:газеттир]
+  confidence: canon
+- place: geo:etel_gorod
+  state: countries/ethel/index
+  sources: [countries/ethel/index, map:газеттир]
+  confidence: canon
+- place: geo:olifanor
+  state: countries/enforis/index
+  sources: [countries/enforis/index, countries/sunny_islands/index, map:газеттир]
+  confidence: canon
+- place: geo:asmodius
+  state: countries/archdemon_s_plateau/index
+  sources: [countries/enforis/index, countries/archdemon_s_plateau/index, map:газеттир]
+  confidence: canon
+- place: geo:tarpet
+  state: countries/igni/index
+  sources: [countries/igni/regions/igni_sarati_region, history/great_war, map:газеттир]
+  confidence: canon
+- place: geo:hagane_no_kokuru
+  state: countries/dragons_country/index
+  sources: [countries/dragons_country/index, map:газеттир]
+  confidence: canon
+- place: geo:vandatari
+  state: countries/land_of_oases/index
+  sources: [countries/land_of_oases/index, map:газеттир]
+  confidence: canon
+- place: geo:medidr
+  state: countries/slavetraders_coast/index
+  sources: [countries/slavetraders_coast/index, map:газеттир]
+  confidence: canon
+- place: geo:maharatha_gorod
+  state: countries/makharatkha/index
+  sources: [countries/makharatkha/index, map:газеттир]
+  confidence: canon
+- place: geo:bersan
+  state: countries/gross/index
+  sources: [countries/gross/index, history/second_igni_rojo_war, map:газеттир]
+  confidence: canon

@@ -1,0 +1,485 @@
+/* Поиск, значки типов, карточки досье. */
+.sbox input {
+  min-height: 32px;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.sres[hidden] {
+  display: none;
+}
+.sres {
+  max-height: min(70vh, calc(100vh - var(--top-h) - var(--dock-h) - 16px));
+  z-index: 30;
+}
+.sgh {
+  display: flex;
+  gap: 6px;
+}
+.sitem {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 0 8px;
+  align-items: center;
+  min-height: 30px;
+}
+.sitem .kic {
+  color: var(--ink-soft);
+  justify-self: center;
+}
+.sitem b {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.sitem b i {
+  font-weight: 400;
+}
+.sitem span {
+  margin-left: 0;
+  max-width: 13em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+.sitem.smore {
+  display: block;
+  padding-left: 40px;
+  color: var(--blood);
+}
+.sitem.smore b {
+  color: var(--blood);
+  text-decoration: underline;
+  font-weight: 500;
+}
+.search-pin {
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  animation: none !important;
+}
+.search-pin i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 3px solid var(--sel, #c0152b);
+  box-shadow: 0 0 0 3px #fff8;
+  animation: pinp 1.4s ease-out 3;
+}
+@media (max-width: 900px) {
+  .sres {
+    position: fixed;
+    top: calc(var(--top-h) + 4px);
+    left: 8px;
+    right: 8px;
+    max-height: calc(100vh - var(--top-h) - var(--dock-h) - 12px);
+    z-index: 30;
+  }
+}
+@media (max-width: 640px) {
+  .sitem {
+    min-height: 48px;
+    padding: 4px 12px;
+  }
+  /* подпись и бейджи «факт / нет на карте» — второй строкой, с переносом: без обрезки многоточием */
+  .sitem {
+    grid-template-columns: 22px minmax(0, 1fr);
+    padding: 6px 12px;
+  }
+  .sitem b {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+  }
+  .sitem span {
+    grid-column: 2;
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 6px;
+  }
+  .sitem span .nomap,
+  .sitem span .conf {
+    margin-left: 0;
+    flex: none;
+    display: inline-block;
+  }
+  .sitem.smore {
+    padding-left: 40px;
+  }
+}
+/* карточки */
+.khead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 24px 4px 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.khead .kic {
+  color: var(--ink);
+}
+.khead .klabel {
+  font-weight: 600;
+}
+.wiki-top {
+  display: inline-block;
+  margin: 2px 0 4px;
+  color: var(--blood);
+  font-size: 13px;
+}
+.card .fld {
+  margin: 2px 0 4px;
+}
+.card small.fn,
+.card ul.fn {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.card ul.fn {
+  margin: 2px 0 6px;
+  padding-left: 16px;
+}
+.card .more {
+  margin: 6px 0;
+  width: 100%;
+}
+.nodata {
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.nodata summary {
+  cursor: pointer;
+}
+.nodata ul {
+  margin: 2px 0;
+  padding-left: 18px;
+}
+.srcs {
+  margin: 8px 0 2px;
+  font-size: 13px;
+}
+.srcs summary {
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+.onmap:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.evcard .lk {
+  cursor: pointer;
+}
+
+@media (pointer: coarse) {
+  #slot-search input {
+    font-size: 16px;
+  }
+}
+.plaques {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0;
+}
+.plq {
+  padding: 2px 8px;
+  border: 1px solid var(--ink-soft);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.nearby h5 {
+  margin: 8px 0 2px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.nlist {
+  margin: 2px 0;
+  padding-left: 18px;
+}
+.nlist .lk {
+  cursor: pointer;
+}
+/* событие: значок типа в строке даты, счётчик кластера с отступами */
+.evmeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 6px;
+}
+.evic {
+  flex: none;
+}
+.evcard .pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 32px 8px 0;
+}
+.evcard .pager button {
+  min-width: 32px;
+  min-height: 32px;
+}
+.ev-sc {
+  text-align: left;
+}
+.gtown {
+  margin: 2px 0;
+  font-size: 14px;
+}
+.gtown summary {
+  cursor: pointer;
+}
+.chron ul {
+  list-style: none;
+  margin: 4px 0;
+  padding: 0;
+}
+.chron li {
+  display: grid;
+  grid-template-columns: 44px 18px minmax(0, 1fr);
+  gap: 6px;
+  align-items: baseline;
+  padding: 3px 0;
+}
+.chron .cy {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+.chron .evic {
+  align-self: center;
+}
+.chron .ct {
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.chron .more {
+  margin: 4px 0;
+}
+.rels li,
+.pevs li {
+  margin: 2px 0;
+}
+.rels .lk,
+.pevs .lk {
+  cursor: pointer;
+}
+.pgraph {
+  margin: 6px 0;
+  width: 100%;
+}
+.plate {
+  margin: 6px 0;
+  padding: 6px 8px;
+  border: 1px dashed var(--ink-soft);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.spop {
+  padding: 4px 12px 8px;
+}
+.spop h5 {
+  margin: 6px 0 2px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.spop .sitem {
+  min-height: 28px;
+}
+.sbox .sico {
+  display: none;
+}
+/* строки действий, цели касания 44px, метка «Положение не указано» */
+.acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 2px 0 6px;
+}
+.acts .wiki-top {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.acts .route-here {
+  width: auto;
+  margin: 0;
+  min-height: 44px;
+  padding: 0 12px;
+}
+.plate {
+  display: block;
+  margin: 2px 0 6px;
+  padding: 0;
+  border: 0;
+  font-size: 12px;
+}
+.nlist {
+  padding-left: 0;
+  list-style: none;
+}
+.nrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+}
+.nrow .lk {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+}
+.nrow .meta {
+  flex: none;
+  text-align: right;
+  white-space: nowrap;
+}
+.rels li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+}
+.rels .lk {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.chron .ct {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.chron li {
+  align-items: center;
+}
+.evlist a,
+.rl a,
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.sitem.smore {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+button.sitem {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.spop .sitem {
+  cursor: pointer;
+}
+.sitem.act {
+  background: var(--paper-2, rgba(0, 0, 0, 0.06));
+}
+@media (max-width: 900px) {
+  #dossier > .sdossier.nopos {
+    max-height: min(40vh, 340px);
+  }
+  .sdossier.nopos .card {
+    min-height: 0;
+  }
+}
+/* «Связано» в карточке события: один ряд чипов, вертикальный зазор 6px */
+.card .links.evrel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  word-break: normal;
+}
+.evrel b {
+  margin-right: 2px;
+}
+.evrel .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 1px solid var(--rule, #c9b98f);
+  border-radius: 15px;
+  font-size: 12px;
+  text-decoration: none;
+  margin: 0;
+}
+.evrel span.chip {
+  color: var(--ink-soft);
+}
+@media (pointer: coarse) {
+  .evrel .chip {
+    min-height: 40px;
+  }
+}
+.sitem .nomap {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--ink-soft);
+  border: 1px dashed currentColor;
+  border-radius: 8px;
+  padding: 0 5px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+.sitem .conf {
+  font-size: 10px;
+  vertical-align: 1px;
+}
+.cell-note {
+  font-size: 12px;
+  margin-top: 8px;
+}
+.stoast {
+  position: fixed;
+  left: 50%;
+  top: 64px;
+  transform: translateX(-50%);
+  z-index: 60;
+  background: var(--ink, #2b1a0e);
+  color: var(--paper, #fff6dc);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  box-shadow: 0 4px 14px #0006;
+  pointer-events: none;
+}

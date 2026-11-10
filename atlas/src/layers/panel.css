@@ -1,0 +1,542 @@
+/* Панель слоёв и легенда активных слоёв */
+.lp-active {
+  margin: 0 0 6px;
+  padding: 5px 6px;
+  background: #b8892b1f;
+  border: 1px solid #b8892b66;
+  border-radius: 6px;
+}
+.lp-at {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5a4118;
+  margin-bottom: 3px;
+}
+.lp-ac,
+.al-i {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 2px 4px 2px 0;
+  padding: 1px 2px 1px 7px;
+  font-size: 12px;
+  background: #fffb;
+  border: 1px solid #b8892b99;
+  border-radius: 12px;
+  color: var(--ink);
+}
+.lp-ac small,
+.al-i small {
+  font-size: 11px;
+  color: #5a4118;
+}
+.lp-ac button,
+.al-i button {
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.lp-ac button:hover,
+.al-i button:hover {
+  background: var(--blood);
+  color: var(--parch);
+}
+.lp-more {
+  font-size: 12px;
+  color: #5a4118;
+  margin-top: 2px;
+}
+.lp .lnk {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blood);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+.lp-gh {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #b8892b55;
+  border-radius: 0;
+  min-height: 36px;
+  text-align: left;
+  color: var(--ink);
+  font-size: 14px;
+  align-items: center;
+}
+.lp-row {
+  padding: 0 0 0 2px;
+  border-bottom: 1px solid #b8892b22;
+}
+.lp-row label {
+  min-height: 40px;
+  align-items: flex-start;
+  padding: 5px 0;
+  gap: 8px;
+}
+.lp-row input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  flex: none;
+}
+.lp-t {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.lp-t .bl {
+  font-size: 12px;
+  color: #5a4118;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  cursor: pointer;
+}
+.lp-t .bl.open {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  display: block;
+}
+.lp-ri {
+  flex: none;
+  width: 18px;
+  margin-top: 2px;
+  display: inline-flex;
+}
+.lp-ri img {
+  width: 18px;
+  height: 18px;
+}
+.lp-ri .sw {
+  width: 14px;
+  height: 14px;
+  margin: 2px;
+}
+.lp-row .cnt {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.lp-row .cnt.off {
+  color: #5a4118;
+}
+.lp-note {
+  font-size: 12px;
+  color: #5a4118;
+  margin: 0 0 4px 26px;
+}
+.lp-note.warn {
+  color: #5a4118;
+  font-style: italic;
+}
+.lp-plan {
+  margin-bottom: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  margin-top: 6px;
+  border-top: 1px solid #b8892b55;
+  font-size: 13px;
+  cursor: pointer;
+}
+.lp-hits a {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.chip {
+  min-height: 28px;
+}
+.al-legend {
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  position: fixed;
+  z-index: 4;
+  left: calc(var(--tools-w) + 2 * var(--gap));
+  bottom: calc(var(--dock-h) + 34px);
+  max-width: calc(100vw - var(--tools-w) - var(--side-w) - 4 * var(--gap));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px 6px;
+  background: rgba(241, 230, 200, 0.92);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+}
+@media (pointer: coarse) {
+  .lp-row label,
+  .lp-plan,
+  .lp-gh {
+    min-height: 44px;
+  }
+  .lp-ac button,
+  .al-i button {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}
+@media (max-width: 760px) {
+  .al-legend {
+    left: var(--gap);
+    right: var(--gap);
+    max-width: none;
+    bottom: calc(var(--dock-h) + 40px);
+  }
+}
+.lp-ac small {
+  white-space: nowrap;
+}
+.lp-ac .nm {
+  text-align: left;
+}
+
+.al-i .nm {
+  white-space: nowrap;
+}
+.al-more {
+  min-height: 28px;
+  padding: 1px 10px;
+  font-size: 12px;
+  border: 1px solid #b8892b99;
+  border-radius: 12px;
+  background: #fffb;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .al-legend {
+    right: calc(var(--zoom-w, 36px) + 2 * var(--gap));
+  }
+}
+
+/* строки и группы не сжимаются flex-контейнером: чипы типов (События и др.) видны целиком, последняя строка не обрезается */
+.lp-group,
+.lp-row,
+.lp-row .legend,
+.lp-active,
+.lp-head {
+  flex: none;
+}
+.lp-row .legend {
+  overflow: visible;
+  padding-bottom: 4px;
+}
+.lp-body {
+  padding-bottom: 12px;
+}
+.lp-row .legend .chip img {
+  flex: none;
+}
+/* телефон: плотные строки (блок ниже) */
+@media (max-width: 760px) {
+  html body .lp .lp-active {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 4px 6px;
+  }
+  html body .lp .lp-active .lp-at {
+    flex: none;
+    margin: 0 6px 0 0;
+    white-space: nowrap;
+  }
+  html body .lp .lp-active .lp-ac {
+    flex: none;
+    margin: 0;
+  }
+  html body .lp .lp-q {
+    min-height: 44px;
+    padding: 2px 8px;
+    margin-top: 2px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  html body .lp .lp-gh {
+    min-height: 44px;
+    margin-top: 0;
+  }
+  html body .lp .lp-row {
+    min-height: 48px;
+  }
+  html body .lp .lp-row label {
+    min-height: 48px;
+    padding: 4px 0;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  html body .lp .lp-row input[type='checkbox'] {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+  }
+  html body .lp .lp-row .legend .chip {
+    min-height: 40px;
+  }
+  html body .lp .lp-row .legend {
+    margin-top: 0;
+  }
+  html body .lp .lp-row .lp-note {
+    margin: 0 0 2px 26px;
+  }
+  html body .lp .lp-body {
+    margin-top: 2px;
+  }
+  html body .lp .lp-active {
+    margin-bottom: 4px;
+  }
+  html body .lp .lp-t .bl:not(.open) {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+  }
+  html body .lp .lp-row {
+    padding-left: 0;
+  }
+  html body .lp .lp-plan {
+    margin-bottom: 24px;
+  }
+}
+
+.lp-miss {
+  margin: 2px 0 0;
+  padding: 0 0 0 16px;
+  font-size: 12px;
+  color: #5a4118;
+  max-height: 120px;
+  overflow: auto;
+}
+.lp-plan small {
+  display: block;
+  font-size: 11px;
+  color: #5a4118;
+}
+.lp-plan {
+  flex-wrap: wrap;
+}
+
+/* геометрия панели. Скролл только у .lp-body (шапка и поиск всегда на виду), панель занимает всю доступную высоту. */
+html body .lp {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+html body .lp .lp-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  max-height: none;
+  overscroll-behavior: contain;
+  margin-top: 4px;
+}
+html body .lp .lp-plan {
+  margin-bottom: 8px;
+  flex: none;
+}
+html body .lp .lp-head {
+  position: static;
+  margin: 0 0 6px;
+  padding: 0;
+}
+html body .lp .lp-row .legend .chip {
+  min-height: 36px;
+}
+@media (pointer: coarse) {
+  html body .lp .lp-row .legend .chip {
+    min-height: 40px;
+  }
+  html body .lp-ac button,
+  html body .al-i button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+/* планшет у́же 900 и выше 520: боковая панель на всю высоту (style.css оставлял ей 52vh) */
+@media (min-width: 801px) and (max-width: 900px) and (min-height: 521px) {
+  html body .lp {
+    height: auto;
+    top: calc(var(--top-h) + var(--gap));
+    bottom: calc(var(--dock-h) + var(--gap));
+  }
+}
+/* ≤800 по ширине или ≤520 по высоте: нижний лист до 60% экрана поверх дока, чипы активных слоёв скрыты (они в списке и в «Слои, включено N») */
+@media (max-width: 800px), (max-height: 520px) {
+  html body .lp {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    max-height: 60vh;
+    max-height: 60dvh;
+    z-index: 20;
+    border-radius: 12px 12px 0 0;
+    border-width: 2px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html body .lp .lp-active {
+    display: none;
+  }
+  /* #ui — свой контекст наложения (position: fixed) ниже дока (z 8); пока лист открыт, поднимаем его над доком */
+  html body #ui:has(#layers-panel) {
+    z-index: 9;
+  }
+  html body.layers-open:not(.dossier-open) {
+    --sheet-h: calc(60vh - var(--dock-h));
+  }
+  /* кнопки зума — рядком над листом, не под ним */
+  html body.layers-open:not(.dossier-open) #zoomc {
+    flex-direction: row;
+    right: var(--gap);
+    left: auto;
+    top: auto;
+    bottom: calc(60vh + var(--gap));
+    bottom: calc(60dvh + var(--gap));
+    display: flex;
+  }
+  html body.layers-open:not(.dossier-open) .scale {
+    bottom: calc(60vh + var(--gap));
+  }
+}
+/* телефон ≤640: шторка на всю высоту поверх дока, шапка не уезжает */
+@media (max-width: 640px) {
+  html body .lp {
+    top: var(--top-h);
+    max-height: none;
+    height: auto;
+    border-radius: 0;
+  }
+  html body.layers-open:not(.dossier-open) #zoomc,
+  html body.layers-open #zoomc {
+    display: none;
+  }
+  html body .lp .lp-plan {
+    margin-bottom: 16px;
+  }
+}
+/* чип-полоса: по содержимому, не на всю ширину, над масштабом; в DOM перед доком (порядок Tab = визуальный) */
+@media (max-width: 900px) {
+  html body .al-legend {
+    right: auto;
+    width: max-content;
+    max-width: calc(100vw - 2 * var(--gap) - 44px - 2 * var(--gap));
+    bottom: calc(var(--corner-base) + var(--scale-h) + 22px);
+  }
+}
+html body .al-i small,
+html body .lp-ac small {
+  white-space: nowrap;
+}
+/* активные слои внутри панели — одной прокручиваемой строкой на любой ширине */
+html body .lp .lp-active {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  flex: none;
+}
+html body .lp .lp-active .lp-at,
+html body .lp .lp-active .lp-ac {
+  flex: none;
+  margin: 0 4px 0 0;
+  white-space: nowrap;
+}
+@media (max-width: 800px), (max-height: 520px) {
+  html body .lp .lp-active {
+    display: none;
+  }
+}
+
+/* чипы слоёв — телефон (≤600): компактные, одна строка ≤36px, прокрутка по x с затуханием; шторка открыта — бейдж «Слои · N» */
+.al-badge {
+  display: none;
+}
+@media (max-width: 600px) {
+  html body #al-slot .al-legend {
+    left: var(--gap);
+    right: auto;
+    width: auto;
+    max-width: calc(100vw - 2 * var(--gap));
+    box-sizing: border-box;
+    padding: 2px 6px;
+    gap: 4px;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    max-height: 40px;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 18px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 18px), transparent);
+  }
+  html body #al-slot .al-legend::-webkit-scrollbar {
+    display: none;
+  }
+  html body .al-i {
+    flex: none;
+    margin: 0;
+    min-height: 32px;
+    padding: 0 0 0 8px;
+  }
+  html body .al-i .nm,
+  html body .al-i small {
+    display: none;
+  }
+  html body .al-i .sw,
+  html body .al-i img,
+  html body .al-i svg {
+    margin: 0;
+  }
+  html body .al-i button {
+    min-width: 32px;
+    min-height: 32px;
+  }
+  html body .al-more {
+    flex: none;
+    min-height: 32px;
+  }
+  html body.dossier-open #al-slot .al-legend .al-i,
+  html body.dossier-open #al-slot .al-legend .al-more {
+    display: none;
+  }
+  html body.dossier-open #al-slot .al-legend {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  html body.dossier-open .al-badge {
+    display: inline-block;
+    flex: none;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 4px 10px;
+  }
+}
+/* планшет: чипы не заходят под колонку зума, сдвинутую шторкой/досье */
+@media (min-width: 601px) and (max-width: 900px) {
+  html body.layers-open #al-slot .al-legend,
+  html body.dossier-open #al-slot .al-legend {
+    max-width: calc(100vw - var(--side-w) - var(--zoom-w, 44px) - 4 * var(--gap) - 12px);
+    flex-wrap: wrap !important;
+    overflow: visible;
+  }
+}

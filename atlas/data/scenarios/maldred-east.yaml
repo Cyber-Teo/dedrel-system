@@ -1,0 +1,79 @@
+# Сценарий: Восточный поход Малдреда (88) и дальнейшие походы Иллиора до образования империи (206).
+# Источники: события хроники (data/events.yaml) и страницы вики history/era_imperial, countries/*, geography/*. Только то, что сказано там;
+# линии между пунктами проведены по прямой и показывают порядок похода, а не дорогу.
+# camera: place | px; highlight: places, lines (via — id мест), polities — id из data/history/owners.yaml.
+id: maldred-east-88
+title: Восточный поход Малдреда (88–206)
+summary: 'От просек в Старом лесу в 88 году через походы на Залесье и Самрун к провозглашению Иллиорской империи в 206 году.'
+sources: [history/era_imperial]
+steps:
+  - title: Просеки в Старом лесу
+    date: { year: 88, label: 88 год, note: без точной даты }
+    text: >-
+      Малдред, правитель Иллиора, прорубает просеки в Старом лесу вдоль пути Иллиор — Гарн и истребляет разбойников и чудовищ.
+      К нему присоединяются отряды Валмира. Земли нынешней Занры входят в Иллиорский союз.
+    camera: { place: geo:garn, zoom: 3 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior, geo:valmir, geo:garn]
+      lines: [{ label: 'путь Иллиор — Гарн (схематично, по прямой)', via: [countries/illior_empire/cities/city_illior, geo:garn] }]
+    sources: [history/era_imperial, geography/old_forest, countries/zanra/index]
+  - title: Виларин входит в союз
+    date: { year: 110 }
+    text: >-
+      Виларин вступает в Иллиорский союз: Малдред обменивает защиту от чудовищ на магическую поддержку. Виларин на карте без
+      координат, поэтому показан центр союза — Иллиор.
+    camera: { place: countries/illior_empire/cities/city_illior, zoom: 3.2 }
+    highlight: { places: [countries/illior_empire/cities/city_illior] }
+    sources: [history/era_imperial, establishments/educational/vilarin_university]
+  - title: От Нордхельда к Вышпе
+    date: { year: 163, month: 3 }
+    text: >-
+      Из Нордхельда Малдред идёт по краю Морозного болота и спускается от Вышпы вниз по Гиблой; Вышпа взята за день. Ансельм
+      покоряет север и закладывает Антиум.
+    camera: { place: geo:vyshpa, zoom: 3 }
+    highlight:
+      places: [geo:nordheld, geo:vyshpa, geo:antium]
+      lines: [{ label: 'Нордхельд — Вышпа (схематично, по прямой)', via: [geo:nordheld, geo:vyshpa] }]
+    sources: [countries/zalessk/index, geography/frosty_marsh, geography/river_of_doom]
+  - title: Совиный погост, Залесск, Кастра Бриксия
+    date: { year: 163, month: 7, label: июль — август 163 }
+    text: >-
+      Малдред и Гней берут Совиный погост, в июле Залесск за два дня; в августе основана Кастра Бриксия. Залесье переходит под
+      власть Иллиора.
+    camera: { place: geo:zalessk, zoom: 3 }
+    highlight:
+      places: [geo:sovinyy_pogost, geo:zalessk, geo:kastra_briksiya]
+      lines: [{ label: 'Совиный погост — Залесск (схематично, по прямой)', via: [geo:sovinyy_pogost, geo:zalessk] }]
+    sources: [countries/zalessk/index, history/era_imperial]
+  - title: Битва при Самруне
+    date: { year: 164 }
+    text: >-
+      Флот Малдреда идёт от Залесска вдоль берега к Самруну; в переговорах ранен Ансельм. Малдред штурмует город и принуждает
+      его войти в Иллиорский союз, получив прозвище Завоеватель (по хроникам; что было на самом деле — неизвестно). Самрун становится
+      военной базой Малдреда.
+    camera: { place: geo:samrun, zoom: 3 }
+    highlight:
+      places: [geo:zalessk, geo:samrun]
+      lines: [{ label: 'путь флота (схематично, по прямой)', via: [geo:zalessk, geo:samrun] }]
+    sources: [countries/khrell/index, history/era_imperial]
+  - title: Юго-западный поход
+    date: { year: 171, label: 171–173 годы }
+    text: >-
+      После вести из Корилы о преследовании рода Нарракез и присланной отрубленной руки Малдред двухлетней кампанией берёт все
+      земли Союза Свободных; виновные бегут в Наджир на Западном берегу.
+    camera: { place: geo:korilla, zoom: 2.6 }
+    highlight:
+      places: [geo:korilla, geo:nadzhir, geo:samrun]
+    sources: [history/era_imperial, countries/gross/index, countries/rojo/index]
+  - title: Иллиорская империя
+    date: { year: 206 }
+    text: >-
+      181-летний Малдред провозглашает Иллиорскую империю: Иллиорский союз становится империей почти на все Восточные земли.
+      Созданы префектуры Арност (Нордхельд, с Вышневодском), Гросс, Хрэлл (Самрун) и Занра; Залесское княжество подчиняется
+      напрямую канцелярии.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior, geo:nordheld, geo:vyshnevodsk, geo:bersan, geo:samrun, geo:zalessk]
+      polities: [countries/illior_empire/index]
+    owners_at: 206
+    sources: [history/era_imperial, countries/illior_empire/index, countries/gross/index, countries/khrell/index, countries/zalessk/index]

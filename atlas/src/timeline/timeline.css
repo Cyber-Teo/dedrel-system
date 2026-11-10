@@ -1,0 +1,494 @@
+/* Временная линия: одна строка управления (год, счётчик, ▶ ‹ › ⚙), настройки в поповере ⚙ на любой ширине. */
+.tl-top {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px 12px;
+  font-size: 12px;
+  position: relative;
+}
+.tl .tl-year {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+.tl-year .yr {
+  font: 700 24px/1 var(--serif);
+  font-variant-numeric: tabular-nums;
+  color: var(--blood);
+  min-width: 3.4ch;
+}
+.tl-year .era {
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.tl-year .cnt {
+  font-size: 12px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  margin-left: 0;
+}
+.tl-base {
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 1px 8px;
+  border: 1px solid #b8892b;
+  border-radius: 10px;
+  background: #fffaf0;
+  color: #6b4e1e;
+  cursor: help;
+}
+.tl-btns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.tl-btns button {
+  min-width: 32px;
+  min-height: 28px;
+}
+.tl-play {
+  min-width: 92px;
+  font-weight: 600;
+}
+.tl-gear {
+  display: inline-block;
+}
+.tl-gear[aria-expanded='true'] {
+  background: var(--gold, #b8892b);
+  color: #fff;
+}
+.tl .tl-ctl {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  width: min(300px, 92vw);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  background: var(--parch, #f6edd3);
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px #0004;
+  z-index: 9;
+}
+.tl.cfg .tl-ctl {
+  display: flex;
+}
+.tl-ctl label {
+  justify-content: space-between;
+}
+.tl-ctl label {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--ink-soft);
+}
+.tl-ctl select,
+.tl-ctl input {
+  padding: 2px 4px;
+  border: 1px solid #8a7a5a;
+  border-radius: 4px;
+  background: #fffc;
+  color: var(--ink);
+  font: inherit;
+}
+.tl-ctl input[type='number'] {
+  width: 54px;
+}
+.tl-ctl .tl-yin {
+  width: 7ch;
+  font-weight: 700;
+}
+.tl-loop {
+  padding: 2px 8px;
+}
+.tl-loop.on {
+  background: var(--gold, #b8892b);
+  color: #fff;
+}
+.tl-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  flex: none;
+}
+.tl-key i {
+  width: 2px;
+  height: 12px;
+  background: #8c1c13;
+  display: inline-block;
+}
+.tl-rul {
+  position: relative;
+  width: 100%;
+  margin-top: 2px;
+}
+.tl-rul canvas {
+  display: block;
+  touch-action: none;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.tl-rul canvas:focus-visible {
+  outline: 3px solid #2b6cb0;
+  outline-offset: 1px;
+}
+.tl .tl-segs {
+  position: relative;
+  height: 15px;
+  margin-top: 2px;
+}
+.tl-segs i {
+  position: absolute;
+  top: 0;
+  height: 15px;
+  cursor: pointer;
+  border-right: 1px solid var(--parch-2);
+  box-sizing: border-box;
+  font: 600 11px/15px var(--serif, Georgia, serif);
+  font-style: normal;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tl-segs i.cur {
+  box-shadow: inset 0 -2px 0 #2b1a0e;
+}
+.tl-segs i.gap {
+  background-image: repeating-linear-gradient(45deg, transparent 0 2px, #f6edd3 2px 3px);
+}
+.tl-chips i {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex: none;
+  display: inline-block;
+}
+.tl-chips {
+  display: none;
+}
+.tl-hint,
+.tl-bubble {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  z-index: 9;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #2b1a0e;
+  color: #fff6dc;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.tl-hint {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tl-bubble {
+  transform: translateX(-50%);
+  font-weight: 700;
+  bottom: calc(100% + 18px);
+}
+@media (max-width: 900px) {
+  .tl-key {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .tl-top {
+    gap: 6px;
+  }
+  .tl .tl-year {
+    gap: 6px;
+  }
+  .tl-year .yr {
+    font-size: 22px;
+    min-width: 0;
+  }
+  .tl-year .cnt {
+    display: none;
+  }
+  .tl-year .era {
+    display: block;
+    min-width: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+  .tl-btns {
+    flex: none;
+    gap: 4px;
+  }
+  .tl-btns button {
+    min-height: 26px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+  .tl-rul {
+    margin-top: 2px;
+  }
+  .tl .tl-segs {
+    height: 13px;
+  }
+  .tl-segs i {
+    height: 13px;
+    font: 600 11px/13px var(--serif, Georgia, serif);
+  }
+  .tl-play {
+    min-width: 36px;
+  }
+  .tl-play .tx {
+    display: none;
+  }
+  .tl-chips {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 11px;
+    margin-top: 2px;
+    line-height: 15px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+    padding-right: 22px;
+  }
+  .tl-chips span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex: none;
+    cursor: pointer;
+  }
+  .tl-chips span.on {
+    font-weight: 700;
+  }
+}
+/* сенсорный экран: крупные цели */
+@media (pointer: coarse) {
+  .tl-btns button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .tl-play {
+    min-width: 44px;
+  }
+  .tl-ctl select,
+  .tl-ctl input,
+  .tl-loop {
+    min-height: 36px;
+  }
+  .tl .tl-segs,
+  .tl-segs i {
+    height: 18px;
+  }
+  .tl-segs i {
+    line-height: 18px;
+  }
+}
+/* окно ⚙ — над шкалой по центру, в стиле панелей; тумблер «зациклить»; ряд эпох на узком экране не обрезает последнюю */
+.tl .tl-ctl {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(300px, calc(100vw - 24px));
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  background: var(--parch, #f6edd3);
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 8px;
+  box-shadow: 0 4px 18px #2b211366;
+}
+.tl-ctl select,
+.tl-ctl input {
+  padding: 3px 6px;
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 6px;
+  background: #fffaf0;
+}
+.tl-ctl select:focus-visible,
+.tl-ctl input:focus-visible {
+  outline: 2px solid var(--gold, #b8892b);
+  outline-offset: 1px;
+}
+.tl-ctl .tl-loop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  cursor: pointer;
+}
+.tl-ctl .tl-loop::after {
+  content: '';
+  flex: none;
+  width: 34px;
+  height: 18px;
+  border-radius: 9px;
+  border: 1px solid var(--gold, #b8892b);
+  background: radial-gradient(circle at 9px 50%, #fffaf0 6px, transparent 7px), #e9dcb4;
+  transition: background-position 0.15s;
+}
+.tl-ctl .tl-loop.on {
+  background: none;
+  color: var(--ink);
+}
+.tl-ctl .tl-loop.on::after {
+  background: radial-gradient(circle at 25px 50%, #fffaf0 6px, transparent 7px), var(--gold, #b8892b);
+}
+@media (max-width: 700px) {
+  .tl-chips {
+    padding-right: 28px;
+    scroll-padding-right: 28px;
+  }
+}
+
+/* подписи эпох не мельче 11 px; строка про события без места на карте */
+.tl-segs i {
+  font-size: 11px;
+  text-shadow: 0 0 2px #0003;
+}
+.tl-segs i.gap {
+  text-shadow: none;
+}
+.tl-noplace {
+  position: relative;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.tl-noplace button {
+  padding: 0 6px;
+  font: inherit;
+  border: 0;
+  background: none;
+  color: #8c1c13;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.tl-noplace ul {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 6px);
+  z-index: 9;
+  width: min(420px, 94vw);
+  max-height: 40vh;
+  overflow: auto;
+  margin: 0;
+  padding: 8px 12px 8px 24px;
+  background: var(--parch, #f6edd3);
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 8px;
+  box-shadow: 0 4px 18px #2b211366;
+  color: var(--ink);
+}
+.tl-noplace li {
+  margin: 2px 0;
+}
+.tl-noplace li small {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+/* фокус слайдера в общем стиле; название эпохи не обрезается многоточием; легенда цветов штрихов */
+.tl-rul canvas:focus-visible {
+  outline: 2px solid var(--gold, #b8892b);
+  outline-offset: 2px;
+}
+.tl-ctl .tl-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  padding-top: 6px;
+  border-top: 1px solid #b8892b55;
+}
+.tl-groups span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.tl-groups i {
+  flex: none;
+  width: 3px;
+  height: 12px;
+  display: inline-block;
+}
+@media (max-width: 700px) {
+  .tl-year .era {
+    overflow-x: auto;
+    text-overflow: clip;
+    scrollbar-width: none;
+    max-width: 100%;
+  }
+  .tl-year .era::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* легенда эпох под шкалой на телефоне и планшете — полные названия, перенос на вторую строку без обрезки */
+@media (max-width: 900px) {
+  .tl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+    overflow: visible;
+    white-space: normal;
+    font-size: 11px;
+    margin-top: 2px;
+    line-height: 15px;
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding-right: 0;
+  }
+  .tl-chips span {
+    flex: none;
+  }
+}
+
+/* год цифрами (не «I»), год и эпоха в отдельных ячейках; на узком экране с чипом подложки эпоха уходит со строки */
+.tl-year .yr {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings:
+    'lnum' 1,
+    'tnum' 1;
+  flex: none;
+  min-width: 4ch;
+}
+.tl-year .era {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.tl-segs i.gap {
+  min-width: 3px;
+}
+@media (max-width: 430px) {
+  .tl-year:has(.tl-base) .era {
+    display: none;
+  }
+  .tl-year .tl-base {
+    flex: none;
+  }
+}

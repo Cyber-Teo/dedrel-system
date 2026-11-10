@@ -1,0 +1,786 @@
+values:
+  religion:
+    Культ Предков: {color: '#b0903f'}
+    Церковь Звёзд: {color: '#6f86a3'}
+    Пантеон Занры: {color: '#8a6a9a'}
+    Многобожие Игни: {color: '#c07a3a'}
+    Культы Залесья: {color: '#5f8a62'}
+    Тотемы и духи предков: {color: '#b99a6b'}
+    Культы Плато Архидемона: {color: '#8c2f2a'}
+    Друиды: {color: '#4f7a45'}
+    Свобода культов: {color: '#9a8a78'}
+    Церковь Катберта: {color: '#8f9bb0'}
+  language:
+    Имперский центральный: {color: '#c9a44c'}
+    Имперский северный: {color: '#6f86a3'}
+    Имперский южный: {color: '#b5703f'}
+    Пустынный: {color: '#c9b58a'}
+    Эльфийский: {color: '#7fa38a'}
+    Драконик: {color: '#8c2f2a'}
+    Демоник: {color: '#6b4a5a'}
+  currency:
+    Иллиорская крона: {color: '#c9a44c'}
+    Злотый Гросса: {color: '#5f8a6e'}
+    Песо Ройо: {color: '#b5703f'}
+    Рупия Игни: {color: '#a8442a'}
+    Рю: {color: '#8c2f2a'}
+    Облигации Банка Занры: {color: '#8a6a9a'}
+    Векселя и облигации Дринрога: {color: '#6f86a3'}
+    Любые монеты и обмен: {color: '#b9ad92'}
+    Обмен без денег: {color: '#8a8470'}
+  guild:
+    Амальгама: {color: '#c0392b', angle: 45}
+    Хладовей: {color: '#e67e22', angle: 45}
+    Мистические Кователи: {color: '#d4ac0d', angle: 45}
+    Алхимики Иллиора: {color: '#8e6b1f', angle: 45}
+    Северный путь: {color: '#27ae60', angle: 135}
+    Солнечные Львы: {color: '#16a085', angle: 135}
+    Чёрные капюшоны: {color: '#1f8a9e', angle: 135}
+    Ящеры: {color: '#2471a3', angle: 135}
+    Пиротехники Занры: {color: '#34495e', angle: 0}
+    Дринрогский Союз: {color: '#6c3483', angle: 0}
+    Драгоценные: {color: '#c2185b', angle: 0}
+    Чёрные Всадники: {color: '#7d6608', angle: 0}
+    Палата алхимиков Тарпета: {color: '#a04000', angle: 90}
+    Виларинский конвент: {color: '#117864', angle: 90}
+    Солнечная компания: {color: '#5b6b7a', angle: 90}
+    Рассветные Дельфины: {color: '#b03a77', angle: 90}
+areas:
+- id: area:religion:01
+  layer: religion
+  value: Культ Предков
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/ancestors_cult, countries/illior_empire/index]
+  text: Без церкви и жрецов; большие празднества на весеннее и осеннее равноденствие.
+- id: area:religion:02
+  layer: religion
+  value: Церковь Звёзд
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_the_stars]
+  text: Запрещена для публичных служб с 268 г.
+- id: area:religion:03
+  layer: religion
+  value: Церковь Катберта
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_cuthbert]
+  text: Катбертисты преследовались с 811 г.
+- id: area:religion:04
+  layer: religion
+  value: Церковь Звёзд
+  scope: state_1006
+  ids: [countries/rojo/index, countries/bastion_union/index, countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/church_of_the_stars]
+  text: 'Ройо: государственная религия с 560–567 гг.; Бастионный союз: церковь в изгнании при Патриархе Герении; Дринрог: приходы.'
+- id: area:religion:05
+  layer: religion
+  value: Церковь Катберта
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_cuthbert]
+  text: Община катбертистов с 811 г.; правительство им не радо, открытых гонений нет.
+- id: area:religion:06
+  layer: religion
+  value: Культ Предков
+  scope: state_1006
+  ids: [countries/gross/index]
+  primary: true
+  confidence: derived
+  sources: [countries/gross/index, knowledges/ancestors_cult]
+  text: Официальной религии нет, веротерпимость; в почёте поклонение духам предков.
+- id: area:religion:07
+  layer: religion
+  value: Церковь Катберта
+  scope: state_1006
+  ids: [countries/gross/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_cuthbert]
+  text: Община святого Катберта в Ежицке.
+- id: area:religion:08
+  layer: religion
+  value: Пантеон Занры
+  scope: state_1006
+  ids: [countries/zanra/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/pantheon_of_zanra]
+  text: 'Государственная религия: единая церковь, созданная после независимости 817 г.'
+- id: area:religion:09
+  layer: religion
+  value: Многобожие Игни
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/polytheism_igni]
+  text: 'Множество культов больших и малых богов; три главных образа: Мать-река Сарати, воитель Метадр, змей Ниимас.'
+- id: area:religion:10
+  layer: religion
+  value: Культы Залесья
+  scope: state_1006
+  ids: [countries/zalessk/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/zalessk_beliefs]
+  text: 'Три культа: Большого медведя, Дикой воды, Леса.'
+- id: area:religion:11
+  layer: religion
+  value: Тотемы и духи предков
+  scope: state_1006
+  ids: [countries/land_of_oases/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/beliefs_of_the_land_of_oases]
+  text: Тотем у каждого племени; духи предков, связь с имперским Культом Предков.
+- id: area:religion:12
+  layer: religion
+  value: Церковь Звёзд
+  scope: state_1006
+  ids: [countries/land_of_oases/index]
+  primary: false
+  confidence: canon
+  sources: [countries/land_of_oases/index]
+  text: Проповедники Церкви Звёзд.
+- id: area:religion:13
+  layer: religion
+  value: Культы Плато Архидемона
+  scope: state_1006
+  ids: [countries/archdemon_s_plateau/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/cults_of_the_archdemon_plateau]
+  text: Демонопоклонничество и Культ сверхчеловека (центр — храмовый комплекс Мадакиша); есть и привозные культы.
+- id: area:religion:14
+  layer: religion
+  value: Друиды
+  scope: state_1006
+  ids: [countries/druid_s_grove/index]
+  primary: true
+  confidence: canon
+  sources: [countries/druid_s_grove/index]
+  text: Почитание леса; Орден друидов охраняет тёмные чащи.
+- id: area:religion:15
+  layer: religion
+  value: Свобода культов
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: true
+  confidence: canon
+  sources: [countries/makharatkha/index]
+  text: Открыто любые культы; ересь о «невинных» демонах.
+- id: area:religion:16
+  layer: religion
+  value: Церковь Звёзд
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_the_stars]
+  text: Приходы Церкви Звёзд.
+- id: area:religion:17
+  layer: religion
+  value: Церковь Катберта
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: false
+  confidence: canon
+  sources: [knowledges/church_of_cuthbert]
+  text: Община катбертистов с 811 г.
+- id: area:language:01
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: derived
+  sources: [countries/illior_empire/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:02
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: false
+  confidence: canon
+  sources: [countries/illior_empire/index, knowledges/languages]
+- id: area:language:03
+  layer: language
+  value: Имперский северный
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: false
+  confidence: canon
+  sources: [countries/illior_empire/index, knowledges/languages]
+- id: area:language:04
+  layer: language
+  value: Эльфийский
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: false
+  confidence: canon
+  sources: [countries/illior_empire/index, knowledges/languages]
+- id: area:language:05
+  layer: language
+  value: Имперский северный
+  scope: state_1006
+  ids: [countries/gross/index]
+  primary: true
+  confidence: derived
+  sources: [countries/gross/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:06
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/gross/index]
+  primary: false
+  confidence: canon
+  sources: [countries/gross/index, knowledges/languages]
+- id: area:language:07
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/rojo/index]
+  primary: true
+  confidence: derived
+  sources: [countries/rojo/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:08
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/rojo/index]
+  primary: false
+  confidence: canon
+  sources: [countries/rojo/index, knowledges/languages]
+- id: area:language:09
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/bastion_union/index]
+  primary: true
+  confidence: derived
+  sources: [countries/bastion_union/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:10
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/bastion_union/index]
+  primary: false
+  confidence: canon
+  sources: [countries/bastion_union/index, knowledges/languages]
+- id: area:language:11
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [countries/drinrog/index, knowledges/languages]
+- id: area:language:12
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/zanra/index]
+  primary: true
+  confidence: canon
+  sources: [countries/zanra/index, knowledges/languages]
+- id: area:language:13
+  layer: language
+  value: Эльфийский
+  scope: state_1006
+  ids: [countries/enforis/index]
+  primary: true
+  confidence: derived
+  sources: [countries/enforis/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:14
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/enforis/index]
+  primary: false
+  confidence: canon
+  sources: [countries/enforis/index, knowledges/languages]
+- id: area:language:15
+  layer: language
+  value: Имперский северный
+  scope: state_1006
+  ids: [countries/vishnevodskoye_principality/index]
+  primary: true
+  confidence: canon
+  sources: [countries/vishnevodskoye_principality/index, knowledges/languages]
+- id: area:language:16
+  layer: language
+  value: Имперский северный
+  scope: state_1006
+  ids: [countries/zalessk/index]
+  primary: true
+  confidence: derived
+  sources: [countries/zalessk/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:17
+  layer: language
+  value: Драконик
+  scope: state_1006
+  ids: [countries/zalessk/index]
+  primary: false
+  confidence: canon
+  sources: [countries/zalessk/index, knowledges/languages]
+- id: area:language:18
+  layer: language
+  value: Имперский центральный
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: true
+  confidence: derived
+  sources: [countries/khrell/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:19
+  layer: language
+  value: Имперский северный
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: false
+  confidence: canon
+  sources: [countries/khrell/index, knowledges/languages]
+- id: area:language:20
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: false
+  confidence: canon
+  sources: [countries/khrell/index, knowledges/languages]
+- id: area:language:21
+  layer: language
+  value: Драконик
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: false
+  confidence: canon
+  sources: [countries/khrell/index, knowledges/languages]
+- id: area:language:22
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: true
+  confidence: derived
+  sources: [countries/igni/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:23
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: false
+  confidence: canon
+  sources: [countries/igni/index, knowledges/languages]
+- id: area:language:24
+  layer: language
+  value: Демоник
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: false
+  confidence: canon
+  sources: [countries/igni/index, knowledges/languages]
+- id: area:language:25
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: true
+  confidence: derived
+  sources: [countries/makharatkha/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:26
+  layer: language
+  value: Демоник
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: false
+  confidence: canon
+  sources: [countries/makharatkha/index, knowledges/languages]
+- id: area:language:27
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/makharatkha/index]
+  primary: false
+  confidence: canon
+  sources: [countries/makharatkha/index, knowledges/languages]
+- id: area:language:28
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/land_of_oases/index]
+  primary: true
+  confidence: derived
+  sources: [countries/land_of_oases/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:29
+  layer: language
+  value: Демоник
+  scope: state_1006
+  ids: [countries/land_of_oases/index]
+  primary: false
+  confidence: canon
+  sources: [countries/land_of_oases/index, knowledges/languages]
+- id: area:language:30
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/archdemon_s_plateau/index]
+  primary: true
+  confidence: derived
+  sources: [countries/archdemon_s_plateau/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:31
+  layer: language
+  value: Демоник
+  scope: state_1006
+  ids: [countries/archdemon_s_plateau/index]
+  primary: false
+  confidence: canon
+  sources: [countries/archdemon_s_plateau/index, knowledges/languages]
+- id: area:language:32
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/archdemon_s_plateau/index]
+  primary: false
+  confidence: canon
+  sources: [countries/archdemon_s_plateau/index, knowledges/languages]
+- id: area:language:33
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/slavetraders_coast/index]
+  primary: true
+  confidence: derived
+  sources: [countries/slavetraders_coast/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:34
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/slavetraders_coast/index]
+  primary: false
+  confidence: canon
+  sources: [countries/slavetraders_coast/index, knowledges/languages]
+- id: area:language:35
+  layer: language
+  value: Демоник
+  scope: state_1006
+  ids: [countries/slavetraders_coast/index]
+  primary: false
+  confidence: canon
+  sources: [countries/slavetraders_coast/index, knowledges/languages]
+- id: area:language:36
+  layer: language
+  value: Эльфийский
+  scope: state_1006
+  ids: [countries/ethel/index]
+  primary: true
+  confidence: canon
+  sources: [countries/ethel/index, knowledges/languages]
+- id: area:language:37
+  layer: language
+  value: Драконик
+  scope: state_1006
+  ids: [countries/dragons_country/index]
+  primary: true
+  confidence: canon
+  sources: [countries/dragons_country/index, knowledges/languages]
+- id: area:language:38
+  layer: language
+  value: Имперский южный
+  scope: state_1006
+  ids: [countries/horseshoe_islands/index]
+  primary: true
+  confidence: derived
+  sources: [countries/horseshoe_islands/index, knowledges/languages]
+  text: Основной — первый в списке языков страны в вики.
+- id: area:language:39
+  layer: language
+  value: Эльфийский
+  scope: state_1006
+  ids: [countries/horseshoe_islands/index]
+  primary: false
+  confidence: canon
+  sources: [countries/horseshoe_islands/index, knowledges/languages]
+- id: area:language:40
+  layer: language
+  value: Пустынный
+  scope: state_1006
+  ids: [countries/horseshoe_islands/index]
+  primary: false
+  confidence: canon
+  sources: [countries/horseshoe_islands/index, knowledges/languages]
+- id: area:language:41
+  layer: language
+  value: Имперский северный
+  scope: region
+  ids: [countries/illior_empire/regions/illior_empire_run_region]
+  primary: true
+  confidence: canon
+  sources: [knowledges/languages]
+  text: В вики имперский северный назван языком имперской префектуры Рун.
+- id: area:language:42
+  layer: language
+  value: Имперский южный
+  scope: region
+  ids: [countries/illior_empire/regions/illior_empire_sark_region]
+  primary: true
+  confidence: derived
+  sources: [knowledges/languages, countries/illior_empire/regions/illior_empire_sark_region]
+  text: «На юге империи»; Сарк — южная граница империи (вывод).
+- id: area:currency:01
+  layer: currency
+  value: Иллиорская крона
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/monetary_system, countries/illior_empire/index]
+  text: Эталон веса и пробы монет по всему миру.
+- id: area:currency:02
+  layer: currency
+  value: Иллиорская крона
+  scope: state_1006
+  ids: [countries/vishnevodskoye_principality/index]
+  primary: true
+  confidence: canon
+  sources: [countries/vishnevodskoye_principality/index]
+  text: В ходу иллиорские кроны.
+- id: area:currency:03
+  layer: currency
+  value: Злотый Гросса
+  scope: state_1006
+  ids: [countries/gross/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/monetary_system, countries/gross/index]
+  text: Одна из трёх мировых валют по имперскому стандарту.
+- id: area:currency:04
+  layer: currency
+  value: Песо Ройо
+  scope: state_1006
+  ids: [countries/rojo/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/monetary_system, countries/rojo/index]
+- id: area:currency:05
+  layer: currency
+  value: Рупия Игни
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: true
+  confidence: canon
+  sources: [knowledges/monetary_system, countries/igni/index]
+  text: Рупии широко ходят на юге.
+- id: area:currency:06
+  layer: currency
+  value: Рю
+  scope: state_1006
+  ids: [countries/dragons_country/index]
+  primary: true
+  confidence: canon
+  sources: [countries/dragons_country/index]
+- id: area:currency:07
+  layer: currency
+  value: Облигации Банка Занры
+  scope: state_1006
+  ids: [countries/zanra/index]
+  primary: true
+  confidence: canon
+  sources: [countries/zanra/index, knowledges/monetary_system]
+  text: Векселя и облигации Банка Занры; монеты — кроны Занры.
+- id: area:currency:08
+  layer: currency
+  value: Векселя и облигации Дринрога
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [countries/drinrog/index, knowledges/monetary_system]
+  text: Векселя и облигации банков (номиналы 10, 50, 100, 1000) и монеты всех стран.
+- id: area:currency:09
+  layer: currency
+  value: Обмен без денег
+  scope: state_1006
+  ids: [countries/zalessk/index]
+  primary: true
+  confidence: canon
+  sources: [countries/zalessk/index]
+  text: Денег нет, в ходу обмен.
+- id: area:currency:10
+  layer: currency
+  value: Любые монеты и обмен
+  scope: state_1006
+  ids: [countries/bastion_union/index, countries/ethel/index, countries/enforis/index, countries/archdemon_s_plateau/index, countries/khrell/index, countries/land_of_oases/index, countries/makharatkha/index,
+    countries/slavetraders_coast/index, countries/horseshoe_islands/index]
+  primary: true
+  confidence: canon
+  sources: [countries/bastion_union/index, countries/ethel/index, countries/enforis/index, countries/archdemon_s_plateau/index, countries/khrell/index, countries/land_of_oases/index, countries/makharatkha/index,
+    countries/slavetraders_coast/index, countries/horseshoe_islands/index]
+  text: '«Деньги: любые» в карточке страны; Хрэлл, Край Оазисов, Побережье работорговцев — в ходу и обмен.'
+- id: area:guild:01
+  layer: guild
+  value: Амальгама
+  scope: state_1006
+  ids: [countries/illior_empire/index, countries/rojo/index, countries/gross/index, countries/arnost/index, countries/drinrog/index, countries/zanra/index]
+  primary: true
+  confidence: derived
+  sources: [guilds/amalgam]
+  text: Лекари и алхимики; «почти везде, больше всего в империи и бывших провинциях» (Ройо, Гросс, Арност, Дринрог, Занра).
+- id: area:guild:02
+  layer: guild
+  value: Хладовей
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/coldwave]
+  text: Пожарные, лекарни, лудус; «почти только империя».
+- id: area:guild:03
+  layer: guild
+  value: Мистические Кователи
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/arcane_blacksmiths]
+  text: Волшебное оружие и доспехи; присутствие по империи, скидки армии.
+- id: area:guild:04
+  layer: guild
+  value: Алхимики Иллиора
+  scope: state_1006
+  ids: [countries/illior_empire/index]
+  primary: true
+  confidence: derived
+  sources: [guilds/illior_alchemists]
+  text: Зелья для армии, стекло; отделения в крупных городах империи.
+- id: area:guild:05
+  layer: guild
+  value: Северный путь
+  scope: state_1006
+  ids: [countries/slavetraders_coast/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/north_road, countries/slavetraders_coast/index]
+  text: Работорговая гильдия, правит Побережьем работорговцев (первенство в олигархии).
+- id: area:guild:06
+  layer: guild
+  value: Солнечные Львы
+  scope: state_1006
+  ids: [countries/enforis/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/sunlions]
+  text: Одна из сильнейших гильдий мира, штаб в Олифаноре; основана в 741 г.
+- id: area:guild:07
+  layer: guild
+  value: Чёрные капюшоны
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/black_hoods]
+  text: Содержат дороги и колодцы в землях Хрэлл.
+- id: area:guild:08
+  layer: guild
+  value: Ящеры
+  scope: state_1006
+  ids: [countries/khrell/index]
+  primary: true
+  confidence: canon
+  sources: [countries/khrell/khrell_lands_fractions]
+  text: 'Синдикат: фермы по всему Хрэлл, монополия на контрабанду в Страну Драконов.'
+- id: area:guild:09
+  layer: guild
+  value: Пиротехники Занры
+  scope: state_1006
+  ids: [countries/zanra/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/zanra_pyrotechnicians]
+  text: Почти монополия на порох и огнестрельное оружие.
+- id: area:guild:10
+  layer: guild
+  value: Дринрогский Союз
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/drinrog_union]
+  text: Торговая гильдия, распоряжается финансами республики.
+- id: area:guild:11
+  layer: guild
+  value: Драгоценные
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/precious]
+  text: Богатейшая гильдия республики (ремесленная).
+- id: area:guild:12
+  layer: guild
+  value: Чёрные Всадники
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: canon
+  sources: [guilds/black_riders]
+  text: 'Наёмничья гильдия: охраняет Дринрог по суше.'
+- id: area:guild:13
+  layer: guild
+  value: Палата алхимиков Тарпета
+  scope: state_1006
+  ids: [countries/igni/index]
+  primary: true
+  confidence: canon
+  sources: [countries/igni/regions/igni_sarati_region]
+  text: Монополия Игни на создание кукол.
+- id: area:guild:14
+  layer: guild
+  value: Виларинский конвент
+  scope: state_1006
+  ids: [countries/druid_s_grove/index, countries/zalessk/index]
+  primary: true
+  confidence: derived
+  sources: [countries/druid_s_grove/index]
+  text: Организация наёмников со штабом в Виларине; присутствие в Друидовой пуще и Залесске (посредничество 1005).
+- id: area:guild:15
+  layer: guild
+  value: Солнечная компания
+  scope: state_1006
+  ids: [countries/drinrog/index]
+  primary: true
+  confidence: derived
+  sources: [guilds/sunny_company]
+  text: 'Торговая: морской фрахт и карты; штаб в Олифаноре, присутствие на Солнечных островах и в Дринроге.'
+- id: area:guild:16
+  layer: guild
+  value: Рассветные Дельфины
+  scope: region
+  ids: [countries/rojo/regions/rojo_danir_region]
+  primary: true
+  confidence: canon
+  sources: [guilds/dawn_dolphins]
+  text: Крупнейшая кораблестроительная гильдия королевства, штаб в Данире.

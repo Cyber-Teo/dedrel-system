@@ -1,0 +1,22 @@
+# Территории без государства в data/geo/states-1006.geojson: id полигонов, которых нет в places.yaml и среди страниц вики.
+# Это зоны «ничьи / нет сведений о принадлежности»: положение по растру (map:растр), статус — по тексту подписи полигона.
+# place — ближайшая запись в places.yaml, если она есть (не обязательна).
+- id: geo:nichya_zemlya_belogolovye_gory
+  name: Белоголовые горы (ничьи)
+  place: geo:belogolovye_gory
+  sources: [map:растр, gazetteer-east]
+  confidence: derived
+- id: geo:staryy_les
+  name: Старый Лес (нет сведений о принадлежности)
+  place: geo:staryy_les_les_uzhasov
+  sources: [map:растр]
+  confidence: derived
+- id: geo:neverlend
+  name: Неверлэнд (нет сведений о государстве)
+  sources: [map:растр]
+  confidence: derived
+- id: geo:velikaya_pustynya
+  name: Великая пустыня (нет сведений о государстве)
+  place: geo:pustynya
+  sources: [map:растр]
+  confidence: speculative

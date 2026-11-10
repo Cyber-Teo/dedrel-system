@@ -1,0 +1,2216 @@
+# Организации. Собрано scripts/import/build-registry.ts из выжимок лора и хроники (входы импорта в репозиторий не входят); дальше правится вручную.
+# Положение — по карте (x,y придут из газеттира), факты — по тексту вики.
+- id: org:senat_illiorskoy_imperii
+  name: Сенат Иллиорской империи
+  slug: countries/illior_empire/illior_empire_senate
+  kind: legislature
+  hq: Иллиор
+  leader: 17 глав Великих Домов + народный депутат Гней Корфидий
+  presence: вся империя
+  influence: главный законодательный орган; вето на императора; революция 817
+  sources:
+    - countries/illior_empire/illior_empire_senate
+    - history/era_imperial
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: власть"
+      sources:
+        - history/era_imperial
+        - history/era_troubles
+- id: org:dom_tarkviniev
+  name: Дом Тарквиниев
+  kind: dynasty
+  hq: Дворец Основателя
+  leader: Йорик
+  presence: вся империя
+  influence: "монархисты: Опии, Юнии, Фабии, Потиции, Нумиции; противники: Фурии, Сульпиции, Эмилии, Клавдии"
+  sources:
+    - characters/houses_clans/tarquinii
+  confidence: canon
+  visibility: public
+- id: org:drakonya_strazha
+  name: Драконья стража
+  kind: guard
+  hq: Дворец Основателя
+  leader: не указан
+  presence: Иллиор
+  influence: личная гвардия императорского дома
+  sources:
+    - characters/houses_clans/tarquinii
+    - history/era_troubles
+    - history/era_new_age
+    - characters/yorick
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: лейб-гвардия"
+      sources:
+        - history/era_troubles
+        - history/era_new_age
+- id: org:imperatorskie_departamenty
+  name: Императорские департаменты
+  kind: administration
+  hq: Иллиор
+  leader: император
+  presence: империя
+  influence: налоги, уголовное право
+  sources:
+    - countries/illior_empire/illior_empire_administration
+  confidence: canon
+  visibility: public
+- id: org:imperskaya_kantselyariya
+  name: Имперская канцелярия
+  kind: administration
+  hq: Иллиор
+  presence: империя
+  influence: списки образованных граждан для судей префектур
+  sources:
+    - countries/illior_empire/illior_empire_administration
+  confidence: canon
+  visibility: public
+- id: org:imperskaya_razvedka
+  name: Имперская разведка
+  kind: intelligence
+  hq: Иллиор
+  leader: прежде Арчибальд Квинт Мариус (погиб 1005)
+  presence: империя
+  influence: обвинила Фуриев в измене
+  sources:
+    - characters/houses_clans/marcia
+    - history/era_new_age
+    - history/vilarin_convention
+    - characters/yorick
+    - characters/klara_furia
+    - characters/serafina_larcia
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: спецслужба"
+      sources:
+        - history/era_new_age
+        - history/vilarin_convention
+- id: org:vilarinskiy_universitet_magii
+  name: Виларинский университет магии
+  slug: establishments/educational/vilarin_university
+  kind: school
+  hq: Виларин
+  leader: ректор архимаг Сарина
+  presence: префектура Виларин
+  influence: фактическая власть в префектуре; изучает аномалии
+  sources:
+    - countries/illior_empire/cities/city_vilarin
+    - countries/vishnevodskoye_principality/index
+    - characters/archmage_sarina
+    - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: университет"
+      sources:
+        - countries/vishnevodskoye_principality/index
+        - characters/archmage_sarina
+        - establishments/educational/vilarin_university
+- id: org:legiony_i_ii_v_vi_ix_xiii_xxiii_xxiv
+  name: Легионы (I, II, V, VI, IX, XIII, XXIII, XXIV)
+  kind: army
+  hq: Иллиор, Висентия, Камераска, Грейхельд, Эрелон, Сибарис
+  leader: легаты
+  presence: империя
+  influence: 24 формально; 120 000 с стражей
+  sources:
+    - countries/illior_empire/illior_empire_army
+  confidence: canon
+  visibility: public
+- id: org:i_legion
+  name: I легион
+  kind: army
+  hq: Иллиор и окрестности
+  leader: Эврипид Август Юний
+  presence: Иллиор
+  influence: сформирован Малдредом; потомки воинов чтят предков как богов
+  sources:
+    - countries/illior_empire/illior_empire_army
+    - characters/euripdus_junius
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: legion"
+      sources:
+        - characters/euripdus_junius
+- id: org:ii_legion
+  name: II легион
+  kind: army
+  hq: Висентия
+  leader: "?"
+  presence: западная граница
+  influence: сформирован при Малдреде; охраняет границу с Гроссом, собирает пошлины
+  sources:
+    - countries/illior_empire/illior_empire_army
+  confidence: canon
+  visibility: public
+- id: org:v_legion
+  name: V легион
+  kind: army
+  hq: около Камераски
+  leader: "?"
+  presence: Камераска, Форт Болотный
+  influence: воздушное наблюдение за Лесом Ужасов
+  sources:
+    - countries/illior_empire/illior_empire_army
+  confidence: canon
+  visibility: public
+- id: org:vi_legion
+  name: VI легион
+  kind: army
+  hq: около Грейхельда
+  leader: Авдикий Гердоний
+  presence: Лес Ужасов, Подменный лес
+  influence: дозор на севере
+  sources:
+    - countries/illior_empire/illior_empire_army
+    - characters/avdikiy_gerdonius
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: легион"
+      sources:
+        - characters/avdikiy_gerdonius
+- id: org:ix_legion
+  name: IX легион
+  kind: army
+  hq: около Эрелона
+  leader: "?"
+  presence: южная граница, Мёртвые горы
+  influence: один из самых боеспособных
+  sources:
+    - countries/illior_empire/illior_empire_army
+    - characters/augustus_junia
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: legion"
+      sources:
+        - characters/augustus_junia
+- id: org:xiii_legion
+  name: XIII легион
+  kind: army
+  hq: Сибарис
+  leader: "?"
+  presence: река Лиор
+  influence: речной флот
+  sources:
+    - countries/illior_empire/illior_empire_army
+  confidence: canon
+  visibility: public
+- id: org:xxiii_legion
+  name: XXIII легион
+  kind: army
+  hq: Грейхельд
+  leader: "?"
+  presence: Рун
+  influence: сформирован 1005 на деньги Октавия Опия против сепаратизма Руна
+  sources:
+    - countries/illior_empire/illior_empire_army
+    - characters/oktavius_opius
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: legion"
+      sources:
+        - characters/oktavius_opius
+- id: org:xxiv_legion
+  name: XXIV легион
+  kind: army
+  hq: "?"
+  leader: Мария Хосе Помар
+  presence: "?"
+  influence: 1005; деньги Алии Сульпиции; организаторы — Эмилия, Клавдия, Лариция, Фурия
+  sources:
+    - countries/illior_empire/illior_empire_army
+    - history/second_igni_rojo_war
+    - characters/alia_sulpicia
+    - characters/maria_pomar
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: легион"
+      sources:
+        - history/second_igni_rojo_war
+        - characters/dzhok_i
+    - text: "тип: legion"
+      sources:
+        - characters/alia_sulpicia
+        - characters/maria_pomar
+- id: org:velikie_doma_17
+  name: Великие Дома (17)
+  kind: nobility
+  hq: Иллиор
+  leader: Фурии, Опии, Сульпиции, Эмилии, Клавдии, Корнелии, Фабии, Потиции, Папирии, Лариции, Марции, Юнии, Аквилии, Ветурии, Горации, Нумиции, Сервилии
+  presence: империя
+  influence: сенат по праву крови
+  sources:
+    - countries/illior_empire/illior_empire_senate
+  confidence: canon
+  visibility: public
+- id: org:gildiya_ognennaya_salamandra
+  name: Гильдия Огненная саламандра
+  kind: guild
+  hq: Магический рынок, Иллиор
+  leader: "?"
+  presence: Иллиор
+  influence: магия, торговля артефактами
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: org:gildiya_arkanum
+  name: Гильдия Арканум
+  kind: guild
+  hq: Иллиор (башня магов), Виларин (гостевой дом)
+  leader: "?"
+  presence: Иллиор, Виларин
+  influence: студенческий дом, приёмы
+  sources:
+    - countries/illior_empire/cities/city_illior
+    - countries/illior_empire/cities/city_vilarin
+  confidence: canon
+  visibility: public
+- id: guilds/metal_makers
+  name: Гильдия металлургов
+  slug: guilds/metal_makers
+  kind: guild
+  hq: Грейхельд
+  leader: "?"
+  presence: мир
+  influence: одна из самых могущественных гильдий; глава назван убийцей Авла (961)
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+    - history/second_igni_rojo_war
+    - history/era_new_age
+    - guilds/metal_makers
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: гильдия"
+      sources:
+        - history/second_igni_rojo_war
+        - history/era_new_age
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/metal_makers
+- id: guilds/bersan_lumberers
+  name: Древотёсы Берсана
+  slug: guilds/bersan_lumberers
+  kind: guild
+  hq: Аркрин
+  leader: "?"
+  presence: Аркрин
+  influence: деревообработка
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+    - countries/gross/cities/city_ezhitsk
+    - characters/kondratij_tarlo-ezhickij
+    - guilds/bersan_lumberers
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: гильдия"
+      sources:
+        - countries/gross/cities/city_ezhitsk
+        - characters/kondratij_tarlo-ezhickij
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/bersan_lumberers
+- id: org:gildiya_amalgama
+  name: Гильдия Амальгама
+  kind: guild
+  hq: Кориалум
+  leader: "?"
+  presence: "?"
+  influence: лекари и алхимики
+  sources:
+    - characters/houses_clans/junia
+  confidence: canon
+  visibility: public
+- id: org:gildiya_rubinovyy_zakat
+  name: Гильдия Рубиновый Закат
+  kind: guild
+  hq: "?"
+  leader: Юст Корнелий
+  presence: "?"
+  influence: магическая гильдия; Тиберий Мерон Ветурий
+  sources:
+    - characters/houses_clans/cornelia
+  confidence: canon
+  visibility: public
+- id: guilds/illior_mint
+  name: Гильдия монетчиков Иллиора
+  slug: guilds/illior_mint
+  kind: guild
+  hq: рядом с имперским монетным двором, Иллиор
+  leader: Алия Сульпиция
+  presence: Иллиор
+  influence: ювелиры и ткачи
+  sources:
+    - characters/houses_clans/sulpicia
+    - characters/alia_sulpicia
+    - guilds/illior_mint
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/illior_mint
+- id: guilds/grain_merchant_league
+  name: Лига зерноторговцев
+  slug: guilds/grain_merchant_league
+  kind: guild
+  hq: "?"
+  leader: "?"
+  presence: "?"
+  influence: влияние Папириев
+  sources:
+    - characters/houses_clans/papiria
+    - characters/filomen_papiria
+    - guilds/grain_merchant_league
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: trade league"
+      sources:
+        - characters/filomen_papiria
+    - text: "тип: торговая"
+      sources:
+        - guilds/grain_merchant_league
+- id: org:gildiya_mrak
+  name: Гильдия Мрак
+  kind: guild
+  hq: "?"
+  leader: Мария Хосе Помар
+  presence: "?"
+  influence: связь с семьёй Лервик
+  sources:
+    - countries/illior_empire/illior_empire_army
+  confidence: canon
+  visibility: public
+- id: org:illiorskaya_kollegiya_bardov
+  name: Иллиорская коллегия бардов
+  kind: school
+  hq: Садовый квартал
+  leader: "?"
+  presence: Иллиор
+  influence: студенты-барды
+  sources:
+    - countries/illior_empire/cities/city_illior
+    - history/era_troubles
+    - characters/alonso_lucky
+    - establishments/educational/fine_arts_academys
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: культурная организация"
+      sources:
+        - history/era_troubles
+    - text: "тип: коллегия"
+      sources:
+        - characters/alonso_lucky
+    - text: "тип: академия"
+      sources:
+        - establishments/educational/fine_arts_academys
+- id: org:bank_bystroe_delo
+  name: Банк «Быстрое дело»
+  kind: bank
+  hq: Иллиор
+  leader: "?"
+  presence: Иллиор
+  influence: по слухам, Опии; должники в рабство
+  sources:
+    - characters/houses_clans/opia
+    - characters/oktavius_opius
+    - characters/lukrecija_opija
+  confidence: canon
+  visibility: public
+- id: org:illiorskiy_imperatorskiy_bank
+  name: Иллиорский Императорский банк
+  slug: establishments/banks/imperial_bank
+  kind: bank
+  hq: Иллиор
+  leader: "?"
+  presence: Иллиор
+  influence: "?"
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: org:lanisterii_emiliev_i_opiev
+  name: Ланистерии Эмилиев и Опиев
+  kind: school
+  hq: Иллиор
+  leader: Эмилии/Опии
+  presence: Императорская арена
+  influence: соперничество домов
+  sources:
+    - characters/houses_clans/aemilia
+    - characters/houses_clans/opia
+  confidence: canon
+  visibility: public
+- id: knowledges/ancestors_cult
+  name: Культ Предков
+  slug: knowledges/ancestors_cult
+  kind: religion
+  hq: каждый дом
+  leader: нет
+  presence: вся империя
+  influence: празднества на равноденствия
+  sources:
+    - countries/illior_empire/index
+    - knowledges/ancestors_cult
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: религия"
+      sources:
+        - knowledges/ancestors_cult
+- id: knowledges/church_of_cuthbert
+  name: Церковь Катберта
+  slug: knowledges/church_of_cuthbert
+  kind: religion
+  hq: "?"
+  leader: "?"
+  presence: "?"
+  influence: гонения в прошлом
+  sources:
+    - countries/illior_empire/index
+    - countries/sunny_islands/index
+    - history/era_troubles
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: церковь-раскол"
+      sources:
+        - countries/sunny_islands/index
+    - text: "тип: религия"
+      sources:
+        - history/era_troubles
+        - knowledges/church_of_cuthbert
+- id: org:drinrogskiy_soyuz_amalgama_gildiya_metallurgov_s
+  name: Дринрогский союз; Амальгама; Гильдия металлургов; Серый Авангард
+  kind: гильдии
+  presence: Старый Плющ (все), Несчастливая крепь (Дринрогский союз, Амальгама)
+  influence: торговые представительства
+  sources:
+    - countries/gross/cities/city_old_ivy
+  confidence: canon
+  visibility: public
+- id: org:seym_grossa
+  name: Сейм Гросса
+  kind: законодательный орган
+  hq: Берсан
+  leader: король
+  presence: весь Гросс
+  influence: "170 родов; партии: националисты 30%, милитаристы 20%, центристы 20%, магнаты 15%, за империю 10%, социалисты 5%"
+  sources:
+    - countries/gross/gross_seim
+    - characters/gustaviii
+    - characters/kondratij_tarlo-ezhickij
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: парламент"
+      sources:
+        - characters/gustaviii
+        - characters/kondratij_tarlo-ezhickij
+- id: org:regulyarnoe_voysko
+  name: Регулярное войско
+  kind: армия
+  hq: Берсан
+  leader: генерал
+  presence: Берсан
+  influence: ~2000
+  sources:
+    - countries/gross/gross_army
+  confidence: canon
+  visibility: public
+- id: org:lesnoe_voysko
+  name: Лесное войско
+  kind: армия
+  hq: Старый Плющ
+  leader: Ирена Пташжинска
+  presence: Подменный лес
+  influence: ~1400, содержится из особого налога после 672
+  sources:
+    - countries/gross/gross_army
+    - history/arnost_catastrophe
+    - characters/irena_ptashzhinska
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: Войско"
+      sources:
+        - history/arnost_catastrophe
+- id: org:zelenaya_militsiya
+  name: Зелёная милиция
+  kind: ополчение
+  hq: Восточные зелёные земли
+  leader: Отто Глии Диций
+  presence: западная граница
+  influence: безземельные аристократы и простолюдины
+  sources:
+    - countries/gross/gross_army
+    - characters/gustaviii
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: милиция"
+      sources:
+        - characters/gustaviii
+- id: org:orden_druidov
+  name: Орден друидов
+  kind: орден
+  hq: Друидова пуща
+  presence: Друидова пуща
+  influence: охраняет тёмные чащи, союзник Гросса
+  sources:
+    - countries/druid_s_grove/index
+  confidence: canon
+  visibility: public
+- id: org:vilarinskiy_konvent
+  name: Виларинский конвент
+  kind: организация наёмников
+  hq: Виларин
+  leader: не указан
+  presence: Друидова пуща, Залесск
+  influence: посредничество 1005
+  sources:
+    - countries/druid_s_grove/index
+    - countries/arnost/index
+    - guilds/grey_avangard
+    - knowledges/tracking_water
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: Союз"
+      sources:
+        - countries/arnost/index
+    - text: "тип: организация"
+      sources:
+        - guilds/grey_avangard
+    - text: "тип: маги"
+      sources:
+        - knowledges/tracking_water
+- id: guilds/black_hoods
+  name: Чёрные капюшоны
+  aliases:
+    - Чёрные Капюшоны
+  slug: guilds/black_hoods
+  kind: гильдия
+  hq: Хрэлл
+  leader: гильдмастер (по слухам Аркидава); боевое крыло Валрага Вдова
+  presence: Хрэлл
+  influence: содержат дороги и колодцы
+  sources:
+    - countries/khrell/khrell_lands_fractions
+    - characters/amanda_gallonia
+    - characters/kylar_kovacs
+    - guilds/black_hoods
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: преступная гильдия"
+      sources:
+        - characters/amanda_gallonia
+        - characters/kylar_kovacs
+    - text: "тип: криминальная"
+      sources:
+        - guilds/black_hoods
+- id: org:otverzhennye
+  name: Отверженные
+  kind: банда
+  hq: Самрун
+  leader: Чаом Однорукий
+  presence: Самрун
+  influence: пиратство и грабежи
+  sources:
+    - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: org:volshebnye_otbrosy
+  name: Волшебные отбросы
+  kind: банда
+  hq: Самрун
+  leader: Аэрд
+  presence: Самрун
+  influence: высокоуровневые маги, дважды чуть не сожгли город
+  sources:
+    - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: org:yaschery
+  name: Ящеры
+  kind: синдикат
+  hq: драконий квартал Самруна
+  leader: Ли Букхан
+  presence: фермы по всему Хрэлл, общины мира
+  influence: монополия на контрабанду в Страну Драконов
+  sources:
+    - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: guilds/arcanum
+  name: Арканум
+  aliases:
+    - Арканум (гильдия)
+  slug: guilds/arcanum
+  kind: гильдия
+  hq: Виларин
+  leader: Алекс Стилвинд
+  presence: бывшая башня магии Самруна
+  influence: утратила башню пару веков назад
+  sources:
+    - countries/khrell/index
+    - history/arnost_catastrophe
+    - history/era_imperial
+    - characters/aleks_stilvind
+    - characters/jasper_minatius
+    - guilds/arcanum
+    - knowledges/services_prices
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: Гильдия магов"
+      sources:
+        - history/arnost_catastrophe
+    - text: "тип: гильдия магов"
+      sources:
+        - characters/aleks_stilvind
+        - characters/jasper_minatius
+    - text: "тип: магическая"
+      sources:
+        - guilds/arcanum
+    - text: "тип: гильдия магов-телепортеров"
+      sources:
+        - knowledges/services_prices
+- id: org:obschestvo_katberta_obschina_svyatogo_katberta
+  name: Общество Катберта (община святого Катберта)
+  kind: религия
+  hq: Ежицк
+  leader: Менассах Хар-Жахав
+  presence: Ежицк
+  influence: одна из немногих на континенте
+  sources:
+    - countries/gross/cities/city_ezhitsk
+  confidence: canon
+  visibility: public
+- id: knowledges/church_of_the_stars
+  name: Церковь Звёзд
+  slug: knowledges/church_of_the_stars
+  kind: религия
+  hq: Аббатство Неугасимого Пламени
+  leader: Патриархи Эспинар и Герений
+  presence: Ройо
+  influence: поддержала Дамиана
+  sources:
+    - countries/gross/index
+    - countries/rojo/index
+    - history/second_igni_rojo_war
+    - countries/sunny_islands/colonial_rojo
+    - history/era_imperial
+    - history/era_troubles
+    - characters/augustin_espinar
+    - characters/salvador_gerenius
+    - establishments/educational/fine_arts_academys
+    - knowledges/church_of_the_stars
+    - knowledges/astronomy
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: Религия"
+      sources:
+        - countries/rojo/index
+    - text: "тип: церковь"
+      sources:
+        - history/second_igni_rojo_war
+        - countries/sunny_islands/colonial_rojo
+        - knowledges/astronomy
+    - text: "тип: религиозная"
+      sources:
+        - characters/augustin_espinar
+        - characters/salvador_gerenius
+    - text: "тип: религия/церковь"
+      sources:
+        - knowledges/church_of_the_stars
+- id: org:veche_zalesska
+  name: Вече Залесска
+  kind: совет князей
+  leader: великий князь Гранн Кривой
+  presence: Залесское княжество
+  influence: сходится в особых случаях
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: org:zheleznyy_klan_drakonov
+  name: Железный клан драконов
+  kind: клан
+  influence: Фезуни короновала Ирину
+  sources:
+    - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: org:abbatstvo_neugasimogo_plameni
+  name: Аббатство Неугасимого Пламени
+  kind: Монастырь
+  hq: Рядом с Даниром
+  leader: Рафаэль Фонеска
+  presence: Данир
+  influence: Обширные земли, рост власти.
+  sources:
+    - countries/rojo/regions/rojo_danir_region
+    - history/era_imperial
+    - characters/augustin_espinar
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: религиозная организация"
+      sources:
+        - history/era_imperial
+    - text: "тип: монастырь"
+      sources:
+        - characters/augustin_espinar
+        - knowledges/church_of_the_stars
+- id: guilds/dawn_dolphins
+  name: Рассветные Дельфины
+  slug: guilds/dawn_dolphins
+  kind: Гильдия кораблестроителей
+  hq: Данир
+  leader: Рикардо Тафалла
+  presence: Данир
+  influence: Крупнейшая кораблестроительная гильдия королевства.
+  sources:
+    - countries/rojo/regions/rojo_danir_region
+    - guilds/dawn_dolphins
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/dawn_dolphins
+- id: guilds/drinrog_union
+  name: Дринрогский Союз
+  aliases:
+    - Дринрогский союз
+  slug: guilds/drinrog_union
+  kind: Торговая гильдия
+  hq: Дринрог
+  leader: Валериус Серый
+  presence: Мировая
+  influence: Распоряжается финансами республики.
+  sources:
+    - countries/drinrog/index
+    - guilds/drinrog_union
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: торговая"
+      sources:
+        - guilds/drinrog_union
+- id: guilds/drinrog_shipbuilders
+  name: Корабелы Дринрога
+  slug: guilds/drinrog_shipbuilders
+  kind: Гильдия
+  hq: Дринрог
+  leader: Семён Горев
+  presence: Море
+  influence: Строит флот и защищает республику.
+  sources:
+    - countries/drinrog/index
+    - guilds/drinrog_shipbuilders
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/drinrog_shipbuilders
+- id: guilds/black_riders
+  name: Чёрные Всадники
+  aliases:
+    - Чёрные всадники
+  slug: guilds/black_riders
+  kind: Наёмничья гильдия
+  hq: Дринрог
+  leader: Влад Хэллрипер
+  presence: Суша
+  influence: Охраняют Дринрог, не участвуют в собраниях.
+  sources:
+    - countries/drinrog/index
+    - countries/enforis/index
+    - countries/archdemon_s_plateau/index
+    - history/era_troubles
+    - guilds/black_riders
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: наёмная гильдия"
+      sources:
+        - countries/enforis/index
+        - history/era_troubles
+    - text: "тип: наёмничья гильдия"
+      sources:
+        - countries/archdemon_s_plateau/index
+    - text: "тип: наёмническая"
+      sources:
+        - guilds/black_riders
+- id: guilds/grey_avangard
+  name: Серый Авангард
+  slug: guilds/grey_avangard
+  kind: Наёмничья гильдия
+  hq: не указан
+  leader: не указан
+  presence: нанята в 720
+  influence: Оборона 672.
+  sources:
+    - history/arnost_catastrophe
+    - countries/enforis/index
+    - countries/sunny_islands/colonies_of_makharatkha
+    - characters/oktavius_opius
+    - characters/index
+    - characters/kylar_kovacs
+    - characters/vladimir_gorely
+    - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: наёмная гильдия"
+      sources:
+        - countries/enforis/index
+    - text: "тип: гильдия наёмников и охотников за головами"
+      sources:
+        - countries/sunny_islands/colonies_of_makharatkha
+    - text: "тип: mercenary"
+      sources:
+        - characters/oktavius_opius
+        - characters/index
+    - text: "тип: наёмническая гильдия"
+      sources:
+        - characters/kylar_kovacs
+        - characters/vladimir_gorely
+    - text: "тип: наёмническая"
+      sources:
+        - guilds/grey_avangard
+- id: guilds/fire_salamander
+  name: Огненная Саламандра
+  slug: guilds/fire_salamander
+  kind: Наёмничья гильдия
+  hq: не указано
+  leader: Антариус (3-й срок)
+  presence: Префектура мертвецов, Махаратха
+  influence: Оборона 672.
+  sources:
+    - history/arnost_catastrophe
+    - characters/antarius
+    - guilds/fire_salamander
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: гильдия"
+      sources:
+        - characters/antarius
+    - text: "тип: магическая"
+      sources:
+        - guilds/fire_salamander
+- id: org:vilarinskiy_universitet
+  name: Виларинский университет
+  kind: Университет
+  hq: Виларин
+  leader: Будос
+  presence: Виларин
+  influence: Исследования.
+  sources:
+    - history/arnost_catastrophe
+    - history/vilarin_convention
+    - history/era_new_age
+    - characters/index
+    - characters/serafina_larcia
+    - knowledges/fairies
+    - knowledges/book_web
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: школа"
+      sources:
+        - history/vilarin_convention
+        - history/era_new_age
+    - text: "тип: university"
+      sources:
+        - characters/index
+        - characters/serafina_larcia
+    - text: "тип: университет"
+      sources:
+        - knowledges/fairies
+        - knowledges/book_web
+- id: org:legiony_imperii
+  name: Легионы империи
+  kind: Армия
+  presence: III, IV, VI, VII, VIII, XIII, XVII, XXIV
+  influence: Главная военная сила.
+  sources:
+    - history/arnost_catastrophe
+    - history/era_imperial
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: армия"
+      sources:
+        - history/era_imperial
+        - history/era_troubles
+- id: org:sovet_ministrov_royo
+  name: Совет министров Ройо
+  kind: Правительство
+  hq: Данир
+  leader: Джок I
+  presence: Ройо
+  influence: Советуется с монархом, часть министров назначает протектор.
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: guilds/sunlions
+  name: Солнечные Львы
+  slug: guilds/sunlions
+  kind: гильдия
+  hq: Олифанор
+  leader: гильдмастер; зам Мэтью Хуртадо
+  presence: Энфорис
+  influence: одна из сильнейших гильдий мира; основана в 741.
+  sources:
+    - countries/enforis/index
+    - history/vilarin_convention
+    - characters/matthew_hurtado
+    - guilds/sunlions
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: гильдия наёмников"
+      sources:
+        - history/vilarin_convention
+    - text: "тип: магическая"
+      sources:
+        - guilds/sunlions
+- id: guilds/zanra_pyrotechnicians
+  name: Пиротехники Занры
+  slug: guilds/zanra_pyrotechnicians
+  kind: гильдия
+  hq: Занра
+  leader: Департамент Торговли
+  presence: отделение в Иллиоре с 860
+  influence: монополия на порох.
+  sources:
+    - countries/zanra/index
+    - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная (государственная)"
+      sources:
+        - guilds/zanra_pyrotechnicians
+- id: org:taynyy_sovet_zanry
+  name: Тайный совет Занры
+  kind: совет
+  hq: Микрис
+  leader: монарх
+  presence: Занра
+  influence: реальная власть.
+  sources:
+    - countries/zanra/index
+    - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: org:departamenty_zanry
+  name: Департаменты Занры
+  kind: министерства
+  hq: Микрис
+  presence: Занра
+  influence: до 10% населения.
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: org:bank_zanry
+  name: Банк Занры
+  slug: establishments/banks/zanra_bank
+  kind: банк
+  hq: Микрис
+  leader: Пентей Гаплий
+  presence: Занра
+  influence: векселя и облигации.
+  sources:
+    - countries/zanra/index
+    - establishments/banks/zanra_bank
+    - knowledges/monetary_system
+  confidence: canon
+  visibility: public
+- id: knowledges/pantheon_of_zanra
+  name: Пантеон Занры
+  slug: knowledges/pantheon_of_zanra
+  kind: церковь
+  presence: Занра
+  influence: единая церковь.
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: org:naemnyy_legion_enforisa
+  name: Наёмный легион Энфориса
+  kind: армия
+  presence: Энфорис
+  influence: иностранцы за деньги.
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: org:xvii_legion
+  name: XVII легион
+  kind: легион
+  hq: граница с Энфорисом
+  presence: Арност
+  influence: 452, 615.
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: org:xxi_legion
+  name: XXI легион
+  kind: легион
+  hq: Занра
+  presence: Занра
+  influence: "817."
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: org:prikazy_vyshnevodska
+  name: Приказы Вышневодска
+  kind: ведомства
+  hq: Вышневодск
+  leader: Великий князь
+  presence: Вышневодск
+  influence: министерства.
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: org:rutilii
+  name: Рутилии
+  kind: род
+  hq: Вышневодск
+  leader: Эдвард Рутилий
+  presence: Арност
+  influence: власть.
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: org:furii
+  name: Фурии
+  kind: род
+  hq: Иллиор
+  leader: Линри
+  presence: Империя
+  influence: взятки.
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: org:kezon_ebutsii
+  name: Кезон-Эбуции
+  kind: династия
+  hq: Микрис
+  leader: Ши
+  presence: Занра
+  influence: владеют землёй.
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: org:senat_enforisa
+  name: Сенат Энфориса
+  kind: сенат
+  hq: Олифанор
+  leader: князь
+  presence: Энфорис
+  influence: выборный.
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: org:asmodiyskiy_soyuz
+  name: Асмодийский союз
+  kind: военный союз городов
+  hq: Асмодиус
+  leader: Махродан
+  presence: города Плато Архидемона
+  influence: 659–673
+  sources:
+    - countries/archdemon_s_plateau/index
+    - countries/makharatkha/index
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: союз городов-государств"
+      sources:
+        - countries/makharatkha/index
+    - text: "тип: политическое объединение"
+      sources:
+        - history/era_troubles
+- id: org:kult_sverhcheloveka
+  name: Культ сверхчеловека
+  kind: религиозный культ
+  hq: Мадакиш
+  leader: не указан
+  presence: Плато Архидемона
+  influence: невольничьи ярмарки при праздниках
+  sources:
+    - countries/archdemon_s_plateau/index
+    - knowledges/cults_of_the_archdemon_plateau
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: культ"
+      sources:
+        - knowledges/cults_of_the_archdemon_plateau
+- id: org:demonopoklonnichestvo
+  name: Демонопоклонничество
+  kind: культ
+  hq: Асмодиус
+  presence: Плато Архидемона
+  influence: тревожит Махаратху
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: org:gildiya_severnyy_put
+  name: Гильдия Северный путь
+  kind: работорговая гильдия
+  hq: Побережье работорговцев
+  presence: крупнейшая в мире
+  influence: первенство в олигархии
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: org:palata_alhimikov_tarpeta
+  name: Палата алхимиков Тарпета
+  kind: алхимическая палата
+  hq: Тарпет
+  presence: Игни
+  influence: монополия на создание кукол
+  sources:
+    - countries/igni/regions/igni_sarati_region
+  confidence: canon
+  visibility: public
+- id: org:zolotoy_klan
+  name: Золотой клан
+  kind: драконий клан
+  hq: Хаганэ-но-Кокуру
+  leader: Яманами
+  presence: Страна Драконов
+  influence: верховенство
+  sources:
+    - countries/dragons_country/index
+  confidence: canon
+  visibility: public
+- id: org:zelenyy_klan
+  name: Зелёный клан
+  kind: драконий клан (торговцы)
+  hq: Куро-Минато
+  presence: порт
+  influence: управляет портом
+  sources:
+    - countries/dragons_country/index
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: клан"
+      sources:
+        - knowledges/dragons
+- id: org:sovet_klanov
+  name: Совет кланов
+  kind: совет
+  hq: Хаганэ-но-Кокуру
+  leader: Золотой клан
+  presence: Страна Драконов
+  influence: государственные дела
+  sources:
+    - countries/dragons_country/index
+  confidence: canon
+  visibility: public
+- id: org:kurultay_kraya_oazisov
+  name: Курултай Края Оазисов
+  kind: совет племён
+  hq: Вандатари
+  presence: Край Оазисов
+  influence: война, споры
+  sources:
+    - countries/land_of_oases/index
+  confidence: canon
+  visibility: public
+- id: org:vyshnevodskie_nekromanty
+  name: Вышневодские некроманты
+  aliases:
+    - Вышневодские некроманты (община)
+  kind: общины
+  hq: Порт Новой Надежды
+  presence: Побережье работорговцев
+  influence: потомки с 553
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: org:kochevye_plemena_nichey_pustyni
+  name: Кочевые племена Ничьей пустыни
+  kind: племена
+  hq: Кровавый оазис
+  leader: Каруна
+  presence: Ничья пустыня
+  influence: наёмники
+  sources:
+    - countries/igni/regions/no_man_s_desert
+  confidence: canon
+  visibility: public
+- id: org:shkola_char_omideh
+  name: Школа Чар Омидэх
+  kind: университет магии
+  hq: Махаратха (город)
+  leader: не указан
+  presence: Махаратха
+  influence: второй в мире; спасла город в 673; выпускники служат радже
+  sources:
+    - countries/makharatkha/index
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: школа"
+      sources:
+        - history/era_troubles
+- id: org:nefritovye_angely
+  name: Нефритовые ангелы
+  kind: преступный синдикат
+  hq: Порт Кусуму
+  leader: вероятно потомки драконов
+  presence: Порт Кусуму
+  influence: владеют крупнейшим пиратским портом мира
+  sources:
+    - countries/sunny_islands/index
+  confidence: canon
+  visibility: public
+- id: org:yaschery_iz_samruna
+  name: Ящеры из Самруна
+  kind: преступный синдикат (аналог)
+  hq: Самрун
+  presence: Самрун
+  influence: образец для Нефритовых ангелов
+  sources:
+    - countries/sunny_islands/index
+  confidence: canon
+  visibility: public
+- id: org:sovet_oligarhov_elki
+  name: Совет олигархов Элки
+  kind: совет
+  hq: Элка
+  leader: совет
+  presence: 5 островов
+  influence: правит Олигархией
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: org:voennyy_flot_elki
+  name: Военный флот Элки
+  kind: флот
+  hq: Лиена
+  presence: воды Элки
+  influence: охотится на пиратов и работорговцев
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: org:piraty_khabaruta
+  name: Пираты Кхабарута
+  kind: пираты, нерегулярный флот
+  hq: Кхабарут
+  leader: капитаны
+  presence: Подковные острова, Тёмный океан
+  influence: доля Махаратхе
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: org:voennyy_flot_kolonialnogo_royo
+  name: Военный флот Колониального Ройо
+  kind: флот
+  hq: Форталеса
+  presence: Колониальное Ройо
+  influence: сила регента
+  sources:
+    - countries/sunny_islands/colonial_rojo
+  confidence: canon
+  visibility: public
+- id: org:flot_kifora
+  name: Флот Кифора
+  kind: флот
+  hq: Кифор / Сильренеас
+  leader: правитель Кифора
+  presence: Колонии Махаратхи
+  influence: самая большая сила края
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: org:zheltyy_klan_drakonov
+  name: Жёлтый клан драконов
+  kind: клан драконов
+  hq: не указан
+  presence: Виларин
+  influence: чума 715–717
+  sources:
+    - countries/makharatkha/index
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: клан"
+      sources:
+        - history/era_troubles
+- id: org:drinrogskaya_faktoriya_hasti
+  name: Дринрогская фактория Хасти
+  kind: торговый пост
+  hq: Хасти
+  presence: Колонии Махаратхи
+  influence: крупный пост
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: org:x_legion
+  name: X легион
+  kind: легион
+  hq: Кортона
+  presence: Арвебель
+  influence: гарнизон 754–817
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: guilds/amalgam
+  name: Амальгама
+  slug: guilds/amalgam
+  kind: гильдия лекарей и алхимиков
+  hq: Кориалум
+  leader: Балдор Лорен Юний
+  presence: почти везде; больше всего в империи и бывших провинциях
+  influence: бесплатная помощь, зелья, общие лаборатории; 6 ступеней; основана 304
+  sources:
+    - history/era_imperial
+    - guilds/amalgam
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная (лекари, алхимики)"
+      sources:
+        - guilds/amalgam
+- id: guilds/ruby_sunset
+  name: Рубиновый Закат
+  slug: guilds/ruby_sunset
+  kind: гильдия
+  hq: не указана
+  leader: Юст Корнелий
+  presence: при дворах
+  influence: зелье, которому приписывают рождение Авла
+  sources:
+    - history/era_new_age
+    - guilds/ruby_sunset
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: ремесленная"
+      sources:
+        - guilds/ruby_sunset
+- id: org:drevnie_rody_illiora
+  name: Древние роды Иллиора
+  kind: аристократия
+  presence: Иллиор
+  influence: Сульпиции, Фурии, Эмилии, Клавдии, Лариции, Опии, Юнии, Папирии, Марции, Горации, Рутилии
+  sources:
+    - history/era_troubles
+    - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: org:nekromant_i_nezhit_arnosta
+  name: Некромант и нежить Арноста
+  kind: угроза
+  hq: Арност
+  presence: север; лечи, вампиры, Залесск
+  sources:
+    - history/vilarin_convention
+    - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: org:sektanty_s_kleymom_nezazhivayuschey_rany
+  name: Сектанты с клеймом незаживающей раны
+  kind: тайная сеть
+  presence: империя, Занра, Махаратха, Гросс
+  sources:
+    - history/vilarin_convention
+  confidence: canon
+  visibility: public
+- id: org:lesnoe_voysko_grossa
+  name: Лесное войско Гросса
+  kind: армия
+  leader: Ирена Пташжинска
+  sources:
+    - history/vilarin_convention
+  confidence: canon
+  visibility: public
+- id: org:soyuz_svobodnyh
+  name: Союз Свободных
+  kind: политическое объединение
+  hq: Данир
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: guilds/mirk
+  name: Мрак
+  slug: guilds/mirk
+  kind: guild
+  hq: неизвестно
+  leader: неизвестно
+  presence: Теневой план
+  influence: Скупает проклятые вещи, проводники по Теневому плану
+  sources:
+    - characters/maria_pomar
+    - guilds/mirk
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: магическая"
+      sources:
+        - guilds/mirk
+- id: guilds/desert_cartel
+  name: Пустынный Картель
+  aliases:
+    - Пустынный картель
+  slug: guilds/desert_cartel
+  kind: caravan cartel
+  hq: Махаратха
+  leader: не указан
+  presence: Пустыня на пути в Махаратху
+  influence: Караваны
+  sources:
+    - characters/lucius_claudius
+    - guilds/desert_cartel
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: торговая"
+      sources:
+        - guilds/desert_cartel
+- id: org:gorodskaya_strazha_illiora_vigily
+  name: Городская стража Иллиора (вигилы)
+  kind: city guard
+  hq: Легавый район
+  leader: Филомен Папирий (формально); Нала Сальвидения (фактически)
+  presence: Иллиор
+  sources:
+    - characters/nala_salvidenija
+    - characters/filomen_papiria
+  confidence: canon
+  visibility: public
+- id: org:senat
+  name: Сенат
+  kind: legislature
+  hq: Иллиор
+  sources:
+    - characters/yorick
+  confidence: canon
+  visibility: public
+- id: org:semya_lervik
+  name: Семья Лервик
+  kind: noble family
+  hq: Барония Лервик
+  sources:
+    - characters/maria_pomar
+  confidence: canon
+  visibility: public
+- id: org:banda_vendetta
+  name: Банда «Вендетта»
+  kind: gang
+  leader: Аманда Галлония
+  sources:
+    - characters/index
+  confidence: canon
+  visibility: public
+- id: org:vendetta
+  name: Вендетта
+  kind: банда
+  hq: Иллиор
+  leader: Аманда Галлония
+  presence: Иллиор, Толкучка
+  influence: Любима народом; лавочка отнятых вещей
+  sources:
+    - characters/amanda_gallonia
+  confidence: canon
+  visibility: public
+- id: org:tserkov_v_izgnanii
+  name: Церковь в изгнании
+  aliases:
+    - Церковь в изгнании (Герения)
+    - Герения
+  kind: религиозная
+  hq: Бастионный союз, Солнечные острова
+  leader: Сальвадор Герений
+  presence: Бастионный союз, Солнечные острова
+  influence: Не признаёт Джока
+  sources:
+    - characters/salvador_gerenius
+  confidence: canon
+  visibility: public
+- id: org:vendikatory
+  name: Вендикаторы
+  kind: боевые священники
+  hq: Данир
+  leader: Верховный Вендикатор
+  presence: Ройо
+  influence: Церковные трибуналы
+  sources:
+    - characters/augustin_espinar
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: духовная стража"
+      sources:
+        - knowledges/church_of_the_stars
+- id: org:i_i_ix_legiony
+  name: I и IX легионы
+  kind: легионы
+  hq: не указано
+  sources:
+    - characters/antarius
+    - characters/lassi_trebius
+  confidence: canon
+  visibility: public
+- id: org:bastionnyy_soyuz
+  name: Бастионный союз
+  slug: countries/bastion_union/index
+  kind: союз крепостей
+  hq: три пограничные крепости Ройо
+  influence: Оплот церкви Герения
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: org:otryad_dzhoka
+  name: Отряд Джока
+  kind: разбойничий отряд → армия
+  hq: Деламота
+  leader: Джок
+  presence: север Ройо
+  influence: 500 пеших, 300 конных, 20 летучих, 12 рыцарей, 700 сброда, дракон
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: org:kanalizatsionnye_krysy_shalnye_belki
+  name: Канализационные Крысы, Шальные Белки
+  kind: банды
+  hq: Иллиор (канализация), северный тракт
+  influence: Разгромлены Ковачем
+  sources:
+    - characters/kylar_kovacs
+  confidence: canon
+  visibility: public
+- id: org:imperskaya_razvedka_i_kontrrazvedka
+  name: Имперская разведка и контрразведка
+  kind: спецслужба
+  hq: Иллиор
+  leader: Арчибальд Мариус (до 1005)
+  presence: Дринрог, Занр
+  influence: Убийства, провокации
+  sources:
+    - characters/archibald_quintus_marius
+  confidence: canon
+  visibility: public
+- id: org:chernyy_klan_drakonov
+  name: Чёрный клан драконов
+  kind: клан
+  hq: Страна Драконов
+  presence: другие миры (после Великой войны)
+  sources:
+    - characters/toyokuza
+  confidence: canon
+  visibility: public
+- id: guilds/arcane_blacksmiths
+  name: Мистические Кователи
+  slug: guilds/arcane_blacksmiths
+  kind: ремесленная
+  hq: Виларин
+  leader: Маргрейв Миллет
+  presence: Империя; скидки армии
+  influence: волшебное оружие и доспехи
+  sources:
+    - guilds/arcane_blacksmiths
+  confidence: canon
+  visibility: public
+- id: guilds/coldwave
+  name: Хладовей
+  slug: guilds/coldwave
+  kind: магическая
+  hq: префектура Иллиор
+  leader: Сара Аурин
+  presence: почти только империя
+  influence: пожарные, лекарни, лудус; сговор со Львами
+  sources:
+    - guilds/coldwave
+  confidence: canon
+  visibility: public
+- id: guilds/freemasons
+  name: Вольные Каменщики
+  slug: guilds/freemasons
+  kind: ремесленная
+  hq: неизвестно
+  leader: неизвестно; Иллиор — Фейсал Махмуд
+  presence: везде, где камень
+  influence: тайное братство беглецов из Игни
+  sources:
+    - guilds/freemasons
+  confidence: canon
+  visibility: public
+- id: guilds/guild_of_assassins
+  name: Гильдия убийц
+  slug: guilds/guild_of_assassins
+  kind: криминальная
+  hq: Заоблачная твердь
+  leader: неизвестно
+  presence: представитель в любом крупном городе
+  influence: жертву нельзя воскресить; договор с Игни (слух)
+  sources:
+    - guilds/guild_of_assassins
+  confidence: canon
+  visibility: public
+- id: guilds/illior_alchemists
+  name: Алхимики Иллиора
+  slug: guilds/illior_alchemists
+  kind: ремесленная
+  hq: Иллиор
+  leader: Маркус Амадей Сикст
+  presence: отделения в крупных городах империи
+  influence: зелья для армии, стекло
+  sources:
+    - guilds/illior_alchemists
+  confidence: canon
+  visibility: public
+- id: guilds/makharatkha_blacksmiths
+  name: Махаратские Кузнецы
+  slug: guilds/makharatkha_blacksmiths
+  kind: ремесленная
+  hq: Махаратха
+  leader: Лабиб аль-Рабин
+  presence: юг, Солнечные острова, отделение Иллиор
+  influence: дорогое оружие; договор с Пиротехниками
+  sources:
+    - guilds/makharatkha_blacksmiths
+  confidence: canon
+  visibility: public
+- id: guilds/mighty_brigade
+  name: Могучая Бригада
+  slug: guilds/mighty_brigade
+  kind: наёмническая
+  hq: Иллиор
+  leader: Дариус Гром, Чия Дьянг, Варир Каас
+  presence: отделения в соседних странах
+  influence: стрелки и пушки; союзник Металлургов
+  sources:
+    - guilds/mighty_brigade
+  confidence: canon
+  visibility: public
+- id: guilds/north_road
+  name: Северный путь
+  slug: guilds/north_road
+  kind: торговая (рабы)
+  hq: Махаратха
+  leader: Адид Хатаб
+  presence: большое отделение в Иллиоре и др.
+  influence: правит Побережьем работорговцев
+  sources:
+    - guilds/north_road
+  confidence: canon
+  visibility: public
+- id: guilds/precious
+  name: Драгоценные
+  slug: guilds/precious
+  kind: ремесленная
+  hq: Дринрог
+  leader: Тильда Аанор
+  presence: лавка в цитадели Иллиора
+  influence: богатейшая гильдия республики
+  sources:
+    - guilds/precious
+  confidence: canon
+  visibility: public
+- id: guilds/seawolves
+  name: Морские волки
+  slug: guilds/seawolves
+  kind: наёмническая
+  hq: Махаратха
+  leader: не указан
+  presence: южные моря
+  influence: фрахт кораблей
+  sources:
+    - guilds/seawolves
+  confidence: canon
+  visibility: public
+- id: guilds/sewer_rats
+  name: Канализационные Крысы
+  aliases:
+    - Канализационные Крысы (гильдия)
+  slug: guilds/sewer_rats
+  kind: преступная гильдия
+  hq: неизвестно; Иллиор
+  leader: Джеф Король-под-городом
+  presence: Иллиор, Дагор, Махаратха, Тарпет, Берсан
+  influence: контрабанда, чёрный рынок; ~800
+  sources:
+    - guilds/sewer_rats
+    - knowledges/services_prices
+  confidence: canon
+  visibility: public
+  alt:
+    - text: "тип: криминальная"
+      sources:
+        - guilds/sewer_rats
+- id: guilds/sunny_company
+  name: Солнечная компания
+  slug: guilds/sunny_company
+  kind: торговая
+  hq: Олифанор
+  leader: Эландор Леотрис
+  presence: Солнечные острова, Дринрог
+  influence: морской фрахт, карты
+  sources:
+    - guilds/sunny_company
+  confidence: canon
+  visibility: public
+- id: guilds/white_dogs
+  name: Белые Псы
+  slug: guilds/white_dogs
+  kind: торговая
+  hq: Иллиор
+  leader: Анна Морвен
+  presence: север, замки, торговые дома
+  influence: роскошь, шпионаж (слух)
+  sources:
+    - guilds/white_dogs
+  confidence: canon
+  visibility: public
+- id: establishments/banks/drinrog_bank
+  name: Банк Дринрога
+  slug: establishments/banks/drinrog_bank
+  kind: банк
+  hq: Дринрог, Банковый квартал
+  leader: Мелита Вегеция
+  presence: множество отделений
+  influence: торговцы
+  sources:
+    - establishments/banks/drinrog_bank
+    - knowledges/monetary_system
+  confidence: canon
+  visibility: public
+- id: org:bank_harbsa_i_nikolima
+  name: Банк Харбса и Николима
+  slug: establishments/banks/harbs_nikolim_bank
+  kind: банк
+  hq: Берсан, Западный район
+  leader: основатели
+  presence: немного отделений
+  influence: поручительство клиентов
+  sources:
+    - establishments/banks/harbs_nikolim_bank
+  confidence: canon
+  visibility: public
+- id: org:imperatorskiy_bank
+  name: Императорский банк
+  kind: банк
+  hq: Иллиор, Безупречный район
+  leader: Салустия Тарквиния
+  presence: все города империи
+  influence: казна
+  sources:
+    - establishments/banks/imperial_bank
+  confidence: canon
+  visibility: public
+- id: establishments/banks/quick_deal_bank
+  name: Быстрое дело
+  slug: establishments/banks/quick_deal_bank
+  kind: банк
+  hq: Иллиор, Длинный район
+  leader: Фадия Дурония
+  presence: Иллиор
+  influence: ростовщичество
+  sources:
+    - establishments/banks/quick_deal_bank
+  confidence: canon
+  visibility: public
+- id: org:akademii_iskusstv_samrun_vyshnevodsk_bersan_dani
+  name: Академии искусств (Самрун, Вышневодск, Берсан, Данир)
+  kind: академии
+  hq: четыре города
+  leader: не названы
+  presence: локально
+  influence: шпионы, медиумы, толпа, трибуны
+  sources:
+    - establishments/educational/fine_arts_academys
+  confidence: canon
+  visibility: public
+- id: org:dom_opiev
+  name: Дом Опиев
+  kind: Великий Дом
+  hq: Иллиор (вывод)
+  leader: Октавий Опий (вывод)
+  presence: Иллиор
+  influence: возможное участие в банке Быстрое дело
+  sources:
+    - establishments/banks/quick_deal_bank
+  confidence: canon
+  visibility: public
+- id: org:velikie_doma_illiora
+  name: Великие Дома Иллиора
+  kind: знать
+  hq: Иллиор
+  leader: Юнии, Сульпиции, Ветурии, Корнелии, Сервилии, Аквилии
+  presence: империя
+  influence: гильдии и таверны
+  sources:
+    - guilds/amalgam
+  confidence: canon
+  visibility: public
+- id: org:imperatorskaya_kantselyariya
+  name: Императорская канцелярия
+  kind: госорган
+  hq: Иллиор
+  leader: император
+  presence: империя
+  influence: доля в Хладовее; монополия Саламандры
+  sources:
+    - guilds/coldwave
+  confidence: canon
+  visibility: public
+- id: org:departament_torgovli_zanry
+  name: Департамент Торговли Занры
+  kind: госорган
+  hq: Занра
+  leader: не указан
+  presence: Занра
+  influence: создал Пиротехников
+  sources:
+    - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+- id: org:tserkov_v_izgnanii_vernaya_gereniyu
+  name: Церковь в изгнании (верная Герению)
+  kind: церковный раскол
+  hq: Бастионный союз и Солнечные острова
+  leader: Сальвадор Герений (местонахождение неизвестно)
+  presence: Бастионный союз, Солнечные острова
+  influence: оппозиция Эспинару
+  sources:
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: org:panteon_zanry_sovet_verhovnyh_zhretsov
+  name: Пантеон Занры (совет верховных жрецов)
+  kind: государственная религия
+  hq: Занра; храм всех богов в Иллиоре
+  leader: совет верховных жрецов, утверждают монарх и Тайный совет
+  presence: Занра
+  influence: жрецы не вправе вести дела или владеть землёй
+  sources:
+    - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: org:mnogobozhie_igni_kasty_zhretsov
+  name: Многобожие Игни (касты жрецов)
+  kind: религия
+  hq: берега Сарати
+  leader: верховные жрецы культов; главный культ — тот, что чтит махараджа
+  presence: Игни, Тарпет
+  influence: храмы — хозяйственные центры, перераспределение зерна, молока, скота; терпимость
+  sources:
+    - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: org:shamany_kraya_oazisov
+  name: Шаманы Края Оазисов
+  kind: жрецы племён
+  hq: Край Оазисов
+  leader: шаман каждого племени
+  presence: племена Края Оазисов
+  influence: толкуют знаки, ведут обряды, готовят учеников
+  sources:
+    - knowledges/beliefs_of_the_land_of_oases
+  confidence: canon
+  visibility: public
+- id: org:kult_bolshogo_medvedya
+  name: Культ Большого медведя
+  kind: культ
+  hq: Залесье
+  leader: шаманы
+  presence: Залесское княжество
+  influence: бои насмерть, жертвоприношения
+  sources:
+    - knowledges/zalessk_beliefs
+  confidence: canon
+  visibility: public
+- id: org:kult_dikoy_vody
+  name: Культ Дикой воды
+  aliases:
+    - Культ Дикой воды (Залесье)
+    - Залесье
+  kind: культ
+  hq: река Гиблая
+  leader: опытные толкователи снов
+  presence: Залесье; в основном пираты
+  influence: залесские пираты
+  sources:
+    - knowledges/zalessk_beliefs
+    - geography/river_of_doom
+  confidence: canon
+  visibility: public
+- id: org:kult_lesa
+  name: Культ леса
+  aliases:
+    - Культ леса (Залесье)
+    - Залесье
+  kind: культ
+  hq: Залесье
+  leader: не указан
+  presence: знахарки, травницы, охотники
+  influence: связи с друидами и тварями Долгого болота (слухи)
+  sources:
+    - knowledges/zalessk_beliefs
+  confidence: canon
+  visibility: public
+- id: org:orden_druidovoy_puschi
+  name: Орден Друидовой пущи
+  kind: общество друидов
+  hq: Друидова пуща
+  leader: не указан
+  presence: Залесье
+  influence: связывают с культом леса
+  sources:
+    - knowledges/zalessk_beliefs
+  confidence: canon
+  visibility: public
+- id: org:demonopoklonniki
+  name: Демонопоклонники
+  kind: тайный культ
+  hq: Плато Архидемона
+  leader: не указан
+  presence: плато; за его пределами тайно
+  influence: преследуются почти везде
+  sources:
+    - knowledges/cults_of_the_archdemon_plateau
+  confidence: canon
+  visibility: public
+- id: org:zolotoy_klan_drakonov
+  name: Золотой клан драконов
+  kind: клан
+  hq: Страна Драконов
+  leader: не указан
+  presence: правящий и дипломатический
+  influence: дыхание — огонь
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:serebryanyy_klan
+  name: Серебряный клан
+  kind: клан
+  hq: Страна Драконов
+  presence: учёные, архивариусы
+  influence: дыхание — лёд
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:zheleznyy_klan
+  name: Железный клан
+  kind: клан
+  hq: Страна Драконов
+  presence: оружейники, металлургия, разведка месторождений
+  influence: дыхание — кислота
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:bronzovyy_klan
+  name: Бронзовый клан
+  kind: клан
+  hq: Страна Драконов
+  presence: песни, театр, цензура
+  influence: дыхание — молния
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:mednyy_klan
+  name: Медный клан
+  kind: клан
+  hq: Страна Драконов
+  presence: разведка, шпионаж
+  influence: дыхание — кислота
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:latunnyy_klan
+  name: Латунный клан
+  kind: клан
+  hq: не на Дедреле
+  presence: строители, скульпторы, художники
+  influence: дыхание — огонь
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:chernyy_klan
+  name: Чёрный клан
+  kind: клан
+  hq: Страна Драконов (мало)
+  presence: воители, ушли в другие миры
+  influence: дыхание — кислота
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:belyy_klan
+  name: Белый клан
+  kind: клан
+  hq: Страна Драконов
+  presence: стража, охрана границ, ловцы преступников
+  influence: дыхание — лёд
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:krasnyy_klan
+  name: Красный клан
+  kind: клан
+  hq: Страна Драконов
+  presence: маги разрушения
+  influence: дыхание — огонь
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:zheltyy_klan
+  name: Жёлтый клан
+  kind: клан
+  hq: Страна Драконов
+  presence: алхимики, целители, земледельцы
+  influence: дыхание — яд
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:siniy_klan
+  name: Синий клан
+  kind: клан
+  hq: храм в Безмолвном лесу
+  presence: маги, мистики, философы; самый многочисленный
+  influence: дыхание — молния
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:dva_skrytyh_klana_drakonov
+  name: Два скрытых клана драконов
+  kind: клан (слухи)
+  hq: неизвестно
+  presence: клан изгнанников и священный тайный клан верховных правителей
+  influence: слухи
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: org:sindikat_akuliy_zub
+  name: Синдикат «Акулий зуб»
+  kind: пиратский синдикат
+  hq: Тёмный океан
+  leader: Улыбчивый Годфри
+  presence: Тёмный океан
+  influence: корабль «Ядовитый крик»
+  sources:
+    - geography/dark_ocean
+  confidence: canon
+  visibility: public
+- id: org:lesnaya_strazha
+  name: Лесная стража
+  aliases:
+    - Лесная стража (Императорский лес)
+    - Императорский лес
+  kind: стража
+  hq: Императорский лес
+  influence: сурово карает браконьеров
+  sources:
+    - geography/imperial_forest
+  confidence: canon
+  visibility: public
+- id: org:druidy
+  name: Друиды
+  kind: жрецы природы
+  hq: Друидова пуща
+  presence: Долгое болото, Подменный лес
+  influence: Пуща — заповедная земля с 1005 г.
+  sources:
+    - geography/changeling_forest
+    - geography/long_swamp
+  confidence: canon
+  visibility: public
+- id: org:zalesskie_piraty
+  name: Залесские пираты
+  kind: пираты
+  hq: Залесск, Гиблая
+  presence: Внутреннее море
+  influence: грабят побережье Хрэлл и Ройо
+  sources:
+    - geography/river_of_doom
+  confidence: canon
+  visibility: public
+- id: org:piraty_maharathi
+  name: Пираты Махаратхи
+  kind: пираты
+  hq: Махаратха, Кхабарут
+  presence: Монструозное море
+  sources:
+    - geography/monstrous_sea
+  confidence: canon
+  visibility: public
+- id: org:banki_obschie
+  name: Банки (общие)
+  kind: финансовые
+  influence: денежные переводы по паутине, векселя
+  sources:
+    - knowledges/book_web
+    - knowledges/monetary_system
+  confidence: canon
+  visibility: public

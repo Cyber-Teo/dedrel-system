@@ -1,0 +1,361 @@
+/* Инструменты измерения и маршрута (src/route). Общие правила маршрута .route-* лежат в style.css; здесь — правила панели и подписей маршрута. */
+#tool-bar .tool-chip {
+  background: var(--blood);
+  color: var(--parch);
+  border-color: var(--blood);
+  font-weight: 600;
+}
+#tool-bar .keep-pill {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blood);
+}
+#tool-bar .measure button {
+  padding: 1px 8px;
+  font-size: 12px;
+}
+#tool-bar .measure button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.seg-len {
+  font:
+    700 11px Georgia,
+    serif;
+  color: #5a1a14;
+  background: rgba(243, 234, 212, 0.92);
+  border: 1px solid var(--sel, #c0152b);
+  border-radius: 9px;
+  padding: 0 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateY(-12px);
+}
+.route-pin {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  color: #fff;
+  font:
+    700 13px/20px Georgia,
+    serif;
+  text-align: center;
+  box-shadow: 0 1px 5px #0007;
+  pointer-events: none;
+}
+.route-pin.a {
+  background: #2e7d32;
+}
+.route-pin.b {
+  background: var(--sel, #c0152b);
+}
+.route-modes button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.route-modes .mn {
+  font-size: 11px;
+  line-height: 1.1;
+}
+.route-card .route-total .nw {
+  white-space: nowrap;
+}
+.route-card .route-total .hrs {
+  flex-basis: 100%;
+  font-size: 11px;
+}
+.route-modes .mic {
+  flex: none;
+}
+.route-modes {
+  flex-wrap: nowrap;
+  gap: 3px;
+}
+.route-modes button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-left: 2px;
+  padding-right: 2px;
+  justify-content: center;
+}
+.route-ends .route-end {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.route-ends input.picking {
+  outline: 2px solid var(--blood);
+  outline-offset: 1px;
+  background: #fff;
+}
+.route-ends label button.on {
+  background: var(--blood);
+  color: var(--parch);
+}
+.route-bad {
+  color: #a01020;
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  padding-left: 56px;
+}
+.route-bad a {
+  color: #1d4380;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.route-none {
+  color: #7a2a14;
+}
+.route-card .route-total {
+  font-size: 14px;
+}
+.route-card .route-total b {
+  font-size: 17px;
+}
+/* заголовок сверху, под ним итог фиксированной высоты (кнопки режимов не прыгают), затем режимы */
+.route-card .route-total {
+  min-height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 4px;
+  margin: 0 0 6px;
+  border-bottom: 1px solid var(--gold);
+  cursor: help;
+}
+.route-card .route-total b {
+  font-size: 16px;
+}
+.route-days ol,
+.route-along ul {
+  margin: 2px 0 6px;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.route-days,
+.route-along {
+  margin-top: 6px;
+}
+.route-along li.haz {
+  color: #7a2a14;
+  list-style: none;
+  margin-left: -16px;
+}
+.route-copy {
+  margin-top: 6px;
+}
+.route-pin.stop .sf {
+  display: none;
+}
+.route-pin.stop .sn {
+  display: block;
+}
+.route-pin.stop {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  text-align: center;
+  font:
+    700 11px/18px Georgia,
+    serif;
+  transform: none;
+  cursor: pointer;
+}
+.route-pin.stop:hover,
+.route-pin.stop.open {
+  z-index: 3;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 1px 7px;
+  transform: translateY(-14px);
+  white-space: nowrap;
+}
+.route-pin.stop:hover .sn,
+.route-pin.stop.open .sn {
+  display: none;
+}
+.route-pin.stop:hover .sf,
+.route-pin.stop.open .sf {
+  display: inline;
+}
+body.route-zoomed .route-pin.stop {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 1px 7px;
+  transform: translateY(-14px);
+  white-space: nowrap;
+}
+body.route-zoomed .route-pin.stop .sn {
+  display: none;
+}
+body.route-zoomed .route-pin.stop .sf {
+  display: inline;
+}
+.route-pin.stop {
+  background: rgba(243, 234, 212, 0.95);
+  color: #3a2a12;
+  border: 1px solid #8c1c13;
+  white-space: nowrap;
+}
+.toast .toast-restore {
+  margin-left: 8px;
+}
+.route-card .sheet-handle {
+  display: none;
+}
+@media (max-width: 640px) {
+  .route-modes {
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+  .route-modes button {
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 6px 4px;
+    min-height: 40px;
+  }
+}
+.route-card > .x {
+  z-index: 3;
+}
+
+/* мобильная шторка: peek ≈25% высоты по умолчанию, ручка разворачивает */
+@media (max-width: 900px) {
+  .route-card .sheet-handle {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .route-card .sheet-handle i {
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 7px auto 0;
+    border-radius: 2px;
+    background: var(--gold);
+  }
+  #dossier > .route-card.peek {
+    max-height: min(46vh, 400px);
+    overflow-y: auto;
+  }
+  .route-card {
+    padding-top: 22px !important;
+  }
+  .route-card .route-end label span {
+    min-width: 0;
+  }
+}
+
+.route-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 4px 0;
+}
+.route-chips .chip {
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid var(--gold);
+  background: #fff9;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 28px;
+}
+.route-chips .chip:hover {
+  background: #fff;
+  border-color: var(--blood);
+}
+@media (pointer: coarse) {
+  .route-chips .chip {
+    min-height: 40px;
+  }
+}
+
+/* метки дней: на мелком масштабе часть скрыта; А/Б крупнее и поверх всего */
+.route-pin.stop.thin {
+  display: none;
+}
+.route-pin.stop {
+  z-index: 2;
+}
+.route-pin.a,
+.route-pin.b {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  line-height: 28px;
+  z-index: 5;
+  border-width: 3px;
+}
+/* телефон: до выбора обеих точек шторка — две строки «Откуда/Куда», карта выше y=590 свободна для тапа */
+@media (max-width: 900px) {
+  #dossier > .route-card.stage {
+    max-height: none;
+    overflow: visible;
+    padding: 24px 10px 6px !important;
+  }
+  .route-card.stage h3,
+  .route-card.stage .route-total,
+  .route-card.stage .route-modes,
+  .route-card.stage .swap,
+  .route-card.stage .route-chips,
+  .route-card.stage .meta[role='status'] {
+    display: none;
+  }
+  .route-card.stage .route-ends {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-right: 36px;
+  }
+  .route-card.stage .route-end label {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1px;
+    position: relative;
+  }
+  .route-card.stage .route-end label span {
+    font-size: 11px;
+  }
+  .route-card.stage .route-end label input {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 36px;
+    padding-right: 36px;
+  }
+  .route-card.stage .route-end label button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+  .route-card.stage > .x {
+    top: 26px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+  }
+}
