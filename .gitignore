@@ -4,3 +4,9 @@ node_modules/
 # Only the sources are tracked; packs/.sync-state.json is local sync bookkeeping.
 packs/*
 !packs/_source/
+
+# World atlas (atlas/): build output, generated tiles and the local master-mode store.
+atlas/node_modules/
+atlas/dist/
+atlas/public/tiles/
+atlas/api/_data/

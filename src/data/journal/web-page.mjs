@@ -7,12 +7,19 @@ import { contentLanguage } from "../../l10n/compendium-translation.mjs";
 
 const fields = foundry.data.fields;
 
-/** Only http(s) addresses may go into the iframe. */
+/**
+ * Only http(s) addresses and relative paths inside the system itself (`systems/dedrel/...`,
+ * e.g. the built world atlas) may go into the iframe. A relative path has no scheme and no `..`.
+ */
 function validateUrl(value) {
   if ( !value ) return;
+  if ( value.startsWith("systems/dedrel/") ) {
+    if ( value.split(/[/\\]/).includes("..") || /[:\\]/.test(value) ) throw new Error("must not contain a scheme or '..'");
+    return;
+  }
   const url = URL.parse(value);
   if ( !url || !["http:", "https:"].includes(url.protocol) ) {
-    throw new Error("must be an http(s) address");
+    throw new Error("must be an http(s) address or a path starting with systems/dedrel/");
   }
 }
 
