@@ -25,8 +25,13 @@ const warns: string[] = []
 const err = (m: string) => errors.push(m)
 
 const pagesPath = join(dir, 'site/pages.json')
-const pages: Record<string, unknown> = existsSync(pagesPath) ? JSON.parse(readFileSync(pagesPath, 'utf8')) : {}
-if (!existsSync(pagesPath)) err(`${pagesPath}: нет снимка вики, сначала pnpm sync`)
+// Снимок вики (data/site/pages.json) не хранится в репозитории: его скачивает `pnpm sync`.
+// Без него сверка ссылок со страницами вики пропускается — любая ссылка считается существующей.
+const havePages = existsSync(pagesPath)
+const pages: Record<string, unknown> = havePages
+  ? JSON.parse(readFileSync(pagesPath, 'utf8'))
+  : new Proxy({}, { has: () => true })
+if (!havePages) warns.push(`${pagesPath}: нет снимка вики — ссылки на страницы не сверяются (pnpm sync)`)
 
 const data: Partial<Record<Kind, any[]>> = {}
 for (const kind of Object.keys(FILES) as Kind[]) {
