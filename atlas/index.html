@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Атлас Дедрела</title>
+    <link rel="preload" href="./fonts/CormorantGaramond-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./fonts/Literata-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./src/styles/fonts.css" />
+    <style>
+      /* скелет: виден до события load карты */
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #f1e6c8;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        background: #f1e6c8;
+        color: #2b1a0e;
+        transition: opacity 0.25s;
+      }
+      #boot.gone {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #boot b {
+        font:
+          700 34px/1 'Cormorant Garamond',
+          Georgia,
+          serif;
+        letter-spacing: 0.02em;
+      }
+      #boot i {
+        width: 160px;
+        height: 3px;
+        background: #b8892b44;
+        overflow: hidden;
+        position: relative;
+      }
+      #boot i::after {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 40%;
+        background: #b8892b;
+        animation: bootbar 1.1s ease-in-out infinite;
+      }
+      @keyframes bootbar {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(260%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot,
+        #boot i::after {
+          animation: none;
+          transition: none;
+        }
+      }
+    </style>
+    <!-- <link rel="preload"> для data/*.json добавляет плагин dedrel-data-json (scripts/build/data-json.ts) -->
+  </head>
+  <body>
+    <div id="boot" role="status" aria-label="Загрузка"><b>Атлас Дедрела</b><i></i></div>
+    <header id="top">
+      <div class="brand">
+        <svg
+          class="emblem"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#f1e6c8"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="6.5" stroke="#b8892b" />
+          <path stroke="#b8892b" d="m12 5.5 1.6 5.4 5.4 1.1-5.4 1.1L12 18.5l-1.6-5.4L5 12l5.4-1.1z" />
+        </svg>
+        <h1>Атлас Дедрела</h1>
+      </div>
+      <div id="slot-search"></div>
+      <div id="slot-basemap"></div>
+      <div id="slot-help"></div>
+      <div id="slot-master"></div>
+      <div id="slot-tools-btn"></div>
+      <div id="slot-layers-btn"></div>
+    </header>
+    <div id="map"></div>
+    <div id="ui"></div>
+    <nav id="tools" aria-label="Инструменты">
+      <section class="tg" id="tg-measure">
+        <h2>Измерить</h2>
+        <div class="tg-b"></div>
+      </section>
+      <section class="tg" id="tg-time">
+        <h2>Время и политика</h2>
+        <div class="tg-b"></div>
+      </section>
+      <section class="tg" id="tg-views">
+        <h2>Виды</h2>
+        <div class="tg-b"></div>
+      </section>
+      <section class="tg" id="tg-ref">
+        <h2>Справочники</h2>
+        <div class="tg-b"></div>
+      </section>
+      <section class="tg" id="tg-win">
+        <h2>Окна</h2>
+        <div class="tg-b"></div>
+      </section>
+      <section class="tg" id="tg-export">
+        <h2>Экспорт</h2>
+        <div class="tg-b"></div>
+      </section>
+    </nav>
+    <div id="tool-bar" aria-live="polite"></div>
+    <div id="zoomc" role="group" aria-label="Масштаб карты"></div>
+    <aside id="dossier" aria-label="Карточка"></aside>
+    <footer id="dock"></footer>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

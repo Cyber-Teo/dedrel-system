@@ -1,0 +1,74 @@
+# Сценарий: Рост Иллиорской империи на кадрах владельцев (206 → 1006).
+# Источники: кадры data/history/owners.yaml (кадры империи: 206, 280, 562, 573, 818, 1006), события тех же лет в data/events.yaml, правители — data/people.yaml.
+# Кадров империи до 206 нет (империя провозглашена в 206): сценарий начинается с провозглашения. Подсвечена территория Иллиорской империи на кадре года (owners_at).
+id: empire-growth
+title: Рост Иллиорской империи (206–1006)
+summary: 'Как менялась подсвеченная территория империи: провозглашение в 206, расширение при Гае I, Смута и потеря Гросса в 573, 818 год после революции и империя 1006 года при Йорике.'
+sources: [history/era_imperial, history/era_troubles, countries/illior_empire/index]
+steps:
+  - title: Провозглашение империи
+    date: { year: 206 }
+    text: >-
+      Правитель года — Малдред Завоеватель, 181 год. Он превращает Иллиорский союз в империю — почти на все Восточные земли; с тех пор
+      императоры носят династическое имя Малдред Август. Гросс добровольно входит в империю с сохранением автономии.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 206
+    sources: [history/era_imperial, countries/illior_empire/index, countries/gross/index]
+  - title: Империя при Гае I
+    date: { year: 280 }
+    text: >-
+      Правитель года — император Гай I. Провальный поход Гая I на Ничью пустыню и Игни: империя отступает с большими потерями и
+      закладывает крепость Вестхельд.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 280
+    sources: [countries/igni/index, history/era_imperial]
+  - title: Бои на границах Ройо
+    date: { year: 562 }
+    text: >-
+      Правитель года — император Маркус Малдред Август Тарквиний (553–571). Империя бросает на Хрэлл ссыльных и залесских варваров;
+      Самрун около десяти раз переходит из рук в руки, к 567 году он в руинах, большинство жителей бежало.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 562
+    sources: [countries/khrell/index, countries/rojo/index, history/era_troubles]
+  - title: Гросс отделяется
+    date: { year: 573, month: 8 }
+    text: >-
+      Правитель года — императрица Энфина (571–573). Гросс отделяется от империи без кровопролития; Энфина признаёт независимость
+      Гросса и Ройо, но корону Гросса не возвращает — она остаётся в императорской сокровищнице.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [geo:bersan]
+      polities: [countries/illior_empire/index]
+    owners_at: 573
+    sources: [countries/gross/index, countries/illior_empire/index, history/era_troubles, countries/rojo/index]
+  - title: После революции 817
+    date: { year: 818 }
+    text: >-
+      Правитель года — император Ралвек Малдред Август Тарквиний (811–843). Иллиорская революция 817 года: Великие Дома ограничили
+      власть императора, в сенате появилось место народного депутата; началась либерализация.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 818
+    sources: [countries/illior_empire/index, history/era_troubles, history/era_new_age]
+  - title: Империя 1006 года
+    date: { year: 1006 }
+    text: >-
+      Правитель года — император Йорик Малдред Август Тарквиний (с 985). В 1005 году сенат принял закон о вето императора, а по итогам
+      Второй войны Игни и Ройо император стал протектором Ройо.
+    camera: { place: geo:bersan, zoom: 2 }
+    highlight:
+      places: [countries/illior_empire/cities/city_illior]
+      polities: [countries/illior_empire/index]
+    owners_at: 1006
+    sources: [characters/yorick, countries/illior_empire/index, history/era_new_age]

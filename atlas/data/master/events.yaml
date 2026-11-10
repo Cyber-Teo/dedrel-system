@@ -1,0 +1,45 @@
+# Мастерские события (visibility: master): слухи, тайны, решения кампаний. В публичный бандл НЕ попадают.
+- id: ev:819:sluh_o_videnii_katberta
+  year: 819
+  date_precision: year
+  date_text: "819"
+  title: Слух о видении Катберта
+  type: religion
+  description: Святая Земля лежит за океаном; ожидается конец света в тысячном году; наспех строят флот.
+  places:
+    - geo:svyataya_zemlya
+  actors:
+    - name: Катберт
+      id: person:katbert
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: master
+- id: ev:1005:fei_podmennogo_lesa_soyuzniki_lyudey
+  year: 1005
+  date_precision: year
+  date_text: 1005 (слухи)
+  title: Феи Подменного леса — союзники людей против нежити Арноста
+  type: war
+  description: Слухи, что феи также собираются уходить в нездешние края.
+  places:
+    - geography/changeling_forest
+    - countries/arnost/index
+  actors:
+    - name: феи
+    - name: нежить Арноста
+  sources:
+    - knowledges/fairies
+  confidence: canon
+  visibility: master
+- id: ev:1006:sluhi_o_nekromante
+  year: 1006
+  date_precision: year
+  date_text: "1006"
+  title: Слухи о Некроманте
+  type: other
+  description: Нежить Арноста собирается в большие стаи.
+  sources:
+    - history/era_new_age
+  confidence: canon
+  visibility: master

@@ -1,0 +1,4481 @@
+# Люди. Собрано scripts/import/build-registry.ts из выжимок лора и хроники (входы импорта в репозиторий не входят); дальше правится вручную.
+# Положение — по карте (x,y придут из газеттира), факты — по тексту вики.
+- id: person:yorik_maldred_avgust_tarkviniy
+  name: Йорик Малдред Август Тарквиний
+  alt:
+  - text: 'роль: Император Иллиорской империи, протектор Ройо'
+    sources:
+    - characters/yorick
+  - text: 'вариант имени: Йорик'
+    sources:
+    - countries/rojo/index
+    - countries/dragons_country/index
+  - text: 'роль: император Иллиора'
+    sources:
+    - countries/dragons_country/index
+  - text: 'вариант имени: Император Йорик'
+    sources:
+    - characters/archibald_quintus_marius
+    - characters/dzhok_i
+  role: император
+  affiliation: Дом Тарквиниев
+  based_in: Дворец Основателя, Иллиор
+  years: император с 985
+  notable: Возвращает трону власть, вето на сенат (1005), протектор Ройо; детей нет; жена Марианна умерла в 977.
+  relations: двоюродный брат и муж Марианны Клавдии-Галевской; брат Филиппа Спурия; дядя Лока
+  sources:
+  - countries/illior_empire/index
+  - characters/houses_clans/tarquinii
+  - history/era_new_age
+  - characters/yorick
+  - countries/rojo/index
+  - countries/dragons_country/index
+  - characters/archibald_quintus_marius
+  - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: person:filipp_spuriy_tarkviniy
+  name: Филипп Спурий Тарквиний
+  alt:
+  - text: 'роль: Брат императора'
+    sources:
+    - characters/yorick
+  role: младший брат императора
+  affiliation: Тарквинии
+  based_in: Иллиор
+  years: '1005'
+  notable: Возможный наследник.
+  relations: отец Лока Филиппа Тарквиния
+  sources:
+  - characters/houses_clans/tarquinii
+  - characters/yorick
+  confidence: canon
+  visibility: public
+- id: person:lok_filipp_tarkviniy
+  name: Лок Филипп Тарквиний
+  alt:
+  - text: 'роль: Племянник императора'
+    sources:
+    - characters/yorick
+  role: племянник императора
+  affiliation: Тарквинии
+  based_in: Иллиор
+  years: '1005'
+  notable: Сын Филиппа.
+  relations: племянник Йорика
+  sources:
+  - characters/houses_clans/tarquinii
+  - characters/yorick
+  confidence: canon
+  visibility: public
+- id: person:kirena_klavdiya
+  name: Кирена Клавдия
+  role: жена императора Авла
+  affiliation: Клавдии
+  based_in: Иллиор
+  years: '?'
+  notable: Мать Нумерии, Мирны и Луция.
+  relations: жена Авла
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Кирена (императрица)'
+    sources:
+    - characters/lucius_claudius
+- id: person:linri_tariana_avgusta_tarkviniya_furiya
+  name: Линри Тариана Августа Тарквиния-Фурия
+  alt:
+  - text: 'роль: регент, супруга Ралоро'
+    sources:
+    - history/era_troubles
+  - text: 'вариант имени: Линри'
+    sources:
+    - countries/vishnevodskoye_principality/index
+  role: претендентка, императрица-супруга
+  affiliation: Фурии
+  based_in: Иллиор
+  years: конец VII — 750-е
+  notable: Фактически правила ~полвека.
+  relations: жена Ралоро
+  sources:
+  - characters/houses_clans/furia
+  - history/era_troubles
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: person:fernand_tarkviniy_ezhitski
+  name: Фернанд Тарквиний-Ежицки
+  alt:
+  - text: 'роль: регент'
+    sources:
+    - history/era_troubles
+  role: претендент
+  affiliation: Опии/Тарквинии
+  based_in: Иллиор
+  years: конец VII
+  notable: Муж Даны Опии.
+  relations: отец Ралоро
+  sources:
+  - characters/houses_clans/opia
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:dana_auliya_opiya
+  name: Дана Аулия Опия
+  role: родоначальница императоров
+  affiliation: Опии
+  based_in: Иллиор
+  years: конец VII
+  notable: Все императоры от Ралоро — её потомки.
+  relations: мать Ралоро
+  sources:
+  - characters/houses_clans/opia
+  confidence: canon
+  visibility: public
+- id: person:lyutsiy
+  name: Люций
+  role: император
+  affiliation: Тарквинии
+  based_in: Иллиор
+  years: Смутные годы
+  notable: Женат на Ясфире Тарквинии-Сульпиции.
+  relations: жена Ясфира
+  sources:
+  - characters/houses_clans/sulpicia
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: characters/hirius_furia
+  name: Хириус Публий Фурий
+  slug: characters/hirius_furia
+  alt:
+  - text: 'роль: Формальный глава Фуриев, сенатор'
+    sources:
+    - characters/hirius_furia
+  role: глава дома, сенатор
+  affiliation: Фурии
+  based_in: Иллиор
+  years: '1005'
+  notable: После удара почти недееспособен.
+  relations: отец Децимуса и Нарцисса
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  confidence: canon
+  visibility: public
+- id: characters/decimus_furia
+  name: Децимус Хириус Фурий
+  slug: characters/decimus_furia
+  alt:
+  - text: 'роль: Мэр Иллиора, граф Камераски, фактический глава Фуриев, меценат'
+    sources:
+    - characters/decimus_furia
+  - text: 'роль: мэр Иллиора'
+    sources:
+    - characters/arvehl
+  - text: 'вариант имени: Децимус Фурий'
+    sources:
+    - history/era_new_age
+  role: мэр Иллиора, фактический глава Фуриев
+  affiliation: Фурии
+  based_in: Иллиор
+  years: мэр с июля 1005
+  notable: Вхож во дворец.
+  relations: старший сын Хириуса
+  sources:
+  - characters/houses_clans/furia
+  - countries/illior_empire/cities/city_illior
+  - characters/decimus_furia
+  - characters/arvehl
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: person:nartsiss_hirius_furiy
+  name: Нарцисс Хириус Фурий
+  alt:
+  - text: 'роль: Младший сын Хириуса; отец Клары и Вибия'
+    sources:
+    - characters/hirius_furia
+    - characters/decimus_furia
+  role: член дома
+  affiliation: Фурии
+  based_in: Иллиор
+  years: '?'
+  notable: Погиб на охоте.
+  relations: отец Клары и Вибия
+  sources:
+  - characters/houses_clans/furia
+  - characters/hirius_furia
+  - characters/decimus_furia
+  confidence: canon
+  visibility: public
+- id: characters/klara_furia
+  name: Клара Нарцисса Фурия
+  slug: characters/klara_furia
+  alt:
+  - text: 'роль: обвиняемая в 1004'
+    sources:
+    - history/era_new_age
+  - text: 'роль: Политик, управляющая делами Фуриев'
+    sources:
+    - characters/klara_furia
+  role: политик, управляющая делами
+  affiliation: Фурии
+  based_in: Иллиор
+  years: 1004–1005
+  notable: Осуждена 1004, освобождена в мае 1005; XXIV легион.
+  relations: дочь Нарцисса
+  sources:
+  - characters/houses_clans/furia
+  - history/era_new_age
+  - characters/klara_furia
+  confidence: canon
+  visibility: public
+- id: characters/vibius_furia
+  name: Вибий Нарцисс Фурий
+  slug: characters/vibius_furia
+  alt:
+  - text: 'роль: обвиняемый в 1004'
+    sources:
+    - history/era_new_age
+  - text: 'роль: Золотая молодёжь'
+    sources:
+    - characters/vibius_furia
+  role: член дома
+  affiliation: Фурии
+  based_in: Иллиор
+  years: 1004–1005
+  notable: Осуждён за измену, освобождён.
+  relations: сын Нарцисса
+  sources:
+  - characters/houses_clans/furia
+  - history/era_new_age
+  - characters/vibius_furia
+  confidence: canon
+  visibility: public
+- id: characters/oktavius_opius
+  name: Октавий Копей Солон Опий
+  slug: characters/oktavius_opius
+  alt:
+  - text: 'роль: Сенатор, основатель XXIII легиона, владелец ланистерия, глава Опиев'
+    sources:
+    - characters/oktavius_opius
+  - text: 'вариант имени: Октавий Опий'
+    sources:
+    - guilds/grey_avangard
+  role: глава дома, сенатор
+  affiliation: Опии
+  based_in: Иллиор
+  years: '1005'
+  notable: Сформировал XXIII легион.
+  relations: брат Лукреции
+  sources:
+  - characters/houses_clans/opia
+  - characters/oktavius_opius
+  - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+- id: characters/lukrecija_opija
+  name: Лукреция Копея Солона Опия
+  aliases:
+  - Лукреция Копея Солона Опия («Мама»)
+  - Мама
+  slug: characters/lukrecija_opija
+  alt:
+  - text: 'роль: Хозяйка постоялого двора «У Мамы»'
+    sources:
+    - characters/lukrecija_opija
+  - text: 'роль: хозяйка «У Мамы»'
+    sources:
+    - establishments/taverns/u_mamy
+  role: хозяйка постоялого двора «У Мамы»
+  affiliation: Опии
+  based_in: Иллиор
+  years: '1005'
+  notable: 'Ведёт тёмные дела для брата: рабы, долги, банк.'
+  relations: сестра Октавия
+  sources:
+  - characters/houses_clans/opia
+  - characters/lukrecija_opija
+  - establishments/taverns/u_mamy
+  confidence: canon
+  visibility: public
+- id: person:veleslav_iz_bersana
+  name: Велеслав из Берсана
+  alt:
+  - text: 'роль: Гладиатор'
+    sources:
+    - characters/oktavius_opius
+  role: гладиатор ланистерия Опиев
+  affiliation: Опии
+  based_in: Иллиор
+  years: до марта 1005
+  notable: 'Слух: убивал женщин; найден обезглавленным.'
+  sources:
+  - characters/houses_clans/opia
+  - characters/oktavius_opius
+  confidence: canon
+  visibility: public
+- id: characters/alia_sulpicia
+  name: Алия Вивиана Сульпиция
+  slug: characters/alia_sulpicia
+  alt:
+  - text: 'роль: Сенатор, гильдмистресс Гильдии монетчиков Иллиора, глава Сульпициев'
+    sources:
+    - characters/alia_sulpicia
+  - text: 'роль: гильдмастер Гильдии монетчиков, сенатор'
+    sources:
+    - guilds/illior_mint
+  role: глава дома, сенатор, гильдмистресс монетчиков
+  affiliation: Сульпиции
+  based_in: Иллиор
+  years: '1005'
+  notable: Профинансировала XXIV легион.
+  relations: Мария Помар — легат её легиона
+  sources:
+  - characters/houses_clans/sulpicia
+  - characters/alia_sulpicia
+  - guilds/illior_mint
+  confidence: canon
+  visibility: public
+- id: person:yasfira_tarkviniya_sulpitsiya
+  name: Ясфира Тарквиния-Сульпиция
+  alt:
+  - text: 'роль: жена Люция'
+    sources:
+    - history/era_troubles
+  - text: 'роль: императрица Смутных лет'
+    sources:
+    - knowledges/fairies
+  role: императрица
+  affiliation: Сульпиции
+  based_in: Иллиор
+  years: Смутные годы
+  notable: Жена императора Люция.
+  sources:
+  - characters/houses_clans/sulpicia
+  - history/era_troubles
+  - knowledges/fairies
+  confidence: canon
+  visibility: public
+- id: characters/tit_aemilius
+  name: Тит Гэлфир Эмилий
+  slug: characters/tit_aemilius
+  alt:
+  - text: 'роль: Сенатор, владелец ресторана, типографии, ланистерия, глава Эмилиев'
+    sources:
+    - characters/tit_aemilius
+  - text: 'роль: владелец «Гарцующих Дьяволов»'
+    sources:
+    - establishments/taverns/garcujuschie_djavoly
+  role: глава дома, сенатор
+  affiliation: Эмилии
+  based_in: Иллиор
+  years: '1005'
+  notable: Светский лев, типография, ланистерий.
+  relations: брат Квинты
+  sources:
+  - characters/houses_clans/aemilia
+  - characters/tit_aemilius
+  - establishments/taverns/garcujuschie_djavoly
+  confidence: canon
+  visibility: public
+- id: characters/quinta_emilia
+  name: Квинта Гэлфира Эмилия
+  slug: characters/quinta_emilia
+  alt:
+  - text: 'роль: Префект Иллиора'
+    sources:
+    - characters/quinta_emilia
+  role: префект Иллиора
+  affiliation: Эмилии
+  based_in: Иллиор
+  years: с 1004
+  notable: Против чиновников; участвовала в сборе XXIV легиона.
+  relations: сестра Тита
+  sources:
+  - characters/houses_clans/aemilia
+  - countries/illior_empire/regions/illior_empire_illior_region
+  - characters/quinta_emilia
+  confidence: canon
+  visibility: public
+- id: characters/lucius_claudius
+  name: Луций Авл Клавдий
+  slug: characters/lucius_claudius
+  alt:
+  - text: 'роль: Сенатор, глава Клавдиев'
+    sources:
+    - characters/lucius_claudius
+  role: глава дома, сенатор
+  affiliation: Клавдии
+  based_in: Иллиор
+  years: '1005'
+  notable: Сын Авла; потерял жену и двоих детей в 991.
+  relations: отец Елены
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+  visibility: public
+- id: characters/elena_klavdia
+  name: Елена Луция Клавдия
+  slug: characters/elena_klavdia
+  alt:
+  - text: 'роль: Политик, золотая молодёжь'
+    sources:
+    - characters/elena_klavdia
+  role: аристократка
+  affiliation: Клавдии
+  based_in: Иллиор
+  years: '1005'
+  notable: Самая заметная из Клавдиев; участвовала в XXIV легионе.
+  relations: дочь Луция
+  sources:
+  - characters/houses_clans/claudia
+  - characters/elena_klavdia
+  confidence: canon
+  visibility: public
+- id: person:mirna_avla_klavdiya
+  name: Мирна Авла Клавдия
+  alt:
+  - text: 'роль: Сестра Луция'
+    sources:
+    - characters/lucius_claudius
+  role: член дома
+  affiliation: Клавдии
+  based_in: Иллиор/Гросс
+  years: '?'
+  notable: Вышла за Марка Галевски из Гросса.
+  relations: мать Марианны
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+  visibility: public
+- id: person:mark_galevski
+  name: Марк Галевски
+  alt:
+  - text: 'роль: Знатный человек из Гросса'
+    sources:
+    - characters/lucius_claudius
+  role: гросская знать
+  affiliation: гросская знать
+  based_in: Гросс
+  years: '?'
+  relations: муж Мирны
+  sources:
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  confidence: canon
+  visibility: public
+- id: person:marianna_marka_klavdiya_galevska
+  name: Марианна Марка Клавдия-Галевска
+  alt:
+  - text: 'роль: Жена Йорика'
+    sources:
+    - characters/yorick
+  role: жена императора
+  affiliation: Клавдии
+  based_in: Иллиор
+  years: до 977
+  notable: Умерла в 977; слухи об убийстве.
+  relations: жена Йорика
+  sources:
+  - characters/houses_clans/claudia
+  - characters/yorick
+  confidence: canon
+  visibility: public
+- id: characters/tiberia_cornelia
+  name: Тиберия Рато Корнелия
+  slug: characters/tiberia_cornelia
+  alt:
+  - text: 'роль: Сенатор, глава Корнелиев'
+    sources:
+    - characters/tiberia_cornelia
+  role: глава дома, сенатор
+  affiliation: Корнелии
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/cornelia
+  - characters/tiberia_cornelia
+  confidence: canon
+  visibility: public
+- id: person:yust_korneliy
+  name: Юст Корнелий
+  alt:
+  - text: 'роль: гильдмастер Рубинового Заката'
+    sources:
+    - guilds/ruby_sunset
+  role: гильдмастер «Рубинового Заката»
+  affiliation: Корнелии
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - characters/houses_clans/cornelia
+  - guilds/ruby_sunset
+  confidence: canon
+  visibility: public
+- id: characters/blorden_fabius
+  name: Блорден Тиль Фабий
+  slug: characters/blorden_fabius
+  alt:
+  - text: 'роль: Сенатор, глава Фабиев'
+    sources:
+    - characters/blorden_fabius
+  role: глава дома, сенатор
+  affiliation: Фабии
+  based_in: Иллиор
+  years: '1005'
+  notable: Монархист.
+  sources:
+  - characters/houses_clans/fabii
+  - characters/blorden_fabius
+  confidence: canon
+  visibility: public
+- id: characters/letid_horatius
+  name: Летид Давор Галиус Гораций
+  slug: characters/letid_horatius
+  alt:
+  - text: 'роль: Сенатор, глава Горациев'
+    sources:
+    - characters/letid_horatius
+  role: глава дома, сенатор
+  affiliation: Горации
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/horatii
+  - characters/letid_horatius
+  confidence: canon
+  visibility: public
+- id: person:aulus_goratsiy
+  name: Аулус Гораций
+  role: префект Виларина
+  affiliation: Горации
+  based_in: Виларин
+  years: '1005'
+  sources:
+  - characters/houses_clans/horatii
+  - countries/illior_empire/regions/illior_empire_vilarin_region
+  confidence: canon
+  visibility: public
+- id: characters/augustus_junia
+  name: Август Ставрос Юний
+  slug: characters/augustus_junia
+  alt:
+  - text: 'роль: Сенатор, в прошлом легат, глава Юниев'
+    sources:
+    - characters/augustus_junia
+  role: глава дома, сенатор, бывший легат
+  affiliation: Юнии
+  based_in: Иллиор
+  years: '1005'
+  notable: Выступает за старые границы.
+  relations: отец Эврипида
+  sources:
+  - characters/houses_clans/junia
+  - characters/augustus_junia
+  confidence: canon
+  visibility: public
+- id: characters/euripdus_junius
+  name: Эврипид Август Юний
+  slug: characters/euripdus_junius
+  alt:
+  - text: 'роль: Легат I легиона'
+    sources:
+    - characters/euripdus_junius
+  role: легат I легиона
+  affiliation: Юнии
+  based_in: Иллиор
+  years: '1005'
+  notable: В 25 лет получил I легион по выбору императора; интерес к слабым местам ройских крепостей.
+  relations: сын Августа
+  sources:
+  - characters/houses_clans/junia
+  - countries/illior_empire/illior_empire_army
+  - characters/euripdus_junius
+  confidence: canon
+  visibility: public
+- id: person:vopiskus_yuniy
+  name: Вопискус Юний
+  alt:
+  - text: 'роль: Командующий операцией'
+    sources:
+    - history/arnost_catastrophe
+  role: полководец
+  affiliation: Юнии
+  based_in: Арност
+  years: '672'
+  notable: Командовал операцией в Арносте.
+  sources:
+  - characters/houses_clans/junia
+  - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: person:baldor_loren_yuniy
+  name: Балдор Лорен Юний
+  alt:
+  - text: 'роль: основатель Амальгамы'
+    sources:
+    - guilds/amalgam
+  role: основатель гильдии Амальгама
+  affiliation: Юнии
+  based_in: Кориалум
+  years: '304'
+  sources:
+  - characters/houses_clans/junia
+  - guilds/amalgam
+  confidence: canon
+  visibility: public
+- id: person:safiel_tiberiya_yuniya
+  name: Сафиэль Тиберия Юния
+  role: императрица
+  affiliation: Юнии
+  based_in: Иллиор
+  years: 811–815
+  notable: Покончила с собой.
+  relations: жена Ралвека
+  sources:
+  - characters/houses_clans/junia
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: characters/genevre_larcia
+  name: Геневра Фиона Лариция
+  slug: characters/genevre_larcia
+  alt:
+  - text: 'роль: Сенатор, глава Лариций'
+    sources:
+    - characters/genevre_larcia
+  role: глава дома, сенатор
+  affiliation: Лариции
+  based_in: Иллиор
+  years: '1005'
+  notable: Матриархат.
+  relations: мать Серафины
+  sources:
+  - characters/houses_clans/larcia
+  - characters/genevre_larcia
+  confidence: canon
+  visibility: public
+- id: characters/serafina_larcia
+  name: Серафина Геневра Лариция
+  slug: characters/serafina_larcia
+  alt:
+  - text: 'роль: Политик, наследница дома Лариций'
+    sources:
+    - characters/serafina_larcia
+  role: наследница
+  affiliation: Лариции
+  based_in: Иллиор
+  years: '1005'
+  notable: Слух о связи с разведкой; XXIV легион.
+  relations: дочь Геневры
+  sources:
+  - characters/houses_clans/larcia
+  - characters/serafina_larcia
+  confidence: canon
+  visibility: public
+- id: person:hami_svena_laritsiya
+  name: Хами Свена Лариция
+  role: сенатор
+  affiliation: Лариции
+  based_in: Иллиор
+  years: '932'
+  notable: Растрата; помилована Авлом.
+  sources:
+  - characters/houses_clans/larcia
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: characters/andrea_marcia
+  name: Андреа Атрония Марция
+  slug: characters/andrea_marcia
+  alt:
+  - text: 'роль: Сенатор, глава Марциев'
+    sources:
+    - characters/andrea_marcia
+  role: глава дома, сенатор
+  affiliation: Марции
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/marcia
+  - characters/andrea_marcia
+  confidence: canon
+  visibility: public
+- id: person:tiberiy_maniy_martsiy
+  name: Тиберий Маний Марций
+  role: префект Сарка
+  affiliation: Марции
+  based_in: Дагор
+  years: '1005'
+  sources:
+  - characters/houses_clans/marcia
+  - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: characters/archibald_quintus_marius
+  name: Арчибальд Квинт Мариус
+  slug: characters/archibald_quintus_marius
+  alt:
+  - text: 'роль: глава разведки империи'
+    sources:
+    - history/vilarin_convention
+  - text: 'роль: Глава имперской разведки'
+    sources:
+    - characters/yorick
+    - characters/serafina_larcia
+  role: бывший глава имперской разведки
+  affiliation: Марции
+  based_in: Иллиор
+  years: до 1005
+  notable: Погиб в 1005.
+  sources:
+  - characters/houses_clans/marcia
+  - history/vilarin_convention
+  - characters/yorick
+  - characters/serafina_larcia
+  confidence: canon
+  visibility: public
+- id: characters/olma_numicia
+  name: Ольма Варта Нумиция
+  slug: characters/olma_numicia
+  alt:
+  - text: 'роль: Представитель протектора'
+    sources:
+    - countries/rojo/regions/rojo_danir_region
+  - text: 'роль: Сенатор, глава Нумициев, представительница императора в Ройо'
+    sources:
+    - characters/olma_numicia
+  - text: 'роль: представитель императора в Данире'
+    sources:
+    - characters/dzhok_i
+  role: глава дома, сенатор
+  affiliation: Нумиции
+  based_in: Ройо
+  years: '1005'
+  notable: Представляет императора в протекторате Ройо.
+  relations: сестра Гортензии
+  sources:
+  - characters/houses_clans/numicii
+  - countries/rojo/regions/rojo_danir_region
+  - characters/olma_numicia
+  - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: characters/gortensia_numicia
+  name: Гортензия Варта Нумиция
+  slug: characters/gortensia_numicia
+  alt:
+  - text: 'роль: Префект Рун'
+    sources:
+    - characters/gortensia_numicia
+  role: префект Руна
+  affiliation: Нумиции
+  based_in: Грейхельд
+  years: '1005'
+  relations: Сестра Ольма
+  sources:
+  - characters/houses_clans/numicii
+  - countries/illior_empire/regions/illior_empire_run_region
+  - characters/gortensia_numicia
+  confidence: canon
+  visibility: public
+- id: characters/raffaela_potitia
+  name: Раффаэла Волена Потиция
+  slug: characters/raffaela_potitia
+  alt:
+  - text: 'роль: Сенатор, глава Потициев'
+    sources:
+    - characters/raffaela_potitia
+  role: глава дома, сенатор
+  affiliation: Потиции
+  based_in: Иллиор
+  years: '1005'
+  notable: Монархист.
+  sources:
+  - characters/houses_clans/potitia
+  - characters/raffaela_potitia
+  confidence: canon
+  visibility: public
+- id: person:barbara_olimpiya_potitsiya
+  name: Барбара Олимпия Потиция
+  role: судья префектуры Иллиор
+  affiliation: Потиции
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - characters/houses_clans/potitia
+  confidence: canon
+  visibility: public
+- id: characters/filomen_papiria
+  name: Филомен Тилмот Папирий
+  slug: characters/filomen_papiria
+  alt:
+  - text: 'роль: Сенатор, квестор префектуры Иллиор, глава стражи столицы, глава Папириев'
+    sources:
+    - characters/filomen_papiria
+  - text: 'вариант имени: Филомен Папирий'
+    sources:
+    - guilds/sewer_rats
+  role: глава дома, сенатор, квестор Иллиора, глава стражи
+  affiliation: Папирии
+  based_in: Иллиор
+  years: '1005'
+  notable: Помощница Нала Сальвидения.
+  relations: брат Алерии
+  sources:
+  - characters/houses_clans/papiria
+  - countries/illior_empire/cities/city_illior
+  - characters/filomen_papiria
+  - guilds/sewer_rats
+  confidence: canon
+  visibility: public
+- id: person:aleriya_tilmota_papiriya
+  name: Алерия Тилмота Папирия
+  alt:
+  - text: 'роль: Сестра Филомена'
+    sources:
+    - characters/danzar_papirius
+  role: член дома
+  affiliation: Папирии
+  based_in: Иллиор
+  years: '1005'
+  relations: сестра Филомена
+  sources:
+  - characters/houses_clans/papiria
+  - characters/danzar_papirius
+  confidence: canon
+  visibility: public
+- id: person:gilbert_papiriy
+  name: Гилберт Папирий
+  role: муж Алерии
+  affiliation: Папирии
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - characters/houses_clans/papiria
+  confidence: canon
+  visibility: public
+- id: characters/danzar_papirius
+  name: Дранзар Гилберт Папирий
+  slug: characters/danzar_papirius
+  alt:
+  - text: 'роль: Наследник главы дома'
+    sources:
+    - characters/danzar_papirius
+  role: наследник главы дома
+  affiliation: Папирии
+  based_in: Иллиор
+  years: '1005'
+  notable: Сын Алерии Тилмоты Папирии; отец Гилберт перешёл в дом Папириев.
+  relations: сын Алерии
+  sources:
+  - characters/houses_clans/papiria
+  - characters/danzar_papirius
+  confidence: canon
+  visibility: public
+- id: characters/nala_salvidenija
+  name: Нала Сальвидения
+  aliases:
+  - Нала Сальвидения («Медянка»)
+  - Медянка
+  slug: characters/nala_salvidenija
+  alt:
+  - text: 'роль: Вигил, помощница квестора, фактически глава стражи Иллиора'
+    sources:
+    - characters/nala_salvidenija
+  - text: 'роль: помощница главы городской стражи'
+    sources:
+    - characters/arvehl
+    - characters/bosco_darkbone
+  role: помощница Филомена
+  affiliation: городская стража
+  based_in: Иллиор
+  years: '1005'
+  notable: Зелёная чешуя, неподкупна; теперь работает с аристократами, нанимает людей.
+  relations: Филомен — начальник; Децимус — партнёр по бюджету
+  sources:
+  - countries/illior_empire/cities/city_illior
+  - characters/nala_salvidenija
+  - characters/arvehl
+  - characters/bosco_darkbone
+  confidence: canon
+  visibility: public
+- id: characters/caius_servilius
+  name: Кай Мариус Сервилий
+  slug: characters/caius_servilius
+  alt:
+  - text: 'роль: Сенатор, глава Сервилиев'
+    sources:
+    - characters/caius_servilius
+  role: глава дома, сенатор
+  affiliation: Сервилии
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/servilii
+  - characters/caius_servilius
+  confidence: canon
+  visibility: public
+- id: person:kassiopeya_vagniya_serviliya
+  name: Кассиопея Вагния Сервилия
+  alt:
+  - text: 'роль: владелица «Старого города»'
+    sources:
+    - establishments/taverns/staryj_gorod
+  role: владелица таверны «Старый город»
+  affiliation: Сервилии
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - characters/houses_clans/servilii
+  - establishments/taverns/staryj_gorod
+  confidence: canon
+  visibility: public
+- id: person:adam_svenitski_serviliy
+  name: Адам Свеницки-Сервилий
+  alt:
+  - text: 'роль: глава рода'
+    sources:
+    - countries/gross/regions/gross_central_region
+  role: землевладелец в Центральном Гроссе
+  affiliation: Сервилии
+  based_in: Гросс
+  years: '1005'
+  notable: скупил землю вдоль тракта
+  sources:
+  - characters/houses_clans/servilii
+  - countries/gross/regions/gross_central_region
+  confidence: canon
+  visibility: public
+- id: characters/lambros_aquillius
+  name: Ламброс Троеннен Аквилий
+  slug: characters/lambros_aquillius
+  alt:
+  - text: 'роль: Сенатор, глава Аквилиев'
+    sources:
+    - characters/lambros_aquillius
+  role: глава дома, сенатор
+  affiliation: Аквилии
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/aquillii
+  - characters/lambros_aquillius
+  confidence: canon
+  visibility: public
+- id: person:lars_kondiy_akviliy
+  name: Ларс Кондий Аквилий
+  alt:
+  - text: 'роль: владелец «Жадного Медведя»'
+    sources:
+    - establishments/taverns/zhadnyj_medved
+  role: владелец таверны «Жадный Медведь»
+  affiliation: Аквилии
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - characters/houses_clans/aquillii
+  - establishments/taverns/zhadnyj_medved
+  confidence: canon
+  visibility: public
+- id: characters/calipso_veturia
+  name: Калипсо Аннет Ветурия
+  slug: characters/calipso_veturia
+  alt:
+  - text: 'роль: Сенатор, глава Ветуриев'
+    sources:
+    - characters/calipso_veturia
+  role: глава дома, сенатор
+  affiliation: Ветурии
+  based_in: Иллиор
+  years: '1005'
+  notable: Страница почти пуста
+  sources:
+  - characters/houses_clans/veturii
+  - characters/calipso_veturia
+  confidence: canon
+  visibility: public
+- id: person:tiberiy_meron_veturiy
+  name: Тиберий Мерон Ветурий
+  alt:
+  - text: 'роль: маг Рубинового Заката'
+    sources:
+    - guilds/ruby_sunset
+  role: маг гильдии Рубиновый Закат
+  affiliation: Ветурии
+  based_in: Иллиор
+  years: '1005'
+  notable: Иллюзия огромного зеркала над Иллиором.
+  sources:
+  - characters/houses_clans/veturii
+  - guilds/ruby_sunset
+  confidence: canon
+  visibility: public
+- id: characters/gnaeus_corfidius
+  name: Гней Корфидий
+  slug: characters/gnaeus_corfidius
+  alt:
+  - text: 'роль: народный депутат сената'
+    sources:
+    - characters/gnaeus_corfidius
+  role: народный депутат
+  affiliation: Сенат
+  based_in: Иллиор
+  years: '1005'
+  notable: Избирается на 5 лет.
+  sources:
+  - countries/illior_empire/illior_empire_senate
+  - characters/gnaeus_corfidius
+  confidence: canon
+  visibility: public
+- id: person:skott_fletcher
+  name: Скотт Флетчер
+  role: лидер Выселок
+  affiliation: Выселки
+  based_in: Иллиор
+  years: с 1005
+  notable: Не допустил погромов, организовал карантин.
+  relations: мэр ему благоволит
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: person:sarina
+  name: Сарина
+  alt:
+  - text: 'роль: ректор Виларина, архимаг'
+    sources:
+    - establishments/educational/vilarin_university
+  role: ректор архимаг
+  affiliation: Виларинский университет
+  based_in: Виларин
+  years: ≈975–
+  notable: Фактический правитель региона.
+  sources:
+  - countries/illior_empire/cities/city_vilarin
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: person:anna_danor
+  name: Анна Данор
+  role: мэр
+  affiliation: графство/город
+  based_in: '?'
+  years: '1005'
+  notable: Не уточнено.
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: person:geniza_iz_dagora
+  name: Гениза из Дагора
+  role: квестор графства
+  affiliation: '?'
+  based_in: '?'
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: person:vernor_briynas
+  name: Вернор Брийнас
+  role: судья графства
+  affiliation: '?'
+  based_in: '?'
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: person:santo_aderiko_fibiy
+  name: Санто Адерико Фибий
+  role: судья префектуры Иллиор
+  affiliation: префектура Иллиор
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: person:septimus_herma
+  name: Септимус Херма
+  role: судья префектуры Иллиор
+  affiliation: префектура Иллиор
+  based_in: Иллиор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: person:kaf_sinorg
+  name: Каф Синорг
+  role: судья Сарка
+  affiliation: префектура Сарк
+  based_in: Дагор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: person:nimo_fabritsiya
+  name: Нимо Фабриция
+  role: судья Сарка
+  affiliation: префектура Сарк
+  based_in: Дагор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: person:emrih_urbiniy
+  name: Эмрих Урбиний
+  role: судья Сарка
+  affiliation: префектура Сарк
+  based_in: Дагор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: person:findran_stalnoy_bok
+  name: Финдран Стальной Бок
+  role: квестор Сарка
+  affiliation: префектура Сарк
+  based_in: Дагор
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: person:lars_karminiy
+  name: Ларс Карминий
+  role: барон, землевладелец
+  affiliation: Рун
+  based_in: Бордыма
+  years: '1005'
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+  confidence: canon
+  visibility: public
+- id: characters/avdikiy_gerdonius
+  name: Авдикий Гердоний
+  slug: characters/avdikiy_gerdonius
+  role: легат VI легиона
+  affiliation: VI легион
+  based_in: около Грейхельда
+  years: '1005'
+  notable: Знаток борьбы с нежитью; честен; обещал помощь наёмникам на конвенте.
+  relations: Сарина
+  sources:
+  - countries/illior_empire/illior_empire_army
+  - history/vilarin_convention
+  - characters/avdikiy_gerdonius
+  confidence: canon
+  visibility: public
+- id: characters/maria_pomar
+  name: Мария Хосе Помар
+  slug: characters/maria_pomar
+  alt:
+  - text: 'роль: Легат XXIV легиона'
+    sources:
+    - characters/maria_pomar
+  role: легат XXIV легиона
+  affiliation: гильдия Мрак
+  based_in: '?'
+  years: '1005'
+  notable: 'Слух: не без семьи Лервик.'
+  relations: Йорик
+  sources:
+  - countries/illior_empire/illior_empire_army
+  - history/second_igni_rojo_war
+  - characters/maria_pomar
+  - characters/dzhok_i
+  - guilds/mirk
+  confidence: canon
+  visibility: public
+- id: characters/gustaviii
+  name: Густав III
+  aliases:
+  - Густав III (Густав Летилий Харчевски)
+  - Густав Летилий Харчевски
+  slug: characters/gustaviii
+  alt:
+  - text: 'роль: избранный король Гросса'
+    sources:
+    - characters/gustaviii
+  role: король Гросса (избранный сейм)
+  affiliation: центристы
+  based_in: Берсан
+  years: наст.
+  notable: выходец из центристов; в молодости служил в Зелёной милиции
+  relations: избран сеймом
+  sources:
+  - countries/gross/gross_seim
+  - characters/gustaviii
+  confidence: canon
+  visibility: public
+- id: characters/irena_ptashzhinska
+  name: Ирена Пташжинска
+  slug: characters/irena_ptashzhinska
+  alt:
+  - text: 'роль: командующая Лесным войском Гросса'
+    sources:
+    - history/vilarin_convention
+  - text: 'роль: командующая Лесным войском'
+    sources:
+    - characters/irena_ptashzhinska
+  role: хозяйка замка Старый Плющ; командующая Лесным войском
+  affiliation: род Пташжински; назначена королём
+  based_in: Старый Плющ
+  years: наст.
+  notable: крупная землевладелица Подменного леса
+  relations: дядя — Гжегош Пташжински; бургомистр Келтон Бечкович
+  sources:
+  - countries/gross/gross_army
+  - history/vilarin_convention
+  - characters/irena_ptashzhinska
+  confidence: canon
+  visibility: public
+- id: person:gzhegosh_ptashzhinski
+  name: Гжегош Пташжински
+  alt:
+  - text: 'роль: владелец Большой бочки'
+    sources:
+    - establishments/taverns/bolshaja_bochka
+  role: кастелян Старого Плюща
+  affiliation: род Пташжински
+  based_in: Старый Плющ
+  years: наст.
+  notable: дядя Ирены
+  relations: Ирена
+  sources:
+  - countries/gross/cities/city_old_ivy
+  - characters/irena_ptashzhinska
+  - establishments/taverns/bolshaja_bochka
+  confidence: canon
+  visibility: public
+- id: person:kelton_bechkovich
+  name: Келтон Бечкович
+  role: бургомистр Старого Плюща
+  affiliation: назначен Иреной
+  based_in: Старый Плющ
+  years: наст.
+  sources:
+  - countries/gross/cities/city_old_ivy
+  confidence: canon
+  visibility: public
+- id: characters/kondratij_tarlo-ezhickij
+  name: Кондратий Тарло-Ежицки
+  slug: characters/kondratij_tarlo-ezhickij
+  alt:
+  - text: 'роль: гильдмастер Древотёсов Берсана; хозяин Ежицка'
+    sources:
+    - characters/kondratij_tarlo-ezhickij
+  - text: 'роль: гильдмастер Древотёсов'
+    sources:
+    - guilds/bersan_lumberers
+  role: хозяин Ежицка; гильдмастер Древотёсов Берсана
+  affiliation: магнаты
+  based_in: Ежицк
+  years: наст.
+  notable: владеет самыми ценными питомниками Подменного леса
+  sources:
+  - countries/gross/cities/city_ezhitsk
+  - characters/kondratij_tarlo-ezhickij
+  - guilds/bersan_lumberers
+  confidence: canon
+  visibility: public
+- id: person:menassah_har_zhahav
+  name: Менассах Хар-Жахав
+  role: глава общины святого Катберта
+  affiliation: община Катберта
+  based_in: Ежицк
+  years: наст.
+  sources:
+  - countries/gross/cities/city_ezhitsk
+  confidence: canon
+  visibility: public
+- id: person:voytseh_sapish_glen_sapish
+  name: Войцех Сапиш; Глен Сапиш
+  role: дворяне, совладельцы Несчастливой крепи
+  affiliation: род Сапишей
+  based_in: Несчастливая крепь
+  years: наст.
+  relations: соперничают с Кальпурниями
+  sources:
+  - countries/gross/cities/city_unfortunate_stronghold
+  confidence: canon
+  visibility: public
+- id: person:amanda_kalpurniya
+  name: Аманда Кальпурния
+  role: дворянка, совладелица Несчастливой крепи
+  affiliation: род Кальпурниев
+  based_in: Несчастливая крепь
+  years: наст.
+  sources:
+  - countries/gross/cities/city_unfortunate_stronghold
+  confidence: canon
+  visibility: public
+- id: person:otto_glii_ditsiy
+  name: Отто Глии Диций
+  role: командующий Зелёной милицией
+  affiliation: милитаристы
+  based_in: Восточные зелёные земли
+  years: наст.
+  sources:
+  - countries/gross/gross_army
+  confidence: canon
+  visibility: public
+- id: person:fiora_tykel
+  name: Фиора Тыкель
+  role: землевладелица, лидер националистов
+  affiliation: националисты; род Тыкель (Бредон)
+  based_in: Восточные зелёные земли
+  years: наст.
+  notable: крупный производитель шерсти
+  sources:
+  - countries/gross/gross_seim
+  confidence: canon
+  visibility: public
+- id: person:kshishtof_grabovski
+  name: Кшиштоф Грабовски
+  role: пивной магнат
+  affiliation: магнаты
+  based_in: Центральный регион
+  years: наст.
+  notable: крупнейший пивовар страны
+  sources:
+  - countries/gross/regions/gross_central_region
+  confidence: canon
+  visibility: public
+- id: person:luka_rybak
+  name: Лука Рыбак
+  role: бургомистр Кривого Лиора
+  affiliation: республиканский город
+  based_in: Кривой Лиор
+  years: наст.
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+  confidence: canon
+  visibility: public
+- id: person:anastasya_ofiliya_gzhegosh_ofiliy
+  name: Анастасья Офилия; Гжегош Офилий
+  role: хозяева Замка Чайки
+  affiliation: род Офилиев
+  based_in: Замок Чайки
+  years: наст.
+  relations: муж и жена
+  sources:
+  - countries/gross/regions/gross_lior_delta
+  confidence: canon
+  visibility: public
+- id: person:blart_yazvinski
+  name: Бларт Язвински
+  role: хозяин Нижнего Балаттера
+  affiliation: род Язвински
+  based_in: Нижний Балаттер
+  years: наст.
+  sources:
+  - countries/gross/regions/gross_lior_delta
+  confidence: canon
+  visibility: public
+- id: person:irina_landovska
+  name: Ирина Ландовска
+  role: королева Гросс
+  affiliation: род Ландовски
+  based_in: Берсан
+  years: 147-151 и далее
+  notable: первая человеческая королева
+  sources:
+  - countries/gross/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:gustav_landovski
+  name: Густав Ландовски
+  role: правитель Берсана
+  affiliation: род Ландовски
+  based_in: Берсан
+  years: 90-е гг.
+  notable: начал колонизацию Подменного леса
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: person:miran_landovski
+  name: Миран Ландовски
+  role: король
+  affiliation: род Ландовски
+  based_in: Берсан
+  years: ум. 188
+  notable: последний король династии
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: person:dana_polonska
+  name: Дана Полонска
+  role: королева
+  affiliation: род Полонски
+  based_in: Берсан
+  years: с 188
+  notable: первая избранная
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: person:boleslava_polonska
+  name: Болеслава Полонска
+  alt:
+  - text: 'роль: Королева Гросс'
+    sources:
+    - countries/rojo/index
+  - text: 'роль: королева Гросс'
+    sources:
+    - history/era_troubles
+  role: королева
+  affiliation: род Полонски
+  based_in: Берсан
+  years: с 573
+  notable: избрана через неделю после переворота
+  sources:
+  - countries/gross/index
+  - countries/rojo/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:yagello_kasporovich
+  name: Ягелло Каспорович
+  role: король
+  affiliation: Каспоровичи
+  based_in: Берсан
+  years: с 657
+  notable: победил в кулачных боях
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: person:budimir_ristovich_stanko_ristovich
+  name: Будимир Ристович; Станко Ристович
+  role: король и сын-мятежник
+  affiliation: Ристовичи
+  based_in: Берсан
+  years: '870'
+  notable: род лишён имущества
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: person:brona_kizhanovska
+  name: Брона Кижановска
+  alt:
+  - text: 'роль: первая жена Ралвека'
+    sources:
+    - history/era_troubles
+  role: аристократка, жена наследника
+  affiliation: Кижановски
+  based_in: Берсан
+  years: 762-817
+  notable: предположительно прокляла новый брак Ралвека
+  relations: муж Ралвек; сын Лукас
+  sources:
+  - countries/gross/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:anselm_gney
+  name: Ансельм; Гней
+  role: сыновья Малдреда
+  affiliation: Иллиор
+  years: 163-164
+  notable: Ансельм основал Антиум, ранен в Самруне
+  sources:
+  - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: person:enfina
+  name: Энфина
+  alt:
+  - text: 'роль: Императрица'
+    sources:
+    - countries/rojo/index
+  - text: 'роль: императрица Иллиора'
+    sources:
+    - countries/enforis/index
+  role: императрица
+  affiliation: из Энфориса
+  based_in: Иллиор
+  years: 571-573
+  notable: 94 года в 567, выглядит на 30
+  relations: Маркус
+  sources:
+  - countries/gross/index
+  - countries/rojo/index
+  - countries/enforis/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:damian_tarkviniy_kalatrava
+  name: Дамиан Тарквиний-Калатрава
+  alt:
+  - text: 'роль: Первый король Ройо'
+    sources:
+    - countries/rojo/index
+  - text: 'роль: основатель королевства Ройо'
+    sources:
+    - knowledges/church_of_the_stars
+  role: первый король Ройо
+  affiliation: Церковь Звёзд
+  based_in: Данир
+  years: 560-
+  notable: Возглавил революцию.
+  relations: Внук Риклаэрона.
+  sources:
+  - countries/gross/index
+  - countries/rojo/index
+  - history/era_troubles
+  - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: person:grann_krivoy
+  name: Гранн Кривой
+  role: великий князь Залесска
+  based_in: Залесск
+  years: с 995
+  notable: неизвестного происхождения
+  sources:
+  - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: person:valraga_po_prozvischu_vdova
+  name: Валрага по прозвищу Вдова
+  alt:
+  - text: 'роль: командует боевым крылом Чёрных капюшонов'
+    sources:
+    - guilds/black_hoods
+  role: глава боевого крыла Чёрных капюшонов
+  affiliation: Чёрные капюшоны
+  based_in: Хрэлл
+  years: наст.
+  sources:
+  - countries/khrell/khrell_lands_fractions
+  - guilds/black_hoods
+  confidence: canon
+  visibility: public
+- id: person:chaom_odnorukiy
+  name: Чаом Однорукий
+  role: главарь Отверженных
+  affiliation: Отверженные
+  based_in: Самрун
+  years: наст.
+  sources:
+  - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: person:aerd
+  name: Аэрд
+  role: эльф, глава Волшебных отбросов
+  affiliation: Волшебные отбросы
+  based_in: Самрун
+  years: наст.
+  notable: о безумии слагают песни
+  sources:
+  - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: person:li_bukhan
+  name: Ли Букхан
+  role: глава Ящеров в Хрэлл
+  affiliation: Ящеры
+  based_in: драконий квартал Самруна
+  years: наст.
+  sources:
+  - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: person:fezuni_vykovavshaya_mech_v_siyanii_molodoy_luny
+  name: Фезуни Выковавшая-меч-в-сиянии-молодой-луны
+  role: драконица Железного клана
+  affiliation: Железный клан
+  years: '151'
+  notable: вручила корону Ирине
+  sources:
+  - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: characters/dzhok_i
+  name: Джок I
+  aliases:
+  - Джок I (Джок Сильвертуф)
+  - Джок Сильвертуф
+  - Джок I (Сильвертуф / Веласкез-Деламота)
+  - Веласкез-Деламота)
+  slug: characters/dzhok_i
+  alt:
+  - text: 'роль: разбойник, граф Хрэлла, король Ройо'
+    sources:
+    - history/second_igni_rojo_war
+  - text: 'роль: король Ройо'
+    sources:
+    - knowledges/church_of_the_stars
+  - text: 'роль: полевой командир, граф Хрэлла, король Ройо'
+    sources:
+    - countries/khrell/index
+  - text: 'вариант имени: Джок I (Сильвертуф'
+    sources:
+    - characters/dzhok_i
+  - text: 'вариант имени: Джок Сильвертуф (повтор: роль графа Хрэлла)'
+    sources:
+    - history/second_igni_rojo_war
+  role: Король Ройо
+  affiliation: Ройо
+  based_in: Данир
+  years: 1005–
+  notable: Бывший разбойник, взял Деламоту при помощи чёрного дракона.
+  relations: Муж Сабрины Деламота; потомок Веласкез; поддержан Эспинаром и XXIV легионом.
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  - characters/index
+  - knowledges/church_of_the_stars
+  - countries/khrell/index
+  - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: person:rafael_foneska
+  name: Рафаэль Фонеска
+  role: Настоятель Аббатства
+  affiliation: Церковь Звёзд
+  based_in: Аббатство Неугасимого Пламени
+  years: '1005'
+  notable: Аббатство признало Эспинара.
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+  confidence: canon
+  visibility: public
+- id: person:aleksis_tafalla
+  name: Алексис Тафалла
+  alt:
+  - text: 'роль: адмирал королевства, граф'
+    sources:
+    - guilds/dawn_dolphins
+  role: Граф, адмирал
+  affiliation: Ройо
+  based_in: Замок Нуэтида
+  years: '1005'
+  notable: Командует флотом.
+  relations: Старший родич Рикардо.
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+  - guilds/dawn_dolphins
+  confidence: canon
+  visibility: public
+- id: person:rikardo_tafalla
+  name: Рикардо Тафалла
+  alt:
+  - text: 'роль: гильдмастер Рассветных Дельфинов, кавалер'
+    sources:
+    - guilds/dawn_dolphins
+  role: Гильдмастер Рассветных Дельфинов
+  affiliation: Рассветные Дельфины
+  based_in: Данир
+  years: '1005'
+  notable: Кавалер.
+  relations: Младший родич адмирала.
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+  - guilds/dawn_dolphins
+  confidence: canon
+  visibility: public
+- id: person:emiliano_tamayo
+  name: Эмилиано Тамайо
+  role: Губернатор Триниво
+  affiliation: Ройо
+  based_in: Триниво
+  years: '1005'
+  notable: Кавалер.
+  sources:
+  - countries/rojo/regions/rojo_golden_coast_regeion
+  confidence: canon
+  visibility: public
+- id: person:laura_alvarado
+  name: Лаура Альварадо
+  role: Баронесса, землевладелица
+  affiliation: Ройо
+  based_in: Золотое побережье
+  years: '1005'
+  notable: Владеет гостиничным комплексом у Монструозного моря.
+  sources:
+  - countries/rojo/regions/rojo_golden_coast_regeion
+  confidence: canon
+  visibility: public
+- id: characters/augustin_espinar
+  name: Августин Эспинар
+  slug: characters/augustin_espinar
+  alt:
+  - text: 'роль: Верховный Вендикатор Церкви Звёзд'
+    sources:
+    - history/second_igni_rojo_war
+  - text: 'роль: Верховный Вендикатор, самопровозглашённый Патриарх'
+    sources:
+    - characters/augustin_espinar
+  - text: 'роль: Верховный Вендикатор, Патриарх военного времени'
+    sources:
+    - knowledges/church_of_the_stars
+  role: Верховный Вендикатор, объявивший себя Патриархом
+  affiliation: Церковь Звёзд
+  based_in: Данир
+  years: 1005–
+  notable: Раскольник.
+  relations: Поддерживает Джока I.
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  - characters/augustin_espinar
+  - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: characters/salvador_gerenius
+  name: Сальвадор Герений
+  slug: characters/salvador_gerenius
+  alt:
+  - text: 'роль: Патриарх Церкви Звёзд'
+    sources:
+    - history/second_igni_rojo_war
+    - knowledges/church_of_the_stars
+  - text: 'роль: Патриарх Церкви Звёзд (слух о переезде)'
+    sources:
+    - countries/sunny_islands/colonial_rojo
+  - text: 'роль: Патриарх Церкви Звёзд (в изгнании)'
+    sources:
+    - characters/salvador_gerenius
+  role: Патриарх (старый)
+  affiliation: Церковь Звёзд
+  based_in: Драконья гора (скрывался)
+  years: до 1005
+  notable: Бежал в неизвестном направлении.
+  relations: Проклял Эспинара.
+  sources:
+  - countries/rojo/regions/rojo_golden_coast_regeion
+  - history/second_igni_rojo_war
+  - countries/sunny_islands/colonial_rojo
+  - characters/salvador_gerenius
+  - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: person:migel_i
+  name: Мигель I
+  alt:
+  - text: 'роль: король Ройо, династия Калатрава'
+    sources:
+    - history/second_igni_rojo_war
+    - characters/morena
+  role: Король Ройо
+  affiliation: Калатрава
+  based_in: Данир
+  years: до 1005
+  notable: Убит ассасином.
+  relations: Отец Морены.
+  sources:
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  - characters/morena
+  confidence: canon
+  visibility: public
+- id: person:sabrina_delamota
+  name: Сабрина Деламота
+  alt:
+  - text: 'роль: жена Джока, королева'
+    sources:
+    - characters/dzhok_i
+  role: Жена Джока I
+  affiliation: Дом Деламота
+  based_in: Деламота
+  years: '1005'
+  notable: Основание прав Джока.
+  sources:
+  - countries/rojo/index
+  - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: person:margarita_kalatrava
+  name: Маргарита Калатрава
+  alt:
+  - text: 'роль: королева Ройо'
+    sources:
+    - history/era_new_age
+  role: Королева Ройо
+  affiliation: Калатрава
+  based_in: Ройо
+  years: '855'
+  notable: Восстановила династию.
+  sources:
+  - countries/rojo/index
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: person:konstantsiya_narrakez
+  name: Констанция Нарракез
+  alt:
+  - text: 'роль: жена Малдреда'
+    sources:
+    - history/era_imperial
+  role: Жена Малдреда
+  affiliation: Нарракез
+  based_in: Юго-запад
+  years: 65 г.
+  notable: Её родичей, по письму, пытали.
+  sources:
+  - countries/rojo/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:dzhulinika
+  name: Джулиника
+  aliases:
+  - Джулиника (Кровавая)
+  - Кровавая
+  alt:
+  - text: 'роль: первая императрица'
+    sources:
+    - history/era_imperial
+  - text: 'роль: императрица'
+    sources:
+    - knowledges/church_of_the_stars
+  role: Императрица
+  affiliation: Империя
+  based_in: Иллиор
+  years: 260–271, ум. 277
+  notable: Кровавая.
+  relations: Бабушка Гая I.
+  sources:
+  - countries/rojo/index
+  - history/era_imperial
+  - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: person:gay_i
+  name: Гай I
+  alt:
+  - text: 'роль: император Иллиорской империи'
+    sources:
+    - countries/igni/index
+  - text: 'роль: император'
+    sources:
+    - history/era_imperial
+  role: Император
+  affiliation: Империя
+  based_in: Иллиор
+  years: 271–
+  notable: Завоевал Западный берег.
+  relations: Шазмехр
+  sources:
+  - countries/rojo/index
+  - countries/igni/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:riklaeron
+  name: Риклаэрон
+  aliases:
+  - Риклаэрон (Строитель)
+  - Строитель
+  - Риклаэрон Строитель
+  alt:
+  - text: 'роль: император'
+    sources:
+    - countries/vishnevodskoye_principality/index
+    - history/era_imperial
+    - geography/long_swamp
+    - geography/river_of_doom
+    - countries/illior_empire/cities/city_illior
+  - text: 'роль: император Иллиора'
+    sources:
+    - countries/slavetraders_coast/index
+  role: Император
+  affiliation: Империя
+  based_in: Иллиор
+  years: до 560
+  notable: Построил тракт Вышпа–Нордхельд.
+  relations: Дед Дамиана.
+  sources:
+  - countries/rojo/index
+  - countries/vishnevodskoye_principality/index
+  - countries/slavetraders_coast/index
+  - history/era_imperial
+  - geography/long_swamp
+  - geography/river_of_doom
+  - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: person:galan
+  name: Галан
+  alt:
+  - text: 'роль: мореход'
+    sources:
+    - countries/enforis/index
+  - text: 'роль: энфорисский мореход, первооткрыватель'
+    sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  - text: 'роль: мореход Энфориса'
+    sources:
+    - history/era_troubles
+  role: Путешественник из Энфориса
+  affiliation: Энфорис
+  based_in: Олифанор
+  years: '698'
+  notable: Открыл Тилэнакади.
+  sources:
+  - countries/rojo/index
+  - countries/enforis/index
+  - countries/sunny_islands/elka_s_oligarchy
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:maharadzha_daas
+  name: Махараджа Даас
+  role: Правитель Игни
+  affiliation: Игни
+  years: '625'
+  notable: Начал Первую войну.
+  sources:
+  - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: person:maharadzha_chander
+  name: Махараджа Чандер
+  role: Правитель Игни
+  affiliation: Игни
+  years: '1005'
+  notable: Нарушил мир.
+  sources:
+  - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: person:maharadzha_shazmehr
+  name: Махараджа Шазмехр
+  role: Правитель Игни
+  affiliation: Игни
+  years: '294'
+  notable: Заключил мир с Гаем I.
+  sources:
+  - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: person:gney_ii
+  name: Гней II
+  alt:
+  - text: 'роль: император'
+    sources:
+    - countries/enforis/index
+    - history/era_troubles
+  role: Император (недееспособен)
+  affiliation: Империя
+  based_in: Иллиор
+  years: '672'
+  notable: Правит сенат.
+  sources:
+  - history/arnost_catastrophe
+  - countries/enforis/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:saranu_vetulena
+  name: Сарану Ветулена
+  role: Глава департамента стражи
+  affiliation: Империя
+  years: '672'
+  notable: Руководила обороной.
+  sources:
+  - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: person:arhimag_budos
+  name: Архимаг Будос
+  alt:
+  - text: 'роль: прежний ректор'
+    sources:
+    - establishments/educational/vilarin_university
+  role: Ректор Виларинского университета
+  affiliation: Виларин
+  based_in: Виларин
+  years: '672'
+  notable: Пропал с экспедицией.
+  sources:
+  - history/arnost_catastrophe
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: person:klara_i_vibiy_furii
+  name: Клара и Вибий Фурии
+  role: Обвинённые в сговоре с Дринрогом
+  affiliation: Империя
+  years: '1004'
+  notable: Обвинены разведкой.
+  sources:
+  - countries/drinrog/index
+  confidence: canon
+  visibility: public
+- id: person:nekromant_sluhi
+  name: Некромант (слухи)
+  role: Неизвестная сила
+  affiliation: Арност
+  years: 1005–1006
+  notable: Берёт нежить под руку.
+  sources:
+  - countries/arnost/index
+  confidence: canon
+  visibility: public
+- id: person:gram_drimsong
+  name: Грам Дримсонг
+  role: Автор справочника
+  notable: Справочник об уникальных чудовищах.
+  sources:
+  - countries/arnost/index
+  confidence: canon
+  visibility: public
+- id: person:amranduin_i
+  name: Амрандуин I
+  role: выборный князь Энфориса
+  affiliation: Энфорис
+  based_in: Олифанор
+  years: правит в 1005
+  notable: Срок и начало не указаны; выбор на 10 лет.
+  sources:
+  - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: person:kvennid
+  name: Квеннид
+  alt:
+  - text: 'роль: жена Адамара'
+    sources:
+    - history/great_war
+  role: основательница Олифанора
+  affiliation: Энфорис
+  based_in: Олифанор
+  years: умерла −86 в 120 лет
+  notable: Переселенка из людей.
+  relations: жена/спутница Адамара; предок Энфины
+  sources:
+  - countries/enforis/index
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:adamar
+  name: Адамар
+  alt:
+  - text: 'роль: эльфийский полководец'
+    sources:
+    - history/great_war
+  role: эльф, вождь Первого рейда, первый князь
+  affiliation: Энфорис
+  based_in: Олифанор
+  years: −181; князь с −81
+  notable: 'Судьба неизвестна: Этель, тайная жизнь, гибель или скрытое правление.'
+  relations: муж Квеннид
+  sources:
+  - countries/enforis/index
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:silviya
+  name: Сильвия
+  role: императрица
+  affiliation: Империя
+  based_in: Иллиор
+  years: после 610
+  notable: Объявила войну Энфорису 615.
+  relations: дочь Энфины
+  sources:
+  - countries/enforis/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:gustav
+  name: Густав
+  role: император
+  affiliation: Империя
+  based_in: Иллиор
+  years: '394'
+  notable: Воскрешён, стал высшей нежитью.
+  sources:
+  - countries/vishnevodskoye_principality/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:brandetta
+  name: Брандетта
+  role: императрица
+  affiliation: Империя
+  based_in: Иллиор
+  years: после 394
+  notable: Ограничила некромантию.
+  relations: преемница Густава
+  sources:
+  - countries/vishnevodskoye_principality/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:tit_klatko_rutiliy
+  name: Тит Клатко Рутилий
+  alt:
+  - text: 'роль: префект Арноста, князь Вышневодска'
+    sources:
+    - history/era_troubles
+  role: префект Арноста
+  affiliation: Рутилии
+  based_in: Вышневодск
+  years: '818'
+  notable: Объявил земли родовой собственностью.
+  relations: из рода Рутилиев
+  sources:
+  - countries/vishnevodskoye_principality/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:edvard_rutiliy
+  name: Эдвард Рутилий
+  role: великий князь
+  affiliation: Рутилии
+  based_in: Вышневодск
+  years: '1005'
+  notable: Все правители независимости — Рутилии.
+  relations: Рутилии
+  sources:
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: person:ana_kezon_ebutsiy
+  name: Ана Кезон-Эбуций
+  role: первая королева Занры
+  affiliation: Кезон-Эбуции
+  based_in: Микрис
+  years: 817–837, ум. в 70
+  notable: Реформы 818.
+  relations: мать Эрри
+  sources:
+  - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: person:erri
+  name: Эрри
+  role: королева
+  affiliation: Кезон-Эбуции
+  based_in: Микрис
+  years: 837–882; ум. 887 в 95
+  notable: Заговор раскрыт при её коронации.
+  relations: дочь Аны, мать Трэма
+  sources:
+  - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: person:trem
+  name: Трэм
+  alt:
+  - text: 'роль: король Занры, святой'
+    sources:
+    - knowledges/pantheon_of_zanra
+  role: король, жрец Ксандаля
+  affiliation: Кезон-Эбуции
+  based_in: Микрис
+  years: 882–911
+  notable: Канонизирован.
+  relations: сын Эрри, отец Эрхи
+  sources:
+  - countries/zanra/index
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:erhi
+  name: Эрхи
+  role: королева
+  affiliation: Кезон-Эбуции
+  based_in: Микрис
+  years: 911–998
+  notable: 913 странный случай.
+  relations: дочь Трэма
+  sources:
+  - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: person:shi_kezon_ebutsiy
+  name: Ши Кезон-Эбуций
+  role: монарх
+  affiliation: Кезон-Эбуции
+  based_in: Микрис
+  years: с 998
+  notable: Родство с Эрхи не указано.
+  sources:
+  - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: person:otal_kezon_ebutsiy
+  name: Отал Кезон-Эбуций
+  alt:
+  - text: 'роль: муж Элорен'
+    sources:
+    - history/era_new_age
+  role: принц-консорт
+  affiliation: Кезон-Эбуции
+  based_in: Иллиор
+  years: '860'
+  notable: Дети с 891.
+  relations: муж Элорен
+  sources:
+  - countries/zanra/index
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: person:novyy_nekromant
+  name: Новый Некромант
+  role: некромант
+  affiliation: не связан с Вышневодском
+  based_in: район Нордхельда
+  years: '1005'
+  notable: Подчинил большую часть нежити.
+  sources:
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: person:rutilii
+  name: Рутилии
+  role: род
+  affiliation: Вышневодск
+  based_in: Вышневодск
+  years: с I-III вв.
+  notable: Правящий род.
+  relations: Фурии (взятки)
+  sources:
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: person:hashem_i
+  name: Хашем I
+  alt:
+  - text: 'роль: раджа Тарпета / махараджа Игни'
+    sources:
+    - history/era_imperial
+  role: раджа Тарпета, первый махараджа Игни
+  affiliation: Игни
+  based_in: Тарпет
+  years: 135–140 (завоевания)
+  notable: За пять лет подчинил долину Сарати.
+  sources:
+  - countries/igni/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:shazmehr
+  name: Шазмехр
+  role: махараджа Игни
+  affiliation: Игни
+  based_in: Тарпет
+  years: '294 (мир с Гаем I)'
+  notable: Подписал мир с Гаем I при посредничестве драконов.
+  relations: Гай I
+  sources:
+  - countries/igni/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:daas
+  name: Даас
+  role: махараджа Игни
+  affiliation: Игни
+  based_in: Тарпет
+  years: '625 (осада Данира)'
+  notable: Разрушил Вестхельд, осадил Данир.
+  relations: Ройо (враг)
+  sources:
+  - countries/igni/index
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:chander
+  name: Чандер
+  role: махараджа Игни, 46 лет
+  affiliation: Игни
+  based_in: Тарпет
+  years: '1005'
+  notable: Нарушил мир 950 г. и получил Западный берег.
+  relations: Амджад Аль-Бакир, Яссир Аль-Бакир
+  sources:
+  - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: person:hapur
+  name: Хапур
+  role: раджа Махаратхи
+  affiliation: Махаратха
+  based_in: Махаратха
+  years: 467–473
+  notable: Умер от старости в ходе Махаратско-асмодийской войны.
+  relations: племена Края Оазисов
+  sources:
+  - countries/archdemon_s_plateau/index
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:rulfari
+  name: Рулфари
+  alt:
+  - text: 'роль: предательница'
+    sources:
+    - history/great_war
+  - text: 'роль: женщина-предательница, демоница'
+    sources:
+    - knowledges/demons
+  role: командующая одной из армий людей, предательница
+  affiliation: союзники, затем архидемон Асмодей
+  based_in: Овидай
+  years: −111
+  notable: Опустошила амбары, угнала жителей в рабство.
+  relations: архидемон Асмодей
+  sources:
+  - countries/archdemon_s_plateau/index
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:mahrodan
+  name: Махродан
+  alt:
+  - text: 'роль: правитель Асмодиуса, самопровозглашённый наследник Бисмистана'
+    sources:
+    - countries/makharatkha/index
+  role: правитель Асмодиуса
+  affiliation: Асмодиус, Асмодийский союз
+  based_in: Асмодиус
+  years: 653–673 (плен ещё 40 лет)
+  notable: Заявлял происхождение от архидемона Бисмистана; заперт в колесе водяного насоса.
+  relations: раджа Махаратхи
+  sources:
+  - countries/archdemon_s_plateau/index
+  - countries/makharatkha/index
+  - history/era_troubles
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:shankaracharya
+  name: Шанкарачарья
+  role: отшельник, целитель
+  based_in: Пепельные горы
+  notable: Известен целительной силой и мудростью по всему княжеству.
+  sources:
+  - countries/igni/regions/igni_ash_mountains_region
+  confidence: canon
+  visibility: public
+- id: person:radzha_prakash
+  name: Раджа Пракаш
+  role: «князь необитаемых холмов»
+  affiliation: Игни
+  based_in: Пепельные горы
+  notable: Древний род, правит пастушьей деревушкой, держит представителя при дворе.
+  sources:
+  - countries/igni/regions/igni_ash_mountains_region
+  confidence: canon
+  visibility: public
+- id: person:radzha_karuna
+  name: Раджа Каруна
+  role: предводительница кочевого племени
+  affiliation: Игни
+  based_in: Ничья пустыня
+  years: '1005'
+  notable: Титул раджи и подарки подтолкнули племена к войне с Ройо.
+  relations: махараджа Чандер
+  sources:
+  - countries/igni/regions/no_man_s_desert
+  confidence: canon
+  visibility: public
+- id: person:hakam_al_salah
+  name: Хакам Аль-Салах
+  role: раджа, военный комендант Западного берега
+  affiliation: Игни
+  based_in: Вестхельд
+  years: '1005'
+  notable: Правит из руин.
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+  visibility: public
+- id: person:yassir_al_bakir
+  name: Яссир Аль-Бакир
+  role: раджа, комендант Наджира
+  affiliation: Игни
+  based_in: Наджир
+  years: 55 лет в 1005
+  notable: Ведает снабжением армии.
+  relations: сын Амджад
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+  visibility: public
+- id: person:amdzhad_al_bakir
+  name: Амджад Аль-Бакир
+  role: военный дипломат
+  affiliation: Игни
+  based_in: Наджир
+  years: 23 года в 1005
+  notable: Вёл переговоры о мире.
+  relations: отец Яссир
+  sources:
+  - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: person:stefan_anzanares
+  name: Стефан Анзанарес
+  role: аристократ, бывший генерал Ройо
+  affiliation: Ройо
+  based_in: Западный берег (скрывается)
+  years: '1005'
+  notable: Не признал мир, партизанская война.
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+  visibility: public
+- id: person:devin_stalnaya_noga
+  name: Дэвин Стальная Нога
+  role: бывший мэр Фанкаменто, вождь борцов за независимость
+  affiliation: Фанкаменто
+  based_in: Западный берег
+  years: '1005'
+  notable: В бегах.
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+  visibility: public
+- id: person:huan_manuel_mendoza
+  name: Хуан Мануэль Мендоза
+  alt:
+  - text: 'роль: регент при Морене'
+    sources:
+    - characters/morena
+  role: регент
+  affiliation: Ройо
+  based_in: Данир
+  years: 60 лет в 1005
+  notable: Правил от имени Морены.
+  sources:
+  - history/second_igni_rojo_war
+  - characters/morena
+  confidence: canon
+  visibility: public
+- id: characters/toyokuza
+  name: Тоёкуза
+  slug: characters/toyokuza
+  role: чёрный дракон-ронин
+  affiliation: союзник Джока
+  based_in: Страна Драконов
+  years: старше 500 лет
+  notable: Дракон-ронин.
+  relations: Джок
+  sources:
+  - history/second_igni_rojo_war
+  - characters/toyokuza
+  confidence: canon
+  visibility: public
+- id: person:yamanami_tantsuyuschiy_v_luchah_dvuh_solnts
+  name: Яманами Танцующий в Лучах Двух Солнц
+  role: старейшина Золотого клана
+  affiliation: Страна Драконов
+  based_in: Хаганэ-но-Кокуру
+  notable: Верховный судья и внешняя политика.
+  sources:
+  - countries/dragons_country/index
+  confidence: canon
+  visibility: public
+- id: person:ali_velikolepnyy
+  name: Али Великолепный
+  role: раджа Махаратхи
+  affiliation: Махаратха
+  based_in: Махаратха (город)
+  years: р. ≈994; на троне с ≈998; сейчас 12 лет
+  notable: Взошёл на престол в 4 года после гибели отца на охоте; власть у визирей; неясно, доживёт ли до совершеннолетия.
+  relations: сын погибшего раджи; опекаются визирями
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:radzha_hapur
+  name: Раджа Хапур
+  role: раджа Махаратхи
+  affiliation: Махаратха
+  based_in: Махаратха (город)
+  years: 467–473
+  notable: Начал войну против Асмодиуса из-за демонопоклонников; умер в конце войны, престарелым.
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:bismistan
+  name: Бисмистан
+  alt:
+  - text: 'Архидемон Бисмистан'
+    sources:
+    - countries/archdemon_s_plateau/index
+  - text: 'роль: архидемон, главный военачальник'
+    sources:
+    - knowledges/demons
+    - knowledges/first_humans
+  role: архидемон
+  affiliation: Плато Архидемона
+  based_in: Плато Архидемона
+  years: древность
+  notable: Упомянут как предтеча Махродана.
+  sources:
+  - countries/makharatkha/index
+  - history/great_war
+  - knowledges/demons
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:shehar
+  name: Шехар
+  role: архимаг, основатель Кифора
+  affiliation: Махаратха
+  based_in: Кифор
+  years: ≈700
+  notable: Построил магическую башню; вокруг вырос Кифор.
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:radzha_800_h_bez_imeni
+  name: Раджа 800-х (без имени)
+  role: раджа Махаратхи
+  affiliation: Махаратха
+  based_in: Салмир
+  years: 800-е
+  notable: Начал дворец на Салмире, умер до завершения.
+  sources:
+  - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: person:otets_ali_bez_imeni
+  name: Отец Али (без имени)
+  role: раджа
+  affiliation: Махаратха
+  based_in: Махаратха
+  years: до ≈998
+  notable: Погиб на охоте; по слухам, убит.
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:viktor_delavara
+  name: Виктор Делавара
+  role: регент Колониального Ройо; ex-генерал-губернатор Нового Данира
+  affiliation: Колониальное Ройо
+  based_in: Новый Данир
+  years: 1005–
+  notable: Объявил себя регентом после пресечения династии; многие думают, что удержит власть.
+  sources:
+  - countries/sunny_islands/colonial_rojo
+  confidence: canon
+  visibility: public
+- id: person:katbert
+  name: Катберт
+  alt:
+  - text: 'роль: епископ'
+    sources:
+    - history/era_troubles
+  - text: 'роль: епископ-раскольник, основатель Церкви Катберта'
+    sources:
+    - knowledges/church_of_cuthbert
+  role: епископ-пророк
+  affiliation: Церковь Катберта
+  based_in: Святая Земля
+  years: 820–823
+  notable: Привёл последователей на Святую Землю.
+  sources:
+  - countries/sunny_islands/index
+  - history/era_troubles
+  - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: person:imperator_riklaeron
+  name: Император Риклаэрон
+  alt:
+  - text: 'роль: император'
+    sources:
+    - guilds/coldwave
+  role: император Иллиора
+  affiliation: Иллиорская империя
+  based_in: Иллиор
+  years: 409–482
+  notable: Основал колонию Тэрранова.
+  sources:
+  - countries/horseshoe_islands/index
+  - guilds/coldwave
+  confidence: canon
+  visibility: public
+- id: person:viziri_radzhi
+  name: Визири раджи
+  role: советники, коллектив
+  affiliation: Махаратха
+  based_in: Махаратха (город)
+  notable: Знатные местные роды, иногда иноземцы; берут долю добычи Кхабарута.
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:pravitel_kifora
+  name: Правитель Кифора
+  role: верховный царёк Колоний Махаратхи
+  affiliation: Колонии Махаратхи
+  based_in: Кифор
+  notable: Командует флотом, получает дань, шлёт дары в Махаратху.
+  sources:
+  - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: person:general_gubernatory_royo
+  name: Генерал-губернаторы Ройо
+  role: коллектив
+  affiliation: Колониальное Ройо
+  based_in: острова Ройо
+  notable: Расширили власть после раскола, подчинены регенту.
+  sources:
+  - countries/sunny_islands/colonial_rojo
+  confidence: canon
+  visibility: public
+- id: person:drakony_zheltogo_klana
+  name: Драконы Жёлтого клана
+  role: учёные
+  affiliation: Жёлтый клан
+  based_in: Виларин / Махаратха
+  years: 715–717
+  notable: Искали лекарство от чумы.
+  sources:
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: person:oligarhi_elki
+  name: Олигархи Элки
+  role: совет богатейших семей
+  affiliation: Олигархия Элка
+  based_in: Элка
+  notable: Часть родов с Шанталоса; Арвебель посылает одного представителя.
+  sources:
+  - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: person:maldred_avgust_tarkviniy
+  name: Малдред Август Тарквиний
+  aliases:
+  - Малдред Август Тарквиний (Завоеватель)
+  - Завоеватель
+  role: основатель и первый император
+  affiliation: Иллиор, Иллиорская империя
+  based_in: Иллиор
+  years: род. ≈25; ум. 210
+  notable: Охотник на чудовищ; избран главой Иллиора в 74; прозвище Завоеватель после штурма Самруна в 164; император с 206.
+  relations: дед — эльфийский воин Алмет; жена Констанция Нарракез; сыновья Гней, Ансельм; брат Эсдор
+  sources:
+  - history/era_imperial
+  - countries/illior_empire/index
+  - countries/gross/index
+  - countries/rojo/index
+  - countries/zanra/index
+  - geography/frosty_marsh
+  - geography/old_forest
+  - geography/river_of_doom
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Малдред Завоеватель'
+    sources:
+    - countries/illior_empire/index
+    - countries/gross/index
+    - countries/rojo/index
+    - countries/zanra/index
+    - geography/frosty_marsh
+    - geography/old_forest
+    - geography/river_of_doom
+  - text: 'роль: правитель Иллиора, император'
+    sources:
+    - countries/gross/index
+  - text: 'роль: Основатель империи'
+    sources:
+    - countries/rojo/index
+  - text: 'роль: правитель Иллиора, первый император'
+    sources:
+    - countries/zanra/index
+  - text: 'роль: основатель империи, полководец'
+    sources:
+    - geography/frosty_marsh
+    - geography/old_forest
+    - geography/river_of_doom
+- id: person:almet
+  name: Алмет
+  role: эльфийский воин, дед Малдреда
+  years: 55 г.
+  notable: В отряде Малдреда с двумя драконами.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:anselm_tarkviniy
+  name: Ансельм Тарквиний
+  role: сын Малдреда
+  notable: Ранен в Самруне; предок Шарли по матери.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:gney_maldred_avgust_tarkviniy
+  name: Гней Малдред Август Тарквиний
+  role: император
+  years: 210–214; умер в 148 лет
+  notable: Покорил Вышневодск (176).
+  sources:
+  - history/era_imperial
+  - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Гней'
+    sources:
+    - countries/vishnevodskoye_principality/index
+  affiliation: Иллиорский союз
+  relations: сын Малдреда
+- id: person:maniy_maldred_avgust_tarkviniy
+  name: Маний Малдред Август Тарквиний
+  role: император
+  years: 214–260; 175 лет
+  notable: Строитель трактов.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:norlen
+  name: Норлэн
+  role: император
+  years: 302–325
+  notable: Бездетен.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:sharli_tarkviniya_polonska
+  name: Шарли Тарквиния-Полонска
+  role: императрица
+  years: с 325
+  notable: Потомок Ансельма и Эсдора.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:kaelana
+  name: Каэлана
+  role: императрица
+  years: с 515
+  notable: Сорок лет покоя.
+  sources:
+  - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: person:markus_maldred_avgust_tarkviniy
+  name: Маркус Малдред Август Тарквиний
+  role: император
+  years: 553–571
+  notable: Налоги; жена Энфина.
+  sources:
+  - history/era_troubles
+  - countries/rojo/index
+  - countries/enforis/index
+  - countries/slavetraders_coast/index
+  - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Маркус'
+    sources:
+    - countries/rojo/index
+    - countries/enforis/index
+    - countries/slavetraders_coast/index
+  - text: 'роль: император'
+    sources:
+    - countries/enforis/index
+  - text: 'роль: император Иллиора'
+    sources:
+    - countries/slavetraders_coast/index
+  - text: 'вариант имени: Император Маркус'
+    sources:
+    - countries/horseshoe_islands/index
+  affiliation: Империя
+  based_in: Иллиор
+  relations: муж Энфины
+- id: person:orim
+  name: Орим
+  role: муж и брат Сильвии
+  notable: Свадьба 572.
+  sources:
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:pifon_tarkviniy
+  name: Пифон Тарквиний
+  role: младший сын Люция
+  notable: Женат на гросской аристократке; отец Фернанда.
+  sources:
+  - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: person:raloro_maldred_avgust_tarkviniy
+  name: Ралоро Малдред Август Тарквиний
+  role: император
+  years: 691–758
+  notable: Увлечён Солнечными островами; погиб на охоте.
+  sources:
+  - history/era_troubles
+  - characters/houses_clans/opia
+  - countries/enforis/index
+  - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Ралоро'
+    sources:
+    - characters/houses_clans/opia
+    - countries/enforis/index
+  - text: 'вариант имени: Император Ралоро'
+    sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  affiliation: Тарквинии/Опии
+  based_in: Иллиор
+  relations: муж Линри Фурии
+- id: person:elen_maldreda_avgusta_tarkviniya
+  name: Элен Малдреда Августа Тарквиния
+  role: императрица
+  years: 758/759–811; ум. в 105
+  notable: Цензура.
+  sources:
+  - history/era_troubles
+  - characters/houses_clans/junia
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Элен'
+    sources:
+    - characters/houses_clans/junia
+  affiliation: Тарквинии
+  based_in: Иллиор
+  relations: мать Ралвека
+- id: person:ralvek_maldred_avgust_tarkviniy
+  name: Ралвек Малдред Август Тарквиний
+  role: император
+  affiliation: Юнии
+  years: 811–843
+  notable: Революция 817; жена Сафиэль Тиберия Юния; первая жена Брона Кижановска.
+  sources:
+  - history/era_troubles
+  - history/era_new_age
+  - characters/houses_clans/junia
+  - countries/vishnevodskoye_principality/index
+  - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Ралвек'
+    sources:
+    - characters/houses_clans/junia
+    - countries/vishnevodskoye_principality/index
+    - knowledges/church_of_cuthbert
+  - text: 'роль: император Иллиорской империи'
+    sources:
+    - knowledges/church_of_cuthbert
+  based_in: Иллиор
+  relations: муж Сафиэль Юнии
+- id: person:lukas_maldred_avgust_tarkviniy
+  name: Лукас Малдред Август Тарквиний
+  role: император
+  based_in: Гросс (жил)
+  years: 843–860
+  notable: Дипломатическое путешествие 852.
+  sources:
+  - history/era_new_age
+  - countries/dragons_country/index
+  - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Лукас'
+    sources:
+    - countries/dragons_country/index
+  - text: 'вариант имени: Император Лукас'
+    sources:
+    - countries/makharatkha/index
+  affiliation: Иллиорская империя
+  relations: Йорик
+- id: person:eloren_neschastnaya
+  name: Элорен Несчастная
+  role: императрица
+  years: 860–912
+  notable: Муж Отал Кезон-Эбуций из Занры.
+  sources:
+  - history/era_new_age
+  - countries/zanra/index
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Элорен'
+    sources:
+    - countries/zanra/index
+  affiliation: Империя
+  based_in: Иллиор
+  relations: жена Отала
+- id: person:avl_maldred_avgust_tarkviniy
+  name: Авл Малдред Август Тарквиний
+  role: император
+  years: 912–961
+  notable: Отравлен; 750 лет империи.
+  sources:
+  - history/era_new_age
+  - countries/zanra/index
+  - knowledges/demons
+  - characters/houses_clans/claudia
+  - characters/lucius_claudius
+  - characters/elena_klavdia
+  - guilds/metal_makers
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Авл'
+    sources:
+    - countries/zanra/index
+    - knowledges/demons
+  - text: 'роль: человек, предок императорского рода Иллиора'
+    sources:
+    - knowledges/demons
+  - text: 'вариант имени: Авл (император)'
+    sources:
+    - characters/houses_clans/claudia
+    - characters/lucius_claudius
+    - characters/elena_klavdia
+  - text: 'роль: Император, отец Нумерии, Луция и Мирны'
+    sources:
+    - characters/lucius_claudius
+    - characters/elena_klavdia
+  - text: 'вариант имени: Император Авл'
+    sources:
+    - guilds/metal_makers
+  affiliation: Империя
+  based_in: Иллиор
+  relations: сын Отала
+- id: person:numeriya_maldreda_avgusta_tarkviniya
+  name: Нумерия Малдреда Августа Тарквиния
+  alt:
+  - text: 'роль: Императрица (961–985)'
+    sources:
+    - characters/lucius_claudius
+    - characters/yorick
+  - text: 'вариант имени: Нумерия'
+    sources:
+    - characters/houses_clans/claudia
+  role: императрица
+  affiliation: Тарквинии
+  based_in: Иллиор
+  years: 961–985
+  notable: Умерла в 56.
+  relations: Сын Йорик; брат Луций
+  sources:
+  - history/era_new_age
+  - characters/lucius_claudius
+  - characters/yorick
+  - characters/houses_clans/claudia
+  confidence: canon
+  visibility: public
+- id: person:gelvetsiya_foriya
+  name: Гельвеция Фория
+  alt:
+  - text: 'роль: Наложница императора'
+    sources:
+    - characters/yorick
+  role: наложница Йорика
+  based_in: Дворец Основателя
+  years: с 987
+  notable: Из Страны Драконов (987).
+  sources:
+  - history/era_new_age
+  - characters/yorick
+  confidence: canon
+  visibility: public
+- id: person:morna_chistaya
+  name: Морна Чистая
+  alt:
+  - text: 'роль: Начальница Драконьей стражи'
+    sources:
+    - characters/yorick
+  role: начальница Драконьей стражи
+  affiliation: Драконья стража
+  based_in: Иллиор
+  years: с 985
+  notable: Совсем юная.
+  sources:
+  - history/era_new_age
+  - characters/yorick
+  confidence: canon
+  visibility: public
+- id: characters/archmage_sarina
+  name: Архимаг Сарина
+  slug: characters/archmage_sarina
+  alt:
+  - text: 'роль: Архимаг'
+    sources:
+    - characters/index
+  - text: 'роль: ректор Виларинского университета (≈30 лет)'
+    sources:
+    - characters/archmage_sarina
+  role: ректор Виларинского университета
+  affiliation: Виларинский университет
+  based_in: Виларин
+  years: '1005'
+  notable: Созвала Виларинский конвент 1005; спорит с императором ради автономии.
+  relations: Спурий, Гердоний
+  sources:
+  - history/vilarin_convention
+  - characters/index
+  - characters/archmage_sarina
+  confidence: canon
+  visibility: public
+- id: characters/archmage_spurius
+  name: Архимаг Спурий
+  slug: characters/archmage_spurius
+  role: декан факультета Тени
+  affiliation: Виларинский университет
+  based_in: Башня Тени, озеро Тёмное
+  years: неизвестно
+  notable: Изучение нежити; факультет стал востребован после оживления Арноста.
+  relations: Сарина
+  sources:
+  - history/vilarin_convention
+  - characters/archmage_spurius
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: characters/matthew_hurtado
+  name: Мэтью Хуртадо
+  slug: characters/matthew_hurtado
+  alt:
+  - text: 'роль: заместитель гильдмастера Львов, глава отделения'
+    sources:
+    - guilds/sunlions
+  role: заместитель гильдмастера Солнечных Львов
+  affiliation: Солнечные Львы
+  based_in: Иллиор
+  years: род. 974
+  notable: Спасение экспедиции на Долгом болоте; конвент.
+  sources:
+  - history/vilarin_convention
+  - characters/matthew_hurtado
+  - guilds/sunlions
+  confidence: canon
+  visibility: public
+- id: person:vladimir_gorelyy_dzhasper_minatsiy_narayna_rura_
+  name: Владимир Горелый; Джаспер Минаций; Нарайна Рура; Ласси Требий; семья Лервик
+  role: наёмники — гости конвента
+  years: '1005'
+  sources:
+  - history/vilarin_convention
+  confidence: canon
+  visibility: public
+- id: person:gabriela
+  name: Габриэла
+  role: декан Виларинского университета (937)
+  sources:
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: person:nadrair
+  name: Надраир
+  role: золотой дракон, вождь
+  notable: Лишился крыла; штурм Асмодиуса.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:eoziarti
+  name: Эозиарти
+  role: чёрный дракон
+  years: −490
+  notable: Убил Юмаота.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:choinel
+  name: Чоинель
+  role: глава Синего клана
+  notable: Пал при Аркадии.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:mirli
+  name: Мирли
+  role: глава Зелёного клана
+  notable: Самоубийство.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:umras
+  name: Умрас
+  role: глава Зелёного клана
+  years: −50
+  notable: Убила Риеску в −50.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:pondridias
+  name: Пондридиас
+  role: глава Бронзового клана
+  notable: Погиб в Двуречье.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:ezil
+  name: Эзил
+  role: глава Синего клана
+  notable: Акрит; штурм Асмодиуса.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:zorrarr
+  name: Зоррарр
+  role: глава Белого клана
+  years: −157
+  notable: Убила Кангрона.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:brandenrib
+  name: Бранденриб
+  role: глава Серебряного клана
+  notable: Большой рейд.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:largiri
+  name: Ларгири
+  role: Железный клан
+  notable: Артефакт слежки; убила Асмодея.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:tirdes
+  name: Тирдес
+  alt:
+  - text: 'роль: дракон Бронзового клана'
+    sources:
+    - knowledges/demons
+  role: Бронзовый клан
+  years: −50
+  notable: Оторвал голову Влозгату.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:furuto
+  name: Фуруто
+  role: золотой дракон
+  years: '852'
+  sources:
+  - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: person:kiatris
+  name: Киатрис
+  role: эльфийка
+  years: ≈−350
+  notable: Убила Денрару.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:kiliren
+  name: Килирен
+  role: эльфийка
+  notable: Открыла Мизруд.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:fennelis
+  name: Феннелис
+  role: предатель-эльф
+  notable: Дагор.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:tirandal
+  name: Тирандаль
+  role: эльф
+  notable: Убил Асмодея.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:maradeym
+  name: Марадейм
+  role: эльфийский маг
+  notable: Пал от Пожирателя.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:seldana
+  name: Селдана
+  alt:
+  - text: 'роль: энфорисская лучница'
+    sources:
+    - knowledges/demons
+  role: лучница из Энфориса
+  based_in: Энфорис
+  years: −50
+  notable: Убила Ирконга.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:sem
+  name: Сэм
+  alt:
+  - text: 'роль: воин Первых людей'
+    sources:
+    - knowledges/first_humans
+  role: Первый человек
+  years: ≈−350
+  notable: Убил Бисмистана.
+  sources:
+  - history/great_war
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:heyfir
+  name: Хейфир
+  role: полукровка
+  notable: Ранил Бисмистана.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:brao
+  name: Брао
+  role: человек из Махаратхи
+  notable: Прославился при осаде Мизруда.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:rolando_iz_danira
+  name: Роландо из Данира
+  role: воин
+  based_in: Данир
+  years: 1 г.
+  notable: Убил Рулфари в последней битве.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:bahled
+  name: Бахлед
+  role: раджа Тарпета
+  notable: Погиб при штурме.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:zhekid_vaon
+  name: Жекид-Ваон
+  role: вождь освобождённых рабов
+  notable: Отстроил Асмодиус.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:avl_legendarnyy_predok
+  name: Авл (легендарный предок)
+  role: воин
+  years: −50
+  notable: Убил Самаола; предок императорского рода.
+  sources:
+  - history/great_war
+  confidence: canon
+  visibility: public
+- id: person:denrara
+  name: Денрара
+  role: архидемоница
+  affiliation: демоны
+  based_in: Долгое/Морозное болото
+  years: пала ≈−350
+  notable: Создала Долгое и Морозное болота; убита в −350.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  - geography/long_swamp
+  - geography/frosty_marsh
+  confidence: canon
+  visibility: public
+- id: person:yumaot
+  name: Юмаот
+  role: архидемон
+  years: пал ≈−490
+  notable: Драконоподобный, зеркальная чешуя, клинок «Убийца Драконов» на хвосте; убит Эозиарти.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:rieska
+  name: Риеска
+  role: архидемоница
+  affiliation: демоны
+  based_in: Долгое болото
+  years: пала в −50
+  notable: Статуя Прародителя.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  - geography/long_swamp
+  confidence: canon
+  visibility: public
+- id: person:kangron
+  name: Кангрон
+  alt:
+  - text: 'роль: архидемон'
+    sources:
+    - knowledges/demons
+    - geography/monstrous_sea
+  role: архидемон Мизруда
+  affiliation: демоны
+  based_in: Мизруд
+  years: пал в −157
+  notable: Осьминогоподобный алхимик и лекарь; убит Зоррарр.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  - geography/monstrous_sea
+  confidence: canon
+  visibility: public
+- id: person:ligra
+  name: Лигра
+  alt:
+  - text: 'роль: архидемон'
+    sources:
+    - knowledges/demons
+    - knowledges/magic_diseases
+  role: архидемон Акрита
+  affiliation: демоны
+  based_in: Акрит, Серебряные горы
+  years: Великая война
+  notable: Четверорукий, оникс; единственный сдавшийся; уничтожил Аркадию; Лигрова оспа.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  - knowledges/magic_diseases
+  confidence: canon
+  visibility: public
+- id: person:asmodey
+  name: Асмодей
+  alt:
+  - text: 'Архидемон Асмодей'
+    sources:
+    - countries/archdemon_s_plateau/index
+  - text: 'роль: архидемон, верховный правитель демонов на Дедреле'
+    sources:
+    - knowledges/demons
+  role: последний архидемон
+  based_in: Асмодиус
+  years: убит в 1 г.
+  notable: Меч Пожиратель.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:samaol
+  name: Самаол
+  alt:
+  - text: 'роль: демон, потомок Денрары'
+    sources:
+    - knowledges/demons
+  role: демон
+  years: пал в −50
+  notable: Ночь убитой радости.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:irkong
+  name: Ирконг
+  alt:
+  - text: 'роль: демон-кузнец, свита Асмодея'
+    sources:
+    - knowledges/demons
+  role: демон-кузнец
+  based_in: Асмодиус
+  years: пал в −50
+  notable: Создатель множества магических вещей; формула «Так заклинаю я, Ирконг, кузнец блистательного Асмодея»; пал от стрелы Селданы.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:vlozgat
+  name: Влозгат
+  alt:
+  - text: 'роль: демон-палач'
+    sources:
+    - knowledges/demons
+  role: генерал-палач
+  years: пал в −50
+  notable: Облако чёрного дыма; пытки; по версии — убит драконом Тирдесом из Бронзового клана при штурме; по другим рассказам — Эозиарти оторвал голову.
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:troggizin
+  name: Троггизин
+  role: демон-соблазнитель
+  years: убит в −50 (или инсценировал)
+  notable: Возможный автор апокрифа Дазиры; скрывается где-то на Дедреле (слухи).
+  sources:
+  - history/great_war
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:simona
+  name: Симона
+  role: строительница Аркадии
+  years: ≈−1200…−900
+  notable: Покровительница каменщиков; «Песнь об Аркадии».
+  sources:
+  - history/era_first_humans
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:heldrik
+  name: Хэлдрик
+  alt:
+  - text: 'роль: путешественник, третье поколение'
+    sources:
+    - knowledges/first_humans
+  role: путешественник
+  notable: Покровитель слабых, рыбаков и мореходов.
+  sources:
+  - history/era_first_humans
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:dzhanna
+  name: Джанна
+  alt:
+  - text: 'роль: героиня сказки, первое поколение'
+    sources:
+    - knowledges/first_humans
+  role: героиня первого поколения
+  notable: Хранит сведения о Забытой войне.
+  sources:
+  - history/era_first_humans
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:lum_pakoniy
+  name: Лум Паконий
+  alt:
+  - text: 'роль: управляющий «Гарцующих Дьяволов»'
+    sources:
+    - establishments/taverns/garcujuschie_djavoly
+  role: Управляющий «Гарцующими Дьяволами»
+  affiliation: Эмилии
+  based_in: Иллиор
+  sources:
+  - characters/tit_aemilius
+  - establishments/taverns/garcujuschie_djavoly
+  confidence: canon
+  visibility: public
+- id: characters/bosco_darkbone
+  name: Боско Даркбоун
+  slug: characters/bosco_darkbone
+  alt:
+  - text: 'роль: частная сыщица, посредница'
+    sources:
+    - characters/bosco_darkbone
+  role: Частная сыщица (посредница)
+  based_in: Иллиор
+  years: '28'
+  notable: Занялась остатками культа; облава с Налой Сальвидией.
+  relations: Нала Сальвидения, Арвэль
+  sources:
+  - characters/index
+  - characters/bosco_darkbone
+  confidence: canon
+  visibility: public
+- id: characters/kylar_kovacs
+  name: Кайлар Ковач
+  aliases:
+  - Кайлар Ковач («Бронзовый Кулак»)
+  - Бронзовый Кулак
+  slug: characters/kylar_kovacs
+  alt:
+  - text: 'роль: ветеран Серого Авангарда, вербовщик'
+    sources:
+    - characters/kylar_kovacs
+  - text: 'роль: ветеран Серого Авангарда'
+    sources:
+    - guilds/grey_avangard
+  role: Посредник
+  affiliation: Серый Авангард
+  based_in: Иллиор
+  years: '76'
+  notable: Меч Кровавый Расчленитель; убил Мадакиша; враг генералов Чёрных Капюшонов.
+  relations: Чёрные Капюшоны
+  sources:
+  - characters/index
+  - characters/kylar_kovacs
+  - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+- id: characters/amanda_gallonia
+  name: Аманда Галлония
+  slug: characters/amanda_gallonia
+  alt:
+  - text: 'роль: глава банды «Вендетта»'
+    sources:
+    - characters/amanda_gallonia
+  role: Глава банды «Вендетта»
+  affiliation: Банда
+  based_in: Иллиор
+  years: средних лет
+  notable: Мстит бандитам и наглым чиновникам; сожжённые ткацкие мастерские; благотворительность неохотно.
+  relations: Чёрные Капюшоны — враги и заказчики
+  sources:
+  - characters/index
+  - characters/amanda_gallonia
+  confidence: canon
+  visibility: public
+- id: characters/alonso_lucky
+  name: Алонсо Везунчик
+  slug: characters/alonso_lucky
+  alt:
+  - text: 'роль: авантюрист, делец, игрок, посредник'
+    sources:
+    - characters/alonso_lucky
+  role: Авантюрист
+  affiliation: независим; Иллиорская коллегия бардов (бывш.)
+  based_in: 'где угодно; происхождение: Сарк'
+  years: около 100
+  notable: Сын эльфа и иллиорки; игральные карты; экспедиции в Залесск и Арност; советник короля Гросса; нанимает в трактирах.
+  relations: император Иллиора, король Гросса
+  sources:
+  - characters/index
+  - characters/alonso_lucky
+  confidence: canon
+  visibility: public
+- id: characters/arvehl
+  name: Арвэль
+  slug: characters/arvehl
+  alt:
+  - text: 'роль: хозяйка таверны «Под топором»'
+    sources:
+    - characters/arvehl
+  - text: 'роль: хозяйка «Под топором»'
+    sources:
+    - establishments/taverns/pod_toporom
+  role: Хозяйка таверны «Под топором»
+  based_in: Иллиор
+  years: '45'
+  notable: Жена Тэм, двое детей; бывший муж Хулон; конфликт с «Облаком и Сердцем».
+  relations: Тэм, Хулон, Квортесса Тетнувеш, Глорг Пузо, Летин Углесерд, Нала Сальвидения
+  sources:
+  - characters/index
+  - characters/arvehl
+  - establishments/taverns/pod_toporom
+  confidence: canon
+  visibility: public
+- id: characters/ana_vranova
+  name: Анна Вранова
+  aliases:
+  - Анна Вранова («Княжна Анна»)
+  - Княжна Анна
+  slug: characters/ana_vranova
+  role: княжна, политик
+  affiliation: Залесское княжество
+  based_in: Залесск
+  years: неизвестно
+  notable: Скупает опасные артефакты через агентов в Иллиоре; не выезжает из Залесска, магическая связь.
+  relations: Марго (Рита) — наёмница-агент; маг Алмос — помощник
+  sources:
+  - characters/ana_vranova
+  - characters/index
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Анна Врановa'
+    sources:
+    - characters/index
+- id: characters/antarius
+  name: Антариус
+  slug: characters/antarius
+  alt:
+  - text: 'роль: гильдмастер Огненной Саламандры (третий срок)'
+    sources:
+    - guilds/fire_salamander
+  role: гильдмастер Огненной Саламандры (3-й срок)
+  affiliation: Огненная Саламандра; I легион (бывш.)
+  based_in: Иллиор (вывод), родом из Гросса
+  years: около 180
+  notable: Самоучка-маг без титула архимага; спасение в Префектуре мертвецов; уничтожила налётчиков для раджи Махаратхи.
+  relations: раджа Махаратхи
+  sources:
+  - characters/antarius
+  - guilds/fire_salamander
+  confidence: canon
+  visibility: public
+- id: person:arhibald_kvint_marius
+  name: Архибальд Квинт Мариус
+  role: глава разведки и контрразведки империи
+  affiliation: Иллиорская империя
+  based_in: Иллиор
+  years: 968–1005 (мёртв)
+  notable: «Цепной пёс императора»; убийства и кража секретов в Дринроге и Занре; погиб в огненную чуму.
+  relations: император Йорик — господин
+  sources:
+  - characters/archibald_quintus_marius
+  confidence: canon
+  visibility: public
+- id: characters/jasper_minatius
+  name: Джаспер Минаций
+  slug: characters/jasper_minatius
+  role: боевой маг, наёмник
+  affiliation: Арканум
+  based_in: Виларин / отделения Арканума
+  years: '47'
+  notable: Представлял Арканум на конвенте; операция в Префектуре мертвецов.
+  sources:
+  - characters/jasper_minatius
+  - guilds/arcanum
+  confidence: canon
+  visibility: public
+- id: characters/lassi_trebius
+  name: Ласси Требий
+  slug: characters/lassi_trebius
+  role: глава независимого отряда; охотник на вампиров
+  affiliation: IX легион (бывш.)
+  based_in: Иллиор (вывод)
+  years: около 40
+  notable: Отряд разбит на конвенте; охота на вампиров стала личной.
+  sources:
+  - characters/lassi_trebius
+  confidence: canon
+  visibility: public
+- id: characters/morena
+  name: Королева Морена I
+  slug: characters/morena
+  role: королева Ройо (июль–осень 1005)
+  affiliation: династия Калатрава
+  based_in: Данир → Солнечные острова
+  years: 993–1005
+  notable: Короновалась в 12 лет; последняя из Калатрава; тело не найдено.
+  relations: Мигель I, Мендоза, Эспинар, Джок I
+  sources:
+  - characters/morena
+  - countries/rojo/index
+  - history/second_igni_rojo_war
+  - countries/sunny_islands/colonial_rojo
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Морена'
+    sources:
+    - countries/rojo/index
+  - text: 'вариант имени: Морена I'
+    sources:
+    - history/second_igni_rojo_war
+  - text: 'вариант имени: Королева Морена'
+    sources:
+    - countries/sunny_islands/colonial_rojo
+- id: characters/narayna_rura
+  name: Нарайна Рура
+  slug: characters/narayna_rura
+  role: глава отряда махаратских наёмников
+  affiliation: Махаратха
+  based_in: Махаратха
+  years: около 60
+  notable: Гость Виларинского конвента.
+  sources:
+  - characters/narayna_rura
+  confidence: canon
+  visibility: public
+- id: characters/vladimir_gorely
+  name: Владимир Горелый
+  slug: characters/vladimir_gorely
+  alt:
+  - text: 'роль: наёмник Виларинского конвента'
+    sources:
+    - guilds/grey_avangard
+  role: охотник за головами
+  affiliation: Серый Авангард
+  based_in: Дринрог
+  years: неизвестно
+  notable: Наёмник Виларинского конвента.
+  sources:
+  - characters/vladimir_gorely
+  - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+- id: person:madakish
+  name: Мадакиш
+  role: тиран Плато Архидемона
+  based_in: Плато Архидемона
+  notable: Убит Ковачем.
+  sources:
+  - characters/kylar_kovacs
+  confidence: canon
+  visibility: public
+- id: person:margo_i_mag_almos
+  name: Марго и маг Алмос
+  aliases:
+  - Марго (Рита) и маг Алмос
+  - Рита
+  role: агенты Анны Враново в Иллиоре
+  affiliation: Анна Вранова
+  based_in: Иллиор
+  notable: Связь с княжной.
+  sources:
+  - characters/ana_vranova
+  confidence: canon
+  visibility: public
+- id: person:nekromant
+  name: Некромант
+  aliases:
+  - Некромант (Арност)
+  - Арност
+  role: антагонист
+  affiliation: нежить Арноста
+  based_in: Арност
+  notable: Готовил удар по Грейхельду и Берсану.
+  sources:
+  - characters/avdikiy_gerdonius
+  confidence: canon
+  visibility: public
+- id: person:tem_hulon_kvortessa_tetnuvesh_glorg_puzo_letin_u
+  name: Тэм, Хулон, Квортесса Тетнувеш, Глорг Пузо, Летин Углесерд
+  role: семья и соседи-трактирщики Арвэль
+  affiliation: Иллиор, Длинный район
+  based_in: Иллиор
+  notable: Хулон — бывший муж, грабил Ройо.
+  sources:
+  - characters/arvehl
+  confidence: canon
+  visibility: public
+- id: person:melita_vegetsiya
+  name: Мелита Вегеция
+  role: председатель совета Банка Дринрога
+  affiliation: Банк Дринрога
+  based_in: Дринрог
+  sources:
+  - establishments/banks/drinrog_bank
+  confidence: canon
+  visibility: public
+- id: person:lutsiy_harbs
+  name: Луций Харбс
+  role: основатель, управляющий банка
+  affiliation: Банк Харбса и Николима
+  based_in: Берсан
+  sources:
+  - establishments/banks/harbs_nikolim_bank
+  confidence: canon
+  visibility: public
+- id: person:nikolim_serebryanyy_glaz
+  name: Николим Серебряный Глаз
+  role: основатель банка
+  affiliation: Банк Харбса и Николима
+  based_in: Берсан
+  sources:
+  - establishments/banks/harbs_nikolim_bank
+  confidence: canon
+  visibility: public
+- id: person:salustiya_tarkviniya
+  name: Салустия Тарквиния
+  role: глава Императорского банка
+  affiliation: Императорский банк
+  based_in: Иллиор
+  relations: назначена императором
+  sources:
+  - establishments/banks/imperial_bank
+  confidence: canon
+  visibility: public
+- id: person:fadiya_duroniya
+  name: Фадия Дурония
+  role: глава банка «Быстрое дело»
+  based_in: Иллиор
+  relations: связь с домом Опиев
+  sources:
+  - establishments/banks/quick_deal_bank
+  confidence: canon
+  visibility: public
+- id: person:pentey_gapliy
+  name: Пентей Гаплий
+  role: глава Банка Занры
+  based_in: Микрис
+  sources:
+  - establishments/banks/zanra_bank
+  confidence: canon
+  visibility: public
+- id: person:kara
+  name: Кара
+  role: хозяйка борделя «Ад»
+  based_in: Иллиор
+  sources:
+  - establishments/brothels/ad
+  confidence: canon
+  visibility: public
+- id: person:inagaki_okama
+  name: Инагаки Окама
+  role: владелец борделя «Лагуна любви»
+  based_in: Иллиор
+  sources:
+  - establishments/brothels/laguna_ljubvi
+  confidence: canon
+  visibility: public
+- id: person:dagobert_russo
+  name: Дагоберт Руссо
+  role: владелец борделя «Высший свет»
+  based_in: Иллиор
+  sources:
+  - establishments/brothels/vysshij_svet
+  confidence: canon
+  visibility: public
+- id: person:mila_valeri
+  name: Мила Валери
+  role: хозяйка борделя «Зной»
+  based_in: Иллиор
+  sources:
+  - establishments/brothels/znoj
+  confidence: canon
+  visibility: public
+- id: person:ariana_feyt
+  name: Ариана Фейт
+  role: глава Иллиорской коллегии бардов
+  based_in: Иллиор, Садовый квартал
+  sources:
+  - establishments/educational/fine_arts_academys
+  confidence: canon
+  visibility: public
+- id: person:zolmek_volfglou_sikst
+  name: Золмек Вольфглоу Сикст
+  role: декан факультета Разума
+  based_in: Виларин
+  sources:
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: person:rasul_danesh
+  name: Расул Данеш
+  role: декан факультета Стихий
+  based_in: Виларин
+  sources:
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: person:sashka
+  name: Сашка
+  role: управляющий Большой бочкой
+  based_in: Старый Плющ
+  sources:
+  - establishments/taverns/bolshaja_bochka
+  confidence: canon
+  visibility: public
+- id: person:nina_voyakovska
+  name: Нина Вояковска
+  role: хозяйка «Танцующей козы и гуля»
+  based_in: Старый Плющ
+  relations: безземельная дворянка на службе у рода Пташжински
+  sources:
+  - establishments/taverns/tancujuschaja_koza_i_gul
+  confidence: canon
+  visibility: public
+- id: person:glorg_puzo
+  name: Глорг Пузо
+  role: владелец «Десяти Бочонков»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/desjat_bochonkov
+  confidence: canon
+  visibility: public
+- id: person:erki_timbers_pok
+  name: Эрки Тимберс Пок
+  role: владелец «Древнего Стража»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/drevnij_strazh
+  confidence: canon
+  visibility: public
+- id: person:letin_ugleserd
+  name: Летин Углесерд
+  role: владелец «Двух Лучников»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/dva_luchnika
+  confidence: canon
+  visibility: public
+- id: person:verna_zelenoflyag
+  name: Верна Зеленофляг
+  role: хозяйка «Двенадцати Пьяниц»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/dvenadcat_pjanic
+  confidence: canon
+  visibility: public
+- id: person:abeliya_diegovna
+  name: Абелия Диеговна
+  role: хозяйка «Изумрудной Чаши»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/izumrudnaja_chasha
+  confidence: canon
+  visibility: public
+- id: person:kutrin_akraleh
+  name: Кутрин Акралех
+  role: владелец «Янтарных Принцев»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/jantarnye_princy
+  confidence: canon
+  visibility: public
+- id: person:raad_milov
+  name: Раад Милов
+  role: владелец «Котла и Демона»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/kotjol_i_demon
+  confidence: canon
+  visibility: public
+- id: person:aranvi_sverkayuschaya_luna
+  name: Аранви Сверкающая Луна
+  role: владелица «Набожного Стервятника»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/nabozhnyj_stervjatnik
+  confidence: canon
+  visibility: public
+- id: person:kvortessa_tetnuvesh
+  name: Квортесса Тетнувеш
+  role: хозяйка «Облака и Сердца»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/oblako_i_serdce
+  confidence: canon
+  visibility: public
+- id: person:lora_pokornaya_ohotnitsa
+  name: Лора «Покорная Охотница»
+  role: хозяйка
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/pokornaja_oxotnica
+  confidence: canon
+  visibility: public
+- id: person:radonaar_bureno
+  name: Радонаар Бурено
+  role: владелец «Радостного Пахаря»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/radostnyj_paxar
+  confidence: canon
+  visibility: public
+- id: person:marta_andrik
+  name: Марта Андрик
+  role: владелица «Северной»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/severnaja
+  confidence: canon
+  visibility: public
+- id: person:diga_krivoy
+  name: Дига Кривой
+  role: владелец «Шумного Агнца»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/shumnyj_agnec
+  confidence: canon
+  visibility: public
+- id: person:alverada_armansus
+  name: Алверада Армансус
+  role: хозяйка «У дракона»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/u_drakona
+  confidence: canon
+  visibility: public
+- id: person:fonkin_ningel
+  name: Фонкин Нингел
+  role: владелец «Удачливой Бутылки»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/udachlivaja_butylka
+  confidence: canon
+  visibility: public
+- id: person:eldon_bochka
+  name: Элдон «Бочка»
+  role: владелец «Удачливого Глашатая»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/udachlivyj_glashataj
+  confidence: canon
+  visibility: public
+- id: person:kventin_bassano_mladshiy
+  name: Квентин Бассано Младший
+  role: владелец «Волшебной Бороды»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/volshebnaja_boroda
+  confidence: canon
+  visibility: public
+- id: person:bolg_sekstiy
+  name: Больг Секстий
+  role: владелец «Выбора гражданина»
+  based_in: Иллиор
+  sources:
+  - establishments/taverns/vybor_grazhdanina
+  confidence: canon
+  visibility: public
+- id: person:iogann_falksian
+  name: Иоганн Фалксиан
+  role: дуумвир Амальгамы
+  based_in: Кориалум
+  sources:
+  - guilds/amalgam
+  confidence: canon
+  visibility: public
+- id: person:silira_osfanis
+  name: Силира Осфанис
+  role: дуумвир Амальгамы
+  based_in: Кориалум
+  sources:
+  - guilds/amalgam
+  confidence: canon
+  visibility: public
+- id: person:margreyv_millet
+  name: Маргрейв Миллет
+  role: гильдмастер Мистических Кователей
+  based_in: Виларин
+  sources:
+  - guilds/arcane_blacksmiths
+  confidence: canon
+  visibility: public
+- id: person:aleks_stilvind
+  name: Алекс Стилвинд
+  role: гильдмастер Арканума, архимаг
+  years: с 986
+  sources:
+  - guilds/arcanum
+  - characters/aleks_stilvind
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Алекс Стилвинд (Архимаг, «Алекс-Скряга»)'
+    sources:
+    - characters/aleks_stilvind
+  affiliation: Арканум, Виларинский университет
+  based_in: Виларин / Арканум
+  notable: Возможное рабское происхождение; ограждения; архимаг 983; гильдмастер ≈986; поднял цены.
+- id: person:vlad_hellriper
+  name: Влад Хэллрипер
+  role: гильдмастер Чёрных всадников
+  based_in: Дринрог
+  sources:
+  - guilds/black_riders
+  confidence: canon
+  visibility: public
+- id: person:sara_aurin
+  name: Сара Аурин
+  role: гильдмастер Хладовея
+  based_in: префектура Иллиор
+  sources:
+  - guilds/coldwave
+  confidence: canon
+  visibility: public
+- id: person:semen_gorev
+  name: Семён Горев
+  role: гильдмастер Корабелов Дринрога
+  based_in: Дринрог
+  sources:
+  - guilds/drinrog_shipbuilders
+  confidence: canon
+  visibility: public
+- id: person:valerius_seryy
+  name: Валериус Серый
+  role: гильдмастер Дринрогского союза
+  based_in: Дринрог
+  sources:
+  - guilds/drinrog_union
+  confidence: canon
+  visibility: public
+- id: person:feysal_mahmud
+  name: Фейсал Махмуд
+  role: представитель Вольных Каменщиков
+  based_in: Иллиор
+  sources:
+  - guilds/freemasons
+  confidence: canon
+  visibility: public
+- id: person:serviy_umbrius_auliy
+  name: Сервий Умбриус Аулий
+  role: гильдмастер Лиги зерноторговцев
+  based_in: Дагор
+  sources:
+  - guilds/grain_merchant_league
+  confidence: canon
+  visibility: public
+- id: person:rip_hogir
+  name: Рип Хогир
+  role: гильдмастер Серого Авангарда в Иллиоре
+  based_in: Иллиор
+  sources:
+  - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+- id: person:markus_amadey_sikst
+  name: Маркус Амадей Сикст
+  role: гильдмастер Алхимиков Иллиора
+  based_in: Иллиор
+  sources:
+  - guilds/illior_alchemists
+  confidence: canon
+  visibility: public
+- id: person:labib_al_rabin
+  name: Лабиб аль-Рабин
+  role: гильдмастер Махаратских Кузнецов
+  based_in: Махаратха
+  sources:
+  - guilds/makharatkha_blacksmiths
+  confidence: canon
+  visibility: public
+- id: person:torold_stalnoy
+  name: Торольд Стальной
+  role: гильдмастер Гильдии металлургов
+  based_in: Грейхельд
+  sources:
+  - guilds/metal_makers
+  confidence: canon
+  visibility: public
+- id: person:imperatritsa_eloren
+  name: Императрица Элорен
+  role: императрица
+  years: после 860 вышла за занрийского принца; в 68 лет родила Авла
+  sources:
+  - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+- id: person:darius_grom
+  name: Дариус Гром
+  role: гильдмастер Могучей Бригады
+  based_in: Иллиор
+  sources:
+  - guilds/mighty_brigade
+  confidence: canon
+  visibility: public
+- id: person:chiya_dyang
+  name: Чия Дьянг
+  role: гильдмастер Могучей Бригады
+  based_in: Иллиор
+  sources:
+  - guilds/mighty_brigade
+  confidence: canon
+  visibility: public
+- id: person:varir_kaas
+  name: Варир Каас
+  role: гильдмастер Могучей Бригады
+  based_in: Иллиор
+  sources:
+  - guilds/mighty_brigade
+  confidence: canon
+  visibility: public
+- id: person:adid_hatab
+  name: Адид Хатаб
+  role: гильдмастер Северного пути
+  based_in: Махаратха
+  sources:
+  - guilds/north_road
+  confidence: canon
+  visibility: public
+- id: person:tilda_aanor
+  name: Тильда Аанор
+  role: гильдмастер Драгоценных
+  based_in: Дринрог
+  sources:
+  - guilds/precious
+  confidence: canon
+  visibility: public
+- id: person:dzhef_korol_pod_gorodom
+  name: Джеф Король-под-городом
+  role: гильдмастер Канализационных Крыс
+  based_in: подземелья Иллиора
+  sources:
+  - guilds/sewer_rats
+  confidence: canon
+  visibility: public
+- id: person:mendrion_veleriy
+  name: Мендрион Велерий
+  role: гильдмастер Солнечных Львов
+  based_in: Олифанор
+  sources:
+  - guilds/sunlions
+  confidence: canon
+  visibility: public
+- id: person:elandor_leotris
+  name: Эландор Леотрис
+  role: гильдмастер Солнечной компании
+  based_in: Олифанор
+  sources:
+  - guilds/sunny_company
+  confidence: canon
+  visibility: public
+- id: person:anna_morven
+  name: Анна Морвен
+  role: гильдмастер Белых Псов
+  based_in: Иллиор
+  sources:
+  - guilds/white_dogs
+  confidence: canon
+  visibility: public
+- id: person:albert_choy
+  name: Альберт Чой
+  role: гильдмастер Пиротехников Занры
+  based_in: Занра
+  sources:
+  - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+- id: person:nadezhda_mirild
+  name: Надежда Мирилд
+  role: представитель Пиротехников
+  based_in: Иллиор
+  sources:
+  - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+- id: person:maksimus_narrakez
+  name: Максимус Нарракез
+  role: 'король (вывод: Ройо)'
+  affiliation: династия Нарракез
+  years: умер ≈809
+  notable: Его гвардия пыталась схватить Катберта; по слухам, умер от проклятия, династия пресеклась почти через полвека.
+  sources:
+  - knowledges/church_of_cuthbert
+  confidence: derived
+  visibility: public
+- id: person:lyutsiniya
+  name: Люциния
+  role: героиня
+  notable: Носила доспех из пластин Кангрона, сражалась с чудовищами в Лесу Ужасов.
+  sources:
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:dazira
+  name: Дазира
+  role: имя, связанное с апокрифом
+  notable: Апокриф Дазиры — единственный благосклонный к демонам источник.
+  sources:
+  - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: person:avian
+  name: Авиан
+  role: вождь Первых людей, святой
+  years: начало Великой войны
+  notable: Погиб в Битве при Аркадии; заключил союз с повелителями фей.
+  sources:
+  - knowledges/first_humans
+  - knowledges/fairies
+  - history/great_war
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Авиан (Эвиан, Летающий)'
+    sources:
+    - history/great_war
+- id: person:gilermo_i_helga
+  name: Гильермо и Хельга
+  role: супружеская пара из баллады
+  notable: Великие святые Церкви Звёзд.
+  sources:
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:zlata
+  name: Злата
+  role: целительница
+  notable: Создала лекарство от всех болезней, убита демонами; покровительница целителей.
+  sources:
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:alfred
+  name: Альфред
+  role: воин
+  notable: Бежал из плена на звёзды; младший святой, ему молятся узники.
+  sources:
+  - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: person:verano
+  name: Верано
+  role: старший бог Пантеона Занры
+  notable: Мёртвый бог знания; символ — ворон; воскресает раз в год в марте; муж Ксандаля.
+  sources:
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:ksandal
+  name: Ксандаль
+  role: старший бог
+  notable: Созидатель, Ткач Снов; символ — веретено; исцеляет тело Верано.
+  sources:
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:orone
+  name: Оронэ
+  role: старший бог
+  notable: Дитя Верано и Ксандаля; изменчивое, астральное; покровитель подростков и магов.
+  sources:
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:mavastra
+  name: Мавастра
+  role: старшая богиня
+  notable: Справедливость и равенство; символ — лотос; покровитель стражи и судей.
+  sources:
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:faone
+  name: Фаонэ
+  role: старший бог
+  notable: Двуликое, андрогин; первое среди равных; природа и равновесие.
+  sources:
+  - knowledges/pantheon_of_zanra
+  confidence: canon
+  visibility: public
+- id: person:sarati
+  name: Сарати
+  aliases:
+  - Сарати (Мать-река)
+  - Мать-река
+  role: божество Игни
+  notable: Женщина с головой коровы, подательница жизни.
+  sources:
+  - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: person:metadr
+  name: Метадр
+  role: божество Игни
+  notable: Муж Сарати, воитель и защитник.
+  sources:
+  - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: person:niimas
+  name: Ниимас
+  role: божество Игни
+  notable: Враг, змей с человеческим лицом и 3–13 руками.
+  sources:
+  - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: person:velikiy_medved
+  name: Великий медведь
+  role: тотемное божество
+  notable: Создатель людей, живёт среди звёзд; Суд Медведя.
+  sources:
+  - knowledges/zalessk_beliefs
+  confidence: canon
+  visibility: public
+- id: person:maharadzha_igni
+  name: Махараджа Игни
+  role: правитель
+  notable: Имя не названо; его любимый бог получает влияние.
+  sources:
+  - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: person:megram_varaniy_v_tekste_megramom_varaniem
+  name: Меграм Вараний (в тексте «Меграмом Варанием»)
+  role: архимаг, ректор Виларинского университета
+  affiliation: Виларинский университет
+  years: '530'
+  notable: создатель книжной паутины
+  sources:
+  - knowledges/book_web
+  - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+  alt:
+  - text: 'вариант имени: Меграм Вараний'
+    sources:
+    - establishments/educational/vilarin_university
+  based_in: Виларин
+- id: person:olaf_bersanskiy
+  name: Олаф Берсанский
+  role: первооткрыватель кометы
+  years: '256'
+  notable: комета раз в 20 лет, пиво особое
+  sources:
+  - knowledges/astronomy
+  confidence: canon
+  visibility: public
+- id: person:oriana
+  name: Ориана
+  role: архимаг
+  years: '500'
+  notable: комета раз в 55 лет, усиливает заклинания
+  sources:
+  - knowledges/astronomy
+  confidence: canon
+  visibility: public
+- id: person:ulybchivyy_godfri
+  name: Улыбчивый Годфри
+  role: пират, капитан «Ядовитый крик»
+  affiliation: синдикат «Акулий зуб»
+  based_in: Тёмный океан
+  notable: один из самых известных пиратов океана
+  sources:
+  - geography/dark_ocean
+  confidence: canon
+  visibility: public

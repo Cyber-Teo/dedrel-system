@@ -1,0 +1,83 @@
+# Гербы и флаги государств 1006 года. Ключ — id владельца из data/history/owners.yaml; file — public/coats/<id>.webp (≤200 px по высоте).
+# Источник картинок: https://dedrel.teo.uy/media/countries/<orig>.png (вики владельца атласа, CC BY-NC 4.0); page — страница государства. Рендер выполнен: public/coats/*.webp.
+# kind: coat (герб) | flag (флаг); confirmed: false — владелец ещё не подтвердил картинку, в интерфейсе не показывается (квадрат цвета).
+# Лицензия: CC BY-NC 4.0, источник dedrel.teo.uy (атрибуция — в окне справки).
+# Для Ройо файл на сайте называется protrojo (флаг), для Махараты — maharatha (флаг).
+countries/illior_empire/index:
+  file: coats/illior_empire.webp
+  original: https://dedrel.teo.uy/media/countries/illior.png
+  page: https://dedrel.teo.uy/countries/illior_empire/index
+  kind: coat
+  confirmed: true
+countries/gross/index:
+  file: coats/gross.webp
+  original: https://dedrel.teo.uy/media/countries/gross.png
+  page: https://dedrel.teo.uy/countries/gross/index
+  kind: coat
+  confirmed: true
+countries/rojo/index:
+  file: coats/rojo.webp
+  original: https://dedrel.teo.uy/media/countries/protrojo.png
+  page: https://dedrel.teo.uy/countries/rojo/index
+  kind: flag
+  confirmed: false
+countries/bastion_union/index:
+  file: coats/bastion_union.webp
+  original: https://dedrel.teo.uy/media/countries/bastion.png
+  page: https://dedrel.teo.uy/countries/bastion_union/index
+  kind: coat
+  confirmed: true
+countries/drinrog/index:
+  file: coats/drinrog.webp
+  original: https://dedrel.teo.uy/media/countries/drinrog.png
+  page: https://dedrel.teo.uy/countries/drinrog/index
+  kind: coat
+  confirmed: true
+countries/ethel/index:
+  file: coats/ethel.webp
+  original: https://dedrel.teo.uy/media/countries/ethel.png
+  page: https://dedrel.teo.uy/countries/ethel/index
+  kind: coat
+  confirmed: true
+countries/zanra/index:
+  file: coats/zanra.webp
+  original: https://dedrel.teo.uy/media/countries/zanra.png
+  page: https://dedrel.teo.uy/countries/zanra/index
+  kind: coat
+  confirmed: true
+countries/enforis/index:
+  file: coats/enforis.webp
+  original: https://dedrel.teo.uy/media/countries/enforis.png
+  page: https://dedrel.teo.uy/countries/enforis/index
+  kind: coat
+  confirmed: true
+countries/vishnevodskoye_principality/index:
+  file: coats/vishnevodskoye_principality.webp
+  original: https://dedrel.teo.uy/media/countries/vishnevodskoye.png
+  page: https://dedrel.teo.uy/countries/vishnevodskoye_principality/index
+  kind: coat
+  confirmed: true
+countries/zalessk/index:
+  file: coats/zalessk.webp
+  original: https://dedrel.teo.uy/media/countries/zalessk.png
+  page: https://dedrel.teo.uy/countries/zalessk/index
+  kind: coat
+  confirmed: true
+countries/igni/index:
+  file: coats/igni.webp
+  original: https://dedrel.teo.uy/media/countries/igni.png
+  page: https://dedrel.teo.uy/countries/igni/index
+  kind: coat
+  confirmed: true
+countries/dragons_country/index:
+  file: coats/dragons_country.webp
+  original: https://dedrel.teo.uy/media/countries/dragon_country.png
+  page: https://dedrel.teo.uy/countries/dragons_country/index
+  kind: coat
+  confirmed: false
+countries/makharatkha/index:
+  file: coats/makharatkha.webp
+  original: https://dedrel.teo.uy/media/countries/maharatha.png
+  page: https://dedrel.teo.uy/countries/makharatkha/index
+  kind: flag
+  confirmed: true

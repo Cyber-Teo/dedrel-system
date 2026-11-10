@@ -1,0 +1,646 @@
+# Реестр слоёв атласа (61), из docs/plan/layers.md; scripts/geo/build-layers.py. status: ready — слой работает, planned — «скоро».
+groups:
+- id: geography
+  name: География
+- id: politics
+  name: Политика
+- id: history
+  name: История
+- id: military
+  name: Военное
+- id: economy
+  name: Экономика
+- id: religion
+  name: Религия
+- id: magic
+  name: Магия
+- id: people
+  name: Люди
+- id: culture
+  name: Культура
+- id: orgs
+  name: Организации
+- id: service
+  name: Сервис
+layers:
+- id: base-map
+  group: geography
+  name: Рисованная карта Тео (растровая подложка)
+  control: toggle + slider прозрачности
+  priority: P0
+  status: planned
+  data: null
+  source_note: dedrel_optimized.webp 7920×5960, конфиг Leaflet с главной страницы (CRS.Simple, 0,25 км/px)
+  volume: 1 растр, пирамида тайлов 0–6
+- id: seas
+  group: geography
+  name: Моря, проливы и заливы
+  control: toggle
+  priority: P0
+  status: planned
+  data: null
+  source_note: geography/dark_ocean, geography/monstrous_sea, Внутреннее море (river_of_doom, border_river), газеттир
+  volume: '8: Тёмный океан, Монструозное, Внутреннее, северное море, Солнечный пролив, пролив Спокойствия, Залив бритвенных скал, впадина Подкова'
+- id: rivers
+  group: geography
+  name: Реки с направлением течения
+  control: toggle + подписи
+  priority: P0
+  status: planned
+  data: null
+  source_note: Лиор, Розовая, Граничная, Гиблая, Сонная, Сарати, Виверна (страницы стран и geography/*); р. Потерянного времени и р. Вертлявая есть только на карте
+  volume: 9 рек; стрелки течения
+- id: forests
+  group: geography
+  name: Леса
+  control: multiselect по массивам
+  priority: P0
+  status: planned
+  data: null
+  source_note: geography/* (6 статей), газеттир
+  volume: '11: Подменный, Лес Ужасов, Старый, Императорский, Маленький, Безмолвный, Неверлэнд, Друидова пуща, Межевой, Галерный, Пепельный'
+- id: swamps
+  group: geography
+  name: Болота и аномальные топи
+  control: multiselect
+  priority: P0
+  status: planned
+  data: null
+  source_note: geography/long_swamp, geography/frosty_marsh, vilarin_region, газеттир
+  volume: '7: Долгое, Морозное, Виларинские (Чёрного пламени, Пляшущих молний, Вероятностное), Болотное море'
+- id: hazards
+  group: geography
+  name: Опасные зоны
+  control: multiselect по виду угрозы
+  priority: P0
+  status: ready
+  data: hazards.yaml
+  icon: triangle
+  color: '#8c1c13'
+  source_note: Арност (с 672), Лес Ужасов, Долгое болото, Подменный лес (опасно уже в 20–30 км от тракта), Старый лес (нежить после 720), Залив бритвенных скал (рифы), Тёмный океан (тайфуны, кракены)
+  volume: ≈10 зон с уровнем угрозы
+- id: mountains
+  group: geography
+  name: Горы и хребты
+  control: toggle
+  priority: P1
+  status: planned
+  data: null
+  source_note: газеттир, geography/neverland, countries/ethel, countries/zalessk
+  volume: '6: Белоголовые, Барьерные, Пепельные, Серебряные, Мёртвые, Драконья гора'
+- id: deserts
+  group: geography
+  name: Пустыни и оазисы
+  control: toggle
+  priority: P1
+  status: planned
+  data: null
+  source_note: geography/great_desert, no_man_s_desert, land_of_oases, газеттир (6 оазисов без подписей)
+  volume: Великая, Ничья, Золотые пески, Край оазисов и ~6 оазисов
+- id: relief-eras
+  group: geography
+  name: Рельеф по эпохам (изменения ландшафта)
+  control: привязан к ползунку времени
+  priority: P1
+  status: planned
+  data: null
+  source_note: history/great_war (Внутреннее море −490, болота −500, пустошь −500), gross/index (Великая вырубка 10-е, просека 90-е), geography/old_forest (88, 181–184), river_of_doom (431–446), changeling_forest
+    (1005)
+  volume: ≈10 изменений
+- id: lakes
+  group: geography
+  name: Озёра
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: газеттир, city_vilarin, city_ezhitsk
+  volume: Болотное море, о. Дриады, Горькое, Радужное (+Спокойствия и Тёмное в Виларине)
+- id: states-1005
+  group: politics
+  name: Государства 1005 г.
+  control: toggle + выбор кликом
+  priority: P0
+  status: planned
+  data: null
+  source_note: countries/index (19 маркеров), цветные границы растра, страницы стран
+  volume: ≈23 единицы, включая Арност, Друидову пущу, Бастионный союз, Махаратху, Подковные острова
+- id: prefectures
+  group: politics
+  name: 'Префектуры империи: нынешние и исторические'
+  control: toggle + год
+  priority: P0
+  status: planned
+  data: null
+  source_note: 4 префектуры с границами на растре; исторические Арност, Гросс, Хрэлл, Ройо, Ринар, Занра, Дринрог (history/*)
+  volume: 4 + 7
+- id: empire-growth
+  group: politics
+  name: Рост и распад империи
+  control: slider (анимация)
+  priority: P0
+  status: planned
+  data: null
+  source_note: Присоединения 76 Дагор, 97 Дринрог, 110 Виларин, 147 Берсан, 163 Залесье, 164 Самрун, 176 Вышневодск, 206; потери 562 Ройо/Ринар/Хрэлл, 573 Гросс, 672 Арност, 777 Дринрог, 817 Занра, 818
+    Вышневодск; 1005 протекторат Ройо
+  volume: ≈16 переломных лет
+- id: territory-status
+  group: politics
+  name: Статус территории
+  control: multiselect
+  priority: P1
+  status: planned
+  data: null
+  source_note: 'страницы стран: суверенное, протекторат (Ройо), доминион (Элка), непризнанное (Бастионный союз), зона отчуждения (Арност), безвластие (Хрэлл), город-государство (Махаратха, Этель), заповедник
+    (Друидова пуща)'
+  volume: 8 категорий
+- id: regions
+  group: politics
+  name: Регионы стран
+  control: toggle
+  priority: P1
+  status: planned
+  data: null
+  source_note: gross_*_region (4), rojo_*_region (Данир, Золотое побережье, Западные Зелёные земли), igni regions (4), города-спутники Махаратхи
+  volume: ≈12 (линии реконструировать)
+- id: noble-holdings
+  group: politics
+  name: Владения знати и графства
+  control: multiselect по домам и родам
+  priority: P1
+  status: planned
+  data: null
+  source_note: Камераска (Фурии), Метис (Юнии), Сарк (Папирии), Бордыма (Карминий), Лервик, Старый Плющ (Пташжински), Несчастливая крепь (Сапиши/Кальпурнии), Ежицк (Тарло-Ежицки), Нижний Балаттер (Язвински),
+    Замок Чайки (Офилии), Бредо
+  volume: ≈13 владений
+- id: camps
+  group: politics
+  name: Политические лагеря (сенат и сейм)
+  control: mode
+  priority: P2
+  status: planned
+  data: null
+  source_note: 'tarquinii (монархисты: Опии, Юнии, Фабии, Потиции, Нумиции; оппозиция: Фурии, Сульпиции, Эмилии, Клавдии), gross_seim (6 партий с долями %)'
+  volume: 17+1 домов, 6 партий
+- id: capitals
+  group: politics
+  name: Столицы и их переносы
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: Нордхельд → Вышневодск (21.11.672), Вестхельд → Наджир (Ринар), спор Залесск / Совиный погост, Микрис и неофициальный Валмир
+  volume: ≈6
+- id: timeline
+  group: history
+  name: Временная шкала эпох с линейкой событий
+  control: slider + отрезки эпох
+  priority: P0
+  status: planned
+  data: null
+  source_note: history/* (5 эпох, ≈150 событий с годом) и события из страниц стран
+  volume: ≈250 событий, 5 эпох, 2 пробела
+- id: events
+  group: history
+  name: События
+  control: toggle + окно ±лет; список «без координат» в карточке слоя
+  priority: P0
+  status: ready
+  data: events.yaml + places.yaml
+  icon: circle
+  color: '#7a1f1a'
+  source_note: data/events.yaml, только public-события с годом; точки на карте — по местам с координатами
+  volume: ≈250 событий
+- id: events-by-type
+  group: history
+  name: События по типам
+  control: multiselect
+  priority: P0
+  status: planned
+  data: null
+  source_note: 'поле type во всех выжимках: война, битва, договор, основание, катастрофа, эпидемия, династия, религия, открытие, независимость'
+  volume: ≈12 типов
+- id: great-war
+  group: history
+  name: 'Великая война: фронты и гибель архидемонов'
+  control: mode (−500…1)
+  priority: P1
+  status: planned
+  data: null
+  source_note: 'history/great_war, knowledges/demons: порталы −500, Огненная ярость −490, Болотный ужас −450, Двуречье −350, Аркадия −290, Дагор −280, Тарпет −200, Акрит −185, Мизруд −160, Большой рейд
+    −149, Асмодиус −50, последняя битв'
+  volume: ≈14 сражений, 9 архидемонов
+- id: campaigns
+  group: history
+  name: Походы и маршруты армий
+  control: multiselect + анимация
+  priority: P1
+  status: ready
+  data: routes.yaml?kind=campaign + geo/routes.geojson
+  icon: line
+  color: '#8c1c13'
+  source_note: Малдред 81–83, 88, 163, 164, 171–173; Гней 176; Хашем 135–140; Гай I 277–280; Хапур 467–473; Даас 625; Махродан 653 и 673; Энфорис 730; добровольцы на Микрис 817; Чандер 1005; Джок с XXIV
+    легионом 1005
+  volume: ≈18 маршрутов
+- id: igni-rojo-war
+  group: history
+  name: Вторая война Игни и Ройо по месяцам
+  control: mode, пошаговый
+  priority: P1
+  status: planned
+  data: null
+  source_note: history/second_igni_rojo_war (март–7 ноября 1005)
+  volume: ≈10 шагов, ≈12 мест
+- id: arnost-hours
+  group: history
+  name: Катастрофа в Арносте по часам
+  control: mode, пошаговый
+  priority: P1
+  status: planned
+  data: null
+  source_note: 'history/arnost_catastrophe: 4.10.672 00:00/05:00/17:00, 6, 14, 17, 31 октября, 21 ноября; 4 легиона, 2 фронта'
+  volume: ≈9 шагов
+- id: dynasties
+  group: history
+  name: Династии и правители
+  control: диаграмма Ганта (без карты)
+  priority: P1
+  status: planned
+  data: null
+  source_note: ряд императоров (≈25), короли Гросса (≈8), Ройо (≈6), Занры (6), махараджи Игни (4), великие князья
+  volume: ≈50 правлений
+- id: epidemics
+  group: history
+  name: Эпидемии
+  control: toggle + год
+  priority: P2
+  status: planned
+  data: null
+  source_note: огненная чума (−320, 1005), Махаратская чума 715–717 (умер каждый третий; Энфорис −80 тыс.), Большой пивной мор 691–696
+  volume: '4'
+- id: legions
+  group: military
+  name: Легионы империи
+  control: multiselect + год
+  priority: P0
+  status: ready
+  data: military.yaml
+  icon: shield
+  color: '#8c1c13'
+  source_note: 'illior_empire_army и history/*: в 1005 г. I, II, V, VI, IX, XIII, XXIII, XXIV; в истории III, IV, VII, VIII, X, XIV, XVII, XXI'
+  volume: 16 легионов с базами и годами
+- id: fortresses
+  group: military
+  name: Крепости и цепи укреплений
+  control: toggle + фильтр по эпохе
+  priority: P0
+  status: ready
+  data: places.yaml?kind=fortress + fortress-dates.yaml
+  icon: diamond
+  color: '#5a3b1c'
+  source_note: 'ромбы на растре и страницы: гросская цепь, ройская цепь, Колючка, Стародраконья, Силадель, Вестхельд, Нордхельд, Талар/Эвертон/Харан, Озрин/Солим/Лийнэ, крепости Руна, Форт Болотный, Сулмипур,
+    Нуэтида, Закатная Бухта'
+  volume: ≈40
+- id: army-size
+  group: military
+  name: Численность армий
+  control: пропорциональные круги
+  priority: P1
+  status: planned
+  data: null
+  source_note: империя ≈120 тыс., Гросс ≈10 тыс., Дринрог ≈15 тыс., Занра ≈15 тыс., Энфорис ≈8 тыс., Махаратха ≈8 тыс., Вышневодск ≈3 тыс. и нежить, Залесск ≈3 тыс., Побережье ≈4 тыс. стражи
+  volume: ≈10
+- id: fleets
+  group: military
+  name: Флоты и морские базы
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: Нуэтида, Закатная Бухта, Сибарис (XIII, речной), Корабелы Дринрога, флот Энфориса, Лиена, Форталеса, Сильренеас/Кифор, пираты Кхабарута
+  volume: ≈10
+- id: vyshnevodsk-front
+  group: military
+  name: Фронт Вышневодска и Энфориса
+  control: slider
+  priority: P2
+  status: planned
+  data: null
+  source_note: 'сдвиги границы: 85, 175 (Малторн), 320–452, 719–720, 818+, затишье 1005'
+  volume: ≈6 положений
+- id: resources
+  group: economy
+  name: Ресурсы и месторождения
+  control: multiselect по ресурсу
+  priority: P0
+  status: ready
+  data: resources.yaml
+  icon: hex
+  color: '#b8892b'
+  source_note: железо и уголь Руна; адамантин, орихалк, мифрил, золото, алмазы, изумруды, сера Серебряных гор; золото Тибура и Каллатиса; мышьяк; мрамор Непии; зерно Сарка и Сарати; хмель Бредона; древесина;
+    бумага и порох Занры; ртуть
+  volume: ≈30 ресурсов, ≈45 точек
+- id: trade-routes
+  group: economy
+  name: Торговые пути
+  control: 'multiselect: суша, река, море, караваны'
+  priority: P0
+  status: ready
+  data: routes.yaml?kind=trade_*,caravan + geo/routes.geojson
+  icon: line
+  color: '#8a6a1f'
+  source_note: 'flows из всех выжимок: тракты Мания, юго-западный тракт Данир–Иллиор, Иллиор–Гарн–Олифанор, Дагор–Дринрог, Лиор, Гиблая; морские Махаратха–Дринрог, Нуэтида–Страна Драконов, Самрун–Куро-Минато;
+    караваны Махаратха–Оазисы–И'
+  volume: ≈30 маршрутов
+- id: roads
+  group: economy
+  name: Дороги по типу (легенда растра)
+  control: multiselect
+  priority: P0
+  status: planned
+  data: null
+  source_note: 'газеттир east/west: мощёные, гравийные, направления'
+  volume: ≈80 отрезков (≈25 мощёных, ≈12 гравийных, ≈45 направлений)
+- id: currencies
+  group: economy
+  name: Валюты
+  control: choropleth
+  priority: P1
+  status: ready
+  data: areas.yaml?layer=currency
+  icon: fill
+  color: '#b5703f'
+  source_note: 'knowledges/monetary_system: кроны империи и Занры, злотые, песо, рупии, рю, векселя Дринрога, облигации Занры, «любые деньги», обмен'
+  volume: ≈10 зон
+- id: slavery
+  group: economy
+  name: Рабство и работорговля
+  control: choropleth + потоки
+  priority: P1
+  status: ready
+  data: routes.yaml?kind=slave + geo/routes.geojson
+  icon: line
+  color: '#4a1a2a'
+  source_note: 'разрешено: империя, Гросс, Махаратха, Побережье, Плато, Вышневодск, колонии Махаратхи; запрещено: Энфорис, Афримас, Элка; ограничено: Занра; потоки Северного пути'
+  volume: ≈15 единиц, ≈6 потоков
+- id: population
+  group: economy
+  name: Население и плотность
+  control: choropleth + круги
+  priority: P1
+  status: planned
+  data: null
+  source_note: цифры по ≈25 государствам и регионам; плотность — вывод по площади на растре
+  volume: ≈25
+- id: tolls
+  group: economy
+  name: Пошлины и таможни
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: Висентия (II легион), Силадель (южный тракт), дельта Лиора (пошлина с каждого судна), торговые пошлины Иллиора
+  volume: ≈5
+- id: banks
+  group: economy
+  name: Банки
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: establishments/banks/* (5 банков, проценты, отделения)
+  volume: '5'
+- id: religions
+  group: religion
+  name: Религии по землям
+  control: choropleth / штриховка
+  priority: P0
+  status: ready
+  data: areas.yaml?layer=religion
+  icon: fill
+  color: '#6f86a3'
+  source_note: 'knowledges/*: Церковь Звёзд, Церковь Катберта, Культ Предков, Пантеон Занры, Многобожие Игни, тотемы Оазисов, 3 культа Залесья, демонопоклонство, культ сверхчеловека, друиды, культ чистоты'
+  volume: ≈12
+- id: shrines
+  group: religion
+  name: Святыни и храмы
+  control: toggle
+  priority: P1
+  status: ready
+  data: religion.yaml
+  icon: star
+  color: '#b8892b'
+  source_note: Аббатство Неугасимого Пламени, Драконья гора, Императорский алтарь, храм всех богов в Иллиоре, храмовый комплекс Мадакиша, храм синих драконов, Роща предков, Камень Памяти, Святой город,
+    храмы на Сарати
+  volume: ≈10
+- id: schisms
+  group: religion
+  name: Расколы и исходы
+  control: slider + анимация
+  priority: P2
+  status: planned
+  data: null
+  source_note: 'Церковь Звёзд: 165, запрет 268, 560–567, Катберт 807–823 (≈300 тыс. отплыли, ≈150 тыс. доплыли), 1005 Эспинар против Герения (церковь в изгнании в Бастионах и на островах)'
+  volume: ≈7 событий
+- id: undead
+  group: magic
+  name: Нежить и некромантия
+  control: toggle + год
+  priority: P0
+  status: ready
+  data: magic.yaml?type=undead
+  icon: cross
+  color: '#4a2a55'
+  source_note: Арност (672), Вышневодск, Старый лес (720), некроманты Тэрранова и Порта Новой Надежды (553), личи Артисиума и Кошчина (730), Густав-нежить (394), Некромант у Нордхельда (1005)
+  volume: ≈10
+- id: anomalies
+  group: magic
+  name: Аномалии и магические места
+  control: toggle
+  priority: P1
+  status: ready
+  data: magic.yaml?type=anomaly
+  icon: ring
+  color: '#4a2a55'
+  source_note: Виларинские болота (6 названий), Озеро Радужное, Башня Испытаний, Разгуляй-квартал, подгорные пещеры Ормхорна, Морозное болото, Следящая вода Арноста, впадина Подкова
+  volume: ≈15
+- id: schools
+  group: magic
+  name: Школы магии и академии
+  control: toggle
+  priority: P1
+  status: ready
+  data: places.yaml?kind=school
+  icon: square
+  color: '#3f4f5a'
+  source_note: Виларинский университет (7 факультетов), Чар Омидэх, 5 академий искусств, коллегия бардов
+  volume: ≈8
+- id: fae-passages
+  group: magic
+  name: Проходы в планы фей
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: knowledges/planes, geography/changeling_forest, geography/neverland, Ормхорн (слух)
+  volume: 3 зоны
+- id: teleport
+  group: magic
+  name: Связь и телепортация
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: сеть Арканума (1 зол./км), сеть Крыс (2 зол./км), книжная паутина (до 200 книг), Следящая вода (сенсоры 10 км); точки сети неизвестны
+  volume: схема без точных узлов
+- id: magic-sources
+  group: magic
+  name: Источники магии (по правилам)
+  control: 'mode: доктрина → нет / есть / изобильный'
+  priority: P2
+  status: planned
+  data: null
+  source_note: 'rules/magic §6–7: типы мест (кладбище, катакомбы, море, лава, поле боя); привязка к местам — вывод'
+  volume: 6 доктрин × типы местности
+- id: people
+  group: people
+  name: Персонажи
+  control: multiselect по роли + поиск
+  priority: P0
+  status: ready
+  data: people-loc.yaml + people.yaml
+  icon: circle
+  color: '#5a3b1c'
+  source_note: страницы characters/* и люди из выжимок с based_in
+  volume: ≈200 именованных, ≈56 с персональными страницами
+- id: houses
+  group: people
+  name: 'Великие Дома: резиденции и сферы'
+  control: multiselect
+  priority: P1
+  status: planned
+  data: null
+  source_note: characters/houses_clans/* (17+1), characters/index
+  volume: 18 домов
+- id: races
+  group: people
+  name: Расы и их наследие
+  control: multiselect
+  priority: P1
+  status: planned
+  data: null
+  source_note: 'knowledges/elves, dragons, fairies, first_humans, demons: Этель, Дагор, Силадель, Эрелон, Каллатис; Страна Драконов и 12 кланов; Подменный лес и Неверлэнд; Аркадия, форт Звёздный, Древняя
+    дорога; Асмодиус, Акрит, Мизруд'
+  volume: 5 рас, ≈20 мест
+- id: languages
+  group: culture
+  name: Языки
+  control: choropleth
+  priority: P1
+  status: ready
+  data: areas.yaml?layer=language
+  icon: fill
+  color: '#c9a44c'
+  source_note: 'knowledges/languages: имперский центральный, северный и южный, эльфийский, драконик, пустынный, демоник'
+  volume: 7 языков, ≈20 единиц
+- id: illior-districts
+  group: culture
+  name: 'Иллиор: районы и заведения (схема)'
+  control: mode «город»
+  priority: P2
+  status: planned
+  data: null
+  source_note: city_illior (~40 районов), establishments/* (26 таверн, 4 борделя, 5 банков); положение по относительным подсказкам
+  volume: ≈75 точек
+- id: festivals
+  group: culture
+  name: Праздники и сезоны
+  control: selector сезона
+  priority: P2
+  status: planned
+  data: null
+  source_note: Фестиваль Предков 1–7 ноября, равноденствия, середина лета (конклавы), Воскрешение Верано (март), весенний разлив Сарати, курултай, тайфуны (2 летних месяца)
+  volume: ≈10
+- id: guild-hq
+  group: orgs
+  name: 'Гильдии: штаб-квартиры и типы'
+  control: multiselect по типу и гильдии
+  priority: P0
+  status: ready
+  data: guild-hq.yaml + orgs.yaml
+  icon: flag
+  color: '#8c1c13'
+  source_note: 'guilds/* (31 страница): магические, ремесленные, наёмнические, торговые, криминальные; цвет и символ из карточек'
+  volume: 31 гильдия, ≈24 известных штаба
+- id: guild-spheres
+  group: orgs
+  name: Сферы влияния гильдий (штриховка поверх стран)
+  control: multiselect
+  priority: P1
+  status: ready
+  data: areas.yaml?layer=guild
+  icon: hatch
+  color: '#7a1f16'
+  source_note: Древотёсы (Гросс и бывшая империя), Дринрогский союз, Лига зерноторговцев (Сарк, Гросс, Ройо), Пустынный картель (юг), Солнечная компания, Металлурги (Рун, Серебряные горы), Северный путь
+    (Побережье)
+  volume: ≈12 зон
+- id: monopolies
+  group: orgs
+  name: Монополии
+  control: toggle
+  priority: P2
+  status: planned
+  data: null
+  source_note: огненные свитки (Саламандра), порох (Пиротехники Занры), телепортация (Арканум), половина мирового железа (Металлурги), древесина Гросса
+  volume: '5'
+- id: crime
+  group: orgs
+  name: Преступность и пираты
+  control: multiselect
+  priority: P2
+  status: planned
+  data: null
+  source_note: Чёрные капюшоны, Крысы, Вендетта, 4 группировки Хрэлла, пираты Кхабарута, Кусуму и залесские, «Акулий зуб», Гильдия убийц
+  volume: ≈12
+- id: confidence
+  group: service
+  name: Достоверность и источник объекта
+  control: 'mode: факт / вывод / слух; heatmap уверенности'
+  priority: P0
+  status: planned
+  data: null
+  source_note: поля source, confidence и «вывод:» у каждого объекта; confidence газеттира
+  volume: все объекты
+- id: grid
+  group: service
+  name: Сетка расстояний и масштаб
+  control: toggle
+  priority: P1
+  status: planned
+  data: null
+  source_note: 0,25 км/px, шкала растра 0–250 км (100 км = 400 px)
+  volume: '1'
+- id: world-miniatures
+  group: geography
+  name: Миниатюры мира
+  control: toggle; по умолчанию включён; появляются в годы, когда верно по лору
+  priority: P0
+  status: ready
+  data: miniatures.yaml
+  icon: line
+  color: '#7a1f1a'
+  default_on: true
+  source_note: дракон над Страной Драконов (с −490), кракен в Монструозном море, парусники во Внутреннем море (с −490), караван в Золотых песках, нежить Арноста (с 672), огоньки над Виларинскими топями; положения — по местам газеттира
+  volume: 6 миниатюр
+- id: places-ranked
+  group: geography
+  name: Места по рангу (столицы, города, порты, храмы, шахты)
+  control: toggle; столицы с z1, города z2, остальное z3
+  priority: P1
+  status: ready
+  data: places.yaml?kind=capital,city,port,temple,mine,ruin
+  icon: circle
+  color: '#b8892b'
+  default_on: true
+  source_note: places.yaml, только места с координатами
+  volume: ≈190 мест

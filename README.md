@@ -76,6 +76,8 @@ are enough to sit down at the table with a ready-made character.
 - **World time and calendar**: effects lasting hours and days, group rests.
 - **The rules inside Foundry**: the *Rules* compendium shows the website chapters right in
   the journal, so they are always the current version.
+- **World atlas**: an interactive map of the world (timeline, borders by year, places, people, scenarios) lives in `atlas/`
+  as a separate app and opens from the *World Atlas* journal in the Rules compendium (build steps: `atlas/README.md`).
 - **Compendiums**: 106 maneuvers, 121 talents, 80 mutations, 28 spells, 28 conditions,
   45 weapons, 178 crafting materials, a starter bestiary and more.
 - **English and Russian**: the interface is fully translated; compendium content is

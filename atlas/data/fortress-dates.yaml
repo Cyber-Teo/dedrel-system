@@ -1,0 +1,9 @@
+# Годы постройки крепостей (из facts/hint мест) и отдельные крепости, у которых kind не fortress.
+# built — год закладки; built_text — формулировка источника; ruined — год, с которого руины. extra: true — крепость вне kind=fortress.
+- {place: geo:kolyuchka, built: 18, built_text: "заложена берсанцами в 18 г.", sources: [countries/gross/regions/gross_central_region], confidence: canon}
+- {place: geo:vestheld, built: 280, built_text: "заложена в 280 после провала похода", ruined: 625, sources: [countries/rojo/index, history/era_imperial], confidence: canon}
+- {place: geo:hrashtitsa, built: 90, built_text: "форт, заложенный в 90-х гг. при колонизации Густавом Ландовски", sources: [countries/gross/regions/gross_changeling_forest], confidence: derived}
+- {place: geo:storozhevaya, built: 573, built_text: "построена в войне Ройо и Гросса (573–620-е); начало диапазона", sources: [countries/gross/regions/gross_eastern_green_lands, countries/rojo/index], confidence: derived}
+- {place: geo:zamok_chayki, built: 573, built_text: "построен в войне Ройо и Гросса (573–620-е); начало диапазона", sources: [countries/gross/regions/gross_lior_delta, countries/rojo/index], confidence: derived}
+- {place: geo:talar, built: 80, built_text: "заложен в первые века н. э. (80–170); начало диапазона", sources: [countries/enforis/index], confidence: derived}
+- {place: geo:nordheld, built: 81, built_text: "заложен Малдредом в 81–83 как крепость; с 672 в руинах", ruined: 672, extra: true, sources: [countries/vishnevodskoye_principality/index, history/era_imperial], confidence: canon}

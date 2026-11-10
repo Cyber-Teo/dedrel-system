@@ -121,5 +121,13 @@
         "name": "Development Table"
       }
     }
+  },
+  "RulesAtlasWorld1": {
+    "name": "World Atlas",
+    "pages": {
+      "RulesAtlasPage01": {
+        "name": "World Atlas"
+      }
+    }
   }
 }

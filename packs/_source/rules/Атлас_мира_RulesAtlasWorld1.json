@@ -1,0 +1,65 @@
+{
+  "_id": "RulesAtlasWorld1",
+  "name": "Атлас мира",
+  "pages": [
+    {
+      "_id": "RulesAtlasPage01",
+      "name": "Атлас мира",
+      "type": "web",
+      "title": {
+        "show": false,
+        "level": 1
+      },
+      "system": {
+        "src": "systems/dedrel/atlas/dist/index.html",
+        "srcEn": "systems/dedrel/atlas/dist/index.html"
+      },
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "image": {},
+      "text": {
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "_key": "!journal.pages!RulesAtlasWorld1.RulesAtlasPage01"
+    }
+  ],
+  "folder": null,
+  "sort": 800000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "categories": [],
+  "_stats": {
+    "coreVersion": "14.368",
+    "systemId": null,
+    "systemVersion": null,
+    "createdTime": null,
+    "modifiedTime": null,
+    "lastModifiedBy": null,
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!RulesAtlasWorld1"
+}

@@ -1,0 +1,10 @@
+Атлас Дедрела
+
+Код (src, api, scripts, e2e, tests, конфигурация): лицензия MIT, см. поле license в package.json.
+
+Данные (data/), растровая карта (data/raw/media/dedrel_optimized.webp, public/tiles) и гербы (public/coats):
+CC BY-NC 4.0, https://creativecommons.org/licenses/by-nc/4.0/. Источник лора и карты: вики https://dedrel.teo.uy.
+
+Сторонние материалы:
+- значки public/icons: game-icons.net, CC BY 3.0 (public/icons/NOTICE, public/icons/ATTRIBUTION.md);
+- шрифты public/fonts: Cormorant Garamond и Literata, SIL OFL 1.1 (public/fonts/NOTICE).

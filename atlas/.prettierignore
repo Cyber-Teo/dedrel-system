@@ -1,0 +1,12 @@
+node_modules
+dist
+public
+data
+docs
+pnpm-lock.yaml
+.beads
+.agents
+.claude
+AGENTS.md
+CLAUDE.md
+scripts/geo/vectorize/lines_refined.json

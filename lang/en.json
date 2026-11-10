@@ -1388,7 +1388,7 @@
         "FIELDS": {
           "src": {
             "label": "Address",
-            "hint": "Full address of the page (https://…). Shown for Russian."
+            "hint": "Full address of the page (https://…) or a path inside the system (systems/dedrel/…). Shown for Russian."
           },
           "srcEn": {
             "label": "Address (English)",

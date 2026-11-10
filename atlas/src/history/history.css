@@ -1,0 +1,443 @@
+/* Слои истории: подписи государств и ландшафта, легенда политики, плашки. */
+.pol-label {
+  font:
+    700 var(--pol-fs, 13px) / 1.1 'Cormorant Garamond',
+    Georgia,
+    serif;
+  letter-spacing: 0.02em;
+  color: #fff6dc;
+  opacity: var(--pol-op, 1) !important;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  text-shadow:
+    0 0 2px var(--ink, #2b1a0e),
+    0 0 3px var(--ink, #2b1a0e),
+    0 1px 4px #2b1a0eb0;
+}
+.ls-label {
+  font:
+    italic 700 14px/1.1 'Cormorant Garamond',
+    Georgia,
+    serif;
+  color: #4a3d1c;
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: center;
+  text-shadow:
+    0 0 2px #f3ead4,
+    0 0 2px #f3ead4,
+    0 0 5px #f3ead4;
+}
+.hist-legend {
+  position: fixed;
+  left: var(--corner-left, 110px);
+  bottom: calc(var(--sheet-h, 0px) + var(--dock-h, 90px) + 12px);
+  z-index: 7;
+  width: 280px;
+  max-width: calc(100vw - 24px);
+  max-height: 60vh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: rgba(246, 237, 211, 0.96);
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 6px;
+  box-shadow: 0 2px 10px #0003;
+  font:
+    12px/1.35 'Literata',
+    Georgia,
+    serif;
+  color: var(--ink, #2b1a0e);
+}
+.hist-legend > summary {
+  cursor: pointer;
+  padding: 6px 10px;
+  font-weight: 600;
+  list-style: none;
+}
+.hist-legend > summary::-webkit-details-marker {
+  display: none;
+}
+.hist-legend > summary::after {
+  content: '▾';
+  float: right;
+}
+.hist-legend:not([open]) > summary::after {
+  content: '▸';
+}
+.hist-legend .hl-body {
+  padding: 0 10px 8px;
+}
+.hist-legend .hl-note {
+  margin: 0 0 6px;
+  font-size: 11px;
+  color: #5b4a2e;
+}
+.hist-legend .hl-conf {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  letter-spacing: -0.01em;
+}
+.hist-legend .hl-conf span {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: help;
+  white-space: nowrap;
+}
+.hist-legend .sw {
+  flex: none;
+  width: 9px;
+  height: 10px;
+  border: 1px solid #3a2c1a88;
+  background: #c9a44c;
+}
+.hist-legend .sw.derived {
+  background: repeating-linear-gradient(135deg, #c9a44c 0 6px, #2b1a0e80 6px 7px);
+}
+.hist-legend .sw.speculative {
+  background: repeating-linear-gradient(135deg, #c9a44c 0 2px, #2b1a0eb0 2px 3px);
+}
+.hist-legend .sw.none {
+  background: #6a6760;
+}
+.hist-legend .hl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.hist-legend .hl-list button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+  padding: 2px 4px;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.hist-legend .hl-list button:hover,
+.hist-legend .hl-list button.on {
+  background: #b8892b33;
+}
+.hist-legend .hl-list i {
+  flex: none;
+  width: 9px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid #0003;
+}
+.hist-legend .hl-fr {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.hist-legend .hl-fr button {
+  padding: 2px 6px;
+  font: inherit;
+  border: 1px solid var(--gold, #b8892b);
+  background: #fffaf0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hist-legend .hl-fr button.on {
+  background: var(--gold, #b8892b);
+  color: #fff;
+}
+.hist-plate {
+  flex-wrap: wrap;
+  position: fixed;
+  left: 50%;
+  top: 64px;
+  transform: translateX(-50%);
+  z-index: 4;
+  max-width: min(92vw, 560px);
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: rgba(246, 237, 211, 0.96);
+  border: 1px solid var(--gold, #b8892b);
+  font:
+    13px/1.35 'Literata',
+    Georgia,
+    serif;
+  color: var(--ink, #2b1a0e);
+  box-shadow: 0 1px 6px #0003;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hist-plate button {
+  padding: 2px 8px;
+  font: inherit;
+  border: 1px solid #8c1c13;
+  color: #8c1c13;
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.hist-plate .x {
+  border: 0;
+  color: var(--ink-soft, #6b4e1e);
+  padding: 0 4px;
+  flex: none;
+  margin-left: 2px;
+}
+.hist-plate span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* общий стек: панель слоёв ложится над легендой политики */
+body .al-legend {
+  bottom: calc(var(--dock-h) + 34px + var(--hl-h, 0px));
+}
+@media (max-width: 600px) {
+  .hist-legend {
+    left: var(--corner-left, 12px);
+    width: min(280px, calc(100vw - 24px - var(--corner-left, 12px)));
+    bottom: calc(var(--sheet-h, 0px) + var(--dock-h, 90px) + 12px);
+    max-height: 60vh;
+  }
+  .hist-plate {
+    top: 52px;
+  }
+  body .al-legend {
+    bottom: calc(var(--dock-h) + 40px + var(--hl-h, 0px));
+  }
+}
+
+/* r5-C: ключ достоверности 18 px как заливка на карте; шапка легенды не прокручивается; тень-подсказка прокрутки */
+.hist-legend {
+  background:
+    linear-gradient(rgba(246, 237, 211, 0.96) 30%, #f6edd300) top / 100% 18px no-repeat local,
+    linear-gradient(#f6edd300, rgba(246, 237, 211, 0.96) 70%) bottom / 100% 18px no-repeat local,
+    radial-gradient(farthest-side at 50% 0, #2b1a0e40, #0000) top / 100% 7px no-repeat scroll,
+    radial-gradient(farthest-side at 50% 100%, #2b1a0e40, #0000) bottom / 100% 7px no-repeat scroll,
+    rgba(246, 237, 211, 0.96);
+  max-height: min(60vh, 520px);
+}
+.hist-legend > summary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f6edd3f5;
+}
+.hist-legend .hl-body {
+  padding-bottom: 14px;
+}
+.hist-legend .hl-conf {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 8px;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.hist-legend .hl-conf span {
+  gap: 6px;
+}
+.hist-legend .sw {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  border: 1px solid #3a2c1aaa;
+  background: #c9a44c;
+}
+.hist-legend .sw.canon {
+  background: #c9a44c;
+}
+.hist-legend .sw.derived {
+  background: repeating-linear-gradient(135deg, #c9a44c 0 6px, #2b1a0e99 6px 8px);
+}
+.hist-legend .sw.speculative {
+  background: repeating-linear-gradient(135deg, #c9a44c 0 2px, #2b1a0eb8 2px 3.5px);
+}
+.hist-legend .sw.none {
+  background: #6a6760;
+}
+.hist-legend .hl-cmp {
+  margin: 0 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.hist-legend .hl-cmp button {
+  padding: 2px 8px;
+  font: inherit;
+  border: 1px solid #8c1c13;
+  color: #8c1c13;
+  background: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hist-legend .hl-cmp .hl-cy {
+  width: 6ch;
+  padding: 1px 4px;
+  font: inherit;
+  border: 1px solid var(--gold, #b8892b);
+  border-radius: 4px;
+  background: #fffaf0;
+}
+.hist-legend .hl-shifts {
+  flex: 1 1 100%;
+}
+.hist-legend .hl-shifts p {
+  margin: 2px 0;
+}
+.hist-legend .hl-shifts ul {
+  margin: 2px 0 0;
+  padding-left: 16px;
+}
+.hist-legend .hl-shifts li {
+  margin: 1px 0;
+}
+.hist-legend .hl-unowned {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px;
+  min-height: 22px;
+  color: #5b4a2e;
+  cursor: help;
+}
+.hist-legend .hl-unowned small {
+  margin-left: auto;
+  font-size: 10px;
+}
+/* r4-C: гербы в легенде политики; чип «Политика, год ▾» остаётся компактным */
+.hist-legend > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hist-legend > summary::after {
+  margin-left: auto;
+  float: none;
+}
+.hist-legend .coat {
+  flex: none;
+  object-fit: contain;
+  border-radius: 2px;
+}
+.hist-legend .coat-shield {
+  display: block;
+}
+.hist-legend .hl-list button {
+  min-height: 22px;
+}
+
+/* r6-B: легенда не выше 40% экрана; список переходов; кнопки */
+.hist-legend {
+  max-height: 40vh;
+}
+@media (max-width: 600px) {
+  .hist-legend {
+    max-height: 40vh;
+  }
+}
+.hist-legend .hl-count {
+  margin: 0 0 6px;
+  font-size: 11px;
+  color: #3a2c1a;
+  font-variant-numeric: tabular-nums;
+}
+.hist-legend .hl-count small {
+  color: #5b4a2e;
+}
+.hist-legend .hl-mute,
+.hist-legend .hl-more {
+  margin: 0 0 8px;
+  padding: 2px 8px;
+  font: inherit;
+  border: 1px solid var(--gold, #b8892b);
+  background: #fffaf0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.hist-legend .hl-more {
+  margin: 2px 0 0;
+}
+.hist-legend .hl-same {
+  color: #5b4a2e;
+  list-style: none;
+  margin-left: -16px;
+}
+.hist-legend .hl-baked {
+  font-style: italic;
+}
+
+/* r6-B: подписи государств — перенос строк, раскладка в кадре */
+.pol-label {
+  white-space: normal;
+  text-align: center;
+}
+.pol-label[data-hide] {
+  visibility: hidden !important;
+}
+.pol-label .pl-t {
+  display: block;
+  width: max-content;
+  max-width: 104px;
+  text-wrap: balance;
+  text-shadow:
+    0 0 2px var(--ink, #2b1a0e),
+    0 0 3px var(--ink, #2b1a0e),
+    0 1px 5px var(--ink, #2b1a0e);
+}
+
+/* r7-B: легенда политики — в видимой области над шкалой, со своей прокруткой; при сравнении пояснение штриховки свёрнуто; сообщение о неверном годе */
+.hist-legend {
+  max-height: min(40vh, calc(100vh - var(--dock-h, 90px) - var(--top-h, 56px) - 32px));
+  overflow-y: auto;
+}
+.hist-legend .hl-note-cmp {
+  display: none;
+}
+.hist-legend .hl-err {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: 11px;
+  color: #8c1c13;
+}
+.hist-legend .hl-err:empty {
+  display: none;
+}
+.hist-legend .hl-cy[aria-invalid='true'] {
+  border-color: #8c1c13;
+  outline: 1px solid #8c1c13;
+  background: #fff0ec;
+}
+
+/* r8-C: легенда до 55vh над шкалой со своей прокруткой и тенями; блок штриховки и переходы сворачиваются */
+.hist-legend {
+  max-height: min(55vh, calc(100vh - var(--dock-h, 90px) - var(--top-h, 56px) - 32px));
+}
+.hist-legend .hl-key,
+.hist-legend details.hl-shifts {
+  margin: 0 0 8px;
+}
+.hist-legend .hl-key > summary,
+.hist-legend details.hl-shifts > summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: #5b4a2e;
+  margin-bottom: 4px;
+}
+.hist-legend .hl-key > .hl-note {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hist-legend .hl-note-cmp {
+  display: block;
+}
+.hist-legend .hl-err {
+  min-height: 1.35em;
+}

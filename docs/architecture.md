@@ -197,6 +197,21 @@ ApplicationV2 + Handlebars. `DedrelCharacterSheet` (персонаж), `DedrelNp
 | `assets/` | Иконки, баннеры, токены; происхождение и лицензии — `assets/ICON_CREDITS.md` |
 | `scripts/` | Скрипты разработки: `packs.mjs` (синхронизация паков, см. ниже), генерация баннеров паков |
 
+### Атлас мира (`atlas/`)
+
+Интерактивный атлас мира Дедрел: карта, хронология с 1200 г. до н. э. по 1006 г., границы государств по годам,
+досье мест, людей и организаций, слои, маршруты, сценарии. Это отдельное приложение (Vite + Preact + MapLibre) со своим
+`package.json`, тестами и данными; код системы и `system.json` оно не меняет и не загружает — Foundry его не видит,
+пока не открыта страница журнала.
+
+Как открыть в Foundry: собрать атлас (`cd atlas && pnpm install && pnpm tiles && VITE_MASTER=off pnpm build`, нужны
+Node 22+ и Python 3 с Pillow) и открыть в компендиуме *Rules* журнал «Атлас мира». Его страница типа `web`
+(`src/data/journal/web-page.mjs`) ссылается на `systems/dedrel/atlas/dist/index.html`: для `src`/`srcEn` разрешены
+http(s)-адреса и относительные пути, начинающиеся с `systems/dedrel/` (без схемы и `..`). `atlas/dist/`, тайлы и
+`atlas/node_modules/` в git не входят. Серверная часть мастер-режима (`atlas/api/`, Vercel) в Foundry не работает.
+
+Подробнее: [atlas/README.md](../atlas/README.md), [atlas/docs/architecture.md](../atlas/docs/architecture.md).
+
 ### Паки: JSON ⇄ LevelDB
 
 `scripts/packs.mjs` на `@foundryvtt/foundryvtt-cli`, команды — в `package.json`:

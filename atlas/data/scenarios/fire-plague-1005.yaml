@@ -1,0 +1,69 @@
+# Сценарий: Огненная чума 1005 года в Иллиорской империи (сентябрь — октябрь 1005).
+# Источники: вики knowledges/magic_diseases, history/era_new_age, history/second_igni_rojo_war, history/vilarin_convention, characters/yorick,
+# countries/illior_empire/cities/city_illior. Выселки и Дворец Основателя на карте без координат: камера ставится на Иллиор.
+id: fire-plague-1005
+title: Огненная чума (1005)
+summary: 'От предания о Днях скорби до вспышки в Иллиоре в сентябре 1005: четыре стадии болезни, закрытые границы, карантин и свет шпиля.'
+sources: [knowledges/magic_diseases]
+steps:
+  - title: Предание о Днях скорби
+    date: { year: -320, label: около −320 года }
+    text: >-
+      По преданию, болезнь создали демоны: впервые она распространилась среди людей около −320 года, в Дни скорби. Эльфы и драконы
+      как могли пытались спасти людей, но многие погибли. Вики добавляет, что спустя больше тысячи лет огненная чума вернулась
+      на Дедрел и унесла немало жизней, но в конце концов была побеждена.
+    camera: { place: geo:vilarin_gorod, zoom: 2.6 }   # Виларинские болота без координат: камера на городе Виларин, что стоит на них
+    sources: [knowledges/magic_diseases, history/great_war]
+  - title: Сентябрь — вспышка в империи
+    date: { year: 1005, month: 9 }
+    text: >-
+      В сентябре 1005 года в Иллиорской империи вспыхивает огненная чума. Заразность высокая; чума идёт по всей стране и тяжело
+      её опустошает. Способ передачи неизвестен.
+    camera: { place: countries/illior_empire/cities/city_illior, zoom: 3.4 }
+    highlight: { places: [countries/illior_empire/cities/city_illior], polities: [countries/illior_empire/index] }   # очаг — Иллиор; «идёт по всей стране» — подсвечена вся империя
+    owners_at: 1005
+    sources: [history/era_new_age, knowledges/magic_diseases, countries/illior_empire/index]
+  - title: Четыре стадии болезни
+    date: { year: 1005, month: 9, label: сентябрь 1005, note: описание болезни, не события }
+    text: >-
+      На первой стадии на теле появляются красные пятна, как после ожога. На второй больному снятся сны о пламени, он слабеет
+      с каждым днём. На третьей пятна воспаляются, и возникает почти неодолимое желание выжечь их огнём. На четвёртой, если больной
+      до неё доживёт, тело вспыхивает само собой. Надёжное средство известно одно — магия, возвращающая к жизни.
+    camera: { place: countries/illior_empire/cities/city_illior, zoom: 4.6 }
+    highlight: { places: [countries/illior_empire/cities/city_illior] }
+    sources: [knowledges/magic_diseases]
+  - title: Границы закрыты, война замерла
+    date: { year: 1005, month: 9 }
+    text: >-
+      Вспышка огненной чумы закрывает границы и останавливает торговлю по всему миру. Война Ройо и Игни на время замирает.
+    camera: { place: geo:vestheld, zoom: 3.2 }
+    highlight: { places: [geo:vestheld, countries/illior_empire/cities/city_illior] }
+    owners_at: 1005
+    sources: [history/second_igni_rojo_war]
+  - title: Карантин в Выселках
+    date: { year: 1005, label: 1005 год, note: месяц в вики не назван }
+    text: >-
+      В иллиорских Выселках, бывшем городском дне, сильный лидер Скотт Флетчер организует карантин во время огненной чумы.
+      Он же не допустил погромов, когда пошли слухи о грядущем голоде; нынешний мэр ему благоволит.
+    camera: { place: countries/illior_empire/cities/city_illior, zoom: 5 }
+    highlight: { places: [countries/illior_empire/cities/city_illior] }
+    sources: [countries/illior_empire/cities/city_illior]
+  - title: Виларинский конвент
+    date: { year: 1005, month: 9, note: повторное заседание — в октябре }
+    text: >-
+      В те же недели в Виларинском университете собирается конвент магов, военных и наёмников: нежить, оживившаяся на севере,
+      в Арносте, угрожает многим странам. Нападение нежити на Грейхельд и Берсан сорвано, но угроза лишь отложена.
+    camera: { place: geo:vilarin_gorod, zoom: 4 }
+    highlight: { places: [geo:vilarin_gorod, geo:greyheld, geo:bersan] }
+    owners_at: 1005
+    sources: [history/vilarin_convention, history/era_new_age]
+  - title: Свет шпиля и слава императора
+    date: { year: 1005, label: осень 1005, note: точная дата в вики не названа }
+    text: >-
+      Эпидемию в Иллиоре останавливает какое-то мощное магическое воздействие неизвестного рода: со стороны оно выглядит как яркий
+      свет шпиля Дворца Основателя. По слухам, чуму остановил лично император Йорик, открыв миру магическую формулу исцеления;
+      его авторитет взлетает и в империи, и за её пределами. По официальной версии, во время чумы погиб бывший глава разведки
+      Арчибальд Квинт Мариус, хотя как именно, неясно.
+    camera: { place: countries/illior_empire/cities/city_illior, zoom: 4.4 }
+    highlight: { places: [countries/illior_empire/cities/city_illior] }
+    sources: [knowledges/magic_diseases, characters/yorick, characters/archibald_quintus_marius]

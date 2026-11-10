@@ -1,0 +1,683 @@
+# Названия страниц вики (slug → заголовок) и «Правительство:» стран. Собрано scripts/import/build-wiki-titles.mjs из data/site/pages.json.
+titles:
+  about: О проекте
+  characters/aleks_stilvind: Архимаг Алекс Стилвинд
+  characters/alia_sulpicia: Алия Вивиана Сульпиция
+  characters/alonso_lucky: Алонсо Везунчик
+  characters/amanda_gallonia: Аманда Галлония
+  characters/ana_vranova: Анна Вранова
+  characters/andrea_marcia: Андреа Атрония Марция
+  characters/antarius: Антариус
+  characters/archibald_quintus_marius: Арчибальд Квинт Мариус
+  characters/archmage_sarina: Архимаг Сарина
+  characters/archmage_spurius: Архимаг Спурий
+  characters/arvehl: Арвэль
+  characters/augustin_espinar: Августин Эспинар
+  characters/augustus_junia: Август Ставрос Юний
+  characters/avdikiy_gerdonius: Авдикий Гердоний
+  characters/blorden_fabius: Блорден Тиль Фабий
+  characters/bosco_darkbone: Боско Даркбоун
+  characters/caius_servilius: Кай Мариус Сервилий
+  characters/calipso_veturia: Калипсо Аннет Ветурия
+  characters/danzar_papirius: Дранзар Гилберт Папирий
+  characters/decimus_furia: Децимус Хириус Фурий
+  characters/dzhok_i: Джок I
+  characters/elena_klavdia: Елена Луция Клавдия
+  characters/euripdus_junius: Эврипид Август Юний
+  characters/filomen_papiria: Филомен Тилмот Папирий
+  characters/genevre_larcia: Геневра Фиона Лариция
+  characters/gnaeus_corfidius: Гней Корфидий
+  characters/gortensia_numicia: Гортензия Варта Нумиция
+  characters/gustaviii: Густав III
+  characters/hirius_furia: Хириус Публий Фурий
+  characters/houses_clans/aemilia: Эмилии
+  characters/houses_clans/aquillii: Аквилии
+  characters/houses_clans/claudia: Клавдии
+  characters/houses_clans/cornelia: Корнелии
+  characters/houses_clans/fabii: Фабии
+  characters/houses_clans/furia: Фурии
+  characters/houses_clans/horatii: Горации
+  characters/houses_clans/index: Дома и кланы
+  characters/houses_clans/junia: Юнии
+  characters/houses_clans/larcia: Лариции
+  characters/houses_clans/marcia: Марции
+  characters/houses_clans/numicii: Нумиции
+  characters/houses_clans/opia: Опии
+  characters/houses_clans/papiria: Семья Папирии
+  characters/houses_clans/potitia: Потиции
+  characters/houses_clans/servilii: Сервилии
+  characters/houses_clans/sulpicia: Сульпиции
+  characters/houses_clans/tarquinii: Тарквинии
+  characters/houses_clans/veturii: Ветурии
+  characters/index: Персонажи
+  characters/irena_ptashzhinska: Ирена Пташжинска
+  characters/jasper_minatius: Джаспер Минаций
+  characters/klara_furia: Клара Нарцисса Фурия
+  characters/kondratij_tarlo-ezhickij: Кондратий Тарло-Ежицки
+  characters/kylar_kovacs: Кайлар Ковач
+  characters/lambros_aquillius: Ламброс Троеннен Аквилий
+  characters/lassi_trebius: Ласси Требий
+  characters/letid_horatius: Летид Давор Галиус Гораций
+  characters/lucius_claudius: Луций Авл Клавдий
+  characters/lukrecija_opija: Лукреция Копея Солона Опия
+  characters/maria_pomar: Мария Хосе Помар
+  characters/matthew_hurtado: Мэтью Хуртадо
+  characters/morena: Королева Морена I
+  characters/nala_salvidenija: Нала Сальвидения
+  characters/narayna_rura: Нарайна Рура
+  characters/oktavius_opius: Октавий Копей Солон Опий
+  characters/olma_numicia: Ольма Варта Нумиция
+  characters/quinta_emilia: Квинта Гэлфира Эмилия
+  characters/raffaela_potitia: Раффаэла Волена Потиция
+  characters/salvador_gerenius: Сальвадор Герений
+  characters/serafina_larcia: Серафина Геневра Лариция
+  characters/tiberia_cornelia: Тиберия Рато Корнелия
+  characters/tit_aemilius: Тит Гэлфир Эмилий
+  characters/toyokuza: Тоёкуза
+  characters/vibius_furia: Вибий Нарцисс Фурий
+  characters/vladimir_gorely: Владимир Горелый
+  characters/yorick: Император Йорик Малдред Август Тарквиний
+  countries/archdemon_s_plateau/index: Плато Архидемона
+  countries/arnost/index: Арност
+  countries/bastion_union/index: Бастионный союз
+  countries/dragons_country/index: Страна Драконов
+  countries/drinrog/index: Республика Дринрог
+  countries/druid_s_grove/index: Друидова пуща
+  countries/enforis/index: Княжество Энфорис
+  countries/ethel/index: Этель
+  countries/gross/cities/city_ezhitsk: Ежицк
+  countries/gross/cities/city_old_ivy: Старый Плющ
+  countries/gross/cities/city_unfortunate_stronghold: Несчастливая крепь
+  countries/gross/cities/index: Города королевства Гросс
+  countries/gross/gross_administration: Административное и политическое устройство королевства Гросс
+  countries/gross/gross_army: Армия королевства Гросс
+  countries/gross/gross_seim: Сейм королевства Гросс
+  countries/gross/index: Королевство Гросс
+  countries/gross/regions/gross_central_region: Центральный регион Гросс
+  countries/gross/regions/gross_changeling_forest: Подменный лес (регион)
+  countries/gross/regions/gross_eastern_green_lands: Восточные зелёные земли
+  countries/gross/regions/gross_lior_delta: Дельта Лиора
+  countries/gross/regions/index: Регионы королевства Гросс
+  countries/horseshoe_islands/index: Подковные острова
+  countries/igni/index: Княжество Игни
+  countries/igni/regions/igni_ash_mountains_region: Пепельные горы (регион)
+  countries/igni/regions/igni_sarati_region: Долина Сарати
+  countries/igni/regions/index: Регионы княжества Игни
+  countries/igni/regions/no_man_s_desert: Ничья пустыня (регион)
+  countries/igni/regions/west_bank: Западный берег
+  countries/illior_empire/cities/city_illior: Иллиор
+  countries/illior_empire/cities/city_vilarin: Город Виларин
+  countries/illior_empire/cities/index: Города Иллиорской империи
+  countries/illior_empire/illior_empire_administration: Административное и политическое устройство Иллиорской империи
+  countries/illior_empire/illior_empire_army: Армия Иллиорской Империи
+  countries/illior_empire/illior_empire_senate: Сенат Иллиорской империи
+  countries/illior_empire/index: Иллиорская империя
+  countries/illior_empire/regions/illior_empire_illior_region: Префектура Иллиор
+  countries/illior_empire/regions/illior_empire_run_region: Префектура Рун
+  countries/illior_empire/regions/illior_empire_sark_region: Префектура Сарк
+  countries/illior_empire/regions/illior_empire_vilarin_region: Префектура Виларин
+  countries/illior_empire/regions/index: Регионы Иллиорской империи
+  countries/index: Страны и территории
+  countries/khrell/index: Земли Хрэлл
+  countries/khrell/khrell_lands_fractions: Правящие группировки Земель Хрэлл
+  countries/land_of_oases/index: Край Оазисов
+  countries/makharatkha/index: Махаратха
+  countries/rojo/index: Королевство Ройо (протекторат)
+  countries/rojo/regions/index: Регионы Ройо
+  countries/rojo/regions/rojo_danir_region: Регион Данир
+  countries/rojo/regions/rojo_golden_coast_regeion: Золотое побережье
+  countries/slavetraders_coast/index: Побережье работорговцев
+  countries/sunny_islands/colonial_rojo: Колониальное Ройо
+  countries/sunny_islands/colonies_of_makharatkha: Колонии Махаратхи
+  countries/sunny_islands/elka_s_oligarchy: Олигархия Элка
+  countries/sunny_islands/index: Солнечные острова
+  countries/vishnevodskoye_principality/index: Вышневодское княжество
+  countries/zalessk/index: Залесское княжество
+  countries/zanra/index: Королевство Занра
+  establishments/banks/drinrog_bank: Банк Дринрога
+  establishments/banks/harbs_nikolim_bank: Банк Харбса и Николима
+  establishments/banks/imperial_bank: Иллиорский Императорский банк
+  establishments/banks/index: Банки
+  establishments/banks/quick_deal_bank: Быстрое дело
+  establishments/banks/zanra_bank: Банк Занры
+  establishments/brothels/ad: Ад
+  establishments/brothels/index: Бордели
+  establishments/brothels/laguna_ljubvi: Лагуна любви
+  establishments/brothels/vysshij_svet: Высший свет
+  establishments/brothels/znoj: Зной
+  establishments/educational/fine_arts_academys: Академии искусств
+  establishments/educational/index: Учебные заведения
+  establishments/educational/vilarin_university: Виларинский университет магии
+  establishments/index: Заведения и локации
+  establishments/taverns/bolshaja_bochka: Большая бочка
+  establishments/taverns/desjat_bochonkov: Десять Бочонков
+  establishments/taverns/drevnij_strazh: Древний Страж
+  establishments/taverns/dva_luchnika: Два Лучника
+  establishments/taverns/dvenadcat_pjanic: Двенадцать Пьяниц
+  establishments/taverns/garcujuschie_djavoly: Гарцующие Дьяволы
+  establishments/taverns/index: Таверны и постоялые дворы
+  establishments/taverns/izumrudnaja_chasha: Изумрудная Чаша
+  establishments/taverns/izyskannaja_zmeja: Изысканная Змея
+  establishments/taverns/jantarnye_princy: Янтарные Принцы
+  establishments/taverns/kotjol_i_demon: Котёл и Демон
+  establishments/taverns/nabozhnyj_stervjatnik: Набожный Стервятник
+  establishments/taverns/oblako_i_serdce: Облако и Сердце
+  establishments/taverns/pod_toporom: Под топором
+  establishments/taverns/pokornaja_oxotnica: Покорная Охотница
+  establishments/taverns/radostnyj_paxar: Радостный Пахарь
+  establishments/taverns/severnaja: Северная
+  establishments/taverns/shumnyj_agnec: Шумный Агнец
+  establishments/taverns/staryj_gorod: Старый город
+  establishments/taverns/tancujuschaja_koza_i_gul: Танцующая коза и гуль
+  establishments/taverns/u_drakona: У дракона
+  establishments/taverns/u_mamy: У Мамы
+  establishments/taverns/udachlivaja_butylka: Удачливая Бутылка
+  establishments/taverns/udachlivyj_glashataj: Удачливый Глашатай
+  establishments/taverns/volshebnaja_boroda: Волшебная Борода
+  establishments/taverns/vybor_grazhdanina: Выбор гражданина
+  establishments/taverns/zhadnyj_medved: Жадный Медведь
+  geography/border_river: р. Граничная
+  geography/changeling_forest: Подменный лес
+  geography/dark_ocean: Тёмный океан
+  geography/forest_of_horrors: Лес Ужасов
+  geography/frosty_marsh: Морозное болото
+  geography/great_desert: Великая пустыня
+  geography/imperial_forest: Императорский лес
+  geography/index: География
+  geography/long_swamp: Долгое болото
+  geography/monstrous_sea: Монструозное море
+  geography/neverland: Неверлэнд
+  geography/old_forest: Старый лес
+  geography/river_of_doom: р. Гиблая
+  geography/small_forest: Маленький лес
+  guilds/amalgam: Амальгама
+  guilds/arcane_blacksmiths: Мистические Кователи
+  guilds/arcanum: Арканум
+  guilds/bersan_lumberers: Древотёсы Берсана
+  guilds/black_hoods: Чёрные капюшоны
+  guilds/black_riders: Чёрные всадники
+  guilds/coldwave: Хладовей
+  guilds/dawn_dolphins: Рассветные Дельфины
+  guilds/desert_cartel: Пустынный картель
+  guilds/drinrog_shipbuilders: Корабелы Дринрога
+  guilds/drinrog_union: Дринрогский союз
+  guilds/fire_salamander: Огненная Саламандра
+  guilds/freemasons: Вольные Каменщики
+  guilds/grain_merchant_league: Лига зерноторговцев
+  guilds/grey_avangard: Серый Авангард
+  guilds/guild_of_assassins: Гильдия убийц
+  guilds/illior_alchemists: Алхимики Иллиора
+  guilds/illior_mint: Гильдия монетчиков Иллиора
+  guilds/index: Гильдии
+  guilds/makharatkha_blacksmiths: Махаратские Кузнецы
+  guilds/metal_makers: Гильдия металлургов
+  guilds/mighty_brigade: Могучая Бригада
+  guilds/mirk: Мрак
+  guilds/north_road: Северный путь
+  guilds/precious: Драгоценные
+  guilds/ruby_sunset: Рубиновый Закат
+  guilds/seawolves: Морские волки
+  guilds/sewer_rats: Канализационные Крысы
+  guilds/sunlions: Солнечные Львы
+  guilds/sunny_company: Солнечная компания
+  guilds/white_dogs: Белые Псы
+  guilds/zanra_pyrotechnicians: Пиротехники Занры
+  history/arnost_catastrophe: Катастрофа в Арносте
+  history/era_first_humans: Эпоха Первых людей
+  history/era_great_war_summary: Эпоха Великой войны (кратко)
+  history/era_imperial: Имперская эпоха
+  history/era_new_age: Новое время
+  history/era_troubles: Смутные годы
+  history/great_war: Великая война
+  history/index: История Дедрела
+  history/second_igni_rojo_war: Вторая война Игни и Ройо
+  history/vilarin_convention: Виларинский конвент
+  index: Главная
+  knowledges/ancestors_cult: Культ Предков
+  knowledges/astronomy: Астрономия
+  knowledges/beliefs_of_the_land_of_oases: Верования Края Оазисов
+  knowledges/book_web: Книжная паутина
+  knowledges/church_of_cuthbert: Церковь Катберта
+  knowledges/church_of_the_stars: Церковь Звёзд
+  knowledges/common_illnesses: Обычные болезни
+  knowledges/cults_of_the_archdemon_plateau: Культы Плато Архидемона
+  knowledges/demons: Демоны
+  knowledges/dragons: Драконы
+  knowledges/elves: Эльфы
+  knowledges/fairies: Феи
+  knowledges/first_humans: Первые люди
+  knowledges/humans: Люди
+  knowledges/index: Знания Дедрела
+  knowledges/languages: Языки
+  knowledges/magic_diseases: Магические болезни
+  knowledges/magical_eavesdropping: Магическая прослушка
+  knowledges/monetary_system: Монетарная система
+  knowledges/pantheon_of_zanra: Пантеон Занры
+  knowledges/planes: Планы бытия
+  knowledges/polytheism_igni: Многобожие Игни
+  knowledges/services_prices: Услуги и цены
+  knowledges/tracking_water: Следящая вода
+  knowledges/zalessk_beliefs: Верования Залесского княжества
+  media/characters/index: characters
+  media/characters/tagpage>opia: tagpage>opia
+  media/countries/index: countries
+  media/countries/tagpage>larcia: tagpage>Larcia
+  media/index: media
+  notes: notes
+  quartz: quartz
+  rules/allconditions/_conditions_hub: Все состояния
+  rules/allconditions/condition_adapt_air_sacs: Дыхательные мешки
+  rules/allconditions/condition_adapt_bone_plate: Костяной панцирь
+  rules/allconditions/condition_adapt_bulging_eyes: Выпуклые глаза
+  rules/allconditions/condition_adapt_claws: Когти
+  rules/allconditions/condition_adapt_darkvision: Кошачий глаз
+  rules/allconditions/condition_adapt_flexibility: Гибкость
+  rules/allconditions/condition_adapt_gills: Жабры
+  rules/allconditions/condition_adapt_keen_senses: Звериное чутьё
+  rules/allconditions/condition_adapt_loose_joints: Смещённые суставы
+  rules/allconditions/condition_adapt_nictitating: Вторые веки
+  rules/allconditions/condition_adapt_regeneration: Регенерация
+  rules/allconditions/condition_adapt_reverse_knees: Обратные колени
+  rules/allconditions/condition_adapt_scales: Чешуя
+  rules/allconditions/condition_adapt_scent: Нюх
+  rules/allconditions/condition_adapt_thick_skin: Толстая кожа
+  rules/allconditions/condition_big_cover: Большое укрытие
+  rules/allconditions/condition_bleeding: Кровотечение
+  rules/allconditions/condition_blind: Ослепление
+  rules/allconditions/condition_body_language: Язык тела
+  rules/allconditions/condition_burning: Горение
+  rules/allconditions/condition_clinch: В клинче
+  rules/allconditions/condition_curse: Проклятье
+  rules/allconditions/condition_disoriented: Дезориентация
+  rules/allconditions/condition_dying: Умирает
+  rules/allconditions/condition_entangled: Спутан
+  rules/allconditions/condition_exhausted: Без Сил
+  rules/allconditions/condition_false_life: Ложная жизнь
+  rules/allconditions/condition_fatigued: Выдохшийся
+  rules/allconditions/condition_fear: Страх
+  rules/allconditions/condition_frenzy: Исступление
+  rules/allconditions/condition_full_paralysis: Полный паралич
+  rules/allconditions/condition_genetic_memory_atletism: "Генетическая память: Атлетика"
+  rules/allconditions/condition_genetic_memory_craftsmanship: "Генетическая память: Ремесло"
+  rules/allconditions/condition_genetic_memory_cultural_awareness: "Генетическая память: Культурная осведомлённость"
+  rules/allconditions/condition_genetic_memory_deception: "Генетическая память: Обман"
+  rules/allconditions/condition_genetic_memory_engineering: "Генетическая память: Инженерное дело"
+  rules/allconditions/condition_genetic_memory_healing: "Генетическая память: Лечение"
+  rules/allconditions/condition_genetic_memory_insight: "Генетическая память: Проницательность"
+  rules/allconditions/condition_genetic_memory_interpretation: "Генетическая память: Интерпретация"
+  rules/allconditions/condition_genetic_memory_intimidation: "Генетическая память: Запугивание"
+  rules/allconditions/condition_genetic_memory_knowledge: "Генетическая память: Знание"
+  rules/allconditions/condition_genetic_memory_logic_reasoning: "Генетическая память: Логика и рассуждение"
+  rules/allconditions/condition_genetic_memory_perception: "Генетическая память: Внимательность"
+  rules/allconditions/condition_genetic_memory_performance: "Генетическая память: Выступление"
+  rules/allconditions/condition_genetic_memory_persuasion: "Генетическая память: Убеждение"
+  rules/allconditions/condition_genetic_memory_research: "Генетическая память: Исследование"
+  rules/allconditions/condition_genetic_memory_stealth: "Генетическая память: Скрытность"
+  rules/allconditions/condition_genetic_memory_survival: "Генетическая память: Выживание"
+  rules/allconditions/condition_grappled: Схвачен
+  rules/allconditions/condition_knockout: Нокаут
+  rules/allconditions/condition_mut_brittle_bones: Хрупкие кости
+  rules/allconditions/condition_mut_cataract: Бельмо
+  rules/allconditions/condition_mut_extra_arm: Лишняя рука
+  rules/allconditions/condition_mut_flesh_rejection: Отторжение плоти
+  rules/allconditions/condition_mut_flooded_lungs: Отёкшие лёгкие
+  rules/allconditions/condition_mut_frailty_con: "Слабость: Телосложение"
+  rules/allconditions/condition_mut_frailty_dex: "Слабость: Ловкость"
+  rules/allconditions/condition_mut_frailty_rea: "Слабость: Реакция"
+  rules/allconditions/condition_mut_frailty_str: "Слабость: Сила"
+  rules/allconditions/condition_mut_fused_fingers: Сросшиеся пальцы
+  rules/allconditions/condition_mut_hideous: Безобразие
+  rules/allconditions/condition_mut_ill_humours: Дурная кровь
+  rules/allconditions/condition_mut_photophobia: Светобоязнь
+  rules/allconditions/condition_mut_restless: Скверный сон
+  rules/allconditions/condition_mut_sagging_skin: Оплывшая кожа
+  rules/allconditions/condition_mut_shortness_of_breath: Одышка
+  rules/allconditions/condition_mut_stunted_tail: Недоразвитый хвост
+  rules/allconditions/condition_mut_swollen_joints: Опухшие суставы
+  rules/allconditions/condition_off_guard: Сбит с толку
+  rules/allconditions/condition_pain: Боль
+  rules/allconditions/condition_partial_paralysis: Частичный паралич
+  rules/allconditions/condition_poison_combat: Отравление (боевое)
+  rules/allconditions/condition_pressed: Зажат
+  rules/allconditions/condition_prone: Лежит
+  rules/allconditions/condition_small_cover: Малое укрытие
+  rules/allconditions/condition_stunned: Оглушение
+  rules/allconditions/condition_suffocating: Удушение
+  rules/allconditions/condition_tactical_breakdown: Тактический разбор
+  rules/allconditions/condition_taunt: Провокация
+  rules/allconditions/condition_terror: Ужас
+  rules/allconditions/condition_withering: Увядание
+  rules/allconditions/index: allconditions
+  rules/allmaneuvers/_maneuvers_hub: Все манёвры
+  rules/allmaneuvers/index: allmaneuvers
+  rules/allmaneuvers/maneuver_absolute_calm: Абсолютное спокойствие
+  rules/allmaneuvers/maneuver_absolute_evasion: Абсолютное уклонение
+  rules/allmaneuvers/maneuver_armor_piersing_shot: Бронебойный выстрел
+  rules/allmaneuvers/maneuver_attack_of_opportunity: Атака по возможности
+  rules/allmaneuvers/maneuver_bash: Удар
+  rules/allmaneuvers/maneuver_blind_spot: Слепое пятно
+  rules/allmaneuvers/maneuver_block: Блок
+  rules/allmaneuvers/maneuver_body_language: Язык тела
+  rules/allmaneuvers/maneuver_bow_shot: Выстрел из лука
+  rules/allmaneuvers/maneuver_braced_shot: Выстрел с упора
+  rules/allmaneuvers/maneuver_breath_weapon_acid: "Драконье дыхание: кислота"
+  rules/allmaneuvers/maneuver_breath_weapon_cold: "Драконье дыхание: холод"
+  rules/allmaneuvers/maneuver_breath_weapon_electric: "Драконье дыхание: молния"
+  rules/allmaneuvers/maneuver_breath_weapon_heat: "Драконье дыхание: огонь"
+  rules/allmaneuvers/maneuver_butterfly_effect: Эффект бабочки
+  rules/allmaneuvers/maneuver_citadel_of_reason: Цитадель разума
+  rules/allmaneuvers/maneuver_closed_eyes: Закрытые глаза
+  rules/allmaneuvers/maneuver_common_monster_bite: Укус
+  rules/allmaneuvers/maneuver_cornering: Загнать в угол
+  rules/allmaneuvers/maneuver_covering_blow: Накрывающий удар
+  rules/allmaneuvers/maneuver_crossbow_shot: Выстрел из арбалета
+  rules/allmaneuvers/maneuver_crowding: Теснить
+  rules/allmaneuvers/maneuver_destroyers_intuition: Интуиция разрушителя
+  rules/allmaneuvers/maneuver_disengage: Разорвать дистанцию
+  rules/allmaneuvers/maneuver_dodge: Уклонение
+  rules/allmaneuvers/maneuver_draconic_roar: Драконий рёв
+  rules/allmaneuvers/maneuver_empty_mind: Пустой ум
+  rules/allmaneuvers/maneuver_expose_weakness: Вскрыть карты
+  rules/allmaneuvers/maneuver_feint_attack: Финт
+  rules/allmaneuvers/maneuver_finishing_blow: Добивание
+  rules/allmaneuvers/maneuver_firearm_shot: Выстрел из огнестрела
+  rules/allmaneuvers/maneuver_flaming_soul: Пламенная душа
+  rules/allmaneuvers/maneuver_flank_attack: Атака с фланга
+  rules/allmaneuvers/maneuver_fly: Полёт
+  rules/allmaneuvers/maneuver_flying_shot: Выстрел в полёте
+  rules/allmaneuvers/maneuver_hide_behind_shield: Спрятаться за щитом
+  rules/allmaneuvers/maneuver_human_flow_state: Состояние потока
+  rules/allmaneuvers/maneuver_hypnotic_gaze: Гипнотический взгляд
+  rules/allmaneuvers/maneuver_incredible_grace: Невероятная грация
+  rules/allmaneuvers/maneuver_inspiring_presence: Воодушевляющее присутствие
+  rules/allmaneuvers/maneuver_instant_intercept: Мгновенный перехват
+  rules/allmaneuvers/maneuver_interact: Взаимодействие
+  rules/allmaneuvers/maneuver_intercepting_shot: Перехват
+  rules/allmaneuvers/maneuver_last_stand: Из Последних Сил
+  rules/allmaneuvers/maneuver_leaders_gaze: Взгляд вожака
+  rules/allmaneuvers/maneuver_leg_sweep: Подсечка
+  rules/allmaneuvers/maneuver_mobile_marksman: Выстрел из-за укрытия
+  rules/allmaneuvers/maneuver_monster_attack_of_opportunity: Атака по возможности (m)
+  rules/allmaneuvers/maneuver_monster_claw_slash: Полоснуть
+  rules/allmaneuvers/maneuver_monster_jaw_lock: Мёртвая хватка
+  rules/allmaneuvers/maneuver_monster_leap: Прыжок
+  rules/allmaneuvers/maneuver_monster_maul: Загрызть
+  rules/allmaneuvers/maneuver_monster_pack_howl: Вой стаи
+  rules/allmaneuvers/maneuver_monster_pin_down: Придавить
+  rules/allmaneuvers/maneuver_monster_pounce: Рывок
+  rules/allmaneuvers/maneuver_monster_ram: Таран
+  rules/allmaneuvers/maneuver_monster_retaliate: Ответный укус
+  rules/allmaneuvers/maneuver_monster_venom_bite: Ядовитый укус
+  rules/allmaneuvers/maneuver_overwatch: Дозор
+  rules/allmaneuvers/maneuver_paired_strike: Парный удар
+  rules/allmaneuvers/maneuver_penetrating_strike: Проникающий удар
+  rules/allmaneuvers/maneuver_phantom_tread: Фантомный шаг
+  rules/allmaneuvers/maneuver_plant_berdiche: Воткнуть бердыш
+  rules/allmaneuvers/maneuver_power_bash: Удар с замахом
+  rules/allmaneuvers/maneuver_preemptive_thrust: Упреждающий выпад
+  rules/allmaneuvers/maneuver_punishing_miss: Карающий промах
+  rules/allmaneuvers/maneuver_rage: Ярость
+  rules/allmaneuvers/maneuver_ranged_riposte: Ответный выстрел
+  rules/allmaneuvers/maneuver_rapid_bow_shot: Быстрый выстрел из лука
+  rules/allmaneuvers/maneuver_read_scroll: Прочитать свиток
+  rules/allmaneuvers/maneuver_regeneration: Регенерация
+  rules/allmaneuvers/maneuver_reload: Перезарядка
+  rules/allmaneuvers/maneuver_reserve_stamina: Резервная выносливость
+  rules/allmaneuvers/maneuver_rewrite_moment: Переписать момент
+  rules/allmaneuvers/maneuver_riposte: Ответная атака
+  rules/allmaneuvers/maneuver_shield_bash: Удар щитом
+  rules/allmaneuvers/maneuver_sniper_shot: Снайперский выстрел
+  rules/allmaneuvers/maneuver_steel_barrier: Стальной барьер
+  rules/allmaneuvers/maneuver_steel_momentum: Стальная инерция
+  rules/allmaneuvers/maneuver_sunder_block: Прорубание защиты
+  rules/allmaneuvers/maneuver_superposition: Суперпозиция
+  rules/allmaneuvers/maneuver_sweeping_arc: Широкий размах
+  rules/allmaneuvers/maneuver_swing: Взмах
+  rules/allmaneuvers/maneuver_swing_on_a_move: Взмах на ходу
+  rules/allmaneuvers/maneuver_tactical_breakdown: Тактический разбор
+  rules/allmaneuvers/maneuver_take_ranged_aim: Прицеливание дальнобойным оружием
+  rules/allmaneuvers/maneuver_taunt: Провокация
+  rules/allmaneuvers/maneuver_through_the_pain: Сквозь боль
+  rules/allmaneuvers/maneuver_thrust: Выпад
+  rules/allmaneuvers/maneuver_trow: Метнуть
+  rules/allmaneuvers/maneuver_unbreakable: Несокрушимость
+  rules/allmaneuvers/maneuver_uncanny_metabolism: Невероятный метаболизм
+  rules/allmaneuvers/maneuver_vector_glide: Векторное скольжение
+  rules/allmaneuvers/maneuver_volt_step: Вольт
+  rules/allmaneuvers/maneuver_weak_spot: Слабое место
+  rules/allmaneuvers/maneuver_will_aura: Аура воли
+  rules/allmaneuvers/maneuver_wings_dive_strike: "Крылья: Пикирующая атака"
+  rules/allmaneuvers/maneuver_world_favors_me: Мир на моей стороне
+  rules/allmutations/_mutations_hub: Все мутации
+  rules/allmutations/demon_blood: Кровь демонов
+  rules/allmutations/demon_blood_magic: Магия крови
+  rules/allmutations/demon_claws: Демонические когти
+  rules/allmutations/demon_darkvision: Темновидение (демон)
+  rules/allmutations/demon_huge_size: Огромный размер
+  rules/allmutations/demon_keen_smell: Острый нюх (демон)
+  rules/allmutations/demon_rage: Ярость
+  rules/allmutations/demon_regeneration: Регенерация
+  rules/allmutations/demon_succubus_ancestor: Предок-суккуб
+  rules/allmutations/demon_tail: Хвост (демон)
+  rules/allmutations/demon_thick_skin: Толстая кожа
+  rules/allmutations/demon_wings: Демонические крылья
+  rules/allmutations/draconic_roar: Драконий рёв
+  rules/allmutations/dragon_blood: Кровь драконов
+  rules/allmutations/dragon_breath_weapon_acid: "Драконье дыхание: кислота"
+  rules/allmutations/dragon_breath_weapon_cold: "Драконье дыхание: холод"
+  rules/allmutations/dragon_breath_weapon_electric: "Драконье дыхание: молния"
+  rules/allmutations/dragon_breath_weapon_heat: "Драконье дыхание: огонь"
+  rules/allmutations/dragon_claws: Драконьи когти
+  rules/allmutations/dragon_darkvision: Темновидение (дракон)
+  rules/allmutations/dragon_draconic_traits: Драконьи черты
+  rules/allmutations/dragon_hypnotic_gaze: Гипнотический взгляд
+  rules/allmutations/dragon_lethargy: Летаргия
+  rules/allmutations/dragon_rebirth: Перерождение
+  rules/allmutations/dragon_scales: Чешуя
+  rules/allmutations/dragon_tail: Хвост (дракон)
+  rules/allmutations/dragon_true_sight: Истинное зрение
+  rules/allmutations/dragon_wings: Драконьи крылья
+  rules/allmutations/elf_absolute_calm: Абсолютное спокойствие
+  rules/allmutations/elf_astralomancy: Астраломансия
+  rules/allmutations/elf_blood: Кровь эльфов
+  rules/allmutations/elf_darkvision: Темновидение (эльф)
+  rules/allmutations/elf_elven_traits: Эльфийские черты
+  rules/allmutations/elf_flaming_soul: Пламенная душа
+  rules/allmutations/elf_flexibility: Гибкость
+  rules/allmutations/elf_immunity: Иммунитет
+  rules/allmutations/elf_incredible_grace: Невероятная грация
+  rules/allmutations/elf_keen_hearing: Острый слух (эльф)
+  rules/allmutations/elf_longevity: Долголетие
+  rules/allmutations/elf_trance: Транс
+  rules/allmutations/elf_whisper_of_stones: Шёпот камней
+  rules/allmutations/fay_blood: Кровь фей
+  rules/allmutations/fay_chaos_magic: Магия хаоса
+  rules/allmutations/fay_claws: Фейские когти
+  rules/allmutations/fay_fay_traits: Черты фей
+  rules/allmutations/fay_feral_magic: Феральная магия
+  rules/allmutations/fay_feral_traits: Феральные черты
+  rules/allmutations/fay_keen_hearing: Острый слух (фей)
+  rules/allmutations/fay_keen_smell: Острый нюх (фей)
+  rules/allmutations/fay_minor_transformation: Малое превращение
+  rules/allmutations/fay_shapeshifting: Шейпшифтинг
+  rules/allmutations/fay_small_size: Маленький размер
+  rules/allmutations/fay_speak_with_animals: Разговор с животными
+  rules/allmutations/fay_speak_with_trees: Разговор с деревьями
+  rules/allmutations/first_human_blood: Кровь первых людей
+  rules/allmutations/human_adaptability: Адаптивность
+  rules/allmutations/human_adaptability_cha: "Адаптивность: Харизма"
+  rules/allmutations/human_adaptability_con: "Адаптивность: Телосложение"
+  rules/allmutations/human_adaptability_dex: "Адаптивность: Ловкость"
+  rules/allmutations/human_adaptability_int: "Адаптивность: Интуиция"
+  rules/allmutations/human_adaptability_log: "Адаптивность: Логика"
+  rules/allmutations/human_adaptability_luck: "Адаптивность: Удача"
+  rules/allmutations/human_adaptability_rea: "Адаптивность: Реакция"
+  rules/allmutations/human_adaptability_str: "Адаптивность: Сила"
+  rules/allmutations/human_adaptability_will: "Адаптивность: Сила воли"
+  rules/allmutations/human_flow_state: Состояние потока
+  rules/allmutations/human_from_stellar_abyss: Из звёздной бездны
+  rules/allmutations/human_genetic_memory: Генетическая память
+  rules/allmutations/human_learnability: Обучаемость
+  rules/allmutations/human_pathfinders_will: Воля первооткрывателей
+  rules/allmutations/human_psionics_empathy: "Псионика: Эмпатия"
+  rules/allmutations/human_psionics_narrative_resonance: "Псионика: Нарративный резонанс"
+  rules/allmutations/human_psionics_telekinesis: "Псионика: Телекинез"
+  rules/allmutations/human_psionics_telepathy: "Псионика: Телепатия"
+  rules/allmutations/human_psionics_zero: "Псионика: Ноль"
+  rules/allmutations/human_social_animal: Социальное животное
+  rules/allmutations/index: allmutations
+  rules/alltalents/_talents_hub: Все таланты
+  rules/alltalents/absolute_evasion: Абсолютное уклонение
+  rules/alltalents/adaptive_physique_acid: Адаптивное тело [кислотный урон]
+  rules/alltalents/adaptive_physique_bludgeoning: Адаптивное тело [дробящий урон]
+  rules/alltalents/adaptive_physique_cold: Адаптивное тело [морозный урон]
+  rules/alltalents/adaptive_physique_electric: Адаптивное тело [электрический урон]
+  rules/alltalents/adaptive_physique_heat: Адаптивное тело [огненный урон]
+  rules/alltalents/adaptive_physique_necrotic: Адаптивное тело [некротический урон]
+  rules/alltalents/adaptive_physique_piercing: Адаптивное тело [колющий урон]
+  rules/alltalents/adaptive_physique_radiant: Адаптивное тело [лучевой урон]
+  rules/alltalents/adaptive_physique_slashing: Адаптивное тело [режущий урон]
+  rules/alltalents/adaptive_physique_sonic: Адаптивное тело [звуковой урон]
+  rules/alltalents/anomalous_luck: Аномальное везение
+  rules/alltalents/armor_piersing_shot: Бронебойный выстрел
+  rules/alltalents/bad_feeling: Плохое предчувствие
+  rules/alltalents/biomancy: Биомантия
+  rules/alltalents/blind_spot: Слепое пятно
+  rules/alltalents/blood_scent: Чующий кровь
+  rules/alltalents/body_language: Язык тела
+  rules/alltalents/but_no: А вот и нет!
+  rules/alltalents/butterfly_effect: Эффект бабочки
+  rules/alltalents/chain_reaction: Цепная реакция
+  rules/alltalents/citadel_of_reason: Цитадель разума
+  rules/alltalents/closed_eyes: Закрытые глаза
+  rules/alltalents/combat_readiness: Боевая готовность
+  rules/alltalents/cornering: Загнать в угол
+  rules/alltalents/covering_blow: Накрывающий удар
+  rules/alltalents/crowding: Теснить
+  rules/alltalents/destroyers_intuition: Интуиция разрушителя
+  rules/alltalents/dexterous_tail: Ловкий хвост
+  rules/alltalents/empty_mind: Пустой ум
+  rules/alltalents/expert: Эксперт
+  rules/alltalents/explosive_personality: Взрывной характер
+  rules/alltalents/expose_weakness: Вскрыть карты
+  rules/alltalents/feint_attack: Финт
+  rules/alltalents/flank_attack: Атака с фланга
+  rules/alltalents/fluid_motion: Пластичность движений
+  rules/alltalents/gamblers_intuition: Чутьё игрока
+  rules/alltalents/geomancy: Геомантия
+  rules/alltalents/heightened_reflexes: Обострённые рефлексы
+  rules/alltalents/hydromancy: Гидромантия
+  rules/alltalents/impenetrable_flesh: Непробиваемая плоть
+  rules/alltalents/index: alltalents
+  rules/alltalents/inspiring_presence: Воодушевляющее присутствие
+  rules/alltalents/instant_intercept: Мгновенный перехват
+  rules/alltalents/intercepting_shot: Перехват
+  rules/alltalents/last_stand: Из Последних Сил
+  rules/alltalents/leaders_gaze: Взгляд вожака
+  rules/alltalents/leg_sweep: Подсечка
+  rules/alltalents/leverage_point: Точка приложения силы
+  rules/alltalents/living_lie_detector: Живой детектор лжи
+  rules/alltalents/mobile_marksman: Выстрел из-за укрытия
+  rules/alltalents/overwatch: Дозор
+  rules/alltalents/pack_alpha: Вожак
+  rules/alltalents/paired_strike: Парный удар
+  rules/alltalents/path_echo: Путь Эха
+  rules/alltalents/path_flow: Путь Потока
+  rules/alltalents/path_ice: Путь Льда
+  rules/alltalents/path_mending: Путь Врачевания
+  rules/alltalents/path_sculpting: Путь Ваяния
+  rules/alltalents/path_squall: Путь Шквала
+  rules/alltalents/pattern_recognition: Поиск паттерна
+  rules/alltalents/penetrating_strike: Проникающий удар
+  rules/alltalents/phantom_tread: Фантомный шаг
+  rules/alltalents/plant_berdiche: Воткнуть бердыш
+  rules/alltalents/portent: Предвидение
+  rules/alltalents/power_bash: Удар с замахом
+  rules/alltalents/preemptive_thrust: Упреждающий удар
+  rules/alltalents/punishing_miss: Карающий промах
+  rules/alltalents/pyromancy: Пиромантия
+  rules/alltalents/ranged_riposte: Ответный выстрел
+  rules/alltalents/rapid_bow_shot: Быстрый выстрел из лука
+  rules/alltalents/reserve_stamina: Резервная выносливость
+  rules/alltalents/rewrite_moment: Переписать момент
+  rules/alltalents/shadowmancy: Тенемантия
+  rules/alltalents/sharp_mind: Острый ум
+  rules/alltalents/shield_bash: Удар щитом
+  rules/alltalents/silver_tongue: Серебряный язык
+  rules/alltalents/sixth_sense: Шестое чувство
+  rules/alltalents/sliding_step: Скользящий шаг
+  rules/alltalents/sniper_shot: Снайперский выстрел
+  rules/alltalents/soul_of_the_crowd: Душа толпы
+  rules/alltalents/steel_barrier: Стальной барьер
+  rules/alltalents/steel_momentum: Стальная инерция
+  rules/alltalents/strong_tail: Сильный хвост
+  rules/alltalents/sunder_block: Прорубание защиты
+  rules/alltalents/superposition: Суперпозиция
+  rules/alltalents/supreme_athleticism: Невероятный атлетизм
+  rules/alltalents/sweeping_arc: Широкий размах
+  rules/alltalents/swing_on_a_move: Взмах на ходу
+  rules/alltalents/tactical_breakdown: Тактический разбор
+  rules/alltalents/taunt: Провокация
+  rules/alltalents/technique_create: "Техника: Создать"
+  rules/alltalents/technique_imbue: "Техника: Внедрить"
+  rules/alltalents/technique_move: "Техника: Переместить"
+  rules/alltalents/technique_sense: "Техника: Почувствовать"
+  rules/alltalents/technique_transform: "Техника: Преобразовать"
+  rules/alltalents/thread_of_fate: Нить судьбы
+  rules/alltalents/through_the_pain: Сквозь боль
+  rules/alltalents/true_fortitude: Истинная стойкость
+  rules/alltalents/unbending_spirit: Несгибаемый дух
+  rules/alltalents/unbreakable: Несокрушимость
+  rules/alltalents/uncanny_metabolism: Невероятный метаболизм
+  rules/alltalents/untamed_might: Неукротимая мощь
+  rules/alltalents/unwavering_confidence: Непоколебимая уверенность
+  rules/alltalents/vector_glide: Векторное скольжение
+  rules/alltalents/ventomancy: Вентомантия
+  rules/alltalents/volt_step: Вольт
+  rules/alltalents/weak_morale: Слабый боевой дух
+  rules/alltalents/weak_spot: Слабое место
+  rules/alltalents/will_aura: Аура воли
+  rules/alltalents/world_favors_me: Мир на моей стороне
+  rules/armor: Доспехи
+  rules/beneficial-mutations: Полезные мутации
+  rules/bloodlines: Линии крови
+  rules/combat-and-damage: Бой и урон
+  rules/combat-maneuvers: Манёвры
+  rules/conditions: Состояния
+  rules/core-attributes: Основные характеристики
+  rules/core-mechanics: Система
+  rules/crafting: Крафт
+  rules/creature-building: Создание существ (гайд Мастера)
+  rules/development-table: Таблица развития
+  rules/enemies: Враги
+  rules/harmful-mutations: Вредные мутации
+  rules/homeland: Страна происхождения
+  rules/index: Правила
+  rules/inventory: Инвентарь и Разновидности Предметов
+  rules/magic: Магия
+  rules/progression-and-experience: Прогрессия и опыт
+  rules/quick-rules: Быстрые правила
+  rules/rituals: Ритуалы и длинные касты
+  rules/secondary-attributes: Вторичные характеристики
+  rules/skills: Навыки
+  rules/talents: Таланты
+  rules/weapons: Оружие
+gov:
+  countries/archdemon_s_plateau/index: нет; независимые города-государства под влиянием Асмодиуса
+  countries/bastion_union/index: триумвират трёх семей
+  countries/dragons_country/index: старейшина Золотого клана Яманами Танцующий в Лучах Двух Солнц и Совет кланов
+  countries/drinrog/index: народное собрание и князь
+  countries/druid_s_grove/index: древний орден друидов
+  countries/enforis/index: аристократическая республика — выборный князь Амрандуин I и сенат
+  countries/ethel/index: неизвестно
+  countries/gross/index: дворянская демократия — сейм и избранный им король Густав III
+  countries/igni/index: махараджа Чандер и присягнувшие ему раджи
+  countries/illior_empire/index: император Йорик Малдред Август Тарквиний и сенат
+  countries/khrell/index: нет; землями правят разные группировки
+  countries/land_of_oases/index: советы старейшин отдельных племён; общий совет племён — курултай
+  countries/makharatkha/index: абсолютная монархия; раджа Али Великолепный (фактически правят визири)
+  countries/rojo/index: король Джок I и протектор — император Йорик; в королевстве протектора представляет Ольма Варта Нумиция
+  countries/slavetraders_coast/index: олигархия; первенство держит гильдия Северный путь
+  countries/vishnevodskoye_principality/index: великий князь Эдвард Рутилий
+  countries/zalessk/index: вече и великий князь Гранн Кривой
+  countries/zanra/index: монарх Ши Кезон-Эбуций и Тайный совет

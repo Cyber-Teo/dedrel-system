@@ -1,0 +1,112 @@
+/* Подсказки и подписи значков карты. Палитра растра: чернила, пергамент, тёмно-красный. */
+.ev-tip.maplibregl-popup .maplibregl-popup-content {
+  background: #f2e9d8;
+  color: #2b2118;
+  border: 1px solid #7a1f1a;
+  border-radius: 6px;
+  padding: 4px 9px;
+  font:
+    600 12.5px/1.3 Georgia,
+    serif;
+  box-shadow: 0 2px 6px rgba(43, 33, 24, 0.35);
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ev-tip.maplibregl-popup .maplibregl-popup-tip {
+  display: none;
+}
+.ev-tip small {
+  color: #7a1f1a;
+  font-weight: 700;
+  margin-left: 2px;
+}
+.mini-pop.maplibregl-popup .maplibregl-popup-content {
+  background: #f2e9d8;
+  color: #2b2118;
+  border: 1px solid #7a1f1a;
+  border-radius: 8px;
+  padding: 10px 28px 10px 12px;
+  font:
+    13px/1.4 Georgia,
+    serif;
+  box-shadow: 0 3px 10px rgba(43, 33, 24, 0.4);
+}
+.mini-pop .mini-card p {
+  margin: 6px 0 0;
+}
+.mini-pop .mc-note {
+  color: #6b5a3c;
+  font-size: 12px;
+}
+.mini-pop .links {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 12.5px;
+}
+.mini-pop .links a {
+  color: #7a1f1a;
+}
+.mini-pop .badge {
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 0 7px;
+  color: #fff;
+  background: #8a6d3b;
+}
+.mini-pop .badge.canon {
+  background: #2f5d3a;
+}
+.mini-pop .badge.speculative {
+  background: #7a1f1a;
+}
+.mini-pop .mc-year {
+  margin-top: 8px;
+  font:
+    600 12.5px Georgia,
+    serif;
+  padding: 5px 10px;
+  border: 1px solid #7a1f1a;
+  background: #fff8e6;
+  color: #7a1f1a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.mini-pop .maplibregl-popup-close-button {
+  font-size: 18px;
+  color: #7a1f1a;
+}
+
+.mini-pop .mc-wiki {
+  display: inline-block;
+  margin: 8px 10px 0 0;
+  font:
+    600 12.5px Georgia,
+    serif;
+  color: #7a1f1a;
+}
+.mini-pop .links {
+  display: block;
+}
+.mini-pop .links a {
+  display: inline;
+}
+
+/* подпись «Путь к островам…»: только с z≥1.5, в 12 px с белым ореолом (переопределяет graph.css, файл не трогаем) */
+.sunny-arrow-lbl {
+  display: none;
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  margin-top: 0;
+  width: 112px;
+  white-space: normal !important;
+  line-height: 1.15;
+  text-align: left;
+}
+body.sea-lbl-on .sunny-arrow-lbl {
+  display: block;
+}

@@ -1,0 +1,580 @@
+.sc-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scen-lbl {
+  font:
+    600 13px Georgia,
+    serif;
+  color: var(--paper-dark, #2b2113);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+.scen-in {
+  position: relative;
+  display: inline-block;
+  padding: 7px 16px;
+  min-width: 64px;
+  text-align: center;
+  border-radius: 6px;
+  background: #f3ead4; /* плотная плашка закрывает подпись, нарисованную в подложке под ней */
+  box-shadow: 0 0 0 1px #b8892b66;
+}
+.scen-line-lbl {
+  color: #8c1c13;
+  font-style: italic;
+}
+.card.sc,
+.card.money,
+.card.sky {
+  font-size: 14px;
+}
+.sc-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  margin: 6px 0;
+  text-align: left;
+  padding: 8px 10px;
+}
+.sc-pick span {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.sc-pick i {
+  font-size: 12px;
+  color: var(--blood);
+}
+.sc-date {
+  font-weight: 600;
+  color: var(--blood);
+  margin-bottom: 4px;
+}
+.sc-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.sc-ctl {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+.sc-ctl button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.sc-steps {
+  margin: 6px 0 0;
+  padding-left: 22px;
+  font-size: 13px;
+}
+.sc-steps li {
+  cursor: pointer;
+  padding: 2px 0;
+  color: var(--ink-soft);
+}
+.sc-steps li.on {
+  color: var(--blood);
+  font-weight: 600;
+}
+.mn-in {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0;
+}
+.mn-in input,
+.mn-in select {
+  padding: 3px 6px;
+  border: 1px solid #8a7a5a;
+  border-radius: 4px;
+  background: #fffc;
+  color: var(--ink);
+  min-width: 0;
+  font-size: 14px;
+}
+.mn-in input {
+  width: 90px;
+}
+.mn-tab,
+.mn-prices {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0;
+}
+.mn-tab td,
+.mn-prices td {
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.mn-prices td.r,
+.mn-tab td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+.mn-prices td.hv {
+  color: var(--blood);
+  font-weight: 600;
+  min-width: 64px;
+  white-space: nowrap;
+  text-align: right;
+}
+.mn-prices small {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.card h4 {
+  margin: 10px 0 2px;
+  font: 700 15px var(--serif);
+}
+.mn-std {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 2px 0 4px;
+}
+.mn-warn {
+  font-size: 13px;
+  background: #f6e7b5;
+  border: 1px solid #d9a21a;
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin: 6px 0;
+}
+.mn-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--blood);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+.exp-opt {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 6px;
+}
+.exp-opt button.on {
+  background: #fff;
+  border-color: var(--gold);
+}
+.moon {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 6px 0;
+}
+.moon small {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.comet {
+  margin: 6px 0;
+}
+.comet small {
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+.card.sc .back,
+.card.sc > .meta,
+.card.sc > h3 {
+  margin-right: 44px;
+}
+.sc-grip {
+  display: none;
+}
+.sc-ctl {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: var(--parch);
+  padding: 6px 0;
+  margin: 8px 0 0;
+  box-shadow: 0 -6px 6px -4px var(--parch, #f1e6c8);
+}
+.sc-ctl button {
+  min-height: 40px;
+}
+@media (max-width: 900px) {
+  .card.sc .sc-grip {
+    display: block;
+    border: 0;
+    background: none;
+    padding: 0 4px 4px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  body.sc-sheet .card.sc.peek {
+    max-height: 34vh;
+  }
+  body.sc-sheet .card.sc.peek p,
+  body.sc-sheet .card.sc.peek .sc-steps,
+  body.sc-sheet .card.sc.peek .links,
+  body.sc-sheet .card.sc.peek .sc-note {
+    display: none;
+  }
+  body.sc-sheet .hist-legend {
+    bottom: calc(var(--dock-h, 90px) + var(--sheet-h, 0px) + 12px);
+  }
+  body.sc-sheet .al-legend {
+    bottom: calc(var(--dock-h) + var(--sheet-h, 0px) + 40px);
+  }
+  body.sc-sheet #zoomc {
+    bottom: calc(var(--dock-h) + var(--sheet-h, 0px) + var(--gap)) !important;
+  }
+}
+.card.sc > .x {
+  position: sticky;
+  float: right;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  min-width: 40px;
+  min-height: 36px;
+  background: var(--parch);
+  margin: -2px -2px 0 0;
+}
+.card.sc > .sc-grip {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  float: left;
+  background: var(--parch);
+}
+.card.sc .back {
+  clear: both;
+}
+.exp-sp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+/* экспорт: колонка внутри флайаута — размер, печать (лист + «без спойлеров»), внизу «Скачать» */
+.exp-opt.exp-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  margin: 2px 0 6px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.exp-opt.exp-col::before {
+  content: none;
+}
+.exp-col .exp-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.exp-col .exp-l {
+  flex: none;
+  width: 58px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.exp-col .exp-row button {
+  flex: 0 0 auto;
+}
+.exp-col .exp-row button.pt {
+  border-radius: 6px;
+  background: #fff9;
+  font-weight: 600;
+  min-width: 0;
+  white-space: nowrap;
+}
+#tools .exp-col .pt[aria-pressed='true'] {
+  background: #fff;
+  border-color: var(--blood);
+  color: var(--blood);
+}
+.exp-col .exp-sp {
+  padding-left: 58px;
+  font-size: 13px;
+  white-space: normal;
+}
+/* список сценариев: значок типа и год-бейдж */
+.sc-pick .sc-t {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.sc-pick .sc-ic {
+  flex: none;
+  color: var(--blood);
+}
+.sc-pick .sc-yr {
+  margin-left: auto;
+  flex: none;
+  font: 600 12px var(--text);
+  font-style: normal;
+  color: var(--parch);
+  background: var(--blood);
+  border-radius: 10px;
+  padding: 1px 8px;
+}
+/* ряд шага: три кнопки одной высоты */
+.sc-ctl button {
+  height: 32px;
+  min-height: 32px;
+  padding-top: 0;
+  padding-bottom: 0;
+  flex: 1 1 0;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .sc-ctl button {
+    height: 40px;
+    min-height: 40px;
+  }
+}
+/* цены: строки — сетка (название | значение | сколько раз хватит), значение не переносится и не обрезается */
+.mn-prices,
+.mn-prices tbody {
+  display: block;
+  width: 100%;
+}
+.mn-prices tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  column-gap: 8px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+}
+.mn-prices td {
+  border-bottom: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.mn-prices td.r {
+  white-space: nowrap;
+  text-align: right;
+  overflow-wrap: normal;
+}
+.mn-prices td.hv {
+  min-width: 0;
+  font-size: 13px;
+}
+/* календарь лун: иконки одного размера в колонке 32 px, на одной вертикали */
+.moon {
+  gap: 10px;
+}
+.moon > svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0 5px;
+  box-sizing: content-box;
+}
+.moon > div {
+  min-width: 0;
+}
+/* заголовок шага: 19 px, не выше двух строк */
+.card.sc > h3 {
+  font-size: 19px;
+  line-height: 1.2;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.sc-notice {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin: 0 0 4px;
+}
+@media (max-width: 900px) {
+  body.sc-sheet .card.sc.peek .sc-notice {
+    display: block;
+  }
+  body.sc-sheet .card.sc.peek .sc-date {
+    font-size: 13px;
+  }
+}
+/* прогулка: компактные кнопки, точки прогресса, закрытие 44×44 */
+.sc-tour-ctl {
+  position: static;
+  box-shadow: none;
+  margin: 6px 0 4px;
+  padding: 0;
+}
+.sc-tour-ctl button {
+  height: 36px;
+  min-height: 36px;
+  font-size: 18px;
+}
+.sc-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin: 2px 0 6px;
+}
+.sc-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.sc-dots i.on {
+  background: var(--blood);
+}
+.card.sc > .x {
+  min-width: 44px;
+  min-height: 44px;
+}
+/* цены: название и цена в первой строке; пояснение и «хватит на N» — второй строкой на всю ширину */
+.mn-prices tr {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.mn-prices td.pn {
+  grid-column: 1;
+  grid-row: 1;
+}
+.mn-prices td.r {
+  grid-column: 2;
+  grid-row: 1;
+}
+.mn-prices td.pnote {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  padding-bottom: 2px;
+  overflow-wrap: normal;
+}
+.mn-prices td.pnote small {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.mn-prices td.pnote b.hv {
+  font-size: 12px;
+  color: var(--blood);
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* источник — в одну строку, «См. также» следом */
+.card.sc .sc-src a {
+  display: inline;
+}
+.card.sc .sc-src {
+  display: block;
+  word-break: normal;
+  font-size: 12px;
+}
+/* телефон: шторка сценария не выше 46% экрана, текст шага виден без «Подробнее» */
+@media (max-width: 900px) {
+  body.sc-sheet .card.sc {
+    max-height: 46vh;
+    overflow-y: auto;
+  }
+  .card.sc p {
+    line-height: 1.4;
+  }
+}
+
+/* r7-B: на планшете (601–900 px) карточка сценария и прогулки — по содержимому, прижата к низу боковой колонки, не выше 46% окна */
+@media (min-width: 601px) and (max-width: 900px) {
+  #dossier > .card.sc {
+    flex: 0 0 auto;
+    margin-top: auto;
+    height: auto;
+    max-height: 46vh;
+  }
+}
+
+/* r8-A: «Следующий сценарий» на последнем шаге, подпись про клавиши, компактная свёрнутая шторка */
+.sc-ctl .sc-next {
+  flex: 1 1 100%;
+  order: 9;
+  white-space: normal;
+  height: auto;
+  min-height: 36px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.sc-keys {
+  font-size: 12px;
+  margin: 2px 0 6px;
+}
+.sc-tour-end {
+  position: static;
+  box-shadow: none;
+  margin: 0 0 4px;
+  padding: 0;
+}
+.sc-tour-end button {
+  font-size: 14px;
+}
+.sc-tour-ctl button {
+  font-size: 14px;
+}
+.sc-steps li {
+  scroll-margin-bottom: 64px;
+}
+.sc-peekbar {
+  display: none;
+}
+@media (max-width: 600px) {
+  body.sc-sheet .card.sc.peek {
+    max-height: 64px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+    height: 60px;
+  }
+  body.sc-sheet .card.sc.peek > :not(.x):not(.sc-grip):not(.sc-peekbar) {
+    display: none;
+  }
+  body.sc-sheet .card.sc.peek .sc-peekbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 14px;
+  }
+  body.sc-sheet .card.sc.peek .sc-peekbar span {
+    flex: 1 1 auto;
+    white-space: nowrap;
+  }
+  body.sc-sheet .card.sc.peek .sc-peekbar button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  body.sc-sheet .card.sc.peek > .sc-grip {
+    position: static;
+    float: none;
+    order: 3;
+    white-space: nowrap;
+    font-size: 13px;
+    padding: 0 4px;
+  }
+  body.sc-sheet .card.sc.peek > .x {
+    position: static;
+    float: none;
+    order: 4;
+    margin: 0;
+    flex: none;
+  }
+  /* × в строке заголовка и над списком сценариев: текст под него не заходит */
+  .card.sc > h3,
+  .card.sc > .meta,
+  .card.sc > .back {
+    margin-right: 48px;
+  }
+}

@@ -1,0 +1,367 @@
+# Династии и правители для ленты и диаграммы Ганта. Правится вручную (исходная хроника импорта в репозиторий не входит).
+dynasties_and_rulers:
+  - polity: Иллиор / Иллиорская империя (Тарквинии)
+    ruler: Малдред Август Тарквиний (Завоеватель)
+    from: 74 (глава Иллиора); 206 (император)
+    to: "210"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Гней Малдред Август Тарквиний
+    from: "210"
+    to: "214"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Маний Малдред Август Тарквиний
+    from: "214"
+    to: "260"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Джулиника (Кровавая)
+    from: "260"
+    to: 271 (ум. 277)
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Гай I
+    from: "271"
+    to: "302"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Норлэн
+    from: "302"
+    to: "325"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Шарли Тарквиния-Полонска
+    from: "325"
+    to: "?"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Густав
+    from: "?"
+    to: 394 (воскрешён нежитью)
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Брандетта
+    from: "394"
+    to: "?"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Риклаэрон (Строитель)
+    from: "409"
+    to: "482"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: три императора (не названы)
+    from: "482"
+    to: "515"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Каэлана
+    from: "515"
+    to: "? (до 553)"
+    source: history/era_imperial
+  - polity: Иллиорская империя
+    ruler: Маркус
+    from: "553"
+    to: "571"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Энфина (из Энфориса)
+    from: "571"
+    to: "610"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Сильвия
+    from: "610"
+    to: "625"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Люций
+    from: "625"
+    to: "658"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Гней II (правил сенат)
+    from: "658"
+    to: "691"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Ралоро (регенты Линри Фурия и Фернанд Тарквиний-Ежицки 692–706)
+    from: 691/692
+    to: "758"
+    source: history/era_troubles; characters/houses_clans/opia
+  - polity: Иллиорская империя
+    ruler: Элен
+    from: 758/759
+    to: "811"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Ралвек
+    from: "811"
+    to: "843"
+    source: history/era_troubles
+  - polity: Иллиорская империя
+    ruler: Лукас
+    from: "843"
+    to: "860"
+    source: history/era_new_age
+  - polity: Иллиорская империя
+    ruler: Элорен Несчастная
+    from: "860"
+    to: "912"
+    source: history/era_new_age
+  - polity: Иллиорская империя
+    ruler: Авл Малдред Август Тарквиний
+    from: "912"
+    to: "961"
+    source: history/era_new_age
+  - polity: Иллиорская империя
+    ruler: Нумерия Малдреда Августа Тарквиния
+    from: "961"
+    to: "985"
+    source: history/era_new_age; characters/yorick
+  - polity: Иллиорская империя
+    ruler: Йорик Малдред Август Тарквиний
+    from: "985"
+    to: наст.
+    source: characters/yorick
+  - polity: Королевство Гросс (Берсан)
+    ruler: Густав Ландовски (правитель Берсана)
+    from: 90-е
+    to: "?"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Ирина Ландовска
+    from: 147 (правительница); 151 (королева)
+    to: "?"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Миран Ландовски (последний Ландовски)
+    from: "?"
+    to: "188"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Дана Полонска (первая избранная)
+    from: "188"
+    to: "?"
+    source: countries/gross/index
+  - polity: Префектура Гросс
+    ruler: префекты по выбору знати (корона у императора)
+    from: "206"
+    to: "573"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Болеслава Полонска
+    from: "573"
+    to: "?"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: междуцарствие (Великий спор)
+    from: "644"
+    to: "657"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Ягелло Каспорович
+    from: "657"
+    to: "?"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Будимир Ристович
+    from: "?"
+    to: "870"
+    source: countries/gross/index
+  - polity: Королевство Гросс
+    ruler: Густав III (Летилий Харчевски)
+    from: "?"
+    to: наст.
+    source: characters/gustaviii
+  - polity: Королевство Ройо
+    ruler: Дамиан Тарквиний-Калатрава (династия Калатрава)
+    from: 560/562
+    to: "?"
+    source: countries/rojo/index
+  - polity: Королевство Ройо
+    ruler: династия Нарракез (в т.ч. Максимус Нарракез, ум. ≈809)
+    from: "641"
+    to: "855"
+    source: countries/rojo/index; knowledges/church_of_cuthbert
+  - polity: Королевство Ройо
+    ruler: Маргарита Калатрава (возвращение Калатрава)
+    from: "855"
+    to: "?"
+    source: countries/rojo/index
+  - polity: Королевство Ройо
+    ruler: Мигель I
+    from: "?"
+    to: июль 1005
+    source: characters/morena
+  - polity: Королевство Ройо
+    ruler: Морена I (регент Хуан Мануэль Мендоза)
+    from: июль 1005
+    to: осень 1005
+    source: characters/morena
+  - polity: Королевство Ройо (протекторат)
+    ruler: Джок I (Сильвертуф, Веласкез-Деламота); протектор — Йорик
+    from: октябрь 1005
+    to: наст.
+    source: characters/dzhok_i
+  - polity: Колониальное Ройо
+    ruler: регент Виктор Делавара
+    from: "1005"
+    to: наст.
+    source: countries/sunny_islands/colonial_rojo
+  - polity: Княжество Игни
+    ruler: Хашем I (первый махараджа)
+    from: 135–140
+    to: "?"
+    source: countries/igni/index
+  - polity: Княжество Игни
+    ruler: Шазмехр
+    from: "?"
+    to: "? (мир 294)"
+    source: countries/igni/index
+  - polity: Княжество Игни
+    ruler: Даас
+    from: "?"
+    to: "? (война 625)"
+    source: countries/igni/index
+  - polity: Княжество Игни
+    ruler: Чандер
+    from: "?"
+    to: наст.
+    source: history/second_igni_rojo_war
+  - polity: Тарпет
+    ruler: раджа Бахлед
+    from: "?"
+    to: −50
+    source: history/great_war
+  - polity: Махаратха
+    ruler: раджа Хапур
+    from: "?"
+    to: "473"
+    source: countries/makharatkha/index
+  - polity: Махаратха
+    ruler: нынешний род раджей
+    from: ≈706 (вывод)
+    to: наст.
+    source: countries/makharatkha/index
+  - polity: Махаратха
+    ruler: Али Великолепный (правят визири)
+    from: ≈998
+    to: наст.
+    source: countries/makharatkha/index
+  - polity: Королевство Занра (Кезон-Эбуции)
+    ruler: Ана
+    from: "817"
+    to: "837"
+    source: countries/zanra/index
+  - polity: Королевство Занра
+    ruler: Эрри
+    from: "837"
+    to: "882"
+    source: countries/zanra/index
+  - polity: Королевство Занра
+    ruler: Трэм
+    from: "882"
+    to: "911"
+    source: countries/zanra/index
+  - polity: Королевство Занра
+    ruler: Эрхи
+    from: "911"
+    to: "998"
+    source: countries/zanra/index
+  - polity: Королевство Занра
+    ruler: Ши Кезон-Эбуций
+    from: "998"
+    to: наст.
+    source: countries/zanra/index
+  - polity: Префектура Арност
+    ruler: префекты из Рутилиев или их ставленники
+    from: 672 (вновь с 753)
+    to: "818"
+    source: countries/vishnevodskoye_principality/index
+  - polity: Вышневодское княжество (Рутилии)
+    ruler: Тит Клатко Рутилий
+    from: "818"
+    to: "?"
+    source: countries/vishnevodskoye_principality/index
+  - polity: Вышневодское княжество
+    ruler: великий князь Эдвард Рутилий
+    from: "?"
+    to: наст.
+    source: countries/vishnevodskoye_principality/index
+  - polity: Олифанор / Княжество Энфорис
+    ruler: Адамар и Квеннид (соправители Олифанора)
+    from: −181
+    to: −86 (смерть Квеннид)
+    source: countries/enforis/index
+  - polity: Княжество Энфорис
+    ruler: Адамар (первый князь)
+    from: −81
+    to: ≈−71
+    source: countries/enforis/index
+  - polity: Княжество Энфорис
+    ruler: Амрандуин I (выборный князь)
+    from: "?"
+    to: наст.
+    source: countries/enforis/index
+  - polity: Залесское княжество
+    ruler: великий князь Гранн Кривой
+    from: "995"
+    to: наст.
+    source: countries/zalessk/index
+  - polity: Асмодиус
+    ruler: Жекид-Ваон (вождь освобождённых рабов)
+    from: −50
+    to: "?"
+    source: history/great_war
+  - polity: Асмодиус / Асмодийский союз
+    ruler: Махродан
+    from: "653"
+    to: 673 (в плену до ≈713)
+    source: countries/archdemon_s_plateau/index
+  - polity: Демоны на Дедреле
+    ruler: архидемон Асмодей
+    from: ≈−500
+    to: "1"
+    source: knowledges/demons
+  - polity: Первые люди
+    ruler: вождь Авиан (Эвиан)
+    from: ≈−500
+    to: ≈−490 (пал при Аркадии)
+    source: history/great_war
+  - polity: Республика Дринрог
+    ruler: выборный князь на 2 года (имя не названо); фактически гильдии, глава Дринрогского союза Валериус Серый
+    from: "777"
+    to: наст.
+    source: countries/drinrog/index; guilds/drinrog_union
+  - polity: Олигархия Элка
+    ruler: совет олигархов
+    from: "781"
+    to: наст.
+    source: countries/sunny_islands/elka_s_oligarchy
+  - polity: Святая Земля
+    ruler: епископ Катберт
+    from: "820"
+    to: "860"
+    source: knowledges/church_of_cuthbert
+  - polity: Страна Драконов
+    ruler: золотой дракон Фуруто
+    from: "? (852)"
+    to: "?"
+    source: history/era_new_age
+  - polity: Страна Драконов
+    ruler: Яманами Танцующий в Лучах Двух Солнц (старейшина Золотого клана)
+    from: "?"
+    to: наст.
+    source: countries/dragons_country/index
+  - polity: Виларинский университет / префектура Виларин
+    ruler: "ректоры: Меграм Вараний (530), Будос (до 672), Сарина (≈975–наст.)"
+    from: "530"
+    to: наст.
+    source: knowledges/book_web; history/arnost_catastrophe; characters/archmage_sarina
+  - polity: Иллиорская империя — префекты 1005
+    ruler: Квинта Эмилия (Иллиор, с 1004), Гортензия Нумиция (Рун), Тиберий Марций (Сарк), Аулус Гораций (Виларин); мэр Иллиора Децимус Фурий (с июля 1005); представитель в Ройо Ольма Нумиция
+    from: 1004–1005
+    to: наст.
+    source: countries/illior_empire/regions/*; characters/decimus_furia; characters/olma_numicia

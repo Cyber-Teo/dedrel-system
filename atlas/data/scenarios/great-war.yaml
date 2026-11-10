@@ -1,0 +1,53 @@
+# Сценарий: Великая война и победа над Асмодеем (−500…1).
+# Источники: события −500, −200, −111, −50 и 1 в data/events.yaml (вики history/great_war, history/era_great_war_summary и страницы мест). Только то, что сказано в описаниях событий;
+# даты −500 и −200 приблизительные («около» в хронике). Линии проведены по прямой и показывают порядок событий, а не дорогу.
+id: great-war
+title: Великая война и победа над Асмодеем (−500…1)
+summary: 'От первых порталов на Плато Архидемона около −500 года через Тарпет, предательство Рулфари и штурм Асмодиуса к последней битве и началу нового летосчисления в 1 году.'
+sources: [history/great_war, history/era_great_war_summary]
+steps:
+  - title: Первые порталы
+    date: { year: -500, label: около −500, note: приблизительная дата }
+    text: >-
+      На Плато Архидемона открываются первые порталы; демоны укрепляются и держат плацдарм почти до конца войны. Первые люди выжигают
+      земли вокруг. Плато зачаровывается на гибель драконам и эльфам.
+    camera: { place: geo:asmodius, zoom: 3 }
+    highlight:
+      places: [geo:asmodius]
+    sources: [history/great_war, history/era_great_war_summary, countries/archdemon_s_plateau/index, knowledges/demons]
+  - title: Битва при Тарпете
+    date: { year: -200, label: около −200, note: приблизительная дата }
+    text: >-
+      Асмодей идёт вверх по Сарати; ополчение задерживает, затем телепортируются эльфы и драконы. Две недели боёв; демоны отступают;
+      переломный момент.
+    camera: { place: geo:tarpet, zoom: 3.4 }
+    highlight:
+      places: [geo:tarpet]
+    sources: [history/great_war, history/era_great_war_summary]
+  - title: Предательство Рулфари
+    date: { year: -111 }
+    text: >-
+      Командующая одной из армий людей Рулфари, подкупленная демонами, опустошает амбары Овидая, угоняет жителей в рабство и
+      переходит на сторону архидемона Асмодея.
+    camera: { place: geo:oviday, zoom: 3.2 }
+    highlight:
+      places: [geo:oviday, geo:herift]
+    sources: [history/great_war, countries/archdemon_s_plateau/index, knowledges/demons]
+  - title: Штурм Асмодиуса
+    date: { year: -50 }
+    text: >-
+      Союзники штурмуют Асмодиус; огромные потери с обеих сторон; последний архидемон уходит. Эльфы и драконы покидают Дедрел:
+      пустеют Дагор, Эрелон, Силадель, Каллатис; число людей растёт, много новых городов.
+    camera: { place: geo:asmodius, zoom: 3.4 }
+    highlight:
+      places: [geo:asmodius, geo:dagor, geo:erelon, geo:siladel, geo:kallatis]
+    sources: [history/great_war, history/era_great_war_summary]
+  - title: Последняя битва
+    date: { year: 1, label: 1 год — год победы }
+    text: >-
+      Союзники находят убежище Асмодея в южной горе; Рулфари убита Роландо, Асмодей — Ларгири и Тирандалем. Год победы — первый год
+      новой эры.
+    camera: { place: geo:zakatnaya_buhta, zoom: 3 }
+    highlight:
+      places: [geo:zakatnaya_buhta]
+    sources: [history/great_war, history/era_great_war_summary, countries/archdemon_s_plateau/index, knowledges/demons, history/era_imperial]

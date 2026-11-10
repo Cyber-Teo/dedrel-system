@@ -1,0 +1,2499 @@
+# Потоки. Собрано scripts/import/build-registry.ts из выжимок лора и хроники (входы импорта в репозиторий не входят); дальше правится вручную.
+# Положение — по карте (x,y придут из газеттира), факты — по тексту вики.
+- id: flow:river_trade-067ff8
+  kind: river_trade
+  what: серебро и грузы, суда мимо Форта Болотного; пираты
+  from: Серебряные горы / Вышневодское княжество
+  to: Иллиор
+  sources:
+    - countries/illior_empire/regions/illior_empire_vilarin_region
+  confidence: canon
+  visibility: public
+- id: flow:river_trade-6d6477
+  kind: river_trade
+  what: перевалка речной торговли, редкие деревья и звери
+  from: Метис
+  to: Иллиор
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+  confidence: canon
+  visibility: public
+- id: flow:road-f60239
+  kind: road
+  what: тракт север-юг
+  from: север
+  to: юг (через Иллиор)
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:road-53340e
+  kind: road
+  what: тракт восток-запад
+  from: восток
+  to: запад (через Иллиор)
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:road-f3d7f4
+  kind: road
+  what: западный тракт, пошлины
+  from: Иллиор
+  to: Висентия, граница Гросса
+  sources:
+    - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: flow:road-a9ebe9
+  kind: road
+  what: восточный тракт
+  from: Иллиор
+  to: Камераска, Кориалум, Микрис
+  sources:
+    - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: flow:road-7757d1
+  kind: road
+  what: дорога на север
+  from: Кориалум
+  to: префектура Виларин
+  sources:
+    - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: flow:road-033ab4
+  kind: road
+  what: студенты и поступающие
+  from: Иллиор (Квартал магов)
+  to: Виларин
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:road-fbf2d1
+  kind: road
+  what: югозападный тракт Сервилиев
+  from: Гросс (юго-запад)
+  to: Иллиор
+  sources:
+    - characters/houses_clans/servilii
+  confidence: canon
+  visibility: public
+- id: flow:road-79c3fd
+  kind: road
+  what: древний тракт через Дагор
+  from: Север
+  to: Дринрог
+  sources:
+    - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: flow:trade-3c2d90
+  kind: trade
+  what: зерно
+  from: Сарк
+  to: Иллиор
+  sources:
+    - countries/illior_empire/regions/illior_empire_illior_region
+  confidence: canon
+  visibility: public
+- id: flow:trade-4d281b
+  kind: trade
+  what: продовольствие
+  from: Сарк
+  to: другие страны
+  sources:
+    - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: flow:trade-3d8c32
+  kind: trade
+  what: оружие и металлические изделия
+  from: Грейхельд
+  to: весь мир
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+  confidence: canon
+  visibility: public
+- id: flow:slave_trade-699fbb
+  kind: slave_trade
+  what: рабы через махаратских купцов
+  from: Побережье работорговцев / Плато архидемона
+  to: Иллиорская империя
+  sources:
+    - countries/illior_empire/index
+  confidence: canon
+  visibility: public
+- id: flow:caravan-4ec215
+  kind: caravan
+  what: торговые караваны Клавдиев
+  from: Империя
+  to: Махаратха
+  sources:
+    - characters/houses_clans/claudia
+  confidence: canon
+  visibility: public
+- id: flow:sea_river_trade-60fcc7
+  kind: sea_river_trade
+  what: грузы в речные порты
+  from: Вышневодское княжество, Гросс, Дринрог
+  to: Иллиор
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:migration-ccdeb1
+  kind: migration
+  what: больные и ищущие прорицаний
+  from: мир
+  to: Виларин
+  sources:
+    - countries/illior_empire/cities/city_vilarin
+  confidence: canon
+  visibility: public
+- id: flow:migration-6bad67
+  kind: migration
+  what: игроки и землевладельцы
+  from: мир
+  to: Дагор
+  sources:
+    - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: flow:migration-46118c
+  kind: migration
+  what: арендаторы (треть населения)
+  from: неграждане
+  to: Сарк
+  sources:
+    - countries/illior_empire/regions/illior_empire_sark_region
+  confidence: canon
+  visibility: public
+- id: flow:artifact_trade-e85f32
+  kind: artifact_trade
+  what: артефакты
+  from: Озеро Радужное, поля боя А/Б
+  to: Виларинский университет
+  sources:
+    - countries/illior_empire/regions/illior_empire_vilarin_region
+  confidence: canon
+  visibility: public
+- id: flow:military-d48597
+  kind: military
+  what: походы Малдреда
+  from: Иллиор
+  to: Восточные земли
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:military-1da5ef
+  kind: military
+  what: поход Вопискуса Юния (672)
+  from: империя
+  to: Арност
+  sources:
+    - characters/houses_clans/junia
+  confidence: canon
+  visibility: public
+- id: flow:military-5ad2e7
+  kind: military
+  what: добровольческий легион (817)
+  from: империя
+  to: Микрис
+  sources:
+    - characters/houses_clans/horatii
+  confidence: canon
+  visibility: public
+- id: flow:military-716827
+  kind: military
+  what: набеги
+  from: Вышневодское княжество
+  to: приграничье Руна
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+  confidence: canon
+  visibility: public
+- id: flow:military-1ccee6
+  kind: military
+  what: твари и нежить
+  from: Лес Ужасов / Префектура мертвецов
+  to: Рун
+  sources:
+    - countries/illior_empire/regions/illior_empire_run_region
+  confidence: canon
+  visibility: public
+- id: flow:military-e26801
+  kind: military
+  what: размещение XXIII легиона (1005)
+  from: Иллиор/Опии
+  to: Грейхельд
+  sources:
+    - characters/houses_clans/opia
+  confidence: canon
+  visibility: public
+- id: flow:local_trade-4997f3
+  kind: local_trade
+  what: рыба
+  from: окрестные хутора
+  to: Рыбный ряд, Иллиор
+  sources:
+    - countries/illior_empire/cities/city_illior
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_trakt-8661d8
+  kind: торговый тракт
+  what: товары, купцы, пиво, изделия из дерева
+  from: Данир
+  to: Иллиор
+  sources:
+    - countries/gross/regions/gross_central_region
+  confidence: canon
+  visibility: public
+- id: flow:doroga-a5d360
+  kind: дорога
+  what: древесина, пушнина
+  from: юго-западный тракт у «Четырёх тетеревов»
+  to: Подменный лес
+  sources:
+    - countries/gross/regions/gross_central_region
+  confidence: canon
+  visibility: public
+- id: flow:reka-c90e04
+  kind: река
+  what: рыба, торговля, хмель, зерно
+  from: Бредон / Кривой Лиор
+  to: Дринрог, Империя, Вышневодское княжество
+  sources:
+    - countries/gross/regions/gross_eastern_green_lands
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_liniya-4dde98
+  kind: морская линия
+  what: корабельный лес, пошлины, корабли Дринрога
+  from: Нижний Балаттер
+  to: Дринрог и другие страны
+  sources:
+    - countries/gross/regions/gross_lior_delta
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-985ff0
+  kind: торговля
+  what: корабельная и магическая древесина
+  from: Подменный лес
+  to: Данир, Дринрог, Солнечные острова
+  sources:
+    - countries/gross/regions/gross_changeling_forest
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-a4b91e
+  kind: торговля
+  what: хмель на ярмарках
+  from: Бредон
+  to: весь мир
+  sources:
+    - countries/gross/regions/gross_eastern_green_lands
+  confidence: canon
+  visibility: public
+- id: flow:eksport-83344b
+  kind: экспорт
+  what: пиво Пташжински
+  from: Старый Плющ
+  to: за пределы королевства
+  sources:
+    - countries/gross/cities/city_old_ivy
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda_begstvo-1db1b2
+  kind: контрабанда / бегство
+  what: бандиты и разбойники
+  from: Земли Хрэлл (Юстина)
+  to: Гросс и Империя через Подменный лес
+  sources:
+    - countries/khrell/index
+  confidence: canon
+  visibility: public
+- id: flow:vtorzhenie_nezhiti-1d3beb
+  kind: вторжение нежити
+  what: нежить и чудовища
+  from: Префектура мертвецов / Долгое болото
+  to: Подменный лес
+  sources:
+    - countries/gross/regions/gross_changeling_forest
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-ec7c43
+  kind: миграция
+  what: обитатели болот (1005)
+  from: болота
+  to: Подменный лес
+  sources:
+    - countries/druid_s_grove/index
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-d32f9a
+  kind: морской путь
+  what: ткани, роскошь, переселенцы
+  from: Куро-Минато
+  to: Самрун
+  sources:
+    - countries/khrell/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_trakt-ee0ad0
+  kind: торговый тракт
+  what: драгоценные камни и металлы
+  from: Империя
+  to: Самрун
+  sources:
+    - countries/khrell/index
+  confidence: canon
+  visibility: public
+- id: flow:kradenoe-b8f1bc
+  kind: краденое
+  what: краденые ценности, артефакты, сведения
+  from: Ройо, Гросс, Империя
+  to: Самрун
+  sources:
+    - countries/khrell/index
+  confidence: canon
+  visibility: public
+- id: flow:piratskiy_nabeg-efe9c7
+  kind: пиратский набег
+  what: грабёж по морю вдоль берега
+  from: Залесск
+  to: побережье Хрэлл и Ройо
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda-997529
+  kind: контрабанда
+  what: товары запада
+  from: Страна Драконов (Белоголовые горы, Белогорск)
+  to: Залесск
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:vodnyy_put-d449ef
+  kind: водный путь
+  what: всё сообщение через Гиблую
+  from: Залесск
+  to: Внутреннее море
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:ukreplennaya_doroga-0d3558
+  kind: укреплённая дорога
+  what: сообщение с империей (оборвано в 672)
+  from: Вышпа
+  to: Нордхельд
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_liniya-1ef9af
+  kind: морская линия
+  what: связь, рыба, морские чудовища
+  from: Антиум
+  to: Вышневодск
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-8ea2c4
+  kind: работорговля
+  what: покупка рабов, заморские вещи
+  from: Махаратха
+  to: Залесск
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-ad5220
+  kind: торговля
+  what: артефакты за бумажные деньги
+  from: Залесск
+  to: Занра
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-0844d8
+  kind: военный поход
+  what: армия Малдреда 163
+  from: Нордхельд
+  to: Вышпа, Антиум, Совиный погост, Залесск
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-b1e1ae
+  kind: военный поход
+  what: флот Малдреда 164
+  from: Залесск
+  to: Самрун
+  sources:
+    - countries/khrell/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-90ef21
+  kind: военный поход
+  what: Юго-западный поход 171-173
+  from: Иллиор
+  to: юго-запад, Союз Свободных
+  sources:
+    - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-f34d6f
+  kind: военный поход
+  what: варвары и ссыльные 562-567
+  from: Залесск
+  to: Хрэлл
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:naemnichestvo-0858a1
+  kind: наёмничество
+  what: князья нанимаются против Энфориса с 320-х
+  from: Залесск
+  to: Энфорис
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:begstvo_bezhentsev-f8dca7
+  kind: бегство беженцев
+  what: беженцы 672
+  from: Арност
+  to: Залесск
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:begstvo_naseleniya-b4a622
+  kind: бегство населения
+  what: население бежит в 181-184
+  from: Подменный лес
+  to: юг
+  sources:
+    - countries/gross/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-985754
+  kind: миграция
+  what: переселенцы
+  from: Страна Драконов
+  to: Самрун и мир
+  sources:
+    - countries/khrell/khrell_lands_fractions
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-7f8174
+  kind: торговля
+  what: пушнина, артефакты
+  from: Залесск
+  to: Вышневодское княжество, Дринрог
+  sources:
+    - countries/zalessk/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-26fba6
+  kind: торговый путь
+  what: Торговля
+  from: Нуэтида
+  to: Страна Драконов
+  sources:
+    - countries/rojo/regions/rojo_danir_region
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-9491c7
+  kind: паломничество
+  what: Паломники
+  from: Мир
+  to: Триниво → Драконья гора
+  sources:
+    - countries/rojo/regions/rojo_golden_coast_regeion
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-5e5c60
+  kind: торговый путь
+  what: Торговля
+  from: Наджир
+  to: Солнечный пролив
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:rechnoy_morskoy_put-52145c
+  kind: речной/морской путь
+  what: Торговля
+  from: Саво
+  to: Монструозное море
+  sources:
+    - countries/drinrog/index
+  confidence: canon
+  visibility: public
+- id: flow:doroga_poshliny-f7cda7
+  kind: дорога/пошлины
+  what: Южный тракт
+  from: Силадель
+  to: Империя
+  sources:
+    - countries/drinrog/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-6e808e
+  kind: торговля
+  what: Бумага
+  from: Занра
+  to: Дринрог
+  sources:
+    - countries/drinrog/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-75fb80
+  kind: торговля
+  what: Оружие, пушки
+  from: Занра
+  to: Ройо
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:snabzhenie_portaly-0c36bc
+  kind: снабжение/порталы
+  what: Припасы
+  from: Солнечные острова
+  to: Бастионы
+  sources:
+    - countries/bastion_union/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-17ff49
+  kind: миграция
+  what: Беженцы 672
+  from: Арност
+  to: Энфорис → Занра
+  sources:
+    - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-bf216e
+  kind: миграция
+  what: Беженцы, чиновники
+  from: Арност
+  to: Залесск
+  sources:
+    - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: flow:trakt-e9b25f
+  kind: тракт
+  what: Дорога империи в Залесск
+  from: Нордхельд
+  to: Вышпа
+  sources:
+    - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-c5837e
+  kind: военный поход
+  what: Малдред 171–173
+  from: Иллиор
+  to: Юго-запад, Наджир
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-f16b61
+  kind: военный поход
+  what: 277–279
+  from: Империя
+  to: Западный берег
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-3e101f
+  kind: военный поход
+  what: "1005"
+  from: Игни
+  to: Западный берег, Аббатство
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-36f823
+  kind: военный поход
+  what: Джок и XXIV легион
+  from: Деламота
+  to: Данир
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:voennye_pohody-1e587a
+  kind: военные походы
+  what: XVII легион
+  from: Вышневодск
+  to: запад
+  sources:
+    - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: flow:teleportatsiya-19c0e2
+  kind: телепортация
+  what: Круги
+  from: Арканум
+  to: Города Арноста
+  sources:
+    - history/arnost_catastrophe
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-d3870d
+  kind: миграция
+  what: Крепостные
+  from: Села Ройо
+  to: Города
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-95236e
+  kind: работорговля
+  what: Насильственное переселение 174–185
+  from: Земли Союза Свободных
+  to: Рабство
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:missiya-a14974
+  kind: миссия
+  what: Проповедники
+  from: Ройо
+  to: Край Оазисов
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-c2b1e2
+  kind: миграция
+  what: Выходцы
+  from: Страна Драконов
+  to: Ройо
+  sources:
+    - countries/rojo/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-f03fcb
+  kind: торговый путь
+  what: драгметаллы по Лиору
+  from: Серебряные горы (Аргенград)
+  to: Кошчин
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:rechnoy_put-128ccb
+  kind: речной путь
+  what: металлы, сера
+  from: Вышневодск
+  to: Монструозное море
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-ce4938
+  kind: торговый путь
+  what: товары через Старый лес
+  from: Иллиор
+  to: Гарн
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-7bf877
+  kind: торговый путь
+  what: драгоценности из Серебряных гор
+  from: Гарн
+  to: Олифанор
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_liniya-30192a
+  kind: морская линия
+  what: заморские товары
+  from: Солнечные острова
+  to: Гарн
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-76f96e
+  kind: миграция
+  what: переселенцы после 698
+  from: Энфорис
+  to: Олигархия Элка
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-fc7b48
+  kind: работорговля
+  what: рабы
+  from: Махаратха
+  to: Вышневодск
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-c8c14a
+  kind: миграция
+  what: некроманты после 553
+  from: Вышневодск
+  to: Порт Новой Надежды
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-22dc6f
+  kind: миграция
+  what: беженцы 672
+  from: Арност
+  to: Занра
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-c73992
+  kind: военный поход
+  what: поход Малдреда 88
+  from: Иллиор
+  to: Гарн
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-2e990a
+  kind: военный поход
+  what: поход Гнея 176
+  from: Лиор
+  to: Вышневодск
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-8ff401
+  kind: военный поход
+  what: поход 20 000 в 817
+  from: Иллиор
+  to: Микрис
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_fraht-2c837d
+  kind: морской фрахт
+  what: Чёрные всадники
+  from: Порт Новой Надежды
+  to: Дринрог
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:nalety-4b2ced
+  kind: налёты
+  what: 5.11.730
+  from: Энфорис
+  to: Артисиум
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:tovarnyy_potok-6581aa
+  kind: товарный поток
+  what: фейерверки
+  from: Занра
+  to: Вышневодск
+  sources:
+    - countries/vishnevodskoye_principality/index
+  confidence: canon
+  visibility: public
+- id: flow:tovarnyy_potok-7b995d
+  kind: товарный поток
+  what: наёмники
+  from: Залесское княжество
+  to: Талар
+  sources:
+    - countries/enforis/index
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda_pomosch-cec6cd
+  kind: контрабанда/помощь
+  what: гуманитарные грузы в 300-х
+  from: Занра
+  to: Энфорис
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-ceff1f
+  kind: паломничество
+  what: учёные
+  from: Занра
+  to: Залесское княжество
+  sources:
+    - countries/zanra/index
+  confidence: canon
+  visibility: public
+- id: flow:karavannaya_doroga-99dd4d
+  kind: караванная дорога
+  what: торговые караваны
+  from: Махаратха
+  to: Игни и Плато Архидемона (через Край Оазисов)
+  sources:
+    - countries/land_of_oases/index
+  confidence: canon
+  visibility: public
+- id: flow:karavannaya_doroga-31a16e
+  kind: караванная дорога
+  what: торговля
+  from: Аль Баджика
+  to: Игни
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-e681e2
+  kind: работорговля
+  what: умелые рабы
+  from: Плато Архидемона
+  to: Побережье работорговцев
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-a3264c
+  kind: работорговля
+  what: пленные
+  from: Край Оазисов
+  to: Побережье работорговцев
+  sources:
+    - countries/land_of_oases/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-1703a9
+  kind: работорговля
+  what: рабы, гладиаторы
+  from: Побережье работорговцев
+  to: весь мир
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: flow:doroga-d95292
+  kind: дорога
+  what: путь
+  from: Овидай
+  to: Край Оазисов
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: flow:doroga-78f220
+  kind: дорога
+  what: путь
+  from: Херифт
+  to: Асмодиус
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: flow:karavannaya_doroga-060e22
+  kind: караванная дорога
+  what: перекрёсток
+  from: Край Оазисов и Плато
+  to: Кохет
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: flow:rechnoy_put-6d9cbc
+  kind: речной путь
+  what: Сарати
+  from: Непия/Пепельные горы
+  to: Сулмипур/Монструозное море
+  sources:
+    - countries/igni/regions/igni_sarati_region
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-cb76d6
+  kind: военный поход
+  what: армия Дааса
+  from: Тарпет/Сарати
+  to: Вестхельд, Наджир, Данир (625)
+  sources:
+    - countries/igni/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-5e2175
+  kind: военный поход
+  what: легионы Гая I
+  from: Западный берег
+  to: Ничья пустыня и Сарати (280)
+  sources:
+    - countries/igni/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-af4eb0
+  kind: военный поход
+  what: войско Махродана
+  from: Асмодиус
+  to: Бандурдэх, Ганджапар (653)
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-26742f
+  kind: военный поход
+  what: армия Чандера
+  from: Игни
+  to: Кровавый оазис, Виверна, Вестхельд, Наджир (1005)
+  sources:
+    - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-7177d3
+  kind: морской путь
+  what: десант 40 000 (август 1005)
+  from: Наджир/Игни
+  to: побережье Данира (Солнечный пролив)
+  sources:
+    - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-d5a04f
+  kind: миграция
+  what: беглецы низшего сословия
+  from: Страна Драконов
+  to: Ройо
+  sources:
+    - countries/dragons_country/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-b182f5
+  kind: миграция
+  what: беглецы от имперских порядков после 294
+  from: империя
+  to: Игни
+  sources:
+    - countries/igni/index
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-cb50f7
+  kind: морской путь
+  what: Чёрные всадники (777)
+  from: Порт Новой Надежды
+  to: Дринрог
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-2b30fb
+  kind: бегство
+  what: двор и королева Морена
+  from: Данир
+  to: Солнечные острова
+  sources:
+    - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-9b5f0c
+  kind: торговля
+  what: шёлк и драгоценные камни за золото
+  from: Куро-Минато
+  to: мир
+  sources:
+    - countries/dragons_country/index
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-06bdf2
+  kind: торговля
+  what: благовония, эфирные масла, мрамор
+  from: Игни
+  to: мир
+  sources:
+    - countries/igni/index
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-05d767
+  kind: бегство
+  what: угнанные жители (−111)
+  from: Овидай
+  to: Асмодиус (рабство)
+  sources:
+    - countries/archdemon_s_plateau/index
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-55a250
+  kind: паломничество
+  what: тропа
+  from: Пепельные горы
+  to: Заоблачная твердь
+  sources:
+    - countries/igni/regions/igni_ash_mountains_region
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-48ba66
+  kind: миграция
+  what: некроманты (553)
+  from: Вышневодье
+  to: Порт Новой Надежды
+  sources:
+    - countries/slavetraders_coast/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-1f6df0
+  kind: миграция
+  what: наёмники (осень 1005)
+  from: Плато Архидемона и Ничья пустыня
+  to: домой, разграбив города Игни
+  sources:
+    - history/second_igni_rojo_war
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya_sezonnaya-68d8dc
+  kind: торговля (сезонная)
+  what: курултай перед весенними разливами
+  from: племена Края Оазисов
+  to: Вандатари
+  sources:
+    - countries/land_of_oases/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_suhoputnaya_torgovlya-755e44
+  kind: морская/сухопутная торговля
+  what: товары и провизия
+  from: Иллиорская империя
+  to: Дринрог
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_torgovlya-1929e4
+  kind: морская торговля
+  what: товары и провизия
+  from: Дринрог
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya_morskie_ekspeditsii-bac493
+  kind: работорговля, морские экспедиции
+  what: рабы
+  from: "Далёкий юг (вывод: Побережье работорговцев)"
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: derived
+  visibility: public
+- id: flow:rabotorgovlya-1215fe
+  kind: работорговля
+  what: рабы
+  from: Махаратха
+  to: Иллиорская империя
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-299e42
+  kind: работорговля
+  what: рабы
+  from: Махаратха
+  to: Солнечные острова (восток)
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_torgovlya-5f375f
+  kind: морская торговля
+  what: дурман, какао, диковины
+  from: Солнечные острова (фактории)
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_torgovlya-402769
+  kind: морская торговля
+  what: шёлк (обмен на роскошь)
+  from: Страна Драконов
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:karavannaya_torgovlya-cb90d1
+  kind: караванная торговля
+  what: рабы
+  from: Край Оазисов
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:karavannyy_put-6cd0dd
+  kind: караванный путь
+  what: торговый путь по суше
+  from: Махаратха
+  to: Игни / Плато Архидемона (через Край Оазисов)
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:suhoputnyy-c1c4bd
+  kind: сухопутный
+  what: караванная дорога на юг
+  from: Махаратха
+  to: Чунгада / вглубь материка
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:dan-d53567
+  kind: дань
+  what: богатые дары
+  from: Кифор / острова
+  to: Махаратха
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: flow:dan-5a65d0
+  kind: дань
+  what: дань деньгами/товарами
+  from: острова Колоний Махаратхи
+  to: Кифор
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: flow:perevalka_na_ostrovah-184a51
+  kind: перевалка на островах
+  what: рабы
+  from: континент
+  to: Сильренеас
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: flow:morskaya-9c237c
+  kind: морская
+  what: трасса кораблей
+  from: Махаратха и Монструозное море
+  to: Тёмный океан (мимо Подковных островов)
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya-543f45
+  kind: морская
+  what: суда с грузами
+  from: юг материка
+  to: Дринрог → Занра → Солнечные острова
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:okeanskiy-b968f2
+  kind: океанский
+  what: экспедиции и колонисты, ≈4000 км
+  from: Гарн/Олифанор (Энфорис)
+  to: Тилэнакади
+  sources:
+    - countries/sunny_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:morskaya_torgovlya-c96d47
+  kind: морская торговля
+  what: сахар, кофе, спирт
+  from: Олигархия Элка
+  to: континент
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:auktsionnaya_prodazha-6106b2
+  kind: аукционная продажа
+  what: кофе, до 40 золотых за меру
+  from: Тэмар-Алора
+  to: Иллиор
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:eksport-5c23ff
+  kind: экспорт
+  what: фрукты и изделия
+  from: Арвебель
+  to: континент
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda-249a7b
+  kind: контрабанда
+  what: дурман «синий туман»
+  from: Кифор
+  to: мир
+  sources:
+    - countries/sunny_islands/colonies_of_makharatkha
+  confidence: canon
+  visibility: public
+- id: flow:suhoputnyy-9724bf
+  kind: сухопутный
+  what: сахарный тростник, дорога W–E
+  from: плантации Осегрота
+  to: Элка/Лиена
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:voennyy-f5bd5e
+  kind: военный
+  what: основание форпоста
+  from: Эльфы
+  to: Афримас
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-56c8c8
+  kind: миграция
+  what: некроманты-беглецы, 553
+  from: Вышневодск
+  to: Тэрранова
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-f0aaa5
+  kind: миграция
+  what: богатые беженцы, 758
+  from: Дринрог
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-b8ccfd
+  kind: военный поход
+  what: вторжение 467–473
+  from: Махаратха + Край Оазисов
+  to: Плато Архидемона
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-bb51bc
+  kind: военный поход
+  what: нападение Махродана, 673
+  from: Плато Архидемона
+  to: Махаратха
+  sources:
+    - countries/makharatkha/index
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_kolonizatsiya-0ab951
+  kind: военный/колонизация
+  what: X легион и колонисты, 754
+  from: Иллиорская империя
+  to: Арвебель
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_palomnichestvo-81cc59
+  kind: миграция/паломничество
+  what: паломники/раскольники, 820–823
+  from: Церковь Звёзд (континент)
+  to: Святая Земля
+  sources:
+    - countries/sunny_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-07965c
+  kind: миграция
+  what: тысячи беженцев и церковь в изгнании, с 1005
+  from: Ройо
+  to: Колониальное Ройо
+  sources:
+    - countries/sunny_islands/colonial_rojo
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-2d43c4
+  kind: миграция
+  what: переселенцы 900-х
+  from: Энфорис
+  to: Олигархия Элка
+  sources:
+    - countries/sunny_islands/elka_s_oligarchy
+  confidence: canon
+  visibility: public
+- id: flow:dan_patronazh-0aa31c
+  kind: дань/патронаж
+  what: доля добычи визирям
+  from: Махаратха
+  to: Кхабарут
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:patrul-f5e5f2
+  kind: патруль
+  what: охота на работорговцев
+  from: Афримас / Элка
+  to: Подковные острова / воды Элки
+  sources:
+    - countries/horseshoe_islands/index
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-280a03
+  kind: миграция
+  what: Первые люди (≈−1700)
+  from: звёзды
+  to: Восточные земли Дедрела
+  sources:
+    - history/era_first_humans
+  confidence: canon
+  visibility: public
+- id: flow:vtorzhenie-cde09e
+  kind: вторжение
+  what: Денрара, Ночь Ядовитого ужаса
+  from: порталы на Плато Архидемона
+  to: север; граница Виларина
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-457062
+  kind: военный поход
+  what: Война Страха
+  from: Плато Архидемона
+  to: северо-восток (столица людей)
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-d65ee4
+  kind: миграция
+  what: люди после Битвы при Аркадии
+  from: окрестности Аркадии
+  to: Страна Драконов
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-2a9cf5
+  kind: военный поход
+  what: набег Риески, Статуя Прародителя
+  from: Долгое болото
+  to: через Белоголовые горы, земли драконов, на Плато
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-fb36d5
+  kind: военный поход
+  what: союзное войско; Двуречье
+  from: Пепельные горы
+  to: Плато Архидемона
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-244809
+  kind: военный поход
+  what: Асмодей, −200
+  from: Плато Архидемона
+  to: Тарпет по Сарати
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-ca79ab
+  kind: морской путь
+  what: пленные демоны
+  from: Серебряные горы/Акрит
+  to: Этель
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-bbbc2a
+  kind: военный поход
+  what: Большой рейд
+  from: союзные земли
+  to: вокруг Плато Архидемона
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-b74365
+  kind: торговый путь
+  what: рынок
+  from: перекрёсток путей Иллиор
+  to: полоса Данир–Гарн
+  sources:
+    - history/great_war
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-82f36c
+  kind: военный поход
+  what: 81–83
+  from: Иллиор
+  to: "север: Рун, Морозное болото, Нордхельд, Грейхельд"
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-2d7f99
+  kind: военный поход
+  what: "88"
+  from: Иллиор
+  to: Гарн
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-ed2537
+  kind: военный поход
+  what: "163"
+  from: Нордхельд
+  to: Морозное болото → Вышпа → Гиблая → Залесск
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-01e933
+  kind: морской путь
+  what: флот, 164
+  from: Залесск
+  to: Самрун по Внутреннему морю
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-a637d4
+  kind: военный поход
+  what: 171–173
+  from: Иллиор
+  to: "юго-запад: Корилла, Наджир"
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-fc4c70
+  kind: военный поход
+  what: Гней, 176
+  from: Иллиор
+  to: Вышневодск
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-9274e5
+  kind: военный поход
+  what: 14 легионов и флот, 277–279
+  from: империя
+  to: Западный берег
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-cfb5e0
+  kind: военный поход
+  what: Хашем I, 135–140
+  from: Тарпет
+  to: долина Сарати
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:doroga-59aba4
+  kind: дорога
+  what: мощёные тракты Мания
+  from: главные города империи
+  to: Иллиор
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:doroga-9bb7c0
+  kind: дорога
+  what: восточный тракт
+  from: Иллиор
+  to: Камераски
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-abbb33
+  kind: военный поход
+  what: 467–473
+  from: Махаратха
+  to: Плато Архидемона
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-049370
+  kind: военный поход
+  what: Махродан, 653
+  from: Асмодиус
+  to: Бандурдэх, Ганджапар
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-cfd3cb
+  kind: военный поход
+  what: "673"
+  from: Асмодийский союз
+  to: Махаратха
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-c2ee6a
+  kind: миграция
+  what: состоятельные беглецы после 758
+  from: Дринрог
+  to: Махаратха, Ройо, Гросс, Солнечные острова
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-ef0d73
+  kind: морской путь
+  what: Галан 698; колонизация
+  from: Энфорис
+  to: Солнечные острова
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-a36411
+  kind: миграция
+  what: искатели приключений, 698–711
+  from: континент
+  to: Солнечные острова
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-f73d7a
+  kind: работорговля
+  what: туземцы как рабы
+  from: Солнечные острова
+  to: континент
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-d0102d
+  kind: паломничество
+  what: исход катбертистов 820–823
+  from: Ройо/Церковь Звёзд
+  to: Солнечные острова
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:posolstvo-b44bec
+  kind: посольство
+  what: Лукас 852
+  from: Иллиор
+  to: Этель → Махаратха → Дринрог → Данир → Страна Драконов
+  sources:
+    - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: flow:posolstvo-a6be41
+  kind: посольство
+  what: Йорик 987
+  from: Иллиор
+  to: Страна Драконов
+  sources:
+    - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-4c4b47
+  kind: торговый путь
+  what: растёт торговля
+  from: Иллиор
+  to: Страна Драконов
+  sources:
+    - history/era_new_age
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda-500145
+  kind: контрабанда
+  what: порох
+  from: Занра
+  to: остальной мир
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-898ffb
+  kind: военный поход
+  what: ссыльные и варвары империи
+  from: Хрэлл/Залесск
+  to: северная граница Ройо
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-735360
+  kind: бегство
+  what: 150 тыс. беженцев, 672
+  from: префектура Арност
+  to: юг
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-6f6a29
+  kind: военный поход
+  what: налёт с воздуха, 730
+  from: Энфорис
+  to: Артисиум, Кошчин
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-5eb69c
+  kind: военный поход
+  what: некромантия, с 819
+  from: Вышневодск
+  to: Серебряные горы
+  sources:
+    - history/era_troubles
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-9e5b5c
+  kind: миграция
+  what: эльфы и драконы
+  from: Дагор/Эрелон/Силадель/Каллатис
+  to: прочь с Дедрела
+  sources:
+    - history/era_great_war_summary
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-6f262d
+  kind: работорговля
+  what: рабы демонов; Следящая вода Арноста
+  from: Асмодиус
+  to: пленные люди и эльфы
+  sources:
+    - history/great_war
+    - history/vilarin_convention
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-03b9a6
+  kind: паломничество
+  what: праздник победы
+  from: весь мир
+  to: Закатная Бухта
+  sources:
+    - history/era_imperial
+  confidence: canon
+  visibility: public
+- id: flow:karavannyy_put-1ca17f
+  kind: караванный путь
+  what: караван Луция Клавдия, нападение кочевников в 991
+  from: Иллиор (вывод)
+  to: Махаратха
+  sources:
+    - characters/lucius_claudius
+  confidence: canon
+  visibility: public
+- id: flow:begstvo_kontrabanda-637967
+  kind: бегство/контрабанда
+  what: купец, обсчитавший Елену Клавдию
+  from: Иллиор
+  to: Гросс
+  sources:
+    - characters/elena_klavdia
+  confidence: canon
+  visibility: public
+- id: flow:posolstvo-8bfec8
+  kind: посольство
+  what: "987 г.: Йорик, возвращается с наложницей"
+  from: Иллиор
+  to: Страна Драконов
+  sources:
+    - characters/yorick
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-7d49c0
+  kind: военный поход
+  what: добровольческий легион 817 г.
+  from: Империя
+  to: Микрис
+  sources:
+    - characters/filomen_papiria
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-83c834
+  kind: миграция
+  what: Мария Помар вывезена ребёнком
+  from: Ройо
+  to: Иллиорская империя
+  sources:
+    - characters/maria_pomar
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-976207
+  kind: торговля
+  what: зерно Папириев
+  from: Сарк
+  to: Иллиор (вывод)
+  sources:
+    - characters/filomen_papiria
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-a4bbb7
+  kind: торговля
+  what: торговля двух стран растёт
+  from: Иллиор
+  to: Страна Драконов
+  sources:
+    - characters/yorick
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-3a6e15
+  kind: работорговля
+  what: рабы Опиев, гарем, ланистерий
+  to: Иллиор
+  sources:
+    - characters/oktavius_opius
+    - characters/lukrecija_opija
+  confidence: canon
+  visibility: public
+- id: flow:pereezd-f54432
+  kind: переезд
+  what: гладиатор Велеслав
+  from: Берсан
+  to: Иллиор
+  sources:
+    - characters/oktavius_opius
+  confidence: canon
+  visibility: public
+- id: flow:voennoe_razvertyvanie-1c455e
+  kind: военное развёртывание
+  what: XXIII легион, 1005
+  from: Иллиор
+  to: Грейхельд
+  sources:
+    - characters/oktavius_opius
+  confidence: canon
+  visibility: public
+- id: flow:rechnoy_put-99c210
+  kind: речной путь
+  what: река Лиор — речное судоходство, ранее пираты
+  sources:
+    - characters/hirius_furia
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_begstvo-db4b31
+  kind: миграция/бегство
+  what: Антариус
+  from: Гросс
+  to: Иллиорская империя (I легион)
+  sources:
+    - characters/antarius
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-cc13b4
+  kind: военный поход
+  what: XXIV легион Марии Хосе Помар
+  from: Иллиор/префектуры империи
+  to: Деламота → Данир
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-0d26ca
+  kind: миграция
+  what: Джок и банда (1005)
+  from: Иллиор
+  to: Земли Хрэлл
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-57528c
+  kind: военный поход
+  what: Отряд Джока с драконом
+  from: Земли Хрэлл / север Ройо
+  to: Деламота → Данир
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: flow:pohod-b8ce0e
+  kind: поход
+  what: Ополчение бедноты Эспинара
+  from: Ройо (провинция)
+  to: Данир
+  sources:
+    - characters/augustin_espinar
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-21bfae
+  kind: бегство
+  what: Морена I
+  from: Данир
+  to: Солнечные острова
+  sources:
+    - characters/morena
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-6537dd
+  kind: бегство
+  what: Патриарх Герений
+  from: Драконья гора (Золотое побережье)
+  to: "неизвестно (церковь в изгнании: Бастионный союз, Солнечные острова)"
+  sources:
+    - characters/salvador_gerenius
+  confidence: canon
+  visibility: public
+- id: flow:ohota_pogonya-56c477
+  kind: охота/погоня
+  what: Беглый убийца Авинас; Ковач привёз его обратно
+  from: Берсан
+  to: Залесск
+  sources:
+    - characters/kylar_kovacs
+  confidence: canon
+  visibility: public
+- id: flow:ekspeditsii-f09d0a
+  kind: экспедиции
+  what: Алонсо с экспедициями
+  from: Иллиор
+  to: Залесск; Арност
+  sources:
+    - characters/alonso_lucky
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda_torgovlya-1ad634
+  kind: контрабанда/торговля
+  what: Жабы (не прижились)
+  from: Солнечные острова
+  to: континент
+  sources:
+    - characters/alonso_lucky
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-1d2ee8
+  kind: торговля
+  what: Взрывчатка
+  from: Занр
+  to: Вышневодск
+  sources:
+    - characters/alonso_lucky
+  confidence: canon
+  visibility: public
+- id: flow:zakupka_artefaktov-dc60f8
+  kind: закупка артефактов
+  what: Опасные магические артефакты (агенты Анны)
+  from: Иллиор
+  to: Залесск
+  sources:
+    - characters/ana_vranova
+  confidence: canon
+  visibility: public
+- id: flow:karavannyy_put-cdb81c
+  kind: караванный путь
+  what: Налёты на караваны
+  from: Побережье работорговцев
+  to: Махаратха
+  sources:
+    - characters/antarius
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_nabor-0ae336
+  kind: военный набор
+  what: Отряд, грабивший земли Ройо (Хулон)
+  from: Иллиор
+  to: Ройо
+  sources:
+    - characters/arvehl
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_chudovisch-d6dc2d
+  kind: миграция чудовищ
+  what: Твари, бегущие от мертвецов
+  from: Арност (болота)
+  to: обжитые земли империи
+  sources:
+    - characters/avdikiy_gerdonius
+  confidence: canon
+  visibility: public
+- id: flow:reparatsii-bd2406
+  kind: репарации
+  what: Репарации по миру 7.11.1005; долг взяла империя
+  from: Ройо
+  to: Игни
+  sources:
+    - characters/dzhok_i
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_drakonov-29a3e6
+  kind: миграция драконов
+  what: Чёрные драконы после Великой войны
+  from: Страна Драконов
+  to: другие миры
+  sources:
+    - characters/toyokuza
+  confidence: canon
+  visibility: public
+- id: flow:naemnichestvo-3329bf
+  kind: наёмничество
+  what: Две дюжины наёмников Серого Авангарда
+  from: Иллиор
+  to: Плато Архидемона
+  sources:
+    - characters/kylar_kovacs
+  confidence: canon
+  visibility: public
+- id: flow:shpionazh-c7d0f2
+  kind: шпионаж
+  what: Агенты Арчибальда
+  from: Иллиор
+  to: Дринрог; Занр
+  sources:
+    - characters/archibald_quintus_marius
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo_evakuatsiya-859c06
+  kind: паломничество/эвакуация
+  what: Спасение экспедиции Мэтью Хуртадо
+  from: Иллиор
+  to: Долгое болото
+  sources:
+    - characters/matthew_hurtado
+  confidence: canon
+  visibility: public
+- id: flow:teleportatsionnaya_set-3d98b4
+  kind: телепортационная сеть
+  what: услуги телепортации и передачи сообщений по кругам в башнях
+  from: города с башнями Арканума
+  to: города разных стран
+  sources:
+    - guilds/arcanum
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda-964202
+  kind: контрабанда
+  what: дурман, краденые вещи, запретные товары и люди через подземелья и порталы
+  from: Иллиор, Дагор, Махаратха, Тарпет, Берсан
+  to: многие страны
+  sources:
+    - guilds/sewer_rats
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-121281
+  kind: работорговля
+  what: рабы с Побережья работорговцев на торги и плантации
+  from: Побережье работорговцев
+  to: Махаратха, Иллиор, Солнечные острова
+  sources:
+    - guilds/north_road
+  confidence: canon
+  visibility: public
+- id: flow:karavannyy_put-b54da0
+  kind: караванный путь
+  what: южные караваны
+  from: Золотые пески
+  to: Край Оазисов, Великая пустыня, Игни
+  sources:
+    - guilds/desert_cartel
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_put-cdb4d8
+  kind: морской путь
+  what: товары Солнечных островов и пассажиры
+  from: Солнечные острова
+  to: Энфорис (Олифанор), Дринрог
+  sources:
+    - guilds/sunny_company
+  confidence: canon
+  visibility: public
+- id: flow:voennaya_perebroska-e673cb
+  kind: военная переброска
+  what: Чёрные всадники флотом Энфориса
+  from: Порт Новой Надежды
+  to: Дринрог
+  sources:
+    - guilds/black_riders
+  confidence: canon
+  visibility: public
+- id: flow:postavki_lesa_i_uglya-f64480
+  kind: поставки леса и угля
+  what: дерево, уголь
+  from: Подменный лес, Берсан, Лес Ужасов
+  to: Грейхельд/Рун, империя, Солнечные острова
+  sources:
+    - guilds/metal_makers
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_masterov-b49892
+  kind: миграция мастеров
+  what: мастера камня бегут на север и в Махаратху
+  from: Непия (Игни)
+  to: север, Махаратха
+  sources:
+    - guilds/freemasons
+  confidence: canon
+  visibility: public
+- id: flow:postavki_poroha-ebb318
+  kind: поставки пороха
+  what: порох и огнестрел; одарённые дети в Занру
+  from: Занра
+  to: Иллиор; дети обратно
+  sources:
+    - guilds/zanra_pyrotechnicians
+  confidence: canon
+  visibility: public
+- id: flow:hranenie_zerna-093e83
+  kind: хранение зерна
+  what: зерно и ежегодные торги
+  from: Сарк, Гросс, Ройо
+  to: Дагор и склады
+  sources:
+    - guilds/grain_merchant_league
+  confidence: canon
+  visibility: public
+- id: flow:roznichnye_karavany-71333d
+  kind: розничные караваны
+  what: предметы роскоши и сведения
+  from: Иллиор
+  to: замки севера
+  sources:
+    - guilds/white_dogs
+  confidence: canon
+  visibility: public
+- id: flow:skladskaya_torgovlya-00da2f
+  kind: складская торговля
+  what: товары, эмбарго
+  from: Дринрог
+  to: большие города
+  sources:
+    - guilds/drinrog_union
+  confidence: canon
+  visibility: public
+- id: flow:sezd-acaa00
+  kind: съезд
+  what: гильдмастера Серого Авангарда раз в год
+  from: города мира
+  to: Иллиор
+  sources:
+    - guilds/grey_avangard
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-4f96cf
+  kind: военный поход
+  what: маги Мрака
+  from: Аббатство Неугасимого Пламени
+  to: Иллиор
+  sources:
+    - guilds/mirk
+  confidence: canon
+  visibility: public
+- id: flow:vyvoz_vin_i_napitkov-68e100
+  kind: вывоз вин и напитков
+  what: вино Этеля, Ройо; пиво Гросса; водка Вышневодска; эль Дринрога; ореховый эль Сарка
+  from: Этель, Ройо, Гросс, Вышневодск, Дринрог, Сарк
+  to: Иллиор
+  sources:
+    - establishments/taverns/drevnij_strazh
+  confidence: canon
+  visibility: public
+- id: flow:finansovye_perevody-887aac
+  kind: финансовые переводы
+  what: переводы между городами
+  from: Дринрог и Иллиор
+  to: отделения
+  sources:
+    - establishments/banks/imperial_bank
+  confidence: canon
+  visibility: public
+- id: flow:naem_i_pohod-5e5118
+  kind: наём и поход
+  what: Энфорис нанимает Серый Авангард; нападение на Вышневодск
+  from: Энфорис
+  to: Вышневодск
+  sources:
+    - guilds/sunlions
+  confidence: canon
+  visibility: public
+- id: flow:dorozhnaya_set-f88d2c
+  kind: дорожная сеть
+  what: дороги Восточных земель сходятся в Иллиоре
+  from: Восточные земли
+  to: Иллиор
+  sources:
+    - establishments/taverns/zhadnyj_medved
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya_vypusknikov-620417
+  kind: миграция выпускников
+  what: выпускники и учителя в Виларин
+  from: империя
+  to: Виларин
+  sources:
+    - establishments/educational/vilarin_university
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-f5aaae
+  kind: миграция
+  what: "Исход катбертистов 820–823: ~300 тыс. отплыли, ~150 тыс. добрались"
+  from: Ройо и империя (континент)
+  to: Святая Земля, Солнечные острова
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: flow:ssylka_kazni-674d19
+  kind: ссылка/казни
+  what: Высылка общины катбертистов 811 (казнь на месте)
+  from: Иллиорская империя
+  to: Ройо
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo-6672fe
+  kind: паломничество
+  what: Прихожане на проповеди Катберта
+  from: Ройо, зарубежье
+  to: Драконья гора
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: flow:shestvie-cc5d4c
+  kind: шествие
+  what: Десятки тысяч человек у стен Данира, 807
+  from: Ройо
+  to: Данир
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: flow:tserkovnye_sezdy-619098
+  kind: церковные съезды
+  what: Ежегодный конклав в день середины лета
+  from: все епископы Ройо
+  to: место конклава (не названо)
+  sources:
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: flow:tserkovnye_sezdy-12c546
+  kind: церковные съезды
+  what: Ежегодный конклав катбертистов
+  from: присты Святой Земли
+  to: Святой город
+  sources:
+    - knowledges/church_of_cuthbert
+  confidence: canon
+  visibility: public
+- id: flow:palomnichestvo_dary-c7fc1c
+  kind: паломничество/дары
+  what: Дары предков
+  from: империя
+  to: Иллиор, Императорский алтарь
+  sources:
+    - knowledges/ancestors_cult
+  confidence: canon
+  visibility: public
+- id: flow:nalogi_tserkvi-59c55d
+  kind: налоги церкви
+  what: Часть налогов и сборов
+  from: епископские владения
+  to: Патриарх
+  sources:
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: flow:teleportatsiya-6a89c8
+  kind: телепортация
+  what: Круги телепортации
+  from: Асмодиус
+  to: Акрит
+  sources:
+    - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: flow:voennye_pohody-1870cf
+  kind: военные походы
+  what: Демоны ≈−500, драконы ≈−490, эльфы ≈−470
+  from: другие миры
+  to: Дедрел
+  sources:
+    - knowledges/demons
+    - knowledges/dragons
+    - knowledges/elves
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-59697c
+  kind: миграция
+  what: Большая часть драконов и эльфов, чёрные драконы
+  from: Дедрел
+  to: другие миры
+  sources:
+    - knowledges/dragons
+    - knowledges/elves
+  confidence: canon
+  visibility: public
+- id: flow:rabotorgovlya-02d5ab
+  kind: работорговля
+  what: Необычные рабы на праздники культа сверхчеловека
+  from: разные земли
+  to: Мадакиш
+  sources:
+    - knowledges/cults_of_the_archdemon_plateau
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-927990
+  kind: торговля
+  what: Зелёные драконы торгуют; единственный порт, открытый для чужаков
+  from: Страна Драконов
+  to: внешний мир через Куро-Минато
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya_proshloe-d08f39
+  kind: торговля (прошлое)
+  what: Обмен даже во время войны
+  from: зелёные драконы
+  to: Первые люди
+  sources:
+    - knowledges/dragons
+  confidence: canon
+  visibility: public
+- id: flow:doroga-139e26
+  kind: дорога
+  what: Древняя дорога, которую чистит голем Первых людей
+  from: Великая пустыня
+  to: —
+  sources:
+    - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: flow:kontrabanda_rynok-02168b
+  kind: контрабанда/рынок
+  what: Мечи Первых людей, доспехи «из шкуры Юмаота»
+  from: неизвестно
+  to: рынки
+  sources:
+    - knowledges/first_humans
+    - knowledges/demons
+  confidence: canon
+  visibility: public
+- id: flow:pereraspredelenie-ed6d9e
+  kind: перераспределение
+  what: Зерно, молоко и скот
+  from: храмы Игни
+  to: население
+  sources:
+    - knowledges/polytheism_igni
+  confidence: canon
+  visibility: public
+- id: flow:rabstvo-f93942
+  kind: рабство
+  what: Рабский труд демонов; рабы затем стали жителями Асмодиуса
+  from: завоёванные земли
+  to: Асмодиус
+  sources:
+    - knowledges/demons
+    - knowledges/humans
+  confidence: canon
+  visibility: public
+- id: flow:begstvo-2de60e
+  kind: бегство
+  what: Церковь в изгнании Герения
+  from: Ройо
+  to: Бастионный союз, Солнечные острова
+  sources:
+    - knowledges/church_of_the_stars
+  confidence: canon
+  visibility: public
+- id: flow:migratsiya-0af8df
+  kind: миграция
+  what: Первые люди ≈3000 лет назад
+  from: звёзды
+  to: Дедрел (Восточные земли)
+  sources:
+    - knowledges/first_humans
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_torgovyy_put-d030e0
+  kind: морской торговый путь
+  what: рабы, ремесленные товары (на восток); сырьё, пряности (на запад)
+  from: западные страны
+  to: Солнечные острова
+  sources:
+    - geography/dark_ocean
+  confidence: canon
+  visibility: public
+- id: flow:morskoy_torgovyy_put-41271e
+  kind: морской торговый путь
+  what: сотни тысяч тонн грузов в год
+  from: Махаратха, Дринрог
+  to: весь мир
+  sources:
+    - geography/monstrous_sea
+  confidence: canon
+  visibility: public
+- id: flow:piratskaya_liniya-da3377
+  kind: пиратская линия
+  what: набеги
+  from: Порт Кусуму, Кхабарут
+  to: Тёмный океан
+  sources:
+    - geography/dark_ocean
+  confidence: canon
+  visibility: public
+- id: flow:rechnoy_put_piratstvo-73c01a
+  kind: речной путь, пиратство
+  what: грабёж
+  from: Залесск, Гиблая
+  to: Внутреннее море, побережья Хрэлл и Ройо
+  sources:
+    - geography/river_of_doom
+  confidence: canon
+  visibility: public
+- id: flow:ekspeditsii-b779c6
+  kind: экспедиции
+  what: охотники, искатели древностей, находки
+  from: крепость Бордыма и Залесск
+  to: Долгое болото
+  sources:
+    - geography/long_swamp
+    - geography/border_river
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-178c86
+  kind: военный поход
+  what: войско Малдреда
+  from: Нордхельд
+  to: Вышпа, затем вниз по Гиблой
+  sources:
+    - geography/frosty_marsh
+    - geography/river_of_doom
+  confidence: canon
+  visibility: public
+- id: flow:voennyy_pohod-7e853c
+  kind: военный поход
+  what: армия Риески
+  from: Белоголовые горы
+  to: тыл драконов
+  sources:
+    - geography/long_swamp
+  confidence: canon
+  visibility: public
+- id: flow:torgovyy_put-fa3b62
+  kind: торговый путь
+  what: торговля, расчищенные просеки
+  from: Иллиор
+  to: Гарн (через Старый лес)
+  sources:
+    - geography/old_forest
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya_s_kochevnikami-b181e4
+  kind: торговля с кочевниками
+  what: неуточнённые товары
+  from: кочевые племена пустыни
+  to: Игни, Махаратха, города Плато Архидемона
+  sources:
+    - geography/great_desert
+  confidence: canon
+  visibility: public
+- id: flow:trakt_razboi-b8144d
+  kind: тракт, разбои
+  what: налёты на торговцев
+  from: Земли Хрэлл
+  to: юго-западный тракт у Подменного леса
+  sources:
+    - geography/changeling_forest
+  confidence: canon
+  visibility: public
+- id: flow:resursy-bb4972
+  kind: ресурсы
+  what: железо, уголь
+  from: Лес Ужасов (Рун)
+  to: мастерские империи
+  sources:
+    - geography/forest_of_horrors
+  confidence: canon
+  visibility: public
+- id: flow:resursy-61dfc0
+  kind: ресурсы
+  what: древесина
+  from: Старый лес (Занра)
+  to: производство бумаги
+  sources:
+    - geography/old_forest
+  confidence: canon
+  visibility: public
+- id: flow:finansovyy-24c2e8
+  kind: финансовый
+  what: переводы по книжной паутине
+  from: отделения банка
+  to: другие отделения
+  sources:
+    - knowledges/monetary_system
+    - knowledges/book_web
+  confidence: canon
+  visibility: public
+- id: flow:beglye_raby_slezhenie-de32bd
+  kind: беглые рабы, слежение
+  what: поиск беглых рабов (прошлое)
+  from: Арност
+  to: "-"
+  sources:
+    - knowledges/tracking_water
+  confidence: canon
+  visibility: public
+- id: flow:torgovlya-3b2ab1
+  kind: торговля
+  what: "торговые товары: тюки специй, меха, ткани, еда в больших объёмах; ингредиенты покупают у торговцев; рецепты покупают, выменивают, крадут. Маршруты и направления в тексте не заданы."
+  sources:
+    - rules/inventory
+    - rules/crafting
+  confidence: canon
+  visibility: public
+- id: flow:valyutnyy_kurs-a3dbc1
+  kind: валютный курс
+  what: 10 меди = 1 серебро, 10 серебра = 1 золото, 10 золота = 1 платина. В разных регионах могут действовать свои правила обмена, ценность одной и той же валюты может различаться.
+  sources:
+    - rules/inventory
+  confidence: canon
+  visibility: public

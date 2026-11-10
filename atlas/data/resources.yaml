@@ -1,0 +1,592 @@
+# Ресурсы и месторождения: lore/*.json (resources), место по тексту «where» (scripts/geo/build-resources.py); правится вручную.
+- id: res:001
+  resource: Древесина (корабельная, магическая, редкие породы)
+  kind: древесина
+  place: geography/changeling_forest
+  where_text: Подменный лес
+  note: Данир, Дринрог, Солнечные острова покупают; питомники Тарло-Ежицки
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+  confidence: derived
+- id: res:002
+  resource: Древесина (корабельная, магическая, редкие породы)
+  kind: древесина
+  place: countries/gross/cities/city_ezhitsk
+  where_text: Ежицк
+  note: Данир, Дринрог, Солнечные острова покупают; питомники Тарло-Ежицки
+  sources:
+  - countries/gross/cities/city_ezhitsk
+  confidence: derived
+- id: res:003
+  resource: Пушнина и дичь
+  kind: зерно, еда и вино
+  place: geography/changeling_forest
+  where_text: Подменный лес
+  note: зверя становится меньше
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+  confidence: derived
+- id: res:004
+  resource: Гранит
+  kind: камень
+  place: countries/gross/cities/city_old_ivy
+  where_text: Старый Плющ (каменоломня закрыта >100 лет)
+  note: снабжал города региона и столицу
+  sources:
+  - countries/gross/cities/city_old_ivy
+  confidence: derived
+- id: res:005
+  resource: Хмель и ячмень
+  kind: зерно, еда и вино
+  place: geo:bredon
+  where_text: Восточные зелёные земли (Бредон)
+  note: основа пивоварения
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+  confidence: derived
+- id: res:006
+  resource: Шерсть
+  kind: зерно, еда и вино
+  place: countries/gross/regions/gross_eastern_green_lands
+  where_text: Восточные зелёные земли (Тыкель)
+  sources:
+  - countries/gross/regions/gross_eastern_green_lands
+  confidence: derived
+- id: res:007
+  resource: Рыба и речная торговля
+  kind: зерно, еда и вино
+  place: geo:lior_reka
+  where_text: Лиор
+  note: пошлины
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:008
+  resource: Редкие твари
+  kind: артефакты и твари
+  place: countries/gross/regions/gross_lior_delta
+  where_text: дельта Лиора
+  note: охота
+  sources:
+  - countries/gross/regions/gross_lior_delta
+  confidence: derived
+- id: res:009
+  resource: Артефакты Первых людей
+  kind: артефакты и твари
+  place: geography/long_swamp
+  where_text: Долгое болото
+  note: меняют на оружие, ткани, пряности
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+  confidence: derived
+- id: res:010
+  resource: Артефакты Первых людей
+  kind: артефакты и твари
+  place: geo:zalessk
+  where_text: Залесск
+  note: меняют на оружие, ткани, пряности
+  sources:
+  - countries/zalessk/index
+  confidence: derived
+- id: res:011
+  resource: Морские чудовища
+  kind: артефакты и твари
+  place: geo:antium
+  where_text: Антиум
+  sources:
+  - countries/zalessk/index
+  confidence: derived
+- id: res:012
+  resource: Серебро
+  kind: металлы и руда
+  place: geo:serebryanye_gory
+  where_text: Серебряные горы
+  note: Рудники
+  sources:
+  - countries/illior_empire/index
+  confidence: derived
+- id: res:013
+  resource: Золото
+  kind: металлы и руда
+  place: geo:kallatis
+  where_text: Каллатис
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:014
+  resource: Мышьяк
+  kind: металлы и руда
+  place: geo:kallatis
+  where_text: Каллатис
+  note: Алхимия
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:015
+  resource: Древесина
+  kind: древесина
+  place: geo:galernyy_les
+  where_text: Галерный лес
+  note: Для кораблей
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:016
+  resource: Древесина
+  kind: древесина
+  place: geo:knaziy
+  where_text: Кназий
+  note: Для кораблей
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:017
+  resource: Корабли
+  kind: ремесло и товары
+  place: geo:danir
+  where_text: Данир
+  note: Лучшие верфи
+  sources:
+  - countries/gross/index
+  confidence: derived
+- id: res:018
+  resource: Корабли
+  kind: ремесло и товары
+  place: geo:korolevskaya_buhta
+  where_text: Королевская Бухта
+  note: Лучшие верфи
+  sources:
+  - countries/rojo/regions/rojo_danir_region
+  confidence: derived
+- id: res:019
+  resource: Корабли
+  kind: ремесло и товары
+  place: geo:drinrog_gorod
+  where_text: Дринрог
+  note: Лучшие верфи
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:020
+  resource: Рыба
+  kind: зерно, еда и вино
+  place: geo:royo
+  where_text: Побережье Ройо
+  sources:
+  - countries/rojo/index
+  confidence: derived
+- id: res:021
+  resource: Фрукты, маслины, козы
+  kind: зерно, еда и вино
+  place: geo:danir
+  where_text: Данир
+  sources:
+  - countries/gross/index
+  confidence: derived
+- id: res:022
+  resource: Пушки, порох, бумага
+  kind: ремесло и товары
+  place: geo:zanra
+  where_text: Занра
+  note: Импорт
+  sources:
+  - countries/zanra/index
+  confidence: derived
+- id: res:023
+  resource: зерно и скот (налог натурой)
+  kind: зерно, еда и вино
+  place: geo:sarati
+  where_text: Долина Сарати
+  sources:
+  - countries/igni/index
+  confidence: derived
+- id: res:024
+  resource: мрамор и гранит
+  kind: камень
+  place: geo:nepiya
+  where_text: Непия
+  sources:
+  - countries/igni/regions/igni_sarati_region
+  confidence: canon
+- id: res:025
+  resource: мрамор и гранит
+  kind: камень
+  place: geo:sarati
+  where_text: верховья Сарати
+  sources:
+  - countries/igni/regions/igni_sarati_region
+  confidence: derived
+- id: res:026
+  resource: перец, гвоздика, ваниль
+  kind: пряности и растения
+  place: geo:zapadnyy_bereg_prefektura_rinar
+  where_text: Западный берег
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+- id: res:027
+  resource: перец, гвоздика, ваниль
+  kind: пряности и растения
+  place: geo:viverna
+  where_text: Виверна
+  sources:
+  - countries/igni/regions/west_bank
+  confidence: canon
+- id: res:028
+  resource: драгоценные камни и металлы
+  kind: металлы и руда
+  place: countries/archdemon_s_plateau/index
+  where_text: Плато Архидемона
+  sources:
+  - countries/archdemon_s_plateau/index
+  confidence: canon
+- id: res:029
+  resource: дурманящие зелья
+  kind: пряности и растения
+  place: countries/archdemon_s_plateau/index
+  where_text: Плато Архидемона
+  sources:
+  - countries/archdemon_s_plateau/index
+  confidence: canon
+- id: res:030
+  resource: шкуры, редкие растения
+  kind: зерно, еда и вино
+  place: countries/land_of_oases/index
+  where_text: Край Оазисов
+  sources:
+  - countries/land_of_oases/index
+  confidence: canon
+- id: res:031
+  resource: шёлк, драгоценные камни
+  kind: ремесло и товары
+  place: geo:kuro_minato
+  where_text: Куро-Минато
+  sources:
+  - countries/dragons_country/index
+  confidence: canon
+- id: res:032
+  resource: золото и редкие металлы (спрос)
+  kind: металлы и руда
+  place: countries/dragons_country/index
+  where_text: Страна Драконов
+  sources:
+  - countries/dragons_country/index
+  confidence: canon
+- id: res:033
+  resource: Дурманящие травы, какао
+  kind: зерно, еда и вино
+  place: geo:maharatha_gorod
+  where_text: Колонии Махаратхи
+  note: алхимия
+  sources:
+  - countries/makharatkha/index
+  confidence: derived
+- id: res:034
+  resource: Благовония
+  kind: пряности и растения
+  place: geo:maharatha_gorod
+  where_text: Махаратха
+  note: один из главных производителей
+  sources:
+  - countries/makharatkha/index
+  confidence: derived
+- id: res:035
+  resource: Шёлк
+  kind: ремесло и товары
+  place: countries/dragons_country/index
+  where_text: Страна Драконов → Махаратха
+  sources:
+  - countries/makharatkha/index
+  confidence: derived
+- id: res:036
+  resource: адамантин и драгоценные металлы
+  kind: металлы и руда
+  place: geo:serebryanye_gory
+  where_text: Серебряные горы
+  note: 175 бой за месторождение; Вышневодск захватил месторождения с 819 (history/era_imperial; history/era_troubles)
+  sources:
+  - history/era_imperial
+  - history/era_troubles
+  confidence: canon
+- id: res:037
+  resource: порох
+  kind: ремесло и товары
+  place: geo:zanra
+  where_text: Занра
+  note: изобретён втайне до 817 (history/era_troubles)
+  sources:
+  - history/era_troubles
+  confidence: canon
+- id: res:038
+  resource: Алмазная пыль и магические реагенты
+  kind: артефакты и твари
+  place: countries/illior_empire/cities/city_illior
+  where_text: Гильдия монетчиков Иллиора
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:039
+  resource: Ткани и ювелирные изделия
+  kind: ремесло и товары
+  place: countries/illior_empire/cities/city_illior
+  where_text: Гильдия монетчиков Иллиора
+  note: Наряды для двора
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:040
+  resource: Металлообработка (литейные)
+  kind: ремесло и товары
+  place: geo:greyheld
+  where_text: Грейхельд
+  note: XXIII легион стоит у них
+  sources:
+  - countries/illior_empire/regions/illior_empire_run_region
+  confidence: derived
+- id: res:041
+  resource: Речная рыба и судоходство
+  kind: зерно, еда и вино
+  place: geo:lior_reka
+  where_text: Лиор
+  note: Рыба не ловится там, где топили пиратов
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:042
+  resource: Питомники (лесные)
+  kind: древесина
+  place: geography/changeling_forest
+  where_text: Подменный лес
+  note: Самые ценные принадлежат Тарло-Ежицки (characters/kondratij_tarlo-ezhickij)
+  sources:
+  - characters/kondratij_tarlo-ezhickij
+  confidence: canon
+- id: res:043
+  resource: Питомники (лесные)
+  kind: древесина
+  place: countries/gross/cities/city_ezhitsk
+  where_text: Ежицк
+  note: Самые ценные принадлежат Тарло-Ежицки (characters/kondratij_tarlo-ezhickij)
+  sources:
+  - characters/kondratij_tarlo-ezhickij
+  confidence: canon
+- id: res:044
+  resource: Шахты
+  kind: металлы и руда
+  place: geo:vyshnevodsk
+  where_text: Вышневодск
+  note: Шахтёры покупали взрывчатку (characters/alonso_lucky)
+  sources:
+  - characters/alonso_lucky
+  confidence: canon
+- id: res:045
+  resource: Опасные магические артефакты
+  kind: артефакты и твари
+  place: countries/illior_empire/cities/city_illior
+  where_text: Иллиор
+  note: Спрос со стороны Анны Враново
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:046
+  resource: Взрывчатка занрийская
+  kind: ремесло и товары
+  place: geo:zanra
+  where_text: Занр
+  note: характеристика
+  sources:
+  - countries/zanra/index
+  confidence: derived
+- id: res:047
+  resource: железо, уголь, сталь, простое оружие
+  kind: металлы и руда
+  place: geo:greyheld
+  where_text: Грейхельд
+  note: Металлурги; guilds/metal_makers
+  sources:
+  - guilds/metal_makers
+  confidence: canon
+- id: res:048
+  resource: железо, уголь, сталь, простое оружие
+  kind: металлы и руда
+  place: geo:serebryanye_gory
+  where_text: Серебряные горы
+  note: Металлурги; guilds/metal_makers
+  sources:
+  - guilds/metal_makers
+  confidence: canon
+- id: res:049
+  resource: редкая древесина, уголь
+  kind: древесина
+  place: geography/changeling_forest
+  where_text: Подменный лес
+  sources:
+  - guilds/bersan_lumberers
+  confidence: canon
+- id: res:050
+  resource: редкая древесина, уголь
+  kind: древесина
+  place: geo:bersan
+  where_text: Берсан
+  sources:
+  - guilds/bersan_lumberers
+  confidence: canon
+- id: res:051
+  resource: редкая древесина, уголь
+  kind: древесина
+  place: geography/forest_of_horrors
+  where_text: Лес Ужасов
+  sources:
+  - guilds/bersan_lumberers
+  confidence: canon
+- id: res:052
+  resource: зерно
+  kind: зерно, еда и вино
+  place: geo:royo
+  where_text: Ройо
+  note: Лига зерноторговцев
+  sources:
+  - countries/rojo/index
+  confidence: derived
+- id: res:053
+  resource: порох и огнестрел
+  kind: ремесло и товары
+  place: geo:zanra
+  where_text: Занра
+  note: монополия; guilds/zanra_pyrotechnicians
+  sources:
+  - guilds/zanra_pyrotechnicians
+  confidence: canon
+- id: res:054
+  resource: камень
+  kind: камень
+  place: geo:nepiya
+  where_text: каменоломни Непии (Игни)
+  sources:
+  - guilds/freemasons
+  confidence: derived
+- id: res:055
+  resource: вина
+  kind: зерно, еда и вино
+  place: geo:etel_gorod
+  where_text: Этель
+  sources:
+  - countries/ethel/index
+  confidence: derived
+- id: res:056
+  resource: вина
+  kind: зерно, еда и вино
+  place: geo:royo
+  where_text: Ройо
+  sources:
+  - countries/rojo/index
+  confidence: derived
+- id: res:057
+  resource: вина
+  kind: зерно, еда и вино
+  place: countries/illior_empire/cities/city_illior
+  where_text: Иллиор
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:058
+  resource: вина
+  kind: зерно, еда и вино
+  place: geo:zapadnyy_bereg_prefektura_rinar
+  where_text: Западный Берег
+  sources:
+  - countries/rojo/index
+  confidence: derived
+- id: res:059
+  resource: пиво
+  kind: зерно, еда и вино
+  place: countries/gross/cities/city_old_ivy
+  where_text: Старый Плющ
+  sources:
+  - countries/gross/cities/city_old_ivy
+  confidence: derived
+- id: res:060
+  resource: ювелирные изделия
+  kind: ремесло и товары
+  place: geo:drinrog_gorod
+  where_text: Дринрог
+  note: Драгоценные; Монетчики
+  sources:
+  - countries/drinrog/index
+  confidence: derived
+- id: res:061
+  resource: ювелирные изделия
+  kind: ремесло и товары
+  place: countries/illior_empire/cities/city_illior
+  where_text: Иллиор
+  note: Драгоценные; Монетчики
+  sources:
+  - countries/illior_empire/cities/city_illior
+  confidence: derived
+- id: res:062
+  resource: корабли
+  kind: ремесло и товары
+  place: geo:drinrog_gorod
+  where_text: Дринрог
+  sources:
+  - guilds/drinrog_shipbuilders
+  confidence: canon
+- id: res:063
+  resource: корабли
+  kind: ремесло и товары
+  place: geo:danir
+  where_text: Данир
+  sources:
+  - guilds/drinrog_shipbuilders
+  confidence: canon
+- id: res:064
+  resource: магические реагенты
+  kind: артефакты и твари
+  place: countries/illior_empire/cities/city_illior
+  where_text: Иллиор
+  note: алмазная пыль; guilds/illior_mint
+  sources:
+  - guilds/illior_mint
+  confidence: canon
+- id: res:065
+  resource: чудовища и нежить
+  kind: артефакты и твари
+  place: countries/archdemon_s_plateau/index
+  where_text: Плато Архидемона
+  sources:
+  - guilds/sunlions
+  confidence: canon
+- id: res:066
+  resource: чудовища и нежить
+  kind: артефакты и твари
+  place: geo:vyshnevodsk
+  where_text: вышневодские земли
+  sources:
+  - guilds/sunlions
+  confidence: derived
+- id: res:067
+  resource: адамантин, мифрил, алмазы, изумруды
+  kind: металлы и руда
+  place: geo:serebryanye_gory
+  where_text: Серебряные горы
+  note: добыча Лигры ~ миллиард золотых
+  sources:
+  - countries/illior_empire/index
+  confidence: derived
+- id: res:068
+  resource: провизия
+  kind: зерно, еда и вино
+  place: countries/dragons_country/index
+  where_text: Страна Драконов (жёлтые драконы)
+  sources:
+  - countries/makharatkha/index
+  confidence: derived
+- id: res:069
+  resource: травы, лес
+  kind: древесина
+  place: geo:zalessk
+  where_text: Залесье
+  note: знахарки, охотники
+  sources:
+  - countries/zalessk/index
+  confidence: derived

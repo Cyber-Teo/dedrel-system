@@ -1,0 +1,117 @@
+# Правки поверх пересборки scripts/import/build-chronicle.ts (применяются в конце, scripts/import/chronicle-overrides.ts).
+# Источник истины для ручных исправлений: даты, id людей после дедупа, названия, тексты, склейки actors.
+# actor_ids — глобальная замена id участника (после дедупа людей); events.<id>.<поле> — полная замена поля (null = удалить поле);
+# drop — id событий, которые надо убрать из пересборки (слитые/удалённые).
+actor_ids:
+  person:arhidemon_asmodey: person:asmodey
+  person:arhidemon_bismistan: person:bismistan
+  person:avl: person:avl_maldred_avgust_tarkviniy
+  person:maldred_zavoevatel: person:maldred_avgust_tarkviniy
+  person:gney: person:gney_maldred_avgust_tarkviniy
+  person:megram_varaniy: person:megram_varaniy_v_tekste_megramom_varaniem
+  person:imperator_markus: person:markus_maldred_avgust_tarkviniy
+  person:linri: person:linri_tariana_avgusta_tarkviniya_furiya
+  person:raloro: person:raloro_maldred_avgust_tarkviniy
+  person:elen: person:elen_maldreda_avgusta_tarkviniya
+  person:ralvek: person:ralvek_maldred_avgust_tarkviniy
+  person:lukas: person:lukas_maldred_avgust_tarkviniy
+  person:eloren: person:eloren_neschastnaya
+  person:imperator_avl: person:avl_maldred_avgust_tarkviniy
+  person:numeriya: person:numeriya_maldreda_avgusta_tarkviniya
+  person:yorik: person:yorik_maldred_avgust_tarkviniy
+  person:morena_i: characters/morena
+  person:detsimus_furiy: characters/decimus_furia
+  person:oktaviy_opiy: characters/oktavius_opius
+  person:imperator_yorik: person:yorik_maldred_avgust_tarkviniy
+  person:filomen_papiriy: characters/filomen_papiria
+  person:morena: characters/morena
+drop: []
+events:
+  ev:-495:elfy_zakladyvayut_etel_kak_bazu_mors:
+    year: -470
+    date_text: ≈−470 — по статье об эльфах (первые эльфы прибыли ≈−470)
+    alt:
+      - text: «≈1500 лет назад» от нашего времени (≈−500) — датировка по статье о стране Этель; она расходится со временем прибытия первых эльфов
+        sources:
+          - countries/ethel/index
+  ev:-320:dni_skorbi_ognennaya_chuma:
+    title: Дни скорби — первая огненная чума
+  ev:553:markus_na_trone_brak_s_enfinoy_iz_en:
+    actors:
+      - name: Маркус
+        id: person:markus_maldred_avgust_tarkviniy
+      - name: Энфина
+        id: person:enfina
+      - name: вышневодские некроманты
+        id: org:vyshnevodskie_nekromanty
+  ev:560:revolyutsiya_v_royo:
+    actors:
+      - name: Дамиан Тарквиний-Калатрава
+        id: person:damian_tarkviniy_kalatrava
+      - name: Церковь Звёзд
+        id: knowledges/church_of_the_stars
+      - name: Маркус
+        id: person:markus_maldred_avgust_tarkviniy
+      - name: Дамиан
+      - name: императрица Энфина
+  ev:626:seym_grossa_golosuet_za_mir_s_royo_7:
+    actors:
+      - name: сейм Гросса
+        id: org:seym_grossa
+      - name: Ройо
+  ev:817:illiorskaya_revolyutsiya:
+    actors:
+      - name: Фурии
+        id: org:furii
+      - name: Эмилии
+      - name: Клавдии
+      - name: Лариции
+      - name: Сульпиции
+      - name: Великие Дома
+      - name: Папирии
+      - name: Лукас
+        id: person:lukas_maldred_avgust_tarkviniy
+      - name: Ралвек
+        id: person:ralvek_maldred_avgust_tarkviniy
+  ev:817:nezavisimost_zanry:
+    territorial_change:
+      gains:
+        - polity: Королевство Занра
+          polity_id: countries/zanra/index
+          places:
+            - geo:zanra
+      losses:
+        - polity: Иллиорская империя
+          polity_id: countries/illior_empire/index
+          places:
+            - geo:zanra
+      note: империя потеряла Занру
+  ev:1005:iyul_1005_ubiystvo_migelya_i_padenie:
+    actors:
+      - name: Мигель I
+        id: person:migel_i
+      - name: Морена I
+        id: characters/morena
+      - name: Мендоза
+      - name: Хуан Мануэль Мендоза
+        id: person:huan_manuel_mendoza
+  ev:1005:ognennaya_chuma:
+    title: "Огненная чума 1005 года: карантин в Выселках"
+    actors:
+      - name: Йорик
+        id: person:yorik_maldred_avgust_tarkviniy
+      - name: Скотт Флетчер
+        id: person:skott_fletcher
+      - name: Арчибальд Квинт Мариус
+        id: characters/archibald_quintus_marius
+      - name: Архибальд Мариус
+  ev:1005:ognennaya_chuma_zakryvaet_granitsy_p:
+    title: Огненная чума закрывает границы империи (по слухам, остановлена светом шпиля Дворца Основателя); Виларинский конвент против нежити Арноста
+  ev:1005:royo_stanovitsya_protektoratom_illio:
+    actors:
+      - name: Джок I
+        id: characters/dzhok_i
+      - name: Император Йорик
+        id: person:yorik_maldred_avgust_tarkviniy
+  ev:1005:vspyshka_ognennoy_chumy_v_illiorskoy:
+    title: "Огненная чума 1005 года: вспышка в империи и свет шпиля"
