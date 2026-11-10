@@ -26,6 +26,8 @@ Code — MIT License (see LICENSE), Copyright (c) 2026 Teo (Lucky Star Games):
   README.md, README.ru.md  project description
   packs/_source/macro/  compendium of system macros (script code)
   package.json        build tooling
+  atlas/              world atlas: code only (atlas/src, atlas/api, atlas/scripts,
+                      atlas/e2e, atlas/tests, configs, atlas/docs). See atlas/NOTICE.
 
 Content — CC BY-NC 4.0 (see LICENSE-CONTENT), Copyright (c) 2015–2026 Teo (Lucky Star Games):
 
@@ -34,6 +36,9 @@ Content — CC BY-NC 4.0 (see LICENSE-CONTENT), Copyright (c) 2015–2026 Teo (L
                       and other game content (except the macro pack, which is code)
   translations/       translations of compendium content
   assets/             artwork: tokens, raster icons, banners
+                      (except the third-party files listed in section 4)
+  atlas/data/         world atlas data (YAML, GeoJSON, scenarios), the raster map
+                      atlas/data/raw/media/ and the coats of arms atlas/public/coats/
                       (except the third-party files listed in section 4)
 
 CODE_OF_CONDUCT.md is adapted from the Contributor Covenant, version 2.1
@@ -96,6 +101,14 @@ Google Noto fonts — SIL Open Font License 1.1
   Noto Sans Symbols, Noto Sans Symbols 2 and Noto Sans Math
   (Copyright The Noto Project Authors).
 
+Icons from game-icons.net in the atlas — CC BY 3.0
+  atlas/public/icons/ holds game-icons.net icons used by the world atlas; authors and
+  original names are in atlas/public/icons/ATTRIBUTION.md.
+
+Atlas fonts — SIL Open Font License 1.1
+  atlas/public/fonts/ holds Cormorant Garamond and Literata; their licenses are in
+  atlas/public/fonts/NOTICE.
+
 Foundry Virtual Tabletop
   Dedrel is an independent game system and is not affiliated with or endorsed by
   Foundry Gaming LLC. Foundry Virtual Tabletop is a product of Foundry Gaming LLC;
@@ -132,7 +145,8 @@ system.json, .github/, пак макросов packs/_source/macro/) — под 
 системы — с указанием авторства. Продавать сами правила, систему или их копии как
 самостоятельный продукт нельзя. Названия «Dedrel» и «Lucky Star Games» не
 лицензируются: свой продукт, модуль или форк называйте иначе, но писать «модуль
-для системы Dedrel» или «по мотивам Dedrel» можно. Иконки game-icons.net (CC BY 3.0) и глифы Noto
+для системы Dedrel» или «по мотивам Dedrel» можно. Атлас мира (atlas/): код — MIT, данные, карта и гербы — CC BY-NC 4.0, иконки
+game-icons.net — CC BY 3.0, шрифты — OFL 1.1 (подробнее в atlas/NOTICE). Иконки game-icons.net (CC BY 3.0) и глифы Noto
 (OFL 1.1) остаются под своими лицензиями. Растровые изображения сгенерированы
 Google Gemini и AnimaYume, код написан с помощью Claude Code и Google Antigravity.
 Юридически действует английский текст выше.

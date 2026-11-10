@@ -20,6 +20,7 @@
 | Документ | О чём |
 |---|---|
 | [architecture.md](architecture.md) | Архитектура и карта модулей |
+| [../atlas/README.md](../atlas/README.md) | Атлас мира: отдельное приложение в `atlas/`, запуск и сборка (см. также раздел в architecture.md) |
 | [use-and-roll-flow.md](use-and-roll-flow.md) | `DedrelItem#use()`, карточки чата, броски атаки и урона, применение урона, стадии DSL |
 | [sheets.md](sheets.md) | Листы на ApplicationV2: `PARTS`, вкладки, действия, partials, формы |
 | [adding-item-type.md](adding-item-type.md) | Рецепт нового типа предмета и общий чеклист разработки |
