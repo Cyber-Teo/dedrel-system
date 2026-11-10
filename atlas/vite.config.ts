@@ -8,7 +8,7 @@ export default defineConfig({
   base: './',
   plugins: [preact(), dataJsonPlugin()],
   // /api → локальный dev-api (scripts/dev-api.ts)
-  server: { proxy: { '/api': `http://127.0.0.1:${DEV_API_PORT}` } },
+  server: { proxy: { '/api': { target: `http://127.0.0.1:${DEV_API_PORT}`, changeOrigin: false } } },
   build: {
     // сам maplibre-gl весит около 1 МБ: выносим его в отдельный чанк и не считаем это предупреждением
     chunkSizeWarningLimit: 1100,
